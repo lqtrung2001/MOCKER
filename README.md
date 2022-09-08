@@ -6,7 +6,7 @@
 
 **Detail:** Website construction can generate dummy data for testing data for the system.
 
-**Instructor:** MAI ANH THO
+**Instructor:** Mai Anh Tho
 
 **Members:**
 
