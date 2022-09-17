@@ -7,6 +7,9 @@ import { NavigationComponent } from './component/navigation/navigation.component
   declarations: [
     NavigationComponent
   ],
+  exports: [
+    NavigationComponent
+  ],
   providers: []
 })
 export class NavigationModule {
