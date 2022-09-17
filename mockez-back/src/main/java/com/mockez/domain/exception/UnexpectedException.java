@@ -1,4 +1,4 @@
-package com.mockez.exception;
+package com.mockez.domain.exception;
 
 public class UnexpectedException {
 }
