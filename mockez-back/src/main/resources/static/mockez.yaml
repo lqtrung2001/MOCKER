@@ -1,9 +1,8 @@
 openapi: "3.0.0"
 components:
   schemas:
-    FIELD:
+    Field:
       allOf:
-        - $ref: '#/components/schemas/Base'
         - type: object
           description: table Field
           properties:
@@ -18,17 +17,91 @@ components:
               description: name of field
               example:
             type_id:
+              $ref: '#/components/schemas/Type'
+            gentype_id:
+              $ref: '#/components/schemas/GenType'
+            option_id:
+              $ref: '#/components/schemas/Option'
+    Type:
+      allOf:
+        - type: object
+          description: table Type
+          properties:
+            id:
+              readOnly: true
+              type: string
+              description: id of table
+            type:
+              readOnly: false
+              type: string
+              description: name of field
+            description:
               readOnly: false
               type: string
               description: type in SQL
-              example:
+    GenType:
+      allOf:
+        - type: object
+          description: table GenType
+          properties:
+            id:
+              readOnly: true
+              type: string
+              description: id of table
+            type:
+              readOnly: false
+              type: string
+              description: type for generate
+            description:
+              readOnly: false
+              type: string
+              description: description for generate type
+            category_id:
+              $ref: '#/components/schemas/Category'
+    Category:
+      allOf:
+        - type: object
+          description: table Category
+          properties:
+            id:
+              readOnly: true
+              type: string
+              description: id of table
+            type:
+              readOnly: false
+              type: string
+              description: name of category
+            description:
+              readOnly: false
+              type: string
+              description: description for generate type
+    Data:
+      allOf:
+        - type: object
+          description: table Data
+          properties:
+            id:
+              readOnly: true
+              type: string
+              description: id of table
+            value:
+              readOnly: false
+              type: string
+              description: value of data
             gentype_id:
-              readOnly: false
+              $ref: '#/components/schemas/GenType'
+    Option:
+      allOf:
+        - type: object
+          description: table Option
+          properties:
+            id:
+              readOnly: true
               type: string
-              description: generate type for field
-              example:
-            option_id:
+              description: id of table
+            blank:
               readOnly: false
-              type: string
-              description: blank,…
-              example: blank
+              type: integer
+              description: blank percent
+
+
