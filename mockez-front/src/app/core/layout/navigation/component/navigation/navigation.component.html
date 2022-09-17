@@ -1,25 +1,27 @@
-<nav>
-  <div class='left'>
-    <div class='logo'>
-      <img class='icon' src='../../../../../../assets/icon/navigation/panda.png' alt='logo'/>
-      <span>MOCKEZ</span>
+<nav class='back-color-white d-flex'>
+  <div class='left d-flex al-items-center'>
+    <div class='logo d-flex al-items-center c-pointer'>
+      <img class='icon' src='assets/icon/navigation/panda.png' alt='logo'/>
+      <span class='f-weight-bold'>MOCKEZ</span>
     </div>
-    <div class='search'>
-      <img src='../../../../../../assets/icon/navigation/search.png' alt='search'/>
-      <input type='text' placeholder='Search Mockez'/>
+    <div class='search d-flex al-items-center b-radius-10'>
+      <img src='assets/icon/navigation/search.png' alt='search'/>
+      <input class='outline-border-none' type='text' placeholder='Search Mockez'/>
     </div>
   </div>
-  <div class='center'>
-    <a href='#'>GENERAL</a>
-    <a href='#'>DATASET</a>
-    <a href='#' class='active'>MOCK API</a>
-    <a href='#'>SCHEMA</a>
-    <a href='#'>PROJECT</a>
+  <div class='center d-flex'>
+    <a href='#' class='f-weight-bold active'>GENERAL</a>
+    <a href='#' class='f-weight-bold'>DATASET</a>
+    <a href='#' class='f-weight-bold'>MOCK API</a>
+    <a href='#' class='f-weight-bold'>SCHEMA</a>
+    <a href='#' class='f-weight-bold'>PROJECT</a>
   </div>
-  <div class='right'>
-    <img class='icon' src='../../../../../../assets/icon/navigation/sun.png' alt='sun'/>
-    <img class='icon' src='../../../../../../assets/icon/navigation/notification.png' alt='notification'/>
-    <img class='icon' src='../../../../../../assets/icon/navigation/facebook_messenger.png' alt='facebook messenger'/>
-    <img class='icon' src='../../../../../../assets/icon/navigation/user.png' alt='user'/>
+  <div class='right d-flex al-items-center'>
+    <img class='icon c-pointer' [src]='isLight ? "assets/icon/navigation/sun.png" : "assets/icon/navigation/moon.png"'
+         [alt]='isLight ? "light" : "dark" '/>
+    <img class='icon c-pointer' src='assets/icon/navigation/settings.png' alt='setting'/>
+    <img class='icon c-pointer' src='assets/icon/navigation/notification.png' alt='notification'/>
+    <img class='icon c-pointer' src='assets/icon/navigation/facebook_messenger.png' alt='facebook messenger'/>
+    <img class='icon c-pointer' src='assets/icon/navigation/user.png' alt='user'/>
   </div>
 </nav>

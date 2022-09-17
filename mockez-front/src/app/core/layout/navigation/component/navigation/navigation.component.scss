@@ -1,25 +1,16 @@
 nav {
-
-  $height: 54px;
-  $font-size: 15px;
-  $back-color: #fff;
-
-  background-color: $back-color;
-  height: $height;
-  display: flex;
+  height: 54px;
   justify-content: space-between;
   padding: 0 30px;
-  font-size: $font-size;
+  font-size: 15px;
 
   > div {
     height: 100%;
-    display: flex;
   }
 
   .left,
   .right {
     width: 350px;
-    align-items: center;
   }
 
   .icon {
@@ -27,15 +18,7 @@ nav {
   }
 
   .left {
-    .logo,
-    .search {
-      display: flex;
-      align-items: center;
-    }
-
     .logo {
-      cursor: pointer;
-
       span {
         margin-left: 20px;
       }
@@ -49,9 +32,8 @@ nav {
       margin-left: 20px;
       background-color: #F0F2F5;
       padding: 10px;
-      width: 258px;
+      width: 200px;
       height: 40px;
-      border-radius: 10px;
 
       img {
         width: 20px;
@@ -61,14 +43,14 @@ nav {
       input {
         width: 200px;
         margin-left: 10px;
-        outline: none;
-        border: none;
         background-color: #F0F2F5;
       }
     }
   }
 
   .center {
+    margin: 0 30px;
+
     a {
       width: 100px;
       line-height: 54px;
@@ -78,7 +60,7 @@ nav {
     }
 
     a:hover {
-      background-color: #f7f9ff;
+      background-color: #e8f1ff;
     }
 
     .active {
@@ -101,7 +83,6 @@ nav {
 
     img {
       margin-left: 30px;
-      cursor: pointer;
     }
   }
 }

@@ -9,4 +9,41 @@
 body {
   background-color: #F0F2F5;
   font-family: 'Roboto', sans-serif;
+
+  input {
+    font-family: 'Roboto', sans-serif;
+  }
+}
+
+.c-pointer {
+  cursor: pointer;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.al-items-center {
+  align-items: center;
+}
+
+.back-color-white {
+  background-color: #fff;
+}
+
+.b-radius-10 {
+  border-radius: 10px;
+}
+
+.outline-border-none {
+  outline: none;
+  border: none;
+}
+
+.f-weight-bold {
+  font-weight: 500;
+}
+
+.b-shadow-light {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.09);
 }
