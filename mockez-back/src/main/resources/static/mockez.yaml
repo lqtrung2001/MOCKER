@@ -1,0 +1,34 @@
+openapi: "3.0.0"
+components:
+  schemas:
+    FIELD:
+      allOf:
+        - $ref: '#/components/schemas/Base'
+        - type: object
+          description: table Field
+          properties:
+            id:
+              readOnly: true
+              type: string
+              description: id of table
+              example: F1
+            name:
+              readOnly: false
+              type: string
+              description: name of field
+              example:
+            type_id:
+              readOnly: false
+              type: string
+              description: type in SQL
+              example:
+            gentype_id:
+              readOnly: false
+              type: string
+              description: generate type for field
+              example:
+            option_id:
+              readOnly: false
+              type: string
+              description: blank,…
+              example: blank
