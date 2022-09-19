@@ -1,7 +1,7 @@
 openapi: "3.0.0"
 info:
   title: Mockez API
-  description: Mockez.
+  description: Website MOCKEZ generates data for system testing.
   version: 0.0.1
 paths:
   /users:
@@ -21,7 +21,7 @@ components:
   schemas:
     Field:
         type: object
-        description: table Field
+        description: FIELD table
         properties:
           id:
             readOnly: true
@@ -34,14 +34,20 @@ components:
             description: name of field
             example:
           type_id:
-            $ref: '#/components/schemas/Type'
+            type: array
+            items:
+              $ref: '#/components/schemas/Type'
           gentype_id:
-            $ref: '#/components/schemas/GenType'
+            type: array
+            items:
+              $ref: '#/components/schemas/GenType'
           option_id:
-            $ref: '#/components/schemas/Option'
+            type: array
+            items:
+              $ref: '#/components/schemas/Option'
     Type:
         type: object
-        description: table Type
+        description: TYPE table
         properties:
           id:
             readOnly: true
@@ -57,7 +63,7 @@ components:
             description: type in SQL
     GenType:
         type: object
-        description: table GenType
+        description: GENTYPE table
         properties:
           id:
             readOnly: true
@@ -72,10 +78,12 @@ components:
             type: string
             description: description for generate type
           category_id:
-            $ref: '#/components/schemas/Category'
+            type: array
+            items:
+              $ref: '#/components/schemas/Category'
     Category:
         type: object
-        description: table Category
+        description: CATEGORY table
         properties:
           id:
             readOnly: true
@@ -91,7 +99,7 @@ components:
             description: description for generate type
     Data:
         type: object
-        description: table Data
+        description: DATA table
         properties:
           id:
             readOnly: true
@@ -102,10 +110,12 @@ components:
             type: string
             description: value of data
           gentype_id:
-            $ref: '#/components/schemas/GenType'
+            type: array
+            items:
+              $ref: '#/components/schemas/GenType'
     Option:
         type: object
-        description: table Option
+        description: OPTION table
         properties:
           id:
             readOnly: true
