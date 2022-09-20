@@ -216,8 +216,10 @@
         <input class='outline-border-none' type='text' placeholder='Name'/>
       </div>
     </div>
-    <div class='check-box d-flex al-items-center'>
-      <div class='btn c-pointer b-shadow-light'></div>
+    <div class='check-box d-flex al-items-center c-pointer' (click)='isIncludeCreateTable = !isIncludeCreateTable'>
+      <div class='btn b-shadow-light'>
+        <img *ngIf='isIncludeCreateTable' class='icon' src='assets/icon/general/done.png' alt='done'/>
+      </div>
       <span class='f-weight-bold'>Include CREATE TABLE</span>
     </div>
   </div>

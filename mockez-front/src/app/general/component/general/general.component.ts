@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GeneralComponent implements OnInit {
 
+  isIncludeCreateTable: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
