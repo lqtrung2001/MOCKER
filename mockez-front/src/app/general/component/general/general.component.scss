@@ -1,0 +1,136 @@
+#form {
+  width: 1200px;
+  margin: 100px auto;
+  font-size: 14px;
+
+  .icon {
+    width: 25px;
+  }
+
+  .header {
+    margin-left: 20px;
+
+    span {
+      width: 230px;
+      margin-left: 10px;
+    }
+  }
+
+  .body {
+    margin-top: 15px;
+
+    .field {
+      margin-top: 10px;
+
+      > div {
+        margin-left: 10px;
+        width: 230px;
+      }
+
+      .name,
+      .type,
+      .gen-type {
+        height: 45px;
+      }
+
+      .name {
+        padding: 0 20px;
+      }
+
+      .type,
+      .gen-type {
+        padding: 0 20px;
+        justify-content: space-between;
+      }
+
+      .option {
+        .blank {
+          .blank-value {
+            margin-left: 10px;
+            height: 45px;
+            width: 100px;
+            padding: 0 20px;
+
+            input {
+              width: 60px;
+            }
+          }
+        }
+
+        .sigma {
+          margin-left: 10px;
+          justify-content: center;
+          width: 45px;
+          height: 45px;
+        }
+      }
+
+      .action {
+        > div {
+          margin-left: 10px;
+          width: 45px;
+          height: 45px;
+          justify-content: center;
+        }
+      }
+    }
+
+    .btn-create {
+      width: 230px;
+      margin: 10px 0 0 10px;
+      background-color: #3DA2FF;
+      height: 45px;
+      color: #fff;
+    }
+  }
+
+  hr {
+    margin-top: 20px;
+    color: #fff;
+    height: 3px;
+    border: none;
+  }
+
+  .footer {
+    margin-top: 20px;
+
+    > div {
+      margin-left: 10px;
+    }
+
+    .row-value,
+    .name-value {
+      height: 45px;
+      width: 140px;
+      padding: 0 20px;
+      margin-left: 10px;
+
+      input {
+        width: 100px;
+      }
+    }
+
+    .format {
+      .format-dropdown {
+        margin-left: 10px;
+        justify-content: space-between;
+        padding: 0 20px;
+        width: 140px;
+        height: 45px;
+      }
+    }
+
+    .check-box {
+      .btn {
+        width: 25px;
+        height: 25px;
+        background-color: #fff;
+        border-radius: 5px;
+      }
+
+      span {
+        margin-left: 10px;
+      }
+    }
+  }
+}
