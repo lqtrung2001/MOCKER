@@ -20,110 +20,124 @@ paths:
 components:
   schemas:
     Field:
-        type: object
-        description: FIELD table
-        properties:
-          id:
-            readOnly: true
-            type: string
-            description: id of table
-            example: F1
-          name:
-            readOnly: false
-            type: string
-            description: name of field
-            example:
-          type_id:
-            type: array
-            items:
-              $ref: '#/components/schemas/Type'
-          gentype_id:
-            type: array
-            items:
-              $ref: '#/components/schemas/GenType'
-          option_id:
-            type: array
-            items:
-              $ref: '#/components/schemas/Option'
+      type: object
+      required:
+        - id
+        - name
+        - type
+        - gentype
+        - option
+      description: FIELD table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          description: id of table
+        name:
+          type: string
+          description: name of field
+        type:
+          $ref: '#/components/schemas/Type'
+        gentype:
+          $ref: '#/components/schemas/GenType'
+        option:
+          $ref: '#/components/schemas/Option'
     Type:
-        type: object
-        description: TYPE table
-        properties:
-          id:
-            readOnly: true
-            type: string
-            description: id of table
-          type:
-            readOnly: false
-            type: string
-            description: name of field
-          description:
-            readOnly: false
-            type: string
-            description: type in SQL
+      type: object
+      required:
+        - id
+        - type
+        - description
+      description: TYPE table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          description: id of table
+        type:
+          type: string
+          description: name of field
+        description:
+          type: string
+          description: type in SQL
     GenType:
-        type: object
-        description: GENTYPE table
-        properties:
-          id:
-            readOnly: true
-            type: string
-            description: id of table
-          type:
-            readOnly: false
-            type: string
-            description: type for generate
-          description:
-            readOnly: false
-            type: string
-            description: description for generate type
-          category_id:
-            type: array
-            items:
-              $ref: '#/components/schemas/Category'
+      type: object
+      required:
+        - id
+        - type
+        - description
+        - category
+      description: GENTYPE table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          description: id of table
+        type:
+          type: string
+          description: type for generate
+        description:
+          type: string
+          description: description for generate type
+        category:
+          $ref: '#/components/schemas/Category'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Data'
     Category:
-        type: object
-        description: CATEGORY table
-        properties:
-          id:
-            readOnly: true
-            type: string
-            description: id of table
-          type:
-            readOnly: false
-            type: string
-            description: name of category
-          description:
-            readOnly: false
-            type: string
-            description: description for generate type
+      type: object
+      required:
+        - id
+        - type
+        - description
+      description: CATEGORY table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          description: id of table
+        type:
+          type: string
+          description: name of category
+        description:
+          type: string
+          description: description for generate type
+        gentypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenType'
     Data:
-        type: object
-        description: DATA table
-        properties:
-          id:
-            readOnly: true
-            type: string
-            description: id of table
-          value:
-            readOnly: false
-            type: string
-            description: value of data
-          gentype_id:
-            type: array
-            items:
-              $ref: '#/components/schemas/GenType'
+      type: object
+      required:
+        - id
+        - value
+        - gentype
+      description: DATA table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          description: id of table
+        value:
+          type: string
+          description: value of data
+        gentype:
+          $ref: '#/components/schemas/GenType'
     Option:
-        type: object
-        description: OPTION table
-        properties:
-          id:
-            readOnly: true
-            type: string
-            description: id of table
-          blank:
-            readOnly: false
-            type: integer
-            description: blank percent
+      type: object
+      required:
+        - id
+        - blank
+      description: OPTION table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          description: id of table
+        blank:
+          default: 0
+          type: integer
+          description: blank percent
 
 
