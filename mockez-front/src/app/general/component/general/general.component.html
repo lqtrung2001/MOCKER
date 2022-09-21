@@ -10,7 +10,7 @@
       <div class='name back-color-white b-radius-10 b-shadow-light d-flex al-items-center'>
         <input class='outline-border-none' type='text' placeholder='Name of field'/>
       </div>
-      <div class='type d-flex back-color-white al-items-center b-radius-10 c-pointer b-shadow-light'>
+      <div class='type d-flex back-color-white al-items-center b-radius-10 c-pointer b-shadow-light' (click)='isShowPopup = !isShowPopup'>
         <span>UUID</span>
         <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
       </div>
@@ -224,5 +224,6 @@
     </div>
   </div>
   <hr class='back-color-white'/>
+  <app-popup *ngIf='isShowPopup'></app-popup>
 </div>
 
