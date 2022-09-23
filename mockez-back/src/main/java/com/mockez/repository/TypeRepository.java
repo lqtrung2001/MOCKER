@@ -1,4 +1,4 @@
 package com.mockez.repository;
 
-public interface UserRepository {
+public interface TypeRepository {
 }
