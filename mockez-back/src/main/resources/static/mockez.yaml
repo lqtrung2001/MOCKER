@@ -25,7 +25,7 @@ components:
         - id
         - name
         - type
-        - gentype
+        - genType
         - option
       description: FIELD table
       properties:
@@ -38,7 +38,7 @@ components:
           description: name of field
         type:
           $ref: '#/components/schemas/Type'
-        gentype:
+        genType:
           $ref: '#/components/schemas/GenType'
         option:
           $ref: '#/components/schemas/Option'
@@ -103,7 +103,7 @@ components:
         description:
           type: string
           description: description for generate type
-        gentypes:
+        genTypes:
           type: array
           items:
             $ref: '#/components/schemas/GenType'
@@ -112,7 +112,7 @@ components:
       required:
         - id
         - value
-        - gentype
+        - genType
       description: DATA table
       properties:
         id:
@@ -122,7 +122,7 @@ components:
         value:
           type: string
           description: value of data
-        gentype:
+        genType:
           $ref: '#/components/schemas/GenType'
     Option:
       type: object
@@ -139,5 +139,3 @@ components:
           default: 0
           type: integer
           description: blank percent
-
-
