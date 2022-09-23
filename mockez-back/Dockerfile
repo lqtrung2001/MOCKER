@@ -1,8 +1,0 @@
-FROM postgres
-
-ENV POSTGRES_USER mockez
-ENV POSTGRES_PASSWORD mockez
-ENV POSTGRES_DB mockez
-
-COPY . .
-
