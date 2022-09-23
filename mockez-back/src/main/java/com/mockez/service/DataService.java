@@ -1,4 +1,4 @@
 package com.mockez.service;
 
-public class UserService {
+public interface DataService {
 }
