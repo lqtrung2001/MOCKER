@@ -19,8 +19,6 @@
         <springfox.swagger2.version>3.0.0</springfox.swagger2.version>
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
         <openapi.generator.maven.plugin.version>5.1.0</openapi.generator.maven.plugin.version>
-
-
     </properties>
     <dependencies>
         <dependency>
@@ -39,7 +37,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>

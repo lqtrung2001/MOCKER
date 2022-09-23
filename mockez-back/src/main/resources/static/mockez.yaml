@@ -202,7 +202,6 @@ paths:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/ServerError'
-
 components:
   schemas:
     Field:
@@ -346,19 +345,10 @@ components:
             - PERMISSION_EXCEPTION
             - BAD_REQUEST
             - NOT_FOUND
-            - UNPROCESSABLE_ENTITY
             - CONFLICT
             - INVALID_STATUS
             - INVALID_PROPERTIES
-            - EXISTING_NAME
-            - CONTAINS_DOCUMENT
-            - CONTAINS_BUSINESS_FOLDER
-            - NOT_LOCKED
-            - INVALID_SORT
             - ACTION_NOT_ALLOWED
-            - INVALID_CRITERIA
-            - MISSING_SEARCH_OPERATOR
-            - MISSING_SEARCH_CRITERIA
           description: |
             Ged error code:
             * UNEXPECTED_EXCEPTION - unexpected error.
@@ -366,19 +356,10 @@ components:
             * PERMISSION_EXCEPTION - user does not have permission to perform the action.
             * BAD_REQUEST - the request is wrong.
             * NOT_FOUND - resource not found.
-            * UNPROCESSABLE_ENTITY - the resource is locked.
             * CONFLICT - business error.
             * INVALID_STATUS - resource status is not valid.
-            * INVALID_PROPERTIES - the properties/extension is not valid.
-            * EXISTING_NAME - the name already exists.
-            * CONTAINS_DOCUMENT - folder contains document(s) and cannot be deleted.
-            * CONTAINS_BUSINESS_FOLDER - interlayer folder contains business folder and cannot be deleted.
-            * NOT_LOCKED - document is not locked and cannot be unlocked.
-            * INVALID_SORT - missing sort field.
-            * ACTION_NOT_ALLOWED - not valid to move resource.
-            * INVALID_CRITERIA - search criteria is invalid.
-            * MISSING_SEARCH_OPERATOR - search operator is missing.
-            * MISSING_SEARCH_CRITERIA - search criteria is missing.
+            * INVALID_PROPERTIES - the properties is not valid.
+            * ACTION_NOT_ALLOWED - the action not allowed.
         additionalMessage:
           type: string
     GenerateRequestBody:
