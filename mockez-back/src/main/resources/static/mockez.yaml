@@ -2,7 +2,7 @@ openapi: "3.0.3"
 info:
   title: Mockez API
   description: Website MOCKEZ generates data for system testing.
-  version: 0.0.1
+  version: 0.0.2
 paths:
   /type:
     get:
@@ -229,7 +229,7 @@ components:
       type: object
       required:
         - id
-        - type
+        - code
         - description
       description: TYPE table
       properties:
@@ -237,17 +237,21 @@ components:
           readOnly: true
           type: string
           description: id of table
-        type:
+        code:
           type: string
           description: name of field
         description:
           type: string
           description: type in SQL
+        genTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenType'
     GenType:
       type: object
       required:
         - id
-        - type
+        - code
         - description
         - category
       description: GENTYPE table
@@ -256,9 +260,9 @@ components:
           readOnly: true
           type: string
           description: id of table
-        type:
+        code:
           type: string
-          description: type for generate
+          description: code for generate
         description:
           type: string
           description: description for generate type
@@ -268,6 +272,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Data'
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/Type'
     Category:
       type: object
       required:
