@@ -1,341 +1,215 @@
-<div id='popup'>
-  <div class='form back-color-white b-radius-10'>
-    <div class='categories d-flex al-items-center'>
-      <div class='category b-radius-10 b-shadow-light c-pointer d-flex al-items-center'>
-        <span class='title'>All</span>
-        <span class='number'>(20)</span>
+<div id='popup' class='fixed top-0 left-0 w-full h-full'>
+  <div class='board bg-white rounded-md absolute p-2.5'>
+    <div class='header flex items-center justify-center'>
+      <div class='item active text-center rounded-md shadow-light cursor-pointer flex items-center ml-2.5 p-2.5 h-10'>
+        <span>All</span>
+        <span class='ml-2.5'>(20)</span>
       </div>
-      <div class='category b-radius-10 b-shadow-light c-pointer d-flex al-items-center'>
-        <span class='title'>Car</span>
-        <span class='number'>(10)</span>
+      <div class='item text-center rounded-md shadow-light cursor-pointer flex items-center ml-2.5 p-2.5 h-10'>
+        <span>All</span>
+        <span class='ml-2.5'>(20)</span>
       </div>
-      <div class='category active b-radius-10 b-shadow-light c-pointer d-flex al-items-center'>
-        <span class='title'>Singer</span>
-        <span class='number'>(30)</span>
-      </div>
-      <div class='category b-radius-10 b-shadow-light c-pointer d-flex al-items-center'>
-        <span class='title'>Song</span>
-        <span class='number'>(9)</span>
-      </div>
-      <div class='category b-radius-10 b-shadow-light c-pointer d-flex al-items-center'>
-        <span class='title'>Car</span>
-        <span class='number'>(10)</span>
-      </div>
-      <div class='category b-radius-10 b-shadow-light c-pointer d-flex al-items-center'>
-        <span class='title'>Singer</span>
-        <span class='number'>(30)</span>
-      </div>
-      <div class='category b-radius-10 b-shadow-light c-pointer d-flex al-items-center'>
-        <span class='title'>Song</span>
-        <span class='number'>(9)</span>
-      </div>
-      <div class='category b-radius-10 b-shadow-light c-pointer d-flex al-items-center'>
-        <span class='title'>Car</span>
-        <span class='number'>(10)</span>
-      </div>
-      <div class='category b-radius-10 b-shadow-light c-pointer d-flex al-items-center'>
-        <span class='title'>Singer</span>
-        <span class='number'>(30)</span>
-      </div>
-      <div class='category b-radius-10 b-shadow-light c-pointer d-flex al-items-center'>
-        <span class='title'>Song</span>
-        <span class='number'>(9)</span>
-      </div>
-      <div class='category b-radius-10 b-shadow-light c-pointer d-flex al-items-center'>...</div>
+      <div class='item text-center rounded-md shadow-light cursor-pointer flex items-center ml-2.5 p-2.5 h-10'>...</div>
     </div>
-    <div class='cards d-flex'>
-      <div class='card b-shadow-light b-radius-10 c-pointer'>
-        <p class='title f-weight-bold'>Character Sequence</p>
-        <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-        <div class='preview back-color-white b-shadow-light b-radius-10'>
-          <p class='heading f-weight-bold'>Character Sequence</p>
-          <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-          <ul class='body'>
-            <li>Garden</li>
-            <li>Games</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Computers</li>
-            <li>Jewelry</li>
-            <li>Beauty</li>
-            <li>Home</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Jewelry</li>
-            <li>Tools</li>
-            <li>Automotive</li>
-            <span>...</span>
+    <div class='cards flex flex-wrap justify-around pt-0 px-7 pb-7 mt-5 overflow-auto'>
+      <div class='card shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
+        <p class='font-medium'>Character Sequence</p>
+        <p>Create simple sequences of characters, digits, and symbols</p>
+        <div class='preview bg-white shadow-light rounded-md absolute hidden w-full p-5'>
+          <p class='font-medium'>Character Sequence</p>
+          <p class='mt-2.5'>Create simple sequences of characters, digits, and symbols</p>
+          <ul class='mt-5 pl-3.5 list-disc'>
+            <li class='mt-1'>Garden</li>
+            <li class='mt-1'>Games</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Computers</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Beauty</li>
+            <li class='mt-1'>Home</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Tools</li>
+            <li class='mt-1'>Automotive</li>
+            <span class='mt-1'>...</span>
           </ul>
         </div>
       </div>
-      <div class='card b-shadow-light b-radius-10 c-pointer'>
-        <p class='title f-weight-bold'>Character Sequence</p>
-        <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-        <div class='preview back-color-white b-shadow-light b-radius-10'>
-          <p class='heading f-weight-bold'>Character Sequence</p>
-          <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-          <ul class='body'>
-            <li>Garden</li>
-            <li>Games</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Computers</li>
-            <li>Jewelry</li>
-            <li>Beauty</li>
-            <li>Home</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Jewelry</li>
-            <li>Tools</li>
-            <li>Automotive</li>
-            <span>...</span>
+      <div class='card shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
+        <p class='font-medium'>Character Sequence</p>
+        <p>Create simple sequences of characters, digits, and symbols</p>
+        <div class='preview bg-white shadow-light rounded-md absolute hidden w-full p-5'>
+          <p class='font-medium'>Character Sequence</p>
+          <p class='mt-2.5'>Create simple sequences of characters, digits, and symbols</p>
+          <ul class='mt-5 pl-3.5 list-disc'>
+            <li class='mt-1'>Garden</li>
+            <li class='mt-1'>Games</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Computers</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Beauty</li>
+            <li class='mt-1'>Home</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Tools</li>
+            <li class='mt-1'>Automotive</li>
+            <span class='mt-1'>...</span>
           </ul>
         </div>
       </div>
-      <div class='card b-shadow-light b-radius-10 c-pointer'>
-        <p class='title f-weight-bold'>Character Sequence</p>
-        <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-        <div class='preview back-color-white b-shadow-light b-radius-10'>
-          <p class='heading f-weight-bold'>Character Sequence</p>
-          <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-          <ul class='body'>
-            <li>Garden</li>
-            <li>Games</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Computers</li>
-            <li>Jewelry</li>
-            <li>Beauty</li>
-            <li>Home</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Jewelry</li>
-            <li>Tools</li>
-            <li>Automotive</li>
-            <span>...</span>
+      <div class='card shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
+        <p class='font-medium'>Character Sequence</p>
+        <p>Create simple sequences of characters, digits, and symbols</p>
+        <div class='preview bg-white shadow-light rounded-md absolute hidden w-full p-5'>
+          <p class='font-medium'>Character Sequence</p>
+          <p class='mt-2.5'>Create simple sequences of characters, digits, and symbols</p>
+          <ul class='mt-5 pl-3.5 list-disc'>
+            <li class='mt-1'>Garden</li>
+            <li class='mt-1'>Games</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Computers</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Beauty</li>
+            <li class='mt-1'>Home</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Tools</li>
+            <li class='mt-1'>Automotive</li>
+            <span class='mt-1'>...</span>
           </ul>
         </div>
       </div>
-      <div class='card b-shadow-light b-radius-10 c-pointer'>
-        <p class='title f-weight-bold'>Character Sequence</p>
-        <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-        <div class='preview back-color-white b-shadow-light b-radius-10'>
-          <p class='heading f-weight-bold'>Character Sequence</p>
-          <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-          <ul class='body'>
-            <li>Garden</li>
-            <li>Games</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Computers</li>
-            <li>Jewelry</li>
-            <li>Beauty</li>
-            <li>Home</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Jewelry</li>
-            <li>Tools</li>
-            <li>Automotive</li>
-            <span>...</span>
+      <div class='card shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
+        <p class='font-medium'>Character Sequence</p>
+        <p>Create simple sequences of characters, digits, and symbols</p>
+        <div class='preview bg-white shadow-light rounded-md absolute hidden w-full p-5'>
+          <p class='font-medium'>Character Sequence</p>
+          <p class='mt-2.5'>Create simple sequences of characters, digits, and symbols</p>
+          <ul class='mt-5 pl-3.5 list-disc'>
+            <li class='mt-1'>Garden</li>
+            <li class='mt-1'>Games</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Computers</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Beauty</li>
+            <li class='mt-1'>Home</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Tools</li>
+            <li class='mt-1'>Automotive</li>
+            <span class='mt-1'>...</span>
           </ul>
         </div>
       </div>
-      <div class='card b-shadow-light b-radius-10 c-pointer'>
-        <p class='title f-weight-bold'>Character Sequence</p>
-        <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-        <div class='preview back-color-white b-shadow-light b-radius-10'>
-          <p class='heading f-weight-bold'>Character Sequence</p>
-          <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-          <ul class='body'>
-            <li>Garden</li>
-            <li>Games</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Computers</li>
-            <li>Jewelry</li>
-            <li>Beauty</li>
-            <li>Home</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Jewelry</li>
-            <li>Tools</li>
-            <li>Automotive</li>
-            <span>...</span>
+      <div class='card shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
+        <p class='font-medium'>Character Sequence</p>
+        <p>Create simple sequences of characters, digits, and symbols</p>
+        <div class='preview bg-white shadow-light rounded-md absolute hidden w-full p-5'>
+          <p class='font-medium'>Character Sequence</p>
+          <p class='mt-2.5'>Create simple sequences of characters, digits, and symbols</p>
+          <ul class='mt-5 pl-3.5 list-disc'>
+            <li class='mt-1'>Garden</li>
+            <li class='mt-1'>Games</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Computers</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Beauty</li>
+            <li class='mt-1'>Home</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Tools</li>
+            <li class='mt-1'>Automotive</li>
+            <span class='mt-1'>...</span>
           </ul>
         </div>
       </div>
-      <div class='card b-shadow-light b-radius-10 c-pointer'>
-        <p class='title f-weight-bold'>Character Sequence</p>
-        <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-        <div class='preview back-color-white b-shadow-light b-radius-10'>
-          <p class='heading f-weight-bold'>Character Sequence</p>
-          <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-          <ul class='body'>
-            <li>Garden</li>
-            <li>Games</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Computers</li>
-            <li>Jewelry</li>
-            <li>Beauty</li>
-            <li>Home</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Jewelry</li>
-            <li>Tools</li>
-            <li>Automotive</li>
-            <span>...</span>
+      <div class='card shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
+        <p class='font-medium'>Character Sequence</p>
+        <p>Create simple sequences of characters, digits, and symbols</p>
+        <div class='preview bg-white shadow-light rounded-md absolute hidden w-full p-5'>
+          <p class='font-medium'>Character Sequence</p>
+          <p class='mt-2.5'>Create simple sequences of characters, digits, and symbols</p>
+          <ul class='mt-5 pl-3.5 list-disc'>
+            <li class='mt-1'>Garden</li>
+            <li class='mt-1'>Games</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Computers</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Beauty</li>
+            <li class='mt-1'>Home</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Tools</li>
+            <li class='mt-1'>Automotive</li>
+            <span class='mt-1'>...</span>
           </ul>
         </div>
       </div>
-      <div class='card b-shadow-light b-radius-10 c-pointer'>
-        <p class='title f-weight-bold'>Character Sequence</p>
-        <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-        <div class='preview back-color-white b-shadow-light b-radius-10'>
-          <p class='heading f-weight-bold'>Character Sequence</p>
-          <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-          <ul class='body'>
-            <li>Garden</li>
-            <li>Games</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Computers</li>
-            <li>Jewelry</li>
-            <li>Beauty</li>
-            <li>Home</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Jewelry</li>
-            <li>Tools</li>
-            <li>Automotive</li>
-            <span>...</span>
+      <div class='card shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
+        <p class='font-medium'>Character Sequence</p>
+        <p>Create simple sequences of characters, digits, and symbols</p>
+        <div class='preview bg-white shadow-light rounded-md absolute hidden w-full p-5'>
+          <p class='font-medium'>Character Sequence</p>
+          <p class='mt-2.5'>Create simple sequences of characters, digits, and symbols</p>
+          <ul class='mt-5 pl-3.5 list-disc'>
+            <li class='mt-1'>Garden</li>
+            <li class='mt-1'>Games</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Computers</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Beauty</li>
+            <li class='mt-1'>Home</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Tools</li>
+            <li class='mt-1'>Automotive</li>
+            <span class='mt-1'>...</span>
           </ul>
         </div>
       </div>
-      <div class='card b-shadow-light b-radius-10 c-pointer'>
-        <p class='title f-weight-bold'>Character Sequence</p>
-        <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-        <div class='preview back-color-white b-shadow-light b-radius-10'>
-          <p class='heading f-weight-bold'>Character Sequence</p>
-          <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-          <ul class='body'>
-            <li>Garden</li>
-            <li>Games</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Computers</li>
-            <li>Jewelry</li>
-            <li>Beauty</li>
-            <li>Home</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Jewelry</li>
-            <li>Tools</li>
-            <li>Automotive</li>
-            <span>...</span>
-          </ul>
-        </div>
-      </div>
-      <div class='card b-shadow-light b-radius-10 c-pointer'>
-        <p class='title f-weight-bold'>Character Sequence</p>
-        <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-        <div class='preview back-color-white b-shadow-light b-radius-10'>
-          <p class='heading f-weight-bold'>Character Sequence</p>
-          <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-          <ul class='body'>
-            <li>Garden</li>
-            <li>Games</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Computers</li>
-            <li>Jewelry</li>
-            <li>Beauty</li>
-            <li>Home</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Jewelry</li>
-            <li>Tools</li>
-            <li>Automotive</li>
-            <span>...</span>
-          </ul>
-        </div>
-      </div>
-      <div class='card b-shadow-light b-radius-10 c-pointer'>
-        <p class='title f-weight-bold'>Character Sequence</p>
-        <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-        <div class='preview back-color-white b-shadow-light b-radius-10'>
-          <p class='heading f-weight-bold'>Character Sequence</p>
-          <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-          <ul class='body'>
-            <li>Garden</li>
-            <li>Games</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Computers</li>
-            <li>Jewelry</li>
-            <li>Beauty</li>
-            <li>Home</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Jewelry</li>
-            <li>Tools</li>
-            <li>Automotive</li>
-            <span>...</span>
-          </ul>
-        </div>
-      </div>
-      <div class='card b-shadow-light b-radius-10 c-pointer'>
-        <p class='title f-weight-bold'>Character Sequence</p>
-        <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-        <div class='preview back-color-white b-shadow-light b-radius-10'>
-          <p class='heading f-weight-bold'>Character Sequence</p>
-          <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-          <ul class='body'>
-            <li>Garden</li>
-            <li>Games</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Computers</li>
-            <li>Jewelry</li>
-            <li>Beauty</li>
-            <li>Home</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Jewelry</li>
-            <li>Tools</li>
-            <li>Automotive</li>
-            <span>...</span>
-          </ul>
-        </div>
-      </div>
-      <div class='card b-shadow-light b-radius-10 c-pointer'>
-        <p class='title f-weight-bold'>Character Sequence</p>
-        <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-        <div class='preview back-color-white b-shadow-light b-radius-10'>
-          <p class='heading f-weight-bold'>Character Sequence</p>
-          <p class='description'>Create simple sequences of characters, digits, and symbols</p>
-          <ul class='body'>
-            <li>Garden</li>
-            <li>Games</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Computers</li>
-            <li>Jewelry</li>
-            <li>Beauty</li>
-            <li>Home</li>
-            <li>Electronics</li>
-            <li>Baby</li>
-            <li>Jewelry</li>
-            <li>Tools</li>
-            <li>Automotive</li>
-            <span>...</span>
+      <div class='card shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
+        <p class='font-medium'>Character Sequence</p>
+        <p>Create simple sequences of characters, digits, and symbols</p>
+        <div class='preview bg-white shadow-light rounded-md absolute hidden w-full p-5'>
+          <p class='font-medium'>Character Sequence</p>
+          <p class='mt-2.5'>Create simple sequences of characters, digits, and symbols</p>
+          <ul class='mt-5 pl-3.5 list-disc'>
+            <li class='mt-1'>Garden</li>
+            <li class='mt-1'>Games</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Computers</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Beauty</li>
+            <li class='mt-1'>Home</li>
+            <li class='mt-1'>Electronics</li>
+            <li class='mt-1'>Baby</li>
+            <li class='mt-1'>Jewelry</li>
+            <li class='mt-1'>Tools</li>
+            <li class='mt-1'>Automotive</li>
+            <span class='mt-1'>...</span>
           </ul>
         </div>
       </div>
     </div>
-    <div class='btn-cancel b-radius-10 b-shadow-light d-flex al-items-center c-pointer'>
-      <span class='f-weight-bold'>Cancel</span>
-      <img src='assets/icon/general/cancel.png' alt='cancel'/>
+    <div class='btn-cancel rounded-md shadow-light flex items-center cursor-pointer absolute justify-center bottom-5 right-5 py-1 px-4'
+         (click)='cancelButtonClick()'
+    >
+      <span class='font-medium'>Cancel</span>
+      <img class='icon ml-2.5' src='assets/icon/general/cancel.png' alt='cancel'/>
     </div>
   </div>
 </div>

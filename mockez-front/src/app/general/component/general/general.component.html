@@ -1,229 +1,303 @@
-<div id='form'>
-  <div class='header d-flex'>
-    <span class='f-weight-bold'>Name</span>
-    <span class='f-weight-bold'>Type</span>
-    <span class='f-weight-bold'>Gen Type</span>
-    <span class='f-weight-bold'>Option</span>
+<div id='form' class='mt-28 mx-auto overflow-auto'>
+  <div class='flex ml-5 justify-center'>
+    <span class='font-medium ml-2.5 w-60'>Name</span>
+    <span class='font-medium ml-2.5 w-60'>Type</span>
+    <span class='font-medium ml-2.5 w-60'>Gen Type</span>
+    <span class='font-medium ml-2.5 w-60'>Option</span>
   </div>
-  <div class='body'>
-    <div class='field d-flex'>
-      <div class='name back-color-white b-radius-10 b-shadow-light d-flex al-items-center'>
+  <div class='mt-4'>
+    <div class='field flex mt-2.5 justify-center'>
+      <div class='bg-white rounded-md shadow-light flex items-center ml-2.5 w-60 h-11 py-0 px-5'>
         <input class='outline-border-none' type='text' placeholder='Name of field'/>
       </div>
-      <div class='type d-flex back-color-white al-items-center b-radius-10 c-pointer b-shadow-light' (click)='isShowPopup = !isShowPopup'>
+      <div class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light
+               ml-2.5 w-60 h-11 py-0 px-5'
+        (click)='isShowPopup = !isShowPopup'>
         <span>UUID</span>
         <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
       </div>
-      <div class='gen-type d-flex back-color-white al-items-center b-radius-10 c-pointer b-shadow-light'>
+      <div
+        class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light ml-2.5 w-60 h-11 py-0 px-5'
+        (click)='isShowPopup = !isShowPopup'>
         <span>UUID</span>
         <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
       </div>
-      <div class='option d-flex al-items-center'>
-        <div class='blank d-flex al-items-center'>
-          <span class='f-weight-bold'>Blank:</span>
-          <div class='blank-value b-radius-10 back-color-white b-shadow-light d-flex al-items-center'>
-            <input class='outline-border-none' type='text' placeholder='Blank'/>
+      <div class='flex items-center ml-2.5'>
+        <div class='flex items-center'>
+          <span class='font-medium'>Blank:</span>
+          <div class='rounded-md bg-white shadow-light flex items-center ml-2.5 h-11 py-0 px-5 w-24'>
+            <input class='outline-border-none w-14' type='text' placeholder='Blank'/>
           </div>
         </div>
-        <div class='sigma d-flex al-items-center back-color-white b-radius-10 c-pointer'>
+        <div class='flex justify-center items-center bg-white rounded-md cursor-pointer ml-2.5 w-11 h-11'>
           <img class='icon' src='assets/icon/general/sigma.png' alt='sigma'/>
         </div>
-      </div>
-      <div class='action d-flex'>
-        <div class='edit d-flex back-color-white b-radius-10 al-items-center c-pointer b-shadow-light'>
-          <img class='icon' src='assets/icon/general/edit.png' alt='edit'/>
-        </div>
-        <div class='delete d-flex back-color-white b-radius-10 al-items-center c-pointer b-shadow-light'>
-          <img class='icon' src='assets/icon/general/delete.png' alt='delete'/>
-        </div>
-      </div>
-    </div>    <div class='field d-flex'>
-      <div class='name back-color-white b-radius-10 b-shadow-light d-flex al-items-center'>
-        <input class='outline-border-none' type='text' placeholder='Name of field'/>
-      </div>
-      <div class='type d-flex back-color-white al-items-center b-radius-10 c-pointer b-shadow-light'>
-        <span>UUID</span>
-        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
-      </div>
-      <div class='gen-type d-flex back-color-white al-items-center b-radius-10 c-pointer b-shadow-light'>
-        <span>UUID</span>
-        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
-      </div>
-      <div class='option d-flex al-items-center'>
-        <div class='blank d-flex al-items-center'>
-          <span class='f-weight-bold'>Blank:</span>
-          <div class='blank-value b-radius-10 back-color-white b-shadow-light d-flex al-items-center'>
-            <input class='outline-border-none' type='text' placeholder='Blank'/>
-          </div>
-        </div>
-        <div class='sigma d-flex al-items-center back-color-white b-radius-10 c-pointer'>
-          <img class='icon' src='assets/icon/general/sigma.png' alt='sigma'/>
-        </div>
-      </div>
-      <div class='action d-flex'>
-        <div class='edit d-flex back-color-white b-radius-10 al-items-center c-pointer b-shadow-light'>
-          <img class='icon' src='assets/icon/general/edit.png' alt='edit'/>
-        </div>
-        <div class='delete d-flex back-color-white b-radius-10 al-items-center c-pointer b-shadow-light'>
-          <img class='icon' src='assets/icon/general/delete.png' alt='delete'/>
-        </div>
-      </div>
-    </div>    <div class='field d-flex'>
-      <div class='name back-color-white b-radius-10 b-shadow-light d-flex al-items-center'>
-        <input class='outline-border-none' type='text' placeholder='Name of field'/>
-      </div>
-      <div class='type d-flex back-color-white al-items-center b-radius-10 c-pointer b-shadow-light'>
-        <span>UUID</span>
-        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
-      </div>
-      <div class='gen-type d-flex back-color-white al-items-center b-radius-10 c-pointer b-shadow-light'>
-        <span>UUID</span>
-        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
-      </div>
-      <div class='option d-flex al-items-center'>
-        <div class='blank d-flex al-items-center'>
-          <span class='f-weight-bold'>Blank:</span>
-          <div class='blank-value b-radius-10 back-color-white b-shadow-light d-flex al-items-center'>
-            <input class='outline-border-none' type='text' placeholder='Blank'/>
-          </div>
-        </div>
-        <div class='sigma d-flex al-items-center back-color-white b-radius-10 c-pointer'>
-          <img class='icon' src='assets/icon/general/sigma.png' alt='sigma'/>
-        </div>
-      </div>
-      <div class='action d-flex'>
-        <div class='edit d-flex back-color-white b-radius-10 al-items-center c-pointer b-shadow-light'>
-          <img class='icon' src='assets/icon/general/edit.png' alt='edit'/>
-        </div>
-        <div class='delete d-flex back-color-white b-radius-10 al-items-center c-pointer b-shadow-light'>
-          <img class='icon' src='assets/icon/general/delete.png' alt='delete'/>
-        </div>
-      </div>
-    </div>    <div class='field d-flex'>
-      <div class='name back-color-white b-radius-10 b-shadow-light d-flex al-items-center'>
-        <input class='outline-border-none' type='text' placeholder='Name of field'/>
-      </div>
-      <div class='type d-flex back-color-white al-items-center b-radius-10 c-pointer b-shadow-light'>
-        <span>UUID</span>
-        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
-      </div>
-      <div class='gen-type d-flex back-color-white al-items-center b-radius-10 c-pointer b-shadow-light'>
-        <span>UUID</span>
-        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
-      </div>
-      <div class='option d-flex al-items-center'>
-        <div class='blank d-flex al-items-center'>
-          <span class='f-weight-bold'>Blank:</span>
-          <div class='blank-value b-radius-10 back-color-white b-shadow-light d-flex al-items-center'>
-            <input class='outline-border-none' type='text' placeholder='Blank'/>
-          </div>
-        </div>
-        <div class='sigma d-flex al-items-center back-color-white b-radius-10 c-pointer'>
-          <img class='icon' src='assets/icon/general/sigma.png' alt='sigma'/>
-        </div>
-      </div>
-      <div class='action d-flex'>
-        <div class='edit d-flex back-color-white b-radius-10 al-items-center c-pointer b-shadow-light'>
-          <img class='icon' src='assets/icon/general/edit.png' alt='edit'/>
-        </div>
-        <div class='delete d-flex back-color-white b-radius-10 al-items-center c-pointer b-shadow-light'>
-          <img class='icon' src='assets/icon/general/delete.png' alt='delete'/>
-        </div>
-      </div>
-    </div>    <div class='field d-flex'>
-      <div class='name back-color-white b-radius-10 b-shadow-light d-flex al-items-center'>
-        <input class='outline-border-none' type='text' placeholder='Name of field'/>
-      </div>
-      <div class='type d-flex back-color-white al-items-center b-radius-10 c-pointer b-shadow-light'>
-        <span>UUID</span>
-        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
-      </div>
-      <div class='gen-type d-flex back-color-white al-items-center b-radius-10 c-pointer b-shadow-light'>
-        <span>UUID</span>
-        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
-      </div>
-      <div class='option d-flex al-items-center'>
-        <div class='blank d-flex al-items-center'>
-          <span class='f-weight-bold'>Blank:</span>
-          <div class='blank-value b-radius-10 back-color-white b-shadow-light d-flex al-items-center'>
-            <input class='outline-border-none' type='text' placeholder='Blank'/>
-          </div>
-        </div>
-        <div class='sigma d-flex al-items-center back-color-white b-radius-10 c-pointer'>
-          <img class='icon' src='assets/icon/general/sigma.png' alt='sigma'/>
-        </div>
-      </div>
-      <div class='action d-flex'>
-        <div class='edit d-flex back-color-white b-radius-10 al-items-center c-pointer b-shadow-light'>
-          <img class='icon' src='assets/icon/general/edit.png' alt='edit'/>
-        </div>
-        <div class='delete d-flex back-color-white b-radius-10 al-items-center c-pointer b-shadow-light'>
-          <img class='icon' src='assets/icon/general/delete.png' alt='delete'/>
-        </div>
-      </div>
-    </div>    <div class='field d-flex'>
-      <div class='name back-color-white b-radius-10 b-shadow-light d-flex al-items-center'>
-        <input class='outline-border-none' type='text' placeholder='Name of field'/>
-      </div>
-      <div class='type d-flex back-color-white al-items-center b-radius-10 c-pointer b-shadow-light'>
-        <span>UUID</span>
-        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
-      </div>
-      <div class='gen-type d-flex back-color-white al-items-center b-radius-10 c-pointer b-shadow-light'>
-        <span>UUID</span>
-        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
-      </div>
-      <div class='option d-flex al-items-center'>
-        <div class='blank d-flex al-items-center'>
-          <span class='f-weight-bold'>Blank:</span>
-          <div class='blank-value b-radius-10 back-color-white b-shadow-light d-flex al-items-center'>
-            <input class='outline-border-none' type='text' placeholder='Blank'/>
-          </div>
-        </div>
-        <div class='sigma d-flex al-items-center back-color-white b-radius-10 c-pointer'>
-          <img class='icon' src='assets/icon/general/sigma.png' alt='sigma'/>
-        </div>
-      </div>
-      <div class='action d-flex'>
-        <div class='edit d-flex back-color-white b-radius-10 al-items-center c-pointer b-shadow-light'>
-          <img class='icon' src='assets/icon/general/edit.png' alt='edit'/>
-        </div>
-        <div class='delete d-flex back-color-white b-radius-10 al-items-center c-pointer b-shadow-light'>
+        <div
+          class='flex justify-center bg-white rounded-md items-center cursor-pointer shadow-light ml-2.5 w-11 h-11'>
           <img class='icon' src='assets/icon/general/delete.png' alt='delete'/>
         </div>
       </div>
     </div>
-    <button type='button' class='btn-create outline-border-none b-radius-10 c-pointer f-weight-bold b-shadow-light'>Add another field</button>
-  </div>
-  <hr class='back-color-white'/>
-  <div class='footer d-flex al-items-center'>
-    <div class='row d-flex al-items-center'>
-      <span class='f-weight-bold'>#Rows:</span>
-      <div class='row-value back-color-white b-radius-10 b-shadow-light d-flex al-items-center'>
-        <input class='outline-border-none' type='text' placeholder='Rows'/>
+    <div class='field flex mt-2.5 justify-center'>
+      <div class='bg-white rounded-md shadow-light flex items-center ml-2.5 w-60 h-11 py-0 px-5'>
+        <input class='outline-border-none' type='text' placeholder='Name of field'/>
+      </div>
+      <div class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light
+               ml-2.5 w-60 h-11 py-0 px-5'
+           (click)='isShowPopup = !isShowPopup'>
+        <span>UUID</span>
+        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
+      </div>
+      <div
+        class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light ml-2.5 w-60 h-11 py-0 px-5'
+        (click)='isShowPopup = !isShowPopup'>
+        <span>UUID</span>
+        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
+      </div>
+      <div class='flex items-center ml-2.5'>
+        <div class='flex items-center'>
+          <span class='font-medium'>Blank:</span>
+          <div class='rounded-md bg-white shadow-light flex items-center ml-2.5 h-11 py-0 px-5 w-24'>
+            <input class='outline-border-none w-14' type='text' placeholder='Blank'/>
+          </div>
+        </div>
+        <div class='flex justify-center items-center bg-white rounded-md cursor-pointer ml-2.5 w-11 h-11'>
+          <img class='icon' src='assets/icon/general/sigma.png' alt='sigma'/>
+        </div>
+        <div
+          class='flex justify-center bg-white rounded-md items-center cursor-pointer shadow-light ml-2.5 w-11 h-11'>
+          <img class='icon' src='assets/icon/general/delete.png' alt='delete'/>
+        </div>
       </div>
     </div>
-    <div class='format d-flex al-items-center'>
-      <span class='f-weight-bold'>Format:</span>
-      <div class='format-dropdown d-flex b-radius-10 back-color-white al-items-center c-pointer b-shadow-light'>
+    <div class='field flex mt-2.5 justify-center'>
+      <div class='bg-white rounded-md shadow-light flex items-center ml-2.5 w-60 h-11 py-0 px-5'>
+        <input class='outline-border-none' type='text' placeholder='Name of field'/>
+      </div>
+      <div class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light
+               ml-2.5 w-60 h-11 py-0 px-5'
+           (click)='isShowPopup = !isShowPopup'>
+        <span>UUID</span>
+        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
+      </div>
+      <div
+        class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light ml-2.5 w-60 h-11 py-0 px-5'
+        (click)='isShowPopup = !isShowPopup'>
+        <span>UUID</span>
+        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
+      </div>
+      <div class='flex items-center ml-2.5'>
+        <div class='flex items-center'>
+          <span class='font-medium'>Blank:</span>
+          <div class='rounded-md bg-white shadow-light flex items-center ml-2.5 h-11 py-0 px-5 w-24'>
+            <input class='outline-border-none w-14' type='text' placeholder='Blank'/>
+          </div>
+        </div>
+        <div class='flex justify-center items-center bg-white rounded-md cursor-pointer ml-2.5 w-11 h-11'>
+          <img class='icon' src='assets/icon/general/sigma.png' alt='sigma'/>
+        </div>
+        <div
+          class='flex justify-center bg-white rounded-md items-center cursor-pointer shadow-light ml-2.5 w-11 h-11'>
+          <img class='icon' src='assets/icon/general/delete.png' alt='delete'/>
+        </div>
+      </div>
+    </div>
+    <div class='field flex mt-2.5 justify-center'>
+      <div class='bg-white rounded-md shadow-light flex items-center ml-2.5 w-60 h-11 py-0 px-5'>
+        <input class='outline-border-none' type='text' placeholder='Name of field'/>
+      </div>
+      <div class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light
+               ml-2.5 w-60 h-11 py-0 px-5'
+           (click)='isShowPopup = !isShowPopup'>
+        <span>UUID</span>
+        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
+      </div>
+      <div
+        class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light ml-2.5 w-60 h-11 py-0 px-5'
+        (click)='isShowPopup = !isShowPopup'>
+        <span>UUID</span>
+        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
+      </div>
+      <div class='flex items-center ml-2.5'>
+        <div class='flex items-center'>
+          <span class='font-medium'>Blank:</span>
+          <div class='rounded-md bg-white shadow-light flex items-center ml-2.5 h-11 py-0 px-5 w-24'>
+            <input class='outline-border-none w-14' type='text' placeholder='Blank'/>
+          </div>
+        </div>
+        <div class='flex justify-center items-center bg-white rounded-md cursor-pointer ml-2.5 w-11 h-11'>
+          <img class='icon' src='assets/icon/general/sigma.png' alt='sigma'/>
+        </div>
+        <div
+          class='flex justify-center bg-white rounded-md items-center cursor-pointer shadow-light ml-2.5 w-11 h-11'>
+          <img class='icon' src='assets/icon/general/delete.png' alt='delete'/>
+        </div>
+      </div>
+    </div>
+    <div class='field flex mt-2.5 justify-center'>
+      <div class='bg-white rounded-md shadow-light flex items-center ml-2.5 w-60 h-11 py-0 px-5'>
+        <input class='outline-border-none' type='text' placeholder='Name of field'/>
+      </div>
+      <div class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light
+               ml-2.5 w-60 h-11 py-0 px-5'
+           (click)='isShowPopup = !isShowPopup'>
+        <span>UUID</span>
+        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
+      </div>
+      <div
+        class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light ml-2.5 w-60 h-11 py-0 px-5'
+        (click)='isShowPopup = !isShowPopup'>
+        <span>UUID</span>
+        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
+      </div>
+      <div class='flex items-center ml-2.5'>
+        <div class='flex items-center'>
+          <span class='font-medium'>Blank:</span>
+          <div class='rounded-md bg-white shadow-light flex items-center ml-2.5 h-11 py-0 px-5 w-24'>
+            <input class='outline-border-none w-14' type='text' placeholder='Blank'/>
+          </div>
+        </div>
+        <div class='flex justify-center items-center bg-white rounded-md cursor-pointer ml-2.5 w-11 h-11'>
+          <img class='icon' src='assets/icon/general/sigma.png' alt='sigma'/>
+        </div>
+        <div
+          class='flex justify-center bg-white rounded-md items-center cursor-pointer shadow-light ml-2.5 w-11 h-11'>
+          <img class='icon' src='assets/icon/general/delete.png' alt='delete'/>
+        </div>
+      </div>
+    </div>
+    <div class='field flex mt-2.5 justify-center'>
+      <div class='bg-white rounded-md shadow-light flex items-center ml-2.5 w-60 h-11 py-0 px-5'>
+        <input class='outline-border-none' type='text' placeholder='Name of field'/>
+      </div>
+      <div class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light
+               ml-2.5 w-60 h-11 py-0 px-5'
+           (click)='isShowPopup = !isShowPopup'>
+        <span>UUID</span>
+        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
+      </div>
+      <div
+        class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light ml-2.5 w-60 h-11 py-0 px-5'
+        (click)='isShowPopup = !isShowPopup'>
+        <span>UUID</span>
+        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
+      </div>
+      <div class='flex items-center ml-2.5'>
+        <div class='flex items-center'>
+          <span class='font-medium'>Blank:</span>
+          <div class='rounded-md bg-white shadow-light flex items-center ml-2.5 h-11 py-0 px-5 w-24'>
+            <input class='outline-border-none w-14' type='text' placeholder='Blank'/>
+          </div>
+        </div>
+        <div class='flex justify-center items-center bg-white rounded-md cursor-pointer ml-2.5 w-11 h-11'>
+          <img class='icon' src='assets/icon/general/sigma.png' alt='sigma'/>
+        </div>
+        <div
+          class='flex justify-center bg-white rounded-md items-center cursor-pointer shadow-light ml-2.5 w-11 h-11'>
+          <img class='icon' src='assets/icon/general/delete.png' alt='delete'/>
+        </div>
+      </div>
+    </div>
+    <div class='field flex mt-2.5 justify-center'>
+      <div class='bg-white rounded-md shadow-light flex items-center ml-2.5 w-60 h-11 py-0 px-5'>
+        <input class='outline-border-none' type='text' placeholder='Name of field'/>
+      </div>
+      <div class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light
+               ml-2.5 w-60 h-11 py-0 px-5'
+           (click)='isShowPopup = !isShowPopup'>
+        <span>UUID</span>
+        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
+      </div>
+      <div
+        class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light ml-2.5 w-60 h-11 py-0 px-5'
+        (click)='isShowPopup = !isShowPopup'>
+        <span>UUID</span>
+        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
+      </div>
+      <div class='flex items-center ml-2.5'>
+        <div class='flex items-center'>
+          <span class='font-medium'>Blank:</span>
+          <div class='rounded-md bg-white shadow-light flex items-center ml-2.5 h-11 py-0 px-5 w-24'>
+            <input class='outline-border-none w-14' type='text' placeholder='Blank'/>
+          </div>
+        </div>
+        <div class='flex justify-center items-center bg-white rounded-md cursor-pointer ml-2.5 w-11 h-11'>
+          <img class='icon' src='assets/icon/general/sigma.png' alt='sigma'/>
+        </div>
+        <div
+          class='flex justify-center bg-white rounded-md items-center cursor-pointer shadow-light ml-2.5 w-11 h-11'>
+          <img class='icon' src='assets/icon/general/delete.png' alt='delete'/>
+        </div>
+      </div>
+    </div>
+    <div class='field flex mt-2.5 justify-center'>
+      <div class='bg-white rounded-md shadow-light flex items-center ml-2.5 w-60 h-11 py-0 px-5'>
+        <input class='outline-border-none' type='text' placeholder='Name of field'/>
+      </div>
+      <div class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light
+               ml-2.5 w-60 h-11 py-0 px-5'
+           (click)='isShowPopup = !isShowPopup'>
+        <span>UUID</span>
+        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
+      </div>
+      <div
+        class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light ml-2.5 w-60 h-11 py-0 px-5'
+        (click)='isShowPopup = !isShowPopup'>
+        <span>UUID</span>
+        <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
+      </div>
+      <div class='flex items-center ml-2.5'>
+        <div class='flex items-center'>
+          <span class='font-medium'>Blank:</span>
+          <div class='rounded-md bg-white shadow-light flex items-center ml-2.5 h-11 py-0 px-5 w-24'>
+            <input class='outline-border-none w-14' type='text' placeholder='Blank'/>
+          </div>
+        </div>
+        <div class='flex justify-center items-center bg-white rounded-md cursor-pointer ml-2.5 w-11 h-11'>
+          <img class='icon' src='assets/icon/general/sigma.png' alt='sigma'/>
+        </div>
+        <div
+          class='flex justify-center bg-white rounded-md items-center cursor-pointer shadow-light ml-2.5 w-11 h-11'>
+          <img class='icon' src='assets/icon/general/delete.png' alt='delete'/>
+        </div>
+      </div>
+    </div>
+    <div class='flex justify-center'>
+      <button type='button'
+              class='bg-main text-white outline-border-none rounded-md cursor-pointer font-medium shadow-light w-60 h-11 mt-2.5 ml-2.5 mb-0 mr-0'>
+        Add another field
+      </button>
+    </div>
+  </div>
+  <div class='flex items-center mt-5 justify-center'>
+    <div class='flex items-center ml-2.5'>
+      <span class='font-medium'>#Rows:</span>
+      <div class='bg-white rounded-md shadow-light flex items-center h-11 px-5 py-0 ml-2.5 w-36'>
+        <input class='outline-border-none w-24' type='text' placeholder='Rows'/>
+      </div>
+    </div>
+    <div class='flex items-center ml-2.5'>
+      <span class='font-medium'>Format:</span>
+      <div
+        class='justify-between flex rounded-md bg-white items-center cursor-pointer shadow-light ml-2.5 px-5 py-0 w-36 h-11'>
         <span>SQL</span>
         <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
       </div>
     </div>
-    <div class='table-name d-flex al-items-center'>
-      <span class='f-weight-bold'>Table name:</span>
-      <div class='name-value back-color-white b-radius-10 b-shadow-light d-flex al-items-center'>
-        <input class='outline-border-none' type='text' placeholder='Name'/>
+    <div class='flex items-center ml-2.5'>
+      <span class='font-medium'>Table name:</span>
+      <div class='bg-white rounded-md shadow-light flex items-center h-11 px-5 py-0 ml-2.5 w-36'>
+        <input class='outline-border-none w-24' type='text' placeholder='Name'/>
       </div>
     </div>
-    <div class='check-box d-flex al-items-center c-pointer' (click)='isIncludeCreateTable = !isIncludeCreateTable'>
-      <div class='btn b-shadow-light'>
+    <div class='flex items-center cursor-pointer ml-2.5'
+         (click)='isIncludeCreateTable = !isIncludeCreateTable'>
+      <div class='shadow-light w-6 h-6 bg-white rounded'>
         <img *ngIf='isIncludeCreateTable' class='icon' src='assets/icon/general/done.png' alt='done'/>
       </div>
-      <span class='f-weight-bold'>Include CREATE TABLE</span>
+      <span class='font-medium ml-2.5'>Include CREATE TABLE</span>
     </div>
   </div>
-  <hr class='back-color-white'/>
-  <app-popup *ngIf='isShowPopup'></app-popup>
+  <app-popup *ngIf='isShowPopup' (exitEventEmitter)='isShowPopup=false'></app-popup>
 </div>
 
