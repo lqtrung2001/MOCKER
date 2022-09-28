@@ -1,53 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  @apply mr-0 p-0 box-border;
 }
 
-::selection {
-  background-color: transparent;
+::selection:not(input) {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar {
+  @apply w-3;
+}
+
+::-webkit-scrollbar-track {
+  @apply rounded-lg bg-white;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-400 rounded-3xl;
+  border: 3px solid #FFFFFF;
 }
 
 body {
+  min-width: 1200px;
   background-color: #F0F2F5;
   font-family: 'Roboto', sans-serif;
 
   input {
     font-family: 'Roboto', sans-serif;
+    outline: none;
   }
-}
 
-.c-pointer {
-  cursor: pointer;
-}
+  .icon {
+    width: 25px;
+  }
 
-.d-flex {
-  display: flex;
-}
+  .shadow-light {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.09);
+  }
 
-.al-items-center {
-  align-items: center;
-}
-
-.back-color-white {
-  background-color: #fff;
-}
-
-.b-radius-10 {
-  border-radius: 10px;
-}
-
-.outline-border-none {
-  outline: none;
-  border: none;
-}
-
-.f-weight-bold {
-  font-weight: 500;
-}
-
-.b-shadow-light {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.09);
+  .bg-main {
+    background-color: #3DA2FF;
+  }
 }
