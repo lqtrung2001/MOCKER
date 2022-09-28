@@ -1,15 +1,9 @@
-volumes:
-  data:
-
 services:
-  postgres:
+  mockez-db:
     image: postgres:latest
     environment:
-      - POSTGRES_USER=
-      - POSTGRES_PASSWORD=postgrespw
+      - POSTGRES_DB=mockez_db
+      - POSTGRES_USER=mockez_user
+      - POSTGRES_PASSWORD=mockez_password
     ports:
       - 5432:5432
-    volumes:
-      - data:/var/lib/postgresql
-  myapp:
-    image: [YOUR-APP-IMAGE]
