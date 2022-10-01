@@ -120,6 +120,7 @@
                             <generateApiDocumentation>false</generateApiDocumentation>
                             <modelPackage>com.mockez.domain.model</modelPackage>
                             <generateModels>true</generateModels>
+                            <modelNameSuffix>ApiBean</modelNameSuffix>
                             <generateModelTests>false</generateModelTests>
                             <generateModelDocumentation>false</generateModelDocumentation>
                             <generateSupportingFiles>true</generateSupportingFiles>

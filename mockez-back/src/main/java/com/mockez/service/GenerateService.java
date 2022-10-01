@@ -1,6 +1,6 @@
 package com.mockez.service;
 
-import com.mockez.domain.model.GenerateRequestBody;
+import com.mockez.domain.model.GenerateBody;
 
 public interface GenerateService {
 
@@ -9,6 +9,6 @@ public interface GenerateService {
      * @param body of request
      * @return generate sql string
      */
-    String generate(GenerateRequestBody body);
+    String generate(GenerateBody body);
 
 }
