@@ -3,12 +3,14 @@ import { GeneralComponent } from './component/general/general.component';
 import { ROUTING } from './general.routing';
 import { NgIf } from '@angular/common';
 import { PopupComponent } from './component/popup/popup.component';
+import { FooterComponent } from './component/footer/footer.component';
 
 @NgModule({
   imports: [ROUTING, NgIf],
   declarations: [
     GeneralComponent,
-    PopupComponent
+    PopupComponent,
+    FooterComponent
   ],
   exports: [
     GeneralComponent

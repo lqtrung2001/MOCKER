@@ -298,36 +298,7 @@
       <span class='font-medium ml-2.5'>Include CREATE TABLE</span>
     </div>
   </div>
-  <footer>
-    <section class=' fixed  bottom-0 z-10 bg-gray shadow'>
-      <div class='flex justify-between'>
-        <div class='flex justify-center p-4'>
-          <button type='button'
-                  class='bg-main text-white outline-border-none rounded-md cursor-pointer font-medium shadow-light w-60 h-11 mt-2.5 ml-2.5 mb-0 mr-0'>
-            Download Data
-          </button>
-        </div>
-        <div class='flex justify-center p-4'>
-          <button type='button'
-                  class='bg-main text-white outline-border-none rounded-md cursor-pointer font-medium shadow-light w-60 h-11 mt-2.5 ml-2.5 mb-0 mr-0'>
-            Preview
-          </button>
-        </div>
-        <div class='flex justify-center p-4'>
-          <button type='button'
-                  class='bg-main text-white outline-border-none rounded-md cursor-pointer font-medium shadow-light w-60 h-11 mt-2.5 ml-2.5 mb-0 mr-0'>
-            Save this schema
-          </button>
-        </div>
-        <div class='flex justify-center p-4'>
-          <button type='button'
-                  class='bg-main text-white outline-border-none rounded-md cursor-pointer font-medium shadow-light w-60 h-11 mt-2.5 ml-2.5 mb-0 mr-0'>
-            More
-          </button>
-        </div>
-      </div>
-    </section>
-  </footer>
+  <app-footer></app-footer>
   <app-popup *ngIf='isShowPopup' (exitEventEmitter)='isShowPopup=false'></app-popup>
 </div>
 
