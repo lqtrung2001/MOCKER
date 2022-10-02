@@ -1,7 +1,7 @@
 package com.mockez.controller;
 
-import com.mockez.api.GentypeApi;
-import com.mockez.domain.model.GenTypeApiBean;
+import com.mockez.api.GeneratetypeApi;
+import com.mockez.domain.model.GenerateTypeDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,20 +10,19 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-public class GenerateTypeController implements GentypeApi {
-
+public class GenerateTypeController implements GeneratetypeApi {
     @Override
-    public ResponseEntity<GenTypeApiBean> getGenType(String id) {
-        return GentypeApi.super.getGenType(id);
+    public ResponseEntity<GenerateTypeDto> getGenerateType(String id) {
+        return GeneratetypeApi.super.getGenerateType(id);
     }
 
     @Override
-    public ResponseEntity<List<GenTypeApiBean>> getGenTypeByTypeId(String typeId) {
-        return GentypeApi.super.getGenTypeByTypeId(typeId);
+    public ResponseEntity<List<GenerateTypeDto>> getGenerateTypeBySQLTypeId(String sqlTypeId) {
+        return GeneratetypeApi.super.getGenerateTypeBySQLTypeId(sqlTypeId);
     }
 
     @Override
-    public ResponseEntity<List<GenTypeApiBean>> getGenTypes() {
-        return GentypeApi.super.getGenTypes();
+    public ResponseEntity<List<GenerateTypeDto>> getGenerateTypes() {
+        return GeneratetypeApi.super.getGenerateTypes();
     }
 }

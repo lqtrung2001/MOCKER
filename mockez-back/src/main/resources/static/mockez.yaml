@@ -1,15 +1,15 @@
 openapi: "3.0.3"
 info:
   title: Mockez API
-  description: Website MOCKEZ generates data for system testing.
-  version: 0.0.2
+  description: Website MOCKEZ generates source for system testing.
+  version: 1.0.0
 paths:
-  /type:
+  /sqltype:
     get:
-      operationId: getTypes
+      operationId: getSQLTypes
       tags:
-        - Type
-      description: Get all Type from data
+        - SQLType
+      description: Get all SQLType from source
       responses:
         200:
           description: The query is successful
@@ -18,7 +18,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Type'
+                  $ref: '#/components/schemas/SQLType'
         400:
           $ref: '#/components/responses/BadRequest'
         401:
@@ -34,7 +34,7 @@ paths:
       operationId: getCategories
       tags:
         - Category
-      description: Get all category from data
+      description: Get all category from source
       responses:
         200:
           description: The query is successful
@@ -84,26 +84,26 @@ paths:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/ServerError'
-  /gentype/{id}:
+  /generatetype/{id}:
     parameters:
       - in: path
         name: id
         required: true
-        description: The GenType ID
+        description: The GenerateType ID
         schema:
           type: string
     get:
-      operationId: getGenType
+      operationId: getGenerateType
       tags:
-        - GenType
-      description: Return a gentype
+        - GenerateType
+      description: Return a generatetype
       responses:
         200:
           description: The query is successful
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenType'
+                $ref: '#/components/schemas/GenerateType'
         400:
           $ref: '#/components/responses/BadRequest'
         401:
@@ -114,19 +114,19 @@ paths:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/ServerError'
-  /gentype/{typeId}:
+  /generatetype/{sqlTypeId}:
     parameters:
       - in: path
-        name: typeId
+        name: sqlTypeId
         required: true
-        description: The typeId
+        description: The sqlTypeId
         schema:
           type: string
     get:
-      operationId: getGenTypeByTypeId
+      operationId: getGenerateTypeBySQLTypeId
       tags:
-        - GenType
-      description: Return a gentype by typeId
+        - GenerateType
+      description: Return a generateType by SQLTypeId
       responses:
         200:
           description: The query is successful
@@ -135,7 +135,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/GenType'
+                  $ref: '#/components/schemas/GenerateType'
         400:
           $ref: '#/components/responses/BadRequest'
         401:
@@ -146,12 +146,12 @@ paths:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/ServerError'
-  /gentype:
+  /generatetype:
     get:
-      operationId: getGenTypes
+      operationId: getGenerateTypes
       tags:
-        - GenType
-      description: Get all GenType from data
+        - GenerateType
+      description: Get all GenerateType from source
       responses:
         200:
           description: The query is successful
@@ -160,7 +160,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/GenType'
+                  $ref: '#/components/schemas/GenerateType'
         400:
           $ref: '#/components/responses/BadRequest'
         401:
@@ -176,7 +176,7 @@ paths:
       operationId: generate
       tags:
         - Generate
-      description: Generate data
+      description: Generate source
       requestBody:
         required: true
         content:
@@ -207,8 +207,8 @@ components:
       required:
         - id
         - name
-        - type
-        - genType
+        - sqlType
+        - generateType
         - option
       description: FIELD table
       properties:
@@ -219,19 +219,19 @@ components:
         name:
           type: string
           description: name of field
-        type:
-          $ref: '#/components/schemas/Type'
-        genType:
-          $ref: '#/components/schemas/GenType'
+        sqlType:
+          $ref: '#/components/schemas/SQLType'
+        generateType:
+          $ref: '#/components/schemas/GenerateType'
         option:
           $ref: '#/components/schemas/Option'
-    Type:
+    SQLType:
       type: object
       required:
         - id
         - code
         - description
-      description: TYPE table
+      description: SQLTYPE table
       properties:
         id:
           readOnly: true
@@ -243,18 +243,18 @@ components:
         description:
           type: string
           description: type in SQL
-        genTypes:
+        generateTypes:
           type: array
           items:
-            $ref: '#/components/schemas/GenType'
-    GenType:
+            $ref: '#/components/schemas/GenerateType'
+    GenerateType:
       type: object
       required:
         - id
         - code
         - description
         - category
-      description: GENTYPE table
+      description: GENERATETYPE table
       properties:
         id:
           readOnly: true
@@ -268,14 +268,14 @@ components:
           description: description for generate type
         category:
           $ref: '#/components/schemas/Category'
-        data:
+        source:
           type: array
           items:
-            $ref: '#/components/schemas/Data'
-        types:
+            $ref: '#/components/schemas/Source'
+        sqlTypes:
           type: array
           items:
-            $ref: '#/components/schemas/Type'
+            $ref: '#/components/schemas/SQLType'
     Category:
       type: object
       required:
@@ -294,17 +294,17 @@ components:
         description:
           type: string
           description: description for generate type
-        genTypes:
+        generateTypes:
           type: array
           items:
-            $ref: '#/components/schemas/GenType'
-    Data:
+            $ref: '#/components/schemas/GenerateType'
+    Source:
       type: object
       required:
         - id
         - value
-        - genType
-      description: DATA table
+        - generateType
+      description: Source table
       properties:
         id:
           readOnly: true
@@ -312,9 +312,9 @@ components:
           description: id of table
         value:
           type: string
-          description: value of data
-        genType:
-          $ref: '#/components/schemas/GenType'
+          description: value of source
+        generateType:
+          $ref: '#/components/schemas/GenerateType'
     Option:
       type: object
       required:
@@ -382,12 +382,12 @@ components:
           readOnly: true
           type: integer
           default: 0
-          description: Row number of data
+          description: Row number of source
         format:
           readOnly: true
           type: string
           default: "SQL"
-          description: Format of data
+          description: Format of source
         tableName:
           readOnly: true
           type: string
