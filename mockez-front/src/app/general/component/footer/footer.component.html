@@ -6,8 +6,9 @@
       </button>
     </div>
     <div class='flex justify-center h-full'>
-      <button type='button' class='uppercase text-center text-black font-medium p-4 w-60'>
-        Preview
+      <button type='button' class='uppercase text-center text-black font-medium p-4 w-60'
+              (click)='showPreviewEventEmitter.emit()'
+      >Preview
       </button>
     </div>
     <div class='flex justify-center h-full'>
@@ -16,8 +17,9 @@
       </button>
     </div>
     <div class='flex justify-center h-full'>
-      <button type='button' class='uppercase text-center text-black font-medium p-4 w-60'>
+      <button type='button' class='flex justify-center items-center uppercase text-center text-black font-medium p-4 w-60'>
         More
+        <img class='w-6 ml-2.5' src='assets/icon/general/down_button.png' alt='more'/>
       </button>
     </div>
   </div>

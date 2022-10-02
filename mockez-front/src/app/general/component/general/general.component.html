@@ -298,7 +298,8 @@
       <span class='font-medium ml-2.5'>Include CREATE TABLE</span>
     </div>
   </div>
-  <app-footer></app-footer>
+  <app-footer (showPreviewEventEmitter)='isShowPreview=true'></app-footer>
   <app-popup *ngIf='isShowPopup' (exitEventEmitter)='isShowPopup=false'></app-popup>
 </div>
+<app-preview *ngIf='isShowPreview' (exitEventEmitter)='isShowPreview=false'></app-preview>
 
