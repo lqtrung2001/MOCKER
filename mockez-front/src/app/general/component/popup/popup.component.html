@@ -206,7 +206,7 @@
       </div>
     </div>
     <div class='btn-cancel rounded-md shadow-light flex items-center cursor-pointer absolute justify-center bottom-5 right-5 py-1 px-4'
-         (click)='cancelButtonClick()'
+         (click)='this.exitEventEmitter.emit()'
     >
       <span class='font-medium'>Cancel</span>
       <img class='icon ml-2.5' src='assets/icon/general/cancel.png' alt='cancel'/>

@@ -9,6 +9,7 @@ export class GeneralComponent implements OnInit {
 
   isIncludeCreateTable: boolean = false;
   isShowPopup: boolean = false;
+  isShowPreview: boolean = false;
 
   constructor() { }
 
