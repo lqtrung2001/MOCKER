@@ -14,8 +14,4 @@ export class PopupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public cancelButtonClick() {
-    this.exitEventEmitter.emit();
-  }
-
 }

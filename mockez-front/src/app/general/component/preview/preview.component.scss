@@ -1,0 +1,64 @@
+#preview {
+  z-index: 11;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  .board {
+    content: '';
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1200px;
+    height: 750px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+
+    nav {
+      a {
+        line-height: 56px;
+      }
+
+      a:hover {
+        background-color: #F5F5F5;
+      }
+
+      .active {
+        position: relative;
+      }
+
+      .active:after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        bottom: 0;
+        border-radius: 5px;
+        background-color: #3DA2FF;
+      }
+    }
+
+    section:not(.pagination){
+      height: 580px;
+
+      table {
+        tr {
+          line-height: 40px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #F5F5F5;
+        }
+
+        th, td {
+          padding-left: 20px;
+        }
+      }
+    }
+
+    .pagination {
+      .active {
+        background-color: #3DA2FF;
+        color: #FFFFFF;
+      }
+    }
+  }
+}
