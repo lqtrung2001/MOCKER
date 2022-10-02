@@ -36,7 +36,7 @@ public class Option extends Base {
     private String algorithm;
 
     @OneToOne
-    @JoinColumn(name = "field_id", referencedColumnName = "id")
+    @JoinColumn(nullable = false, name = "field_id", referencedColumnName = "id")
     private Field field;
 
     @Override

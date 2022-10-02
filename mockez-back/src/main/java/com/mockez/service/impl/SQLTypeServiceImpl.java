@@ -12,10 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 public class SQLTypeServiceImpl implements SQLTypeService {
 
-    private SQLTypeRepository sQLTypeRepository;
+    private SQLTypeRepository sqlTypeRepository;
 
     @Override
     public List<SQLType> getSQLTypes() {
-        return sQLTypeRepository.findAll();
+        return sqlTypeRepository.findAll();
     }
 }
