@@ -1,6 +1,6 @@
 package com.mockez.service;
 
-import com.mockez.domain.model.Category;
+import com.mockez.domain.model.entity.Category;
 
 import java.util.List;
 
