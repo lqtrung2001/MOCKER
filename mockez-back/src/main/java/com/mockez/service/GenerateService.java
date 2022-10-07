@@ -1,6 +1,9 @@
 package com.mockez.service;
 
-import com.mockez.domain.model.GenerateBody;
+import com.mockez.domain.model.GenerateReq;
+
+import java.util.List;
+import java.util.Map;
 
 public interface GenerateService {
 
@@ -9,6 +12,6 @@ public interface GenerateService {
      * @param body of request
      * @return generate sql string
      */
-    String generate(GenerateBody body);
+    List<Map<String, String>> generate(GenerateReq body);
 
 }

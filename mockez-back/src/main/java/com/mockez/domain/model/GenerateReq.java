@@ -16,7 +16,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class GenerateBody {
+public class GenerateReq {
     private Integer row;
     private String format;
     private String tableName;
