@@ -2,9 +2,8 @@ package com.mockez.controller.maper;
 
 import com.mockez.domain.dto.FieldDto;
 import com.mockez.domain.model.entity.Field;
-import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-@Mapper
+
 public interface ApiFieldMapper extends ApiAbstractMapper{
 
     @Override

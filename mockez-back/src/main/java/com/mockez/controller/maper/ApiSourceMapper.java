@@ -2,9 +2,7 @@ package com.mockez.controller.maper;
 
 import com.mockez.domain.dto.SourceDto;
 import com.mockez.domain.model.entity.Source;
-import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-@Mapper
 public interface ApiSourceMapper extends ApiAbstractMapper{
 
     @Override

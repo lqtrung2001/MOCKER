@@ -1,8 +1,12 @@
 package com.mockez.domain.model.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -16,7 +20,10 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString
+@SuperBuilder
 @MappedSuperclass
+@AllArgsConstructor
+@NoArgsConstructor
 //@EntityListeners(AuditingEntityListener.class)
 public abstract class Base {
 

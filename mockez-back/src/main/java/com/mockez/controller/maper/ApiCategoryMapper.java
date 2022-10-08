@@ -2,10 +2,8 @@ package com.mockez.controller.maper;
 
 import com.mockez.domain.dto.CategoryDto;
 import com.mockez.domain.model.entity.Category;
-import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
 public interface ApiCategoryMapper extends ApiAbstractMapper {
 
     @Override

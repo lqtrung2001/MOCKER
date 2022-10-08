@@ -2,10 +2,8 @@ package com.mockez.controller.maper;
 
 import com.mockez.domain.dto.SQLTypeDto;
 import com.mockez.domain.model.entity.SQLType;
-import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
 public interface ApiSQLTypeMapper extends ApiAbstractMapper {
 
     @Override
