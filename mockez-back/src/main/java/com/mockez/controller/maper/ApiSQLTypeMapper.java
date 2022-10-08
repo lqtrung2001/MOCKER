@@ -6,16 +6,19 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper
-public interface ApiSQLTypeAbstractMapper extends ApiAbstractMapper {
-    @Mapping(source = "id",  target = "id")
-    @Mapping(source = "code",  target = "code")
-    @Mapping(source = "description",  target = "description")
-    @Mapping(source = "generateTypes",  target = "generateTypes")
-    SQLType toEntity(SQLTypeDto sqlTypeDto);
+public interface ApiSQLTypeMapper extends ApiAbstractMapper {
 
+    @Override
     @Mapping(source = "id",  target = "id")
     @Mapping(source = "code",  target = "code")
     @Mapping(source = "description",  target = "description")
     @Mapping(source = "generateTypes",  target = "generateTypes")
-    SQLTypeDto toDTO(SQLType sqlType);
+    SQLTypeDto map(SQLType sqlType);
+
+    @Override
+    @Mapping(source = "id",  target = "id")
+    @Mapping(source = "code",  target = "code")
+    @Mapping(source = "description",  target = "description")
+    @Mapping(source = "generateTypes",  target = "generateTypes")
+    SQLType map(SQLTypeDto sqlTypeDto);
 }

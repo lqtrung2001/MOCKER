@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import java.util.UUID;
+
 import static lombok.AccessLevel.NONE;
 
 @Entity
@@ -27,7 +29,7 @@ public class Option extends Base {
     @Id
     @Setter(NONE)
     @Column(name = "field_id", nullable = false, updatable = false)
-    private String id;
+    private UUID id;
 
     @Column(nullable = false)
     private Integer blank;
