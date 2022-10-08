@@ -22,7 +22,7 @@ public class GenerateController implements GenerateApi {
     @Override
     public ResponseEntity<List<Map<String, String>>> generate(GenerateReqDto generateReqDto) {
         GenerateReq body = new GenerateReq();
-        body.setTableName("MOCKEZ");
+//        body.setTableName("MOCKEZ");
         body.setRow(1000);
 
         GenerateType generateType = new GenerateType("68d318cb-5db2-4b60-9f17-61762ebf823d", null, null, null, null, null);
