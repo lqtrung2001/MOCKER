@@ -10,6 +10,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 import java.sql.Timestamp;
 
 @Getter
@@ -34,4 +35,8 @@ public abstract class Base {
     @LastModifiedBy
     @Column(name = "modified_by")
     private String modifiedBy;
+
+    @Version
+    @Column(nullable = false)
+    private Integer version;
 }

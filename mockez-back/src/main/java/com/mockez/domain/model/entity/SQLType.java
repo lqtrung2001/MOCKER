@@ -18,6 +18,7 @@ import javax.persistence.UniqueConstraint;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.NONE;
 
 @Entity
@@ -43,13 +44,13 @@ public class SQLType extends Base {
     @Column(nullable = false)
     private String description;
 
-    @ManyToMany
+    @ToString.Exclude
+    @ManyToMany(fetch = LAZY)
     @JoinTable(
             name = "field_generate_type",
             joinColumns = @JoinColumn(name = "field_id"),
             inverseJoinColumns = @JoinColumn(name = "generate_id")
     )
-    @ToString.Exclude
     private List<GenerateType> generateTypes = new ArrayList<>();
 
     @Override

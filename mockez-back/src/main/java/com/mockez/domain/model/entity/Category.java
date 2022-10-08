@@ -16,6 +16,7 @@ import javax.persistence.UniqueConstraint;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.NONE;
 
 @Entity
@@ -42,7 +43,7 @@ public class Category extends Base{
     private String description;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = LAZY)
     private List<GenerateType> generateTypes = new ArrayList<>();
 
     @Override

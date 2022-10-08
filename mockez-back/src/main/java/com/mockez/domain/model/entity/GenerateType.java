@@ -20,6 +20,7 @@ import javax.persistence.UniqueConstraint;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.NONE;
 
 @Entity
@@ -46,15 +47,16 @@ public class GenerateType extends Base {
     private String description;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "generateType")
-    private List<Source> sources = new ArrayList<Source>();
+    @OneToMany(mappedBy = "generateType", fetch = LAZY)
+    private List<Source> sources = new ArrayList<>();
 
-    @ManyToOne
+    @ToString.Exclude
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "generate_type_category_id_fk"))
     private Category category;
 
-    @ManyToMany(mappedBy = "generateTypes")
     @ToString.Exclude
+    @ManyToMany(mappedBy = "generateTypes", fetch = LAZY)
     private List<SQLType> sqlTypes = new ArrayList<>();
 
 }

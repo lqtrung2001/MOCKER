@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.NONE;
 
 @Entity
@@ -33,7 +34,7 @@ public class Source extends Base {
     @Column(nullable = false)
     private String value;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "source_generate_type_id_fk"))
     private GenerateType generateType;
 

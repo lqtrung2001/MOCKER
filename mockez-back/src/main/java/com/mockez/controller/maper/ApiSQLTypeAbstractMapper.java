@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper
-public interface ApiSQLTypeMapper {
+public interface ApiSQLTypeAbstractMapper extends ApiAbstractMapper {
     @Mapping(source = "id",  target = "id")
     @Mapping(source = "code",  target = "code")
     @Mapping(source = "description",  target = "description")

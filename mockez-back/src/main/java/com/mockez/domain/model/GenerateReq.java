@@ -18,8 +18,5 @@ import java.util.List;
 @AllArgsConstructor
 public class GenerateReq {
     private Integer row;
-    private String format;
-    private String tableName;
-    private Boolean isIncludeCreateTable;
     private List<Field> fields;
 }
