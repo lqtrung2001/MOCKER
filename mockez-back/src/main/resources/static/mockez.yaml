@@ -210,10 +210,6 @@ components:
       type: object
       required:
         - id
-        - name
-        - sqlType
-        - generateType
-        - option
         - version
       description: FIELD table
       properties:
@@ -241,8 +237,6 @@ components:
       type: object
       required:
         - id
-        - code
-        - description
         - version
       description: SQLTYPE table
       properties:
@@ -271,9 +265,6 @@ components:
       type: object
       required:
         - id
-        - code
-        - description
-        - category
         - version
       description: GENERATETYPE table
       properties:
@@ -308,8 +299,6 @@ components:
       type: object
       required:
         - id
-        - name
-        - description
         - version
       description: CATEGORY table
       properties:
@@ -338,8 +327,6 @@ components:
       type: object
       required:
         - id
-        - value
-        - generateType
         - version
       description: Source table
       properties:
@@ -362,7 +349,6 @@ components:
       type: object
       required:
         - id
-        - blank
         - version
       description: OPTION table
       properties:

@@ -40,7 +40,7 @@ public class Category extends Base{
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, length = 1000)
+    @Column(nullable = false, length = 1000 )
     private String description;
 
     @ToString.Exclude
