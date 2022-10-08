@@ -69,6 +69,11 @@
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -120,7 +125,7 @@
                             <generateApis>true</generateApis>
                             <generateApiTests>false</generateApiTests>
                             <generateApiDocumentation>false</generateApiDocumentation>
-                            <modelPackage>com.mockez.domain.model</modelPackage>
+                            <modelPackage>com.mockez.domain.dto</modelPackage>
                             <generateModels>true</generateModels>
                             <modelNameSuffix>Dto</modelNameSuffix>
                             <generateModelTests>false</generateModelTests>

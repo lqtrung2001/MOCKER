@@ -1,6 +1,6 @@
 package com.mockez.controller.maper;
 
-import com.mockez.domain.model.CategoryDto;
+import com.mockez.domain.dto.CategoryDto;
 import com.mockez.domain.model.entity.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

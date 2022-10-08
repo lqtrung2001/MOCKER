@@ -1,7 +1,7 @@
 package com.mockez.controller.maper;
 
 import com.mockez.domain.model.GenerateReq;
-import com.mockez.domain.model.GenerateReqDto;
+import com.mockez.domain.dto.GenerateReqDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 @Mapper

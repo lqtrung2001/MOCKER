@@ -1,6 +1,6 @@
 package com.mockez.controller.maper;
 
-import com.mockez.domain.model.GenerateTypeDto;
+import com.mockez.domain.dto.GenerateTypeDto;
 import com.mockez.domain.model.entity.GenerateType;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

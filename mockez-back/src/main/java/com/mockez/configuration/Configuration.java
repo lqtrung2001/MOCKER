@@ -1,4 +1,4 @@
 package com.mockez.configuration;
 
-public class Config {
+public class Configuration {
 }

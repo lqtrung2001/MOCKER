@@ -38,5 +38,4 @@ public class Option extends Base {
     @JoinColumn(nullable = false, name = "field_id", referencedColumnName = "id")
     private Field field;
 
-
 }

@@ -47,23 +47,4 @@ public class Category extends Base{
     @OneToMany(mappedBy = "category", fetch = LAZY)
     private List<GenerateType> generateTypes = new ArrayList<>();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Category category)) return false;
-
-        if (!getId().equals(category.getId())) return false;
-        if (!getName().equals(category.getName())) return false;
-        if (!getDescription().equals(category.getDescription())) return false;
-        return getGenerateTypes().equals(category.getGenerateTypes());
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + getName().hashCode();
-        result = 31 * result + getDescription().hashCode();
-        result = 31 * result + getGenerateTypes().hashCode();
-        return result;
-    }
 }
