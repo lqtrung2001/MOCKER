@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.NONE;
@@ -38,22 +39,22 @@ public class GenerateType extends Base {
     @Id
     @Setter(NONE)
     @Column(updatable = false)
-    private String id;
+    private UUID id;
 
     @Column(nullable = false)
     private String code;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000)
     private String description;
-
-    @ToString.Exclude
-    @OneToMany(mappedBy = "generateType", fetch = LAZY)
-    private List<Source> sources = new ArrayList<>();
 
     @ToString.Exclude
     @ManyToOne(fetch = LAZY)
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "generate_type_category_id_fk"))
     private Category category;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "generateType", fetch = LAZY)
+    private List<Source> sources = new ArrayList<>();
 
     @ToString.Exclude
     @ManyToMany(mappedBy = "generateTypes", fetch = LAZY)

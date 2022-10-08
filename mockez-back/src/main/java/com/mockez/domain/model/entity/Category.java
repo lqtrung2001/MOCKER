@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.NONE;
@@ -34,12 +35,12 @@ public class Category extends Base{
     @Id
     @Setter(NONE)
     @Column(updatable = false)
-    private String id;
+    private UUID id;
 
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000)
     private String description;
 
     @ToString.Exclude

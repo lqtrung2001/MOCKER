@@ -10,6 +10,7 @@ public interface ApiSQLTypeMapper extends ApiAbstractMapper {
 
     @Override
     @Mapping(source = "id",  target = "id")
+    @Mapping(source = "version", target = "version")
     @Mapping(source = "code",  target = "code")
     @Mapping(source = "description",  target = "description")
     @Mapping(source = "generateTypes",  target = "generateTypes")
@@ -17,6 +18,7 @@ public interface ApiSQLTypeMapper extends ApiAbstractMapper {
 
     @Override
     @Mapping(source = "id",  target = "id")
+    @Mapping(source = "version", target = "version")
     @Mapping(source = "code",  target = "code")
     @Mapping(source = "description",  target = "description")
     @Mapping(source = "generateTypes",  target = "generateTypes")

@@ -10,14 +10,16 @@ public interface ApiCategoryMapper extends ApiAbstractMapper {
 
     @Override
     @Mapping(source = "id", target = "id")
-    @Mapping(source = "type", target = "name")
+    @Mapping(source = "version", target = "version")
+    @Mapping(source = "name", target = "name")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "generateTypes", target = "generateTypes")
     CategoryDto map(Category category);
 
     @Override
     @Mapping(source = "id", target = "id")
-    @Mapping(source = "name", target = "type")
+    @Mapping(source = "version", target = "version")
+    @Mapping(source = "name", target = "name")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "generateTypes", target = "generateTypes")
     Category map(CategoryDto categoryDto);

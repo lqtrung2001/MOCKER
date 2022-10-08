@@ -9,15 +9,15 @@ public interface ApiSourceMapper extends ApiAbstractMapper{
 
     @Override
     @Mapping(source = "id", target = "id")
+    @Mapping(source = "version", target = "version")
     @Mapping(source = "value", target = "value")
     @Mapping(source = "generateType", target = "generateType")
-    @Mapping(source = "version", target = "version")
     SourceDto map(Source source);
 
     @Override
     @Mapping(source = "id", target = "id")
+    @Mapping(source = "version", target = "version")
     @Mapping(source = "value", target = "value")
     @Mapping(source = "generateType", target = "generateType")
-    @Mapping(source = "version", target = "version")
     Source map(SourceDto sourceDto);
 }

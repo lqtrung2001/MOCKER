@@ -3,6 +3,7 @@ package com.mockez.service;
 import com.mockez.domain.model.entity.GenerateType;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface GenerateTypeService {
 
@@ -11,14 +12,14 @@ public interface GenerateTypeService {
      * @param id of generateType
      * @return generateType
      */
-    GenerateType getGenerateType(String id);
+    GenerateType getGenerateType(UUID id);
 
     /**
      * GENERATETYPE.02 GET /generate-type/{typeId}
      * @param sqlTypeId of sqlType
      * @return generateType by sqlTypeId
      */
-    List<GenerateType> getGenerateTypesByType(String sqlTypeId);
+    List<GenerateType> getGenerateTypesByType(UUID sqlTypeId);
 
     /**
      * GENERATETYPE.03 GET /generate-type

@@ -18,6 +18,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import java.util.UUID;
+
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.NONE;
 
@@ -36,15 +38,17 @@ public class Field extends Base {
     @Id
     @Setter(NONE)
     @Column(updatable = false)
-    private String id;
+    private UUID id;
 
     @Column(nullable = false)
     private String name;
 
+    @ToString.Exclude
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "sql_type_id", nullable = false, foreignKey = @ForeignKey(name = "field_sql_type_id_fk"))
-    private SQLType SQLType;
+    private SQLType sqlType;
 
+    @ToString.Exclude
     @ManyToOne(fetch = LAZY)
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "field_generate_type_id_fk"))
     private GenerateType generateType;

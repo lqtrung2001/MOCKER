@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -17,12 +18,12 @@ public class GenerateTypeServiceImpl implements GenerateTypeService {
     private SQLTypeRepository sqlTypeRepository;
 
     @Override
-    public GenerateType getGenerateType(String id) {
+    public GenerateType getGenerateType(UUID id) {
         return generateTypeRepository.findById(id).orElseThrow();
     }
 
     @Override
-    public List<GenerateType> getGenerateTypesByType(String sqlTypeId) {
+    public List<GenerateType> getGenerateTypesByType(UUID sqlTypeId) {
         return sqlTypeRepository.findById(sqlTypeId).orElseThrow().getGenerateTypes();
     }
 

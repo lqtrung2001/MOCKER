@@ -296,7 +296,7 @@ components:
           description: description for generate type
         category:
           $ref: '#/components/schemas/Category'
-        source:
+        sources:
           type: array
           items:
             $ref: '#/components/schemas/Source'
@@ -380,6 +380,8 @@ components:
           default: 0
           maximum: 100
           description: blank percent
+        field:
+          $ref: '#/components/schemas/Field'
     Error:
       description: Schema for error response body
       type: object

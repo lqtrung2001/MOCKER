@@ -3,6 +3,7 @@ package com.mockez.service;
 import com.mockez.domain.model.entity.Category;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface CategoryService {
 
@@ -17,6 +18,6 @@ public interface CategoryService {
      * @param id of category
      * @return category
      */
-    Category getCategory(String id);
+    Category getCategory(UUID id);
 
 }

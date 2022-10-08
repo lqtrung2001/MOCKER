@@ -10,12 +10,15 @@ public interface ApiOptionMapper extends ApiAbstractMapper {
 
     @Override
     @Mapping(source = "id", target = "id")
-    @Mapping(source = "blank", target = "blank")
-    @Mapping(source = "algorithm", target = "generateType")
-    @Mapping(source = "field", target = "generateType")
     @Mapping(source = "version", target = "version")
+    @Mapping(source = "blank", target = "blank")
+    @Mapping(source = "field", target = "field")
     OptionDto map(Option option);
 
     @Override
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "version", target = "version")
+    @Mapping(source = "blank", target = "blank")
+    @Mapping(source = "field", target = "field")
     Option map(OptionDto optionDto);
 }

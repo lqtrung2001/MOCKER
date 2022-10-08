@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -21,7 +22,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category getCategory(String id) {
+    public Category getCategory(UUID id) {
         return categoryRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Resource not found"));
     }

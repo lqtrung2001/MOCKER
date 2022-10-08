@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.NONE;
@@ -36,12 +37,12 @@ public class SQLType extends Base {
     @Id
     @Setter(NONE)
     @Column(updatable = false)
-    private String id;
+    private UUID id;
 
     @Column(nullable = false)
     private String code;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000)
     private String description;
 
     @ToString.Exclude
@@ -52,22 +53,4 @@ public class SQLType extends Base {
             inverseJoinColumns = @JoinColumn(name = "generate_id")
     )
     private List<GenerateType> generateTypes = new ArrayList<>();
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof SQLType sqlType)) return false;
-
-        if (!getId().equals(sqlType.getId())) return false;
-        if (!getCode().equals(sqlType.getCode())) return false;
-        return getDescription().equals(sqlType.getDescription());
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + getCode().hashCode();
-        result = 31 * result + getDescription().hashCode();
-        return result;
-    }
 }
