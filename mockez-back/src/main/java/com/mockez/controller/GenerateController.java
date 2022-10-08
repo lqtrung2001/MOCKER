@@ -2,7 +2,7 @@ package com.mockez.controller;
 
 import com.mockez.api.GenerateApi;
 import com.mockez.domain.model.GenerateReq;
-import com.mockez.domain.model.GenerateRequestBodyDto;
+import com.mockez.domain.model.GenerateReqDto;
 import com.mockez.domain.model.entity.Field;
 import com.mockez.domain.model.entity.GenerateType;
 import com.mockez.service.GenerateService;
@@ -20,10 +20,10 @@ public class GenerateController implements GenerateApi {
     private final GenerateService generateService;
 
     @Override
-    public ResponseEntity<List<Map<String, String>>> generate(GenerateRequestBodyDto generateRequestBodyDto) {
+    public ResponseEntity<List<Map<String, String>>> generate(GenerateReqDto generateReqDto) {
         GenerateReq body = new GenerateReq();
         body.setTableName("MOCKEZ");
-        body.setRow(100);
+        body.setRow(1000);
 
         GenerateType generateType = new GenerateType("68d318cb-5db2-4b60-9f17-61762ebf823d", null, null, null, null, null);
         Field field1 = new Field();

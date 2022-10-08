@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper
-public interface ApiCategoryMapper {
+public interface ApiCategoryMapper extends ApiMapper{
     @Mapping(source = "id", target = "id")
     @Mapping(source = "type", target = "name")
     @Mapping(source = "description", target = "description")
