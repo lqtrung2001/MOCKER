@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper
-public interface ApiCategoryAbstractMapper extends ApiAbstractMapper {
+public interface ApiCategoryMapper extends ApiAbstractMapper {
 
     @Override
     @Mapping(source = "id", target = "id")

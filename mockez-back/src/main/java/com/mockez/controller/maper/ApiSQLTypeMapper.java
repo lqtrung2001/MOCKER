@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper
-public interface ApiSQLTypeAbstractMapper extends ApiAbstractMapper {
+public interface ApiSQLTypeMapper extends ApiAbstractMapper {
 
     @Override
     @Mapping(source = "id",  target = "id")
