@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ConverterService } from '@core/util/converter.service';
 
 @Component({
   selector: 'app-preview',
@@ -8,23 +9,18 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class PreviewComponent implements OnInit {
 
   @Output() exitEventEmitter: EventEmitter<any> = new EventEmitter();
+  @Input() data: any[] = [];
+  @Input() format: string = 'JSON';
 
   isTable: boolean = false;
 
-  constructor() {
+  constructor(
+    private converterService: ConverterService
+  ) {
   }
 
-  rows: any[] = [];
-
   ngOnInit(): void {
-    this.rows.push([{
-      id: 1,
-      first_name: `Gerri`,
-      last_name: `Variant`,
-      email: `gvarian0@joomla.org`,
-      gender: `Female`,
-      id_address: `47.80.7.226`
-    }]);
+
   }
 
 }

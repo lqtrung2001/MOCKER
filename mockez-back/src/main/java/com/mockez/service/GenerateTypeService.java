@@ -19,7 +19,7 @@ public interface GenerateTypeService {
      * @param sqlTypeId of sqlType
      * @return generateType by sqlTypeId
      */
-    List<GenerateType> getGenerateTypesByType(UUID sqlTypeId);
+    List<GenerateType> getGenerateTypesBySQLType(UUID sqlTypeId);
 
     /**
      * GENERATETYPE.03 GET /generate-type

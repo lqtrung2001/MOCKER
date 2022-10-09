@@ -1,12 +1,12 @@
 nav {
   font-size: 15px;
   box-shadow: 0 10px 10px rgba(225, 225, 225, 0.65);
+  z-index: 1;
 
   .logo {
     width: 30px;
     height: 30.6px;
   }
-
 
   > div:nth-child(2) {
     a {

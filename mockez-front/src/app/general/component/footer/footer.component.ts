@@ -7,7 +7,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  @Output() showPreviewEventEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() previewOnClickEventEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() downloadOnClickEventEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
