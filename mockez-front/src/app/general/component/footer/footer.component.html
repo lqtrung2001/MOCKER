@@ -1,24 +1,25 @@
 <footer class='fixed inset-x-0 bottom-0 bg-white'>
   <div class='flex justify-center w-full'>
     <div class='flex justify-center h-full'>
-      <button type='button' class='uppercase text-center text-black font-medium p-4 w-60'>
-        Download Data
+      <button type='button' class='uppercase text-center text-black font-medium p-4 w-60'
+              (click)='downloadOnClickEventEmitter.emit()'>
+        {{'general.footer.download_data' | translate | uppercase}}
       </button>
     </div>
     <div class='flex justify-center h-full'>
       <button type='button' class='uppercase text-center text-black font-medium p-4 w-60'
-              (click)='showPreviewEventEmitter.emit()'
-      >Preview
+              (click)='previewOnClickEventEmitter.emit()'>
+        {{'general.footer.preview' | translate | uppercase}}
       </button>
     </div>
     <div class='flex justify-center h-full'>
       <button type='button' class='uppercase text-center text-black font-medium p-4 w-60'>
-        Save this schema
+        {{'general.footer.save_this_schema' | translate | uppercase}}
       </button>
     </div>
     <div class='flex justify-center h-full'>
       <button type='button' class='flex justify-center items-center uppercase text-center text-black font-medium p-4 w-60'>
-        More
+        {{'general.footer.more' | translate | uppercase}}
         <img class='w-6 ml-2.5' src='assets/icon/general/down_button.png' alt='more'/>
       </button>
     </div>

@@ -1,0 +1,34 @@
+{
+  "navigation": {
+    "name": "mockez",
+    "search": "search mockez",
+    "general": "general",
+    "dataset": "dataset",
+    "mock_api": "mock api",
+    "schema": "schema",
+    "project": "project"
+  },
+  "general": {
+    "table": {
+      "empty": "Table is empty, please add another field and config them by using below button.",
+      "name": "name",
+      "sql_type": "sql type",
+      "generate_type": "generate type",
+      "option": "option",
+      "blank": "blank",
+      "name_of_field": "name of field"
+    },
+    "config": {
+      "rows": "rows",
+      "format": "format",
+      "table_name": "table name",
+      "include_create_table": "include create table"
+    },
+    "footer": {
+      "download_data": "download data",
+      "preview": "preview",
+      "save_this_schema": "save this schema",
+      "more": "more"
+    }
+  }
+}

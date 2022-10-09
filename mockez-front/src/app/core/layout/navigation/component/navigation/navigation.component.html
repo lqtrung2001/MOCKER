@@ -2,23 +2,25 @@
   <div class='flex items-center h-full w-72'>
     <div class='flex items-center cursor-pointer'>
       <img class='logo' src='assets/icon/navigation/panda.png' alt='logo'/>
-      <span class='font-medium ml-3'>MOCKEZ</span>
+      <span class='font-medium ml-3'>{{'navigation.name' | translate | uppercase}}</span>
     </div>
     <div class='flex items-center bg-gray rounded-md ml-5 p-2.5 w-44 h-10'>
       <img src='assets/icon/navigation/search.png' alt='search'/>
-      <input class='outline-border-none bg-gray w-28 ml-2.5' type='text' placeholder='Search Mockez'/>
+      <input class='outline-border-none bg-gray w-28 ml-2.5' type='text' placeholder='{{"navigation.search" | translate | titlecase}}'/>
     </div>
   </div>
   <div class='flex h-full mx-8 my-0'>
-    <a href='#' class='no-underline text-center text-black font-medium w-24 active'>GENERAL</a>
-    <a href='#' class='no-underline text-center text-black font-medium w-24'>DATASET</a>
-    <a href='#' class='no-underline text-center text-black font-medium w-24'>MOCK API</a>
-    <a href='#' class='no-underline text-center text-black font-medium w-24'>SCHEMA</a>
-    <a href='#' class='no-underline text-center text-black font-medium w-24'>PROJECT</a>
+    <a href='#' class='no-underline text-center text-black font-medium w-24 active'>{{'navigation.general' | translate | uppercase}}</a>
+    <a href='#' class='no-underline text-center text-black font-medium w-24'>{{'navigation.dataset' | translate | uppercase}}</a>
+    <a href='#' class='no-underline text-center text-black font-medium w-24'>{{'navigation.mock_api' | translate | uppercase}}</a>
+    <a href='#' class='no-underline text-center text-black font-medium w-24'>{{'navigation.schema' | translate | uppercase}}</a>
+    <a href='#' class='no-underline text-center text-black font-medium w-24'>{{'navigation.project' | translate | uppercase}}</a>
   </div>
   <div class='flex items-center h-full justify-end w-72'>
-    <img class='icon cursor-pointer mr-8' [src]='isLight ? "assets/icon/navigation/sun.png" : "assets/icon/navigation/moon.png"'
-         [alt]='isLight ? "light" : "dark" '/>
+    <img class='icon cursor-pointer mr-8'
+         [src]='isLight ? "assets/icon/navigation/sun.png" : "assets/icon/navigation/moon.png"'
+         [alt]='isLight ? "light" : "dark" '
+         (click)='isLight=!isLight'/>
     <img class='icon cursor-pointer mr-8' src='assets/icon/navigation/settings.png' alt='setting'/>
     <img class='icon cursor-pointer mr-8' src='assets/icon/navigation/notification.png' alt='notification'/>
     <img class='icon cursor-pointer mr-8' src='assets/icon/navigation/facebook_messenger.png' alt='facebook messenger'/>
