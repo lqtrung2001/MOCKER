@@ -11,7 +11,7 @@ public interface ApiCategoryMapper extends ApiAbstractMapper {
     @Mapping(source = "version", target = "version")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "description", target = "description")
-    @Mapping(source = "generateTypes", target = "generateTypes")
+//    @Mapping(source = "generateTypes", target = "generateTypes")
     CategoryDto map(Category category);
 
     @Override
@@ -19,6 +19,6 @@ public interface ApiCategoryMapper extends ApiAbstractMapper {
     @Mapping(source = "version", target = "version")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "description", target = "description")
-    @Mapping(source = "generateTypes", target = "generateTypes")
+//    @Mapping(source = "generateTypes", target = "generateTypes")
     Category map(CategoryDto categoryDto);
 }

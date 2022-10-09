@@ -7,7 +7,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 
 INSERT INTO generate_type (id, code, description, category_id, version) VALUES ('1bcda47f-327c-4874-ab0d-2ba10dbd73c3', 'Blank', 'Blank', '276094fb-a8e6-418e-8757-65470dbffd08', 0);
 
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'null', 'dbd189e4-568c-409a-bb6a-de9483d88f35', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'null', '1bcda47f-327c-4874-ab0d-2ba10dbd73c3', 0);
 
 INSERT INTO generate_type (id, code, description, category_id, version) VALUES ('d7d3b0c7-707e-4b66-a94c-86ee15a3fc96', 'Boolean', 'Boolean', '276094fb-a8e6-418e-8757-65470dbffd08', 0);
 

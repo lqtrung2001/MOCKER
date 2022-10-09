@@ -341,7 +341,7 @@ components:
           description: version of record
         value:
           type: string
-          maxLength: 1000
+          maxLength: 4096
           description: value of source
         generateType:
           $ref: '#/components/schemas/GenerateType'

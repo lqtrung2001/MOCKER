@@ -34,7 +34,7 @@ public class Source extends Base {
     @Column(updatable = false)
     private UUID id;
 
-    @Column(nullable = false, length = 1000)
+    @Column(nullable = false, length = 4096)
     private String value;
 
     @ToString.Exclude

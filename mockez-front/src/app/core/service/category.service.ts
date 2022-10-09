@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Category } from '@core/model/Category.modal';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '@environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
+
+  constructor(private httpClient: HttpClient) {
+  }
+
   public getCategories(): Observable<Category[]> {
-    return;
+    return this.httpClient.get<Category[]>(`${environment.apiUrl}/category`);
   }
 
   public getCategory(id: string): Observable<Category> {
-    return;
+    return this.httpClient.get<Category>(`${environment.apiUrl}/category/${id}`);
   }
 
 }

@@ -2,11 +2,11 @@ INSERT INTO category (id, name, description, version) VALUES ('d157db0f-91e9-4ee
 
 INSERT INTO generate_type (id, code, description, category_id, version) VALUES ('b127d9b1-0847-4205-8d1d-e854ae3b7dda', 'Character Sequence', 'Character Sequence', 'd157db0f-91e9-4ee2-8ba7-736b4413205b', 0);
 
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '', 'b127d9b1-0847-4205-8d1d-e854ae3b7dda', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'not found', 'b127d9b1-0847-4205-8d1d-e854ae3b7dda', 0);
 
 INSERT INTO generate_type (id, code, description, category_id, version) VALUES ('c37de0ba-6a59-4064-a00f-f931d2966449', 'Digit Sequence', 'Digit Sequence', 'd157db0f-91e9-4ee2-8ba7-736b4413205b', 0);
 
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '', 'c37de0ba-6a59-4064-a00f-f931d2966449', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'not found', 'c37de0ba-6a59-4064-a00f-f931d2966449', 0);
 
 INSERT INTO generate_type (id, code, description, category_id, version) VALUES ('30028579-6d45-46da-8a2f-c7a4c55243a9', 'Formula', 'Formula', 'd157db0f-91e9-4ee2-8ba7-736b4413205b', 0);
 
@@ -1029,7 +1029,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'NULL', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '0.00', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '../../../../../../../../../../../etc/hosts', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'œ∑´®†¥¨ˆøπ“‘', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '​', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '(╯°□°）╯︵ ┻━┻)  ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1050,7 +1050,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '""', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '00˙Ɩ$-', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '✋🏿 💪🏿 👐🏿 🙌🏿 👏🏿 🙏🏿', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '̗̺͖̹̯͓Ṯ̤͍̥͇͈h̲́e͏͓̼̗̙̼̣͔ ͇̜̱̠͓͍ͅN͕͠e̗̱z̘̝̜̺͙p̤̺̹͍̯͚e̠̻̠͜r̨̤͍̺̖͔̖̖d̠̟̭̬̝͟i̦͖̩͓͔̤a̠̗̬͉̙n͚͜ ̻̞̰͚ͅh̵͉i̳̞v̢͇ḙ͎͟-҉̭̩̼͔m̤̭̫i͕͇̝̦n̗͙ḍ̟ ̯̲͕͞ǫ̟̯̰̲͙̻̝f ̪̰̰̗̖̭̘͘c̦͍̲̞͍̩̙ḥ͚a̮͎̟̙͜ơ̩̹͎s̤.̝̝ ҉Z̡̖̜͖̰̣͉̜a͖̰͙̬͡l̲̫̳͍̩g̡̟̼̱͚̞̬ͅo̗͜.̟', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '"''''''''"''"', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '"''"''"''''''''"', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1070,7 +1070,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '‪‪test‪', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '0.00', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '　', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1/0', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '１２３', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1/0', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1100,7 +1100,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '0.00', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'בְּרֵאשִׁית, בָּרָא אֱלֹהִים, אֵת הַשָּׁמַיִם, וְאֵת הָאָרֶץ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '✋🏿 💪🏿 👐🏿 🙌🏿 👏🏿 🙏🏿', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '$1.00', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1''; DROP TABLE users--', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '̦H̬̤̗̤͝e͜ ̜̥̝̻͍̟́w̕h̖̯͓o̝͙̖͎̱̮ ҉̺̙̞̟͈W̷̼̭a̺̪͍į͈͕̭͙̯̜t̶̼̮s̘͙͖̕ ̠̫̠B̻͍͙͉̳ͅe̵h̵̬͇̫͙i̹͓̳̳̮͎̫̕n͟d̴̪̜̖ ̰͉̩͇͙̲͞ͅT͖̼͓̪͢h͏͓̮̻e̬̝̟ͅ ̤̹̝W͙̞̝͔͇͝ͅa͏͓͔̹̼̣l̴͔̰̤̟͔ḽ̫.͕', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1131,7 +1131,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '"', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '😍', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1E+02', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '"''''''''"''"', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '0.00', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), ',。・:*:・゜’( ☻ ω ☻ )。・:*:・゜’', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1154,13 +1154,13 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'Z̮̞̠͙͔ͅḀ̗̞͈̻̗Ḷ͙͎̯̹̞͓G̻O̭̗̮', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '(｡◕ ∀ ◕｡)', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '‪‪test‪', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '﻿', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '𠜎𠜱𠝹𠱓𠱸𠲖𠳏', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'ヽ༼ຈل͜ຈ༽ﾉ ヽ༼ຈل͜ຈ༽ﾉ ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '(╯°□°）╯︵ ┻━┻)  ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '̦H̬̤̗̤͝e͜ ̜̥̝̻͍̟́w̕h̖̯͓o̝͙̖͎̱̮ ҉̺̙̞̟͈W̷̼̭a̺̪͍į͈͕̭͙̯̜t̶̼̮s̘͙͖̕ ̠̫̠B̻͍͙͉̳ͅe̵h̵̬͇̫͙i̹͓̳̳̮͎̫̕n͟d̴̪̜̖ ̰͉̩͇͙̲͞ͅT͖̼͓̪͢h͏͓̮̻e̬̝̟ͅ ̤̹̝W͙̞̝͔͇͝ͅa͏͓͔̹̼̣l̴͔̰̤̟͔ḽ̫.͕', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '🚾 🆒 🆓 🆕 🆖 🆗 🆙 🏧', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'בְּרֵאשִׁית, בָּרָא אֱלֹהִים, אֵת הַשָּׁמַיִם, וְאֵת הָאָרֶץ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'åß∂ƒ©˙∆˚¬…æ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1177,7 +1177,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '｀ｨ(´∀｀∩', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'nil', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'œ∑´®†¥¨ˆøπ“‘', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '울란바토르', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '0.00', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '../../../../../../../../../../../etc/passwd%00', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1192,7 +1192,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '␡', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '(╯°□°）╯︵ ┻━┻)  ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'ÅÍÎÏ˝ÓÔÒÚÆ☃', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), null, 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'null', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '-1.00', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1E+02', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'nil', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1204,7 +1204,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '0/0', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '👩🏽', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), ',。・:*:・゜’( ☻ ω ☻ )。・:*:・゜’', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'ヽ༼ຈل͜ຈ༽ﾉ ヽ༼ຈل͜ຈ༽ﾉ ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '˙ɐnbᴉlɐ ɐuƃɐɯ ǝɹolop ʇǝ ǝɹoqɐl ʇn ʇunpᴉpᴉɔuᴉ ɹodɯǝʇ poɯsnᴉǝ op pǝs ''ʇᴉlǝ ƃuᴉɔsᴉdᴉpɐ ɹnʇǝʇɔǝsuoɔ ''ʇǝɯɐ ʇᴉs ɹolop ɯnsdᴉ ɯǝɹo˥', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '../../../../../../../../../../../etc/hosts', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1213,7 +1213,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1E+02', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1.00', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'null', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '0.00', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '(╯°□°）╯︵ ┻━┻)  ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1225,7 +1225,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '`⁄€‹›ﬁﬂ‡°·‚—±', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1''; DROP TABLE users--', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '␡', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), null, 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'null', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '⁰⁴⁵₀₁₂', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1E2', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '⁰⁴⁵₀₁₂', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1236,12 +1236,12 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '✋🏿 💪🏿 👐🏿 🙌🏿 👏🏿 🙏🏿', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1.00', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '-1E+02', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), null, 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'null', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '・(￣∀￣)・:*:', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), ' ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '˙ɐnbᴉlɐ ɐuƃɐɯ ǝɹolop ʇǝ ǝɹoqɐl ʇn ʇunpᴉpᴉɔuᴉ ɹodɯǝʇ poɯsnᴉǝ op pǝs ''ʇᴉlǝ ƃuᴉɔsᴉdᴉpɐ ɹnʇǝʇɔǝsuoɔ ''ʇǝɯɐ ʇᴉs ɹolop ɯnsdᴉ ɯǝɹo˥', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1;DROP TABLE users', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '(╯°□°）╯︵ ┻━┻)  ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '﻿', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'nil', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1259,7 +1259,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '() { _; } >_[$($())] { touch /tmp/blns.shellshock2.fail; }', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '̦H̬̤̗̤͝e͜ ̜̥̝̻͍̟́w̕h̖̯͓o̝͙̖͎̱̮ ҉̺̙̞̟͈W̷̼̭a̺̪͍į͈͕̭͙̯̜t̶̼̮s̘͙͖̕ ̠̫̠B̻͍͙͉̳ͅe̵h̵̬͇̫͙i̹͓̳̳̮͎̫̕n͟d̴̪̜̖ ̰͉̩͇͙̲͞ͅT͖̼͓̪͢h͏͓̮̻e̬̝̟ͅ ̤̹̝W͙̞̝͔͇͝ͅa͏͓͔̹̼̣l̴͔̰̤̟͔ḽ̫.͕', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'NULL', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '(╯°□°）╯︵ ┻━┻)  ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '‫test‫', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '␣', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1313,7 +1313,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'Z̮̞̠͙͔ͅḀ̗̞͈̻̗Ḷ͙͎̯̹̞͓G̻O̭̗̮', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '$1.00', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '../../../../../../../../../../../etc/hosts', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '"''"''"''''''''"', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), ' ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '　', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1446,7 +1446,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '‫test‫', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '"''"''"''''''''"', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'Ṱ̺̺̕o͞ ̷i̲̬͇̪͙n̝̗͕v̟̜̘̦͟o̶̙̰̠kè͚̮̺̪̹̱̤ ̖t̝͕̳̣̻̪͞h̼͓̲̦̳̘̲e͇̣̰̦̬͎ ̢̼̻̱̘h͚͎͙̜̣̲ͅi̦̲̣̰̤v̻͍e̺̭̳̪̰-m̢iͅn̖̺̞̲̯̰d̵̼̟͙̩̼̘̳ ̞̥̱̳̭r̛̗̘e͙p͠r̼̞̻̭̗e̺̠̣͟s̘͇̳͍̝͉e͉̥̯̞̲͚̬͜ǹ̬͎͎̟̖͇̤t͍̬̤͓̼̭͘ͅi̪̱n͠g̴͉ ͏͉ͅc̬̟h͡a̫̻̯͘o̫̟̖͍̙̝͉s̗̦̲.̨̹͈̣', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '""', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '␡', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'הָיְתָהtestالصفحات التّحول', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1588,9 +1588,9 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), ',./;''[]\-=', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1;DROP TABLE users', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'הָיְתָהtestالصفحات التّحول', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'Z̮̞̠͙͔ͅḀ̗̞͈̻̗Ḷ͙͎̯̹̞͓G̻O̭̗̮', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '../../../../../../../../../../../etc/hosts', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '-1E+02', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1;DROP TABLE users', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1598,7 +1598,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '사회과학원 어학연구소', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'Œ„´‰ˇÁ¨ˆØ∏”’', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '(｡◕ ∀ ◕｡)', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '""', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'œ∑´®†¥¨ˆøπ“‘', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), ',./;''[]\-=', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1612,9 +1612,9 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '0.00', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1E02', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '⁰⁴⁵', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), ',。・:*:・゜’( ☻ ω ☻ )。・:*:・゜’', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'בְּרֵאשִׁית, בָּרָא אֱלֹהִים, אֵת הַשָּׁמַיִם, וְאֵת הָאָרֶץ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '"', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'ÅÍÎÏ˝ÓÔÒÚÆ☃', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1637,12 +1637,12 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '‫test‫', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'Z̮̞̠͙͔ͅḀ̗̞͈̻̗Ḷ͙͎̯̹̞͓G̻O̭̗̮', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '᠎', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '$1.00', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '-$1.00', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '₀₁₂', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '-1E2', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '👾 🙇 💁 🙅 🙆 🙋 🙎 🙍 ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '١٢٣', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'NIL', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1660,7 +1660,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1/0', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '⁦test⁧', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '‫test‫', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'ヽ༼ຈل͜ຈ༽ﾉ ヽ༼ຈل͜ຈ༽ﾉ ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '-1E+02', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1/2', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1689,8 +1689,8 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '̦H̬̤̗̤͝e͜ ̜̥̝̻͍̟́w̕h̖̯͓o̝͙̖͎̱̮ ҉̺̙̞̟͈W̷̼̭a̺̪͍į͈͕̭͙̯̜t̶̼̮s̘͙͖̕ ̠̫̠B̻͍͙͉̳ͅe̵h̵̬͇̫͙i̹͓̳̳̮͎̫̕n͟d̴̪̜̖ ̰͉̩͇͙̲͞ͅT͖̼͓̪͢h͏͓̮̻e̬̝̟ͅ ̤̹̝W͙̞̝͔͇͝ͅa͏͓͔̹̼̣l̴͔̰̤̟͔ḽ̫.͕', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '　', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '👩🏽', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'NULL', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '`⁄€‹›ﬁﬂ‡°·‚—±', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'ﾟ･✿ヾ╲(｡◕‿◕｡)╱✿･ﾟ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1754,7 +1754,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'ثم نفس سقطت وبالتحديد،, جزيرتي باستخدام أن دنو. إذ هنا؟ الستار وتنصيب كان. أهّل ايطاليا، بريطانيا-فرنسا قد أخذ. سليمان، إتفاقية بين ما, يذكر الحدود أي بعد, معاملة بولندا، الإطلاق عل إيو.', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), ' ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '１２３', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '() { 0; }; touch /tmp/blns.shellshock1.fail;', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'Ω≈ç√∫˜µ≤≥÷', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1;DROP TABLE users', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1779,7 +1779,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'åß∂ƒ©˙∆˚¬…æ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1/0', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'ﾟ･✿ヾ╲(｡◕‿◕｡)╱✿･ﾟ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1/2', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'הָיְתָהtestالصفحات التّحول', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1E+02', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1827,7 +1827,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'ثم نفس سقطت وبالتحديد،, جزيرتي باستخدام أن دنو. إذ هنا؟ الستار وتنصيب كان. أهّل ايطاليا، بريطانيا-فرنسا قد أخذ. سليمان، إتفاقية بين ما, يذكر الحدود أي بعد, معاملة بولندا، الإطلاق عل إيو.', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '() { _; } >_[$($())] { touch /tmp/blns.shellshock2.fail; }', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1E2', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '̗̺͖̹̯͓Ṯ̤͍̥͇͈h̲́e͏͓̼̗̙̼̣͔ ͇̜̱̠͓͍ͅN͕͠e̗̱z̘̝̜̺͙p̤̺̹͍̯͚e̠̻̠͜r̨̤͍̺̖͔̖̖d̠̟̭̬̝͟i̦͖̩͓͔̤a̠̗̬͉̙n͚͜ ̻̞̰͚ͅh̵͉i̳̞v̢͇ḙ͎͟-҉̭̩̼͔m̤̭̫i͕͇̝̦n̗͙ḍ̟ ̯̲͕͞ǫ̟̯̰̲͙̻̝f ̪̰̰̗̖̭̘͘c̦͍̲̞͍̩̙ḥ͚a̮͎̟̙͜ơ̩̹͎s̤.̝̝ ҉Z̡̖̜͖̰̣͉̜a͖̰͙̬͡l̲̫̳͍̩g̡̟̼̱͚̞̬ͅo̗͜.̟', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1E+02', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '１２３', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1848,7 +1848,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '`⁄€‹›ﬁﬂ‡°·‚—±', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'åß∂ƒ©˙∆˚¬…æ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '__ﾛ(,_,*)', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '🐵 🙈 🙉 🙊', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '-1E+02', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'Z̮̞̠͙͔ͅḀ̗̞͈̻̗Ḷ͙͎̯̹̞͓G̻O̭̗̮', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1872,7 +1872,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '␡', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '・(￣∀￣)・:*:', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'בְּרֵאשִׁית, בָּרָא אֱלֹהִים, אֵת הַשָּׁמַיִם, וְאֵת הָאָרֶץ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'ﾟ･✿ヾ╲(｡◕‿◕｡)╱✿･ﾟ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '・(￣∀￣)・:*:', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1/0', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1889,7 +1889,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '👩🏽', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), ' ', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '١٢٣', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'NULL', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'null', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '₀₁₂', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1956,7 +1956,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '👩🏽', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '1E2', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''"''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), null, 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'null', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '社會科學院語學研究所', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'test⁠test‫', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'NIL', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
@@ -1991,7 +1991,7 @@ INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uui
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '١٢٣', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '__ﾛ(,_,*)', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '00˙Ɩ$-', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '''', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
+INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), 'not found', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '-1E+02', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '`⁄€‹›ﬁﬂ‡°·‚—±', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
 INSERT INTO source (id, value, generate_type_id, version) VALUES (gen_random_uuid(), '̡͓̞ͅI̗̘̦͝n͇͇͙v̮̫ok̲̫̙͈i̖͙̭̹̠̞n̡̻̮̣̺g̲͈͙̭͙̬͎ ̰t͔̦h̞̲e̢̤ ͍̬̲͖f̴̘͕̣è͖ẹ̥̩l͖͔͚i͓͚̦͠n͖͍̗͓̳̮g͍ ̨o͚̪͡f̘̣̬ ̖̘͖̟͙̮c҉͔̫͖͓͇͖ͅh̵̤̣͚͔á̗̼͕ͅo̼̣̥s̱͈̺̖̦̻͢.̛̖̞̠̫̰', 'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
