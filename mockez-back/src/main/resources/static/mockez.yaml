@@ -62,6 +62,7 @@ paths:
         description: The Category ID
         schema:
           type: string
+          format: uuid
     get:
       operationId: getCategory
       tags:
@@ -92,6 +93,7 @@ paths:
         description: The GenerateType ID
         schema:
           type: string
+          format: uuid
     get:
       operationId: getGenerateType
       tags:
@@ -122,6 +124,7 @@ paths:
         description: The sqlTypeId
         schema:
           type: string
+          format: uuid
     get:
       operationId: getGenerateTypeBySQLTypeId
       tags:

@@ -45,7 +45,7 @@ public class Category extends Base{
     private String description;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "category", fetch = LAZY)
+    @OneToMany(mappedBy = "category")
     private List<GenerateType> generateTypes = new ArrayList<>();
 
 }

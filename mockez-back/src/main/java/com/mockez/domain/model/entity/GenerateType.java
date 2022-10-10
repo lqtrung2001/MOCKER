@@ -49,16 +49,16 @@ public class GenerateType extends Base {
     private String description;
 
     @ToString.Exclude
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "generate_type_category_id_fk"))
     private Category category;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "generateType", fetch = LAZY)
+    @OneToMany(mappedBy = "generateType")
     private List<Source> sources = new ArrayList<>();
 
     @ToString.Exclude
-    @ManyToMany(mappedBy = "generateTypes", fetch = LAZY)
+    @ManyToMany(mappedBy = "generateTypes")
     private List<SQLType> sqlTypes = new ArrayList<>();
 
 }

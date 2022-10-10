@@ -45,12 +45,12 @@ public class Field extends Base {
     private String name;
 
     @ToString.Exclude
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne
     @JoinColumn(name = "sql_type_id", nullable = false, foreignKey = @ForeignKey(name = "field_sql_type_id_fk"))
     private SQLType sqlType;
 
     @ToString.Exclude
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "field_generate_type_id_fk"))
     private GenerateType generateType;
 

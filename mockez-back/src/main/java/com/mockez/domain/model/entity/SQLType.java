@@ -47,7 +47,7 @@ public class SQLType extends Base {
     private String description;
 
     @ToString.Exclude
-    @ManyToMany(fetch = LAZY)
+    @ManyToMany
     @JoinTable(
             name = "field_generate_type",
             joinColumns = @JoinColumn(name = "field_id"),

@@ -38,7 +38,7 @@ public class Source extends Base {
     private String value;
 
     @ToString.Exclude
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "source_generate_type_id_fk"))
     private GenerateType generateType;
 }

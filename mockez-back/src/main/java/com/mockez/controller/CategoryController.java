@@ -28,7 +28,7 @@ public class CategoryController implements CategoryApi {
     }
 
     @Override
-    public ResponseEntity<CategoryDto> getCategory(String id) {
-        return ResponseEntity.ok(apiAbstractMapper.map(categoryService.getCategory(UUID.fromString(id))));
+    public ResponseEntity<CategoryDto> getCategory(UUID id) {
+        return ResponseEntity.ok(apiAbstractMapper.map(categoryService.getCategory(id)));
     }
 }

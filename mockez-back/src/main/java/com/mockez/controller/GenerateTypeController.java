@@ -22,13 +22,13 @@ public class GenerateTypeController implements GenerateTypeApi {
     private final GenerateTypeService generateTypeService;
 
     @Override
-    public ResponseEntity<GenerateTypeDto> getGenerateType(String id) {
-        return ResponseEntity.ok(apiAbstractMapper.map(generateTypeService.getGenerateType(UUID.fromString(id))));
+    public ResponseEntity<GenerateTypeDto> getGenerateType(UUID id) {
+        return ResponseEntity.ok(apiAbstractMapper.map(generateTypeService.getGenerateType(id)));
     }
 
     @Override
-    public ResponseEntity<List<GenerateTypeDto>> getGenerateTypeBySQLTypeId(String sqlTypeId) {
-        return ResponseEntity.ok(generateTypeService.getGenerateTypesBySQLType(UUID.fromString(sqlTypeId))
+    public ResponseEntity<List<GenerateTypeDto>> getGenerateTypeBySQLTypeId(UUID sqlTypeId) {
+        return ResponseEntity.ok(generateTypeService.getGenerateTypesBySQLType(sqlTypeId)
                 .stream().map(apiAbstractMapper::map).collect(Collectors.toList()));
     }
 
