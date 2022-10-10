@@ -15,9 +15,12 @@ import com.mockez.domain.model.entity.Option;
 import com.mockez.domain.model.entity.SQLType;
 import com.mockez.domain.model.entity.Source;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface ApiAbstractMapper {
+
+    @Mapping(target = "generateTypes", ignore = true)
     CategoryDto map(Category category);
 
     Category map(CategoryDto categoryDto);

@@ -36,7 +36,6 @@ import static lombok.AccessLevel.NONE;
 public class SQLType extends Base {
 
     @Id
-    @Setter(NONE)
     @Column(updatable = false)
     private UUID id;
 
@@ -46,8 +45,8 @@ public class SQLType extends Base {
     @Column(nullable = false, length = 1000)
     private String description;
 
-    @ToString.Exclude
     @ManyToMany
+    @ToString.Exclude
     @JoinTable(
             name = "field_generate_type",
             joinColumns = @JoinColumn(name = "field_id"),

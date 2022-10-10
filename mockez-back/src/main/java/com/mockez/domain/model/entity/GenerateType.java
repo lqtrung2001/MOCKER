@@ -38,7 +38,6 @@ import static lombok.AccessLevel.NONE;
 public class GenerateType extends Base {
 
     @Id
-    @Setter(NONE)
     @Column(updatable = false)
     private UUID id;
 
@@ -48,8 +47,8 @@ public class GenerateType extends Base {
     @Column(nullable = false, length = 1000)
     private String description;
 
-    @ToString.Exclude
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "generate_type_category_id_fk"))
     private Category category;
 

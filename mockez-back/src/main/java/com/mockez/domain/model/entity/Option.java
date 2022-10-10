@@ -28,7 +28,6 @@ import static lombok.AccessLevel.NONE;
 public class Option extends Base {
 
     @Id
-    @Setter(NONE)
     @Column(name = "field_id", nullable = false, updatable = false)
     private UUID id;
 

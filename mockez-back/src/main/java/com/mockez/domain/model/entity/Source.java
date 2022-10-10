@@ -30,15 +30,14 @@ import static lombok.AccessLevel.NONE;
 public class Source extends Base {
 
     @Id
-    @Setter(NONE)
     @Column(updatable = false)
     private UUID id;
 
     @Column(nullable = false, length = 4096)
     private String value;
 
-    @ToString.Exclude
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "source_generate_type_id_fk"))
     private GenerateType generateType;
 }

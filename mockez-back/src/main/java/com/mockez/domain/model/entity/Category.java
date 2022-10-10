@@ -1,7 +1,6 @@
 package com.mockez.domain.model.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.NONE;
 
 @Entity
@@ -34,14 +32,13 @@ import static lombok.AccessLevel.NONE;
 public class Category extends Base{
 
     @Id
-    @Setter(NONE)
     @Column(updatable = false)
     private UUID id;
 
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, length = 1000 )
+    @Column(nullable = false, length = 1000)
     private String description;
 
     @ToString.Exclude
