@@ -5,9 +5,9 @@
         <span>All</span>
         <span class='ml-2.5'>(20)</span>
       </div>
-      <div class='item text-center rounded-md shadow-light cursor-pointer flex items-center ml-2.5 p-2.5 h-10'>
-        <span>All</span>
-        <span class='ml-2.5'>(20)</span>
+      <div *ngFor='let category of categories' class='item text-center rounded-md shadow-light cursor-pointer flex items-center ml-2.5 p-2.5 h-10'>
+        <span >{{category.category.name}}</span>
+        <span class='ml-2.5'>({{category.generateTypesCount}})</span>
       </div>
       <div class='item text-center rounded-md shadow-light cursor-pointer flex items-center ml-2.5 p-2.5 h-10'>...</div>
     </div>

@@ -28,4 +28,9 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Resource not found"));
     }
+
+    @Override
+    public Integer getGenerateTypesCount(UUID id) {
+        return categoryRepository.getGenerateTypesCount(id);
+    }
 }

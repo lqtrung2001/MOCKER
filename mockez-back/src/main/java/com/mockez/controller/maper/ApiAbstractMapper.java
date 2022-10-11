@@ -16,6 +16,7 @@ import com.mockez.domain.model.entity.SQLType;
 import com.mockez.domain.model.entity.Source;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring")
 public interface ApiAbstractMapper {
@@ -23,16 +24,22 @@ public interface ApiAbstractMapper {
     @Mapping(target = "generateTypes", ignore = true)
     CategoryDto map(Category category);
 
+    @Named("mapHasGenerateType")
+    CategoryDto mapHasGenerateType(Category category);
+
     Category map(CategoryDto categoryDto);
 
     GenerateReqDto map(GenerateReq generateReq);
 
     GenerateReq map(GenerateReqDto generateReqDto);
 
+    @Mapping(target = "sources", ignore = true)
+    @Mapping(target = "sqlTypes", ignore = true)
     GenerateTypeDto map(GenerateType generateType);
 
     GenerateType map(GenerateTypeDto generateTypeDto);
 
+    @Mapping(target = "generateTypes", ignore = true)
     SQLTypeDto map(SQLType sqlType);
 
     SQLType map(SQLTypeDto sqlTypeDto);

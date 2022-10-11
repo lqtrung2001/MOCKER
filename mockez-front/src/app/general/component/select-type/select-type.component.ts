@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Category } from '@core/model/Category.modal';
+import { CategoryService } from '@core/service/category.service';
+import { data } from 'autoprefixer';
 
 @Component({
   selector: 'app-select-type',
@@ -9,11 +11,22 @@ import { Category } from '@core/model/Category.modal';
 export class SelectTypeComponent implements OnInit {
 
   @Output() exitEventEmitter: EventEmitter<string> = new EventEmitter<string>();
-  @Input() categories: Category[] = [];
+  categories: { category: Category, generateTypesCount: number }[] = [];
 
-  constructor() { }
+  constructor(private categoryService: CategoryService) {
+    categoryService.getCategories().subscribe((categories: Category[]) => {
+      categories.forEach((category: Category) => {
+        this.categoryService.getGenerateTypesCount(category.id).subscribe((count: number) => {
+          if (this.categories.length < 10) {
+            this.categories.push({ category: category, generateTypesCount: count });
+          }
+        });
+      });
+    });
 
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {
+
+  }
 }

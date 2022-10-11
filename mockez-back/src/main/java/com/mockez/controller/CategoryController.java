@@ -31,4 +31,9 @@ public class CategoryController implements CategoryApi {
     public ResponseEntity<CategoryDto> getCategory(UUID id) {
         return ResponseEntity.ok(apiAbstractMapper.map(categoryService.getCategory(id)));
     }
+
+    @Override
+    public ResponseEntity<Integer> getGenerateTypesCount(UUID id) {
+        return ResponseEntity.ok(categoryService.getGenerateTypesCount(id));
+    }
 }
