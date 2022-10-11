@@ -20,4 +20,10 @@ public interface CategoryService {
      */
     Category getCategory(UUID id);
 
+    /**
+     * CATEGORY.03 GET /category/{id}/generate-types/count
+     * @param id of category
+     * @return number of generate-types in category
+     */
+    Integer getGenerateTypesCount(UUID id);
 }
