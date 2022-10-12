@@ -21,4 +21,7 @@ export class CategoryService {
     return this.httpClient.get<Category>(`${environment.apiUrl}/category/${id}`);
   }
 
+  public getGenerateTypesCount(id: string): Observable<number> {
+    return this.httpClient.get<number>(`${environment.apiUrl}/category/${id}/generate-types/count`);
+  }
 }
