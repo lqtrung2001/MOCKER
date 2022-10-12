@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Category } from '@core/model/Category.modal';
 import { CategoryService } from '@core/service/category.service';
 import { data } from 'autoprefixer';
+import { SQLType } from '@core/model/SQLType.modal';
+import { SQLTypeService } from '@core/service/sql-type.service';
 
 @Component({
   selector: 'app-select-type',
@@ -12,8 +14,9 @@ export class SelectTypeComponent implements OnInit {
 
   @Output() exitEventEmitter: EventEmitter<string> = new EventEmitter<string>();
   categories: { category: Category, generateTypesCount: number }[] = [];
+  sqlTypes: SQLType[] = [];
 
-  constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService, private sqlTypeService: SQLTypeService) {
     categoryService.getCategories().subscribe((categories: Category[]) => {
       categories.forEach((category: Category) => {
         this.categoryService.getGenerateTypesCount(category.id).subscribe((count: number) => {
@@ -22,6 +25,10 @@ export class SelectTypeComponent implements OnInit {
           }
         });
       });
+    });
+
+    sqlTypeService.getSQLTypes().subscribe((sqlType: SQLType[]) => {
+      this.sqlTypes = sqlType;
     });
 
   }

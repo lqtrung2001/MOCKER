@@ -5,48 +5,23 @@
         <span>All</span>
         <span class='ml-2.5'>(20)</span>
       </div>
-      <div *ngFor='let category of categories' class='item text-center rounded-md shadow-light cursor-pointer flex items-center ml-2.5 p-2.5 h-10'>
-        <span >{{category.category.name}}</span>
+      <div *ngFor='let category of categories'
+           class='item text-center rounded-md shadow-light cursor-pointer flex items-center ml-2.5 p-2.5 h-10'>
+        <span>{{category.category.name}}</span>
         <span class='ml-2.5'>({{category.generateTypesCount}})</span>
       </div>
       <div class='item text-center rounded-md shadow-light cursor-pointer flex items-center ml-2.5 p-2.5 h-10'>...</div>
     </div>
     <div class='cards flex flex-wrap justify-around pt-0 px-7 pb-7 mt-5 overflow-auto'>
-      <div class='card bg-white shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
-        <p class='font-medium'>Character Sequence</p>
-        <p>Create simple sequences of characters, digits, and symbols</p>
-      </div>
-      <div class='card bg-white shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
-        <p class='font-medium'>Character Sequence</p>
-        <p>Create simple sequences of characters, digits, and symbols</p>
-      </div>
-      <div class='card bg-white shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
-        <p class='font-medium'>Character Sequence</p>
-        <p>Create simple sequences of characters, digits, and symbols</p>
-      </div>
-      <div class='card bg-white shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
-        <p class='font-medium'>Character Sequence</p>
-        <p>Create simple sequences of characters, digits, and symbols</p>
-      </div>
-      <div class='card bg-white shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
-        <p class='font-medium'>Character Sequence</p>
-        <p>Create simple sequences of characters, digits, and symbols</p>
-      </div>
-      <div class='card bg-white shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
-        <p class='font-medium'>Character Sequence</p>
-        <p>Create simple sequences of characters, digits, and symbols</p>
-      </div>
-      <div class='card bg-white shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
-        <p class='font-medium'>Character Sequence</p>
-        <p>Create simple sequences of characters, digits, and symbols</p>
-      </div>
-      <div class='card bg-white shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
-        <p class='font-medium'>Character Sequence</p>
-        <p>Create simple sequences of characters, digits, and symbols</p>
+      <div *ngFor='let sqlType of sqlTypes'
+           class='card bg-white shadow-light rounded-md cursor-pointer relative mt-5 p-5 h-24'>
+        <p class='font-medium'>{{sqlType.code}}</p>
+        <p>{{sqlType.description}}</p>
       </div>
     </div>
-    <div class='btn-cancel rounded-md shadow-light flex items-center cursor-pointer absolute justify-center bottom-5 right-5 py-1 px-4'
-         (click)='this.exitEventEmitter.emit()'
+    <div
+      class='btn-cancel rounded-md shadow-light flex items-center cursor-pointer absolute justify-center bottom-5 right-5 py-1 px-4'
+      (click)='this.exitEventEmitter.emit()'
     >
       <span class='font-medium'>Cancel</span>
       <img class='icon ml-2.5' src='assets/icon/general/cancel.png' alt='cancel'/>
