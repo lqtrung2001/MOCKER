@@ -4,5 +4,5 @@ export interface Source {
   id: string,
   value?: string,
   generateTypes?: GenerateType[],
-  version: number
+  version?: number
 }

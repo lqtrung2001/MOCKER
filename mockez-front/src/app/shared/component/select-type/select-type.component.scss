@@ -9,19 +9,18 @@
     width: 1200px;
     height: 630px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    background-color: #FFF;
   }
 }
 
 .header {
-  margin-left: -10px;
-
   .active {
     background-color: #3DA2FF;
     color: #fff;
   }
 
   .item:not(.active):hover {
-    background-color: #E8F1FF;
+    background-color: #dbe8ff;
   }
 }
 
@@ -29,22 +28,16 @@
   height: 500px;
 
   .card {
+    background-color: #f8f8fc;
     flex-basis: 28%;
-
-    .preview {
-      z-index: 1;
-      top: 30%;
-      left: 90%;
-
-    }
   }
 
-  .card:hover {
-    background-color: #E8F1FF;
+  .active {
+    background-color: #cce7ff;
+  }
 
-    .preview {
-      display: block;
-    }
+  .card:not(.active):hover {
+    background-color: #cce7ff;
   }
 }
 

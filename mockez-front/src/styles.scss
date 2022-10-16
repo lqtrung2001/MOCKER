@@ -8,12 +8,12 @@
   @apply mr-0 p-0 box-border;
 }
 
-::selection:not(input) {
-  @apply bg-transparent;
-}
+//::selection:not(input) {
+//  @apply bg-transparent;
+//}
 
 ::-webkit-scrollbar {
-  @apply w-3;
+  @apply w-3 h-3;
 }
 
 ::-webkit-scrollbar-track {

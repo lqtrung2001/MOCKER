@@ -3,24 +3,28 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ROUTING } from './app.routing';
-import { NavigationModule } from '@core/layout/navigation/navigation.module';
 import { GeneralModule } from './general/general.module';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { TRANSLATE } from '@app/app.translate';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DialogModule } from '@progress/kendo-angular-dialog';
+import { LayoutModule } from '@shared/layout/layout.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    CommonModule,
-    HttpClientModule,
+    DialogModule,
     BrowserModule,
+    CommonModule,
+    GeneralModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     ROUTING,
     TRANSLATE,
-    NavigationModule,
-    GeneralModule
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

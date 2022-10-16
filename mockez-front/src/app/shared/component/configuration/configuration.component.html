@@ -1,0 +1,48 @@
+<div [formGroup]='configuration'
+     class='flex items-center text-sm mt-5 justify-center'>
+  <div class='flex items-center ml-2.5'>
+    <span class='font-medium'>#{{ 'general.config.rows' | translate | titlecase }}:</span>
+    <div class='bg-white rounded-md shadow-light flex items-center h-11 px-5 py-0 ml-2.5 w-36'>
+      <input [placeholder]='"general.config.rows" | translate'
+             class='outline-border-none w-24'
+             formControlName='row'
+      />
+    </div>
+  </div>
+  <div class='flex items-center ml-2.5'>
+    <span class='font-medium'>{{ 'general.config.format' | translate | titlecase }}:</span>
+    <div
+      class='relative justify-between flex rounded-md bg-white items-center cursor-pointer shadow-light ml-2.5 px-5 py-0 w-36 h-11'
+      (click)='selectFormatOnClick()'>
+      <span>{{ configuration.get('format')?.value }}</span>
+      <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
+<!--      <div *ngIf='isSelectFormat'-->
+<!--           class='absolute top-14 left-0 rounded-md bg-white format w-36'>-->
+<!--        <p *ngFor='let format of formatsSupported'-->
+<!--           (click)='changeFormat(format)'-->
+<!--           class='py-2.5 pl-5 {{format === configuration.get("format")?.value ? "font-bold" : ""}}'-->
+<!--           [innerHTML]='format'>-->
+<!--        </p>-->
+<!--      </div>-->
+    </div>
+  </div>
+  <div class='flex items-center ml-2.5'>
+    <span class='font-medium'>{{ 'general.config.table_name' | translate | titlecase }}:</span>
+    <div class='bg-white rounded-md shadow-light flex items-center h-11 px-5 py-0 ml-2.5 w-36'>
+      <input formControlName='tableName'
+             class='outline-border-none w-24'
+             [placeholder]='"general.config.table_name" | translate'
+      />
+    </div>
+  </div>
+  <div (click)='configuration.get("isIncludeCreateTable")?.setValue(!configuration.get("isIncludeCreateTable")?.value)'
+       class='flex items-center cursor-pointer ml-2.5'>
+    <div class='shadow-light w-6 h-6 bg-white rounded'>
+      <img *ngIf='configuration.get("isIncludeCreateTable")?.value'
+           alt='done'
+           class='icon'
+           src='assets/icon/general/done.png'/>
+    </div>
+    <span class='font-medium ml-2.5'>{{ 'general.config.include_create_table' | translate | uppercase }}</span>
+  </div>
+</div>

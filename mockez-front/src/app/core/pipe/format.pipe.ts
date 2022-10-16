@@ -10,11 +10,11 @@ export class FormatPipe implements PipeTransform {
   constructor(private converterService: ConverterService) {
   }
 
-  transform(data: any[], format: string): string[] {
+  transform(data: any[], format: string, tableName?: string): string[] {
     const result: string[] = [];
     switch (format) {
       case FormatEnum.SQL:
-        result.push(...this.converterService.JSONArrayToSQL(data));
+        result.push(...this.converterService.JSONArrayToSQL(tableName!, data));
         break;
       case FormatEnum.JSON:
         result.push(...this.converterService.JSONArrayToJSON(data));
