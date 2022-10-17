@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectComponent } from './component/project/project.component';
 import { SharedModule } from '@shared/shared.module';
+import { FormatPipe } from '@core/pipe/format.pipe';
 
 @NgModule({
   imports: [
@@ -17,10 +18,6 @@ import { SharedModule } from '@shared/shared.module';
   ],
   declarations: [
     GeneralComponent,
-    SelectTypeComponent,
-    PreviewComponent,
-    FooterComponent,
-    FormatPipe,
     ProjectComponent
   ],
   exports: [
