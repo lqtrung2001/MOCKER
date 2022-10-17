@@ -30,5 +30,23 @@
       "save_this_schema": "save this schema",
       "more": "more"
     }
+  },
+  "project": {
+    "title": "Project",
+    "search": {
+      "title": "What are you looking for?",
+      "placeholder": "Search for name",
+      "btn_search": "Search",
+      "btn_create_project": "Create a project"
+    },
+    "table":{
+      "project_summary": "Project summary",
+      "show": "Show",
+      "all_column": "All column",
+      "btn_delete": "Delete selected",
+      "name": "name",
+      "shared_with": "Shared with",
+      "last_modified": "Last modified"
+    }
   }
 }

@@ -10,10 +10,9 @@ import { TRANSLATE } from '@app/app.translate';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from '@progress/kendo-angular-dialog';
 import { LayoutModule } from '@shared/layout/layout.module';
-
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     DialogModule,

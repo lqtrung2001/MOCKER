@@ -4,6 +4,7 @@ import { ROUTING } from './general.routing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { ProjectComponent } from './component/project/project.component';
 import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
@@ -16,9 +17,15 @@ import { SharedModule } from '@shared/shared.module';
   ],
   declarations: [
     GeneralComponent,
+    SelectTypeComponent,
+    PreviewComponent,
+    FooterComponent,
+    FormatPipe,
+    ProjectComponent
   ],
   exports: [
-    GeneralComponent
+    GeneralComponent,
+    ProjectComponent
   ],
   providers: []
 })
