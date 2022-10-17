@@ -1,6 +1,5 @@
 package com.mockez.service.impl;
 
-import com.mockez.domain.exception.NotFoundException;
 import com.mockez.domain.model.entity.Category;
 import com.mockez.repository.CategoryRepository;
 import com.mockez.service.CategoryService;
@@ -24,9 +23,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category getCategory(UUID id) {
-        return categoryRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Resource not found"));
+    public Category getCategoryHasGenerateTypes(UUID id) {
+        return categoryRepository.getCategoryHasGenerateTypes(id);
     }
 
     @Override

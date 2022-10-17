@@ -2,6 +2,7 @@ package com.mockez.service.impl;
 
 import com.mockez.domain.model.GenerateReq;
 import com.mockez.domain.model.entity.Field;
+import com.mockez.domain.model.entity.Source;
 import com.mockez.repository.GenerateTypeRepository;
 import com.mockez.service.GenerateService;
 import lombok.AllArgsConstructor;
@@ -30,15 +31,17 @@ public class GenerateServiceImpl implements GenerateService {
 
         while (++index < row) {
             Map<String, String> map = new HashMap<>();
-            fields.forEach(field -> map.put(
-                    field.getName(),
-                    generateTypeRepository
-                            .findById(field.getGenerateType().getId())
-                            .orElseThrow()
-                            .getSources()
-                            .get(random.nextInt(0, 1000))
-                            .getValue()
-                    ));
+            fields.forEach(field -> {
+                List<Source> sources = generateTypeRepository
+                        .findById(field.getGenerateType().getId())
+                        .orElseThrow()
+                        .getSources();
+                map.put(
+                        field.getName(),
+                        sources.get(random.nextInt(0, sources.size()))
+                                .getValue()
+                        );
+            });
             result.add(map);
         }
         return result;

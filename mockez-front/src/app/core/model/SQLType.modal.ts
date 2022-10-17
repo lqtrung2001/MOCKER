@@ -5,5 +5,5 @@ export interface SQLType {
   code?: string,
   description?: string,
   generateTypes?: GenerateType[],
-  version: number
+  version?: number
 }

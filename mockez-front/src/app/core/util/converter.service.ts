@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as JsonToXML from 'js2xmlparser';
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +9,16 @@ export class ConverterService {
   constructor() {
   }
 
-  public JSONArrayToSQL(data: any[]): string[] {
-    return [];
+  public JSONArrayToSQL(tableName: string, data: any[]): string[] {
+    const result: string[] = [];
+    data.forEach((values: any) => {
+      result.push(`INSERT INTO ${tableName} (${Object.keys(values).toString()}) VALUES (${Object.values(values).map((value: any) => '"' + value + '"').toString()});`);
+    });
+    return result;
   };
 
   public JSONArrayToXML(data: any[]): string[] {
-    return [];
+    return JsonToXML.parse('row', data).split('');
   };
 
   public JSONArrayToCSV(data: any[]): string[] {
