@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormatPipe } from '@core/pipe/format.pipe';
 import { TranslateModule } from '@ngx-translate/core';
+import { ProjectComponent } from './component/project/project.component';
 
 @NgModule({
   imports: [
@@ -21,10 +22,12 @@ import { TranslateModule } from '@ngx-translate/core';
     SelectTypeComponent,
     PreviewComponent,
     FooterComponent,
-    FormatPipe
+    FormatPipe,
+    ProjectComponent
   ],
   exports: [
-    GeneralComponent
+    GeneralComponent,
+    ProjectComponent
   ],
   providers: []
 })

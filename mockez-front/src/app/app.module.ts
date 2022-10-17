@@ -8,10 +8,9 @@ import { GeneralModule } from './general/general.module';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { TRANSLATE } from '@app/app.translate';
-
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     CommonModule,
