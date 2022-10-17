@@ -8,5 +8,5 @@ export interface Field {
   sqlType?: SQLType,
   generateType?: GenerateType,
   option?: Option,
-  version: number
+  version?: number
 }

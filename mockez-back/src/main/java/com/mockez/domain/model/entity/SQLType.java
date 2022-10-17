@@ -48,9 +48,9 @@ public class SQLType extends Base {
     @ManyToMany
     @ToString.Exclude
     @JoinTable(
-            name = "field_generate_type",
-            joinColumns = @JoinColumn(name = "field_id"),
-            inverseJoinColumns = @JoinColumn(name = "generate_id")
+            name = "sql_type_generate_type",
+            joinColumns = @JoinColumn(name = "sql_type_id"),
+            inverseJoinColumns = @JoinColumn(name = "generate_type_id")
     )
     private List<GenerateType> generateTypes = new ArrayList<>();
 }

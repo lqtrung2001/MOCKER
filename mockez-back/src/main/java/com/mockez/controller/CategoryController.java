@@ -29,7 +29,7 @@ public class CategoryController implements CategoryApi {
 
     @Override
     public ResponseEntity<CategoryDto> getCategory(UUID id) {
-        return ResponseEntity.ok(apiAbstractMapper.map(categoryService.getCategory(id)));
+        return ResponseEntity.ok(apiAbstractMapper.mapHasGenerateType(categoryService.getCategoryHasGenerateTypes(id)));
     }
 
     @Override

@@ -9,5 +9,5 @@ export interface GenerateType {
   category?: Category,
   sources?: Source[],
   sqlTypes?: SQLType[],
-  version: number
+  version?: number
 }

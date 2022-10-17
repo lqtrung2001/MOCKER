@@ -4,5 +4,5 @@ export interface Option {
   id: string,
   blank?: number,
   field?: Field,
-  version: number
+  version?: number
 }
