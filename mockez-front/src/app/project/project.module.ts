@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
-import { GeneralComponent } from './component/general/general.component';
-import { ROUTING } from './general.routing';
+import { ProjectComponent } from './component/project/project.component';
+import { ROUTING } from './project.routing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
-import { FormatPipe } from '@core/pipe/format.pipe';
 
 @NgModule({
   imports: [
@@ -16,12 +15,12 @@ import { FormatPipe } from '@core/pipe/format.pipe';
     SharedModule
   ],
   declarations: [
-    GeneralComponent,
+    ProjectComponent
   ],
   exports: [
-    GeneralComponent,
+    ProjectComponent
   ],
   providers: []
 })
-export class GeneralModule {
+export class ProjectModule {
 }
