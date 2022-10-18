@@ -10,6 +10,7 @@ import { TRANSLATE } from '@app/app.translate';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from '@progress/kendo-angular-dialog';
 import { LayoutModule } from '@shared/layout/layout.module';
+import { ProjectModule } from '@app/project/project.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { LayoutModule } from '@shared/layout/layout.module';
     ReactiveFormsModule,
     ROUTING,
     TRANSLATE,
-    LayoutModule
+    LayoutModule,
+    ProjectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
