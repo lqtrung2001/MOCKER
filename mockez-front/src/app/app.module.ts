@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from '@progress/kendo-angular-dialog';
 import { LayoutModule } from '@shared/layout/layout.module';
 import { ProjectModule } from '@app/project/project.module';
+import { SchemaModule } from '@app/schema/schema.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { ProjectModule } from '@app/project/project.module';
     ROUTING,
     TRANSLATE,
     LayoutModule,
-    ProjectModule
+    ProjectModule,
+    SchemaModule
   ],
   providers: [],
   bootstrap: [AppComponent]
