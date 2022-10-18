@@ -48,5 +48,13 @@
       "shared_with": "Shared with",
       "last_modified": "Last modified"
     }
-  }
+  },
+  "schema":{
+    "search": {
+      "btn_create_schema": "Create a schema"
+    },
+    "table": {
+      "schema_summary": "Schema summary"
+    }
+}
 }
