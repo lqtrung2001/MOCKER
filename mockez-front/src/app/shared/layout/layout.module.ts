@@ -4,6 +4,7 @@ import { FooterComponent } from '@shared/layout/component/footer/footer.componen
 import { TranslateModule } from '@ngx-translate/core';
 import { NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
+import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,9 @@ import { SharedModule } from '@shared/shared.module';
     UpperCasePipe,
     TitleCasePipe,
     SharedModule,
-    NgIf
+    NgIf,
+    RouterLinkWithHref,
+    RouterLinkActive
   ],
   exports: [
     NavigationComponent,

@@ -1,2 +1,3 @@
-export const NAVIGATION = 'navigation';
 export const GENERAL = 'general';
+export const PROJECT = 'project';
+export const SCHEMA = 'schema';
