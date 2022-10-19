@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ConverterService } from '@core/util/converter.service';
 import { DataProviderService } from '@shared/service/data-provider.service';
+import { Modal } from '@shared/modal/modal-service/model/modal.model';
 
 @Component({
   selector: 'app-preview',
   templateUrl: './preview.component.html',
   styleUrls: ['./preview.component.scss']
 })
-export class PreviewComponent {
+export class PreviewComponent extends Modal{
 
   @Output() exitEventEmitter: EventEmitter<any> = new EventEmitter();
   data: any[] = [];
@@ -16,11 +17,11 @@ export class PreviewComponent {
 
   isTable: boolean = false;
 
-  constructor(
-    private DataProviderService: DataProviderService,
-    private converterService: ConverterService
-  ) {
-    this.data = this.DataProviderService.data;
+  onInjectInputs(input: any): void {
+  }
+
+  public closeOnClick(): void {
+    this.close();
   }
 
 }
