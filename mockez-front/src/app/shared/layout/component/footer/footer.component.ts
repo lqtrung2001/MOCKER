@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { ModalService } from '@shared/modal/modal-service/modal-service.service';
+import { PreviewComponent } from '@shared/component/preview/preview.component';
 
 @Component({
   selector: 'app-footer',
@@ -7,12 +9,17 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class FooterComponent {
 
-  @Output() previewOnClickEventEmitter: EventEmitter<any> = new EventEmitter();
-  @Output() downloadOnClickEventEmitter: EventEmitter<any> = new EventEmitter();
+  constructor(
+    private modalService: ModalService
+  ) { }
 
-  isDisplayPreview: boolean = false;
+  public previewOnClick(): void {
+    this.modalService.open(PreviewComponent)
+      .onResult().subscribe(() => {
+        console.log('Close');
+    })
+  }
 
-  constructor() { }
 
 
 
