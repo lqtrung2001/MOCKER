@@ -7,13 +7,21 @@ import com.mockez.domain.dto.GenerateTypeDto;
 import com.mockez.domain.dto.OptionDto;
 import com.mockez.domain.dto.SQLTypeDto;
 import com.mockez.domain.dto.SourceDto;
+import com.mockez.domain.dto.UserDto;
+import com.mockez.domain.dto.GroupDto;
+import com.mockez.domain.dto.SchemaDto;
+import com.mockez.domain.dto.TableDto;
 import com.mockez.domain.model.GenerateReq;
 import com.mockez.domain.model.entity.Category;
 import com.mockez.domain.model.entity.Field;
 import com.mockez.domain.model.entity.GenerateType;
+import com.mockez.domain.model.entity.Group;
 import com.mockez.domain.model.entity.Option;
 import com.mockez.domain.model.entity.SQLType;
+import com.mockez.domain.model.entity.Schema;
 import com.mockez.domain.model.entity.Source;
+import com.mockez.domain.model.entity.Table;
+import com.mockez.domain.model.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -55,4 +63,22 @@ public interface ApiAbstractMapper {
     SourceDto map(Source source);
 
     Source map(SourceDto sourceDto);
+
+    User map(UserDto userDto);
+
+    UserDto map(User user);
+
+    Group map(GroupDto groupDto);
+
+    @Mapping(target = "groups", ignore = true)
+    GroupDto map(Group group);
+
+    Schema map(SchemaDto schemaDto);
+
+    @Mapping(target = "schemas", ignore = true)
+    SchemaDto map(Schema schema);
+
+    Table map(TableDto tableDto);
+
+    TableDto map(Table table);
 }
