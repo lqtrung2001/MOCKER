@@ -23,7 +23,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
-public class User {
+public class User extends Base{
     @Id
     @Column(updatable = false)
     private UUID id;

@@ -25,7 +25,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
-public class Project {
+public class Project extends Base{
     @Id
     @Column(updatable = false)
     private UUID id;

@@ -29,7 +29,7 @@ import static lombok.AccessLevel.NONE;
 @Table(uniqueConstraints = {
         @UniqueConstraint(name = "category_name_unique", columnNames = "name")
 })
-public class Category extends Base{
+public class Category c Base{
 
     @Id
     @Column(updatable = false)
