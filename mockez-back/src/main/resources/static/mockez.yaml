@@ -502,7 +502,7 @@ components:
           description: address of user
         dob:
           type: string
-          format: datetime
+          format: date-time
           maxLength: 225
           description: dob of user
         phone:
