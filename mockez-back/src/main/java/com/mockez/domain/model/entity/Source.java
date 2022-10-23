@@ -23,10 +23,10 @@ import static lombok.AccessLevel.NONE;
 @Entity
 @Getter
 @Setter
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
+@SuperBuilder(toBuilder = true)
 public class Source extends Base {
 
     @Id

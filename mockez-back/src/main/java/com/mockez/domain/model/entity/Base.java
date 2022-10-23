@@ -20,10 +20,10 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString
-@SuperBuilder
 @MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder(toBuilder = true)
 //@EntityListeners(AuditingEntityListener.class)
 public abstract class Base {
 

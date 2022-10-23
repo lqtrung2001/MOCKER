@@ -1,7 +1,6 @@
 package com.mockez.domain.model.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,18 +12,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-
 import java.util.UUID;
-
-import static lombok.AccessLevel.NONE;
 
 @Entity
 @Getter
 @Setter
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
+@SuperBuilder(toBuilder = true)
 public class Option extends Base {
 
     @Id

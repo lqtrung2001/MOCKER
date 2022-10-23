@@ -26,10 +26,10 @@ import static lombok.AccessLevel.NONE;
 @Entity
 @Getter
 @Setter
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
+@SuperBuilder(toBuilder = true)
 @Table(name = "sql_type", uniqueConstraints = {
         @UniqueConstraint(name = "sql_type_code_unique_constraint", columnNames = "code")
 })

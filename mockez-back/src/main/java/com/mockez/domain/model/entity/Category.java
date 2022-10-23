@@ -17,15 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static lombok.AccessLevel.NONE;
-
 @Entity
 @Getter
 @Setter
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
+@SuperBuilder(toBuilder = true)
 @Table(uniqueConstraints = {
         @UniqueConstraint(name = "category_name_unique", columnNames = "name")
 })

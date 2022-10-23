@@ -13,17 +13,17 @@ import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.sql.Timestamp;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
-@SuperBuilder
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
-public class User extends Base{
+public class User extends Base {
     @Id
     @Column(updatable = false)
     private UUID id;
@@ -47,7 +47,7 @@ public class User extends Base{
     private String address;
 
     @Column(nullable = false)
-    private Timestamp dob;
+    private OffsetDateTime dob;
 
     @Column(nullable = false)
     private String role;

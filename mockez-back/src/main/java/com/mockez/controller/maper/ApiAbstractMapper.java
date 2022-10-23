@@ -11,12 +11,14 @@ import com.mockez.domain.dto.UserDto;
 import com.mockez.domain.dto.GroupDto;
 import com.mockez.domain.dto.SchemaDto;
 import com.mockez.domain.dto.TableDto;
+import com.mockez.domain.dto.ProjectDto;
 import com.mockez.domain.model.GenerateReq;
 import com.mockez.domain.model.entity.Category;
 import com.mockez.domain.model.entity.Field;
 import com.mockez.domain.model.entity.GenerateType;
 import com.mockez.domain.model.entity.Group;
 import com.mockez.domain.model.entity.Option;
+import com.mockez.domain.model.entity.Project;
 import com.mockez.domain.model.entity.SQLType;
 import com.mockez.domain.model.entity.Schema;
 import com.mockez.domain.model.entity.Source;
@@ -70,16 +72,22 @@ public interface ApiAbstractMapper {
 
     Group map(GroupDto groupDto);
 
-    @Mapping(target = "groups", ignore = true)
+    @Mapping(target = "users", ignore = true)
+    @Mapping(target = "projects", ignore = true)
     GroupDto map(Group group);
 
     Schema map(SchemaDto schemaDto);
 
-    @Mapping(target = "schemas", ignore = true)
+    @Mapping(target = "tables", ignore = true)
     SchemaDto map(Schema schema);
 
     Table map(TableDto tableDto);
 
     TableDto map(Table table);
+
+    Project map(ProjectDto projectDto);
+
+    @Mapping(target = "schemas", ignore = true)
+    ProjectDto map(Project project);
 
 }

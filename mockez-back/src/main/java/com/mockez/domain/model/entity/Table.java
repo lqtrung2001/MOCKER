@@ -18,11 +18,11 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
-public class Table extends Base{
+@SuperBuilder(toBuilder = true)
+public class Table extends Base {
     @Id
     @Column(updatable = false)
     private UUID id;

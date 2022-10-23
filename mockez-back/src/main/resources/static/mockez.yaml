@@ -547,6 +547,14 @@ components:
           type: string
           maxLength: 1000
           description: description for group
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
     Project:
       type: object
       description: PROJECT table
@@ -574,10 +582,12 @@ components:
           type: string
           maxLength: 1000
           description: description for project
-        groupId:
+        group:
+          $ref: '#/components/schemas/Group'
+        schemas:
           type: array
           items:
-            $ref: '#/components/schemas/Group'
+            $ref: '#/components/schemas/Schema'
     Schema:
       type: object
       description: SCHEMA table
@@ -605,10 +615,12 @@ components:
           type: string
           maxLength: 1000
           description: description for schema
-        projectId:
+        project:
+          $ref: '#/components/schemas/Project'
+        tables:
           type: array
           items:
-            $ref: '#/components/schemas/Project'
+            $ref: '#/components/schemas/Table'
     Table:
       type: object
       description: TABLE table
@@ -636,10 +648,8 @@ components:
           type: string
           maxLength: 1000
           description: description for table
-        schemaId:
-          type: array
-          items:
-            $ref: '#/components/schemas/Schema'
+        schema:
+          $ref: '#/components/schemas/Schema'
   responses:
     NotFound:
       description: The specified resource was not found

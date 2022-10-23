@@ -19,15 +19,13 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.util.UUID;
 
-import static lombok.AccessLevel.NONE;
-
 @Entity
 @Getter
 @Setter
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
+@SuperBuilder(toBuilder = true)
 @Table(uniqueConstraints = {
         @UniqueConstraint(name = "field_name_unique_constraint", columnNames = "name")
 })
