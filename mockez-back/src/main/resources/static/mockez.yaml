@@ -2,7 +2,7 @@ openapi: "3.0.3"
 info:
   title: Mockez API
   description: Website MOCKEZ generates source for system testing.
-  version: 2.0.0
+  version: 2.1.0
 paths:
   /sql-type:
     get:
@@ -259,7 +259,7 @@ components:
         name:
           type: string
           maxLength: 225
-#          pattern: '^[a-z]$ | [_]'
+          #          pattern: '^[a-z]$ | [_]'
           description: name of field
         sqlType:
           $ref: '#/components/schemas/SQLType'
@@ -459,6 +459,187 @@ components:
           description: Fields of table
           items:
             $ref: '#/components/schemas/Field'
+    User:
+      type: object
+      required:
+        - id
+        - version
+        - email
+        - password
+        - name
+        - role
+        - groupId
+      description: USER table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: id of table
+        version:
+          readOnly: true
+          type: integer
+          description: version of record
+        email:
+          type: string
+          format: email
+          maxLength: 225
+          description: email of user
+        password:
+          type: string
+          maxLength: 225
+          description: password of user
+        name:
+          type: string
+          maxLength: 225
+          description: name of user
+        gender:
+          type: boolean
+          description: gender of user
+        address:
+          type: string
+          maxLength: 225
+          description: address of user
+        dob:
+          type: string
+          format: date-time
+          maxLength: 225
+          description: dob of user
+        phone:
+          type: string
+          maxLength: 12
+          description: phone of user
+        description:
+          type: string
+          maxLength: 1000
+          description: description for generate type
+        role:
+          type: string
+          maxLength: 100
+          description: role for generate type
+        groupId:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+    Group:
+      type: object
+      description: GROUP table
+      required:
+        - id
+        - version
+        - name
+        - description
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: id of table
+        version:
+          readOnly: true
+          type: integer
+          description: version of record
+        name:
+          type: string
+          maxLength: 225
+          description: name of group
+        description:
+          type: string
+          maxLength: 1000
+          description: description for group
+    Project:
+      type: object
+      description: PROJECT table
+      required:
+        - id
+        - version
+        - name
+        - description
+        - groupId
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: id of table
+        version:
+          readOnly: true
+          type: integer
+          description: version of record
+        name:
+          type: string
+          maxLength: 225
+          description: name of project
+        description:
+          type: string
+          maxLength: 1000
+          description: description for project
+        groupId:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+    Schema:
+      type: object
+      description: SCHEMA table
+      required:
+        - id
+        - version
+        - name
+        - description
+        - projectId
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: id of table
+        version:
+          readOnly: true
+          type: integer
+          description: version of record
+        name:
+          type: string
+          maxLength: 225
+          description: name of schema
+        description:
+          type: string
+          maxLength: 1000
+          description: description for schema
+        projectId:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+    Table:
+      type: object
+      description: TABLE table
+      required:
+        - id
+        - version
+        - name
+        - description
+        - schemaId
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: id of table
+        version:
+          readOnly: true
+          type: integer
+          description: version of record
+        name:
+          type: string
+          maxLength: 225
+          description: name of table
+        description:
+          type: string
+          maxLength: 1000
+          description: description for table
+        schemaId:
+          type: array
+          items:
+            $ref: '#/components/schemas/Schema'
   responses:
     NotFound:
       description: The specified resource was not found
