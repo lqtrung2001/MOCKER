@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
+import { DataProviderService } from '@shared/service/data-provider.service';
+import { FormatEnum } from '@core/config/format.enum';
 
 @Component({
   selector: 'app-configuration',
@@ -8,15 +9,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ConfigurationComponent {
 
-  @Input() configuration: FormGroup;
+  isSelectFormat: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder
+    public dataProvider: DataProviderService
   ) {
-    this.configuration = this.formBuilder.group([]);
   }
-
-  public selectFormatOnClick() {
-
+  changeFormat(format: FormatEnum) {
+    this.dataProvider.configuration.get('format')?.setValue(format);
   }
 }

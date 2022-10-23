@@ -14,7 +14,9 @@ export interface GenerateReq {
 })
 export class GenerateService {
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient
+  ) {
   }
 
   public generate(generateReq: GenerateReq): Observable<any[]> {

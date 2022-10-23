@@ -1,5 +1,5 @@
 <div id='form' class='mt-28 mx-auto'>
-  <div *ngIf='table.controls.length'
+  <div *ngIf='dataProvider.table.length'
        class='flex ml-5 justify-center'>
     <span class='font-medium ml-2.5 w-60'>{{ 'general.table.name' | translate | uppercase }}</span>
     <span class='font-medium ml-2.5 w-60'>{{ 'general.table.sql_type' | translate | uppercase }}</span>
@@ -7,11 +7,11 @@
     <span class='font-medium ml-2.5 w-60'>{{ 'general.table.option' | translate | uppercase }}</span>
   </div>
   <div class='mt-4 relative'>
-    <span *ngIf='!table.controls.length'
+    <span *ngIf='!dataProvider.table.controls.length'
           class='flex justify-center'
           [innerHTML]='"general.table.empty" | translate'>
     </span>
-    <div *ngFor='let field of table.controls; index as index'>
+    <div *ngFor='let field of dataProvider.table.controls; index as index'>
       <ng-container [formGroup]='field'>
         <div class='field flex mt-2.5 justify-center'>
           <div class='bg-white rounded-md shadow-light flex items-center ml-2.5 w-60 h-11 py-0 px-5 relative'>
@@ -50,7 +50,7 @@
             </div>
             <div
               class='flex justify-center bg-white rounded-md items-center cursor-pointer shadow-light ml-2.5 w-11 h-11'
-              (click)='removeField(index)'>
+              (click)='dataProvider.removeField(index)'>
               <img class='icon' src='assets/icon/general/delete.png' alt='delete'/>
             </div>
           </div>
@@ -58,7 +58,7 @@
       </ng-container>
     </div>
     <div class='flex justify-center'>
-      <button (click)='insertField()'
+      <button (click)='dataProvider.insertField()'
               [innerHTML]='"+"'
               class='bg-main text-white outline-border-none rounded-full text-2xl font-medium shadow-light w-11 h-11 mt-2.5 ml-2.5 mb-0 mr-0'
               type='button'>
@@ -66,9 +66,3 @@
     </div>
   </div>
 </div>
-<app-select-type
-  *ngIf='isDisplaySelectType'
-  [selectTypeOption]='selectTypeOption'
-  (exitEventEmitter)='isDisplaySelectType=false'
-  (selectedTypeEventEmitter)='selectTypeUpdate($event)'
-></app-select-type>

@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
-import { FormatPipe } from '@core/pipe/format.pipe';
 
 @NgModule({
   imports: [
@@ -16,10 +15,10 @@ import { FormatPipe } from '@core/pipe/format.pipe';
     SharedModule
   ],
   declarations: [
-    GeneralComponent,
+    GeneralComponent
   ],
   exports: [
-    GeneralComponent,
+    GeneralComponent
   ],
   providers: []
 })

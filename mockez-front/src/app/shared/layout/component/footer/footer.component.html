@@ -1,23 +1,29 @@
 <footer class='fixed inset-x-0 bottom-0 bg-white text-sm'>
   <div class='flex justify-center w-full'>
     <div class='flex justify-center h-full'>
-      <button type='button' class='uppercase text-center text-black font-medium p-4 w-60'>
+      <button type='button'
+              class='uppercase text-center text-black font-medium p-4 w-60'
+              (click)='downloadOnClick()'>
         {{'general.footer.download_data' | translate | uppercase}}
       </button>
     </div>
     <div class='flex justify-center h-full'>
-      <button type='button' class='uppercase text-center text-black font-medium p-4 w-60'
+      <button type='button'
+              class='uppercase text-center text-black font-medium p-4 w-60'
               (click)='previewOnClick()'>
         {{'general.footer.preview' | translate | uppercase}}
       </button>
     </div>
     <div class='flex justify-center h-full'>
-      <button type='button' class='uppercase text-center text-black font-medium p-4 w-60'>
+      <button type='button'
+              class='uppercase text-center text-black font-medium p-4 w-60'
+              (click)='saveThisSchemaOnClick()'>
         {{'general.footer.save_this_schema' | translate | uppercase}}
       </button>
     </div>
     <div class='flex justify-center h-full'>
-      <button type='button' class='flex justify-center items-center uppercase text-center text-black font-medium p-4 w-60'>
+      <button type='button'
+              class='flex justify-center items-center uppercase text-center text-black font-medium p-4 w-60'>
         {{'general.footer.more' | translate | uppercase}}
         <img class='w-6 ml-2.5' src='assets/icon/general/down_button.png' alt='more'/>
       </button>

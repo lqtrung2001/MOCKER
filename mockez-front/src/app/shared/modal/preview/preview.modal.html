@@ -1,20 +1,20 @@
-<div id='preview' class='fixed top-0 left-0 w-full h-full'>
+<div id='preview' class='dialog'>
   <div class='board absolute bg-white rounded-md'>
     <p class='flex justify-between mt-2.5 font-medium bg-white z-10 pt-5 px-5'>
-      PREVIEW
+      {{ 'modal.preview.name' | translate | uppercase }}
       <button class='flex justify-between'
-              (click)='closeOnClick()'
-      >Close
-        <img class='icon ml-2.5' src='../../../../assets/icon/general/cancel.png' alt='cancel'/>
+              (click)='close()'>
+        {{ 'modal.preview.close' | translate | titlecase }}
+        <img class='icon ml-2.5' src='assets/icon/general/cancel.png' alt='cancel'/>
       </button>
     </p>
     <nav class='flex justify-center bg-white h-10'>
       <a href='#' class='no-underline text-center text-black font-medium w-24 {{isTable ? "active" : ""}}'
          (click)='isTable=true'
-      >TABLE</a>
+      >{{ 'modal.preview.table' | translate | uppercase }}</a>
       <a href='#' class='no-underline text-center text-black font-medium w-36 {{!isTable ? "active" : ""}}'
          (click)='isTable=false'
-      >FORMAT ({{format | uppercase}})</a>
+      >{{ 'modal.preview.format' | translate | uppercase }} ({{dataProvider.configuration.get("format")?.value | uppercase}})</a>
     </nav>
     <section class='px-5 overflow-y-scroll relative'>
       <table *ngIf='isTable' class='w-full'>
@@ -26,7 +26,10 @@
         </tr>
       </table>
       <div *ngIf='!isTable'>
-        <p *ngFor='let line of data | formatPipe:this.format:tableName'>{{line}}</p>
+        <p
+          *ngFor='let line of data | formatPipe:dataProvider.configuration.get("format")?.value:dataProvider.configuration.get("tableName")?.value'>
+          {{line}}
+        </p>
       </div>
     </section>
     <section class='pagination text-center mt-5'>

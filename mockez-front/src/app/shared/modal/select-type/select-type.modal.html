@@ -1,4 +1,4 @@
-<div id='select-type' class='fixed z-10 top-0 left-0 w-full h-full'>
+<div id='select-type' class='dialog'>
   <div class='board rounded-md absolute text-sm py-2.5 px-5'>
     <div *ngIf='!selectTypeOption.isSQLType'
          class='header flex overflow-auto -ml-2.5'>
@@ -23,9 +23,9 @@
     </div>
     <div
       class='btn-cancel rounded-md flex items-center cursor-pointer absolute justify-center bottom-5 right-5 py-1 px-4'
-      (click)='this.exitEventEmitter.emit()'>
+      (click)='close()'>
       <span class='font-medium'>Cancel</span>
-      <img class='icon ml-2.5' src='../../../../assets/icon/general/cancel.png' alt='cancel'/>
+      <img class='icon ml-2.5' src='assets/icon/general/cancel.png' alt='cancel'/>
     </div>
   </div>
 </div>

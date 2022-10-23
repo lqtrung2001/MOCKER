@@ -1,4 +1,4 @@
-<div [formGroup]='configuration'
+<div [formGroup]='dataProvider.configuration'
      class='flex items-center text-sm mt-5 justify-center'>
   <div class='flex items-center ml-2.5'>
     <span class='font-medium'>#{{ 'general.config.rows' | translate | titlecase }}:</span>
@@ -13,17 +13,17 @@
     <span class='font-medium'>{{ 'general.config.format' | translate | titlecase }}:</span>
     <div
       class='relative justify-between flex rounded-md bg-white items-center cursor-pointer shadow-light ml-2.5 px-5 py-0 w-36 h-11'
-      (click)='selectFormatOnClick()'>
-      <span>{{ configuration.get('format')?.value }}</span>
+      (click)='isSelectFormat=!isSelectFormat'>
+      <span>{{ dataProvider.configuration.get('format')?.value }}</span>
       <img class='icon' src='assets/icon/general/down_button.png' alt='down button'/>
-<!--      <div *ngIf='isSelectFormat'-->
-<!--           class='absolute top-14 left-0 rounded-md bg-white format w-36'>-->
-<!--        <p *ngFor='let format of formatsSupported'-->
-<!--           (click)='changeFormat(format)'-->
-<!--           class='py-2.5 pl-5 {{format === configuration.get("format")?.value ? "font-bold" : ""}}'-->
-<!--           [innerHTML]='format'>-->
-<!--        </p>-->
-<!--      </div>-->
+      <div *ngIf='isSelectFormat'
+           class='absolute top-14 left-0 rounded-md bg-white format w-36'>
+        <p *ngFor='let format of dataProvider.formatsSupported'
+           (click)='changeFormat(format)'
+           class='py-2.5 pl-5 {{format === dataProvider.configuration.get("format")?.value ? "font-bold" : ""}}'
+           [innerHTML]='format'>
+        </p>
+      </div>
     </div>
   </div>
   <div class='flex items-center ml-2.5'>
@@ -35,10 +35,10 @@
       />
     </div>
   </div>
-  <div (click)='configuration.get("isIncludeCreateTable")?.setValue(!configuration.get("isIncludeCreateTable")?.value)'
+  <div (click)='dataProvider.configuration.get("isIncludeCreateTable")?.setValue(!dataProvider.configuration.get("isIncludeCreateTable")?.value)'
        class='flex items-center cursor-pointer ml-2.5'>
     <div class='shadow-light w-6 h-6 bg-white rounded'>
-      <img *ngIf='configuration.get("isIncludeCreateTable")?.value'
+      <img *ngIf='dataProvider.configuration.get("isIncludeCreateTable")?.value'
            alt='done'
            class='icon'
            src='assets/icon/general/done.png'/>
