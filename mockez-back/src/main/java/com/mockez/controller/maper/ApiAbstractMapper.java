@@ -81,4 +81,5 @@ public interface ApiAbstractMapper {
     Table map(TableDto tableDto);
 
     TableDto map(Table table);
+
 }
