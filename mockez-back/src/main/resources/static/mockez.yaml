@@ -463,6 +463,7 @@ components:
       type: object
       required:
         - id
+        - version
         - email
         - password
         - name
@@ -475,8 +476,13 @@ components:
           type: string
           format: uuid
           description: id of table
+        version:
+          readOnly: true
+          type: integer
+          description: version of record
         email:
           type: string
+          format: email
           maxLength: 225
           description: email of user
         password:
@@ -496,6 +502,7 @@ components:
           description: address of user
         dob:
           type: string
+          format: datetime
           maxLength: 225
           description: dob of user
         phone:
@@ -519,6 +526,7 @@ components:
       description: GROUP table
       required:
         - id
+        - version
         - name
         - description
       properties:
@@ -527,6 +535,10 @@ components:
           type: string
           format: uuid
           description: id of table
+        version:
+          readOnly: true
+          type: integer
+          description: version of record
         name:
           type: string
           maxLength: 225
@@ -540,6 +552,7 @@ components:
       description: PROJECT table
       required:
         - id
+        - version
         - name
         - description
         - groupId
@@ -549,6 +562,10 @@ components:
           type: string
           format: uuid
           description: id of table
+        version:
+          readOnly: true
+          type: integer
+          description: version of record
         name:
           type: string
           maxLength: 225
@@ -566,6 +583,7 @@ components:
       description: SCHEMA table
       required:
         - id
+        - version
         - name
         - description
         - projectId
@@ -575,6 +593,10 @@ components:
           type: string
           format: uuid
           description: id of table
+        version:
+          readOnly: true
+          type: integer
+          description: version of record
         name:
           type: string
           maxLength: 225
@@ -592,6 +614,7 @@ components:
       description: TABLE table
       required:
         - id
+        - version
         - name
         - description
         - schemaId
@@ -601,6 +624,10 @@ components:
           type: string
           format: uuid
           description: id of table
+        version:
+          readOnly: true
+          type: integer
+          description: version of record
         name:
           type: string
           maxLength: 225
