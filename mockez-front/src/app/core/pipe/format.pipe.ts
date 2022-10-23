@@ -7,7 +7,9 @@ import { FormatEnum } from '../config/format.enum';
 })
 export class FormatPipe implements PipeTransform {
 
-  constructor(private converterService: ConverterService) {
+  constructor(
+    private converterService: ConverterService
+  ) {
   }
 
   transform(data: any[], format: string, tableName?: string): string[] {

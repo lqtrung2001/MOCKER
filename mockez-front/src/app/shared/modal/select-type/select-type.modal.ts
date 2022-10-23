@@ -1,30 +1,33 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Category } from '@core/model/Category.modal';
 import { CategoryService } from '@core/service/category.service';
 import { SQLType } from '@core/model/SQLType.modal';
 import { SQLTypeService } from '@core/service/sql-type.service';
-import { SelectTypeOption } from '@app/general/component/general/general.component';
 import { GenerateType } from '@core/model/GenerateType.modal';
+import { Modal } from '@shared/modal/modal-service/model/modal.model';
+
+export interface SelectTypeOption {
+  isSQLType: boolean;
+  type: SQLType | GenerateType;
+}
 
 @Component({
   selector: 'app-select-type',
-  templateUrl: './select-type.component.html',
-  styleUrls: ['./select-type.component.scss']
+  templateUrl: './select-type.modal.html',
+  styleUrls: ['./select-type.modal.scss']
 })
-export class SelectTypeComponent implements OnInit {
-
-  @Input() selectTypeOption!: SelectTypeOption;
-  @Output() exitEventEmitter: EventEmitter<any> = new EventEmitter();
-  @Output() selectedTypeEventEmitter: EventEmitter<SQLType | GenerateType> = new EventEmitter<SQLType | GenerateType>();
+export class SelectTypeModal extends Modal implements OnInit {
 
   categories: Category[] = [];
   data: SQLType[] | GenerateType[] = [];
   categoryActiveId: string = '';
+  selectTypeOption!: SelectTypeOption;
 
   constructor(
     private categoryService: CategoryService,
     private sqlTypeService: SQLTypeService
   ) {
+    super();
   }
 
   ngOnInit(): void {
@@ -73,10 +76,14 @@ export class SelectTypeComponent implements OnInit {
   }
 
   typeOnClick(type: SQLType | GenerateType) {
-    this.selectedTypeEventEmitter.emit(type);
+    this.modalInstance.close(type);
   }
 
   allOnClick(): void {
 
+  }
+
+  onInjectInputs(input: any): void {
+    this.selectTypeOption = input;
   }
 }

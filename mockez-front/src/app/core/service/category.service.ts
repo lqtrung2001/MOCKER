@@ -9,8 +9,9 @@ import { environment } from '@environment/environment';
 })
 export class CategoryService {
 
-
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient
+  ) {
   }
 
   public getCategories(): Observable<Category[]> {

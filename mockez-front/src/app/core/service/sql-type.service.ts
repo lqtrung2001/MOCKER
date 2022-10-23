@@ -9,8 +9,9 @@ import { environment } from '@environment/environment';
 })
 export class SQLTypeService {
 
-
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient
+  ) {
   }
 
   public getSQLTypes(): Observable<SQLType[]> {

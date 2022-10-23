@@ -4,9 +4,9 @@ import { TableComponent } from '@shared/component/table/table.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { KeyValuePipe, NgForOf, NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TruncatePipe } from '@core/pipe/truncate';
-import { SelectTypeComponent } from '@shared/component/select-type/select-type.component';
-import { PreviewComponent } from '@shared/component/preview/preview.component';
+import { TruncatePipe } from '@core/pipe/truncate.pipe';
+import { SelectTypeModal } from '@shared/modal/select-type/select-type.modal';
+import { PreviewModal } from '@shared/modal/preview/preview.modal';
 import { FormatPipe } from '@core/pipe/format.pipe';
 
 @NgModule({
@@ -14,8 +14,8 @@ import { FormatPipe } from '@core/pipe/format.pipe';
     ConfigurationComponent,
     TableComponent,
     TruncatePipe,
-    SelectTypeComponent,
-    PreviewComponent,
+    SelectTypeModal,
+    PreviewModal,
     FormatPipe
   ],
   imports: [
@@ -31,7 +31,7 @@ import { FormatPipe } from '@core/pipe/format.pipe';
     TableComponent,
     TruncatePipe,
     ConfigurationComponent,
-    PreviewComponent
+    PreviewModal
   ],
   providers: []
 })

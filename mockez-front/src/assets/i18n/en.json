@@ -39,7 +39,7 @@
       "btn_search": "Search",
       "btn_create_project": "Create a project"
     },
-    "table":{
+    "table": {
       "project_summary": "Project summary",
       "show": "Show",
       "all_column": "All column",
@@ -49,12 +49,20 @@
       "last_modified": "Last modified"
     }
   },
-  "schema":{
+  "schema": {
     "search": {
       "btn_create_schema": "Create a schema"
     },
     "table": {
       "schema_summary": "Schema summary"
     }
-}
+  },
+  "modal": {
+    "preview": {
+      "name": "preview",
+      "close": "close",
+      "table": "table",
+      "format": "format"
+    }
+  }
 }

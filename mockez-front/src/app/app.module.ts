@@ -12,9 +12,11 @@ import { DialogModule } from '@progress/kendo-angular-dialog';
 import { LayoutModule } from '@shared/layout/layout.module';
 import { ProjectModule } from '@app/project/project.module';
 import { SchemaModule } from '@app/schema/schema.module';
+import { StoreModule } from '@ngrx/store';
+
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     DialogModule,
@@ -27,7 +29,8 @@ import { SchemaModule } from '@app/schema/schema.module';
     TRANSLATE,
     LayoutModule,
     ProjectModule,
-    SchemaModule
+    SchemaModule,
+    StoreModule.forRoot({})
   ],
   providers: [],
   bootstrap: [AppComponent]
