@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { FormatEnum } from '@core/config/format.enum';
-import { GenerateService } from '@core/service/generate.service';
-import { ConverterService } from '@core/util/converter.service';
+import { Project } from '@core/model/Project.modal';
+import { ProjectService } from '@core/service/project.service';
 
 @Component({
   selector: 'app-project',
@@ -11,14 +9,22 @@ import { ConverterService } from '@core/util/converter.service';
 })
 export class ProjectComponent implements OnInit {
 
-  constructor() {
+  groupId: string = '';
+  projects: Project[] = [];
+
+  constructor(
+    private projectService: ProjectService
+  ) {
+    projectService.getProjectByGroupId(this.groupId).subscribe((projects: Project[]) => {
+      projects.forEach((project: Project) => {
+        this.projects.push(project);
+      });
+    });
   }
 
   public ngOnInit(): void {
 
   }
-
-
 
 
 }
