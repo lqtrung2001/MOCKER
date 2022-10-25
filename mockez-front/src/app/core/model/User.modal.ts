@@ -9,6 +9,6 @@ export interface User {
   gender?: boolean,
   address?: string,
   dob?: string,
-  group?: Group[]
+  group?: Group
 
 }

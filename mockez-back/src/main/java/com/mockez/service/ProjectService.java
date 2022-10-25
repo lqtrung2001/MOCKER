@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface ProjectService {
     /**
      * PROJECT.01 GET /project/{groupId}
-     * @param groupId of sqlType
+     * @param groupId of group
      * @return project by groupId
      */
     List<Project> getProjectsByGroup(UUID groupId);

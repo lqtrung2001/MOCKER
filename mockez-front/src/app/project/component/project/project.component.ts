@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '@core/model/Project.modal';
 import { ProjectService } from '@core/service/project.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-project',
@@ -13,18 +14,17 @@ export class ProjectComponent implements OnInit {
   projects: Project[] = [];
 
   constructor(
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private route: ActivatedRoute
   ) {
     projectService.getProjectByGroupId(this.groupId).subscribe((projects: Project[]) => {
-      projects.forEach((project: Project) => {
-        this.projects.push(project);
-      });
+      this.projects = projects;
     });
   }
 
   public ngOnInit(): void {
-
+    this.route.queryParams.subscribe(params => {
+      this.groupId = params['groupId'];
+    });
   }
-
-
 }

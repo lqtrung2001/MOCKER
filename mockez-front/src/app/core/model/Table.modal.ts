@@ -1,8 +1,8 @@
-import {Schema} from '@core/model/Schema.modal';
+import { Schema } from '@core/model/Schema.modal';
 
-export interface Table{
+export interface Table {
   id: string,
   name: string,
-  description?: string
-  schema?: Schema[]
+  description?: string,
+  schema?: Schema
 }

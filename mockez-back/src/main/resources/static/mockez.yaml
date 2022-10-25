@@ -157,7 +157,7 @@ paths:
           type: string
           format: uuid
     get:
-      operationId: getGenerateTypeBySQLTypeId
+      operationId: getGenerateTypesBySQLType
       tags:
         - GenerateType
       description: Return a generateType by SQLTypeId
@@ -248,7 +248,7 @@ paths:
           type: string
           format: uuid
     get:
-      operationId: getProjectByGroupId
+      operationId: getProjectsByGroup
       tags:
         - Project
       description: Return a project by groupId
@@ -281,7 +281,7 @@ paths:
           type: string
           format: uuid
     get:
-      operationId: getSchemaByProjectId
+      operationId: getSchemasByProject
       tags:
         - Schema
       description: Return schemas by projectId
