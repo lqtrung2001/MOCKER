@@ -29,6 +29,7 @@ import java.util.UUID;
 })
 public class Category extends Base{
 
+
     @Id
     @Column(updatable = false)
     private UUID id;

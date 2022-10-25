@@ -11,5 +11,4 @@ import java.util.UUID;
 public interface SQLTypeRepository extends JpaRepository<SQLType, UUID>, SQLTypeRepositoryCustom {
 
 
-
 }
