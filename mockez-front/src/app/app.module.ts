@@ -13,6 +13,7 @@ import { LayoutModule } from '@shared/layout/layout.module';
 import { ProjectModule } from '@app/project/project.module';
 import { SchemaModule } from '@app/schema/schema.module';
 import { StoreModule } from '@ngrx/store';
+import { LoginModule } from '@app/login/login.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { StoreModule } from '@ngrx/store';
     BrowserModule,
     CommonModule,
     GeneralModule,
+    LoginModule,
     HttpClientModule,
     ReactiveFormsModule,
     ROUTING,
