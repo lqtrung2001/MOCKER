@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Schema } from '@core/model/Schema.modal';
+import { SchemaService } from '@core/service/schema.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-schema',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SchemaComponent implements OnInit {
 
-  constructor() { }
+  projectId: string = '';
+  schemas: Schema[] = [];
 
-  ngOnInit(): void {
+  constructor(
+    schemaService: SchemaService,
+    private route: ActivatedRoute
+  ) {
+    schemaService.getSchemaByProjectId(this.projectId).subscribe((schemas: Schema[]) => {
+      this.schemas = schemas;
+    });
   }
 
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.projectId = params['projectId'];
+    });
+  }
 }
