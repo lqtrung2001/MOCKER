@@ -3,14 +3,14 @@ package com.mockez.service.impl;
 import com.mockez.domain.model.entity.Project;
 import com.mockez.repository.ProjectRepository;
 import com.mockez.service.ProjectService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;

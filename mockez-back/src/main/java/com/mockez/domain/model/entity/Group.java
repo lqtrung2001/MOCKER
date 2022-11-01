@@ -25,6 +25,7 @@ import java.util.UUID;
 @ToString(callSuper = true)
 @SuperBuilder(toBuilder = true)
 public class Group extends Base {
+
     @Id
     @Column(updatable = false)
     private UUID id;

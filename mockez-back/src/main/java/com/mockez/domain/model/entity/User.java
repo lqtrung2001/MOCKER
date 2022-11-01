@@ -1,5 +1,6 @@
 package com.mockez.domain.model.entity;
 
+import com.mockez.domain.model.entity.enumeration.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,8 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -26,6 +29,7 @@ import java.util.UUID;
 @ToString(callSuper = true)
 @SuperBuilder(toBuilder = true)
 public class User extends Base {
+
     @Id
     @Column(updatable = false)
     private UUID id;
@@ -52,7 +56,20 @@ public class User extends Base {
     private OffsetDateTime dob;
 
     @Column(nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column(nullable = false)
+    private Boolean isAccountNonExpired;
+
+    @Column(nullable = false)
+    private Boolean isAccountNonLocked;
+
+    @Column(nullable = false)
+    private Boolean isCredentialsNonExpired;
+
+    @Column(nullable = false)
+    private Boolean isEnabled;
 
     @ManyToOne
     @ToString.Exclude

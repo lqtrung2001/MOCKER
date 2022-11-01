@@ -4,7 +4,7 @@ import com.mockez.api.GenerateApi;
 import com.mockez.controller.maper.ApiAbstractMapper;
 import com.mockez.domain.dto.GenerateReqDto;
 import com.mockez.service.GenerateService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping(path = "/api/v1")
 public class GenerateController implements GenerateApi {
 

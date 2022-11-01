@@ -1,10 +1,10 @@
 package com.mockez.service.impl;
 
 import com.mockez.service.TableService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class TableServiceImpl implements TableService {
 }

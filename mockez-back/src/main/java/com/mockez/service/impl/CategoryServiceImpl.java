@@ -3,7 +3,7 @@ package com.mockez.service.impl;
 import com.mockez.domain.model.entity.Category;
 import com.mockez.repository.CategoryRepository;
 import com.mockez.service.CategoryService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -12,10 +12,10 @@ import java.util.UUID;
 
 @Service
 @Transactional
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public List<Category> getCategories() {

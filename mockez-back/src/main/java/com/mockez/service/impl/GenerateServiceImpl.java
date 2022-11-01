@@ -5,7 +5,7 @@ import com.mockez.domain.model.entity.Field;
 import com.mockez.domain.model.entity.Source;
 import com.mockez.repository.GenerateTypeRepository;
 import com.mockez.service.GenerateService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,10 +15,10 @@ import java.util.Map;
 import java.util.Random;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class GenerateServiceImpl implements GenerateService {
 
-    private GenerateTypeRepository generateTypeRepository;
+    private final GenerateTypeRepository generateTypeRepository;
 
     @Override
     public List<Map<String, String>> generate(GenerateReq body) {

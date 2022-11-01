@@ -26,6 +26,7 @@ import java.util.UUID;
 @ToString(callSuper = true)
 @SuperBuilder(toBuilder = true)
 public class Schema extends Base {
+
     @Id
     @Column(updatable = false)
     private UUID id;
