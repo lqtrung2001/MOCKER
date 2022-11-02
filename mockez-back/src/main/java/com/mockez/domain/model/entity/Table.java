@@ -24,6 +24,7 @@ import java.util.UUID;
 @SuperBuilder(toBuilder = true)
 @javax.persistence.Table(name = "[table]")
 public class Table extends Base {
+
     @Id
     @Column(updatable = false)
     private UUID id;

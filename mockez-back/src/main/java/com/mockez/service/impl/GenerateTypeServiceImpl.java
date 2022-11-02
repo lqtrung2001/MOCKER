@@ -4,18 +4,18 @@ import com.mockez.domain.model.entity.GenerateType;
 import com.mockez.repository.GenerateTypeRepository;
 import com.mockez.repository.SQLTypeRepository;
 import com.mockez.service.GenerateTypeService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class GenerateTypeServiceImpl implements GenerateTypeService {
 
-    private GenerateTypeRepository generateTypeRepository;
-    private SQLTypeRepository sqlTypeRepository;
+    private final GenerateTypeRepository generateTypeRepository;
+    private final SQLTypeRepository sqlTypeRepository;
 
     @Override
     public GenerateType getGenerateType(UUID id) {

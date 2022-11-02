@@ -4,7 +4,7 @@ import com.mockez.api.GenerateTypeApi;
 import com.mockez.controller.maper.ApiAbstractMapper;
 import com.mockez.domain.dto.GenerateTypeDto;
 import com.mockez.service.GenerateTypeService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping(path = "/api/v1")
 public class GenerateTypeController implements GenerateTypeApi {
 
@@ -27,7 +27,7 @@ public class GenerateTypeController implements GenerateTypeApi {
     }
 
     @Override
-    public ResponseEntity<List<GenerateTypeDto>> getGenerateTypeBySQLTypeId(UUID sqlTypeId) {
+    public ResponseEntity<List<GenerateTypeDto>> getGenerateTypesBySQLType(UUID sqlTypeId) {
         return ResponseEntity.ok(generateTypeService.getGenerateTypesBySQLType(sqlTypeId)
                 .stream().map(apiAbstractMapper::map).collect(Collectors.toList()));
     }
