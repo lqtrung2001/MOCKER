@@ -36,13 +36,11 @@ public class GroupAccess extends Base {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    // user
     @ManyToOne
     @ToString.Exclude
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "user_group_access_fk"), insertable=false, updatable=false)
     private User user;
 
-    // group
     @ManyToOne
     @ToString.Exclude
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "group_group_access_fk"),  insertable=false, updatable=false)

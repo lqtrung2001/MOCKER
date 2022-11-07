@@ -4,7 +4,7 @@ import com.mockez.api.SchemaApi;
 import com.mockez.controller.maper.ApiAbstractMapper;
 import com.mockez.domain.dto.SchemaDto;
 import com.mockez.service.SchemaService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping(path = "/api/v1")
 public class SchemaController implements SchemaApi {
 
