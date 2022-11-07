@@ -16,8 +16,11 @@ import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -76,4 +79,7 @@ public class User extends Base {
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "user_group_fk"))
     private Group group;
 
+    @ToString.Exclude
+    @OneToMany(mappedBy = "user")
+    private List<GroupAccess> group_accesses = new ArrayList<>();
 }

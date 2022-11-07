@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Data
 @Embeddable
@@ -15,8 +16,8 @@ public class GroupAccessPK implements Serializable {
     private static final long serialVersionUID = -4766406047469968465L;
 
     @Column(nullable = false)
-    private String groupId;
+    private UUID groupId;
 
     @Column(nullable = false)
-    private String userId;
+    private UUID userId;
 }

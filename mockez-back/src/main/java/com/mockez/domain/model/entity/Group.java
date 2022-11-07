@@ -9,7 +9,10 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
@@ -43,4 +46,10 @@ public class Group extends Base {
     @ToString.Exclude
     @OneToMany(mappedBy = "group")
     private List<Project> projects = new ArrayList<>();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "group")
+    private List<GroupAccess> group_accesses = new ArrayList<>();
+
+
 }

@@ -1,10 +1,9 @@
 package com.mockez.controller;
-
-import com.mockez.api.ProjectApi;
 import com.mockez.controller.maper.ApiAbstractMapper;
 import com.mockez.domain.dto.ProjectDto;
 import com.mockez.service.ProjectService;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import com.mockez.api.ProjectApi;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +13,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
 @RequestMapping(path = "/api/v1")
 public class ProjectController implements ProjectApi {
 
