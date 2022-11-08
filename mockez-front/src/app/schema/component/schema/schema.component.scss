@@ -1,3 +1,9 @@
 #form, .search, .title {
   width: 1200px;
 }
+
+#form {
+  .row:nth-child(even) {
+    background-color: #F5F5F5;
+  }
+}

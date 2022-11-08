@@ -25,6 +25,13 @@
   border: 3px solid #FFFFFF;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
 body {
   min-width: 1200px;
   background-color: #F0F2F5;
