@@ -14,6 +14,9 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Getter
@@ -33,8 +36,13 @@ public class GroupAccess extends Base {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    // user
+    @ManyToOne
+    @ToString.Exclude
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "user_group_access_fk"), insertable=false, updatable=false)
+    private User user;
 
-    // group
-
+    @ManyToOne
+    @ToString.Exclude
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "group_group_access_fk"),  insertable=false, updatable=false)
+    private Group group;
 }

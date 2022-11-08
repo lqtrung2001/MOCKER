@@ -68,12 +68,14 @@ public interface ApiAbstractMapper {
 
     User map(UserDto userDto);
 
+//    @Mapping(target = "group_accesses", ignore = true)
     UserDto map(User user);
 
     Group map(GroupDto groupDto);
 
     @Mapping(target = "users", ignore = true)
     @Mapping(target = "projects", ignore = true)
+//    @Mapping(target = "group_accesses", ignore = true)
     GroupDto map(Group group);
 
     Schema map(SchemaDto schemaDto);

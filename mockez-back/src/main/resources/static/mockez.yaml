@@ -2,7 +2,7 @@ openapi: "3.0.3"
 info:
   title: Mockez API
   description: Website MOCKEZ generates source for system testing.
-  version: 2.2.0
+  version: 2.3.0
 paths:
   /user/login:
     post:
@@ -342,9 +342,6 @@ components:
   schemas:
     Field:
       type: object
-      required:
-        - id
-        - version
       description: FIELD table
       properties:
         id:
@@ -369,9 +366,6 @@ components:
           $ref: '#/components/schemas/Option'
     SQLType:
       type: object
-      required:
-        - id
-        - version
       description: SQLTYPE table
       properties:
         id:
@@ -397,9 +391,6 @@ components:
             $ref: '#/components/schemas/GenerateType'
     GenerateType:
       type: object
-      required:
-        - id
-        - version
       description: GENERATETYPE table
       properties:
         id:
@@ -431,9 +422,6 @@ components:
             $ref: '#/components/schemas/SQLType'
     Category:
       type: object
-      required:
-        - id
-        - version
       description: CATEGORY table
       properties:
         id:
@@ -459,9 +447,6 @@ components:
             $ref: '#/components/schemas/GenerateType'
     Source:
       type: object
-      required:
-        - id
-        - version
       description: Source table
       properties:
         id:
@@ -481,9 +466,6 @@ components:
           $ref: '#/components/schemas/GenerateType'
     Option:
       type: object
-      required:
-        - id
-        - version
       description: OPTION table
       properties:
         id:
@@ -543,9 +525,6 @@ components:
     GenerateReq:
       type: object
       description: The body of generate request
-      required:
-        - row
-        - fields
       properties:
         row:
           readOnly: true
@@ -561,14 +540,6 @@ components:
             $ref: '#/components/schemas/Field'
     User:
       type: object
-      required:
-        - id
-        - version
-        - email
-        - password
-        - name
-        - role
-        - groupId
       description: USER table
       properties:
         id:
@@ -624,11 +595,6 @@ components:
     Group:
       type: object
       description: GROUP table
-      required:
-        - id
-        - version
-        - name
-        - description
       properties:
         id:
           readOnly: true
@@ -658,12 +624,6 @@ components:
     Project:
       type: object
       description: PROJECT table
-      required:
-        - id
-        - version
-        - name
-        - description
-        - groupId
       properties:
         id:
           readOnly: true
@@ -691,12 +651,6 @@ components:
     Schema:
       type: object
       description: SCHEMA table
-      required:
-        - id
-        - version
-        - name
-        - description
-        - projectId
       properties:
         id:
           readOnly: true
@@ -724,12 +678,6 @@ components:
     Table:
       type: object
       description: TABLE table
-      required:
-        - id
-        - version
-        - name
-        - description
-        - schemaId
       properties:
         id:
           readOnly: true
