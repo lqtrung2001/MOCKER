@@ -1,13 +1,13 @@
 <div id='login'>
   <div [formGroup]='credential' class='board bg-white rounded-md shadow-light text-sm mt-20 pt-14 px-10 mx-auto w-96'>
-    <h1 class='text-center font-bold text-xl tracking-wider mb-14'>Login</h1>
+    <h1 class='text-center font-bold text-xl tracking-wider mb-14'>Signup</h1>
     <div class='relative'>
       <label class='block font-medium' for='email'>Email</label>
       <div class='input flex items-center'>
         <div class='flex items-center w-1/12'>
           <img class='icon' src='assets/icon/navigation/user.png' alt='user'/>
         </div>
-        <input formControlName='email' class='relative px-5 pt-1 pb-3 mt-3 w-11/12' type='email' id='email'
+        <input formControlName='email' class='relative px-5 pt-1 pb-3 mt-3 w-11/12' type='text' id='email'
                placeholder='Enter your email address'/>
       </div>
     </div>
@@ -21,15 +21,12 @@
                placeholder='Enter your password'/>
       </div>
     </div>
-    <p *ngIf='invalid' class='text-red-500 text-center font-medium mt-5'>Email or password is incorrect</p>
-    <p class='text-right mt-5 underline cursor-pointer'><a routerLink='/forgot-password'>Forgot password?</a></p>
     <div class='text-center mt-8'>
       <button class='bg-blue-400 font-bold text-white rounded-md p-2.5 w-11/12'
-              (click)='login()'>LOGIN
-      </button>
+      (click)='signup()'>SIGNUP</button>
     </div>
     <div class='text-center mt-8 text-gray-500'>
-      If you haven't account, <a routerLink='/signup' class='underline text-blue-500'>sign up</a> now or by using
+      If you have account, <a routerLink='/login' class='underline text-blue-500'>login</a> now or by using
     </div>
     <div class='flex justify-center mt-5'>
       <img class='w-8 mx-2 cursor-pointer' src='assets/icon/google.png' alt='google'/>

@@ -14,10 +14,12 @@ import { ProjectModule } from '@app/project/project.module';
 import { SchemaModule } from '@app/schema/schema.module';
 import { StoreModule } from '@ngrx/store';
 import { LoginModule } from '@app/login/login.module';
+import { DialogModal } from '@shared/modal/modal-provider/dialog/dialog.modal';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DialogModal
   ],
   imports: [
     DialogModule,

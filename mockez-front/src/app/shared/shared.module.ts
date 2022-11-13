@@ -8,6 +8,10 @@ import { TruncatePipe } from '@core/pipe/truncate.pipe';
 import { SelectTypeModal } from '@shared/modal/select-type/select-type.modal';
 import { PreviewModal } from '@shared/modal/preview/preview.modal';
 import { FormatPipe } from '@core/pipe/format.pipe';
+import { CreateProjectModal } from '@shared/modal/create-project/create-project.modal';
+import { CreateSchemaModal } from '@shared/modal/create-schema/create-schema.modal';
+import { PageNotFoundComponent } from '@shared/component/page-not-found/page-not-found.component';
+import { RouterLinkWithHref } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,10 @@ import { FormatPipe } from '@core/pipe/format.pipe';
     TruncatePipe,
     SelectTypeModal,
     PreviewModal,
-    FormatPipe
+    CreateProjectModal,
+    CreateSchemaModal,
+    FormatPipe,
+    PageNotFoundComponent
   ],
   imports: [
     KeyValuePipe,
@@ -25,13 +32,17 @@ import { FormatPipe } from '@core/pipe/format.pipe';
     TranslateModule,
     NgIf,
     NgForOf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLinkWithHref
   ],
   exports: [
     TableComponent,
     TruncatePipe,
     ConfigurationComponent,
-    PreviewModal
+    CreateProjectModal,
+    CreateSchemaModal,
+    PreviewModal,
+    PageNotFoundComponent
   ],
   providers: []
 })

@@ -1,6 +1,6 @@
 <h1 class='title flex uppercase font-bold mx-auto mt-20 '>{{'project.title' | translate | uppercase}}</h1>
 <div class='search mt-2 p-4 shadow-light mx-auto bg-white rounded-md text-sm'>
-  <span class='ml-2.5 font-bold'>{{'project.search.title' | translate}}</span>
+  <span class='ml-2.5 font-medium'>{{'project.search.title' | translate}}</span>
   <div class='flex ml-5 mt-2'>
     <div class='flex items-center bg-gray rounded-md ml-5 p-2.5 w-3/5 h-10'>
       <img src='/assets/icon/navigation/search.png' alt='search'/>
@@ -12,12 +12,13 @@
     </div>
     <div class='flex h-10 ml-5'>
       <div class='flex justify-center h-10'>
-        <button type='button' class='bg-blue-500 rounded-md text-center text-white font-medium w-40'>
+        <button type='button' class='bg-blue-500 rounded-md shadow-light text-center text-white font-bold w-40'>
           {{'project.search.btn_search' | translate}}
         </button>
       </div>
       <div class='flex justify-center h-10'>
-        <button type='button' class='bg-blue-500 rounded-md text-center text-white font-medium ml-5 w-40'>
+        <button type='button' class='bg-blue-500 rounded-md shadow-light text-center text-white font-bold ml-5 w-40'
+                (click)='createProject()'>
           {{'project.search.btn_create_project' | translate}}
         </button>
       </div>
@@ -26,9 +27,9 @@
 </div>
 <div id='form' class='mt-2 p-4 shadow-light mx-auto bg-white rounded-md text-sm'>
   <div class='flex ml-5 mb-2 justify-center'>
-    <span class='font-bold mt-2 ml-2.5 w-1/5'>{{'project.table.project_summary' | translate}}</span>
+    <span class='font-medium mt-2 ml-2.5 w-1/5'>{{'project.table.summary' | translate}}</span>
     <div class='flex justify-center w-3/5'>
-      <span class='font-bold mt-2 ml-2.5 mr-5'>{{'project.table.show' | translate}}</span>
+      <span class='font-medium mt-2 ml-2.5 mr-5'>{{'project.table.show' | translate}}</span>
       <div class='justify-between flex bg-white items-center rounded-md cursor-pointer shadow-light w-60'>
         <span class='ml-3'>{{'project.table.all_column' | translate}}</span>
         <img class='mr-3 icon' src='/assets/icon/general/down_button.png' alt='down button'/>
@@ -40,11 +41,13 @@
       </button>
     </div>
     <div class='flex justify-center w-1/5 mt-2'>
+      <a class='font-medium ml-2.5 cursor-pointer'><</a>
       <a class='font-medium ml-2.5 cursor-pointer'>1</a>
       <a class='font-medium ml-2.5 cursor-pointer'>2</a>
       <a class='font-medium ml-2.5 cursor-pointer'>3</a>
       <a class='font-medium ml-2.5 cursor-pointer'>...</a>
       <a class='font-medium ml-2.5 cursor-pointer'>10</a>
+      <a class='font-medium ml-2.5 cursor-pointer'>></a>
     </div>
   </div>
   <hr>
@@ -53,19 +56,21 @@
       <input type='checkbox' value=''
              class='w-4 h-4 text-blue-600 bg-gray-100 focus:ring-blue-500 cursor-pointer'>
     </div>
-    <span class='font-bold mt-2 ml-2.5 w-1/3'>{{'project.table.name' | translate}}</span>
-    <span class='font-bold mt-2 ml-2.5 w-1/3'>{{'project.table.shared_with' | translate}}</span>
-    <span class='font-bold mt-2 ml-2.5 w-1/3'>{{'project.table.last_modified' | translate}}</span>
-    <span class='font-bold mt-2 ml-2.5 w-1/6'></span>
+    <span class='font-medium mt-2 ml-2.5 w-1/3'>{{'project.table.name' | translate}}</span>
+    <span class='font-medium mt-2 ml-2.5 w-1/3'>{{'project.table.shared_with' | translate}}</span>
+    <span class='font-medium mt-2 ml-2.5 w-1/3'>{{'project.table.last_modified' | translate}}</span>
+    <span class='font-medium mt-2 ml-2.5 w-1/6'></span>
   </div>
+
+  <div *ngIf='!projects.length' class='mt-5 text-center'>{{ 'project.table.empty' | translate }}</div>
 
   <div *ngFor='let project of projects' class='flex mt-2 ml-5 justify-between'>
     <div class='flex items-center mt-2 w-1/6'>
       <input type='checkbox' value=''
              class='w-4 h-4 text-blue-600 bg-gray-100 focus:ring-blue-500 cursor-pointer'>
     </div>
-    <span class='mt-2 ml-2.5 w-1/3'>{{project.name}}</span>
-    <span class='mt-2 ml-2.5 w-1/3'>{{project.group.users}}</span>
+    <span class='mt-2 ml-2.5 w-1/3'>{{project?.name}}</span>
+    <span class='mt-2 ml-2.5 w-1/3'>{{project?.group?.users}}</span>
     <span class='mt-2 ml-2.5 w-1/3'>2 days ago</span>
     <div class='flex justify-center bg-white rounded-md items-center cursor-pointer ml-2.5 w-1/6'>
       <img class='icon' src='/assets/icon/general/delete.png' alt='delete'/>

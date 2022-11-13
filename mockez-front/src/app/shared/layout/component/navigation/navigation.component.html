@@ -11,8 +11,8 @@
   </div>
   <div class='flex h-full mx-8 my-0'>
     <a routerLink='/general' routerLinkActive='active' class='no-underline text-center text-black font-medium w-24'>{{'navigation.general' | translate | uppercase}}</a>
-    <a href='#' class='no-underline text-center text-black font-medium w-24'>{{'navigation.dataset' | translate | uppercase}}</a>
-    <a href='#' class='no-underline text-center text-black font-medium w-24'>{{'navigation.mock_api' | translate | uppercase}}</a>
+    <a class='no-underline text-center text-black font-medium w-24' (click)='featureNotAvailable()'>{{'navigation.dataset' | translate | uppercase}}</a>
+    <a class='no-underline text-center text-black font-medium w-24' (click)='featureNotAvailable()'>{{'navigation.mock_api' | translate | uppercase}}</a>
     <a routerLink='/schema' routerLinkActive='active' class='no-underline text-center text-black font-medium w-24'>{{'navigation.schema' | translate | uppercase}}</a>
     <a routerLink='/project' routerLinkActive='active' class='no-underline text-center text-black font-medium w-24'>{{'navigation.project' | translate | uppercase}}</a>
   </div>
