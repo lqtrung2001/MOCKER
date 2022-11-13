@@ -14,9 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static java.util.Collections.emptyList;
 
 @Entity
 @Getter
@@ -40,9 +41,9 @@ public class Project extends Base {
     @ManyToOne
     @ToString.Exclude
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "project_group_fk"))
-    private Group group;
+    private Group group = Group.builder().build();
 
     @ToString.Exclude
     @OneToMany(mappedBy = "project")
-    private List<Schema> schemas = new ArrayList<>();
+    private List<Schema> schemas = emptyList();
 }

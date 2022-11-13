@@ -7,10 +7,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Role {
 
-    APPLICATION("application_admin"),
-    APPLICATION_GUEST("application_guest"),
-    GROUP_ADMIN("group_admin"),
-    GROUP_ASSOCIATE("group_associate");
+    GROUP_ADMIN("GROUP_ADMIN"),
+    GROUP_ASSOCIATE("GROUP_ASSOCIATE"),
+    USER("USER"),
+    ADMIN("ADMIN");
 
     private final String value;
 }

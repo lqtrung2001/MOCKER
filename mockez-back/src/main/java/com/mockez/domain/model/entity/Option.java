@@ -32,6 +32,6 @@ public class Option extends Base {
 
     @OneToOne
     @JoinColumn(nullable = false, name = "field_id", referencedColumnName = "id")
-    private Field field;
+    private Field field = Field.builder().build();
 
 }

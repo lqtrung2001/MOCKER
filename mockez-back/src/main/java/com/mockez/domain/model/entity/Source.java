@@ -34,5 +34,5 @@ public class Source extends Base {
     @ManyToOne
     @ToString.Exclude
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "source_generate_type_id_fk"))
-    private GenerateType generateType;
+    private GenerateType generateType = GenerateType.builder().build();
 }

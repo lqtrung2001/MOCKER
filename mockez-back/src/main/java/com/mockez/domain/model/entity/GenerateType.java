@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static java.util.Collections.emptyList;
+
 @Entity
 @Getter
 @Setter
@@ -46,14 +48,14 @@ public class GenerateType extends Base {
     @ManyToOne
     @ToString.Exclude
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "generate_type_category_id_fk"))
-    private Category category;
+    private Category category = Category.builder().build();
 
     @ToString.Exclude
     @OneToMany(mappedBy = "generateType")
-    private List<Source> sources = new ArrayList<>();
+    private List<Source> sources = emptyList();
 
     @ToString.Exclude
     @ManyToMany(mappedBy = "generateTypes")
-    private List<SQLType> sqlTypes = new ArrayList<>();
+    private List<SQLType> sqlTypes = emptyList();
 
 }

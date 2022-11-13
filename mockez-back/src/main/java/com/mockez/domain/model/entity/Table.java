@@ -38,5 +38,5 @@ public class Table extends Base {
     @ManyToOne
     @ToString.Exclude
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "table_schema_fk"))
-    private Schema schema;
+    private Schema schema = Schema.builder().build();
 }

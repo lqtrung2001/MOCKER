@@ -1,6 +1,5 @@
 package com.mockez.service;
 
-import com.mockez.domain.model.entity.GenerateType;
 import com.mockez.domain.model.entity.Project;
 
 import java.util.List;

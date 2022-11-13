@@ -14,10 +14,10 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     private EntityManager entityManager;
 
     @Override
-    public User findByEmailAndPassword(String email, String password) {
+    public User findByEmailAndPassword(String username, String password) {
         return new JPAQuery<User>(entityManager)
                 .from(QUser.user)
-                .where(QUser.user.email.eq(email)
+                .where(QUser.user.username.eq(username)
                         .and(QUser.user.password.eq(password)))
                 .fetchOne();
     }

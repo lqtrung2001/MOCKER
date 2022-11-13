@@ -15,9 +15,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static java.util.Collections.emptyList;
 
 @Entity
 @Getter
@@ -48,5 +49,5 @@ public class SQLType extends Base {
             joinColumns = @JoinColumn(name = "sql_type_id"),
             inverseJoinColumns = @JoinColumn(name = "generate_type_id")
     )
-    private List<GenerateType> generateTypes = new ArrayList<>();
+    private List<GenerateType> generateTypes = emptyList();
 }

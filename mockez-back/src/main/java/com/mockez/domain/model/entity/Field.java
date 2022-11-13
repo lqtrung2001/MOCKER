@@ -41,15 +41,15 @@ public class Field extends Base {
     @ManyToOne
     @ToString.Exclude
     @JoinColumn(name = "sql_type_id", nullable = false, foreignKey = @ForeignKey(name = "field_sql_type_id_fk"))
-    private SQLType sqlType;
+    private SQLType sqlType = SQLType.builder().build();
 
     @ManyToOne
     @ToString.Exclude
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "field_generate_type_id_fk"))
-    private GenerateType generateType;
+    private GenerateType generateType = GenerateType.builder().build();
 
     @PrimaryKeyJoinColumn
     @OneToOne(mappedBy = "field")
-    private Option option;
+    private Option option = Option.builder().build();
 
 }

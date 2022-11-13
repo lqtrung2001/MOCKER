@@ -9,15 +9,13 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static java.util.Collections.emptyList;
 
 @Entity
 @Getter
@@ -41,15 +39,14 @@ public class Group extends Base {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "group")
-    private List<User> users = new ArrayList<>();
+    private List<User> users = emptyList();
 
     @ToString.Exclude
     @OneToMany(mappedBy = "group")
-    private List<Project> projects = new ArrayList<>();
+    private List<Project> projects = emptyList();
 
     @ToString.Exclude
     @OneToMany(mappedBy = "group")
-    private List<GroupAccess> group_accesses = new ArrayList<>();
-
+    private List<GroupAccess> groupAccesses = emptyList();
 
 }
