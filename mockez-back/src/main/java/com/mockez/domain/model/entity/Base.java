@@ -15,6 +15,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 import java.sql.Timestamp;
+import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -28,7 +29,7 @@ public abstract class Base {
 
     @CreatedDate
     @Column(name = "created_date")
-    private Timestamp createdDate;
+    private OffsetDateTime createdDate;
 
     @CreatedBy
     @Column(name = "created_by")
@@ -36,7 +37,7 @@ public abstract class Base {
 
     @LastModifiedDate
     @Column(name = "modified_date")
-    private Timestamp modifiedDate;
+    private OffsetDateTime modifiedDate;
 
     @LastModifiedBy
     @Column(name = "modified_by")

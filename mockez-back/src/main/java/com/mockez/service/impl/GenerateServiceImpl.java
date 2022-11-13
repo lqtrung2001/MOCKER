@@ -1,6 +1,5 @@
 package com.mockez.service.impl;
 
-import com.mockez.domain.model.GenerateReq;
 import com.mockez.domain.model.entity.Field;
 import com.mockez.domain.model.entity.Source;
 import com.mockez.repository.GenerateTypeRepository;
@@ -13,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 @RequiredArgsConstructor
@@ -21,15 +21,14 @@ public class GenerateServiceImpl implements GenerateService {
     private final GenerateTypeRepository generateTypeRepository;
 
     @Override
-    public List<Map<String, String>> generate(GenerateReq body) {
+    public List<Map<String, String>> generate(Integer row, List<Field> fields) {
 
         List<Map<String, String>> result = new ArrayList<>();
-        List<Field> fields = body.getFields();
 
-        int index = 0, row = body.getRow();
+        AtomicInteger atomicInteger = new AtomicInteger(0);
         Random random = new Random();
 
-        while (++index < row) {
+        while (atomicInteger.getAndIncrement() < row) {
             Map<String, String> map = new HashMap<>();
             fields.forEach(field -> {
                 List<Source> sources = generateTypeRepository

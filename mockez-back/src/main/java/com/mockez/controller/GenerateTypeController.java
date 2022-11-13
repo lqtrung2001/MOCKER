@@ -1,8 +1,10 @@
 package com.mockez.controller;
 
 import com.mockez.api.GenerateTypeApi;
+import com.mockez.configuration.security.ApplicationContextHolder;
 import com.mockez.controller.maper.ApiAbstractMapper;
 import com.mockez.domain.dto.GenerateTypeDto;
+import com.mockez.domain.model.entity.User;
 import com.mockez.service.GenerateTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,7 @@ public class GenerateTypeController implements GenerateTypeApi {
 
     private final ApiAbstractMapper apiAbstractMapper;
     private final GenerateTypeService generateTypeService;
+    private final ApplicationContextHolder applicationContextHolder;
 
     @Override
     public ResponseEntity<GenerateTypeDto> getGenerateType(UUID id) {
@@ -34,6 +37,7 @@ public class GenerateTypeController implements GenerateTypeApi {
 
     @Override
     public ResponseEntity<List<GenerateTypeDto>> getGenerateTypes() {
+        User user = applicationContextHolder.getCurrentUser();
         return ResponseEntity.ok(generateTypeService.getGenerateTypes().stream()
                 .map(apiAbstractMapper::map).collect(Collectors.toList()));
     }

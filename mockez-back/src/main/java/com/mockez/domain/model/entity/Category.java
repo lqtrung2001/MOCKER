@@ -13,9 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static java.util.Collections.emptyList;
 
 @Entity
 @Getter
@@ -41,7 +42,7 @@ public class Category extends Base{
 
     @ToString.Exclude
     @OneToMany(mappedBy = "category")
-    private List<GenerateType> generateTypes = new ArrayList<>();
+    private List<GenerateType> generateTypes = emptyList();
 
 }
 
