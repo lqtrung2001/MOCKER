@@ -1,8 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
-import { ProjectComponent } from './component/project/project.component';
 
-const routes: Routes = [
-  { path: '', component:  ProjectComponent, resolve: [] }
-];
+const routes: Routes = [];
 
 export const ROUTING = RouterModule.forChild(routes);

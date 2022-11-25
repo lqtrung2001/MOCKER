@@ -8,9 +8,9 @@
       </div>
       <div *ngFor='let category of categories; index as index'
            class='{{ category.id === categoryActiveId ? "active" : "" }}  {{ index === categories.length - 1 ? "mr-5" : "" }} item text-center rounded-md shadow-light cursor-pointer flex items-center ml-5 py-2.5 px-5 h-10'
-           (click)='categoryOnClick(category.id)'>
+           (click)='categoryOnClick(category.id!)'>
         <span [innerHTML]='category.name'></span>
-        <span class='ml-2.5'>({{category.generateTypeCount}})</span>
+        <span class='ml-2.5'>({{ category.id || '' }})</span>
       </div>
     </div>
     <div class='cards flex flex-wrap items-center justify-around pt-0 px-7 pb-7 mt-5 overflow-auto'>

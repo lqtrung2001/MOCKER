@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GenerateType } from '@core/model/GenerateType.modal';
+import { GenerateType } from '@core/model/generate-type';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environment/environment';
 

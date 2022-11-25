@@ -1,6 +1,5 @@
 package com.mockez.repository.customize.impl;
 
-import com.mockez.domain.model.entity.QProject;
 import com.mockez.domain.model.entity.QSchema;
 import com.mockez.domain.model.entity.Schema;
 import com.mockez.repository.customize.SchemaRepositoryCustom;
@@ -19,10 +18,8 @@ public class SchemaRepositoryImpl implements SchemaRepositoryCustom {
     @Override
     public List<Schema> getSchemasByProject(UUID projectId) {
         return new JPAQuery<Schema>(entityManager)
-                .from(QProject.project)
-                .where(QProject.project.id.eq(projectId))
-                .innerJoin(QProject.project.schemas, QSchema.schema)
-                .fetchJoin()
+                .from(QSchema.schema)
+                .where(QSchema.schema.project.id.eq(projectId))
                 .fetch();
     }
 }

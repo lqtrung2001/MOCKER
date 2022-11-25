@@ -1,58 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { Schema } from '@core/model/Schema.modal';
+import { Component } from '@angular/core';
 import { SchemaService } from '@core/service/schema.service';
 import { ActivatedRoute } from '@angular/router';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
 import { CreateSchemaModal } from '@shared/modal/create-schema/create-schema.modal';
+import { ProjectService } from '@core/service/project.service';
+import { Project } from '@core/model/project';
+import { Schema } from '@core/model/schema';
 
 @Component({
   selector: 'app-schema',
   templateUrl: './schema.component.html',
   styleUrls: ['./schema.component.scss']
 })
-export class SchemaComponent implements OnInit {
+export class SchemaComponent {
 
-  projectId: string = '';
+  project: Project = new Project();
   schemas: Schema[] = [];
   table: any;
 
   constructor(
-    schemaService: SchemaService,
+    private schemaService: SchemaService,
+    private projectService: ProjectService,
     private route: ActivatedRoute,
     private modalService: ModalService
   ) {
-    schemaService.getSchemaByProjectId(this.projectId).subscribe((schemas: Schema[]) => {
-      this.schemas = schemas;
-    });
-  }
-
-  ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.projectId = params['projectId'];
-    });
-    this.schemas.push({
-      id: '1',
-      name: 'Youtube',
-      description: 'Youtube',
-      project: {}
-    });
-    this.schemas.push({
-      id: '1',
-      name: 'Youtube',
-      description: 'Youtube',
-      project: {}
-    });
-    this.schemas.push({
-      id: '1',
-      name: 'Youtube',
-      description: 'Youtube',
-      project: {}
-    });
-    this.schemas.push({
-      id: '1',
-      name: 'Youtube',
-      description: 'Youtube',
-      project: {}
+    route.queryParams.subscribe(params => {
+      this.project.id = params['projectId'];
+      this.projectService.getProject(this.project.id!).subscribe((project: Project) => {
+        this.project = project;
+        this.schemaService.getSchemaByProject(this.project.id!).subscribe((schema: Schema[]) => {
+          this.schemas = schema;
+        });
+      });
     });
   }
 

@@ -1,7 +1,6 @@
 package com.mockez.repository.customize.impl;
 
 import com.mockez.domain.model.entity.Project;
-import com.mockez.domain.model.entity.QGroup;
 import com.mockez.domain.model.entity.QProject;
 import com.mockez.repository.customize.ProjectRepositoryCustom;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -16,14 +15,11 @@ public class ProjectRepositoryImpl implements ProjectRepositoryCustom {
     @PersistenceContext
     EntityManager entityManager;
 
-
     @Override
-    public List<Project> getProjectsByGroup(UUID groupId) {
+    public List<Project> findAllByGroup(UUID groupId) {
         return new JPAQuery<Project>(entityManager)
-                .from(QGroup.group)
-                .where(QGroup.group.id.eq(groupId))
-                .innerJoin(QGroup.group.projects, QProject.project)
-                .fetchJoin()
+                .from(QProject.project)
+                .where(QProject.project.group.id.eq(groupId))
                 .fetch();
     }
 }

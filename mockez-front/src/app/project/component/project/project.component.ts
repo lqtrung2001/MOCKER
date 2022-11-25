@@ -1,37 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { Project } from '@core/model/Project.modal';
+import { Component } from '@angular/core';
 import { ProjectService } from '@core/service/project.service';
 import { ActivatedRoute } from '@angular/router';
-import { ModalService } from '@app/shared/modal/modal-service/modal-service.service';
-import { CreateProjectModal } from '@shared/modal/create-project/create-project.modal';
+import { Project } from '@core/model/project';
 
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss']
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent {
 
-  groupId: string = '';
-  projects: Project[] = [];
+  project: Project = new Project();
 
   constructor(
-    private projectService: ProjectService,
-    private route: ActivatedRoute,
-    private modalService: ModalService
+    private activeRoute: ActivatedRoute,
+    private projectService: ProjectService
   ) {
-    projectService.getProjectByGroupId(this.groupId).subscribe((projects: Project[]) => {
-      this.projects = projects;
-    });
+    const id: string = activeRoute.snapshot.params['id'];
+    projectService.getProject(id)
+      .subscribe((project: Project) => {
+        this.project = project;
+      });
   }
 
-  public ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.groupId = params['groupId'];
-    });
-  }
 
-  public createProject(): void {
-    this.modalService.open(CreateProjectModal);
-  }
 }

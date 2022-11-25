@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormatEnum } from '@core/config/format.enum';
 import { GenerateReq, GenerateService } from '@core/service/generate.service';
-import { Field } from '@core/model/Field.modal';
+import { Field } from '@core/model/field';
 import { Observable } from 'rxjs';
+import { SQLType } from '@core/model/sql-type';
+import { GenerateType } from '@core/model/generate-type';
 
 @Injectable({
   providedIn: 'root'
@@ -58,19 +60,13 @@ export class DataProviderService {
   }
 
   public buildGenerateReq(): GenerateReq {
-    const fields: Field[] = this.table.controls.map((field: FormGroup) => ({
-      id: '68d318cb-5db2-4b60-9f17-61762ebf823d',
-      name: field.get('name')?.value,
-      sqlType: {
-        id: field.get('sqlType')?.value.id,
-        version: field.get('version')?.value.version | 0
-      },
-      generateType: {
-        id: field.get('generateType')?.value.id,
-        version: field.get('generateType')?.value.version | 0
-      },
-      version: 0
-    }));
+    const fields: Field[] = this.table.controls.map((formGroup: FormGroup) => {
+      const field: Field = new Field();
+      field.name = formGroup.get('name')?.value;
+      field.sqlType = new SQLType();
+      field.generateType = new GenerateType();
+      return field;
+    });
     return {
       row: this.configuration.get('row')?.value,
       fields

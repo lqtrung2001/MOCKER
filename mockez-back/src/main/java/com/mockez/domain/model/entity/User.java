@@ -28,7 +28,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
-import static lombok.AccessLevel.NONE;
 
 @Entity
 @Getter

@@ -35,14 +35,12 @@
       />
     </div>
   </div>
-  <div (click)='dataProvider.configuration.get("isIncludeCreateTable")?.setValue(!dataProvider.configuration.get("isIncludeCreateTable")?.value)'
-       class='flex items-center cursor-pointer ml-2.5'>
-    <div class='shadow-light w-6 h-6 bg-white rounded'>
-      <img *ngIf='dataProvider.configuration.get("isIncludeCreateTable")?.value'
-           alt='done'
-           class='icon'
-           src='assets/icon/general/done.png'/>
-    </div>
+  <div
+    (click)='dataProvider.configuration.get("isIncludeCreateTable")?.setValue(!dataProvider.configuration.get("isIncludeCreateTable")?.value)'
+    class='flex items-center cursor-pointer ml-2.5'>
+        <div class='shadow-light w-6 h-6 bg-white rounded flex justify-center items-center'>
+          <input type='checkbox' value='' class='bg-white w-6 h-6' [checked]='dataProvider.configuration.get("isIncludeCreateTable")?.value'/>
+        </div>
     <span class='font-medium ml-2.5'>{{ 'general.config.include_create_table' | translate | uppercase }}</span>
   </div>
 </div>

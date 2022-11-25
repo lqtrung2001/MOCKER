@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { SQLType } from '@core/model/SQLType.modal';
-import { GenerateType } from '@core/model/GenerateType.modal';
 import { DataProviderService } from '@shared/service/data-provider.service';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
 import { SelectTypeModal } from '@shared/modal/select-type/select-type.modal';
+import { GenerateType } from '@core/model/generate-type';
+import { SQLType } from '@core/model/sql-type';
 
 @Component({
   selector: 'app-table',

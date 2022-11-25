@@ -22,13 +22,26 @@
       "es2020",
       "dom"
     ],
+//    "strictPropertyInitialization": false,
     "paths": {
-      "@app/*": ["app/*"],
-      "@core/*": ["app/core/*"],
-      "@config/*": ["app/config/*"],
-      "@environment/*": ["environments/*"],
-      "@shared/*": ["app/shared/*"],
-      "@helpers/*": ["helpers/*"]
+      "@app/*": [
+        "app/*"
+      ],
+      "@core/*": [
+        "app/core/*"
+      ],
+      "@config/*": [
+        "app/config/*"
+      ],
+      "@environment/*": [
+        "environments/*"
+      ],
+      "@shared/*": [
+        "app/shared/*"
+      ],
+      "@helpers/*": [
+        "helpers/*"
+      ]
     }
   },
   "angularCompilerOptions": {

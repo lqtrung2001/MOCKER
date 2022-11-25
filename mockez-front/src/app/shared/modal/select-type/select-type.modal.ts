@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '@core/model/Category.modal';
 import { CategoryService } from '@core/service/category.service';
-import { SQLType } from '@core/model/SQLType.modal';
 import { SQLTypeService } from '@core/service/sql-type.service';
-import { GenerateType } from '@core/model/GenerateType.modal';
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
+import { SQLType } from '@core/model/sql-type';
+import { GenerateType } from '@core/model/generate-type';
+import { Category } from '@core/model/category';
 
 export interface SelectTypeOption {
   isSQLType: boolean;
@@ -19,7 +19,7 @@ export interface SelectTypeOption {
 export class SelectTypeModal extends Modal implements OnInit {
 
   categories: Category[] = [];
-  data: SQLType[] | GenerateType[] = [];
+  data: any = [];
   categoryActiveId: string = '';
   selectTypeOption!: SelectTypeOption;
 
@@ -43,9 +43,9 @@ export class SelectTypeModal extends Modal implements OnInit {
       this.categoryService.getCategories()
         .subscribe((categories: Category[]) => {
           categories.forEach((category: Category) => {
-            this.categoryService.getGenerateTypesCount(category.id)
+            this.categoryService.getGenerateTypesCount(category.id!)
               .subscribe((generateTypeCount: number) => {
-                const categoryGenCount: Category = { ...category, generateTypeCount };
+                const categoryGenCount: Category = category;
                 if (category.id === this.categoryActiveId) {
                   this.categories.unshift(categoryGenCount);
                 } else {
@@ -56,10 +56,7 @@ export class SelectTypeModal extends Modal implements OnInit {
         });
       this.categoryService.getCategory(this.categoryActiveId)
         .subscribe((category: Category) => {
-          this.data = category.generateTypes!.map((type: GenerateType) => ({
-            ...type,
-            description: type.description += 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-          }));
+          this.data = category.generateTypes!;
         });
     }
   }
@@ -68,10 +65,7 @@ export class SelectTypeModal extends Modal implements OnInit {
     this.categoryService.getCategory(id)
       .subscribe((category: Category) => {
         this.categoryActiveId = id;
-        this.data = category.generateTypes!.map((type: GenerateType) => ({
-          ...type,
-          description: type.description += 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-        }));
+        this.data = category.generateTypes!;
       });
   }
 

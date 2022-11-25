@@ -46,8 +46,11 @@ export class ModalProvider {
     }).onResult();
   }
 
-  public showInformational(message: string): Observable<any> {
-    return this.modalService.open(DialogModal).onResult();
+  public showInformation(message: string): Observable<any> {
+    return this.modalService.open(DialogModal, {
+      title: 'Information',
+      btnOk: true
+    }).onResult();
   }
 
 }
