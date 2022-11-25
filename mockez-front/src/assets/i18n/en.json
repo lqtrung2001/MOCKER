@@ -35,9 +35,9 @@
     "title": "Project",
     "search": {
       "title": "What are you looking for?",
-      "placeholder": "Search for name",
+      "placeholder": "Find a project...",
       "btn_search": "Search",
-      "btn_create_project": "Create a project"
+      "new": "New"
     },
     "table": {
       "empty": "Project is empty, please add another project and config them by using create button.",
@@ -45,7 +45,7 @@
       "show": "Show",
       "all_column": "All column",
       "btn_delete": "Delete selected",
-      "name": "name",
+      "name": "Name",
       "shared_with": "Shared with",
       "last_modified": "Last modified"
     }
@@ -63,7 +63,7 @@
       "show": "Show",
       "all_column": "All column",
       "btn_delete": "Delete selected",
-      "name": "name",
+      "name": "Name",
       "shared_with": "Shared with",
       "last_modified": "Last modified"
 

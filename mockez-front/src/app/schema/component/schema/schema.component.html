@@ -1,5 +1,7 @@
 <div *ngIf='!table'>
-  <h1 class='title flex uppercase font-bold mx-auto mt-20 '>{{'project.title' | translate | uppercase}} > Youtube</h1>
+  <h1 class='title flex uppercase font-bold mx-auto mt-20 '>
+    {{ 'projects.title' | translate | uppercase }} : {{ project.name }}
+  </h1>
   <div class='search mt-2 p-4 mx-auto shadow-light bg-white rounded-md text-sm'>
     <span class='ml-2.5 font-medium'>{{ 'schema.search.title' | translate }}</span>
     <div class='flex ml-5 mt-2'>

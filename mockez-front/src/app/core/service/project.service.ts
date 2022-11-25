@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Project } from '@core/model/Project.modal';
+import { Project } from '@core/model/project';
 import { environment } from '@environment/environment';
 
 @Injectable({
@@ -14,7 +14,11 @@ export class ProjectService {
   ) {
   }
 
-  public getProjectByGroupId(groupId: string): Observable<Project[]>{
-    return this.httpClient.get<Project[]>(`${environment.apiUrl}/project/${groupId}`);
+  public getProject(id: string): Observable<Project> {
+    return this.httpClient.get<Project>(`${environment.apiUrl}/project/${id}`);
+  }
+
+  public getProjects(): Observable<Project[]> {
+    return this.httpClient.get<Project[]>(`${environment.apiUrl}/project`);
   }
 }

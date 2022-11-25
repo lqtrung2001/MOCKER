@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Field } from '../model/Field.modal';
+import { Field } from '../model/field';
 import { environment } from '@environment/environment';
 
 export interface GenerateReq {

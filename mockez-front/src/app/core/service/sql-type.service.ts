@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SQLType } from '@core/model/SQLType.modal';
+import { SQLType } from '@core/model/sql-type';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environment/environment';
 

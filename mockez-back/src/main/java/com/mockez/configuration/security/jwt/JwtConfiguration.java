@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
+import static com.google.common.net.HttpHeaders.USER_AGENT;
 
 @Getter
 @Setter
@@ -20,5 +21,9 @@ public class JwtConfiguration {
 
     public String getAuthorizationHeader() {
         return AUTHORIZATION;
+    }
+
+    public String getUserAgent() {
+        return USER_AGENT;
     }
 }

@@ -1,9 +1,10 @@
 package com.mockez.controller;
+
+import com.mockez.api.ProjectApi;
 import com.mockez.controller.maper.ApiAbstractMapper;
 import com.mockez.domain.dto.ProjectDto;
 import com.mockez.service.ProjectService;
 import lombok.AllArgsConstructor;
-import com.mockez.api.ProjectApi;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,15 @@ public class ProjectController implements ProjectApi {
     private final ProjectService projectService;
 
     @Override
-    public ResponseEntity<List<ProjectDto>> getProjectsByGroup(UUID groupId) {
-        return ResponseEntity.ok(projectService.getProjectsByGroup(groupId)
-                .stream().map(apiAbstractMapper::map).collect(Collectors.toList()));
+    public ResponseEntity<ProjectDto> getProject(UUID id) {
+        return ResponseEntity.ok(apiAbstractMapper.map(projectService.getProject(id)));
+    }
+
+    @Override
+    public ResponseEntity<List<ProjectDto>> getProjects() {
+        return ResponseEntity.ok(projectService.getProjectsCurrentAccess()
+                .stream()
+                .map(apiAbstractMapper::map)
+                .collect(Collectors.toList()));
     }
 }

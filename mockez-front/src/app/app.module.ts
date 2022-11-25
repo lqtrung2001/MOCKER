@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { ROUTING } from './app.routing';
 import { GeneralModule } from './general/general.module';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TRANSLATE } from '@app/app.translate';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from '@progress/kendo-angular-dialog';
@@ -13,8 +13,9 @@ import { LayoutModule } from '@shared/layout/layout.module';
 import { ProjectModule } from '@app/project/project.module';
 import { SchemaModule } from '@app/schema/schema.module';
 import { StoreModule } from '@ngrx/store';
-import { LoginModule } from '@app/login/login.module';
+import { AuthModule } from '@app/auth/auth.module';
 import { DialogModal } from '@shared/modal/modal-provider/dialog/dialog.modal';
+import { AuthHttpInterceptor } from '@core/service/auth-http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -25,18 +26,22 @@ import { DialogModal } from '@shared/modal/modal-provider/dialog/dialog.modal';
     DialogModule,
     BrowserModule,
     CommonModule,
-    GeneralModule,
-    LoginModule,
+    AuthModule,
     HttpClientModule,
     ReactiveFormsModule,
     ROUTING,
     TRANSLATE,
     LayoutModule,
     ProjectModule,
+    GeneralModule,
     SchemaModule,
     StoreModule.forRoot({})
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthHttpInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

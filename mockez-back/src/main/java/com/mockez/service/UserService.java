@@ -6,4 +6,6 @@ public interface UserService {
 
     User authentication(String email, String password);
 
+    User getUserByUsername(String username);
+
 }

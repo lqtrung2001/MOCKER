@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
 
 @Component({
-  selector: 'app-create-project',
+  selector: 'app-create-projects',
   templateUrl: './create-schema.modal.html',
   styleUrls: ['./create-schema.modal.scss']
 })

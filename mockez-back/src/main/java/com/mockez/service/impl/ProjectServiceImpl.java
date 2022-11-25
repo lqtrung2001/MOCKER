@@ -1,5 +1,6 @@
 package com.mockez.service.impl;
 
+import com.mockez.configuration.security.ApplicationContextHolder;
 import com.mockez.domain.model.entity.Project;
 import com.mockez.repository.ProjectRepository;
 import com.mockez.service.ProjectService;
@@ -14,9 +15,15 @@ import java.util.UUID;
 public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
+    private final ApplicationContextHolder applicationContextHolder;
 
     @Override
-    public List<Project> getProjectsByGroup(UUID groupId) {
-        return projectRepository.getProjectsByGroup(groupId);
+    public Project getProject(UUID id) {
+        return projectRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public List<Project> getProjectsCurrentAccess() {
+        return projectRepository.findAllByGroup(applicationContextHolder.getCurrentUser().getGroup().getId());
     }
 }

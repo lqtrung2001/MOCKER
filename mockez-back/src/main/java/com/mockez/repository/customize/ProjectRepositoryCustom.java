@@ -7,6 +7,6 @@ import java.util.UUID;
 
 public interface ProjectRepositoryCustom {
 
-    List<Project> getProjectsByGroup(UUID groupId);
+    List<Project> findAllByGroup(UUID groupId);
 
 }
