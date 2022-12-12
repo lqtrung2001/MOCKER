@@ -1,16 +1,18 @@
 import { Base } from '@core/model/base';
-import { User } from '@core/model/user';
 import { Project } from '@core/model/project';
-import { GroupAccess } from '@core/model/group-access';
+import { GroupMember } from '@core/model/group-member';
+
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
 
 export class Group extends Base {
 
   private _id: string | undefined = undefined;
   private _name: string | undefined = undefined;
   private _description: string | undefined = undefined;
-  private _users: User | undefined = undefined;
-  private _projects: Project[] | undefined = undefined;
-  private _groupAccesses: GroupAccess[] | undefined = undefined;
+  private _projects: Project[] = [];
+  private _groupMembers: GroupMember[] = [];
 
   get id(): string | undefined {
     return this._id;
@@ -36,27 +38,19 @@ export class Group extends Base {
     this._description = value;
   }
 
-  get users(): User | undefined {
-    return this._users;
-  }
-
-  set users(value: User | undefined) {
-    this._users = value;
-  }
-
-  get projects(): Project[] | undefined {
+  get projects(): Project[] {
     return this._projects;
   }
 
-  set projects(value: Project[] | undefined) {
+  set projects(value: Project[]) {
     this._projects = value;
   }
 
-  get groupAccesses(): GroupAccess[] | undefined {
-    return this._groupAccesses;
+  get groupMembers(): GroupMember[] {
+    return this._groupMembers;
   }
 
-  set groupAccesses(value: GroupAccess[] | undefined) {
-    this._groupAccesses = value;
+  set groupMembers(value: GroupMember[]) {
+    this._groupMembers = value;
   }
 }

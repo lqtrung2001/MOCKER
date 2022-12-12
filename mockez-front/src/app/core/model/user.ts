@@ -1,7 +1,10 @@
 import { Base } from '@core/model/base';
 import { Gender } from '@core/model/enumeration/gender';
-import { Group } from '@core/model/group';
-import { GroupAccess } from '@core/model/group-access';
+import { GroupMember } from '@core/model/group-member';
+
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
 
 export class User extends Base {
 
@@ -18,8 +21,7 @@ export class User extends Base {
   private _isCredentialsNonExpired: boolean | undefined = undefined;
   private _isEnabled: boolean | undefined = undefined;
   private _grantedAuthorities: string | undefined = undefined;
-  private _group: Group | undefined = undefined;
-  private _groupAccesses: GroupAccess[] | undefined = undefined;
+  private _groupMembers: GroupMember[] = [];
 
   get id(): string | undefined {
     return this._id;
@@ -125,19 +127,11 @@ export class User extends Base {
     this._grantedAuthorities = value;
   }
 
-  get group(): Group | undefined {
-    return this._group;
+  get groupMembers(): GroupMember[] {
+    return this._groupMembers;
   }
 
-  set group(value: Group | undefined) {
-    this._group = value;
-  }
-
-  get groupAccesses(): GroupAccess[] | undefined {
-    return this._groupAccesses;
-  }
-
-  set groupAccesses(value: GroupAccess[] | undefined) {
-    this._groupAccesses = value;
+  set groupMembers(value: GroupMember[]) {
+    this._groupMembers = value;
   }
 }

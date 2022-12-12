@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#main {
+  table:before {
+    content: '';
+    background-color: #4285F4;;
+    @apply absolute top-0 left-0 rounded-t w-full h-1.5;
+  }
+
+  table tr:nth-child(2) td {
+    padding-top: 20px !important;
+    padding-bottom: 8px !important;
+  }
+
+  table tr:nth-last-child(1) td {
+    padding-bottom: 20px !important;
+  }
+}

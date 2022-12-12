@@ -1,5 +1,8 @@
-<div id='app'>
-  <app-navigation></app-navigation>
-  <router-outlet></router-outlet>
-<!--  <app-footer></app-footer>-->
+<div id='main' class='flex w-screen h-screen'>
+  <div id='navigation' class='z-10 bg-white w-80 drop-shadow-xl'>
+    <app-navigation></app-navigation>
+  </div>
+  <div id='content' class='bg-gray p-4 overflow-y-auto'>
+    <router-outlet></router-outlet>
+  </div>
 </div>

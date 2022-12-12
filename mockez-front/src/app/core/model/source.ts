@@ -1,11 +1,15 @@
 import { Base } from './base';
 import { GenerateType } from '@core/model/generate-type';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export class Source extends Base {
 
   private _id: string | undefined = undefined;
   private _value: string | undefined = undefined;
-  private _generateType: GenerateType | undefined = undefined;
+  private _generateType: GenerateType = new GenerateType();
 
   get id(): string | undefined {
     return this._id;
@@ -23,11 +27,11 @@ export class Source extends Base {
     this._value = value;
   }
 
-  get generateType(): GenerateType | undefined {
+  get generateType(): GenerateType {
     return this._generateType;
   }
 
-  set generateType(value: GenerateType | undefined) {
+  set generateType(value: GenerateType) {
     this._generateType = value;
   }
 }

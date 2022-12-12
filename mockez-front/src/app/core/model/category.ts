@@ -1,12 +1,16 @@
 import { Base } from '@core/model/base';
 import { GenerateType } from '@core/model/generate-type';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export class Category extends Base {
 
   private _id: string | undefined = undefined;
   private _name: string | undefined = undefined;
   private _description: string | undefined = undefined;
-  private _generateTypes: GenerateType[] | undefined = undefined;
+  private _generateTypes: GenerateType[] = [];
 
   get id(): string | undefined {
     return this._id;
@@ -32,11 +36,11 @@ export class Category extends Base {
     this._description = value;
   }
 
-  get generateTypes(): GenerateType[] | undefined {
+  get generateTypes(): GenerateType[] {
     return this._generateTypes;
   }
 
-  set generateTypes(value: GenerateType[] | undefined) {
+  set generateTypes(value: GenerateType[]) {
     this._generateTypes = value;
   }
 }

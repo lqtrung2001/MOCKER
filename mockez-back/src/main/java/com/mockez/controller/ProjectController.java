@@ -13,6 +13,10 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @RestController
 @AllArgsConstructor
 @RequestMapping(path = "/api/v1")
@@ -28,9 +32,14 @@ public class ProjectController implements ProjectApi {
 
     @Override
     public ResponseEntity<List<ProjectDto>> getProjects() {
-        return ResponseEntity.ok(projectService.getProjectsCurrentAccess()
+        return ResponseEntity.ok(projectService.getProjects()
                 .stream()
                 .map(apiAbstractMapper::map)
                 .collect(Collectors.toList()));
+    }
+
+    @Override
+    public ResponseEntity<UUID> saveOrUpdate(ProjectDto projectDto) {
+        return ResponseEntity.ok(projectService.saveOrUpdate(apiAbstractMapper.map(projectDto)));
     }
 }

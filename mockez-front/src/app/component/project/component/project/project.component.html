@@ -1,0 +1,35 @@
+<div id='main' class='flex justify-between mx-auto mt-20'>
+  <div class='left bg-white rounded-md p-5 w-2/3'>
+    <div class='flex justify-between items-center'>
+      <h2 class='font-medium'>Document</h2>
+      <img src='assets/icon/pencil.png' class='w-5 cursor-pointer' alt='pencil' />
+    </div>
+    <hr class='mt-3' />
+    <div class='document text-sm p-1'>
+      {{ project.description }}
+    </div>
+  </div>
+  <div class='right bg-white rounded-md p-5'>
+    <div class='flex justify-between items-center'>
+      <h3 class='font-medium'>About</h3>
+      <div class='custom-color flex items-end'>
+        <p class='w-4 h-4 ml-2 rounded-full bg-red'></p>
+        <p class='w-4 h-4 ml-2 rounded-full bg-yellow'></p>
+        <p class='w-4 h-4 ml-2 rounded-full bg-green'></p>
+      </div>
+    </div>
+    <p class='mt-5 text-sm font-medium'>{{ project.name | uppercase }}</p>
+    <p class='mt-4 text-justify text-sm'>{{ project.summary }}</p>
+    <div class='mt-4 text-sm'>
+      <p class='font-medium'>Group: {{ project.group.name }}</p>
+      <p class='mt-3 text-gray-600'>Contributed by: 100 users</p>
+      <p class='mt-3 text-gray-600'>Starred: 1000</p>
+      <div class='flex h-10 items-center'>
+        <button class='mt-3 bg-blue p-2 text-white font-medium rounded'>Star project</button>
+        <img src='assets/icon/flying_star.png' class='ml-2 w-7 h-7' alt='flying star' />
+      </div>
+    </div>
+    <button class='mt-4 bg-green text-white rounded text-sm font-medium p-2 w-full' (click)='openSchema(project.id)'>Access Schema</button>
+    <button class='mt-3 bg-red text-white rounded text-sm font-medium p-2 w-full'>Delete Project</button>
+  </div>
+</div>

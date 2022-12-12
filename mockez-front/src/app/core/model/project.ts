@@ -2,13 +2,18 @@ import { Base } from '@core/model/base';
 import { Group } from '@core/model/group';
 import { Schema } from '@core/model/schema';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export class Project extends Base {
 
   private _id: string | undefined = undefined;
   private _name: string | undefined = undefined;
+  private _summary: string | undefined = undefined;
   private _description: string | undefined = undefined;
-  private _group: Group | undefined = undefined;
-  private _schemas: Schema[] | undefined = undefined;
+  private _group: Group = new Group();
+  private _schemas: Schema[] = [];
 
   get id(): string | undefined {
     return this._id;
@@ -26,6 +31,14 @@ export class Project extends Base {
     this._name = value;
   }
 
+  get summary(): string | undefined {
+    return this._summary;
+  }
+
+  set summary(value: string | undefined) {
+    this._summary = value;
+  }
+
   get description(): string | undefined {
     return this._description;
   }
@@ -34,19 +47,19 @@ export class Project extends Base {
     this._description = value;
   }
 
-  get group(): Group | undefined {
+  get group(): Group {
     return this._group;
   }
 
-  set group(value: Group | undefined) {
+  set group(value: Group) {
     this._group = value;
   }
 
-  get schemas(): Schema[] | undefined {
+  get schemas(): Schema[] {
     return this._schemas;
   }
 
-  set schemas(value: Schema[] | undefined) {
+  set schemas(value: Schema[]) {
     this._schemas = value;
   }
 }

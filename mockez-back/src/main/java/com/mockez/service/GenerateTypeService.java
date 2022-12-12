@@ -5,6 +5,10 @@ import com.mockez.domain.model.entity.GenerateType;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 public interface GenerateTypeService {
 
     /**

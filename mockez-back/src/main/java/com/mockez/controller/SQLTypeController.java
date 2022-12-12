@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/v1")

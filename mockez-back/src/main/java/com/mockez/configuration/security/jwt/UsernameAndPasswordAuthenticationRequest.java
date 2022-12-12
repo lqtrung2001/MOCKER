@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Getter
 @Setter
 @ToString

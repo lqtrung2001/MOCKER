@@ -11,6 +11,10 @@ import java.util.stream.Collectors;
 
 import static org.springframework.security.core.context.SecurityContextHolder.getContext;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component
 @RequiredArgsConstructor
 public class ApplicationContextHolder {

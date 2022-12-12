@@ -19,6 +19,10 @@ import java.util.UUID;
 
 import static java.util.Collections.emptyList;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Entity
 @Getter
 @Setter
@@ -26,21 +30,22 @@ import static java.util.Collections.emptyList;
 @AllArgsConstructor
 @ToString(callSuper = true)
 @SuperBuilder(toBuilder = true)
+@javax.persistence.Table(name = "[SCHEMA]")
 public class Schema extends Base {
 
     @Id
-    @Column(updatable = false)
+    @Column(name = "ID", updatable = false)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(nullable = false, length = 1000)
+    @Column(name = "DESCRIPTION", nullable = false, length = 4096)
     private String description;
 
     @ManyToOne
     @ToString.Exclude
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "schema_project_fk"))
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "SCHEMA_PROJECT_FK"))
     private Project project = Project.builder().build();
 
     @ToString.Exclude

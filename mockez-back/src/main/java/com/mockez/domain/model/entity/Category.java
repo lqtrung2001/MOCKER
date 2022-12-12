@@ -18,6 +18,10 @@ import java.util.UUID;
 
 import static java.util.Collections.emptyList;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Entity
 @Getter
 @Setter
@@ -26,18 +30,18 @@ import static java.util.Collections.emptyList;
 @ToString(callSuper = true)
 @SuperBuilder(toBuilder = true)
 @Table(uniqueConstraints = {
-        @UniqueConstraint(name = "category_name_unique", columnNames = "name")
-})
+        @UniqueConstraint(name = "CATEGORY_NAME_UNIQUE", columnNames = "NAME")
+}, name = "CATEGORY")
 public class Category extends Base{
 
     @Id
-    @Column(updatable = false)
+    @Column(name = "ID", updatable = false)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(nullable = false, length = 1000)
+    @Column(name = "DESCRIPTION", nullable = false, length = 1000)
     private String description;
 
     @ToString.Exclude

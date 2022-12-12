@@ -294,6 +294,35 @@ paths:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/ServerError'
+    post:
+      operationId: saveOrUpdate
+      tags:
+        - Project
+      description: Save or Update a project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: string
+                format: uuid
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
   /project/{id}:
     parameters:
       - in: path
@@ -358,6 +387,31 @@ paths:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/ServerError'
+  /group:
+    get:
+      operationId: getGroupsWithAccess
+      tags:
+        - Schema
+      description: Return groups has access
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
 components:
   schemas:
     Base:
@@ -373,6 +427,11 @@ components:
           type: string
           format: uuid
           description: audit created by
+        createdByGroup:
+          readOnly: true
+          type: string
+          format: uuid
+          description: audit created by group
         modifiedDate:
           type: string
           format: date-time
@@ -382,6 +441,11 @@ components:
           type: string
           format: uuid
           description: audit modified by
+        modifiedByGroup:
+          readOnly: true
+          type: string
+          format: uuid
+          description: audit modified by group
         version:
           readOnly: true
           type: integer
@@ -397,7 +461,7 @@ components:
           description: id of category
         name:
           type: string
-          maxLength: 225
+          maxLength: 255
           description: name of category
         description:
           type: string
@@ -421,7 +485,7 @@ components:
           description: id of field
         name:
           type: string
-          maxLength: 225
+          maxLength: 255
           description: name of field
         sqlType:
           $ref: '#/components/schemas/SQLType'
@@ -442,7 +506,7 @@ components:
           description: id of generate type
         code:
           type: string
-          maxLength: 225
+          maxLength: 255
           description: code of generate type
         description:
           type: string
@@ -473,7 +537,7 @@ components:
           description: id of group
         name:
           type: string
-          maxLength: 225
+          maxLength: 255
           description: name of group
         description:
           type: string
@@ -489,19 +553,19 @@ components:
           description: list projects of group
           items:
             $ref: '#/components/schemas/Project'
-        groupAccesses:
+        groupMembers:
           type: array
-          description: list group accesses of group
+          description: list groupMembers of group
           items:
-            $ref: '#/components/schemas/GroupAccess'
+            $ref: '#/components/schemas/GroupMember'
       allOf:
         - $ref: '#/components/schemas/Base'
-    GroupAccess:
+    GroupMember:
       type: object
-      description: GROUP-ACCESS table
+      description: GROUP-MEMBER table
       properties:
         id:
-          $ref: '#/components/schemas/GroupAccessPK'
+          $ref: '#/components/schemas/GroupMemberPK'
         role:
           $ref: '#/components/schemas/Role'
         user:
@@ -510,9 +574,9 @@ components:
           $ref: '#/components/schemas/Group'
       allOf:
         - $ref: '#/components/schemas/Base'
-    GroupAccessPK:
+    GroupMemberPK:
       type: object
-      description: GROUP-ACCESS primary key table
+      description: GROUP-MEMBER primary key table
       properties:
         groupId:
           readOnly: true
@@ -554,8 +618,12 @@ components:
           description: id of project
         name:
           type: string
-          maxLength: 225
+          maxLength: 255
           description: name of project
+        summary:
+          type: string
+          maxLength: 255
+          description: summary of project
         description:
           type: string
           maxLength: 1000
@@ -580,7 +648,7 @@ components:
           description: id of schema
         name:
           type: string
-          maxLength: 225
+          maxLength: 255
           description: name of schema
         description:
           type: string
@@ -623,7 +691,7 @@ components:
           description: id of sql type
         code:
           type: string
-          maxLength: 225
+          maxLength: 255
           description: name of sql type
         description:
           type: string
@@ -647,7 +715,7 @@ components:
           description: id of table
         name:
           type: string
-          maxLength: 225
+          maxLength: 255
           description: name of table
         description:
           type: string
@@ -669,15 +737,15 @@ components:
         username:
           type: string
           format: email
-          maxLength: 225
+          maxLength: 255
           description: username of user
         password:
           type: string
-          maxLength: 225
+          maxLength: 255
           description: password of user
         name:
           type: string
-          maxLength: 225
+          maxLength: 255
           description: name of user
         phone:
           type: string
@@ -687,7 +755,7 @@ components:
           $ref: '#/components/schemas/Gender'
         address:
           type: string
-          maxLength: 225
+          maxLength: 255
           description: address of user
         dob:
           type: string
@@ -708,13 +776,11 @@ components:
         grantedAuthorities:
           type: string
           description: list of allowed authorities
-        group:
-          $ref: '#/components/schemas/Group'
-        groupAccesses:
+        groupMembers:
           type: array
-          description: list group accesses of user
+          description: list groupMembers of user
           items:
-            $ref: '#/components/schemas/GroupAccess'
+            $ref: '#/components/schemas/GroupMember'
       allOf:
         - $ref: '#/components/schemas/Base'
     Gender:

@@ -7,6 +7,10 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.crypto.SecretKey;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Configuration
 @RequiredArgsConstructor
 public class JwtSecretKey {

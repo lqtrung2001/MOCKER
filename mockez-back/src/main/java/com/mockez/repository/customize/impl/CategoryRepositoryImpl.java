@@ -10,6 +10,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.UUID;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 public class CategoryRepositoryImpl implements CategoryRepositoryCustom {
 
     @PersistenceContext

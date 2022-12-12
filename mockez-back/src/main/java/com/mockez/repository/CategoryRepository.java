@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, UUID>, CategoryRepositoryCustom {
 }

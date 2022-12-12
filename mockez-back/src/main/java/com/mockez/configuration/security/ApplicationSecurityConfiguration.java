@@ -23,6 +23,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.crypto.SecretKey;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor

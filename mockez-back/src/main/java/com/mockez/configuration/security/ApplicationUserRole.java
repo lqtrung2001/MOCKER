@@ -15,6 +15,10 @@ import static com.mockez.configuration.security.ApplicationUserPermission.PROJEC
 import static com.mockez.configuration.security.ApplicationUserPermission.SCHEMA_READ;
 import static com.mockez.configuration.security.ApplicationUserPermission.SCHEMA_WRITE;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Getter
 @RequiredArgsConstructor
 public enum ApplicationUserRole {

@@ -3,19 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ROUTING } from './app.routing';
-import { GeneralModule } from './general/general.module';
+import { GeneralModule } from './component/general/general.module';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TRANSLATE } from '@app/app.translate';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DialogModule } from '@progress/kendo-angular-dialog';
 import { LayoutModule } from '@shared/layout/layout.module';
-import { ProjectModule } from '@app/project/project.module';
-import { SchemaModule } from '@app/schema/schema.module';
+import { ProjectModule } from '@app/component/project/project.module';
+import { SchemaModule } from '@app/component/schema/schema.module';
 import { StoreModule } from '@ngrx/store';
-import { AuthModule } from '@app/auth/auth.module';
+import { AuthModule } from '@app/component/auth/auth.module';
 import { DialogModal } from '@shared/modal/modal-provider/dialog/dialog.modal';
 import { AuthHttpInterceptor } from '@core/service/auth-http-interceptor.service';
+import { TableModule } from '@app/component/table/table.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,6 @@ import { AuthHttpInterceptor } from '@core/service/auth-http-interceptor.service
     DialogModal
   ],
   imports: [
-    DialogModule,
     BrowserModule,
     CommonModule,
     AuthModule,
@@ -35,6 +34,7 @@ import { AuthHttpInterceptor } from '@core/service/auth-http-interceptor.service
     ProjectModule,
     GeneralModule,
     SchemaModule,
+    TableModule,
     StoreModule.forRoot({})
   ],
   providers: [{

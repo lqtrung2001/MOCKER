@@ -2,13 +2,17 @@ import { Base } from '@core/model/base';
 import { Project } from '@core/model/project';
 import { Table } from '@core/model/table';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export class Schema extends Base {
 
   private _id: string | undefined = undefined;
   private _name: string | undefined = undefined;
   private _description: string | undefined = undefined;
-  private _project: Project | undefined = undefined;
-  private _tables: Table[] | undefined = undefined;
+  private _project: Project = new Project();
+  private _tables: Table[] = [];
 
   get id(): string | undefined {
     return this._id;
@@ -34,19 +38,19 @@ export class Schema extends Base {
     this._description = value;
   }
 
-  get project(): Project | undefined {
+  get project(): Project {
     return this._project;
   }
 
-  set project(value: Project | undefined) {
+  set project(value: Project) {
     this._project = value;
   }
 
-  get tables(): Table[] | undefined {
+  get tables(): Table[] {
     return this._tables;
   }
 
-  set tables(value: Table[] | undefined) {
+  set tables(value: Table[]) {
     this._tables = value;
   }
 }

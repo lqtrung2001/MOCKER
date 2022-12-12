@@ -28,13 +28,12 @@
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
-input:-webkit-autofill:active{
+input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
 body {
   min-width: 1200px;
-  background-color: #F0F2F5;
   font-family: 'Roboto', sans-serif;
 
   input, label {
@@ -84,56 +83,14 @@ body {
 
   .dialog {
     @apply fixed top-0 left-0 w-full h-full z-10;
-  }
+    background-color: rgba(0, 0, 0, 0.6);
 
-  input[type='checkbox'] {
-    /* Add if not using autoprefixer */
-    -webkit-appearance: none;
-    /* Remove most all native input styles */
-    appearance: none;
-    /* For iOS < 15 */
-    background-color: var(--form-background);
-    /* Not removed via appearance */
-    margin: 0;
-
-    font: inherit;
-    color: currentColor;
-    width: 1.15em;
-    height: 1.15em;
-    border: 0.15em solid currentColor;
-    border-radius: 0.15em;
-    transform: translateY(-0.075em);
-    cursor: pointer;
-    display: grid;
-    place-content: center;
-  }
-
-  input[type='checkbox']::before {
-    content: '';
-    width: 0.65em;
-    height: 0.65em;
-    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-    transform: scale(0);
-    transform-origin: bottom left;
-    transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em var(--form-control-color);
-    /* Windows High Contrast Mode */
-    background-color: #000;
-  }
-
-  input[type='checkbox']:checked::before {
-    transform: scale(1);
-  }
-
-  input[type='checkbox']:focus {
-    outline: max(2px, 0.15em) solid currentColor;
-    outline-offset: max(2px, 0.15em);
-  }
-
-  input[type='checkbox']:disabled {
-    --form-control-color: var(--form-control-disabled);
-
-    color: var(--form-control-disabled);
-    cursor: not-allowed;
+    > div {
+      @apply rounded absolute p-10 bg-white;
+      content: '';
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 }

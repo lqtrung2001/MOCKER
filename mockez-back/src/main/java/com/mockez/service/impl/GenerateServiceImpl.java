@@ -14,6 +14,10 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Service
 @RequiredArgsConstructor
 public class GenerateServiceImpl implements GenerateService {

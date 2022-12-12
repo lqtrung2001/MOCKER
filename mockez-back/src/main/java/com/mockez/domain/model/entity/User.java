@@ -14,10 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.ForeignKey;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.OffsetDateTime;
@@ -29,65 +26,64 @@ import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "[user]")
+@Table(name = "[USER]")
 @ToString(callSuper = true)
 @SuperBuilder(toBuilder = true)
 public class User extends Base {
 
     @Id
-    @Column(updatable = false)
+    @Column(name = "ID", updatable = false)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "USERNAME", nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "PHONE", nullable = false)
     private String phone;
 
-    @Column(nullable = false)
+    @Column(name = "GENDER", nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(nullable = false)
+    @Column(name = "ADDRESS", nullable = false)
     private String address;
 
-    @Column(nullable = false)
+    @Column(name = "DOB", nullable = false)
     private OffsetDateTime dob;
 
-    @Column(name = "is_account_non_expired", nullable = false)
+    @Column(name = "IS_ACCOUNT_NON_EXPIRED", nullable = false)
     private Boolean isAccountNonExpired;
 
-    @Column(name = "is_account_non_locked", nullable = false)
+    @Column(name = "IS_ACCOUNT_NON_LOCKED", nullable = false)
     private Boolean isAccountNonLocked;
 
-    @Column(name = "is_credentials_non_expired", nullable = false)
+    @Column(name = "IS_CREDENTIALS_NON_EXPIRED", nullable = false)
     private Boolean isCredentialsNonExpired;
 
-    @Column(name = "is_enabled", nullable = false)
+    @Column(name = "IS_ENABLED", nullable = false)
     private Boolean isEnabled;
 
-    @Column(name = "granted_authorities", nullable = false)
+    @Column(name = "GRANTED_AUTHORITIES", nullable = false)
     private String grantedAuthorities;
 
-    @ManyToOne
     @ToString.Exclude
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "user_group_fk"))
-    private Group group = Group.builder().build();
-
-    @ToString.Exclude
-    @OneToMany(mappedBy = "user")
-    private List<GroupAccess> groupAccesses = emptyList();
+    @OneToMany(mappedBy = "group")
+    private List<GroupMember> groupMembers = emptyList();
 
     public Set<? extends GrantedAuthority> getGrantedAuthoritiesWithGrantedAuthorityFormat() {
         return Arrays.stream(grantedAuthorities.split("\\|"))

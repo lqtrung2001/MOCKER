@@ -7,6 +7,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Set;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @RequiredArgsConstructor
 public class ApplicationUser implements UserDetails {
 

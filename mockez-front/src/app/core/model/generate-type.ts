@@ -3,14 +3,18 @@ import { Category } from '@core/model/category';
 import { Source } from '@core/model/source';
 import { SQLType } from '@core/model/sql-type';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export class GenerateType extends Base {
 
   private _id: string | undefined = undefined;
   private _code: string | undefined = undefined;
   private _description: string | undefined = undefined;
-  private _category: Category | undefined = undefined;
-  private _sources: Source[] | undefined = undefined;
-  private _sqlTypes: SQLType[] | undefined = undefined;
+  private _category: Category = new Category();
+  private _sources: Source[] = [];
+  private _sqlTypes: SQLType[] = [];
 
   get id(): string | undefined {
     return this._id;
@@ -36,27 +40,27 @@ export class GenerateType extends Base {
     this._description = value;
   }
 
-  get category(): Category | undefined {
+  get category(): Category {
     return this._category;
   }
 
-  set category(value: Category | undefined) {
+  set category(value: Category) {
     this._category = value;
   }
 
-  get sources(): Source[] | undefined {
+  get sources(): Source[] {
     return this._sources;
   }
 
-  set sources(value: Source[] | undefined) {
+  set sources(value: Source[]) {
     this._sources = value;
   }
 
-  get sqlTypes(): SQLType[] | undefined {
+  get sqlTypes(): SQLType[] {
     return this._sqlTypes;
   }
 
-  set sqlTypes(value: SQLType[] | undefined) {
+  set sqlTypes(value: SQLType[]) {
     this._sqlTypes = value;
   }
 }
