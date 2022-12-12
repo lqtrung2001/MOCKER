@@ -4,6 +4,10 @@ import com.mockez.domain.model.entity.SQLType;
 
 import java.util.List;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 public interface SQLTypeService {
 
     /**

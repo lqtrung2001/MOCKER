@@ -12,7 +12,10 @@ export class AuthService {
   ) {
   }
 
-  login(username: string, password: string): Observable<any> {
+  login(username: string | undefined, password: string | undefined): Observable<any> {
+    if (!username || !password) {
+      throw new Error(`Invalid username or password`);
+    }
     return this.httpClient.post('http://localhost:8080/login', {
       username,
       password

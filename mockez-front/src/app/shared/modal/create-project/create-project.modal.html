@@ -1,6 +1,13 @@
-<div id='create' class='dialog'>
-  <div class='board absolute bg-white rounded-md p-10'>
-    <p class='font-bold'>CREATE PROJECT</p>
+<div id='main' class='dialog text-sm'>
+  <div class='board absolute bg-white rounded p-10' [formGroup]='project'>
+    <div class='flex justify-between'>
+      <p class='font-bold'>CREATE PROJECT</p>
+      <div class='flex'>
+        <p class='w-4 h-4 rounded-full bg-red'></p>
+        <p class='w-4 h-4 ml-3 rounded-full bg-yellow'></p>
+        <p class='w-4 h-4 ml-3 rounded-full bg-green'></p>
+      </div>
+    </div>
     <div class='relative mt-10'>
       <label class='block font-medium' for='name'>Name:</label>
       <div class='input flex items-center'>
@@ -9,16 +16,16 @@
       </div>
     </div>
     <div class='relative mt-5'>
-      <label class='block font-medium' for='description'>Description:</label>
+      <label class='block font-medium' for='summary'>Summary:</label>
       <div class='input flex items-center'>
-        <textarea formControlName='description' class='relative pt-1 pb-3 mt-3 w-full h-60 max-h-60 focus:outline-0'
-                  type='text' id='description'
-                  placeholder='Enter project description'></textarea>
+        <textarea formControlName='summary' class='relative pt-1 pb-3 mt-3 w-full h-32 max-h-32 focus:outline-0'
+                  type='text' id='summary'
+                  placeholder='Enter project summary'></textarea>
       </div>
     </div>
-    <div class='flex absolute bottom-10 right-10 mt-10 justify-end -mr-3'>
-      <button (click)='modalInstance.close(false)' type='button' class='shadow-light font-medium rounded-md px-5 py-2 mr-3'>Cancel</button>
-      <button (click)='modalInstance.close(true)' type='button' class='shadow-light text-white font-bold rounded-md bg-blue-500 px-5 py-2 mr-3'>OK</button>
+    <div class='flex justify-end mt-10 -mr-3'>
+      <button (click)='close(false)' type='button' class='bg-gray text-sm text-black rounded font-medium px-5 h-10 py-2 mr-3'>Cancel</button>
+      <button (click)='create()' type='button' class='bg-blue text-sm text-white rounded font-medium px-5 h-10 py-2 mr-3'>OK</button>
     </div>
   </div>
 </div>

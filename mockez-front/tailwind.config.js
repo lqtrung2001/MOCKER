@@ -5,9 +5,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      borderRadius: {
-        'md': '10px'
-      },
       backgroundColor: {
         'gray': '#F0F2F5'
       }

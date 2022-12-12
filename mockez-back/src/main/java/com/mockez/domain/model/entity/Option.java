@@ -12,23 +12,32 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.util.UUID;
+
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "[OPTION]")
 @ToString(callSuper = true)
 @SuperBuilder(toBuilder = true)
 public class Option extends Base {
 
     @Id
-    @Column(name = "field_id", nullable = false, updatable = false)
+    @Column(name = "FIELD_ID", nullable = false, updatable = false)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "BLANK", nullable = false)
     private Integer blank;
+
+    @Column(name = "CONFIGURATION")
+    private String configuration;
 
     @OneToOne
     @JoinColumn(nullable = false, name = "field_id", referencedColumnName = "id")

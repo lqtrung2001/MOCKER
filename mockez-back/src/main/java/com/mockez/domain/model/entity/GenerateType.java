@@ -17,11 +17,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import static java.util.Collections.emptyList;
+
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
 
 @Entity
 @Getter
@@ -31,23 +34,23 @@ import static java.util.Collections.emptyList;
 @AllArgsConstructor
 @ToString(callSuper = true)
 @Table(uniqueConstraints = {
-        @UniqueConstraint(name = "generate_type_code_unique", columnNames = "code")
-})
+        @UniqueConstraint(name = "GENERATE_TYPE_CODE_UNIQUE", columnNames = "CODE")
+}, name = "GENERATE_TYPE")
 public class GenerateType extends Base {
 
     @Id
-    @Column(updatable = false)
+    @Column(name = "ID", updatable = false)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "CODE", nullable = false)
     private String code;
 
-    @Column(nullable = false, length = 1000)
+    @Column(name = "DESCRIPTION", nullable = false, length = 1000)
     private String description;
 
     @ManyToOne
     @ToString.Exclude
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "generate_type_category_id_fk"))
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "GENERATE_TYPE_CATEGORY_ID_FK"))
     private Category category = Category.builder().build();
 
     @ToString.Exclude

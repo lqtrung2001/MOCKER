@@ -3,7 +3,6 @@ package com.mockez.controller.maper;
 import com.mockez.domain.dto.CategoryDto;
 import com.mockez.domain.dto.FieldDto;
 import com.mockez.domain.dto.GenerateTypeDto;
-import com.mockez.domain.dto.GroupAccessDto;
 import com.mockez.domain.dto.GroupDto;
 import com.mockez.domain.dto.OptionDto;
 import com.mockez.domain.dto.ProjectDto;
@@ -16,7 +15,6 @@ import com.mockez.domain.model.entity.Category;
 import com.mockez.domain.model.entity.Field;
 import com.mockez.domain.model.entity.GenerateType;
 import com.mockez.domain.model.entity.Group;
-import com.mockez.domain.model.entity.GroupAccess;
 import com.mockez.domain.model.entity.Option;
 import com.mockez.domain.model.entity.Project;
 import com.mockez.domain.model.entity.SQLType;
@@ -27,6 +25,10 @@ import com.mockez.domain.model.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
 
 @Mapper(componentModel = "spring")
 public interface ApiAbstractMapper {
@@ -51,14 +53,9 @@ public interface ApiAbstractMapper {
 
     Group map(GroupDto groupDto);
 
-    @Mapping(target = "users", ignore = true)
     @Mapping(target = "projects", ignore = true)
-    @Mapping(target = "groupAccesses", ignore = true)
+    @Mapping(target = "groupMembers", ignore = true)
     GroupDto map(Group group);
-
-    GroupAccess map(GroupAccessDto groupAccessDto);
-
-    GroupAccessDto map(GroupAccess groupAccess);
 
     OptionDto map(Option option);
 
@@ -89,7 +86,7 @@ public interface ApiAbstractMapper {
 
     User map(UserDto userDto);
 
-    @Mapping(target = "groupAccesses", ignore = true)
+    @Mapping(target = "groupMembers", ignore = true)
     UserDto map(User user);
 
 }

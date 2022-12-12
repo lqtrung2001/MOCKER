@@ -14,8 +14,11 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
-import java.sql.Timestamp;
 import java.time.OffsetDateTime;
+
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
 
 @Getter
 @Setter
@@ -28,22 +31,28 @@ import java.time.OffsetDateTime;
 public abstract class Base {
 
     @CreatedDate
-    @Column(name = "created_date")
+    @Column(name = "CREATED_DATE", nullable = false)
     private OffsetDateTime createdDate;
 
     @CreatedBy
-    @Column(name = "created_by")
+    @Column(name = "CREATED_BY", nullable = false)
     private String createdBy;
 
+    @Column(name = "CREATED_BY_GROUP", nullable = false)
+    private String createdByGroup;
+
     @LastModifiedDate
-    @Column(name = "modified_date")
+    @Column(name = "MODIFIED_DATE", nullable = false)
     private OffsetDateTime modifiedDate;
 
     @LastModifiedBy
-    @Column(name = "modified_by")
+    @Column(name = "MODIFIED_BY", nullable = false)
     private String modifiedBy;
 
+    @Column(name = "MODIFIED_BY_GROUP", nullable = false)
+    private String modifiedByGroup;
+
     @Version
-    @Column(nullable = false)
+    @Column(name = "VERSION", nullable = false)
     private Integer version;
 }

@@ -19,6 +19,10 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @RequiredArgsConstructor
 public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -33,8 +37,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                     .readValue(request.getInputStream(), UsernameAndPasswordAuthenticationRequest.class);
             Authentication authentication = new UsernamePasswordAuthenticationToken(
                     usernameAndPasswordAuthenticationRequest.getUsername(),
-                    usernameAndPasswordAuthenticationRequest.getPassword()
-            );
+                    usernameAndPasswordAuthenticationRequest.getPassword());
             return authenticationManager.authenticate(authentication);
         } catch (IOException ioException) {
             throw new RuntimeException(ioException);

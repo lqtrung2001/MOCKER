@@ -19,6 +19,10 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.util.UUID;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Entity
 @Getter
 @Setter
@@ -27,29 +31,34 @@ import java.util.UUID;
 @ToString(callSuper = true)
 @SuperBuilder(toBuilder = true)
 @Table(uniqueConstraints = {
-        @UniqueConstraint(name = "field_name_unique_constraint", columnNames = "name")
-})
+        @UniqueConstraint(name = "FIELD_NAME_UNIQUE_CONSTRAINT", columnNames = "NAME")
+}, name = "FIELD")
 public class Field extends Base {
 
     @Id
-    @Column(updatable = false)
+    @Column(name = "ID", updatable = false)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "NAME", nullable = false)
     private String name;
 
     @ManyToOne
     @ToString.Exclude
-    @JoinColumn(name = "sql_type_id", nullable = false, foreignKey = @ForeignKey(name = "field_sql_type_id_fk"))
+    @JoinColumn(name = "SQL_TYPE_ID", nullable = false, foreignKey = @ForeignKey(name = "FIELD_SQL_TYPE_ID_FK"))
     private SQLType sqlType = SQLType.builder().build();
 
     @ManyToOne
     @ToString.Exclude
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "field_generate_type_id_fk"))
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "FIELD_GENERATE_TYPE_ID_FK"))
     private GenerateType generateType = GenerateType.builder().build();
 
     @PrimaryKeyJoinColumn
     @OneToOne(mappedBy = "field")
     private Option option = Option.builder().build();
+
+    @ManyToOne
+    @ToString.Exclude
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "FIELD_TABLE_ID_FK"))
+    private com.mockez.domain.model.entity.Table table = com.mockez.domain.model.entity.Table.builder().build();
 
 }

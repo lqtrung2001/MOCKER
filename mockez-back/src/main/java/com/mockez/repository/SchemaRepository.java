@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Repository
 public interface SchemaRepository extends JpaRepository<Schema, UUID>, SchemaRepositoryCustom {
 }

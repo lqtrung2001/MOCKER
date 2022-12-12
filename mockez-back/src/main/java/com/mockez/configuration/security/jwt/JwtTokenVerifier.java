@@ -27,6 +27,10 @@ import java.util.stream.Collectors;
 
 import static org.apache.logging.log4j.util.Strings.EMPTY;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Slf4j
 @RequiredArgsConstructor
 public class JwtTokenVerifier extends OncePerRequestFilter {

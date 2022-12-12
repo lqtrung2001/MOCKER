@@ -10,6 +10,10 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Service
 @Transactional
 @RequiredArgsConstructor

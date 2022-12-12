@@ -9,6 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static com.google.common.net.HttpHeaders.USER_AGENT;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Getter
 @Setter
 @Configuration

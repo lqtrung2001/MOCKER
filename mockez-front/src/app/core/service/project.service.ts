@@ -21,4 +21,8 @@ export class ProjectService {
   public getProjects(): Observable<Project[]> {
     return this.httpClient.get<Project[]>(`${environment.apiUrl}/project`);
   }
+
+  public createProject(project: Project): Observable<string> {
+    return this.httpClient.post<string>(`${environment.apiUrl}/project`, project);
+  }
 }

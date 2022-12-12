@@ -13,7 +13,15 @@ import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 import java.util.UUID;
+
+import static java.util.Collections.emptyList;
+
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
 
 @Entity
 @Getter
@@ -22,21 +30,26 @@ import java.util.UUID;
 @AllArgsConstructor
 @ToString(callSuper = true)
 @SuperBuilder(toBuilder = true)
-@javax.persistence.Table(name = "[table]")
+@javax.persistence.Table(name = "[TABLE]")
 public class Table extends Base {
 
     @Id
-    @Column(updatable = false)
+    @Column(name = "ID", updatable = false)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(nullable = false, length = 1000)
+    @Column(name = "DESCRIPTION", nullable = false, length = 1000)
     private String description;
 
     @ManyToOne
     @ToString.Exclude
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "table_schema_fk"))
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "TABLE_SCHEMA_FK"))
     private Schema schema = Schema.builder().build();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "table")
+    private List<Field> fields = emptyList();
+
 }

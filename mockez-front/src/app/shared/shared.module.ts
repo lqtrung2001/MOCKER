@@ -12,6 +12,7 @@ import { CreateProjectModal } from '@shared/modal/create-project/create-project.
 import { CreateSchemaModal } from '@shared/modal/create-schema/create-schema.modal';
 import { PageNotFoundComponent } from '@shared/component/page-not-found/page-not-found.component';
 import { RouterLinkWithHref } from '@angular/router';
+import { SelectGroupModal } from '@shared/modal/select-group/select-group.modal';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RouterLinkWithHref } from '@angular/router';
     CreateProjectModal,
     CreateSchemaModal,
     FormatPipe,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SelectGroupModal
   ],
   imports: [
     KeyValuePipe,
@@ -42,7 +44,8 @@ import { RouterLinkWithHref } from '@angular/router';
     CreateProjectModal,
     CreateSchemaModal,
     PreviewModal,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SelectGroupModal
   ],
   providers: []
 })
