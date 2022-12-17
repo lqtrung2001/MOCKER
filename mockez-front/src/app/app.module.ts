@@ -17,6 +17,9 @@ import { DialogModal } from '@shared/modal/modal-provider/dialog/dialog.modal';
 import { ApplicationHttpInterceptorService } from '@core/service/application-http-interceptor.service';
 import { TableModule } from '@app/component/table/table.module';
 import { ProfileModule } from '@app/component/profile/profile.module';
+import { GroupModule } from '@app/component/group/group.module';
+import { PersonModule } from '@app/component/person/person.module';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { ProfileModule } from '@app/component/profile/profile.module';
     SchemaModule,
     TableModule,
     ProfileModule,
-    StoreModule.forRoot({})
+    GroupModule,
+    PersonModule,
+    StoreModule.forRoot({}),
+    MarkdownModule.forRoot()
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

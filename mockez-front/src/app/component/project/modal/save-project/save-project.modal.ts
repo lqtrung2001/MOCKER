@@ -6,15 +6,15 @@ import { Project } from '@core/model/project';
 
 @Component({
   selector: 'app-save-schema-modal',
-  templateUrl: './save-project-modal.html',
-  styleUrls: ['./save-project-modal.scss']
+  templateUrl: './save-project.modal.html',
+  styleUrls: ['./save-project.modal.scss']
 })
 export class SaveProjectModal extends Modal {
 
   project: Project;
   formGroup: FormGroup;
 
-  onInjectInputs(project: Project): void {
+  override onInjectInputs(project: Project): void {
     // modify
     if (project?.id) {
       this.project = project;

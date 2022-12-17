@@ -5,7 +5,7 @@ import { Project } from '@core/model/project';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DeleteProjectModal } from '@app/component/project/modal/delete-project/delete-project.modal';
-import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project-modal';
+import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project.modal';
 
 @Component({
   selector: 'app-project',
