@@ -6,7 +6,7 @@ import { ModalService } from '@shared/modal/modal-service/modal-service.service'
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 import { Group } from '@core/model/group';
-import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project-modal';
+import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project.modal';
 import { ToastService } from '@shared/modal/toast-service';
 
 @Component({
@@ -43,25 +43,6 @@ export class ProjectsComponent {
     });
   }
 
-  public createProject(): void {
-    this.modalProvider.performAction('CREATE PROJECT')
-      .subscribe((group: Group) => {
-        if (!group) {
-          return;
-        }
-        this.modalService.open(SaveProjectModal, {
-          group
-        }).onResult()
-          .subscribe((id: string) => {
-            if (id) {
-              this.router.navigate(['/project/' + id]).then(() => {
-                console.log('Project created successfully');
-              });
-            }
-          });
-      });
-  }
-
   public setLineBackgroundColor(index: number): any {
     const number = Math.floor(Math.random() * (3));
     let backgroundColor;
@@ -82,5 +63,24 @@ export class ProjectsComponent {
     return {
       backgroundColor
     };
+  }
+
+  create(): void {
+    this.modalProvider.performAction('CREATE PROJECT')
+      .subscribe((group: Group) => {
+        if (!group) {
+          return;
+        }
+        this.modalService.open(SaveProjectModal, {
+          group
+        }).onResult()
+          .subscribe((id: string) => {
+            if (id) {
+              this.router.navigate(['/project/' + id]).then(() => {
+                console.log('Project created successfully');
+              });
+            }
+          });
+      });
   }
 }

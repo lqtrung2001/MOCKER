@@ -66,16 +66,6 @@ export class SchemasComponent {
     });
   }
 
-  createSchema(): void {
-    this.modalService.open(SaveSchemaModal, {
-      project: this.project
-    }).onResult().subscribe((id: string) => {
-      if (id) {
-        this.load();
-      }
-    });
-  }
-
   openDetail(id: string): void {
     this.isOpenDetail = true;
     this.schemaDetail = this.schemas.find((schema: Schema) => schema.id === id)!;
@@ -105,6 +95,16 @@ export class SchemasComponent {
 
   openTable(): void {
     this.router.navigate(['/table'], { queryParams: { schemaId: this.schemaDetail.id } }).then(() => {
+    });
+  }
+
+  create(): void {
+    this.modalService.open(SaveSchemaModal, {
+      project: this.project
+    }).onResult().subscribe((id: string) => {
+      if (id) {
+        this.load();
+      }
     });
   }
 }

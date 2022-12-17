@@ -7,7 +7,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
 import { ProjectComponent } from './component/project/project.component';
 import { DeleteProjectModal } from '@app/component/project/modal/delete-project/delete-project.modal';
-import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project-modal';
+import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project.modal';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SaveProjectModal } from '@app/component/project/modal/save-project/save
     CommonModule,
     ReactiveFormsModule,
     TranslateModule,
-    SharedModule
+    SharedModule,
+    MarkdownModule
   ],
   declarations: [
     ProjectsComponent,

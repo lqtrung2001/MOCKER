@@ -1,35 +1,8 @@
 <div id='main' class='mx-auto'>
-  <h1 class='title flex font-bold mx-auto'>{{ 'schema.title' | translate | uppercase }} : {{ project.name | uppercase }}</h1>
-  <div class='search mt-2 p-4 mx-auto bg-white rounded-md text-sm'>
-    <span class='ml-2.5 font-medium'>{{ 'schema.search.title' | translate }}</span>
-    <div class='flex justify-between mt-2 px-10'>
-      <div class='flex items-center bg-gray rounded-md p-2.5 w-2/3 h-10' [formGroup]='credential'>
-        <img src='assets/icon/navigation/search.png' alt='search' />
-        <input class='outline-border-none bg-gray w-full ml-2.5' type='text'
-               formControlName='filter'
-               placeholder="{{ 'schema.search.placeholder' | translate }}" />
-      </div>
-      <div class='flex items-center rounded-md p-2.5 h-10'>
-        <img src='assets/icon/project/filter.png' alt='filter' />
-      </div>
-      <div class='flex h-10'>
-        <div class='flex justify-center h-10'>
-          <button type='button' class='flex justify-center items-center bg-blue rounded text-white font-medium w-32'>
-            <img src='assets/icon/search.png' class='w-6 mr-2' alt='search' />
-            {{ 'schema.search.btn_search' | translate }}
-          </button>
-        </div>
-        <div class='flex justify-center h-10 ml-5'>
-          <button type='button' class='flex justify-center items-center bg-green rounded text-white font-medium w-32'
-                  (click)='createSchema()'>
-            <img src='assets/icon/save.png' class='w-6 mr-2' alt='save' />
-            {{ 'schema.search.new' | translate }}
-          </button>
-        </div>
-      </div>
-    </div>
+  <div class='search text-center' [formGroup]='credential'>
+    <input class='text-sm w-1/2 py-2 px-5 rounded-md' formControlName='filter' type='text' placeholder='Find anything...' />
   </div>
-  <div class='flex'>
+  <div class='flex mt-5'>
     <div class='cards -ml-3 flex flex-wrap content-around {{ isOpenDetail ? "w-3/4" : "" }}'>
       <div *ngFor='let schema of schemas; index as index'
            class='m-3 card rounded-md cursor-pointer p-5 w-60 h-80 bg-white relative {{ (schemaDetail && schemaDetail.id===schema.id) ? "drop-shadow-xl" : "" }} hover:drop-shadow-xl'
@@ -80,4 +53,9 @@
       </div>
     </div>
   </div>
+  <button
+    class='absolute bottom-10 right-5 bg-green rounded-full w-12 h-12 drop-shadow-xl font-bold text-white search-button'
+    (click)='create()'>
+    +
+  </button>
 </div>
