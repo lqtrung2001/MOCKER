@@ -17,4 +17,8 @@ public interface SchemaService {
      * @return schemas by projectId
      */
     List<Schema> getSchemasByProject(UUID projectId);
+
+    UUID saveOrUpdate(Schema schema);
+
+    UUID delete(UUID id);
 }

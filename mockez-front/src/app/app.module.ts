@@ -14,7 +14,7 @@ import { SchemaModule } from '@app/component/schema/schema.module';
 import { StoreModule } from '@ngrx/store';
 import { AuthModule } from '@app/component/auth/auth.module';
 import { DialogModal } from '@shared/modal/modal-provider/dialog/dialog.modal';
-import { AuthHttpInterceptor } from '@core/service/auth-http-interceptor.service';
+import { ApplicationHttpInterceptorService } from '@core/service/application-http-interceptor.service';
 import { TableModule } from '@app/component/table/table.module';
 
 @NgModule({
@@ -39,7 +39,7 @@ import { TableModule } from '@app/component/table/table.module';
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
-    useClass: AuthHttpInterceptor,
+    useClass: ApplicationHttpInterceptorService,
     multi: true
   }],
   bootstrap: [AppComponent]

@@ -4,7 +4,7 @@ import { Group } from '@core/model/group';
 import { GroupService } from '@core/service/group.service';
 
 @Component({
-  selector: 'app-select-group',
+  selector: 'app-select-group-modal',
   templateUrl: './select-group.modal.html',
   styleUrls: ['./select-group.modal.scss']
 })

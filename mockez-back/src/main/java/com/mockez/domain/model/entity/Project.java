@@ -6,10 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -35,6 +37,11 @@ import static java.util.Collections.emptyList;
 public class Project extends Base {
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     @Column(name = "ID", updatable = false)
     private UUID id;
 
@@ -44,7 +51,7 @@ public class Project extends Base {
     @Column(name = "SUMMARY", nullable = false, length = 1000)
     private String summary;
 
-    @Column(name = "DESCRIPTION", nullable = false, length = 4096)
+    @Column(name = "DESCRIPTION", length = 4096)
     private String description;
 
     @ManyToOne

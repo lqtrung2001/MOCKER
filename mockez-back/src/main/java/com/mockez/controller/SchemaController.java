@@ -30,4 +30,14 @@ public class SchemaController implements SchemaApi {
         return ResponseEntity.ok(schemaService.getSchemasByProject(projectId).stream()
                 .map(apiAbstractMapper::map).collect(Collectors.toList()));
     }
+
+    @Override
+    public ResponseEntity<UUID> deleteSchema(UUID id) {
+        return ResponseEntity.ok(schemaService.delete(id));
+    }
+
+    @Override
+    public ResponseEntity<UUID> saveOrUpdateSchema(SchemaDto schemaDto) {
+        return ResponseEntity.ok(schemaService.saveOrUpdate(apiAbstractMapper.map(schemaDto)));
+    }
 }

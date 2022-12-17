@@ -19,7 +19,6 @@ export class ModalRef {
   public close(output: any): void {
     this.result$.next(output);
     this.destroy$();
-
   }
 
   public dismiss(output: any): void {

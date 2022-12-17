@@ -1,9 +1,13 @@
-#form, .search, .title {
-  width: 1200px;
-}
+#main {
+  .detail {
+    min-width: 400px;
 
-#form {
-  .row:nth-child(even) {
-    background-color: #F5F5F5;
+    > div {
+      min-height: 800px;
+    }
+
+    .dock {
+      top: calc(50% - 8px);
+    }
   }
 }

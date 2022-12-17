@@ -86,7 +86,7 @@ body {
     background-color: rgba(0, 0, 0, 0.6);
 
     > div {
-      @apply rounded absolute p-10 bg-white;
+      @apply rounded absolute p-7 bg-white;
       content: '';
       top: 50%;
       left: 50%;

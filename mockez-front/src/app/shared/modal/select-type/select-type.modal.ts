@@ -12,7 +12,7 @@ export interface SelectTypeOption {
 }
 
 @Component({
-  selector: 'app-select-type',
+  selector: 'app-select-type-modal',
   templateUrl: './select-type.modal.html',
   styleUrls: ['./select-type.modal.scss']
 })
