@@ -60,6 +60,9 @@ public class User extends Base {
     @Column(name = "NAME", nullable = false)
     private String name;
 
+    @Column(name = "BIO", nullable = false)
+    private String bio;
+
     @Column(name = "PHONE", nullable = false)
     private String phone;
 

@@ -16,6 +16,7 @@ import { AuthModule } from '@app/component/auth/auth.module';
 import { DialogModal } from '@shared/modal/modal-provider/dialog/dialog.modal';
 import { ApplicationHttpInterceptorService } from '@core/service/application-http-interceptor.service';
 import { TableModule } from '@app/component/table/table.module';
+import { ProfileModule } from '@app/component/profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { TableModule } from '@app/component/table/table.module';
     GeneralModule,
     SchemaModule,
     TableModule,
+    ProfileModule,
     StoreModule.forRoot({})
   ],
   providers: [{
