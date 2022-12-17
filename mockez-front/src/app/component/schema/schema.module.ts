@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
+import { SaveSchemaModal } from '@app/component/schema/modal/save-schema/save-schema-modal';
+import { DeleteSchemaModal } from '@app/component/schema/modal/delete-schema-modal/delete-schema.modal';
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import { SharedModule } from '@shared/shared.module';
     SharedModule
   ],
   declarations: [
-    SchemasComponent
+    SchemasComponent,
+    SaveSchemaModal,
+    DeleteSchemaModal
   ],
   exports: [
     SchemasComponent

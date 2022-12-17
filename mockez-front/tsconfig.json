@@ -22,7 +22,7 @@
       "es2020",
       "dom"
     ],
-//    "strictPropertyInitialization": false,
+    "strictPropertyInitialization": false,
     "paths": {
       "@app/*": [
         "app/*"

@@ -36,7 +36,13 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public UUID saveOrUpdate(Project project) {
-        return projectRepository.saveAndFlush(project).getId();
+        return projectRepository.save(project).getId();
+    }
+
+    @Override
+    public UUID delete(UUID id) {
+        projectRepository.deleteById(id);
+        return id;
     }
 
     private void checkAccess() {

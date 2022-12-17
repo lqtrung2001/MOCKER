@@ -1,9 +1,10 @@
 <div id='main' class='mx-auto text-sm'>
-  <div class='tables relative'>
-    <table class='bg-white drop-shadow-xl cursor-pointer rounded-md w-72 absolute top-0 overflow-hidden'
-    (click)='openDetail("3df5500c-42dd-4da0-9e93-3d597da5f68f")'>
+  <div class='tables flex'>
+    <table *ngFor='let table of tables; index as index'
+           class='bg-white relative m-3 cursor-pointer rounded-md w-60 overflow-hidden'
+           (click)='openDetail(table.id)'>
       <tr>
-        <th colspan='2' class='bg-blue-100 py-4'>{{ 'user' | uppercase }}</th>
+        <th colspan='2' class='bg-blue-100 py-2'>{{ table.name | uppercase }}</th>
       </tr>
       <tr>
         <td class='py-2 pl-10 text-left font-medium'>
@@ -11,53 +12,6 @@
           id
         </td>
         <td class='py-2 pr-8 text-right text-gray-500 uppercase'>int</td>
-      </tr>
-      <tr>
-        <td class='py-2 pl-10 text-left'>name</td>
-        <td class='py-2 pr-8 text-right text-gray-500 uppercase'>varchar</td>
-      </tr>
-      <tr>
-        <td class='py-2 pl-10 text-left'>address</td>
-        <td class='py-2 pr-8 text-right text-gray-500 uppercase'>varchar</td>
-      </tr>
-      <tr>
-        <td class='py-2 pl-10 text-left'>date_of_birth</td>
-        <td class='py-2 pr-8 text-right text-gray-500 uppercase'>varchar</td>
-      </tr>
-      <tr>
-        <td class='py-2 pl-10 text-left'>phone</td>
-        <td class='py-2 pr-8 text-right text-gray-500 uppercase'>varchar</td>
-      </tr>
-      <tr>
-        <td class='py-2 pl-10 text-left'>
-          <img class='w-5 absolute left-2' src='assets/icon/nav/foreign_key.png' alt='FOREIGN KEY' />
-          product_id
-        </td>
-        <td class='py-2 pr-8 text-right text-gray-500 uppercase'>varchar</td>
-      </tr>
-    </table>
-    <table class='bg-white drop-shadow-xl cursor-pointer rounded-md w-72 absolute top-0 left-96 overflow-hidden'>
-      <tr>
-        <th colspan='2' class='bg-red-100 py-4'>{{ 'user' | uppercase }}</th>
-      </tr>
-      <tr>
-        <td class='py-2 pl-10 text-left font-medium'>
-          <img class='w-5 absolute left-2' src='assets/icon/nav/primary_key.png' alt='PRIMARY KEY' />
-          id
-        </td>
-        <td class='py-2 pr-8 text-right text-gray-500 uppercase'>int</td>
-      </tr>
-      <tr>
-        <td class='py-2 pl-10 text-left'>name</td>
-        <td class='py-2 pr-8 text-right text-gray-500 uppercase'>varchar</td>
-      </tr>
-      <tr>
-        <td class='py-2 pl-10 text-left'>address</td>
-        <td class='py-2 pr-8 text-right text-gray-500 uppercase'>varchar</td>
-      </tr>
-      <tr>
-        <td class='py-2 pl-10 text-left'>date_of_birth</td>
-        <td class='py-2 pr-8 text-right text-gray-500 uppercase'>varchar</td>
       </tr>
       <tr>
         <td class='py-2 pl-10 text-left'>phone</td>

@@ -1,14 +1,14 @@
 <div id='main' class='dialog text-sm'>
-  <div class='board absolute bg-white rounded p-10' [formGroup]='project'>
+  <div class='board' [formGroup]='formGroup'>
     <div class='flex justify-between'>
       <p class='font-bold'>CREATE PROJECT</p>
       <div class='flex'>
-        <p class='w-4 h-4 rounded-full bg-red'></p>
-        <p class='w-4 h-4 ml-3 rounded-full bg-yellow'></p>
-        <p class='w-4 h-4 ml-3 rounded-full bg-green'></p>
+        <p class='w-3 h-3 rounded-full bg-red'></p>
+        <p class='w-3 h-3 ml-3 rounded-full bg-yellow'></p>
+        <p class='w-3 h-3 ml-3 rounded-full bg-green'></p>
       </div>
     </div>
-    <div class='relative mt-10'>
+    <div class='relative mt-5'>
       <label class='block font-medium' for='name'>Name:</label>
       <div class='input flex items-center'>
         <input formControlName='name' class='relative pt-1 pb-3 mt-3 w-full' type='text' id='name'
@@ -18,14 +18,14 @@
     <div class='relative mt-5'>
       <label class='block font-medium' for='summary'>Summary:</label>
       <div class='input flex items-center'>
-        <textarea formControlName='summary' class='relative pt-1 pb-3 mt-3 w-full h-32 max-h-32 focus:outline-0'
+        <textarea formControlName='summary' class='relative leading-6 pt-1 pb-3 mt-3 w-full h-96 max-h-96 focus:outline-0'
                   type='text' id='summary'
                   placeholder='Enter project summary'></textarea>
       </div>
     </div>
     <div class='flex justify-end mt-10 -mr-3'>
       <button (click)='close(false)' type='button' class='bg-gray text-sm text-black rounded font-medium px-5 h-10 py-2 mr-3'>Cancel</button>
-      <button (click)='create()' type='button' class='bg-blue text-sm text-white rounded font-medium px-5 h-10 py-2 mr-3'>OK</button>
+      <button (click)='submit()' type='button' class='bg-blue text-sm text-white rounded font-medium px-5 h-10 py-2 mr-3'>OK</button>
     </div>
   </div>
 </div>

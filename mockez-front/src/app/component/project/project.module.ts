@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
 import { ProjectComponent } from './component/project/project.component';
+import { DeleteProjectModal } from '@app/component/project/modal/delete-project/delete-project.modal';
+import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project-modal';
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import { ProjectComponent } from './component/project/project.component';
   ],
   declarations: [
     ProjectsComponent,
-    ProjectComponent
+    ProjectComponent,
+    DeleteProjectModal,
+    SaveProjectModal
   ],
   exports: [
     ProjectsComponent

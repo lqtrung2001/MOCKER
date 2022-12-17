@@ -51,23 +51,24 @@
     }
   },
   "schema": {
+    "title": "Schema",
     "search": {
       "title": "What are you looking for?",
       "placeholder": "Search for name",
       "btn_search": "Search",
-      "btn_create_schema": "Create a schema"
-    },
-    "table": {
-      "empty": "Schema is empty, please add another project and config them by using create button.",
-      "summary": "Schema summary",
-      "show": "Show",
-      "all_column": "All column",
-      "btn_delete": "Delete selected",
-      "name": "Name",
-      "shared_with": "Shared with",
-      "last_modified": "Last modified"
-
+      "new": "New"
     }
+  },
+  "table": {
+    "title": "Table",
+    "empty": "Schema is empty, please add another project and config them by using create button.",
+    "summary": "Schema summary",
+    "show": "Show",
+    "all_column": "All column",
+    "btn_delete": "Delete selected",
+    "name": "Name",
+    "shared_with": "Shared with",
+    "last_modified": "Last modified"
   },
   "modal": {
     "preview": {

@@ -36,8 +36,8 @@ public interface ApiAbstractMapper {
     @Mapping(target = "generateTypes", ignore = true)
     CategoryDto map(Category category);
 
-    @Named("mapHasGenerateType")
-    CategoryDto mapHasGenerateType(Category category);
+    @Named("mapHasGenerateTypes")
+    CategoryDto mapWithEagerGenerateTypes(Category category);
 
     Category map(CategoryDto categoryDto);
 
@@ -82,7 +82,11 @@ public interface ApiAbstractMapper {
 
     Table map(TableDto tableDto);
 
+    @Mapping(target = "fields", ignore = true)
     TableDto map(Table table);
+
+    @Named("mapWithEagerFields")
+    TableDto mapWithEagerFields(Table table);
 
     User map(UserDto userDto);
 

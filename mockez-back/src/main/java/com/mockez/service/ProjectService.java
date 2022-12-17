@@ -17,4 +17,6 @@ public interface ProjectService {
 
     UUID saveOrUpdate(Project project);
 
+    UUID delete(UUID id);
+
 }

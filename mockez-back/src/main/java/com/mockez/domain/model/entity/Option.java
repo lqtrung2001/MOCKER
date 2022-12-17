@@ -6,9 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -30,7 +32,12 @@ import java.util.UUID;
 public class Option extends Base {
 
     @Id
-    @Column(name = "FIELD_ID", nullable = false, updatable = false)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(name = "ID", updatable = false)
     private UUID id;
 
     @Column(name = "BLANK", nullable = false)
@@ -40,7 +47,7 @@ public class Option extends Base {
     private String configuration;
 
     @OneToOne
-    @JoinColumn(nullable = false, name = "field_id", referencedColumnName = "id")
-    private Field field = Field.builder().build();
+    @JoinColumn(nullable = false, name = "FIELD_ID", referencedColumnName = "ID")
+    private Field field;
 
 }

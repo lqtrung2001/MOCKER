@@ -22,7 +22,11 @@ export class ProjectService {
     return this.httpClient.get<Project[]>(`${environment.apiUrl}/project`);
   }
 
-  public createProject(project: Project): Observable<string> {
+  public saveOrUpdate(project: Project): Observable<string> {
     return this.httpClient.post<string>(`${environment.apiUrl}/project`, project);
+  }
+
+  public deleteProject(id: string): Observable<string> {
+    return this.httpClient.delete<string>(`${environment.apiUrl}/project/${id}`);
   }
 }

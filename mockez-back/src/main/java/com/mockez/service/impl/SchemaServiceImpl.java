@@ -23,4 +23,15 @@ public class SchemaServiceImpl implements SchemaService {
     public List<Schema> getSchemasByProject(UUID projectId) {
         return schemaRepository.getSchemasByProject(projectId);
     }
+
+    @Override
+    public UUID saveOrUpdate(Schema schema) {
+        return schemaRepository.save(schema).getId();
+    }
+
+    @Override
+    public UUID delete(UUID id) {
+        schemaRepository.deleteById(id);
+        return id;
+    }
 }

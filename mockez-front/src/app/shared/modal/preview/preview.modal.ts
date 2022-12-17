@@ -3,7 +3,7 @@ import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { DataProviderService } from '@shared/service/data-provider.service';
 
 @Component({
-  selector: 'app-preview',
+  selector: 'app-preview-modal',
   templateUrl: './preview.modal.html',
   styleUrls: ['./preview.modal.scss']
 })

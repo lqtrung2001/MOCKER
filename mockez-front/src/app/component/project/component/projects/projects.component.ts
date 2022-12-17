@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Project } from '@core/model/project';
 import { ProjectService } from '@core/service/project.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
-import { CreateProjectModal } from '@shared/modal/create-project/create-project.modal';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 import { Group } from '@core/model/group';
+import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project-modal';
+import { ToastService } from '@shared/modal/toast-service';
 
 @Component({
   selector: 'app-projects',
@@ -24,12 +25,15 @@ export class ProjectsComponent {
     private activatedRoute: ActivatedRoute,
     private modalService: ModalService,
     private formBuilder: FormBuilder,
-    private modalProvider: ModalProvider
+    private modalProvider: ModalProvider,
+    private router: Router,
+    private toastService: ToastService
   ) {
     this.credential = formBuilder.group({
       filter: formBuilder.control('')
     });
     projectService.getProjects().subscribe((projects: Project[]) => {
+      projects = projects.sort((p1: Project, p2: Project) => (new Date(p2.createdDate!)).getTime() - (new Date(p1.createdDate!)).getTime());
       this.storage = projects;
       this.projects = projects;
     });
@@ -37,7 +41,6 @@ export class ProjectsComponent {
       const filter = value.filter?.toUpperCase();
       this.projects = this.storage.filter((project: Project) => project.name?.toUpperCase().includes(filter));
     });
-    // this.createProject();
   }
 
   public createProject(): void {
@@ -46,15 +49,21 @@ export class ProjectsComponent {
         if (!group) {
           return;
         }
-        this.modalService.open(CreateProjectModal, group).onResult()
-          .subscribe(() => {
-
+        this.modalService.open(SaveProjectModal, {
+          group
+        }).onResult()
+          .subscribe((id: string) => {
+            if (id) {
+              this.router.navigate(['/project/' + id]).then(() => {
+                console.log('Project created successfully');
+              });
+            }
           });
       });
   }
 
-  public setBackgroundColor(index: number): any {
-    const number = Math.round(index / 2);
+  public setLineBackgroundColor(index: number): any {
+    const number = Math.floor(Math.random() * (3));
     let backgroundColor;
     switch (number) {
       case 0: {

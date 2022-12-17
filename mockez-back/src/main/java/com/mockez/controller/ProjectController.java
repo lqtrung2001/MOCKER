@@ -42,4 +42,9 @@ public class ProjectController implements ProjectApi {
     public ResponseEntity<UUID> saveOrUpdate(ProjectDto projectDto) {
         return ResponseEntity.ok(projectService.saveOrUpdate(apiAbstractMapper.map(projectDto)));
     }
+
+    @Override
+    public ResponseEntity<UUID> deleteProject(UUID id) {
+        return ResponseEntity.ok(projectService.delete(id));
+    }
 }
