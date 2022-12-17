@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -38,5 +39,10 @@ public class UserServiceImpl implements UserService {
             return userRepository.findByUsername(username);
         }
         throw new UnexpectedException("You cannot access this user");
+    }
+
+    @Override
+    public UUID update(User user) {
+        return userRepository.save(user).getId();
     }
 }

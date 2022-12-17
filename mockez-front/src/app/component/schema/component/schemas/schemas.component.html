@@ -32,7 +32,7 @@
   <div class='flex'>
     <div class='cards -ml-3 flex flex-wrap content-around {{ isOpenDetail ? "w-3/4" : "" }}'>
       <div *ngFor='let schema of schemas; index as index'
-           class='m-3 card rounded-md cursor-pointer p-5 w-60 h-80 bg-white relative {{ schemaDetail?.id===schema.id ? "drop-shadow-xl" : "" }} hover:drop-shadow-xl'
+           class='m-3 card rounded-md cursor-pointer p-5 w-60 h-80 bg-white relative {{ (schemaDetail && schemaDetail.id===schema.id) ? "drop-shadow-xl" : "" }} hover:drop-shadow-xl'
            (click)='openDetail(schema.id!)'>
         <p class='text-sm rounded-2xl bg-green text-white p-1 w-24 text-center font-medium'>{{ 'complete' | uppercase }}</p>
         <p class='mt-3 font-medium'>{{ schema.name | titlecase }}</p>

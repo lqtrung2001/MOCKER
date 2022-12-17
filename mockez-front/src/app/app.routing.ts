@@ -22,6 +22,7 @@ import { AuthGuard } from '@app/auth.guard';
 import { LoginComponent } from '@app/component/auth/component/login/login.component';
 import { TablesComponent } from '@app/component/table/component/tables/tables.component';
 import { TablePropertiesComponent } from '@app/component/table/component/table-properties/table-properties.component';
+import { ProfileComponent } from '@app/component/profile/component/profile/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'general', pathMatch: 'full' },
@@ -37,7 +38,7 @@ const routes: Routes = [
   { path: PROJECT + '/:id', component: ProjectComponent, pathMatch: 'full', canActivate: [AuthGuard] },
   { path: GROUP, component: GeneralComponent, canActivate: [AuthGuard] },
   { path: PERSON, component: GeneralComponent, canActivate: [AuthGuard] },
-  { path: PROFILE, component: GeneralComponent, canActivate: [AuthGuard] },
+  { path: PROFILE, component: ProfileComponent, canActivate: [AuthGuard] },
   { path: SETTING, component: GeneralComponent, canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];

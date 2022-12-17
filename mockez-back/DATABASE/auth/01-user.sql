@@ -8,14 +8,16 @@ VALUES ('b6bf5612-12fb-4e77-aaa6-34d8223e2290', '5ecaf074-a91f-4758-ae0d-0724443
         0);
 
 INSERT INTO "user" (id, created_by, created_by_group, created_date, modified_by, modified_by_group, modified_date,
-                    version, address, dob, gender, granted_authorities, is_account_non_expired, is_account_non_locked,
+                    version, address, dob, bio, gender, granted_authorities, is_account_non_expired,
+                    is_account_non_locked,
                     is_credentials_non_expired, is_enabled, name, password, phone, username)
 VALUES ('5ecaf074-a91f-4758-ae0d-0724443a1a7a', '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
         'b6bf5612-12fb-4e77-aaa6-34d8223e2290', date(timezone('UTC±00', now()::timestamp)),
         '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
         'b6bf5612-12fb-4e77-aaa6-34d8223e2290', date(timezone('UTC±00', now()::timestamp)), 0,
         'Thu Duc city, Ho Chi Minh city, Viet Nam',
-        '2001-09-03 00:00:00.000000+00', 'MALE', 'ROLE_USER|ROLE_Administrator', true, true, true, true,
+        '2001-09-03 00:00:00.000000+00', 'Software Engineer', 'MALE', 'ROLE_USER|ROLE_Administrator', true, true, true,
+        true,
         'Administrator',
         '$2a$10$aGlByXJid6Y8rVeYWNn92uzKoUbUZ1wmCu84navyJ87ZtkFT5ux7a', '84393014871',
         'Administrator@gmail.com');
@@ -30,7 +32,8 @@ VALUES ('017f2591-eacf-40a2-a96a-fde394558fdf', '5ecaf074-a91f-4758-ae0d-0724443
         0);
 
 INSERT INTO "user" (id, created_by, created_by_group, created_date, modified_by, modified_by_group, modified_date,
-                    version, address, dob, gender, granted_authorities, is_account_non_expired, is_account_non_locked,
+                    version, address, dob, bio, gender, granted_authorities, is_account_non_expired,
+                    is_account_non_locked,
                     is_credentials_non_expired, is_enabled, name, password, phone, username)
 VALUES ('c60b6052-3117-411d-94a6-888813fb763a', '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
         'b6bf5612-12fb-4e77-aaa6-34d8223e2290',
@@ -38,7 +41,8 @@ VALUES ('c60b6052-3117-411d-94a6-888813fb763a', '5ecaf074-a91f-4758-ae0d-0724443
         '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
         'b6bf5612-12fb-4e77-aaa6-34d8223e2290', date(timezone('UTC±00', now()::timestamp)), 0,
         'Thu Duc city, Ho Chi Minh city, Viet Nam',
-        '2001-09-03 00:00:00.000000+00', 'MALE', 'ROLE_USER|ROLE_Administrator', true, true, true, true, 'Do Quoc Viet',
+        '2001-09-03 00:00:00.000000+00', 'Software Engineer', 'MALE', 'ROLE_USER|ROLE_Administrator', true, true, true,
+        true, 'Do Quoc Viet',
         '$2a$10$aGlByXJid6Y8rVeYWNn92uzKoUbUZ1wmCu84navyJ87ZtkFT5ux7a', '84393014871',
         'doquocviet.sept3rd@gmail.com');
 

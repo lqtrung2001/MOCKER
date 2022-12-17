@@ -12,6 +12,7 @@ export class User extends Base {
   private _username: string | undefined = undefined;
   private _password: string | undefined = undefined;
   private _name: string | undefined = undefined;
+  private _bio: string | undefined = undefined;
   private _phone: string | undefined = undefined;
   private _gender: Gender | undefined = undefined;
   private _address: string | undefined = undefined;
@@ -53,6 +54,14 @@ export class User extends Base {
 
   set name(value: string | undefined) {
     this._name = value;
+  }
+
+  get bio(): string | undefined {
+    return this._bio;
+  }
+
+  set bio(value: string | undefined) {
+    this._bio = value;
   }
 
   get phone(): string | undefined {
