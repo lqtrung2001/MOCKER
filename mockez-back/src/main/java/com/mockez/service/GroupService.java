@@ -13,4 +13,9 @@ public interface GroupService {
 
     List<Group> getGroupsWithAccess(UUID userId);
 
+    Group getProject(UUID id);
+
+    UUID delete(UUID id);
+
+    UUID saveOrUpdate(Group group);
 }

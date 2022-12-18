@@ -10,8 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -34,5 +36,21 @@ public class GroupController implements GroupApi {
         return ResponseEntity.ok(groupService.getGroupsWithAccess(authId)
                 .stream().map(apiAbstractMapper::map)
                 .collect(Collectors.toList()));
+    }
+
+    @Override
+    public ResponseEntity<UUID> deleteGroup(UUID id) {
+        return ResponseEntity.ok(groupService.delete(id));
+    }
+
+    @Override
+    public ResponseEntity<GroupDto> getGroup(UUID id) {
+        return ResponseEntity.ok(apiAbstractMapper.map(groupService.getProject(id)));
+
+    }
+
+    @Override
+    public ResponseEntity<UUID> saveOrUpdateGroup(GroupDto groupDto) {
+        return ResponseEntity.ok(groupService.saveOrUpdate(apiAbstractMapper.map(groupDto)));
     }
 }

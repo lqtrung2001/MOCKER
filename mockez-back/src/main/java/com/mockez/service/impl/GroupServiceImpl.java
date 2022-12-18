@@ -23,4 +23,20 @@ public class GroupServiceImpl implements GroupService {
     public List<Group> getGroupsWithAccess(UUID userId) {
         return groupRepository.findAllWithAccess(userId);
     }
+
+    @Override
+    public Group getProject(UUID id) {
+        return groupRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public UUID delete(UUID id) {
+        groupRepository.deleteById(id);
+        return id;
+    }
+
+    @Override
+    public UUID saveOrUpdate(Group group) {
+        return groupRepository.save(group).getId();
+    }
 }
