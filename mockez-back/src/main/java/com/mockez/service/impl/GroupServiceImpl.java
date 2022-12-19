@@ -25,7 +25,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Group getProject(UUID id) {
+    public Group getGroup(UUID id) {
         return groupRepository.findById(id).orElseThrow();
     }
 
