@@ -4,16 +4,13 @@ import com.mockez.api.GroupApi;
 import com.mockez.configuration.security.ApplicationContextHolder;
 import com.mockez.controller.maper.ApiAbstractMapper;
 import com.mockez.domain.dto.GroupDto;
-import com.mockez.domain.model.entity.User;
 import com.mockez.service.GroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -45,7 +42,7 @@ public class GroupController implements GroupApi {
 
     @Override
     public ResponseEntity<GroupDto> getGroup(UUID id) {
-        return ResponseEntity.ok(apiAbstractMapper.map(groupService.getProject(id)));
+        return ResponseEntity.ok(apiAbstractMapper.map(groupService.getGroup(id)));
 
     }
 

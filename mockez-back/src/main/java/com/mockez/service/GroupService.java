@@ -13,7 +13,7 @@ public interface GroupService {
 
     List<Group> getGroupsWithAccess(UUID userId);
 
-    Group getProject(UUID id);
+    Group getGroup(UUID id);
 
     UUID delete(UUID id);
 
