@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component
 @RequiredArgsConstructor
 public class AuditorAwareImpl implements AuditorAware<String> {

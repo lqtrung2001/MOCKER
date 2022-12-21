@@ -1,24 +1,14 @@
 package com.mockez.domain.model.entity;
 
 import com.mockez.domain.model.entity.enumeration.Gender;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.List;

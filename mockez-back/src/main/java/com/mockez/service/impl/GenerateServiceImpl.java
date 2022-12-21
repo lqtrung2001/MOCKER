@@ -1,18 +1,16 @@
 package com.mockez.service.impl;
 
 import com.mockez.domain.model.entity.Field;
-import com.mockez.domain.model.entity.Source;
-import com.mockez.repository.GenerateTypeRepository;
+import com.mockez.domain.model.entity.GenerateType;
+import com.mockez.domain.model.entity.Table;
+import com.mockez.repository.SourceRepository;
+import com.mockez.repository.TableRepository;
 import com.mockez.service.GenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -22,30 +20,32 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RequiredArgsConstructor
 public class GenerateServiceImpl implements GenerateService {
 
-    private final GenerateTypeRepository generateTypeRepository;
+    private final TableRepository tableRepository;
+    private final SourceRepository sourceRepository;
 
     @Override
-    public List<Map<String, String>> generate(Integer row, List<Field> fields) {
+    public List<Map<String, String>> generateWithTableId(UUID tableId, Integer row) {
+        Table table = tableRepository.findById(tableId).orElseThrow();
+        return generate(table, row);
+    }
 
+    public List<Map<String, String>> generate(Table table, Integer row) {
         List<Map<String, String>> result = new ArrayList<>();
-
-        AtomicInteger atomicInteger = new AtomicInteger(0);
         Random random = new Random();
-
-        while (atomicInteger.getAndIncrement() < row) {
-            Map<String, String> map = new HashMap<>();
+        List<Field> fields = table.getFields().stream().peek(field -> {
+            GenerateType generateType = field.getGenerateType();
+            generateType.setSources(sourceRepository.findAllByGenerateType(generateType));
+            field.setGenerateType(generateType);
+        }).collect(Collectors.toList());
+        int count = 0;
+        Map<String, String> map = new HashMap<>();
+        while (++count < row) {
             fields.forEach(field -> {
-                List<Source> sources = generateTypeRepository
-                        .findById(field.getGenerateType().getId())
-                        .orElseThrow()
-                        .getSources();
-                map.put(
-                        field.getName(),
-                        sources.get(random.nextInt(0, sources.size()))
-                                .getValue()
-                        );
+                int index = random.nextInt(0, field.getGenerateType().getSources().size());
+                map.put(field.getName(), field.getGenerateType().getSources().get(index).getValue());
             });
             result.add(map);
+            map.clear();
         }
         return result;
     }

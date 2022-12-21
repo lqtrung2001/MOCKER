@@ -1,16 +1,11 @@
 package com.mockez.repository.customize.impl;
 
-import com.mockez.domain.model.entity.Field;
-import com.mockez.domain.model.entity.QField;
 import com.mockez.domain.model.entity.Table;
 import com.mockez.repository.customize.TableRepositoryCustom;
 import com.querydsl.jpa.impl.JPAQuery;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +20,6 @@ public class TableRepositoryImpl implements TableRepositoryCustom {
 
     @PersistenceContext
     EntityManager entityManager;
-    JPAQueryFactory queryFactory;
 
     @Override
     public List<Table> findAllBySchema(UUID schemaId) {
@@ -44,8 +38,4 @@ public class TableRepositoryImpl implements TableRepositoryCustom {
                 .fetchOne();
     }
 
-    @Override
-    public UUID saveOrUpdateTable(Table entity) {
-        return null;
-    }
 }

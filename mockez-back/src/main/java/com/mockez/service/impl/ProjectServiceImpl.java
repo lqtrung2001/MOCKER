@@ -44,8 +44,4 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.deleteById(id);
         return id;
     }
-
-    private void checkAccess() {
-
-    }
 }

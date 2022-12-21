@@ -27,7 +27,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class GroupServiceImpl implements GroupService {
 
-    private final UserRepository userRepository;
     private final GroupRepository groupRepository;
     private final GroupMemberRepository groupMemberRepository;
     private final ApplicationContextHolder applicationContextHolder;

@@ -2,7 +2,6 @@ package com.mockez.service;
 
 import com.mockez.domain.model.entity.Table;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 

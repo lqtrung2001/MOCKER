@@ -15,5 +15,4 @@ public interface TableRepositoryCustom {
 
     Table findOneWithEagerFields(UUID id);
 
-    UUID saveOrUpdateTable(Table table);
 }
