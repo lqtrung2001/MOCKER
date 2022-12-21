@@ -14,4 +14,6 @@ public interface TableRepositoryCustom {
     List<Table> findAllBySchema(UUID schemaId);
 
     Table findOneWithEagerFields(UUID id);
+
+    UUID saveOrUpdateTable(Table table);
 }
