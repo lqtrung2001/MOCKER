@@ -1,6 +1,9 @@
 package com.mockez.domain.model.entity.composite_key;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -13,6 +16,8 @@ import java.util.UUID;
 
 @Data
 @Embeddable
+@SuperBuilder
+@NoArgsConstructor
 public class GroupMemberPK implements Serializable {
 
     @Column(nullable = false)

@@ -43,7 +43,6 @@ public class GroupController implements GroupApi {
     @Override
     public ResponseEntity<GroupDto> getGroup(UUID id) {
         return ResponseEntity.ok(apiAbstractMapper.map(groupService.getGroup(id)));
-
     }
 
     @Override

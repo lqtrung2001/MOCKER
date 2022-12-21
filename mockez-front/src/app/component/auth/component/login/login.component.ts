@@ -63,7 +63,7 @@ export class LoginComponent {
             });
           });
       } else {
-        this.invalid = false;
+        this.invalid = true;
       }
     });
   }

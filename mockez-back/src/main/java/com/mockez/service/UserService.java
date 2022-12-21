@@ -16,4 +16,6 @@ public interface UserService {
 
     UUID update(User user);
 
+    User getUser(UUID id);
+
 }

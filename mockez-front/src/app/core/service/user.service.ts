@@ -16,11 +16,15 @@ export class UserService {
   }
 
   findOneByUsername(username: string): Observable<User> {
-    return this.httpClient.get<User>(`${this.USER_API}/${username}`);
+    return this.httpClient.get<User>(`${this.USER_API}?username=${username}`);
   }
 
   update(user: User): Observable<string> {
     return this.httpClient.put<string>(`${this.USER_API}`, user);
+  }
+
+  getUser(id: string): Observable<User> {
+    return this.httpClient.get<User>(`${this.USER_API}/${id}`);
   }
 
 }

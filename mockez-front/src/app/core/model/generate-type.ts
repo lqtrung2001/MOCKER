@@ -12,7 +12,7 @@ export class GenerateType extends Base {
   private _id: string | undefined = undefined;
   private _code: string | undefined = undefined;
   private _description: string | undefined = undefined;
-  private _category: Category = new Category();
+  private _category: Category | undefined = undefined;
   private _sources: Source[] = [];
   private _sqlTypes: SQLType[] = [];
 
@@ -40,11 +40,11 @@ export class GenerateType extends Base {
     this._description = value;
   }
 
-  get category(): Category {
+  get category(): Category | undefined {
     return this._category;
   }
 
-  set category(value: Category) {
+  set category(value: Category | undefined) {
     this._category = value;
   }
 

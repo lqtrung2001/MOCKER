@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '@core/service/auth.service';
-import { UserService } from '@core/service/user.service';
 import { AppConfigProviderService } from '@core/service/app-config-provider.service';
+import { SQLTypeService } from '@core/service/sql-type.service';
+import { GenerateTypeService } from '@core/service/generate-type.service';
+import { SQLType } from '@core/model/sql-type';
+import { GenerateType } from '@core/model/generate-type';
 
 @Component({
   selector: 'app-root',
@@ -12,18 +13,21 @@ import { AppConfigProviderService } from '@core/service/app-config-provider.serv
 })
 export class AppComponent {
 
-  isAuthenticated: boolean = false;
 
   constructor(
     private translateService: TranslateService,
-    private readonly activeRoute: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService,
-    private userService: UserService,
-    public readonly appConfigProviderService: AppConfigProviderService
+    private sqlTypeService: SQLTypeService,
+    private generateTypeService: GenerateTypeService,
+    public appConfigProviderService: AppConfigProviderService
   ) {
     translateService.setDefaultLang('en');
     translateService.use('en');
+    sqlTypeService.getSQLTypes().subscribe((sqlTypes: SQLType[]) => {
+      appConfigProviderService.sqlTypes = sqlTypes;
+    });
+    generateTypeService.getGenerateTypes().subscribe((generateTypes: GenerateType[]) => {
+      appConfigProviderService.generateTypes = generateTypes;
+    });
   }
 
 }

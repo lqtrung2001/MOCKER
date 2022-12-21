@@ -1,17 +1,58 @@
 import { Injectable } from '@angular/core';
+import { SQLType } from '@core/model/sql-type';
+import { GenerateType } from '@core/model/generate-type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppConfigProviderService {
 
-  private _loading: boolean = false;
+  private _isLoading: boolean = false;
+  private _sqlTypes: SQLType[] = [];
+  private _generateTypes: GenerateType[] = [];
+  private _currentSchemaId: string | undefined;
+  private _currentProjectId: string | undefined;
 
-  get loading(): boolean {
-    return this._loading;
+  constructor() {
   }
 
-  set loading(value: boolean) {
-    this._loading = value;
+  get isLoading(): boolean {
+    return this._isLoading;
+  }
+
+  set isLoading(value: boolean) {
+    this._isLoading = value;
+  }
+
+  get sqlTypes(): SQLType[] {
+    return this._sqlTypes;
+  }
+
+  set sqlTypes(value: SQLType[]) {
+    this._sqlTypes = value;
+  }
+
+  get generateTypes(): GenerateType[] {
+    return this._generateTypes;
+  }
+
+  set generateTypes(value: GenerateType[]) {
+    this._generateTypes = value;
+  }
+
+  get currentSchemaId(): string | undefined {
+    return this._currentSchemaId;
+  }
+
+  set currentSchemaId(value: string | undefined) {
+    this._currentSchemaId = value;
+  }
+
+  get currentProjectId(): string | undefined {
+    return this._currentProjectId;
+  }
+
+  set currentProjectId(value: string | undefined) {
+    this._currentProjectId = value;
   }
 }

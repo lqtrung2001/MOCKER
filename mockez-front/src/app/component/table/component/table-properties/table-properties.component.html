@@ -1,7 +1,40 @@
-<div id='main' class='mx-auto'>
-  <div class='table bg-white w-full'>
-    <head>
-
-    </head>
+<div id='main' class='w-full h-full'>
+  <div class='w-full h-full bg-white rounded-md p-10 text-sm relative'>
+    <div class='flex items-center'>
+      <img class='w-32' src='assets/sqltable.png' alt='sql table'/>
+      <div>
+        <p class='font-medium'>{{ table.name }}</p>
+        <p class='mt-2'>{{ table.description }}</p>
+      </div>
+    </div>
+    <p *ngIf='!table?.fields?.length' class='text-center'>{{ 'table.empty' | translate }}</p>
+    <div *ngIf='table?.fields?.length' class='mt-5 overflow-y-scroll relative' style='height: 70vh'>
+      <div class='flex justify-between font-medium sticky bg-white z-10 top-0'>
+        <span class='w-1/5 ml-2 mb-2'>{{ 'Field name: *' }}</span>
+        <span class='w-1/5 ml-2 mb-2'>{{ 'Field sql type:' }}</span>
+        <span class='w-1/5 ml-2 mb-2'>{{ 'Field generate type: *' }}</span>
+        <span class='w-1/5 ml-2 mb-2'>{{ 'Field options: *' }}</span>
+      </div>
+      <div *ngFor='let field of formGroup.get("fields")?.value; index as index' class='flex justify-between mt-4'>
+        <input class='w-1/5 border p-2 rounded' type='text' placeholder='Field name' />
+        <button class='w-1/5 border p-2 rounded text-left {{ field["sqlType"]?.code ? "" : "text-gray-500" }} outline-0'
+                (click)='selectSQLType(index)'>{{ field["sqlType"]?.code || 'Field sql type' }}</button>
+        <button
+          class='w-1/5 border p-2 rounded text-left {{ field["generateType"]?.code ? "" : "text-gray-500" }} outline-0'
+          (click)='selectGenerateType(index)'>{{ field["generateType"]?.code || 'Field generate type' }}</button>
+        <div class='w-1/5 flex items-center'>
+          {{ 'Blank:' }}
+          <input class='w-16 border ml-2 p-2 rounded' type='number' max='100' min='0' />
+          <button class='bg-red hover:drop-shadow-xl font-medium text-white w-8 h-8 rounded ml-5'
+                  (click)='removeField(index)'>{{ 'X' }}</button>
+        </div>
+      </div>
+      <button class='w-1/5 border p-2 bg-green rounded hover:drop-shadow-xl text-left mt-4 outline-0 text-white font-medium mb-60' (click)='insertField()'>Add another field</button>
+    </div>
+    <div class='absolute bottom-0 left-0 flex w-full h-12 shadow-2xl z-10 shadow-2xl'>
+      <p class='w-1/2 text-center hover:bg-gray leading-10 cursor-pointer font-medium'>Generate</p>
+      <p class='w-1/2 text-center hover:bg-gray leading-10 cursor-pointer font-medium'>Options</p>
+      <p class='w-1/2 text-center hover:bg-gray leading-10 cursor-pointer font-medium'>Save</p>
+    </div>
   </div>
 </div>

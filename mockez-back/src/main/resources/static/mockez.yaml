@@ -4,20 +4,20 @@ info:
   description: Website MOCKEZ generates source for system testing.
   version: 2.3.0
 paths:
-  /user/{username}:
+  /user/{id}:
     parameters:
       - in: path
-        name: username
+        name: id
         required: true
-        description: The username
+        description: The id
         schema:
           type: string
-          format: email
+          format: uuid
     get:
-      operationId: findOneByUsername
+      operationId: getUser
       tags:
         - User
-      description: find user by username
+      description: get user
       responses:
         200:
           description: The query is successful
@@ -36,6 +36,36 @@ paths:
         500:
           $ref: '#/components/responses/ServerError'
   /user:
+    get:
+      operationId: getUserByUsername
+      parameters:
+        - in: query
+          name: username
+          required: true
+          description: The username
+          schema:
+            type: string
+            format: email
+      tags:
+        - User
+      description: get user by username
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
     put:
       operationId: updateUser
       tags:
@@ -567,6 +597,7 @@ paths:
     get:
       operationId: getGroup
       tags:
+        -
         - Group
       description: Return group
       responses:

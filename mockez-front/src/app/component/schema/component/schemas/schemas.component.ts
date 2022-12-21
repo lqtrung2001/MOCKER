@@ -9,6 +9,7 @@ import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SaveSchemaModal } from '@app/component/schema/modal/save-schema/save-schema-modal';
 import { DeleteSchemaModal } from '@app/component/schema/modal/delete-schema-modal/delete-schema.modal';
+import { AppConfigProviderService } from '@core/service/app-config-provider.service';
 
 @Component({
   selector: 'app-schemas',
@@ -29,27 +30,31 @@ export class SchemasComponent {
   constructor(
     private schemaService: SchemaService,
     private projectService: ProjectService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private modalService: ModalService,
     private router: Router,
     private modalProvider: ModalProvider,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private appConfigProviderService: AppConfigProviderService
   ) {
     this.credential = formBuilder.group({
       filter: formBuilder.control('')
     });
-    route.queryParams.subscribe(params => {
-      this.project.id = params['projectId'];
-      if (!this.project.id) {
+    this.project.id = activatedRoute.snapshot.queryParams['projectId'];
+    if (!this.project.id) {
+      const projectId = appConfigProviderService.currentProjectId;
+      if (projectId) {
+        this.router.navigate(['schema'], { queryParams: { projectId } }).then();
+      } else {
         this.router.navigate(['/project']).then(() => {
           modalProvider.showError({
             body: 'Project not found, please choose a project'
           });
         });
-      } else {
-        this.load();
       }
-    });
+    } else {
+      this.load();
+    }
     this.credential.valueChanges.subscribe((value) => {
       const filter = value.filter?.toUpperCase();
       this.schemas = this.storage.filter((schema: Schema) => schema.name?.toUpperCase().includes(filter));
@@ -58,6 +63,7 @@ export class SchemasComponent {
 
   load(): void {
     this.projectService.getProject(this.project.id!).subscribe((project: Project) => {
+      this.appConfigProviderService.currentProjectId = this.project.id;
       this.project = project;
       this.schemaService.getSchemasByProject(this.project.id!).subscribe((schemas: Schema[]) => {
         this.storage = schemas;

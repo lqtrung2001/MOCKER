@@ -45,4 +45,9 @@ public class UserServiceImpl implements UserService {
     public UUID update(User user) {
         return userRepository.save(user).getId();
     }
+
+    @Override
+    public User getUser(UUID id) {
+        return userRepository.findById(id).orElseThrow();
+    }
 }

@@ -10,7 +10,7 @@ export class Option extends Base {
   private _id: string | undefined = undefined;
   private _blank: number | undefined = undefined;
   private _configuration: string | undefined = undefined;
-  private _field: Field = new Field();
+  private _field: Field | undefined = undefined;
 
   get id(): string | undefined {
     return this._id;
@@ -36,11 +36,11 @@ export class Option extends Base {
     this._configuration = value;
   }
 
-  get field(): Field {
+  get field(): Field | undefined {
     return this._field;
   }
 
-  set field(value: Field) {
+  set field(value: Field | undefined) {
     this._field = value;
   }
 }

@@ -6,6 +6,7 @@ import { ModalService } from '@shared/modal/modal-service/modal-service.service'
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DeleteProjectModal } from '@app/component/project/modal/delete-project/delete-project.modal';
 import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project.modal';
+import { AppConfigProviderService } from '@core/service/app-config-provider.service';
 
 @Component({
   selector: 'app-project',
@@ -23,7 +24,8 @@ export class ProjectComponent {
     private projectService: ProjectService,
     private router: Router,
     private modalService: ModalService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private appConfigProviderService: AppConfigProviderService
   ) {
     this.formGroup = formBuilder.group({
       description: formBuilder.control('')
@@ -38,6 +40,7 @@ export class ProjectComponent {
   load(id?: string) {
     this.projectService.getProject(id || this.project.id!)
       .subscribe((project: Project) => {
+        this.appConfigProviderService.currentProjectId = id;
         this.project = project;
         this.formGroup.patchValue(this.project);
       });

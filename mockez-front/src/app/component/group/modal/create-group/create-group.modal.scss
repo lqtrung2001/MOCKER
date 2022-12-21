@@ -1,15 +1,13 @@
-#main {
-  .board {
-    width: 700px;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-    .input:after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      background-color: #E3E3E3;
-      width: 100%;
-      height: 2px;
-      border-radius: 3px;
-    }
+#main {
+  .input:after {
+    content: '';
+    background-color: #E3E3E3;
+    height: 1.5px;
+    border-radius: 3px;
+    @apply w-full bottom-0 absolute;
   }
 }
