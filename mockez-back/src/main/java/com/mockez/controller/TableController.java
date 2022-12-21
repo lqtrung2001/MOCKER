@@ -1,5 +1,6 @@
 package com.mockez.controller;
 
+import com.mockez.api.TableApi;
 import com.mockez.controller.maper.ApiAbstractMapper;
 import com.mockez.domain.dto.TableDto;
 import com.mockez.service.TableService;
@@ -35,5 +36,10 @@ public class TableController implements com.mockez.api.TableApi {
                 .stream()
                 .map(apiAbstractMapper::map)
                 .collect(Collectors.toList()));
+    }
+
+    @Override
+    public ResponseEntity<UUID> saveOrUpdateTable(TableDto tableDto) {
+        return ResponseEntity.ok(tableService.saveOrUpdateTable(apiAbstractMapper.map(tableDto)));
     }
 }
