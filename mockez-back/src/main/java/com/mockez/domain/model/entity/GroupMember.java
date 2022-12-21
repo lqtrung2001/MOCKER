@@ -2,22 +2,11 @@ package com.mockez.domain.model.entity;
 
 import com.mockez.domain.model.entity.composite_key.GroupMemberPK;
 import com.mockez.domain.model.entity.enumeration.Role;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet

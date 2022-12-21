@@ -13,5 +13,4 @@ import java.util.UUID;
 
 @Repository
 public interface GenerateTypeRepository extends JpaRepository<GenerateType, UUID>, GenerateTypeRepositoryCustom {
-
 }

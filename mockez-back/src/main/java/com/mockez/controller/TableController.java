@@ -1,6 +1,5 @@
 package com.mockez.controller;
 
-import com.mockez.api.TableApi;
 import com.mockez.controller.maper.ApiAbstractMapper;
 import com.mockez.domain.dto.TableDto;
 import com.mockez.service.TableService;

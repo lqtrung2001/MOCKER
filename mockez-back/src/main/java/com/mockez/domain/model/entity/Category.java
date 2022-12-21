@@ -1,20 +1,11 @@
 package com.mockez.domain.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,7 +25,7 @@ import static java.util.Collections.emptyList;
 @Table(uniqueConstraints = {
         @UniqueConstraint(name = "CATEGORY_NAME_UNIQUE", columnNames = "NAME")
 }, name = "CATEGORY")
-public class Category extends Base{
+public class Category extends Base {
 
     @Id
     @GeneratedValue(generator = "UUID")

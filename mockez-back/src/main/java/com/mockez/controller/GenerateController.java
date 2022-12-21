@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -26,10 +27,7 @@ public class GenerateController implements GenerateApi {
     private final GenerateService generateService;
 
     @Override
-    public ResponseEntity<List<Map<String, String>>> generate(GenerateRequestBodyDto generateRequestBodyDto) {
-        return ResponseEntity.ok(generateService.generate(generateRequestBodyDto.getRow(),
-                generateRequestBodyDto.getFields().stream()
-                        .map(apiAbstractMapper::map)
-                        .collect(Collectors.toList())));
+    public ResponseEntity<List<Map<String, String>>> generate(UUID tableId, Integer row) {
+        return ResponseEntity.ok(generateService.generateWithTableId(tableId, row));
     }
 }

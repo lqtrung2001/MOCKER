@@ -10,6 +10,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Configuration
 @RequiredArgsConstructor
 @EnableJpaAuditing(auditorAwareRef = "auditorProvider", dateTimeProviderRef = "auditingDateTimeProvider")
