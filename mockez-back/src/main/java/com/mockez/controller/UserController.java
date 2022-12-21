@@ -11,7 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -41,5 +43,13 @@ public class UserController implements UserApi {
     @Override
     public ResponseEntity<UserDto> getUserByUsername(String username) {
         return ResponseEntity.ok(apiAbstractMapper.map(userService.getUserByUsername(username)));
+    }
+
+    @Override
+    public ResponseEntity<List<UserDto>> getUsers() {
+        return ResponseEntity.ok(userService.getUsers()
+                .stream()
+                .map(apiAbstractMapper::map)
+                .collect(Collectors.toList()));
     }
 }

@@ -1,11 +1,11 @@
 <div id='main' class='mx-auto'>
-  <div class='relative flex items-center bg-white rounded py-3 px-5 w-full h-28'>
-    <div class=''>
+  <div class='relative flex items-center bg-white rounded py-3 px-5 w-full h-28' style='height: 15vh'>
+    <div class='w-1/12 flex justify-center'>
       <img class='w-16' src='assets/group.png' alt='group' />
     </div>
-    <div class='text-sm ml-5'>
-      <p class='font-medium uppercase'>{{ group.name | truncate: 15 }}</p>
-      <p class='text-gray-500 text-justify first-letter:uppercase'>{{ group.description | truncate:100 }}</p>
+    <div class='text-sm ml-5 w-11/12'>
+      <p class='font-medium uppercase'>{{ group?.name | truncate:100 }}</p>
+      <p class='text-gray-500 text-justify first-letter:uppercase'>{{ group?.description | truncate: 100 }}</p>
     </div>
     <div class='absolute top-4 right-5 flex'>
       <p class='w-3 h-3 rounded-full bg-red'></p>
@@ -13,7 +13,109 @@
       <p class='w-3 h-3 ml-3 rounded-full bg-green'></p>
     </div>
   </div>
-  <div class='bg-white rounded mt-5 w-full h-96'>
-
+  <div class='bg-white rounded mt-4 w-full h-96' style='min-height: 80vh;'>
+    <div class='flex rounded overflow-hidden'>
+      <p
+        class='w-1/2 text-center h-10 leading-10 {{ tab==="PROJECT" ? "bg-yellow text-white" : "" }} font-medium text-sm uppercase cursor-pointer'
+        (click)='tab="PROJECT"'>PROJECT</p>
+      <p
+        class='w-1/2 text-center h-10 leading-10 {{ tab==="MEMBER" ? "bg-yellow text-white" : "" }} font-medium text-sm uppercase cursor-pointer'
+        (click)='tab="MEMBER"'>MEMBER</p>
+      <p
+        class='w-1/2 text-center h-10 leading-10 {{ tab==="PROPERTIES" ? "bg-yellow text-white" : "" }} font-medium text-sm uppercase cursor-pointer'
+        (click)='tab="PROPERTIES"'>PROPERTIES</p>
+    </div>
+    <div *ngIf='tab==="PROJECT"' class='overflow-y-scroll pb-20' style='height: 75vh'>
+      <div class='text-center items-center mt-5'>
+        <input class='text-sm w-1/2 shadow focus:drop-shadow-xl py-2 px-5 rounded-md' [formControl]='filterProject'
+               type='text'
+               placeholder='{{ "label.search_placeholder" | translate }}' />
+      </div>
+      <p *ngIf='!group?.projects?.length && storageProjects?.length'
+         class='mt-5 text-center text-sm'>{{ 'message.no_project_match' | translate }}</p>
+      <div class='text-sm' *ngIf='group?.projects?.length'>
+        <div *ngFor='let project of group?.projects'
+             class='flex bg-white justify-between rounded-md w-10/12 mx-auto shadow py-5 px-14 mt-5 relative hover:drop-shadow-xl'>
+          <div class='absolute left-7 rounded-md w-1.5 h-28 bg-green'></div>
+          <div class='left w-1/2'>
+            <p class='font-medium'>
+              <a [routerLink]='"/project/" + project?.id'
+                 class='cursor-pointer hover:underline'>{{ project?.name | uppercase }}</a>
+            </p>
+            <p class='mt-3 text-gray-600 text-justify'>{{ project?.summary | truncate:200 }}</p>
+          </div>
+          <div class='right flex justify-between w-1/3'>
+            <div>
+              <p class='font-medium'>Group: {{ project?.group?.name }}</p>
+              <p class='mt-3 text-gray-600'>Contributed by: 100 users</p>
+              <p class='mt-3 text-gray-600'>Starred: 1000</p>
+              <div class='flex h-10 items-center'>
+                <button class='mt-3 bg-blue p-2 text-white font-medium rounded'>Star project</button>
+                <img src='assets/icon/flying_star.png' class='ml-2 w-7 h-7' alt='flying star' />
+              </div>
+            </div>
+            <div class='custom-color flex flex-col items-end ml-5 w-1/5'>
+              <p class='w-3 h-3 mt-3 rounded-full bg-red'></p>
+              <p class='w-3 h-3 mt-3 rounded-full bg-yellow'></p>
+              <p class='w-3 h-3 mt-3 rounded-full bg-green'></p>
+            </div>
+          </div>
+          <p class='mt-3 text-gray-600 absolute bottom-5'>Updated {{ project.modifiedDate! | dateDurationPipe }}</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf='tab==="MEMBER"'>
+      <div class='search text-center mt-5'>
+        <input class='text-sm w-1/2 py-2 shadow focus:drop-shadow-xl px-5 rounded-md' [formControl]='filterGroupMember'
+               type='text'
+               placeholder='Find anything...' />
+        <button class='bg-green p-2 text-sm rounded font-medium text-white hover:drop-shadow-xl ml-3' (click)='addMember()'>Add member</button>
+      </div>
+      <div class='cards flex mt-5 justify-evenly flex-wrap'>
+        <div *ngFor='let groupMember of group.groupMembers'
+             class='card relative m-4 flex items-center shadow hover:drop-shadow-xl bg-white py-5 pl-10 pr-5 rounded-md w-96 h-32'>
+          <div class='absolute left-4 rounded-md w-1 h-28'></div>
+          <div class='w-1/4'>
+            <img class='w-20' src='assets/profile.png' alt='profile' />
+          </div>
+          <div class='info ml-5 w-1/2'>
+            <a class='font-medium hover:underline' [routerLink]='"/"'>{{ groupMember?.user?.name }}</a>
+            <p class='text-sm text-gray-500'>{{ groupMember?.user?.bio }}</p>
+            <p class='text-sm text-gray-500'>{{ 'Phone: +' + groupMember?.user?.phone }}</p>
+          </div>
+          <div class='w-1/6 flex justify-end'>
+            <img class='w-5' src='assets/icon/general/delete.png' alt='delete' (click)='removeUser(groupMember)' />
+          </div>
+          <div class='absolute top-4 right-5 flex'>
+            <p class='w-3 h-3 rounded-full bg-red'></p>
+            <p class='w-3 h-3 ml-3 rounded-full bg-yellow'></p>
+            <p class='w-3 h-3 ml-3 rounded-full bg-green'></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf='tab==="PROPERTIES"' class='p-20 text-sm' [formGroup]='formGroup'>
+      <div class='flex mt-5 justify-center'>
+        <p class='font-medium w-1/4'>{{ 'Name:' }}</p>
+        <input class='border w-3/4 py-2 pl-3 pr-14 rounded-md' type='text' formControlName='name'
+               placeholder='Please enter group name' />
+      </div>
+      <div class='flex mt-5 justify-center'>
+        <p class='font-medium w-1/4'>{{ 'Description:' }}</p>
+        <textarea class='border w-3/4 py-2 pl-3 pr-14 h-96 max-h-96 rounded-md outline-0' type='text'
+                  formControlName='description'
+                  placeholder='Please enter group description'></textarea>
+      </div>
+      <div class='flex mt-5 justify-center'>
+        <button type='button'
+                class='w-1/4 outline-0 bg-red hover:drop-shadow-xl text-sm text-white rounded font-medium px-5 h-10 py-2'
+                (click)='deleteGroup()'>Delete
+        </button>
+        <button type='button'
+                class='ml-3 outline-0 w-3/4 bg-green text-sm hover:drop-shadow-xl text-white rounded font-medium px-5 h-10 py-2'
+                (click)='saveGroup()'>Save
+        </button>
+      </div>
+    </div>
   </div>
 </div>

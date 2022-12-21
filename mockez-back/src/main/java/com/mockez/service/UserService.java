@@ -2,6 +2,7 @@ package com.mockez.service;
 
 import com.mockez.domain.model.entity.User;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -17,5 +18,7 @@ public interface UserService {
     UUID update(User user);
 
     User getUser(UUID id);
+
+    List<User> getUsers();
 
 }

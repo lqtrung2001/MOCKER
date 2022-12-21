@@ -15,6 +15,7 @@ import com.mockez.domain.model.entity.Category;
 import com.mockez.domain.model.entity.Field;
 import com.mockez.domain.model.entity.GenerateType;
 import com.mockez.domain.model.entity.Group;
+import com.mockez.domain.model.entity.GroupMember;
 import com.mockez.domain.model.entity.Option;
 import com.mockez.domain.model.entity.Project;
 import com.mockez.domain.model.entity.SQLType;
@@ -22,6 +23,7 @@ import com.mockez.domain.model.entity.Schema;
 import com.mockez.domain.model.entity.Source;
 import com.mockez.domain.model.entity.Table;
 import com.mockez.domain.model.entity.User;
+import com.mockez.domain.model.entity.composite_key.GroupMemberPK;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -56,6 +58,9 @@ public interface ApiAbstractMapper {
     @Mapping(target = "projects", ignore = true)
     @Mapping(target = "groupMembers", ignore = true)
     GroupDto map(Group group);
+
+    @Named("mapWithEagerProjectsAndGroupMembers")
+    GroupDto mapWithEagerProjectsAndGroupMembers(Group group);
 
     OptionDto map(Option option);
 
@@ -92,5 +97,13 @@ public interface ApiAbstractMapper {
 
     @Mapping(target = "groupMembers", ignore = true)
     UserDto map(User user);
+
+    com.mockez.domain.dto.GroupMemberDto map(GroupMember groupMember);
+
+    GroupMember map(com.mockez.domain.dto.GroupMemberDto groupMemberDto);
+
+    com.mockez.domain.dto.GroupMemberPKDto map(GroupMemberPK groupMemberPK);
+
+    GroupMemberPK map(com.mockez.domain.dto.GroupMemberPKDto groupMemberPKDto);
 
 }
