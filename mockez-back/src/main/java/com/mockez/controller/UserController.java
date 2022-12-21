@@ -27,14 +27,19 @@ public class UserController implements UserApi {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public ResponseEntity<UserDto> findOneByUsername(String username) {
-        return ResponseEntity.ok(apiAbstractMapper.map(userService.getUserByUsername(username)));
-    }
-
-    @Override
     public ResponseEntity<UUID> updateUser(UserDto userDto) {
         User user = apiAbstractMapper.map(userDto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return ResponseEntity.ok(userService.update(user));
+    }
+
+    @Override
+    public ResponseEntity<UserDto> getUser(UUID id) {
+        return ResponseEntity.ok(apiAbstractMapper.map(userService.getUser(id)));
+    }
+
+    @Override
+    public ResponseEntity<UserDto> getUserByUsername(String username) {
+        return ResponseEntity.ok(apiAbstractMapper.map(userService.getUserByUsername(username)));
     }
 }
