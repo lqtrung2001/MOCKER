@@ -13,4 +13,6 @@ public interface GroupRepositoryCustom {
 
     List<Group> findAllWithAccess(UUID userId);
 
+    Group findOneWithEagerProjectsAndGroupMembers(UUID id);
+
 }

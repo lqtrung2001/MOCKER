@@ -10,10 +10,10 @@
         <markdown [data]='project.description'></markdown>
       </div>
       <ng-container *ngIf='isModifyingDescription'>
-        <textarea class='w-full focus:outline-0 border-2 p-3 rounded' formControlName='description'></textarea>
+        <textarea class='w-full h-5/6 overflow-y-scroll focus:outline-0 border-2 p-3 rounded' formControlName='description'></textarea>
         <div class='flex justify-end mt-10 -mr-3'>
           <button (click)='isModifyingDescription=false' type='button' class='bg-gray text-sm text-black rounded font-medium px-5 h-10 py-2 mr-3'>Cancel</button>
-          <button (click)='modifyDescription()' type='button' class='bg-blue text-sm text-white rounded font-medium px-5 h-10 py-2 mr-3'>OK</button>
+          <button (click)='modifyDescription()' type='button' class='bg-blue text-sm text-white rounded font-medium px-5 h-10 py-2 mr-3'>Save</button>
         </div>
       </ng-container>
     </div>

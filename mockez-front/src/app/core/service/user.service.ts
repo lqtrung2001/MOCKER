@@ -16,7 +16,7 @@ export class UserService {
   }
 
   findOneByUsername(username: string): Observable<User> {
-    return this.httpClient.get<User>(`${this.USER_API}?username=${username}`);
+    return this.httpClient.get<User>(`${this.USER_API}/find-by-username?username=${username}`);
   }
 
   update(user: User): Observable<string> {
@@ -27,4 +27,7 @@ export class UserService {
     return this.httpClient.get<User>(`${this.USER_API}/${id}`);
   }
 
+  getUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${this.USER_API}`);
+  }
 }

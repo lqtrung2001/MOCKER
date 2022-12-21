@@ -37,25 +37,19 @@ paths:
           $ref: '#/components/responses/ServerError'
   /user:
     get:
-      operationId: getUserByUsername
-      parameters:
-        - in: query
-          name: username
-          required: true
-          description: The username
-          schema:
-            type: string
-            format: email
+      operationId: getUsers
+      description: get users
       tags:
         - User
-      description: get user by username
       responses:
         200:
           description: The query is successful
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
         400:
           $ref: '#/components/responses/BadRequest'
         401:
@@ -85,6 +79,37 @@ paths:
               schema:
                 type: string
                 format: uuid
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /user/find-by-username:
+    get:
+      operationId: getUserByUsername
+      parameters:
+        - in: query
+          name: username
+          required: true
+          description: The username
+          schema:
+            type: string
+            format: email
+      tags:
+        - User
+      description: get user by username
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
         400:
           $ref: '#/components/responses/BadRequest'
         401:
@@ -598,7 +623,6 @@ paths:
     get:
       operationId: getGroup
       tags:
-        -
         - Group
       description: Return group
       responses:
@@ -734,6 +758,64 @@ paths:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/ServerError'
+  /group-member:
+    post:
+      operationId: addGroupMember
+      tags:
+        - GroupMember
+      description: Add a GroupMember
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMemberPK'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMemberPK'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+    delete:
+      operationId: deleteGroupMember
+      tags:
+        - GroupMember
+      description: delete a group member
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMemberPK'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMemberPK'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+
 components:
   schemas:
     Base:

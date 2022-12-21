@@ -25,4 +25,8 @@ export class GroupService {
   public saveOrUpdate(group: Group): Observable<string> {
     return this.httpClient.post<string>(`${environment.apiUrl}/group`, group);
   }
+
+  delete(id: string): Observable<string> {
+    return this.httpClient.delete<string>(`${environment.apiUrl}/group/${id}`);
+  }
 }

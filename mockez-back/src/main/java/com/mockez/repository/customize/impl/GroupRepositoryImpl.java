@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import static com.mockez.domain.model.entity.QGroup.group;
 import static com.mockez.domain.model.entity.QGroupMember.groupMember;
+import static com.mockez.domain.model.entity.QProject.project;
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -33,5 +34,15 @@ public class GroupRepositoryImpl implements GroupRepositoryCustom {
                 .stream()
                 .map(GroupMember::getGroup)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Group findOneWithEagerProjectsAndGroupMembers(UUID id) {
+        return new JPAQuery<Group>(entityManager)
+                .from(group)
+                .where(group.id.eq(id))
+                .leftJoin(group.projects, project).fetchJoin()
+                .leftJoin(group.groupMembers, groupMember).fetchJoin()
+                .fetchFirst();
     }
 }

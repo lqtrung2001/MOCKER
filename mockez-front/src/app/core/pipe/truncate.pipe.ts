@@ -9,6 +9,6 @@ export class TruncatePipe implements PipeTransform {
     if (value === undefined) {
       return '';
     }
-    return value.length > limit ? value.substring(0, limit) + '...' : value;
+    return value?.length > limit ? value.substring(0, limit) + '...' : value;
   }
 }

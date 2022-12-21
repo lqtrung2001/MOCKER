@@ -3,7 +3,7 @@ import { ProjectService } from '@core/service/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '@core/model/project';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DeleteProjectModal } from '@app/component/project/modal/delete-project/delete-project.modal';
 import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project.modal';
 import { AppConfigProviderService } from '@core/service/app-config-provider.service';
@@ -28,7 +28,7 @@ export class ProjectComponent {
     private appConfigProviderService: AppConfigProviderService
   ) {
     this.formGroup = formBuilder.group({
-      description: formBuilder.control('')
+      description: formBuilder.control('', [Validators.maxLength(4096)])
     });
     const id: string = activatedRoute.snapshot.params['id'];
     if (!id) {
@@ -76,10 +76,15 @@ export class ProjectComponent {
   }
 
   modifyDescription(): void {
+    if (this.formGroup.invalid) {
+      return;
+    }
     this.isModifyingDescription = false;
     this.project.description = this.formGroup.get('description')?.value;
     this.projectService.saveOrUpdate(this.project).subscribe((id: string) => {
-      this.load(id);
+      if (id) {
+        this.load(id);
+      }
     });
   }
 }
