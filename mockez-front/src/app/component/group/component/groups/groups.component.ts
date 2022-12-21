@@ -4,6 +4,8 @@ import { Group } from '@core/model/group';
 import { Router } from '@angular/router';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
 import { CreateGroupModal } from '@app/component/group/modal/create-group/create-group.modal';
+import { GroupService } from '@core/service/group.service';
+import { FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-groups',
@@ -11,24 +13,28 @@ import { CreateGroupModal } from '@app/component/group/modal/create-group/create
   styleUrls: ['./groups.component.scss']
 })
 export class GroupsComponent {
-  groups: Group[];
+
+  storage: Group[] = [];
+  groups: Group[] = [];
+  filter: FormControl;
 
   constructor(
     private userService: UserService,
     private router: Router,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private groupService: GroupService,
+    private formBuilder: FormBuilder
   ) {
-    this.groups = [
-      new Group(),
-      new Group(),
-      new Group(),
-      new Group(),
-      new Group(),
-      new Group(),
-      new Group(),
-      new Group(),
-      new Group()
-    ];
+    this.filter = formBuilder.control('');
+    this.filter.valueChanges.subscribe((value: string) => {
+      this.groups = this.storage.filter((group: Group) =>
+        group.name?.toUpperCase().includes(value.toUpperCase())
+        || group.description?.toUpperCase().includes(value.toUpperCase()));
+    });
+    groupService.getGroupsWithAccess().subscribe((groups: Group[]) => {
+      this.storage = groups;
+      this.groups = groups;
+    });
   }
 
   openDetail(id: string): void {
@@ -46,27 +52,5 @@ export class GroupsComponent {
         });
       }
     });
-  }
-
-  public setLineBackgroundColor(index: number): any {
-    const number = Math.floor(Math.random() * (3));
-    let backgroundColor;
-    switch (number) {
-      case 0: {
-        backgroundColor = '#FF605C';
-        break;
-      }
-      case 1: {
-        backgroundColor = '#FFBD44';
-        break;
-      }
-      default: {
-        backgroundColor = '#00CA4E';
-        break;
-      }
-    }
-    return {
-      backgroundColor
-    };
   }
 }

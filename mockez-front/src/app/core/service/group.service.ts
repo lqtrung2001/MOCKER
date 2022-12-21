@@ -17,4 +17,12 @@ export class GroupService {
   public getGroupsWithAccess(): Observable<Group[]> {
     return this.httpClient.get<Group[]>(`${environment.apiUrl}/group`);
   }
+
+  getGroup(id: string): Observable<Group> {
+    return this.httpClient.get<Group>(`${environment.apiUrl}/group/${id}`);
+  }
+
+  public saveOrUpdate(group: Group): Observable<string> {
+    return this.httpClient.post<string>(`${environment.apiUrl}/group`, group);
+  }
 }

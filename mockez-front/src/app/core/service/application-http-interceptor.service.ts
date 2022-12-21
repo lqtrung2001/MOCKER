@@ -16,7 +16,7 @@ export class ApplicationHttpInterceptorService implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.appConfigProviderService.loading = true;
+    this.appConfigProviderService.isLoading = true;
     return next
       // Add token when requesting
       .handle(request.clone({
@@ -26,13 +26,19 @@ export class ApplicationHttpInterceptorService implements HttpInterceptor {
         }
       }))
       // Catch the error
-      .pipe(catchError((error: HttpErrorResponse) => {
-        this.appConfigProviderService.loading = false;
-        return this.modalProvider.showError({
-          body: error.message
-        });
+      .pipe(catchError((httpErrorResponse: HttpErrorResponse) => {
+        this.appConfigProviderService.isLoading = false;
+        if (httpErrorResponse.status === 403) {
+          return this.modalProvider.showError({
+            body: 'You don\'t have permission to perform this action: ' + httpErrorResponse.message
+          });
+        } else {
+          return this.modalProvider.showError({
+            body: 'A error occurred while performing this action, please try again later or contact the administrator'
+          });
+        }
       }), finalize(() => {
-        this.appConfigProviderService.loading = false;
+        this.appConfigProviderService.isLoading = false;
       }));
   }
 }

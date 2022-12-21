@@ -11,7 +11,7 @@ export class Schema extends Base {
   private _id: string | undefined = undefined;
   private _name: string | undefined = undefined;
   private _description: string | undefined = undefined;
-  private _project: Project = new Project();
+  private _project: Project | undefined = undefined;
   private _tables: Table[] = [];
 
   get id(): string | undefined {
@@ -38,11 +38,11 @@ export class Schema extends Base {
     this._description = value;
   }
 
-  get project(): Project {
+  get project(): Project | undefined {
     return this._project;
   }
 
-  set project(value: Project) {
+  set project(value: Project | undefined) {
     this._project = value;
   }
 

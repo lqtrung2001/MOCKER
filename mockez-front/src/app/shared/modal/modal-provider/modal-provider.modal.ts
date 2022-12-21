@@ -50,6 +50,7 @@ export class ModalProvider {
 
   public showInformation(message: string): Observable<any> {
     return this.modalService.open(DialogModal, {
+      body: message,
       title: 'Information',
       btnOk: true
     }).onResult();

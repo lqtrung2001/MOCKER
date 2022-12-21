@@ -12,7 +12,7 @@ export class Project extends Base {
   private _name: string | undefined = undefined;
   private _summary: string | undefined = undefined;
   private _description: string | undefined = undefined;
-  private _group: Group = new Group();
+  private _group: Group | undefined = undefined;
   private _schemas: Schema[] = [];
 
   get id(): string | undefined {
@@ -47,11 +47,11 @@ export class Project extends Base {
     this._description = value;
   }
 
-  get group(): Group {
+  get group(): Group | undefined {
     return this._group;
   }
 
-  set group(value: Group) {
+  set group(value: Group | undefined) {
     this._group = value;
   }
 

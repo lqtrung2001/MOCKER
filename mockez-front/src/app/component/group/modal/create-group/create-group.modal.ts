@@ -1,7 +1,8 @@
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from '@core/service/group.service';
+import { Group } from '@core/model/group';
 
 @Component({
   selector: 'app-create-group-modal',
@@ -21,13 +22,21 @@ export class CreateGroupModal extends Modal {
   ) {
     super();
     this.formGroup = formBuilder.group({
-      name: formBuilder.control(''),
-      description: formBuilder.control('')
+      name: formBuilder.control('', [Validators.required]),
+      description: formBuilder.control('', [Validators.required])
     });
   }
 
   submit(): void {
-
+    if (this.formGroup.invalid) {
+      return;
+    }
+    const group: Group = this.formGroup.getRawValue();
+    this.groupService.saveOrUpdate(group).subscribe((id: string) => {
+      if (id) {
+        this.close(id);
+      }
+    });
   }
 
 }

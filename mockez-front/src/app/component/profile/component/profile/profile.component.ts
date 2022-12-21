@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
 import { User } from '@core/model/user';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Gender } from '@core/model/enumeration/gender';
 import { formatDate } from '@angular/common';
 import { UserService } from '@core/service/user.service';
+import { ModalService } from '@shared/modal/modal-service/modal-service.service';
+import {
+  ChangePasswordModal,
+  ChangePasswordModalOptions
+} from '@app/component/profile/modal/change-password/change-password.modal';
 
 @Component({
   selector: 'app-profile',
@@ -22,16 +27,16 @@ export class ProfileComponent {
   constructor(
     private modalProvider: ModalProvider,
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private modalService: ModalService
   ) {
     this.formGroup = formBuilder.group({
-      username: formBuilder.control(''),
-      password: formBuilder.control(''),
-      name: formBuilder.control(''),
-      bio: formBuilder.control(''),
-      phone: formBuilder.control(''),
-      address: formBuilder.control(''),
-      dob: formBuilder.control('')
+      username: formBuilder.control('', [Validators.required]),
+      name: formBuilder.control('', [Validators.required]),
+      bio: formBuilder.control('', [Validators.required]),
+      phone: formBuilder.control('', [Validators.required]),
+      address: formBuilder.control('', [Validators.required]),
+      dob: formBuilder.control('', [Validators.required])
     });
     const storage = window.localStorage.getItem('user');
     if (!storage) {
@@ -51,8 +56,12 @@ export class ProfileComponent {
   }
 
   submit(): void {
+
+    if (this.formGroup.invalid) {
+      return;
+    }
+
     this.user.username = this.formGroup.get('username')?.value;
-    this.user.password = this.formGroup.get('password')?.value;
     this.user.name = this.formGroup.get('name')?.value;
     this.user.bio = this.formGroup.get('bio')?.value;
     this.user.phone = this.formGroup.get('phone')?.value;
@@ -65,7 +74,6 @@ export class ProfileComponent {
     this.userService.update(this.user).subscribe((id: string) => {
       if (id) {
         this.userService.findOneByUsername(this.user.username!).subscribe((user: User) => {
-          user.password = this.user.password;
           window.localStorage.setItem('user', JSON.stringify(user));
           this.user = user;
         });
@@ -73,7 +81,14 @@ export class ProfileComponent {
     });
   }
 
-  dobOnChange($event: Event) {
-    console.log($event);
+  changePassword(): void {
+    const options: ChangePasswordModalOptions = {
+      username: this.user.username!
+    };
+    this.modalService.open(ChangePasswordModal, options).onResult().subscribe((user: User) => {
+      if (user) {
+        this.user.version = user.version;
+      }
+    });
   }
 }

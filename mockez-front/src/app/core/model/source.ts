@@ -9,7 +9,7 @@ export class Source extends Base {
 
   private _id: string | undefined = undefined;
   private _value: string | undefined = undefined;
-  private _generateType: GenerateType = new GenerateType();
+  private _generateType: GenerateType | undefined = undefined;
 
   get id(): string | undefined {
     return this._id;
@@ -27,11 +27,11 @@ export class Source extends Base {
     this._value = value;
   }
 
-  get generateType(): GenerateType {
+  get generateType(): GenerateType | undefined {
     return this._generateType;
   }
 
-  set generateType(value: GenerateType) {
+  set generateType(value: GenerateType | undefined) {
     this._generateType = value;
   }
 }

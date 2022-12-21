@@ -12,8 +12,8 @@ export class GroupMember extends Base {
 
   private _id: GroupMemberPk | undefined = undefined;
   private _role: Role | undefined = undefined;
-  private _user: User = new User();
-  private _group: Group = new Group();
+  private _user: User | undefined = undefined;
+  private _group: Group | undefined = undefined;
 
   get id(): GroupMemberPk | undefined {
     return this._id;
@@ -31,19 +31,19 @@ export class GroupMember extends Base {
     this._role = value;
   }
 
-  get user(): User {
+  get user(): User | undefined {
     return this._user;
   }
 
-  set user(value: User) {
+  set user(value: User | undefined) {
     this._user = value;
   }
 
-  get group(): Group {
+  get group(): Group | undefined {
     return this._group;
   }
 
-  set group(value: Group) {
+  set group(value: Group | undefined) {
     this._group = value;
   }
 }

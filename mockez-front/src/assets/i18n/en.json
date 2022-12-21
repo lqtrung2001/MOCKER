@@ -1,4 +1,30 @@
 {
+  "label": {
+    "search_placeholder": "Find anything...",
+    "button_new": "New",
+    "member": "Member: ",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "message": {
+    "no_group_match": "No group match with this credential.",
+    "no_project_match": "No project match with this credential."
+  },
+  "modal": {
+    "create_group": {
+      "title": "CREATE GROUP",
+      "name": "Name: ",
+      "description": "Description: ",
+      "name_placeholder": "Enter group name",
+      "description_placeholder": "Enter project description"
+    },
+    "preview": {
+      "name": "preview",
+      "close": "close",
+      "table": "table",
+      "format": "format"
+    }
+  },
   "navigation": {
     "name": "mockez",
     "search": "search mockez",
@@ -70,12 +96,7 @@
     "shared_with": "Shared with",
     "last_modified": "Last modified"
   },
-  "modal": {
-    "preview": {
-      "name": "preview",
-      "close": "close",
-      "table": "table",
-      "format": "format"
-    }
+  "group": {
+
   }
 }
