@@ -21,4 +21,7 @@ public interface UserService {
 
     List<User> getUsers();
 
+    UUID delete(UUID id);
+
+    UUID saveUser(User user);
 }

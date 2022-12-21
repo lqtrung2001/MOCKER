@@ -35,6 +35,29 @@ paths:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/ServerError'
+    delete:
+      operationId: deleteUser
+      tags:
+        - User
+      description: Return id of deleted User
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: string
+                format: uuid
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
   /user:
     get:
       operationId: getUsers
@@ -50,6 +73,35 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: saveUser
+      tags:
+        - User
+      description: save user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: string
+                format: uuid
         400:
           $ref: '#/components/responses/BadRequest'
         401:
@@ -89,6 +141,7 @@ paths:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/ServerError'
+
   /user/find-by-username:
     get:
       operationId: getUserByUsername

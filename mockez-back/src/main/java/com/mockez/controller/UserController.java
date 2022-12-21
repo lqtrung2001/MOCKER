@@ -52,4 +52,14 @@ public class UserController implements UserApi {
                 .map(apiAbstractMapper::map)
                 .collect(Collectors.toList()));
     }
+
+    @Override
+    public ResponseEntity<UUID> deleteUser(UUID id) {
+        return ResponseEntity.ok(userService.delete(id));
+    }
+
+    @Override
+    public ResponseEntity<UUID> saveUser(UserDto userDto) {
+        return ResponseEntity.ok(userService.saveUser(apiAbstractMapper.map(userDto)));
+    }
 }
