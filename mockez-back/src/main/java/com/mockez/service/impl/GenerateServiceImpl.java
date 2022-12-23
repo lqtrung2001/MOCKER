@@ -29,6 +29,11 @@ public class GenerateServiceImpl implements GenerateService {
         return generate(table, row);
     }
 
+    @Override
+    public List<Map<String, String>> generateWithTable(Table table, Integer row) {
+        return generate(table, row);
+    }
+
     public List<Map<String, String>> generate(Table table, Integer row) {
         List<Map<String, String>> result = new ArrayList<>();
         Random random = new Random();
