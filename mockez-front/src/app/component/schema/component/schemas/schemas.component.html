@@ -1,10 +1,13 @@
 <div id='main' class='mx-auto bg-white overflow-y-hidden h-full'>
-  <div class='mt-10 text-center' [formGroup]='credential'>
-    <input class='text-sm w-1/2 py-2 shadow focus:drop-shadow-xl px-5 rounded-md' formControlName='filter' type='text'
+  <div class='mt-10 text-center'>
+    <input class='text-sm w-1/2 py-2 shadow focus:drop-shadow-xl px-5 rounded-md' [formControl]='filter' type='text'
            placeholder='{{ "label.search_placeholder" | translate }}' />
     <button class='ml-3 rounded bg-green font-medium hover:drop-shadow-xl text-white text-sm py-1.5 px-5'
             (click)='create()'>{{ 'label.button_new' | translate }}</button>
   </div>
+  <p *ngIf='filter.value && !schemas?.length && storage?.length'
+     class='mt-5 text-center text-sm'>{{ 'message.no_schema_match' | translate }}</p>
+  <p *ngIf='!storage?.length' class='mt-5 text-center text-sm'>{{ 'message.schema_empty' | translate }}</p>
   <div class='flex mt-5'>
     <div class='relative cards -ml-3 flex p-5 flex-wrap content-start {{ isOpenDetail ? "w-3/4" : "" }}'>
       <div *ngFor='let schema of schemas; index as index'
@@ -15,7 +18,7 @@
         <p class='mt-3 font-medium'>{{ schema.name | titlecase }}</p>
         <p class='text-sm text-gray-500'>{{ schema.modifiedDate | date }}</p>
         <p class='mt-5 text-sm'>{{ schema.description | truncate:100 }}</p>
-<!--        <p class='absolute bottom-5 left-5 text-sm'>Table: {{ schema.tables?.length || 0 }}</p>-->
+        <!--        <p class='absolute bottom-5 left-5 text-sm'>Table: {{ schema.tables?.length || 0 }}</p>-->
         <div class='flex absolute bottom-5 right-5'>
           <p class='w-3 h-3 rounded-full bg-red'></p>
           <p class='w-3 h-3 ml-3 rounded-full bg-yellow'></p>
@@ -45,14 +48,14 @@
           <p
             class='rounded-2xl ml-3 bg-green text-white p-1 w-24 text-center font-medium'>{{ 'complete' | uppercase }}</p>
         </div>
-<!--        <p class='mt-3'>Table: 10</p>-->
-<!--        <div class='mt-3 rounded-md bg-gray max-h-40 p-5 flex flex-wrap overflow-y-scroll'>-->
-<!--          <p class='bg-blue font-medium p-2 mx-2 my-2 rounded-md text-white'>User</p>-->
-<!--          <p class='bg-blue font-medium p-2 mx-2 my-2 rounded-md text-white'>Product</p>-->
-<!--          <p class='bg-blue font-medium p-2 mx-2 my-2 rounded-md text-white'>Checkout</p>-->
-<!--          <p class='bg-blue font-medium p-2 mx-2 my-2 rounded-md text-white'>Receipt</p>-->
-<!--          <p class='bg-blue font-medium p-2 mx-2 my-2 rounded-md text-white'>Customer</p>-->
-<!--        </div>-->
+        <!--        <p class='mt-3'>Table: 10</p>-->
+        <!--        <div class='mt-3 rounded-md bg-gray max-h-40 p-5 flex flex-wrap overflow-y-scroll'>-->
+        <!--          <p class='bg-blue font-medium p-2 mx-2 my-2 rounded-md text-white'>User</p>-->
+        <!--          <p class='bg-blue font-medium p-2 mx-2 my-2 rounded-md text-white'>Product</p>-->
+        <!--          <p class='bg-blue font-medium p-2 mx-2 my-2 rounded-md text-white'>Checkout</p>-->
+        <!--          <p class='bg-blue font-medium p-2 mx-2 my-2 rounded-md text-white'>Receipt</p>-->
+        <!--          <p class='bg-blue font-medium p-2 mx-2 my-2 rounded-md text-white'>Customer</p>-->
+        <!--        </div>-->
         <button class='mt-4 bg-green text-white rounded text-sm font-medium p-2 w-full' (click)='openTable()'>Access
           Table
         </button>

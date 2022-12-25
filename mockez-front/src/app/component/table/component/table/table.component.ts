@@ -15,17 +15,19 @@ import { PreviewModal, PreviewModalOptions } from '@shared/modal/preview/preview
 import { FormatEnum } from '@core/config/format.enum';
 import { TableOptionModal, TableOptionModalOptions } from '@app/component/table/modal/table-option/table-option.modal';
 import { SaveTableModal, SaveTableModalOptions } from '@app/component/table/modal/save-table/save-table.modal';
+import { saveAs } from 'file-saver';
+import { ConverterService } from '@core/util/converter.service';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
  */
 
 @Component({
-  selector: 'app-table-properties',
-  templateUrl: './table-properties.component.html',
-  styleUrls: ['./table-properties.component.scss']
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.scss']
 })
-export class TablePropertiesComponent {
+export class TableComponent {
 
   table: Table;
   formGroup: FormGroup;
@@ -36,6 +38,7 @@ export class TablePropertiesComponent {
     private activatedRoute: ActivatedRoute,
     private tableService: TableService,
     private router: Router,
+    private converterService: ConverterService,
     private formBuilder: FormBuilder,
     private modalService: ModalService,
     private modalProvider: ModalProvider,
@@ -144,8 +147,28 @@ export class TablePropertiesComponent {
   }
 
   generate(): void {
+    const fileName: string = 'mockez';
     this.initData(() => {
-      console.log('a');
+      switch (this.tableOptions.type) {
+        case FormatEnum.JSON:
+          saveAs(new Blob(this.converterService.JSONArrayToJSON(this.data), {
+            type: 'application/json'
+          }), `${fileName}.json`);
+          break;
+        case FormatEnum.XML:
+          saveAs(new Blob(this.converterService.JSONArrayToXML(this.data), {
+            type: 'application/xml'
+          }), `${fileName}.xml`);
+          break;
+        case FormatEnum.SQL:
+          saveAs(new Blob(this.converterService.JSONArrayToSQL(this.tableOptions.name!, this.data)),
+            `${fileName}.sql`);
+          break;
+        case FormatEnum.CSV:
+          saveAs(new Blob(this.converterService.JSONArrayToCSV(this.data)),
+            `${fileName}.csv`);
+          break;
+      }
     });
   }
 
@@ -167,7 +190,7 @@ export class TablePropertiesComponent {
     this.initData(() => {
       const options: PreviewModalOptions = {
         data: this.data,
-        format: FormatEnum.JSON
+        format: this.tableOptions.type
       };
       this.modalService.open(PreviewModal, options);
     });
@@ -176,7 +199,9 @@ export class TablePropertiesComponent {
   option(): void {
     this.modalService.open(TableOptionModal, this.tableOptions)
       .onResult().subscribe((options: TableOptionModalOptions) => {
-      this.tableOptions = options;
+      if (options) {
+        this.tableOptions = options;
+      }
     });
   }
 

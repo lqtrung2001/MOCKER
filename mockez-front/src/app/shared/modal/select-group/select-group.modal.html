@@ -11,7 +11,7 @@
     <div class='text-center mt-5 relative'>
       <button (click)='isShowPopup=!isShowPopup'
               class='w-full drop-shadow-xl h-10 rounded bg-green text-white'>{{ (selectedGroup.name ? selectedGroup.name : 'CLICK FOR CHOOSE GROUP') | uppercase}}</button>
-      <div *ngIf='isShowPopup' class='absolute h-60 overflow-y-scroll text-left top-14 bg-white rounded drop-shadow-xl w-full z-20'>
+      <div *ngIf='isShowPopup' class='absolute max-h-60 overflow-y-scroll text-left top-14 bg-white rounded drop-shadow-xl w-full z-20'>
         <p *ngFor='let group of groups'
            (click)='selectGroup(group)'
            class='p-4 cursor-pointer font-medium hover:bg-gray'>{{ group.name | uppercase }}</p>
