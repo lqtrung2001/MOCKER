@@ -3,13 +3,15 @@ import { ProfileComponent } from '@app/component/profile/component/profile/profi
 import { DatePipe, NgIf, UpperCasePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChangePasswordModal } from '@app/component/profile/modal/change-password/change-password.modal';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     UpperCasePipe,
     ReactiveFormsModule,
     DatePipe,
-    NgIf
+    NgIf,
+    TranslateModule
   ],
   declarations: [
     ProfileComponent,

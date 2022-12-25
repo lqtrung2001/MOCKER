@@ -1,15 +1,18 @@
 <div id='main' class='mx-auto bg-white rounded-md h-full'>
   <div class='text-center items-center'>
-    <input class='text-sm w-1/2 shadow mt-5 focus:drop-shadow-xl py-2 px-5 rounded-md' [formControl]='filter' type='text'
+    <input class='text-sm w-1/2 shadow mt-10 focus:drop-shadow-xl py-2 px-5 rounded-md' [formControl]='filter'
+           type='text'
            placeholder='{{ "label.search_placeholder" | translate }}' />
     <button class='ml-3 rounded bg-green font-medium hover:drop-shadow-xl text-white text-sm py-1.5 px-5'
             (click)='create()'>{{ 'label.button_new' | translate }}</button>
   </div>
-  <p *ngIf='!projects?.length' class='mt-5 text-center text-sm'>{{ 'message.no_project_match' | translate }}</p>
+  <p *ngIf='filter.value && !projects?.length && storage?.length'
+     class='mt-5 text-center text-sm'>{{ 'message.no_project_match' | translate }}</p>
+  <p *ngIf='!storage?.length' class='mt-5 text-center text-sm'>{{ 'message.project_empty' | translate }}</p>
   <div class='text-sm flex items-center flex-col pb-20 mt-5 overflow-y-scroll' style='height: 85vh;'>
-    <div *ngFor='let project of projects; index as index'
+    <div *ngFor='let project of projects'
          class='flex bg-white justify-between shadow rounded-md w-2/3 py-5 px-14 mt-5 relative hover:drop-shadow-xl'>
-      <div class='absolute left-7 rounded-md w-1.5 h-28 bg-green'></div>
+      <div class='absolute left-7 rounded-md w-1 h-28 bg-yellow'></div>
       <div class='left w-1/2'>
         <p class='font-medium'>
           <a [routerLink]='project?.id' class='cursor-pointer hover:underline'>{{ project?.name | uppercase }}</a>

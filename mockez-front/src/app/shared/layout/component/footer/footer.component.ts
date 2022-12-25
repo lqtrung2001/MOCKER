@@ -23,14 +23,14 @@ export class FooterComponent {
   }
 
   public previewOnClick(): void {
-    this.dataProvider.generateData()
-      .subscribe((data: any[]) => {
-        this.dataProvider.data = data;
-        this.modalService.open(PreviewModal, data).onResult()
-          .subscribe(() => {
-            // Do nothing
-          });
-      });
+    // this.dataProvider.generateData()
+    //   .subscribe((data: any[]) => {
+    //     this.dataProvider.data = data;
+    //     this.modalService.open(PreviewModal, data).onResult()
+    //       .subscribe(() => {
+    //         // Do nothing
+    //       });
+    //   });
   }
 
   public downloadOnClick(): void {

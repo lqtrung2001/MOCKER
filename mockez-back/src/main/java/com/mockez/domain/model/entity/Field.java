@@ -17,11 +17,9 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "FIELD")
 @ToString(callSuper = true)
 @SuperBuilder(toBuilder = true)
-@Table(uniqueConstraints = {
-        @UniqueConstraint(name = "FIELD_NAME_UNIQUE_CONSTRAINT", columnNames = "NAME")
-}, name = "FIELD")
 public class Field extends Base {
 
     @Id

@@ -26,10 +26,15 @@ import { ProfileComponent } from '@app/component/profile/component/profile/profi
 import { GroupsComponent } from '@app/component/group/component/groups/groups.component';
 import { PersonsComponent } from '@app/component/person/component/persons/persons.component';
 import { GroupComponent } from '@app/component/group/component/group/group.component';
+import { PersonComponent } from '@app/component/person/component/person/person.component';
+import { SignupComponent } from '@app/component/auth/component/signup/signup.component';
+import { ForgotPasswordComponent } from '@app/component/auth/component/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'general', pathMatch: 'full' },
   { path: AUTH + '/login', component: LoginComponent },
+  { path: AUTH + '/signup', component: SignupComponent },
+  { path: AUTH + '/forgot-password', component: ForgotPasswordComponent },
   { path: NOTIFICATION, component: GeneralComponent, canActivate: [AuthGuard] },
   { path: GENERAL, component: GeneralComponent, canActivate: [AuthGuard] },
   { path: TABLE, component: TablesComponent, canActivate: [AuthGuard] },
@@ -42,6 +47,7 @@ const routes: Routes = [
   { path: GROUP, component: GroupsComponent, canActivate: [AuthGuard] },
   { path: GROUP + '/:id', component: GroupComponent, canActivate: [AuthGuard] },
   { path: PERSON, component: PersonsComponent, canActivate: [AuthGuard] },
+  { path: PERSON + '/:id', component: PersonComponent, canActivate: [AuthGuard] },
   { path: PROFILE, component: ProfileComponent, canActivate: [AuthGuard] },
   { path: SETTING, component: GeneralComponent, canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent }

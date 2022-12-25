@@ -25,4 +25,8 @@ export class SchemaService {
   deleteSchema(id: string): Observable<string> {
     return this.httpClient.delete<string>(`${environment.apiUrl}/schema/${id}`);
   }
+
+  getSchema(id: string): Observable<Schema> {
+    return this.httpClient.get<Schema>(`${environment.apiUrl}/schema/${id}`);
+  }
 }

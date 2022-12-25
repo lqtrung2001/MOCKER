@@ -37,12 +37,6 @@ export class GroupsComponent {
     });
   }
 
-  openDetail(id: string): void {
-    this.router.navigate(['/group/' + id]).then(() => {
-      console.log('Detail');
-    });
-  }
-
   create(): void {
     this.modalService.open(CreateGroupModal, {})
       .onResult().subscribe((id: string) => {

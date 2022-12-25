@@ -49,4 +49,19 @@ export class SelectTypeModal extends Modal {
       this.categories = categories;
     });
   }
+
+  typeSelect(category: Category): void {
+    this.categoryService.getCategory(category.id!).subscribe((category: Category) => {
+      this.types = category.generateTypes;
+      this.storage = this.types;
+    });
+  }
+
+  selectAll(): void {
+    this.categoryService.getCategories().subscribe((categories: Category[]) => {
+      this.categories = categories;
+      this.types = this.option?.isSQLType ? this.appConfigProvider.sqlTypes : this.appConfigProvider.generateTypes;
+      this.storage = this.types;
+    });
+  }
 }

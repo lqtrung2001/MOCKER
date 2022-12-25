@@ -1,5 +1,6 @@
 package com.mockez.controller;
 
+import com.mockez.api.TableApi;
 import com.mockez.controller.maper.ApiAbstractMapper;
 import com.mockez.domain.dto.TableDto;
 import com.mockez.service.TableService;
@@ -40,5 +41,10 @@ public class TableController implements com.mockez.api.TableApi {
     @Override
     public ResponseEntity<UUID> saveOrUpdateTable(TableDto tableDto) {
         return ResponseEntity.ok(tableService.saveOrUpdateTable(apiAbstractMapper.map(tableDto)));
+    }
+
+    @Override
+    public ResponseEntity<UUID> deleteTable(UUID id) {
+        return ResponseEntity.ok(tableService.delete(id));
     }
 }

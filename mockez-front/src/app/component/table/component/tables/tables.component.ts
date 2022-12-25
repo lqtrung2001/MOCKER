@@ -5,6 +5,10 @@ import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal
 import { TableService } from '@core/service/table.service';
 import { Table } from '@app/core/model/table';
 import { AppConfigProviderService } from '@core/service/app-config-provider.service';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { SaveTableModal, SaveTableModalOptions } from '@app/component/table/modal/save-table/save-table.modal';
+import { Schema } from '@core/model/schema';
+import { SchemaService } from '@core/service/schema.service';
 
 @Component({
   selector: 'app-tables',
@@ -12,16 +16,27 @@ import { AppConfigProviderService } from '@core/service/app-config-provider.serv
   styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent {
+
+  storage: Table[] = [];
   tables: Table[] = [];
+  schema: Schema;
+  filter: FormControl;
 
   constructor(
     private modalService: ModalService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private modalProvider: ModalProvider,
+    private formBuilder: FormBuilder,
     private tableService: TableService,
-    private appConfigProviderService: AppConfigProviderService
+    private appConfigProviderService: AppConfigProviderService,
+    private schemaService: SchemaService
   ) {
+    this.filter = formBuilder.control('');
+    this.filter.valueChanges.subscribe((value: string) => {
+      this.tables = this.storage.filter((table: Table) => table.name?.toUpperCase().includes(value.toUpperCase())
+        || table.description?.toUpperCase().includes(value.toUpperCase()));
+    });
     const schemaId: string = activatedRoute.snapshot.queryParams['schemaId'];
     if (!schemaId) {
       const schemaIdStorage = appConfigProviderService.currentSchemaId;
@@ -35,20 +50,28 @@ export class TablesComponent {
         });
       }
     } else {
-      this.tableService.getTablesBySchema(schemaId).subscribe((tables: Table[]) => {
-        appConfigProviderService.currentSchemaId = schemaId;
-        this.tables = tables;
+      this.schemaService.getSchema(schemaId).subscribe((schema: Schema) => {
+        this.schema = schema;
+        this.tableService.getTablesBySchema(schemaId).subscribe((tables: Table[]) => {
+          appConfigProviderService.currentSchemaId = schemaId;
+          this.tables = tables;
+          this.storage = tables;
+        });
       });
     }
   }
 
-  openDetail(id: string | undefined): void {
-    if (!id) {
-      console.error('Please provide a unique identifier');
-      return;
-    }
-    this.router.navigate(['/table/' + id])
-      .then(() => {
-      });
+  create(): void {
+    this.modalService.open(SaveTableModal, {}).onResult().subscribe((close: SaveTableModalOptions) => {
+      if (close) {
+        const table: Table = new Table();
+        table.name = close.name;
+        table.description = close.description;
+        table.schema = this.schema;
+        this.tableService.saveOrUpdate(table).subscribe((id: string) => {
+          this.router.navigate(['table/' + id]).then();
+        });
+      }
+    });
   }
 }

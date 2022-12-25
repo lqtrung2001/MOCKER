@@ -141,7 +141,6 @@ paths:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/ServerError'
-
   /user/find-by-username:
     get:
       operationId: getUserByUsername
@@ -173,7 +172,34 @@ paths:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/ServerError'
-
+  /user/change-password:
+    put:
+      operationId: changePassword
+      tags:
+        - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangPasswordRequest'
+      description: get user by username
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
   /sql-type:
     get:
       operationId: getSQLTypes
@@ -635,6 +661,28 @@ paths:
         schema:
           type: string
           format: uuid
+    get:
+      operationId: getSchema
+      tags:
+        - Schema
+      description: Return schema
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schema'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
     delete:
       operationId: deleteSchema
       tags:
@@ -849,6 +897,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Table'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+    delete:
+      operationId: deleteTable
+      tags:
+        - Table
+      description: deletes a table
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: string
+                format: UUID
         400:
           $ref: '#/components/responses/BadRequest'
         401:
@@ -1299,6 +1370,19 @@ components:
             $ref: '#/components/schemas/GroupMember'
       allOf:
         - $ref: '#/components/schemas/Base'
+    ChangPasswordRequest:
+      type: object
+      description: the request of change password api
+      properties:
+        userId:
+          type: string
+          format: uuid
+        currentPassword:
+          type: string
+          description: the current password
+        newPassword:
+          type: string
+          description: the new password
     Gender:
       type: string
       enum:

@@ -40,4 +40,9 @@ public class SchemaController implements SchemaApi {
     public ResponseEntity<UUID> saveOrUpdateSchema(SchemaDto schemaDto) {
         return ResponseEntity.ok(schemaService.saveOrUpdate(apiAbstractMapper.map(schemaDto)));
     }
+
+    @Override
+    public ResponseEntity<SchemaDto> getSchema(UUID id) {
+        return ResponseEntity.ok(apiAbstractMapper.map(schemaService.getSchema(id)));
+    }
 }

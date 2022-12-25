@@ -9,6 +9,12 @@ import { Field } from '@core/model/field';
 import { SelectTypeModal, SelectTypeModalOptions } from '@shared/modal/select-type/select-type.modal';
 import { SQLType } from '@core/model/sql-type';
 import { GenerateType } from '@core/model/generate-type';
+import { GenerateService } from '@core/service/generate.service';
+import { DeleteTableModal } from '@app/component/table/modal/delete-table/delete-table.modal';
+import { PreviewModal, PreviewModalOptions } from '@shared/modal/preview/preview.modal';
+import { FormatEnum } from '@core/config/format.enum';
+import { TableOptionModal, TableOptionModalOptions } from '@app/component/table/modal/table-option/table-option.modal';
+import { SaveTableModal, SaveTableModalOptions } from '@app/component/table/modal/save-table/save-table.modal';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -23,7 +29,8 @@ export class TablePropertiesComponent {
 
   table: Table;
   formGroup: FormGroup;
-
+  data: any[];
+  tableOptions: TableOptionModalOptions;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -31,7 +38,8 @@ export class TablePropertiesComponent {
     private router: Router,
     private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private modalProvider: ModalProvider
+    private modalProvider: ModalProvider,
+    private generateService: GenerateService
   ) {
     this.formGroup = formBuilder.group({
       id: formBuilder.control(''),
@@ -47,29 +55,16 @@ export class TablePropertiesComponent {
         });
       });
     } else {
-      tableService.getTable(id).subscribe((table: Table) => {
-        this.table = table;
-        this.formGroup.patchValue(table);
-        this.insertField();
-        this.insertField();
-        this.insertField();
-        this.insertField();
-        this.insertField();
-        this.insertField();
-        this.insertField();
-        this.insertField();
-        this.insertField();
-        this.insertField();
-        this.insertField();
-        this.insertField();
-        this.insertField();
-        this.insertField();
-        this.insertField();
-        this.insertField();
-        this.insertField();
-        this.insertField();
-      });
+      this.load(id);
     }
+  }
+
+  load(id: string): void {
+    this.tableService.getTable(id).subscribe((table: Table) => {
+      table.fields = table.fields.sort((t1: Field, t2: Field) => (new Date(t1.createdDate!)).getTime() - (new Date(t2.createdDate!)).getTime());
+      this.table = table;
+      this.formGroup.patchValue(table);
+    });
   }
 
   selectSQLType(index: number): void {
@@ -120,12 +115,82 @@ export class TablePropertiesComponent {
     if (this.formGroup.invalid) {
       return;
     }
+    this.table.fields = this.formGroup.get('fields')?.value;
+    this.tableService.saveOrUpdate(this.table)
+      .subscribe((id) => {
+        this.load(id);
+      });
   }
 
-  submit(): void {
+  initData(callback: () => void): void {
     if (this.formGroup.invalid) {
       return;
     }
-    console.log(this.formGroup.getRawValue());
+    if (!this.tableOptions) {
+      this.modalProvider.showError({
+        body: 'Please configure for table to generate by using options tab.'
+      });
+    } else {
+      this.table.fields = this.formGroup.get('fields')?.value;
+      this.tableService.saveOrUpdate(this.table)
+        .subscribe((id) => {
+          this.load(id);
+          this.generateService.generate(this.table.id!, this.tableOptions.row).subscribe((data: any[]) => {
+            this.data = data;
+            callback();
+          });
+        });
+    }
+  }
+
+  generate(): void {
+    this.initData(() => {
+      console.log('a');
+    });
+  }
+
+  delete(): void {
+    this.modalService.open(DeleteTableModal, {
+      name: this.table.name
+    }).onResult().subscribe((close: boolean) => {
+      if (close) {
+        this.tableService.delete(this.table.id!).subscribe((id) => {
+          if (id) {
+            this.router.navigate(['table'], { queryParams: { schemaId: this.table.schema?.id } }).then();
+          }
+        });
+      }
+    });
+  }
+
+  preview(): void {
+    this.initData(() => {
+      const options: PreviewModalOptions = {
+        data: this.data,
+        format: FormatEnum.JSON
+      };
+      this.modalService.open(PreviewModal, options);
+    });
+  }
+
+  option(): void {
+    this.modalService.open(TableOptionModal, this.tableOptions)
+      .onResult().subscribe((options: TableOptionModalOptions) => {
+      this.tableOptions = options;
+    });
+  }
+
+  modifyDetail(): void {
+    const options: SaveTableModalOptions = {
+      name: this.table.name!,
+      description: this.table.description
+    };
+    this.modalService.open(SaveTableModal, options).onResult().subscribe((close: SaveTableModalOptions) => {
+      if (close) {
+        this.table.name = close.name;
+        this.table.description = close.description;
+        this.save();
+      }
+    });
   }
 }

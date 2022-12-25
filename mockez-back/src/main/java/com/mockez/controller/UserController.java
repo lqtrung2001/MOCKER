@@ -2,7 +2,9 @@ package com.mockez.controller;
 
 import com.mockez.api.UserApi;
 import com.mockez.controller.maper.ApiAbstractMapper;
+import com.mockez.domain.dto.ChangPasswordRequestDto;
 import com.mockez.domain.dto.UserDto;
+import com.mockez.domain.exception.UnexpectedException;
 import com.mockez.domain.model.entity.User;
 import com.mockez.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -30,9 +32,7 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<UUID> updateUser(UserDto userDto) {
-        User user = apiAbstractMapper.map(userDto);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return ResponseEntity.ok(userService.update(user));
+        return ResponseEntity.ok(userService.update(apiAbstractMapper.map(userDto)));
     }
 
     @Override
@@ -61,5 +61,10 @@ public class UserController implements UserApi {
     @Override
     public ResponseEntity<UUID> saveUser(UserDto userDto) {
         return ResponseEntity.ok(userService.saveUser(apiAbstractMapper.map(userDto)));
+    }
+
+    @Override
+    public ResponseEntity<UserDto> changePassword(ChangPasswordRequestDto changPasswordRequestDto) {
+        return ResponseEntity.ok(apiAbstractMapper.map(userService.changePassword(changPasswordRequestDto.getUserId(), changPasswordRequestDto.getCurrentPassword(), changPasswordRequestDto.getNewPassword())));
     }
 }

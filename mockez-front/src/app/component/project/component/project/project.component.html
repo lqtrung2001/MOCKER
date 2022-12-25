@@ -1,5 +1,5 @@
-<div id='main' class='flex justify-evenly min-h-full mx-auto'>
-  <div class='left bg-white rounded-md p-5 w-2/3'>
+<div id='main' class='flex h-full overflow-y-hidden mx-auto'>
+  <div class='left bg-white pt-10 px-5 w-2/3'>
     <div class='flex justify-between items-center'>
       <h2 class='font-medium'>Document</h2>
       <img src='assets/icon/pencil.png' class='w-5 cursor-pointer' alt='pencil' (click)='isModifyingDescription=true' />
@@ -10,7 +10,7 @@
         <markdown [data]='project.description'></markdown>
       </div>
       <ng-container *ngIf='isModifyingDescription'>
-        <textarea class='w-full h-5/6 overflow-y-scroll focus:outline-0 border-2 p-3 rounded' formControlName='description'></textarea>
+        <textarea class='w-full h-5/6 overflow-y-scroll focus:outline-0 border p-3 rounded' formControlName='description'></textarea>
         <div class='flex justify-end mt-10 -mr-3'>
           <button (click)='isModifyingDescription=false' type='button' class='bg-gray text-sm text-black rounded font-medium px-5 h-10 py-2 mr-3'>Cancel</button>
           <button (click)='modifyDescription()' type='button' class='bg-blue text-sm text-white rounded font-medium px-5 h-10 py-2 mr-3'>Save</button>
@@ -18,7 +18,7 @@
       </ng-container>
     </div>
   </div>
-  <div class='right bg-white rounded-md p-5'>
+  <div class='right bg-white pt-10 px-5 w-1/3'>
     <div class='flex justify-between items-center'>
       <h3 class='font-medium'>About</h3>
       <div class='custom-color flex items-end'>

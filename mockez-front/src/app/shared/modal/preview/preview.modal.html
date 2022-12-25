@@ -1,45 +1,44 @@
-<div id='preview' class='dialog'>
-  <div class='board absolute bg-white rounded-md'>
-    <p class='flex justify-between mt-2.5 font-medium bg-white z-10 pt-5 px-5'>
-      {{ 'modal.preview.name' | translate | uppercase }}
-      <button class='flex justify-between'
-              (click)='close()'>
-        {{ 'modal.preview.close' | translate | titlecase }}
-        <img class='icon ml-2.5' src='assets/icon/general/cancel.png' alt='cancel'/>
-      </button>
-    </p>
-    <nav class='flex justify-center bg-white h-10'>
-      <a href='#' class='no-underline text-center text-black font-medium w-24 {{isTable ? "active" : ""}}'
-         (click)='isTable=true'
-      >{{ 'modal.preview.table' | translate | uppercase }}</a>
-      <a href='#' class='no-underline text-center text-black font-medium w-36 {{!isTable ? "active" : ""}}'
-         (click)='isTable=false'
-      >{{ 'modal.preview.format' | translate | uppercase }} ({{dataProvider.configuration.get("format")?.value | uppercase}})</a>
-    </nav>
-    <section class='px-5 overflow-y-scroll relative'>
-      <table *ngIf='isTable' class='w-full'>
+<div id='main' class='dialog text-sm' xmlns='http://www.w3.org/1999/html'>
+  <div class='board' style='width: 1000px; height: 800px;'>
+    <div class='flex justify-between'>
+      <p class='font-bold'>PREVIEW</p>
+      <div class='flex'>
+        <p class='w-3 h-3 rounded-full bg-red'></p>
+        <p class='w-3 h-3 ml-3 rounded-full bg-yellow'></p>
+        <p class='w-3 h-3 ml-3 rounded-full bg-green'></p>
+      </div>
+    </div>
+    <hr class='mt-5' />
+    <div class='flex'>
+      <p
+        class='w-1/2 text-center h-10 leading-10 {{ tab==="TABLE" ? "bg-yellow text-white" : "" }} font-medium text-sm uppercase cursor-pointer'
+        (click)='tab="TABLE"'>TABLE</p>
+      <p
+        class='w-1/2 text-center h-10 leading-10 {{ tab==="FORMAT" ? "bg-yellow text-white" : "" }} font-medium text-sm uppercase cursor-pointer'
+        (click)='tab="FORMAT"'>FORMAT</p>
+    </div>
+    <hr />
+    <div class='px-5 overflow-scroll w-full relative h-5/6'>
+      <table *ngIf='tab==="TABLE"' class='w-full'>
         <tr class='sticky top-0 bg-white disabled'>
-          <th *ngFor='let item of data[0] | keyvalue' class='font-medium text-left'>{{item.key}}</th>
+          <th *ngFor='let item of options.data[0] | keyvalue' class='font-medium text-left'>{{item.key}}</th>
         </tr>
-        <tr *ngFor='let record of data'>
-          <td *ngFor='let item of record | keyvalue'>{{item.value}}</td>
+        <tr *ngFor='let record of options.data'>
+          <td *ngFor='let item of record | keyvalue' >{{item.value}}</td>
         </tr>
       </table>
-      <div *ngIf='!isTable'>
+      <div *ngIf='tab==="FORMAT"'>
         <p
-          *ngFor='let line of data | formatPipe:dataProvider.configuration.get("format")?.value:dataProvider.configuration.get("tableName")?.value'>
+          *ngFor='let line of options.data | formatPipe:options.format'>
           {{line}}
         </p>
+        <div>
+        </div>
       </div>
-    </section>
-    <section class='pagination text-center mt-5'>
-      <button class='w-8 rounded-md font-medium'><</button>
-      <button class='ml-2.5 w-8 rounded-md font-medium'>1</button>
-      <button class='ml-2.5 w-8 rounded-md font-medium'>2</button>
-      <button class='ml-2.5 w-8 rounded-md font-medium active'>3</button>
-      <button class='ml-2.5 w-8 rounded-md font-medium'>4</button>
-      <button class='ml-2.5 w-8 rounded-md font-medium'>...</button>
-      <button class='ml-2.5 w-8 rounded-md font-medium'>></button>
-    </section>
+    </div>
+    <button (click)='close(false)' type='button'
+            class='absolute bottom-5 right-5 bg-gray text-sm text-black rounded font-medium px-5 h-10 py-2 mr-3'>
+      Cancel
+    </button>
   </div>
 </div>

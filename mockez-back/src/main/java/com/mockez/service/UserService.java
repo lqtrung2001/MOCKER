@@ -24,4 +24,6 @@ public interface UserService {
     UUID delete(UUID id);
 
     UUID saveUser(User user);
+
+    User changePassword(UUID id, String currentPassword, String newPassword);
 }

@@ -30,6 +30,11 @@ public class SchemaServiceImpl implements SchemaService {
     }
 
     @Override
+    public Schema getSchema(UUID id) {
+        return schemaRepository.findById(id).orElseThrow();
+    }
+
+    @Override
     public UUID delete(UUID id) {
         schemaRepository.deleteById(id);
         return id;

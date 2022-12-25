@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
-import { DataProviderService } from '@shared/service/data-provider.service';
+import { FormatEnum } from '@core/config/format.enum';
+
+export interface PreviewModalOptions {
+  data: any[],
+  format: FormatEnum
+}
 
 @Component({
   selector: 'app-preview-modal',
@@ -9,16 +14,16 @@ import { DataProviderService } from '@shared/service/data-provider.service';
 })
 export class PreviewModal extends Modal {
 
-  data: any[] = [];
-  isTable: boolean = false;
+  options: PreviewModalOptions;
 
-  constructor(
-    public dataProvider: DataProviderService
-  ) {
+  tab: 'TABLE' | 'FORMAT';
+
+  constructor() {
     super();
+    this.tab = 'TABLE';
   }
 
-  onInjectInputs(input: any): void {
-    this.data = input;
+  onInjectInputs(options: PreviewModalOptions): void {
+    this.options = options;
   }
 }

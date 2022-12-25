@@ -59,16 +59,17 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public UUID saveOrUpdate(Group group) {
         // After saving group, update the group member for saved group and auth user
-        Group save = groupRepository.save(group);
-        if (group.getId() == null) {
+        boolean isNew = group.getId() == null;
+        groupRepository.save(group);
+        if (isNew) {
             GroupMember build = GroupMember.builder()
                     .id(GroupMemberPK.builder()
-                            .groupId(save.getId())
+                            .groupId(group.getId())
                             .userId(applicationContextHolder.getCurrentUser().getId())
                             .build())
                     .role(Role.GROUP_ADMIN).build();
             groupMemberRepository.save(build);
         }
-        return save.getId();
+        return group.getId();
     }
 }

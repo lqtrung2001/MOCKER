@@ -30,4 +30,13 @@ export class UserService {
   getUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>(`${this.USER_API}`);
   }
+
+  changePassword(userId: string, currentPassword: string, newPassword: string): Observable<User> {
+    return this.httpClient.put<User>(`${this.USER_API}/change-password`, {
+      userId,
+      currentPassword,
+      newPassword
+    });
+
+  }
 }
