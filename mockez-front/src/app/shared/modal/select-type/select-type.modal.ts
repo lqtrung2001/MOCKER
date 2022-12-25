@@ -28,14 +28,14 @@ export class SelectTypeModal extends Modal {
 
   override onInjectInputs(selectTypeOption: SelectTypeModalOptions): void {
     this.option = selectTypeOption;
-    this.types = this.option?.isSQLType ? this.appConfigProvider.sqlTypes : this.appConfigProvider.generateTypes;
+    this.types = this.option?.isSQLType ? this.appConfigProviderService.sqlTypes : this.appConfigProviderService.generateTypes;
     this.storage = this.types;
   }
 
   constructor(
     private categoryService: CategoryService,
     private sqlTypeService: SQLTypeService,
-    private appConfigProvider: AppConfigProviderService,
+    private appConfigProviderService: AppConfigProviderService,
     private formBuilder: FormBuilder
   ) {
     super();
@@ -60,7 +60,7 @@ export class SelectTypeModal extends Modal {
   selectAll(): void {
     this.categoryService.getCategories().subscribe((categories: Category[]) => {
       this.categories = categories;
-      this.types = this.option?.isSQLType ? this.appConfigProvider.sqlTypes : this.appConfigProvider.generateTypes;
+      this.types = this.option?.isSQLType ? this.appConfigProviderService.sqlTypes : this.appConfigProviderService.generateTypes;
       this.storage = this.types;
     });
   }

@@ -3,7 +3,7 @@
     <div class='flex items-center'>
       <img class='w-32' src='assets/sqltable.png' alt='sql table' />
       <div>
-        <p class='font-medium'>{{ table?.name }}</p>
+        <p class='font-medium'>{{ table?.name | uppercase }}</p>
         <p class='mt-2'>{{ table?.description }}</p>
       </div>
     </div>

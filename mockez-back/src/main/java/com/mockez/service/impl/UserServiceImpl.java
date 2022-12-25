@@ -7,7 +7,6 @@ import com.mockez.domain.model.entity.User;
 import com.mockez.repository.UserRepository;
 import com.mockez.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -78,12 +77,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User changePassword(UUID id, String currentPassword, String newPassword) {
+        if (Objects.equals(currentPassword, newPassword)) {
+            throw new UnexpectedException("Cannot change password when already in use");
+        }
         User auth = applicationContextHolder.getCurrentUser();
         if (!auth.getId().equals(id) || !passwordEncoder.matches(currentPassword, auth.getPassword())) {
             throw new UnexpectedException("You have not permission to change the password");
         }
         auth.setPassword(passwordEncoder.encode(newPassword));
-        saveUser(auth);
-        return auth;
+        return userRepository.save(auth);
     }
 }

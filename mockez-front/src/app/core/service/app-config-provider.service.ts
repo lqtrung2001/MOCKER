@@ -12,8 +12,6 @@ export class AppConfigProviderService {
   private _isLoading: boolean = false;
   private _sqlTypes: SQLType[] = [];
   private _generateTypes: GenerateType[] = [];
-  private _currentSchemaId: string | undefined;
-  private _currentProjectId: string | undefined;
 
   constructor(
     private modalProvider: ModalProvider
@@ -42,22 +40,6 @@ export class AppConfigProviderService {
 
   set generateTypes(value: GenerateType[]) {
     this._generateTypes = value;
-  }
-
-  get currentSchemaId(): string | undefined {
-    return this._currentSchemaId;
-  }
-
-  set currentSchemaId(value: string | undefined) {
-    this._currentSchemaId = value;
-  }
-
-  get currentProjectId(): string | undefined {
-    return this._currentProjectId;
-  }
-
-  set currentProjectId(value: string | undefined) {
-    this._currentProjectId = value;
   }
 
   get auth(): User {

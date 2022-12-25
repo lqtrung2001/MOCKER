@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
-import { TablePropertiesComponent } from '@app/component/table/component/table-properties/table-properties.component';
+import { TableComponent } from '@app/component/table/component/table/table.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgForOf, NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,7 +24,7 @@ import { SaveTableModal } from '@app/component/table/modal/save-table/save-table
   ],
   declarations: [
     TablesComponent,
-    TablePropertiesComponent,
+    TableComponent,
     DeleteTableModal,
     TableOptionModal,
     SaveTableModal

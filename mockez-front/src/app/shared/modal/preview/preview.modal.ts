@@ -4,7 +4,8 @@ import { FormatEnum } from '@core/config/format.enum';
 
 export interface PreviewModalOptions {
   data: any[],
-  format: FormatEnum
+  format: FormatEnum,
+  tableName?: string
 }
 
 @Component({

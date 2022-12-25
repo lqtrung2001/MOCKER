@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { FormatEnum } from '@core/config/format.enum';
 
@@ -34,7 +34,7 @@ export class TableOptionModal extends Modal {
     super();
     this.formGroup = formBuilder.group({
       name: formBuilder.control(''),
-      row: formBuilder.control(1)
+      row: formBuilder.control(100, [Validators.min(1), Validators.max(1000)])
     });
     this.formatSupported.push(
       FormatEnum.JSON,
@@ -50,6 +50,9 @@ export class TableOptionModal extends Modal {
   }
 
   submit(): void {
+    if (this.formGroup.invalid) {
+      return;
+    }
     const { name, row } = this.formGroup.getRawValue();
     const options: TableOptionModalOptions = {
       name,

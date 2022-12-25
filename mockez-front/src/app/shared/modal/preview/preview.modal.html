@@ -24,16 +24,16 @@
           <th *ngFor='let item of options.data[0] | keyvalue' class='font-medium text-left'>{{item.key}}</th>
         </tr>
         <tr *ngFor='let record of options.data'>
-          <td *ngFor='let item of record | keyvalue' >{{item.value}}</td>
+          <td *ngFor='let item of record | keyvalue'>{{item.value}}</td>
         </tr>
       </table>
       <div *ngIf='tab==="FORMAT"'>
-        <p
-          *ngFor='let line of options.data | formatPipe:options.format'>
-          {{line}}
-        </p>
-        <div>
-        </div>
+        <ng-container [ngSwitch]='options.format'>
+          <pre *ngSwitchCase='"JSON"'>{{ options.data | json }}</pre>
+          <pre *ngSwitchCase='"XML"'>{{ options.data | xml: options.tableName! }}</pre>
+          <pre *ngSwitchCase='"SQL"'>{{ options.data | sql: options.tableName! }}</pre>
+          <pre *ngSwitchCase='"CSV"'>{{ options.data | csv }}</pre>
+        </ng-container>
       </div>
     </div>
     <button (click)='close(false)' type='button'

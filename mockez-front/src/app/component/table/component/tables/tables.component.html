@@ -10,13 +10,13 @@
   <p *ngIf='!storage.length' class='mt-5 text-center text-sm'>{{ 'message.table_empty' | translate }}</p>
   <div class='tables flex mt-10'>
     <div *ngFor='let table of tables'
-         class='card shadow relative m-4 flex items-center hover:drop-shadow-xl bg-white py-5 pl-10 pr-5 rounded-md w-96 h-32'>
+         class='card shadow relative m-4 flex items-center hover:drop-shadow-xl bg-white py-5 pl-10 pr-5 rounded-md w-80 h-32'>
       <div class='absolute left-4 rounded-md w-1 h-28 bg-green'></div>
       <div class='w-1/4'>
         <img class='w-20' src='assets/table.png' alt='table' />
       </div>
       <div class='info ml-5 w-1/2'>
-        <a class='font-medium hover:underline' [routerLink]='"/table/" + table.id'>{{ table.name | truncate: 20 }}</a>
+        <a class='font-medium hover:underline' [routerLink]='"/table/" + table.id'>{{ table.name | truncate: 20 | uppercase }}</a>
         <p class='text-sm text-gray-500'>{{ table.description | truncate: 50 }}</p>
       </div>
       <div class='absolute top-4 right-5 flex'>

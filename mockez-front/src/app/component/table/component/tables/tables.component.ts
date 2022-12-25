@@ -39,21 +39,15 @@ export class TablesComponent {
     });
     const schemaId: string = activatedRoute.snapshot.queryParams['schemaId'];
     if (!schemaId) {
-      const schemaIdStorage = appConfigProviderService.currentSchemaId;
-      if (schemaIdStorage) {
-        this.router.navigate(['/table'], { queryParams: { schemaId } }).then();
-      } else {
-        this.router.navigate(['/project']).then(() => {
-          this.modalProvider.showError({
-            body: 'Please select a schema before navigating to table.'
-          });
+      this.router.navigate(['/project']).then(() => {
+        this.modalProvider.showError({
+          body: 'Please select a schema before navigating to table.'
         });
-      }
+      });
     } else {
       this.schemaService.getSchema(schemaId).subscribe((schema: Schema) => {
         this.schema = schema;
         this.tableService.getTablesBySchema(schemaId).subscribe((tables: Table[]) => {
-          appConfigProviderService.currentSchemaId = schemaId;
           this.tables = tables;
           this.storage = tables;
         });

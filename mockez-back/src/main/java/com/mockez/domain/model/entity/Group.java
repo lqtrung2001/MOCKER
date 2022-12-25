@@ -37,7 +37,7 @@ public class Group extends Base {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "DESCRIPTION", nullable = false, length = 1000)
+    @Column(name = "DESCRIPTION", nullable = false, length = 4096)
     private String description;
 
     @ToString.Exclude

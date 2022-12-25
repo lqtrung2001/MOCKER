@@ -40,7 +40,6 @@ export class ProjectComponent {
   load(id?: string) {
     this.projectService.getProject(id || this.project.id!)
       .subscribe((project: Project) => {
-        this.appConfigProviderService.currentProjectId = id;
         this.project = project;
         this.formGroup.patchValue(this.project);
       });

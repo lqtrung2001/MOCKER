@@ -12,7 +12,7 @@ export class ConverterService {
   public JSONArrayToSQL(tableName: string, data: any[]): string[] {
     const result: string[] = [];
     data.forEach((values: any) => {
-      result.push(`INSERT INTO ${tableName} (${Object.keys(values).toString()}) VALUES (${Object.values(values).map((value: any) => '"' + value + '"').toString()});`);
+      result.push(`INSERT INTO ${tableName} (${Object.keys(values).toString()}) VALUES (${Object.values(values).map((value: any) => '"' + value + '"').toString()});\n`);
     });
     return result;
   };
@@ -30,14 +30,14 @@ export class ConverterService {
       let csv = data.map(row => header.map(fieldName =>
         JSON.stringify(row[fieldName], replacer)).join(','));
       csv.unshift(header.join(','));
-      return csv.join('\r\n').split('\r\n');
+      csv = csv.join('\r\n').split('\r\n');
+      return csv.map(r => r + '\n');
     }
     return [];
   };
 
   public JSONArrayToJSON(data: any[]): string[] {
-    JSON.stringify(data, null, '\t').split('\t');
-    return [];
+    return [JSON.stringify(data, undefined, 2)];
   }
 
 }

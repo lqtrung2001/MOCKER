@@ -11,10 +11,10 @@ import { SelectTypeModal, SelectTypeModalOptions } from '@shared/modal/select-ty
 import { SQLType } from '@core/model/sql-type';
 import { Field } from '@core/model/field';
 import { GenerateType } from '@core/model/generate-type';
-import { DeleteTableModal } from '@app/component/table/modal/delete-table/delete-table.modal';
 import { PreviewModal, PreviewModalOptions } from '@shared/modal/preview/preview.modal';
 import { FormatEnum } from '@core/config/format.enum';
-import { SaveTableModal, SaveTableModalOptions } from '@app/component/table/modal/save-table/save-table.modal';
+import { saveAs } from 'file-saver';
+import { ConverterService } from '@core/util/converter.service';
 
 @Component({
   selector: 'app-general',
@@ -35,6 +35,7 @@ export class GeneralComponent {
     private formBuilder: FormBuilder,
     private modalService: ModalService,
     private modalProvider: ModalProvider,
+    private converterService: ConverterService,
     private generateService: GenerateService
   ) {
     this.formGroup = formBuilder.group({
@@ -111,8 +112,28 @@ export class GeneralComponent {
   }
 
   generate(): void {
+    const fileName: string = 'mockez';
     this.initData(() => {
-      console.log('a');
+      switch (this.tableOptions.type) {
+        case FormatEnum.JSON:
+          saveAs(new Blob(this.converterService.JSONArrayToJSON(this.data), {
+            type: 'application/json'
+          }), `${fileName}.json`);
+          break;
+        case FormatEnum.XML:
+          saveAs(new Blob(this.converterService.JSONArrayToXML(this.data), {
+            type: 'application/xml'
+          }), `${fileName}.xml`);
+          break;
+        case FormatEnum.SQL:
+          saveAs(new Blob(this.converterService.JSONArrayToSQL(this.tableOptions.name!, this.data)),
+            `${fileName}.sql`);
+          break;
+        case FormatEnum.CSV:
+          saveAs(new Blob(this.converterService.JSONArrayToCSV(this.data)),
+            `${fileName}.csv`);
+          break;
+      }
     });
   }
 
@@ -120,7 +141,7 @@ export class GeneralComponent {
     this.initData(() => {
       const options: PreviewModalOptions = {
         data: this.data,
-        format: FormatEnum.JSON
+        format: this.tableOptions.type
       };
       this.modalService.open(PreviewModal, options);
     });
