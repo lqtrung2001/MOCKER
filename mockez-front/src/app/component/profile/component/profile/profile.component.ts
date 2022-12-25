@@ -10,6 +10,7 @@ import {
   ChangePasswordModal,
   ChangePasswordModalOptions
 } from '@app/component/profile/modal/change-password/change-password.modal';
+import { AppConfigProviderService } from '@core/service/app-config-provider.service';
 
 @Component({
   selector: 'app-profile',
@@ -28,22 +29,21 @@ export class ProfileComponent {
     private modalProvider: ModalProvider,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private appContextProviderService: AppConfigProviderService
   ) {
     this.formGroup = formBuilder.group({
       username: formBuilder.control('', [Validators.required]),
       name: formBuilder.control('', [Validators.required]),
       bio: formBuilder.control('', [Validators.required]),
-      phone: formBuilder.control('', [Validators.required]),
-      address: formBuilder.control('', [Validators.required]),
-      dob: formBuilder.control('', [Validators.required])
+      phone: formBuilder.control('', []),
+      address: formBuilder.control('', []),
+      dob: formBuilder.control('', [])
     });
-    const storage = window.localStorage.getItem('user');
+    const storage = localStorage.getItem('user');
     if (!storage) {
       this.modalProvider.showError({
         body: 'Can not authenticate'
-      }).subscribe(() => {
-        console.log('Can not authenticate');
       });
     } else {
       this.user = JSON.parse(storage);
@@ -56,17 +56,16 @@ export class ProfileComponent {
   }
 
   submit(): void {
-
     if (this.formGroup.invalid) {
       return;
     }
-
-    this.user.username = this.formGroup.get('username')?.value;
-    this.user.name = this.formGroup.get('name')?.value;
-    this.user.bio = this.formGroup.get('bio')?.value;
-    this.user.phone = this.formGroup.get('phone')?.value;
-    this.user.address = this.formGroup.get('address')?.value;
-    this.user.dob = this.formGroup.get('dob')?.value;
+    const { username, name, bio, phone, address, dob } = this.formGroup.getRawValue();
+    this.user.username = username;
+    this.user.name = name;
+    this.user.bio = bio;
+    this.user.phone = phone;
+    this.user.address = address;
+    this.user.dob = dob;
     if (this.user.dob) {
       this.user.dob = new Date(this.user.dob);
     }
@@ -74,7 +73,8 @@ export class ProfileComponent {
     this.userService.update(this.user).subscribe((id: string) => {
       if (id) {
         this.userService.findOneByUsername(this.user.username!).subscribe((user: User) => {
-          window.localStorage.setItem('user', JSON.stringify(user));
+          user.password = this.appContextProviderService.auth.password;
+          localStorage.setItem('user', JSON.stringify(user));
           this.user = user;
         });
       }

@@ -93,7 +93,7 @@ export class DataProviderService {
     });
   }
 
-  public generateData(): Observable<any> {
-    return this.generateService.generate(this.buildGenerateReq());
+  public generateData() {
+    // return this.generateService.generate(this.buildGenerateReq());
   }
 }

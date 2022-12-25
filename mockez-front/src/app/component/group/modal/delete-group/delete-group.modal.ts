@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Project } from '@core/model/project';
 import { Group } from '@core/model/group';
 
 @Component({

@@ -1,0 +1,66 @@
+<div id='main' class='mx-auto h-full'>
+  <div class='bg-white rounded text-sm h-full'>
+    <div class='flex items-center relative py-5 px-20'>
+      <img class='w-28' src='assets/profile.png' alt='person' />
+      <div class='ml-8'>
+        <p class='text-lg font-medium'>{{ user.name | uppercase }}</p>
+        <p class='text-gray-500 text-sm'>{{ user.bio }}</p>
+      </div>
+      <div class='flex flex-col absolute right-20'>
+        <p class='w-3 h-3 mt-3 rounded-full bg-red'></p>
+        <p class='w-3 h-3 mt-3 rounded-full bg-yellow'></p>
+        <p class='w-3 h-3 mt-3 rounded-full bg-green'></p>
+      </div>
+    </div>
+    <div class='flex mt-10 justify-center'>
+      <p class='font-medium w-1/4'>{{ 'person.username_colon' | translate }}</p>
+      <input class='border w-1/2 py-2 pl-3 pr-14 rounded-md' type='email' [readonly]='true'
+             placeholder='{{ "person.username_placeholder" | translate }}' [value]='user.username' />
+    </div>
+    <div class='flex mt-5 justify-center'>
+      <p class='font-medium w-1/4'>{{ 'person.name_colon' | translate }}</p>
+      <input class='border w-1/2 py-2 pl-3 pr-14 rounded-md' type='text' [readonly]='true'
+             placeholder='{{ "person.name_placeholder" | translate }}' [value]='user.name' />
+    </div>
+    <div class='flex mt-5 justify-center'>
+      <p class='font-medium w-1/4'>
+        {{ 'person.bio_colon' | translate }}<br />
+        <span class='font-normal mt-2 text-gray-500'>{{ 'person.bio_further_info' | translate }}</span>
+      </p>
+      <textarea class='border w-1/2 py-2 pl-3 pr-14 h-28 rounded-md outline-0' type='text' [value]='user.bio'
+                [readonly]='true'
+                placeholder='{{ "person.bio_placeholder" | translate }}'></textarea>
+    </div>
+    <div class='flex mt-5 justify-center'>
+      <p class='font-medium w-1/4'>{{ 'person.phone_colon' | translate }}</p>
+      <input class='border w-1/2 py-2 pl-3 pr-14 rounded-md' type='text' [value]='user.phone' [readonly]='true'
+             placeholder='{{ "person.phone_placeholder" | translate }}' />
+    </div>
+    <div class='flex my-7 justify-center'>
+      <p class='font-medium w-1/4'>{{ 'person.gender_colon' | translate }}</p>
+      <div class='flex w-1/2'>
+        <div class='flex items-center'>
+          <input id='male' type='radio' name='gender' [checked]='gender===MALE' [disabled]='true'
+                 class='cursor-pointer w-4 h-4'>
+          <label for='male' class='ml-2 text-sm'>{{ 'person.gender.male' | translate }}</label>
+        </div>
+        <div class='flex items-center ml-28'>
+          <input id='female' type='radio' name='gender' [checked]='gender===FEMALE' [disabled]='true'
+                 class='cursor-pointer w-4 h-4'>
+          <label for='female' class='ml-2 text-sm'>{{ 'person.gender.female' | translate }}</label>
+        </div>
+      </div>
+    </div>
+    <div class='flex mt-5 justify-center'>
+      <p class='font-medium w-1/4'>{{ 'person.address_colon' | translate }}</p>
+      <textarea class='border w-1/2 py-2 pl-3 pr-14 rounded-md outline-0 h-40' type='text' [value]='user.address'
+                [readonly]='true'
+                placeholder='{{ "person.address_placeholder" | translate }}'></textarea>
+    </div>
+    <div class='flex mt-5 justify-center'>
+      <p class='font-medium w-1/4'>{{ 'person.date_of_birth_colon' | translate }}</p>
+      <input class='border cursor-pointer w-1/2 py-2 pl-3 pr-14 rounded-md' [value]='dob' [readonly]='true'
+             type='date' />
+    </div>
+  </div>
+</div>

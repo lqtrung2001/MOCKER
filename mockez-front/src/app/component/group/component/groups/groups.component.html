@@ -1,23 +1,22 @@
-<div id='main' class='mx-auto'>
-  <div class='text-center items-center'>
-    <input class='text-sm w-1/2 focus:drop-shadow-xl py-2 px-5 rounded-md' [formControl]='filter' type='text'
+<div id='main' class='mx-auto bg-white h-full'>
+  <div class='pt-10 text-center items-center'>
+    <input class='text-sm w-1/2 shadow focus:drop-shadow-xl py-2 px-5 rounded-md' [formControl]='filter' type='text'
            placeholder='{{ "label.search_placeholder" | translate }}' />
     <button class='ml-3 rounded bg-green font-medium hover:drop-shadow-xl text-white text-sm py-1.5 px-5'
             (click)='create()'>{{ 'label.button_new' | translate }}</button>
   </div>
-  <p *ngIf='!groups?.length' class='mt-5 text-center text-sm'>{{ 'message.no_group_match' | translate }}</p>
-  <div class='flex justify-evenly mt-5 flex-wrap'>
+  <p *ngIf='filter.value && !groups?.length && storage.length' class='mt-5 text-center text-sm'>{{ 'message.no_group_match' | translate }}</p>
+  <p *ngIf='!storage.length' class='mt-5 text-center text-sm'>{{ 'message.group_empty' | translate }}</p>
+  <div class='flex mt-5 flex-wrap'>
     <div *ngFor='let group of groups'
-         class='relative m-4 flex items-center cursor-pointer hover:drop-shadow-xl bg-white py-5 pl-10 pr-5 rounded-md w-96 h-32'
-         (click)='openDetail(group.id!)'>
-      <div class='absolute left-4 rounded-md w-1 h-28 bg-green'></div>
+         class='relative shadow m-4 flex items-center hover:drop-shadow-xl bg-white py-5 pl-10 pr-5 rounded-md w-96 h-32'>
+      <div class='absolute left-4 rounded-md w-1 h-28 bg-blue'></div>
       <div class='w-1/4'>
         <img class='w-16' src='assets/group.png' alt='group' />
       </div>
       <div class='text-sm ml-5 w-1/2'>
-        <p class='font-medium uppercase'>{{ group.name | truncate: 15 }}</p>
+        <a [routerLink]='group.id' class='hover:underline font-medium uppercase'>{{ group.name | truncate: 15 }}</a>
         <p class='text-gray-500 first-letter:uppercase'>{{ group.description | truncate: 20 }}</p>
-        <p class='text-gray-500'>{{ ('label.member' | translate) + 0 }}</p>
       </div>
       <div class='absolute top-4 right-5 flex'>
         <p class='w-3 h-3 rounded-full bg-red'></p>

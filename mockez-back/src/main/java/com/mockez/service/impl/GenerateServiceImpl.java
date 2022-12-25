@@ -25,7 +25,7 @@ public class GenerateServiceImpl implements GenerateService {
 
     @Override
     public List<Map<String, String>> generateWithTableId(UUID tableId, Integer row) {
-        Table table = tableRepository.findById(tableId).orElseThrow();
+        Table table = tableRepository.findOneWithEagerFields(tableId);
         return generate(table, row);
     }
 
@@ -41,16 +41,15 @@ public class GenerateServiceImpl implements GenerateService {
             GenerateType generateType = field.getGenerateType();
             generateType.setSources(sourceRepository.findAllByGenerateType(generateType));
             field.setGenerateType(generateType);
-        }).collect(Collectors.toList());
+        }).toList();
         int count = 0;
-        Map<String, String> map = new HashMap<>();
-        while (++count < row) {
+        while (count++ < row) {
+            Map<String, String> map = new HashMap<>();
             fields.forEach(field -> {
                 int index = random.nextInt(0, field.getGenerateType().getSources().size());
                 map.put(field.getName(), field.getGenerateType().getSources().get(index).getValue());
             });
             result.add(map);
-            map.clear();
         }
         return result;
     }

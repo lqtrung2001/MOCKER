@@ -2,6 +2,7 @@ import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { Component } from '@angular/core';
 import { Group } from '@core/model/group';
 import { GroupService } from '@core/service/group.service';
+import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 
 @Component({
   selector: 'app-select-group-modal',
@@ -20,11 +21,19 @@ export class SelectGroupModal extends Modal {
   }
 
   constructor(
-    private groupService: GroupService
+    private groupService: GroupService,
+    private modalProvider: ModalProvider
   ) {
     super();
     groupService.getGroupsWithAccess().subscribe((groups: Group[]) => {
-      this.groups = groups;
+      if (!groups?.length) {
+        this.close(false);
+        modalProvider.showError({
+          body: 'You can not create a new project at this time, please create a group before creating a new project.'
+        });
+      } else {
+        this.groups = groups;
+      }
     });
   }
 

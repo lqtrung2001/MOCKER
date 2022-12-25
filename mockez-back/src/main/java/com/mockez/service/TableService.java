@@ -16,4 +16,6 @@ public interface TableService {
     List<Table> getTablesBySchema(UUID schemaId);
 
     UUID saveOrUpdateTable(Table table);
+
+    UUID delete(UUID id);
 }

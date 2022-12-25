@@ -9,58 +9,11 @@ import { SQLType } from '@core/model/sql-type';
 
 export class GenerateType extends Base {
 
-  private _id: string | undefined = undefined;
-  private _code: string | undefined = undefined;
-  private _description: string | undefined = undefined;
-  private _category: Category | undefined = undefined;
-  private _sources: Source[] = [];
-  private _sqlTypes: SQLType[] = [];
+  public id: string | undefined = undefined;
+  public code: string | undefined = undefined;
+  public description: string | undefined = undefined;
+  public category: Category | undefined = undefined;
+  public sources: Source[] = [];
+  public sqlTypes: SQLType[] = [];
 
-  get id(): string | undefined {
-    return this._id;
-  }
-
-  set id(value: string | undefined) {
-    this._id = value;
-  }
-
-  get code(): string | undefined {
-    return this._code;
-  }
-
-  set code(value: string | undefined) {
-    this._code = value;
-  }
-
-  get description(): string | undefined {
-    return this._description;
-  }
-
-  set description(value: string | undefined) {
-    this._description = value;
-  }
-
-  get category(): Category | undefined {
-    return this._category;
-  }
-
-  set category(value: Category | undefined) {
-    this._category = value;
-  }
-
-  get sources(): Source[] {
-    return this._sources;
-  }
-
-  set sources(value: Source[]) {
-    this._sources = value;
-  }
-
-  get sqlTypes(): SQLType[] {
-    return this._sqlTypes;
-  }
-
-  set sqlTypes(value: SQLType[]) {
-    this._sqlTypes = value;
-  }
 }

@@ -7,6 +7,8 @@ import com.mockez.domain.model.entity.User;
 import com.mockez.repository.UserRepository;
 import com.mockez.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ApplicationContextHolder applicationContextHolder;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User authentication(String email, String password) {
@@ -44,6 +47,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UUID update(User user) {
+        if (user.getId() == null) {
+            throw new UnexpectedException("Invalid user id");
+        }
+        String currentPassword = getUser(user.getId()).getPassword();
+        user.setPassword(currentPassword);
         return userRepository.save(user).getId();
     }
 
@@ -66,5 +74,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public UUID saveUser(User user) {
         return userRepository.save(user).getId();
+    }
+
+    @Override
+    public User changePassword(UUID id, String currentPassword, String newPassword) {
+        User auth = applicationContextHolder.getCurrentUser();
+        if (!auth.getId().equals(id) || !passwordEncoder.matches(currentPassword, auth.getPassword())) {
+            throw new UnexpectedException("You have not permission to change the password");
+        }
+        auth.setPassword(passwordEncoder.encode(newPassword));
+        saveUser(auth);
+        return auth;
     }
 }

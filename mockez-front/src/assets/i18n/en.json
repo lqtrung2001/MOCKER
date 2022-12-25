@@ -8,7 +8,14 @@
   },
   "message": {
     "no_group_match": "No group match with this credential.",
-    "no_project_match": "No project match with this credential."
+    "group_empty": "Group is empty in this time, please click create button for creating group.",
+    "no_table_match": "No table match with this credential.",
+    "table_empty": "Table is empty in this time, please click create button for creating table.",
+    "no_project_match": "No project match with this credential.",
+    "project_empty": "Project is empty in this time, please click create button for creating project.",
+    "no_schema_match": "No schema match with this credential.",
+    "schema_empty": "Schema is empty in this time, please click create button for creating schema.",
+    "no_person_match": "No person match with this credential."
   },
   "modal": {
     "create_group": {
@@ -87,7 +94,7 @@
   },
   "table": {
     "title": "Table",
-    "empty": "Schema is empty, please add another project and config them by using create button.",
+    "empty": "Field is empty, please add another project and config them by using add button.",
     "summary": "Schema summary",
     "show": "Show",
     "all_column": "All column",
@@ -97,6 +104,50 @@
     "last_modified": "Last modified"
   },
   "group": {
-
+  },
+  "person": {
+    "no_match": "No person matching the criteria.",
+    "empty": "Person is empty in this time.",
+    "card": {
+      "phone": "Phone"
+    },
+    "username_colon": "Username:",
+    "username_placeholder": "Please enter your email",
+    "name_colon": "Name:",
+    "name_placeholder": "Please enter your name",
+    "bio_colon": "Bio:",
+    "bio_further_info": "This will be displayed on your profile.",
+    "bio_placeholder": "Please enter your bio",
+    "phone_colon": "Phone:",
+    "phone_placeholder": "Please enter your phone",
+    "gender_colon": "Gender:",
+    "gender": {
+      "male": "Male",
+      "female": "Female"
+    },
+    "address_colon": "Address:",
+    "address_placeholder": "Please enter your address",
+    "date_of_birth_colon": "Date of birth:"
+  },
+  "profile": {
+    "username_colon": "Username:",
+    "username_placeholder": "Please enter your email",
+    "name_colon": "Name:",
+    "name_placeholder": "Please enter your name",
+    "bio_colon": "Bio:",
+    "bio_further_info": "This will be displayed on your profile.",
+    "bio_placeholder": "Please enter your bio",
+    "phone_colon": "Phone:",
+    "phone_placeholder": "Please enter your phone",
+    "gender_colon": "Gender:",
+    "gender": {
+      "male": "Male",
+      "female": "Female"
+    },
+    "address_colon": "Address:",
+    "address_placeholder": "Please enter your address",
+    "date_of_birth_colon": "Date of birth:",
+    "change_password": "Change password",
+    "save_change": "Save changes"
   }
 }

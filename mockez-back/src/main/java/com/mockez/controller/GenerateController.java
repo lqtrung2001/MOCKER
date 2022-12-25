@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -31,7 +32,7 @@ public class GenerateController implements GenerateApi {
     }
 
     @Override
-    public ResponseEntity<List<Map<String, String>>> showGenerate(Integer row, TableDto tableDto) {
-        return ResponseEntity.ok(generateService.generateWithTable(apiAbstractMapper.map(tableDto), row));
+    public ResponseEntity<List<Map<String, String>>> showGenerate(BigDecimal row, TableDto tableDto) {
+        return ResponseEntity.ok(generateService.generateWithTable(apiAbstractMapper.map(tableDto), row.intValue()));
     }
 }

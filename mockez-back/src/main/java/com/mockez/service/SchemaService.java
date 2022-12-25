@@ -1,6 +1,7 @@
 package com.mockez.service;
 
 import com.mockez.domain.model.entity.Schema;
+import com.mockez.domain.model.entity.User;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,4 +22,6 @@ public interface SchemaService {
     UUID saveOrUpdate(Schema schema);
 
     UUID delete(UUID id);
+
+    Schema getSchema(UUID id);
 }

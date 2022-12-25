@@ -28,4 +28,12 @@ export class TableService {
     return this.httpClient.get<Table[]>(`${environment.apiUrl}/${TableService.TABLE}?schemaId=${schemaId}`);
   }
 
+  saveOrUpdate(table: Table): Observable<string> {
+    return this.httpClient.post<string>(`${environment.apiUrl}/${TableService.TABLE}`, table);
+  }
+
+  delete(id: string): Observable<string> {
+    return this.httpClient.delete<string>(`${environment.apiUrl}/${TableService.TABLE}/${id}`);
+  }
+
 }

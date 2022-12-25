@@ -13,6 +13,7 @@ import { GroupMemberService } from '@core/service/group-member.service';
 import { AddMemberModal, AddMemberModalOptions } from '@app/component/group/modal/add-member/add-member.modal';
 import { User } from '@core/model/user';
 import { GroupMemberPk } from '@core/model/composite_key/group-member-pk';
+import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project.modal';
 
 @Component({
   selector: 'app-group',
@@ -35,7 +36,7 @@ export class GroupComponent {
     private router: Router,
     private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private appConfigProviderService: AppConfigProviderService,
+    public appConfigProviderService: AppConfigProviderService,
     private modalProvider: ModalProvider,
     private groupMemberService: GroupMemberService
   ) {
@@ -121,25 +122,37 @@ export class GroupComponent {
   }
 
   removeUser(groupMember: GroupMember): void {
-    if (groupMember.user?.id === this.appConfigProviderService.auth.id) {
-      this.modalProvider.showError({
-        body: 'You cannot remove yourself from this group'
-      }).subscribe(() => {
-        return;
-      });
-    } else {
-      this.modalProvider.showConfirmation({
-        body: 'Are you sure you want to remove user from this group'
-      }).subscribe((ok: boolean) => {
-        if (ok) {
-          this.groupMemberService.delete(groupMember.id!).subscribe((id) => {
-            if (id) {
+    const isPrinciple: boolean = groupMember.user?.id === this.appConfigProviderService.auth.id;
+    const content: string = isPrinciple
+      ? 'Are you sure leaving this group anyway'
+      : 'Are you sure you want to remove user from this group';
+    this.modalProvider.showConfirmation({
+      body: content
+    }).subscribe((ok: boolean) => {
+      if (ok) {
+        this.groupMemberService.delete(groupMember.id!).subscribe((id) => {
+          if (id) {
+            if (isPrinciple) {
+              this.router.navigate(['group']).then();
+            } else {
               this.load(this.group.id!);
             }
+          }
+        });
+      }
+    });
+  }
+
+  addProject(): void {
+    this.modalService.open(SaveProjectModal, {
+      group: this.group
+    }).onResult()
+      .subscribe((id: string) => {
+        if (id) {
+          this.router.navigate(['/project/' + id]).then(() => {
+            console.log('Project created successfully');
           });
         }
       });
-    }
   }
-
 }

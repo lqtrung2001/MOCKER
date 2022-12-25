@@ -1,29 +1,29 @@
-<div id='main' class='mx-auto text-sm'>
-  <div class='tables flex'>
-    <table *ngFor='let table of tables; index as index'
-           class='bg-white relative m-3 cursor-pointer rounded-md w-60 overflow-hidden'
-           (click)='openDetail(table.id)'>
-      <tr>
-        <th colspan='2' class='bg-blue-100 py-2'>{{ table.name | uppercase }}</th>
-      </tr>
-      <tr>
-        <td class='py-2 pl-10 text-left font-medium'>
-          <img class='w-5 absolute left-2' src='assets/icon/nav/primary_key.png' alt='PRIMARY KEY' />
-          id
-        </td>
-        <td class='py-2 pr-8 text-right text-gray-500 uppercase'>int</td>
-      </tr>
-      <tr>
-        <td class='py-2 pl-10 text-left'>phone</td>
-        <td class='py-2 pr-8 text-right text-gray-500 uppercase'>varchar</td>
-      </tr>
-      <tr>
-        <td class='py-2 pl-10 text-left'>
-          <img class='w-5 absolute left-2' src='assets/icon/nav/foreign_key.png' alt='FOREIGN KEY' />
-          product_id
-        </td>
-        <td class='py-2 pr-8 text-right text-gray-500 uppercase'>varchar</td>
-      </tr>
-    </table>
+<div id='main' class='mx-auto bg-white h-full text-sm'>
+  <div class='text-center items-center'>
+    <input class='text-sm w-1/2 shadow mt-10 focus:drop-shadow-xl py-2 px-5 rounded-md' [formControl]='filter'
+           type='text'
+           placeholder='{{ "label.search_placeholder" | translate }}' />
+    <button class='ml-3 rounded bg-green font-medium hover:drop-shadow-xl text-white text-sm py-1.5 px-5'
+            (click)='create()'>{{ 'label.button_new' | translate }}</button>
+  </div>
+  <p *ngIf='filter.value && !tables?.length && storage.length' class='mt-5 text-center text-sm'>{{ 'message.no_table_match' | translate }}</p>
+  <p *ngIf='!storage.length' class='mt-5 text-center text-sm'>{{ 'message.table_empty' | translate }}</p>
+  <div class='tables flex mt-10'>
+    <div *ngFor='let table of tables'
+         class='card shadow relative m-4 flex items-center hover:drop-shadow-xl bg-white py-5 pl-10 pr-5 rounded-md w-96 h-32'>
+      <div class='absolute left-4 rounded-md w-1 h-28 bg-green'></div>
+      <div class='w-1/4'>
+        <img class='w-20' src='assets/table.png' alt='table' />
+      </div>
+      <div class='info ml-5 w-1/2'>
+        <a class='font-medium hover:underline' [routerLink]='"/table/" + table.id'>{{ table.name | truncate: 20 }}</a>
+        <p class='text-sm text-gray-500'>{{ table.description | truncate: 50 }}</p>
+      </div>
+      <div class='absolute top-4 right-5 flex'>
+        <p class='w-3 h-3 rounded-full bg-red'></p>
+        <p class='w-3 h-3 ml-3 rounded-full bg-yellow'></p>
+        <p class='w-3 h-3 ml-3 rounded-full bg-green'></p>
+      </div>
+    </div>
   </div>
 </div>

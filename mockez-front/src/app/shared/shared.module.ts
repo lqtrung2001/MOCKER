@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { ConfigurationComponent } from '@shared/component/configuration/configuration.component';
-import { TableComponent } from '@shared/component/table/table.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { KeyValuePipe, NgForOf, NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -18,7 +17,6 @@ import { ToastModule } from '@shared/modal/toast-service';
 @NgModule({
   declarations: [
     ConfigurationComponent,
-    TableComponent,
     TruncatePipe,
     SelectTypeModal,
     PreviewModal,
@@ -40,7 +38,6 @@ import { ToastModule } from '@shared/modal/toast-service';
     ToastModule
   ],
   exports: [
-    TableComponent,
     TruncatePipe,
     ConfigurationComponent,
     CreateSchemaModal,
