@@ -4,6 +4,72 @@ info:
   description: Website MOCKEZ generates source for system testing.
   version: 3.0.0
 paths:
+  /auth/sendcode:
+    post:
+      operationId: sendOTP
+      tags:
+        - Signup
+      description: signup SendOTP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+              format: email
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: boolean
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /auth/validate/{otpCode}:
+    parameters:
+      - in: path
+        name: otpCode
+        required: true
+        description: otpCode
+        schema:
+          type: integer
+    post:
+      operationId: signup
+      tags:
+        - Signup
+      description: signup user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
   /user/{id}:
     parameters:
       - in: path

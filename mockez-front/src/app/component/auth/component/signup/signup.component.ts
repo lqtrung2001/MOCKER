@@ -1,49 +1,52 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {ModalService} from "@shared/modal/modal-service/modal-service.service";
+import {ModalProvider} from "@shared/modal/modal-provider/modal-provider.modal";
+import {TableOptionModalOptions} from "@app/component/table/modal/table-option/table-option.modal";
+import {SignupModal, SignupModalOptions} from "@app/component/auth/modal/sigup/sigup.modal";
+import {AuthService} from "@core/service/auth.service";
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
-  credential: FormGroup;
+  formGroup: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private httpClient: HttpClient
+    private modalService: ModalService,
+    private modalProvider: ModalProvider,
+    private authService: AuthService
   ) {
-    this.credential = formBuilder.group({
-      email: formBuilder.control('', Validators.required),
-      password: formBuilder.control('', Validators.required)
+    this.formGroup = formBuilder.group({
+      username: formBuilder.control('', [Validators.required]),
+      password: formBuilder.control('', [Validators.required])
     });
   }
 
-  ngOnInit(): void {
-    sessionStorage.setItem('token', '');
-  }
-
-  signup() {
-    const url = 'http://localhost:8080/user/login';
-    this.httpClient.post<Observable<boolean>>(url, {
-      email: this.credential.get('email')?.value,
-      password: this.credential.get('password')?.value
-    }).subscribe((isValid: Observable<boolean>) => {
-      if (isValid) {
-        sessionStorage.setItem('token',
-          btoa(`${this.credential.get('email')?.value}:${this.credential.get('password')?.value}`)
-        );
-        this.router.navigate(['/general']).then();
-      } else {
-        alert('Authentication failed');
+  sendOPT(): void {
+    if (this.formGroup.invalid) {
+      return;
+    }
+    const {username, password} = this.formGroup.getRawValue();
+    this.authService.sentOTPCode(username).subscribe((res: boolean) => {
+      if (!res) {
+        return;
       }
+      const options: SignupModalOptions = {username, password};
+      this.modalService.open(SignupModal, options)
+        .onResult().subscribe((close: boolean) => {
+        if (close) {
+          this.router.navigate(['/profile']).then();
+        }
+      });
     });
   }
-
 }
