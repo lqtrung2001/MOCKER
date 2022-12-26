@@ -5,6 +5,7 @@ import com.mockez.api.AuthApi;
 import com.mockez.controller.maper.ApiAbstractMapper;
 import com.mockez.domain.dto.UserDto;
 import com.mockez.service.AuthService;
+import com.mockez.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "")
-public class EmailController implements AuthApi {
+public class AuthController implements AuthApi {
     private final ApiAbstractMapper apiAbstractMapper;
     private final AuthService authService;
+    private final UserService userService;
 
     @Override
     public ResponseEntity<UserDto> signup(Integer otpCode, UserDto userDto) {
@@ -32,4 +34,8 @@ public class EmailController implements AuthApi {
         return ResponseEntity.ok(authService.sendOTPCode(username));
     }
 
+    @Override
+    public ResponseEntity<Boolean> checkIsExistUsername(String username) {
+        return ResponseEntity.ok(userService.checkIsExistingUsername(username));
+    }
 }

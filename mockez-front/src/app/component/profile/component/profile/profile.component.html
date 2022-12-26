@@ -13,30 +13,46 @@
       </div>
     </div>
     <div class='flex mt-10 justify-center'>
-      <p class='font-medium w-1/4'>{{ 'profile.username_colon' | translate }}</p>
-      <input class='border w-1/2 py-2 pl-3 pr-14 rounded-md' type='email' formControlName='username'
+      <p class='font-medium w-1/4'>{{ 'profile.username_colon_required' | translate }}</p>
+      <div class='w-1/2'>
+        <input class='border w-full {{ formGroup.get("username")?.invalid ? "border-red-300" : "" }} py-2 px-3 rounded-md' type='email' formControlName='username'
              placeholder='{{ "profile.username_placeholder" | translate }}' />
+        <p class='ml-3 mt-2 text-red-500' *ngIf='formGroup.get("username")?.errors?.["required"]'>{{ 'validator.required' | translate }}</p>
+        <p class='ml-3 mt-2 text-red-500' *ngIf='formGroup.get("username")?.errors?.["maxlength"]'>{{ ('validator.max_length' | translate) + '255.' }}</p>
+      </div>
     </div>
     <div class='flex mt-5 justify-center'>
-      <p class='font-medium w-1/4'>{{ 'profile.name_colon' | translate }}</p>
-      <input class='border w-1/2 py-2 pl-3 pr-14 rounded-md' type='text' formControlName='name'
+      <p class='font-medium w-1/4'>{{ 'profile.name_colon_required' | translate }}</p>
+      <div class='w-1/2'>
+        <input class='border w-full {{ formGroup.get("name")?.invalid ? "border-red-300" : "" }} py-2 px-3 rounded-md' type='text' formControlName='name'
              placeholder='{{ "profile.name_placeholder" | translate }}' />
+        <p class='ml-3 mt-2 text-red-500' *ngIf='formGroup.get("name")?.errors?.["required"]'>{{ 'validator.required' | translate }}</p>
+        <p class='ml-3 mt-2 text-red-500' *ngIf='formGroup.get("name")?.errors?.["maxlength"]'>{{ ('validator.max_length' | translate) + '255.' }}</p>
+      </div>
     </div>
     <div class='flex mt-5 justify-center'>
       <p class='font-medium w-1/4'>
-        {{ 'profile.bio_colon' | translate }}<br />
+        {{ 'profile.bio_colon_required' | translate }}<br />
         <span class='font-normal mt-2 text-gray-500'>{{ 'profile.bio_further_info' | translate }}</span>
       </p>
-      <textarea class='border w-1/2 py-2 pl-3 pr-14 h-28 rounded-md outline-0' formControlName='bio' type='text'
+      <div class='w-1/2'>
+        <textarea class='border w-full {{ formGroup.get("bio")?.invalid ? "border-red-300" : "" }} py-2 px-3 h-28 rounded-md outline-0' formControlName='bio' type='text'
                 placeholder='{{ "profile.bio_placeholder" | translate }}'></textarea>
+        <p class='ml-3 mt-2 text-red-500' *ngIf='formGroup.get("bio")?.errors?.["required"]'>{{ 'validator.required' | translate }}</p>
+        <p class='ml-3 mt-2 text-red-500' *ngIf='formGroup.get("bio")?.errors?.["maxlength"]'>{{ ('validator.max_length' | translate) + '255.' }}</p>
+      </div>
     </div>
     <div class='flex mt-5 justify-center'>
-      <p class='font-medium w-1/4'>{{ 'profile.phone_colon' | translate }}</p>
-      <input class='border w-1/2 py-2 pl-3 pr-14 rounded-md' type='text' formControlName='phone'
+      <p class='font-medium w-1/4'>{{ 'profile.phone_colon_required' | translate }}</p>
+      <div class='w-1/2'>
+        <input class='border w-full {{ formGroup.get("phone")?.invalid ? "border-red-300" : "" }} py-2 px-3 rounded-md' type='text' formControlName='phone'
              placeholder='{{ "profile.phone_placeholder" | translate }}' />
+        <p class='ml-3 mt-2 text-red-500' *ngIf='formGroup.get("phone")?.errors?.["required"]'>{{ 'validator.required' | translate }}</p>
+        <p class='ml-3 mt-2 text-red-500' *ngIf='formGroup.get("phone")?.errors?.["maxlength"]'>{{ ('validator.max_length' | translate) + '255.' }}</p>
+      </div>
     </div>
     <div class='flex my-7 justify-center'>
-      <p class='font-medium w-1/4'>{{ 'profile.gender_colon' | translate }}</p>
+      <p class='font-medium w-1/4'>{{ 'profile.gender_colon_required' | translate }}</p>
       <div class='flex w-1/2'>
         <div class='flex items-center'>
           <input id='male' type='radio' name='gender' (click)='gender=MALE' [checked]='gender===MALE'
@@ -53,14 +69,21 @@
       </div>
     </div>
     <div class='flex mt-5 justify-center'>
-      <p class='font-medium w-1/4'>{{ 'profile.address_colon' | translate }}</p>
-      <textarea class='border w-1/2 py-2 pl-3 pr-14 rounded-md outline-0 h-40' formControlName='address' type='text'
+      <p class='font-medium w-1/4'>{{ 'profile.address_colon_required' | translate }}</p>
+      <div class='w-1/2'>
+        <textarea class='border w-full {{ formGroup.get("address")?.invalid ? "border-red-300" : "" }} py-2 px-3 rounded-md outline-0 h-40' formControlName='address' type='text'
                 placeholder='{{ "profile.address_placeholder" | translate }}'></textarea>
+        <p class='ml-3 mt-2 text-red-500' *ngIf='formGroup.get("address")?.errors?.["required"]'>{{ 'validator.required' | translate }}</p>
+        <p class='ml-3 mt-2 text-red-500' *ngIf='formGroup.get("address")?.errors?.["maxlength"]'>{{ ('validator.max_length' | translate) + '255.' }}</p>
+      </div>
     </div>
     <div class='flex mt-5 justify-center'>
-      <p class='font-medium w-1/4'>{{ 'profile.date_of_birth_colon' | translate }}</p>
-      <input class='border cursor-pointer w-1/2 py-2 pl-3 pr-14 rounded-md' formControlName='dob'
+      <p class='font-medium w-1/4'>{{ 'profile.date_of_birth_colon_required' | translate }}</p>
+      <div class='w-1/2'>
+        <input class='border w-full {{ formGroup.get("dob")?.invalid ? "border-red-300" : "" }} cursor-pointer py-2 px-3 rounded-md' formControlName='dob'
              type='date' />
+        <p class='ml-3 mt-2 text-red-500' *ngIf='formGroup.get("dob")?.errors?.["required"]'>{{ 'validator.required' | translate }}</p>
+      </div>
     </div>
     <div class='flex mt-5 justify-center'>
       <button type='button'

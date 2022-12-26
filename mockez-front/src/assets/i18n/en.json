@@ -17,11 +17,15 @@
     "schema_empty": "Schema is empty in this time, please click create button for creating schema.",
     "no_person_match": "No person match with this credential."
   },
+  "validator": {
+    "required": "This field is required.",
+    "max_length": "The maximum number of characters allowed in this field is "
+  },
   "modal": {
     "create_group": {
       "title": "CREATE GROUP",
-      "name": "Name: ",
-      "description": "Description: ",
+      "name": "Name: *",
+      "description": "Description: *",
       "name_placeholder": "Enter group name",
       "description_placeholder": "Enter project description"
     },
@@ -111,42 +115,42 @@
     "card": {
       "phone": "Phone"
     },
-    "username_colon": "Username:",
+    "username_colon_required": "Username: *",
     "username_placeholder": "Please enter your email",
-    "name_colon": "Name:",
+    "name_colon_required": "Name: *",
     "name_placeholder": "Please enter your name",
-    "bio_colon": "Bio:",
+    "bio_colon_required": "Bio: *",
     "bio_further_info": "This will be displayed on your profile.",
     "bio_placeholder": "Please enter your bio",
-    "phone_colon": "Phone:",
+    "phone_colon_required": "Phone: *",
     "phone_placeholder": "Please enter your phone",
-    "gender_colon": "Gender:",
+    "gender_colon_required": "Gender: *",
     "gender": {
       "male": "Male",
       "female": "Female"
     },
-    "address_colon": "Address:",
+    "address_colon_required": "Address: *",
     "address_placeholder": "Please enter your address",
-    "date_of_birth_colon": "Date of birth:"
+    "date_of_birth_colon_required": "Date of birth: *"
   },
   "profile": {
-    "username_colon": "Username:",
+    "username_colon_required": "Username: *",
     "username_placeholder": "Please enter your email",
-    "name_colon": "Name:",
+    "name_colon_required": "Name: *",
     "name_placeholder": "Please enter your name",
-    "bio_colon": "Bio:",
+    "bio_colon_required": "Bio: *",
     "bio_further_info": "This will be displayed on your profile.",
     "bio_placeholder": "Please enter your bio",
-    "phone_colon": "Phone:",
+    "phone_colon_required": "Phone: *",
     "phone_placeholder": "Please enter your phone",
-    "gender_colon": "Gender:",
+    "gender_colon_required": "Gender: *",
     "gender": {
       "male": "Male",
       "female": "Female"
     },
-    "address_colon": "Address:",
+    "address_colon_required": "Address: *",
     "address_placeholder": "Please enter your address",
-    "date_of_birth_colon": "Date of birth:",
+    "date_of_birth_colon_required": "Date of birth: *",
     "change_password": "Change password",
     "save_change": "Save changes"
   }

@@ -15,8 +15,8 @@ export interface SelectTypeModalOptions {
 
 @Component({
   selector: 'app-select-type-modal',
-  templateUrl: './select-type.modal.html',
-  styleUrls: ['./select-type.modal.scss']
+  templateUrl: 'select-type.modal.html',
+  styleUrls: ['select-type.modal.scss']
 })
 export class SelectTypeModal extends Modal {
 

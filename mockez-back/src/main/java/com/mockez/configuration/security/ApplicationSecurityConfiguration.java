@@ -44,7 +44,10 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.cors();
-        http.authorizeRequests()
+        http
+                .anonymous()
+                .and()
+                .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/api/**").hasAnyRole(ApplicationUserRole.USER.name(), ApplicationUserRole.ADMIN.name())
                 .anyRequest()

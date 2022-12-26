@@ -18,6 +18,9 @@ export class ConverterService {
   };
 
   public JSONArrayToXML(data: any[]): string[] {
+    if (!data) {
+      return [];
+    }
     return JsonToXML.parse('row', data).split('');
   };
 
@@ -37,6 +40,9 @@ export class ConverterService {
   };
 
   public JSONArrayToJSON(data: any[]): string[] {
+    if (!data) {
+      return [];
+    }
     return [JSON.stringify(data, undefined, 2)];
   }
 

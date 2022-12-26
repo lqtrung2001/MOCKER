@@ -55,7 +55,7 @@ export class AuthGuard implements CanActivate {
     }).subscribe(() => {
       this.router.navigate(['/auth/login'], { queryParams: { returnUrl: state.url } })
         .then(() => {
-          console.debug(`User isn't logged in`);
+          console.debug(`User isn't logged in, please login and try again`);
         });
     });
   }

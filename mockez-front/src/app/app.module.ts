@@ -20,6 +20,7 @@ import { ProfileModule } from '@app/component/profile/profile.module';
 import { GroupModule } from '@app/component/group/group.module';
 import { PersonModule } from '@app/component/person/person.module';
 import { MarkdownModule } from 'ngx-markdown';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MarkdownModule } from 'ngx-markdown';
     GroupModule,
     PersonModule,
     StoreModule.forRoot({}),
-    MarkdownModule.forRoot()
+    MarkdownModule.forRoot(),
+    SharedModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

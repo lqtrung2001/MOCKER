@@ -14,7 +14,7 @@ export class SchemaService {
   ) {
   }
 
-  public getSchemasByProject(projectId: string): Observable<Schema[]> {
+  getSchemasByProject(projectId: string): Observable<Schema[]> {
     return this.httpClient.get<Schema[]>(`${environment.apiUrl}/schema?projectId=${projectId}`);
   }
 

@@ -109,15 +109,22 @@
     </div>
     <div *ngIf='tab==="PROPERTIES"' class='p-20 text-sm' [formGroup]='formGroup'>
       <div class='flex mt-5 justify-center'>
-        <p class='font-medium w-1/4'>{{ 'Name:' }}</p>
-        <input class='border w-3/4 py-2 pl-3 pr-14 rounded-md' type='text' formControlName='name'
-               placeholder='Please enter group name' />
+        <p class='font-medium w-1/4'>{{ 'Name: *' }}</p>
+        <div class='w-3/4'>
+          <input class='border {{ formGroup.get("name")?.invalid ? "border-red-300" : "" }} w-full py-2 pl-3 pr-14 rounded-md' type='text' formControlName='name'
+                 placeholder='Please enter group name' />
+          <p class='ml-3 mt-2 text-red-500' *ngIf='formGroup.get("name")?.errors?.["required"]'>{{ "validator.required" | translate }}</p>
+        </div>
       </div>
       <div class='flex mt-5 justify-center'>
-        <p class='font-medium w-1/4'>{{ 'Description:' }}</p>
-        <textarea class='border w-3/4 py-2 pl-3 pr-14 h-96 max-h-96 rounded-md outline-0' type='text'
-                  formControlName='description'
-                  placeholder='Please enter group description'></textarea>
+        <p class='font-medium w-1/4'>{{ 'Description: *' }}</p>
+        <div class='w-3/4'>
+          <textarea class='border {{ formGroup.get("description")?.invalid ? "border-red-300" : "" }} w-full py-2 pl-3 pr-14 h-96 max-h-96 rounded-md outline-0' type='text'
+                    formControlName='description'
+                    placeholder='Please enter group description'></textarea>
+          <p class='ml-3 mt-2 text-red-500' *ngIf='formGroup.get("description")?.errors?.["required"]'>{{ 'validator.required' | translate }}</p>
+          <p class='ml-3 mt-2 text-red-500' *ngIf='formGroup.get("description")?.errors?.["maxlength"]'>{{ ('validator.max_length' | translate) + '4096.' }}</p>
+        </div>
       </div>
       <div class='flex mt-5 justify-center'>
         <button type='button'

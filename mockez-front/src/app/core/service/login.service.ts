@@ -13,11 +13,11 @@ export class LoginService {
   ) {
   }
 
-  public login(email: string, password: string): Observable<boolean> {
+  login(email: string, password: string): Observable<boolean> {
     return this.httpClient.post<boolean>(`${environment.apiUrl}/login`, { email, password });
   }
 
-  public signup(email: string, password: string): Observable<boolean> {
+  signup(email: string, password: string): Observable<boolean> {
     return this.httpClient.post<boolean>(`${environment.apiUrl}/signup`, { email, password });
   }
 

@@ -1,6 +1,5 @@
 package com.mockez.service.impl;
 
-import com.google.common.base.Strings;
 import com.mockez.domain.exception.UnexpectedException;
 import com.mockez.domain.model.entity.User;
 import com.mockez.domain.model.entity.enumeration.Gender;
@@ -60,12 +59,12 @@ public class AuthServiceImpl implements AuthService {
                 return userRepository.save(User.builder()
                         .username(user.getUsername())
                         .password(passwordEncoder.encode(user.getPassword()))
-                        .name("User" + otpCode)
-                        .bio("Bio")
-                        .address("HCMC")
+                        .name("User-" + otpCode)
+                        .bio("N/A")
+                        .address("N/A")
                         .dob(OffsetDateTime.now())
                         .gender(Gender.FEMALE)
-                        .phone("0123456789")
+                        .phone("N/A")
                         .grantedAuthorities("ROLE_USER")
                         .isAccountNonExpired(true)
                         .isCredentialsNonExpired(true)
@@ -73,9 +72,9 @@ public class AuthServiceImpl implements AuthService {
                         .isEnabled(true)
                         .build());
             } else {
-                User usesForgotPassword = userRepository.findByUsername(user.getUsername());
-                usesForgotPassword.setPassword(passwordEncoder.encode(otpCode.toString()));
-                return userRepository.save(usesForgotPassword);
+                User userForgotPassword = userRepository.findByUsername(user.getUsername());
+                userForgotPassword.setPassword(passwordEncoder.encode(otpCode.toString()));
+                return userRepository.save(userForgotPassword);
             }
         }
         throw new UnexpectedException("OTP is wrong");

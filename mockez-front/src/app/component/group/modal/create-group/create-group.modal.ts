@@ -22,8 +22,8 @@ export class CreateGroupModal extends Modal {
   ) {
     super();
     this.formGroup = formBuilder.group({
-      name: formBuilder.control('', [Validators.required]),
-      description: formBuilder.control('', [Validators.required])
+      name: formBuilder.control('', [Validators.required, Validators.maxLength(255)]),
+      description: formBuilder.control('', [Validators.required, Validators.maxLength(4096)])
     });
   }
 

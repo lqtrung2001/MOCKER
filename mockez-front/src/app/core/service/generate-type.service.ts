@@ -14,15 +14,15 @@ export class GenerateTypeService {
   ) {
   }
 
-  public getGenerateType(id: string): Observable<GenerateType> {
+  getGenerateType(id: string): Observable<GenerateType> {
     return this.httpClient.get<GenerateType>(`${environment.apiUrl}/generate-type/${id}`);
   }
 
-  public getGenerateTypeByType(sqlTypeId: string): Observable<GenerateType[]> {
+  getGenerateTypeByType(sqlTypeId: string): Observable<GenerateType[]> {
     return this.httpClient.get<GenerateType[]>(`${environment.apiUrl}/generate-type/${sqlTypeId}`);
   }
 
-  public getGenerateTypes(): Observable<GenerateType[]> {
+  getGenerateTypes(): Observable<GenerateType[]> {
     return this.httpClient.get<GenerateType[]>(`${environment.apiUrl}/generate-type/`);
   }
 }
