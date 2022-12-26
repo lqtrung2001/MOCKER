@@ -3,6 +3,10 @@ import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { Table } from '@core/model/table';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-delete-table-modal',
   templateUrl: 'delete-table.modal.html',

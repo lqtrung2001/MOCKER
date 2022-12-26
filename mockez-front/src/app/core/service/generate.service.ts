@@ -5,6 +5,10 @@ import { Field } from '../model/field';
 import { environment } from '@environment/environment';
 import { Table } from '@core/model/table';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export interface GenerateReq {
   row: number;
   fields: Field[];

@@ -4,10 +4,14 @@ import { Group } from '@core/model/group';
 import { GroupService } from '@core/service/group.service';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-select-group-modal',
-  templateUrl: './select-group.modal.html',
-  styleUrls: ['./select-group.modal.scss']
+  templateUrl: 'select-group.modal.html',
+  styleUrls: ['select-group.modal.scss']
 })
 export class SelectGroupModal extends Modal {
 

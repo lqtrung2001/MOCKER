@@ -1,11 +1,15 @@
-import {Component} from '@angular/core';
-import {Modal} from '@shared/modal/modal-service/model/modal.model';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "@core/service/auth.service";
-import {User} from "@core/model/user";
-import {UserService} from "@core/service/user.service";
-import {Router} from "@angular/router";
-import {ModalProvider} from "@shared/modal/modal-provider/modal-provider.modal";
+import { Component } from '@angular/core';
+import { Modal } from '@shared/modal/modal-service/model/modal.model';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '@core/service/auth.service';
+import { User } from '@core/model/user';
+import { UserService } from '@core/service/user.service';
+import { Router } from '@angular/router';
+import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
+
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
 
 export interface SignupModalOptions {
   username: string,
@@ -55,6 +59,6 @@ export class SignupModal extends Modal {
             });
           }
         }
-      })
+      });
   }
 }

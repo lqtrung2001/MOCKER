@@ -6,6 +6,10 @@ import { NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
 import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @NgModule({
   declarations: [
     NavigationComponent,

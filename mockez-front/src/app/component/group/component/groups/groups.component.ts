@@ -7,10 +7,14 @@ import { CreateGroupModal } from '@app/component/group/modal/create-group/create
 import { GroupService } from '@core/service/group.service';
 import { FormBuilder, FormControl } from '@angular/forms';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-groups',
-  templateUrl: './groups.component.html',
-  styleUrls: ['./groups.component.scss']
+  templateUrl: 'groups.component.html',
+  styleUrls: ['groups.component.scss']
 })
 export class GroupsComponent {
 

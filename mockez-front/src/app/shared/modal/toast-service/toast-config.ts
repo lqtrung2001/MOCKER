@@ -1,5 +1,9 @@
 import { InjectionToken, TemplateRef } from '@angular/core';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export class ToastData {
   type: ToastType;
   text?: string;

@@ -5,6 +5,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ChangePasswordModal } from '@app/component/profile/modal/change-password/change-password.modal';
 import { TranslateModule } from '@ngx-translate/core';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @NgModule({
   imports: [
     UpperCasePipe,

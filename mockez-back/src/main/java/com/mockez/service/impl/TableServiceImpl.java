@@ -1,5 +1,6 @@
 package com.mockez.service.impl;
 
+import com.mockez.domain.exception.UnexpectedException;
 import com.mockez.domain.model.entity.Field;
 import com.mockez.domain.model.entity.Table;
 import com.mockez.repository.FieldRepository;
@@ -61,6 +62,11 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public UUID delete(UUID id) {
+        Table table = tableRepository.findOneWithEagerFields(id);
+        if (table == null) {
+            throw new UnexpectedException("Table " + id + " does not exist");
+        }
+        fieldRepository.deleteAll(table.getFields());
         tableRepository.deleteById(id);
         return id;
     }

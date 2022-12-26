@@ -2,6 +2,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { ConverterService } from '../util/converter.service';
 import { FormatEnum } from '../config/format.enum';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Pipe({
   name: 'formatPipe'
 })

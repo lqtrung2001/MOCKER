@@ -4,10 +4,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from '@core/service/group.service';
 import { Group } from '@core/model/group';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-create-group-modal',
-  templateUrl: './create-group.modal.html',
-  styleUrls: ['./create-group.modal.scss']
+  templateUrl: 'create-group.modal.html',
+  styleUrls: ['create-group.modal.scss']
 })
 export class CreateGroupModal extends Modal {
 

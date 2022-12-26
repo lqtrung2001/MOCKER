@@ -8,38 +8,6 @@ VALUES ('d157db0f-91e9-4ee2-8ba7-736b4413205b', '5ecaf074-a91f-4758-ae0d-0724443
 
 INSERT INTO generate_type (id, created_by, created_by_group, created_date, modified_by, modified_by_group,
                            modified_date, code, description, category_id, version)
-VALUES ('b127d9b1-0847-4205-8d1d-e854ae3b7dda', '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
-        'b6bf5612-12fb-4e77-aaa6-34d8223e2290',
-        date(timezone('UTC±00', now()::timestamp)), '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
-        'b6bf5612-12fb-4e77-aaa6-34d8223e2290', date(timezone('UTC±00', now()::timestamp)), 'Character Sequence',
-        'Character Sequence', 'd157db0f-91e9-4ee2-8ba7-736b4413205b', 0);
-
-INSERT INTO source (id, created_by, created_by_group, created_date, modified_by, modified_by_group, modified_date,
-                    value, generate_type_id, version)
-VALUES (gen_random_uuid(), '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
-        'b6bf5612-12fb-4e77-aaa6-34d8223e2290',
-        date(timezone('UTC±00', now()::timestamp)), '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
-        'b6bf5612-12fb-4e77-aaa6-34d8223e2290', date(timezone('UTC±00', now()::timestamp)), 'not found',
-        'b127d9b1-0847-4205-8d1d-e854ae3b7dda', 0);
-
-INSERT INTO generate_type (id, created_by, created_by_group, created_date, modified_by, modified_by_group,
-                           modified_date, code, description, category_id, version)
-VALUES ('c37de0ba-6a59-4064-a00f-f931d2966449', '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
-        'b6bf5612-12fb-4e77-aaa6-34d8223e2290',
-        date(timezone('UTC±00', now()::timestamp)), '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
-        'b6bf5612-12fb-4e77-aaa6-34d8223e2290', date(timezone('UTC±00', now()::timestamp)), 'Digit Sequence',
-        'Digit Sequence', 'd157db0f-91e9-4ee2-8ba7-736b4413205b', 0);
-
-INSERT INTO source (id, created_by, created_by_group, created_date, modified_by, modified_by_group, modified_date,
-                    value, generate_type_id, version)
-VALUES (gen_random_uuid(), '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
-        'b6bf5612-12fb-4e77-aaa6-34d8223e2290',
-        date(timezone('UTC±00', now()::timestamp)), '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
-        'b6bf5612-12fb-4e77-aaa6-34d8223e2290', date(timezone('UTC±00', now()::timestamp)), 'not found',
-        'c37de0ba-6a59-4064-a00f-f931d2966449', 0);
-
-INSERT INTO generate_type (id, created_by, created_by_group, created_date, modified_by, modified_by_group,
-                           modified_date, code, description, category_id, version)
 VALUES ('30028579-6d45-46da-8a2f-c7a4c55243a9', '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
         'b6bf5612-12fb-4e77-aaa6-34d8223e2290',
         date(timezone('UTC±00', now()::timestamp)), '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
@@ -14153,19 +14121,3 @@ VALUES (gen_random_uuid(), '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
         date(timezone('UTC±00', now()::timestamp)), '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
         'b6bf5612-12fb-4e77-aaa6-34d8223e2290', date(timezone('UTC±00', now()::timestamp)), '<>?:"{}|_+',
         'fdbd2bde-4dd1-40cf-9818-a25268d2013b', 0);
-
-INSERT INTO generate_type (id, created_by, created_by_group, created_date, modified_by, modified_by_group,
-                           modified_date, code, description, category_id, version)
-VALUES ('34a113cc-a76e-4225-ae43-4a9ab7b271b3', '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
-        'b6bf5612-12fb-4e77-aaa6-34d8223e2290',
-        date(timezone('UTC±00', now()::timestamp)), '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
-        'b6bf5612-12fb-4e77-aaa6-34d8223e2290', date(timezone('UTC±00', now()::timestamp)), 'Regular Expression',
-        'Regular Expression', 'd157db0f-91e9-4ee2-8ba7-736b4413205b', 0);
-
-INSERT INTO source (id, created_by, created_by_group, created_date, modified_by, modified_by_group, modified_date,
-                    value, generate_type_id, version)
-VALUES (gen_random_uuid(), '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
-        'b6bf5612-12fb-4e77-aaa6-34d8223e2290',
-        date(timezone('UTC±00', now()::timestamp)), '5ecaf074-a91f-4758-ae0d-0724443a1a7a',
-        'b6bf5612-12fb-4e77-aaa6-34d8223e2290', date(timezone('UTC±00', now()::timestamp)),
-        'Invalid character class empty?', '34a113cc-a76e-4225-ae43-4a9ab7b271b3', 0);

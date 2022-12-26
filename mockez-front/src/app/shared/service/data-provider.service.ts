@@ -3,9 +3,12 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormatEnum } from '@core/config/format.enum';
 import { GenerateReq, GenerateService } from '@core/service/generate.service';
 import { Field } from '@core/model/field';
-import { Observable } from 'rxjs';
 import { SQLType } from '@core/model/sql-type';
 import { GenerateType } from '@core/model/generate-type';
+
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
 
 @Injectable({
   providedIn: 'root'

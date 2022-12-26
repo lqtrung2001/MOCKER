@@ -6,6 +6,10 @@ import { defaultToastConfig, ToastConfig, ToastData } from './toast-config';
 import { ToastRef } from './toast-ref';
 import { ToastComponent } from '@shared/modal/toast-service/toast/toast.component';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Injectable({
   providedIn: 'root'
 })

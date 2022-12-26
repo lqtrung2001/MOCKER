@@ -8,10 +8,14 @@ import { UserService } from '@core/service/user.service';
 import { User } from '@core/model/user';
 import { catchError, of } from 'rxjs';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: 'login.component.html',
+  styleUrls: ['login.component.scss']
 })
 export class LoginComponent {
 

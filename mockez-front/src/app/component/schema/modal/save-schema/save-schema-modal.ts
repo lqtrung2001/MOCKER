@@ -4,10 +4,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Schema } from '@core/model/schema';
 import { SchemaService } from '@core/service/schema.service';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-save-schema-modal',
-  templateUrl: './save-schema-modal.html',
-  styleUrls: ['./save-schema-modal.scss']
+  templateUrl: 'save-schema-modal.html',
+  styleUrls: ['save-schema-modal.scss']
 })
 export class SaveSchemaModal extends Modal {
 

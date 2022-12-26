@@ -2,10 +2,14 @@ import { Component } from '@angular/core';
 import { DataProviderService } from '@shared/service/data-provider.service';
 import { FormatEnum } from '@core/config/format.enum';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-configuration',
-  templateUrl: './configuration.component.html',
-  styleUrls: ['./configuration.component.scss']
+  templateUrl: 'configuration.component.html',
+  styleUrls: ['configuration.component.scss']
 })
 export class ConfigurationComponent {
 
@@ -15,6 +19,7 @@ export class ConfigurationComponent {
     public dataProvider: DataProviderService
   ) {
   }
+
   changeFormat(format: FormatEnum) {
     this.dataProvider.configuration.get('format')?.setValue(format);
   }

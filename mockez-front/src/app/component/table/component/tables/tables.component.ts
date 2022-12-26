@@ -10,10 +10,14 @@ import { SaveTableModal, SaveTableModalOptions } from '@app/component/table/moda
 import { Schema } from '@core/model/schema';
 import { SchemaService } from '@core/service/schema.service';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-tables',
-  templateUrl: './tables.component.html',
-  styleUrls: ['./tables.component.scss']
+  templateUrl: 'tables.component.html',
+  styleUrls: ['tables.component.scss']
 })
 export class TablesComponent {
 

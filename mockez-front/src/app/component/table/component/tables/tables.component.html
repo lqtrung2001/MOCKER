@@ -6,7 +6,8 @@
     <button class='ml-3 rounded bg-green font-medium hover:drop-shadow-xl text-white text-sm py-1.5 px-5'
             (click)='create()'>{{ 'label.button_new' | translate }}</button>
   </div>
-  <p *ngIf='filter.value && !tables?.length && storage.length' class='mt-5 text-center text-sm'>{{ 'message.no_table_match' | translate }}</p>
+  <p *ngIf='filter.value && !tables?.length && storage.length'
+     class='mt-5 text-center text-sm'>{{ 'message.no_table_match' | translate }}</p>
   <p *ngIf='!storage.length' class='mt-5 text-center text-sm'>{{ 'message.table_empty' | translate }}</p>
   <div class='tables flex mt-10'>
     <div *ngFor='let table of tables'
@@ -16,7 +17,8 @@
         <img class='w-20' src='assets/table.png' alt='table' />
       </div>
       <div class='info ml-5 w-1/2'>
-        <a class='font-medium hover:underline' [routerLink]='"/table/" + table.id'>{{ table.name | truncate: 20 | uppercase }}</a>
+        <a [routerLink]='"/table/" + table.id'
+           class='font-medium hover:underline'>{{ table.name | truncate: 20 | uppercase }}</a>
         <p class='text-sm text-gray-500'>{{ table.description | truncate: 50 }}</p>
       </div>
       <div class='absolute top-4 right-5 flex'>

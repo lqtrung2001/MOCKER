@@ -3,16 +3,20 @@ import { Project } from '@core/model/project';
 import { ProjectService } from '@core/service/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 import { Group } from '@core/model/group';
 import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project.modal';
 import { ToastService } from '@shared/modal/toast-service';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-projects',
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.scss']
+  templateUrl: 'projects.component.html',
+  styleUrls: ['projects.component.scss']
 })
 export class ProjectsComponent {
 
@@ -37,7 +41,7 @@ export class ProjectsComponent {
         || project.description?.toUpperCase().includes(value.toUpperCase()));
     });
     projectService.getProjects().subscribe((projects: Project[]) => {
-      projects = projects.sort((p1: Project, p2: Project) => (new Date(p2.createdDate!)).getTime() - (new Date(p1.createdDate!)).getTime());
+      projects = projects.sort((p1: Project, p2: Project) => (new Date(p2.modifiedDate!)).getTime() - (new Date(p1.modifiedDate!)).getTime());
       this.storage = projects;
       this.projects = projects;
     });

@@ -5,6 +5,10 @@ import {
 } from '@shared/modal/modal-service/component/modal-container/modal-container.component';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @NgModule({
   imports: [
     CommonModule

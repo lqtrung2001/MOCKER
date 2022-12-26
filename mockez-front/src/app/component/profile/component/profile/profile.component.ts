@@ -12,10 +12,14 @@ import {
 } from '@app/component/profile/modal/change-password/change-password.modal';
 import { AppConfigProviderService } from '@core/service/app-config-provider.service';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  templateUrl: 'profile.component.html',
+  styleUrls: ['profile.component.scss']
 })
 export class ProfileComponent {
 

@@ -19,6 +19,10 @@ import { SQLTypeService } from '@core/service/sql-type.service';
 import { GenerateTypeService } from '@core/service/generate-type.service';
 import { AppConfigProviderService } from '@core/service/app-config-provider.service';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-general',
   templateUrl: 'general.component.html',
@@ -114,16 +118,24 @@ export class GeneralComponent {
         return;
       });
     } else {
-      if (!this.tableOptions) {
+      if (this.isDuplicated(this.formGroup.get('fields')?.value)) {
         this.modalProvider.showError({
-          body: 'Please configure for table to generate by using options tab.'
+          body: 'Duplicate fields.'
+        }).subscribe(() => {
+          return;
         });
       } else {
-        this.table.fields = this.formGroup.get('fields')?.value;
-        this.generateService.generateWithTable(this.table, this.tableOptions.row).subscribe((data: any[]) => {
-          this.data = data;
-          callback();
-        });
+        if (!this.tableOptions) {
+          this.modalProvider.showError({
+            body: 'Please configure for table to generate by using options tab.'
+          });
+        } else {
+          this.table.fields = this.formGroup.get('fields')?.value;
+          this.generateService.generateWithTable(this.table, this.tableOptions.row).subscribe((data: any[]) => {
+            this.data = data;
+            callback();
+          });
+        }
       }
     }
   }
@@ -170,5 +182,9 @@ export class GeneralComponent {
       .onResult().subscribe((options: TableOptionModalOptions) => {
       this.tableOptions = options;
     });
+  }
+
+  isDuplicated(fields: Field[]): boolean {
+    return new Set(fields.map(f => f.name)).size !== fields.length;
   }
 }

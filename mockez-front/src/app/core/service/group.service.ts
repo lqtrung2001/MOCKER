@@ -4,6 +4,10 @@ import { Observable } from 'rxjs';
 import { environment } from '@environment/environment';
 import { Group } from '@core/model/group';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Injectable({
   providedIn: 'root'
 })

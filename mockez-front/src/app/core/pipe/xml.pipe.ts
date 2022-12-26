@@ -1,6 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import * as JsonToXML from 'js2xmlparser';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Pipe({
   name: 'xml'
 })

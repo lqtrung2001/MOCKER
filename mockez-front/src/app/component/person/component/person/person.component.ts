@@ -8,10 +8,14 @@ import { ModalService } from '@shared/modal/modal-service/modal-service.service'
 import { formatDate } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-person',
-  templateUrl: './person.component.html',
-  styleUrls: ['./person.component.scss']
+  templateUrl: 'person.component.html',
+  styleUrls: ['person.component.scss']
 })
 export class PersonComponent {
 

@@ -5,6 +5,10 @@ import {
 } from '@shared/modal/modal-service/component/modal-container/modal-container.component';
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export class ModalRef {
 
   private result$ = new Subject<any>();

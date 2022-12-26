@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfigProviderService } from '@core/service/app-config-provider.service';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',

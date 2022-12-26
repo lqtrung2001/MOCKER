@@ -18,7 +18,7 @@
                 (click)='selectAll()'>{{ 'All' }}</button>
         <button *ngFor='let category of categories'
                 class='mt-5 h-8 rounded w-full shadow hover:drop-shadow-xl text-sm font-medium'
-        (click)='typeSelect(category)'>{{ category.name }}</button>
+                (click)='typeSelect(category)'>{{ category.name }}</button>
       </div>
       <div
         class='flex flex-wrap overflow-y-scroll justify-evenly {{ option.isSQLType ? "w-full" : "w-3/4" }} content-start'>

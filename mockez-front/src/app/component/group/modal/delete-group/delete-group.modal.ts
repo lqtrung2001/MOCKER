@@ -3,10 +3,14 @@ import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Group } from '@core/model/group';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-delete-project',
-  templateUrl: './delete-group.modal.html',
-  styleUrls: ['./delete-group.modal.scss']
+  templateUrl: 'delete-group.modal.html',
+  styleUrls: ['delete-group.modal.scss']
 })
 export class DeleteGroupModal extends Modal {
 

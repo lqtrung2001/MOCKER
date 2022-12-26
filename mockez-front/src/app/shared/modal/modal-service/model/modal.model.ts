@@ -1,5 +1,9 @@
 import { ModalRef } from '@shared/modal/modal-service/model/modal-ref.model';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export abstract class Modal {
 
   modalInstance!: ModalRef;

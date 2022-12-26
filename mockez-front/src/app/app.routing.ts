@@ -17,6 +17,10 @@ import { PersonComponent } from '@app/component/person/component/person/person.c
 import { SignupComponent } from '@app/component/auth/component/signup/signup.component';
 import { ForgotPasswordComponent } from '@app/component/auth/component/forgot-password/forgot-password.component';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 const routes: Routes = [
   { path: '', component: LoginComponent },
   // { path: '', redirectTo: 'general', pathMatch: 'full' },

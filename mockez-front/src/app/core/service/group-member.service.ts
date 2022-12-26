@@ -4,6 +4,10 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { GroupMemberPk } from '@core/model/composite_key/group-member-pk';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Injectable({
   providedIn: 'root'
 })

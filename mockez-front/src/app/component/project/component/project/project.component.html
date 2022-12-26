@@ -10,10 +10,17 @@
         <markdown [data]='project.description'></markdown>
       </div>
       <ng-container *ngIf='isModifyingDescription'>
-        <textarea class='w-full h-5/6 overflow-y-scroll focus:outline-0 border p-3 rounded' formControlName='description'></textarea>
+        <textarea class='w-full h-5/6 overflow-y-scroll focus:outline-0 border p-3 rounded'
+                  formControlName='description'></textarea>
         <div class='flex justify-end mt-10 -mr-3'>
-          <button (click)='isModifyingDescription=false' type='button' class='bg-gray text-sm text-black rounded font-medium px-5 h-10 py-2 mr-3'>Cancel</button>
-          <button (click)='modifyDescription()' type='button' class='bg-blue text-sm text-white rounded font-medium px-5 h-10 py-2 mr-3'>Save</button>
+          <button (click)='isModifyingDescription=false'
+                  class='bg-gray text-sm text-black rounded font-medium px-5 h-10 py-2 mr-3'
+                  type='button'>Cancel
+          </button>
+          <button (click)='modifyDescription()'
+                  class='bg-blue text-sm text-white rounded font-medium px-5 h-10 py-2 mr-3'
+                  type='button'>Save
+          </button>
         </div>
       </ng-container>
     </div>
@@ -38,8 +45,12 @@
         <img src='assets/icon/flying_star.png' class='ml-2 w-7 h-7' alt='flying star' />
       </div>
     </div>
-    <button class='mt-4 bg-green text-white rounded text-sm font-medium p-2 w-full' (click)='openSchema()'>Access Schema</button>
-    <button class='mt-3 bg-yellow text-white rounded text-sm font-medium p-2 w-full' (click)='modifyDetail()'>Modify detail</button>
+    <button (click)='openSchema()' class='mt-4 bg-green text-white rounded text-sm font-medium p-2 w-full'>Access
+      Schema
+    </button>
+    <button (click)='modifyDetail()' class='mt-3 bg-yellow text-white rounded text-sm font-medium p-2 w-full'>Modify
+      detail
+    </button>
     <button class='mt-3 bg-red text-white rounded text-sm font-medium p-2 w-full' (click)='delete()'>Delete</button>
   </div>
 </div>

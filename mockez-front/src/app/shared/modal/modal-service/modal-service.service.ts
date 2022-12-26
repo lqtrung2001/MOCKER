@@ -5,6 +5,10 @@ import {
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { ModalRef } from '@shared/modal/modal-service/model/modal-ref.model';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Injectable({
   providedIn: 'root'
 })

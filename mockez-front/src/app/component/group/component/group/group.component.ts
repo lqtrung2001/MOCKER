@@ -15,6 +15,10 @@ import { User } from '@core/model/user';
 import { GroupMemberPk } from '@core/model/composite_key/group-member-pk';
 import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project.modal';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-group',
   templateUrl: 'group.component.html',

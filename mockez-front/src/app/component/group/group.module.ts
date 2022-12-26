@@ -11,6 +11,10 @@ import { RouterLinkWithHref } from '@angular/router';
 import { DeleteGroupModal } from '@app/component/group/modal/delete-group/delete-group.modal';
 import { AddMemberModal } from '@app/component/group/modal/add-member/add-member.modal';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @NgModule({
   imports: [
     NgForOf,

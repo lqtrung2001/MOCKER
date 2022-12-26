@@ -1,6 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ConverterService } from '@core/util/converter.service';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Pipe({
   name: 'csv'
 })

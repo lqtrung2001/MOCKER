@@ -27,6 +27,10 @@ import { SqlPipe } from '@core/pipe/sql.pipe';
 import { CsvPipe } from '@core/pipe/csv.pipe';
 import { SafeHtmlPipe } from '@core/pipe/safe-html.pipe';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @NgModule({
   declarations: [
     ConfigurationComponent,
