@@ -13,18 +13,18 @@
       </div>
     </div>
     <div class='flex mt-10 justify-center'>
-      <p class='font-medium w-1/4'>{{ 'person.username_colon' | translate }}</p>
+      <p class='font-medium w-1/4'>{{ 'person.username_colon_required' | translate }}</p>
       <input class='border w-1/2 py-2 pl-3 pr-14 rounded-md' type='email' [readonly]='true'
              placeholder='{{ "person.username_placeholder" | translate }}' [value]='user.username' />
     </div>
     <div class='flex mt-5 justify-center'>
-      <p class='font-medium w-1/4'>{{ 'person.name_colon' | translate }}</p>
+      <p class='font-medium w-1/4'>{{ 'person.name_colon_required' | translate }}</p>
       <input class='border w-1/2 py-2 pl-3 pr-14 rounded-md' type='text' [readonly]='true'
              placeholder='{{ "person.name_placeholder" | translate }}' [value]='user.name' />
     </div>
     <div class='flex mt-5 justify-center'>
       <p class='font-medium w-1/4'>
-        {{ 'person.bio_colon' | translate }}<br />
+        {{ 'person.bio_colon_required' | translate }}<br />
         <span class='font-normal mt-2 text-gray-500'>{{ 'person.bio_further_info' | translate }}</span>
       </p>
       <textarea class='border w-1/2 py-2 pl-3 pr-14 h-28 rounded-md outline-0' type='text' [value]='user.bio'
@@ -32,12 +32,12 @@
                 placeholder='{{ "person.bio_placeholder" | translate }}'></textarea>
     </div>
     <div class='flex mt-5 justify-center'>
-      <p class='font-medium w-1/4'>{{ 'person.phone_colon' | translate }}</p>
+      <p class='font-medium w-1/4'>{{ 'person.phone_colon_required' | translate }}</p>
       <input class='border w-1/2 py-2 pl-3 pr-14 rounded-md' type='text' [value]='user.phone' [readonly]='true'
              placeholder='{{ "person.phone_placeholder" | translate }}' />
     </div>
     <div class='flex my-7 justify-center'>
-      <p class='font-medium w-1/4'>{{ 'person.gender_colon' | translate }}</p>
+      <p class='font-medium w-1/4'>{{ 'person.gender_colon_required' | translate }}</p>
       <div class='flex w-1/2'>
         <div class='flex items-center'>
           <input id='male' type='radio' name='gender' [checked]='gender===MALE' [disabled]='true'
@@ -52,13 +52,13 @@
       </div>
     </div>
     <div class='flex mt-5 justify-center'>
-      <p class='font-medium w-1/4'>{{ 'person.address_colon' | translate }}</p>
+      <p class='font-medium w-1/4'>{{ 'person.address_colon_required' | translate }}</p>
       <textarea class='border w-1/2 py-2 pl-3 pr-14 rounded-md outline-0 h-40' type='text' [value]='user.address'
                 [readonly]='true'
                 placeholder='{{ "person.address_placeholder" | translate }}'></textarea>
     </div>
     <div class='flex mt-5 justify-center'>
-      <p class='font-medium w-1/4'>{{ 'person.date_of_birth_colon' | translate }}</p>
+      <p class='font-medium w-1/4'>{{ 'person.date_of_birth_colon_required' | translate }}</p>
       <input class='border cursor-pointer w-1/2 py-2 pl-3 pr-14 rounded-md' [value]='dob' [readonly]='true'
              type='date' />
     </div>

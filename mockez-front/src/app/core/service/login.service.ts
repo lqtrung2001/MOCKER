@@ -3,6 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environment/environment';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Injectable({
   providedIn: 'root'
 })

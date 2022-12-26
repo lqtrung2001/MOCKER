@@ -1,5 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Pipe({
   name: 'truncate'
 })

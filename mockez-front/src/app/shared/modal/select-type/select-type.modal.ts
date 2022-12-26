@@ -8,6 +8,10 @@ import { AppConfigProviderService } from '@core/service/app-config-provider.serv
 import { Category } from '@core/model/category';
 import { FormBuilder, FormControl } from '@angular/forms';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export interface SelectTypeModalOptions {
   isSQLType: boolean;
   type: SQLType | GenerateType;

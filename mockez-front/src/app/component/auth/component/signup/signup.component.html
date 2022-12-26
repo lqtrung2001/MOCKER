@@ -5,32 +5,33 @@
       <label class='block font-medium' for='username'>Email</label>
       <div class='input flex items-center'>
         <div class='flex items-center w-1/12'>
-          <img class='icon' src='assets/icon/navigation/user.png' alt='user'/>
+          <img alt='user' class='icon' src='assets/icon/navigation/user.png' />
         </div>
         <input formControlName='username' class='relative px-5 pt-1 pb-3 mt-3 w-11/12' type='text' id='username'
-               placeholder='Enter your email address'/>
+               placeholder='Enter your email address' />
       </div>
     </div>
     <div class='relative mt-5'>
       <label class='block font-medium' for='password'>Password</label>
       <div class='input flex items-center'>
         <div class='flex items-center w-1/12'>
-          <img class='icon' src='assets/icon/lock.png' alt='lock'/>
+          <img alt='lock' class='icon' src='assets/icon/lock.png' />
         </div>
         <input formControlName='password' class='relative px-5 pt-1 pb-3 mt-3 w-11/12' type='password' id='password'
-               placeholder='Enter your password'/>
+               placeholder='Enter your password' />
       </div>
     </div>
     <div class='text-center mt-8'>
       <button class='bg-green font-bold text-white rounded p-2.5 w-11/12'
-      (click)='sendOPT()'>SIGNUP</button>
+              (click)='sendOPT()'>SIGNUP
+      </button>
     </div>
     <div class='text-center mt-8 text-gray-500'>
       If you have account, <a routerLink='/auth/login' class='underline text-blue-500'>login</a> now or by using
     </div>
     <div class='flex justify-center mt-5'>
-      <img class='w-8 mx-2 cursor-pointer' src='assets/icon/google.png' alt='google'/>
-      <img class='w-8 mx-2 cursor-pointer' src='assets/icon/github.png' alt='github'/>
+      <img alt='google' class='w-8 mx-2 cursor-pointer' src='assets/icon/google.png' />
+      <img alt='github' class='w-8 mx-2 cursor-pointer' src='assets/icon/github.png' />
     </div>
   </div>
 </div>

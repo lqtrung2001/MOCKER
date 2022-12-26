@@ -4,6 +4,10 @@ import { GenerateType } from '@core/model/generate-type';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environment/environment';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Injectable({
   providedIn: 'root'
 })

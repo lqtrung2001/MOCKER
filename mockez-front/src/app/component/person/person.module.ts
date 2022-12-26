@@ -7,6 +7,10 @@ import { RouterLinkWithHref } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @NgModule({
   imports: [
     SharedModule,

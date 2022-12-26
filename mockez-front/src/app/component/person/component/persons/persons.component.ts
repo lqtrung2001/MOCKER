@@ -3,10 +3,14 @@ import { User } from '@core/model/user';
 import { UserService } from '@core/service/user.service';
 import { FormBuilder, FormControl } from '@angular/forms';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-persons',
-  templateUrl: './persons.component.html',
-  styleUrls: ['./persons.component.scss']
+  templateUrl: 'persons.component.html',
+  styleUrls: ['persons.component.scss']
 })
 export class PersonsComponent {
 

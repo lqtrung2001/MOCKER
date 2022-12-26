@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { DialogOption } from '@shared/modal/modal-provider/modal-provider.modal';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-dialog-modal',
   templateUrl: 'dialog.modal.html',

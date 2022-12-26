@@ -4,10 +4,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProjectService } from '@core/service/project.service';
 import { Project } from '@core/model/project';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-save-schema-modal',
-  templateUrl: './save-project.modal.html',
-  styleUrls: ['./save-project.modal.scss']
+  templateUrl: 'save-project.modal.html',
+  styleUrls: ['save-project.modal.scss']
 })
 export class SaveProjectModal extends Modal {
 

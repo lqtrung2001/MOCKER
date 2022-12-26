@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
-import { PreviewModal } from '@shared/modal/preview/preview.modal';
 import { DataProviderService } from '@shared/service/data-provider.service';
 import { FormatEnum } from '@core/config/format.enum';
 import { ConverterService } from '@core/util/converter.service';
 import { saveAs } from 'file-saver';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  templateUrl: 'footer.component.html',
+  styleUrls: ['footer.component.scss']
 })
 export class FooterComponent {
 
@@ -23,14 +26,7 @@ export class FooterComponent {
   }
 
   public previewOnClick(): void {
-    // this.dataProvider.generateData()
-    //   .subscribe((data: any[]) => {
-    //     this.dataProvider.data = data;
-    //     this.modalService.open(PreviewModal, data).onResult()
-    //       .subscribe(() => {
-    //         // Do nothing
-    //       });
-    //   });
+
   }
 
   public downloadOnClick(): void {

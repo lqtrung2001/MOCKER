@@ -10,6 +10,10 @@ import { DeleteProjectModal } from '@app/component/project/modal/delete-project/
 import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project.modal';
 import { MarkdownModule } from 'ngx-markdown';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @NgModule({
   imports: [
     ROUTING,

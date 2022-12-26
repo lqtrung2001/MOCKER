@@ -10,6 +10,10 @@ import { DeleteTableModal } from '@app/component/table/modal/delete-table/delete
 import { TableOptionModal } from '@app/component/table/modal/table-option/table-option.modal';
 import { SaveTableModal } from '@app/component/table/modal/save-table/save-table.modal';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @NgModule({
   imports: [
     SharedModule,

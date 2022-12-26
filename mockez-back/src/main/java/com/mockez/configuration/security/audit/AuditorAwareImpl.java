@@ -23,6 +23,7 @@ public class AuditorAwareImpl implements AuditorAware<String> {
         if (applicationContextHolder.getCurrentUser() != null) {
             return Optional.of(applicationContextHolder.getCurrentUser().getId().toString());
         }
+        // Administrator
         return Optional.of("5ecaf074-a91f-4758-ae0d-0724443a1a7a");
     }
 }

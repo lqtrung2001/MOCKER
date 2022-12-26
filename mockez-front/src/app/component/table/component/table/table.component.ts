@@ -27,8 +27,8 @@ import { AppConfigProviderService } from '@core/service/app-config-provider.serv
 
 @Component({
   selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  templateUrl: 'table.component.html',
+  styleUrls: ['table.component.scss']
 })
 export class TableComponent {
 
@@ -139,11 +139,19 @@ export class TableComponent {
         return;
       });
     } else {
-      this.table.fields = this.formGroup.get('fields')?.value;
-      this.tableService.saveOrUpdate(this.table)
-        .subscribe((id) => {
-          this.load(id);
+      if (this.isDuplicated(this.formGroup.get('fields')?.value)) {
+        this.modalProvider.showError({
+          body: 'Duplicate fields.'
+        }).subscribe(() => {
+          return;
         });
+      } else {
+        this.table.fields = this.formGroup.get('fields')?.value;
+        this.tableService.saveOrUpdate(this.table)
+          .subscribe((id) => {
+            this.load(id);
+          });
+      }
     }
   }
 
@@ -160,15 +168,23 @@ export class TableComponent {
           body: 'Please configure for table to generate by using options tab.'
         });
       } else {
-        this.table.fields = this.formGroup.get('fields')?.value;
-        this.tableService.saveOrUpdate(this.table)
-          .subscribe((id) => {
-            this.load(id);
-            this.generateService.generate(this.table.id!, this.tableOptions.row).subscribe((data: any[]) => {
-              this.data = data;
-              callback();
-            });
+        if (this.isDuplicated(this.formGroup.get('fields')?.value)) {
+          this.modalProvider.showError({
+            body: 'Duplicate fields.'
+          }).subscribe(() => {
+            return;
           });
+        } else {
+          this.table.fields = this.formGroup.get('fields')?.value;
+          this.tableService.saveOrUpdate(this.table)
+            .subscribe((id) => {
+              this.load(id);
+              this.generateService.generate(this.table.id!, this.tableOptions.row).subscribe((data: any[]) => {
+                this.data = data;
+                callback();
+              });
+            });
+        }
       }
     }
   }
@@ -245,5 +261,9 @@ export class TableComponent {
         this.save();
       }
     });
+  }
+
+  isDuplicated(fields: Field[]): boolean {
+    return new Set(fields.map(f => f.name)).size !== fields.length;
   }
 }

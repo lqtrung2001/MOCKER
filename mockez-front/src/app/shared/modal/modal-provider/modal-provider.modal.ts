@@ -5,6 +5,10 @@ import { Observable } from 'rxjs';
 import { SelectGroupModal } from '@shared/modal/select-group/select-group.modal';
 import { Group } from '@core/model/group';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export interface DialogOption {
   title?: string;
   body?: string;

@@ -8,10 +8,14 @@ import { DeleteProjectModal } from '@app/component/project/modal/delete-project/
 import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project.modal';
 import { AppConfigProviderService } from '@core/service/app-config-provider.service';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-project',
-  templateUrl: './project.component.html',
-  styleUrls: ['./project.component.scss']
+  templateUrl: 'project.component.html',
+  styleUrls: ['project.component.scss']
 })
 export class ProjectComponent {
 

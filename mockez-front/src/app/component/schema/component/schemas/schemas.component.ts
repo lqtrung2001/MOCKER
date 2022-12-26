@@ -11,10 +11,14 @@ import { SaveSchemaModal } from '@app/component/schema/modal/save-schema/save-sc
 import { DeleteSchemaModal } from '@app/component/schema/modal/delete-schema-modal/delete-schema.modal';
 import { AppConfigProviderService } from '@core/service/app-config-provider.service';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-schemas',
-  templateUrl: './schemas.component.html',
-  styleUrls: ['./schemas.component.scss']
+  templateUrl: 'schemas.component.html',
+  styleUrls: ['schemas.component.scss']
 })
 export class SchemasComponent {
 

@@ -1,11 +1,8 @@
-import {
-  AnimationTriggerMetadata,
-  trigger,
-  state,
-  transition,
-  style,
-  animate,
-} from '@angular/animations';
+import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from '@angular/animations';
+
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
 
 export const toastAnimations: {
   readonly fadeToast: AnimationTriggerMetadata;
@@ -15,9 +12,9 @@ export const toastAnimations: {
     transition('void => *', [style({ opacity: 0 }), animate('{{ fadeIn }}ms')]),
     transition(
       'default => closing',
-      animate('{{ fadeOut }}ms', style({ opacity: 0 })),
-    ),
-  ]),
+      animate('{{ fadeOut }}ms', style({ opacity: 0 }))
+    )
+  ])
 };
 
 export type ToastAnimationState = 'default' | 'closing';

@@ -20,7 +20,7 @@ VALUES ('5ecaf074-a91f-4758-ae0d-0724443a1a7a', '5ecaf074-a91f-4758-ae0d-0724443
         true,
         'Administrator',
         '$2a$10$aGlByXJid6Y8rVeYWNn92uzKoUbUZ1wmCu84navyJ87ZtkFT5ux7a', '84393014871',
-        'Administrator@gmail.com');
+        'administrator@gmail.com');
 
 INSERT INTO "group" (id, created_by, created_by_group, created_date, modified_by, modified_by_group, modified_date,
                      name, description, version)

@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export interface SaveTableModalOptions {
   name: string;
   description?: string;

@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { FormatEnum } from '@core/config/format.enum';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export interface TableOptionModalOptions {
   name?: string;
   type: FormatEnum;
@@ -25,7 +29,7 @@ export class TableOptionModal extends Modal {
   override onInjectInputs(options: TableOptionModalOptions) {
     this.options = options;
     this.formGroup.patchValue(this.options);
-    console.log(options?.type)
+    console.log(options?.type);
     this.selectedType = options?.type || FormatEnum.SQL;
   }
 

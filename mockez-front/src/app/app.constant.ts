@@ -1,3 +1,7 @@
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export const AUTH = 'auth';
 export const NOTIFICATION = 'notification';
 export const GENERAL = 'general';

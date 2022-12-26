@@ -7,14 +7,18 @@ import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal
 import { AppConfigProviderService } from '@core/service/app-config-provider.service';
 import { User } from '@core/model/user';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export interface ChangePasswordModalOptions {
   username: string;
 }
 
 @Component({
   selector: 'app-change-password-modal',
-  templateUrl: './change-password.modal.html',
-  styleUrls: ['./change-password.modal.scss']
+  templateUrl: 'change-password.modal.html',
+  styleUrls: ['change-password.modal.scss']
 })
 export class ChangePasswordModal extends Modal {
 

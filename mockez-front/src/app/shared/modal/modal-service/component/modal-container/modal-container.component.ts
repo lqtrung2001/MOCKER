@@ -9,6 +9,10 @@ import {
 } from '@angular/core';
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   template: `
     <div class='modal-backdrop fade in'></div>

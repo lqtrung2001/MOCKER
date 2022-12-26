@@ -4,6 +4,10 @@ import { GenerateType } from '@core/model/generate-type';
 import { User } from '@core/model/user';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Injectable({
   providedIn: 'root'
 })

@@ -5,14 +5,18 @@ import { UserService } from '@core/service/user.service';
 import { GroupMember } from '@core/model/group-member';
 import { FormBuilder, FormControl } from '@angular/forms';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export interface AddMemberModalOptions {
   groupMembers: GroupMember[];
 }
 
 @Component({
   selector: 'app-add-member-modal',
-  templateUrl: './add-member.modal.html',
-  styleUrls: ['./add-member.modal.scss']
+  templateUrl: 'add-member.modal.html',
+  styleUrls: ['add-member.modal.scss']
 })
 export class AddMemberModal extends Modal {
 

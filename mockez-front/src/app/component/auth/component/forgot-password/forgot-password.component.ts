@@ -7,10 +7,14 @@ import { AuthService } from '@core/service/auth.service';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-forgot-password',
-  templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss']
+  templateUrl: 'forgot-password.component.html',
+  styleUrls: ['forgot-password.component.scss']
 })
 export class ForgotPasswordComponent {
 

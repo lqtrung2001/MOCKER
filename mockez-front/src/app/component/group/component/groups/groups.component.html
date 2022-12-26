@@ -5,7 +5,8 @@
     <button class='ml-3 rounded bg-green font-medium hover:drop-shadow-xl text-white text-sm py-1.5 px-5'
             (click)='create()'>{{ 'label.button_new' | translate }}</button>
   </div>
-  <p *ngIf='filter.value && !groups?.length && storage.length' class='mt-5 text-center text-sm'>{{ 'message.no_group_match' | translate }}</p>
+  <p *ngIf='filter.value && !groups?.length && storage.length'
+     class='mt-5 text-center text-sm'>{{ 'message.no_group_match' | translate }}</p>
   <p *ngIf='!storage.length' class='mt-5 text-center text-sm'>{{ 'message.group_empty' | translate }}</p>
   <div class='flex mt-5 flex-wrap'>
     <div *ngFor='let group of groups'

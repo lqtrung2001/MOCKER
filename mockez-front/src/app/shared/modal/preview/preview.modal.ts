@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { FormatEnum } from '@core/config/format.enum';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export interface PreviewModalOptions {
   data: any[],
   format: FormatEnum,

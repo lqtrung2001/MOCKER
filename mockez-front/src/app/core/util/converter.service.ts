@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as JsonToXML from 'js2xmlparser';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Injectable({
   providedIn: 'root'
 })

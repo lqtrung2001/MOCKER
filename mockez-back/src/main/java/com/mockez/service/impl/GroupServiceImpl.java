@@ -9,8 +9,9 @@ import com.mockez.domain.model.entity.enumeration.Role;
 import com.mockez.repository.GroupMemberRepository;
 import com.mockez.repository.GroupRepository;
 import com.mockez.repository.ProjectRepository;
-import com.mockez.repository.UserRepository;
+import com.mockez.repository.SchemaRepository;
 import com.mockez.service.GroupService;
+import com.mockez.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,8 @@ public class GroupServiceImpl implements GroupService {
     private final GroupMemberRepository groupMemberRepository;
     private final ApplicationContextHolder applicationContextHolder;
     private final ProjectRepository projectRepository;
+    private final SchemaRepository schemaRepository;
+    private final ProjectService projectService;
 
     @Override
     public List<Group> getGroupsWithAccess(UUID userId) {
@@ -51,7 +54,7 @@ public class GroupServiceImpl implements GroupService {
         List<GroupMember> groupMembers = groupMemberRepository.findAllByGroup(group);
         List<Project> projects = projectRepository.findAllByGroup(group);
         groupMemberRepository.deleteAll(groupMembers);
-        projectRepository.deleteAll(projects);
+        projects.stream().map(Project::getId).forEach(projectService::delete);
         groupRepository.delete(group);
         return id;
     }

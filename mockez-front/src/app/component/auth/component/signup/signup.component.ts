@@ -7,10 +7,14 @@ import { SignupModal, SignupModalOptions } from '@app/component/auth/modal/sigup
 import { AuthService } from '@core/service/auth.service';
 import { UserService } from '@core/service/user.service';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
   selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  templateUrl: 'signup.component.html',
+  styleUrls: ['signup.component.scss']
 })
 export class SignupComponent {
 

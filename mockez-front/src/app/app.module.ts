@@ -22,6 +22,10 @@ import { PersonModule } from '@app/component/person/person.module';
 import { MarkdownModule } from 'ngx-markdown';
 import { SharedModule } from '@shared/shared.module';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @NgModule({
   declarations: [
     AppComponent,

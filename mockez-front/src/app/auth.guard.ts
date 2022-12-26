@@ -7,6 +7,10 @@ import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { UserService } from '@core/service/user.service';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Injectable({
   providedIn: 'root'
 })

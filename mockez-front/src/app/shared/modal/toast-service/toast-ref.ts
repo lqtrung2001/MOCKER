@@ -1,7 +1,12 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 export class ToastRef {
-  constructor(private readonly overlay: OverlayRef) { }
+  constructor(private readonly overlay: OverlayRef) {
+  }
 
   close() {
     this.overlay.dispose();
@@ -12,6 +17,6 @@ export class ToastRef {
   }
 
   getPosition() {
-    return this.overlay.overlayElement.getBoundingClientRect()
+    return this.overlay.overlayElement.getBoundingClientRect();
   }
 }

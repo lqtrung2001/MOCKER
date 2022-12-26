@@ -10,10 +10,16 @@
     </div>
     <p class='mt-3'>This action cannot be undone.</p>
     <p class='mt-3'>Please type <b>{{ name }}</b> to confirm.</p>
-    <input class='mt-3 w-full h-9 border-2 rounded' type='text' formControlName='schemaName'/>
+    <input class='mt-3 w-full h-9 border-2 rounded' formControlName='schemaName' type='text' />
     <div class='mt-3 flex justify-end'>
-      <button (click)='close(false)' type='button' class='bg-gray text-sm text-black rounded font-medium px-5 h-10 py-2 mr-3'>Cancel</button>
-      <button (click)='close(true)' type='button' [disabled]='name!==formGroup.get("schemaName")?.value' class='{{ name===formGroup.get("schemaName")?.value ? "bg-red text-white" : "bg-gray" }} text-sm rounded font-medium px-5 h-10 py-2 mr-3'>OK</button>
+      <button (click)='close(false)' class='bg-gray text-sm text-black rounded font-medium px-5 h-10 py-2 mr-3'
+              type='button'>Cancel
+      </button>
+      <button (click)='close(true)' [disabled]='name!==formGroup.get("schemaName")?.value'
+              class='{{ name===formGroup.get("schemaName")?.value ? "bg-red text-white" : "bg-gray" }} text-sm rounded font-medium px-5 h-10 py-2'
+              type='button'>
+        Delete
+      </button>
     </div>
   </div>
 </div>

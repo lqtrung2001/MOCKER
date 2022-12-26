@@ -3,10 +3,14 @@ import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Schema } from '@core/model/schema';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Component({
-  selector: 'app-delete-project',
-  templateUrl: './delete-schema.modal.html',
-  styleUrls: ['./delete-schema.modal.scss']
+  selector: 'app-delete-schema-modal',
+  templateUrl: 'delete-schema.modal.html',
+  styleUrls: ['delete-schema.modal.scss']
 })
 export class DeleteSchemaModal extends Modal {
 

@@ -4,6 +4,10 @@ import { Observable } from 'rxjs';
 import { Schema } from '@core/model/schema';
 import { environment } from '@environment/environment';
 
+/**
+ * @author Luong Quoc Trung, Do Quoc Viet
+ */
+
 @Injectable({
   providedIn: 'root'
 })
