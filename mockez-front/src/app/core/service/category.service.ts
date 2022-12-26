@@ -14,15 +14,15 @@ export class CategoryService {
   ) {
   }
 
-  public getCategories(): Observable<Category[]> {
+  getCategories(): Observable<Category[]> {
     return this.httpClient.get<Category[]>(`${environment.apiUrl}/category`);
   }
 
-  public getCategory(id: string): Observable<Category> {
+  getCategory(id: string): Observable<Category> {
     return this.httpClient.get<Category>(`${environment.apiUrl}/category/${id}`);
   }
 
-  public getGenerateTypesCount(id: string): Observable<number> {
+  getGenerateTypesCount(id: string): Observable<number> {
     return this.httpClient.get<number>(`${environment.apiUrl}/category/${id}/generate-types/count`);
   }
 }

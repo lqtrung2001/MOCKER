@@ -11,13 +11,19 @@
     <div class='flex flex-col'>
       <label for='name' class='font-medium mt-3 pl-2'>Table name:</label>
       <input id='name' formControlName='name'
-             class='w-full mt-1 border rounded p-2'
+             class='w-full mt-1 border {{ formGroup.get("name")?.invalid ? "border-red-300" : "" }} rounded p-2'
              placeholder='Enter table name' />
+      <p class='ml-2 mt-2 text-red-500'
+         *ngIf='formGroup.get("name")?.errors?.["required"]'>{{ 'validator.required' | translate }}</p>
+      <p class='ml-2 mt-2 text-red-500'
+         *ngIf='formGroup.get("name")?.errors?.["maxlength"]'>{{ ('validator.max_length' | translate) + '255.' }}</p>
     </div>
     <div class='text-center mt-5 relative'>
       <p class='font-medium text-left mb-1 mt-3 pl-2'>Generate format:</p>
       <button (click)='isShowPopup=!isShowPopup'
-              class='w-full border p-2 rounded text-left {{ selectedType ? "" : "text-gray-400" }} outline-0'>{{ selectedType || 'Click for choosing type' }}</button>
+              class='w-full border p-2 rounded text-left {{ selectedType ? "" : "text-gray-400 border-red-300" }} outline-0'>{{ selectedType || 'Click for choosing type' }}</button>
+      <p class='text-left ml-2 mt-2 text-red-500'
+         *ngIf='!selectedType'>{{ 'validator.required' | translate }}</p>
       <div *ngIf='isShowPopup' class='absolute text-left top-10 bg-white rounded drop-shadow-xl w-full z-20'>
         <p *ngFor='let type of formatSupported'
            (click)='selectFormat(type)'
@@ -36,7 +42,7 @@
       <button (click)='close(false)' type='button'
               class='bg-gray text-sm text-black rounded font-medium px-5 h-10 py-2 mr-3'>Cancel
       </button>
-      <button (click)='submit()' type='button'
+      <button (click)='submit()' type='submit'
               class='bg-green text-sm text-white rounded font-medium px-5 h-10 py-2'>
         Save Changes
       </button>

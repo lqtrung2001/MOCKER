@@ -25,7 +25,8 @@ export class TableOptionModal extends Modal {
   override onInjectInputs(options: TableOptionModalOptions) {
     this.options = options;
     this.formGroup.patchValue(this.options);
-    this.selectedType = options?.type;
+    console.log(options?.type)
+    this.selectedType = options?.type || FormatEnum.SQL;
   }
 
   constructor(
@@ -33,7 +34,7 @@ export class TableOptionModal extends Modal {
   ) {
     super();
     this.formGroup = formBuilder.group({
-      name: formBuilder.control(''),
+      name: formBuilder.control('', [Validators.required, Validators.maxLength(255)]),
       row: formBuilder.control(100, [Validators.min(1), Validators.max(1000)])
     });
     this.formatSupported.push(
@@ -50,7 +51,7 @@ export class TableOptionModal extends Modal {
   }
 
   submit(): void {
-    if (this.formGroup.invalid) {
+    if (this.formGroup.invalid || !this.selectedType) {
       return;
     }
     const { name, row } = this.formGroup.getRawValue();

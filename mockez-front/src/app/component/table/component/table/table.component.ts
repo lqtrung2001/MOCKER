@@ -17,6 +17,9 @@ import { TableOptionModal, TableOptionModalOptions } from '@app/component/table/
 import { SaveTableModal, SaveTableModalOptions } from '@app/component/table/modal/save-table/save-table.modal';
 import { saveAs } from 'file-saver';
 import { ConverterService } from '@core/util/converter.service';
+import { SQLTypeService } from '@core/service/sql-type.service';
+import { GenerateTypeService } from '@core/service/generate-type.service';
+import { AppConfigProviderService } from '@core/service/app-config-provider.service';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -42,8 +45,17 @@ export class TableComponent {
     private formBuilder: FormBuilder,
     private modalService: ModalService,
     private modalProvider: ModalProvider,
-    private generateService: GenerateService
+    private generateService: GenerateService,
+    private sqlTypeService: SQLTypeService,
+    private generateTypeService: GenerateTypeService,
+    private appConfigProviderService: AppConfigProviderService
   ) {
+    sqlTypeService.getSQLTypes().subscribe((sqlTypes: SQLType[]) => {
+      appConfigProviderService.sqlTypes = sqlTypes;
+    });
+    generateTypeService.getGenerateTypes().subscribe((generateTypes: GenerateType[]) => {
+      appConfigProviderService.generateTypes = generateTypes;
+    });
     this.formGroup = formBuilder.group({
       id: formBuilder.control(''),
       name: formBuilder.control(''),
@@ -115,34 +127,49 @@ export class TableComponent {
   }
 
   save(): void {
-    if (this.formGroup.invalid) {
-      return;
-    }
-    this.table.fields = this.formGroup.get('fields')?.value;
-    this.tableService.saveOrUpdate(this.table)
-      .subscribe((id) => {
-        this.load(id);
-      });
-  }
-
-  initData(callback: () => void): void {
-    if (this.formGroup.invalid) {
-      return;
-    }
-    if (!this.tableOptions) {
+    if (this.formGroup.invalid
+      || this.formGroup.get('fields')?.value.some((field: Field) =>
+        !field.name
+        || !field.generateType
+        || !field.sqlType
+        || field.name.includes(' '))) {
       this.modalProvider.showError({
-        body: 'Please configure for table to generate by using options tab.'
+        body: 'Table is invalid in this time, please double-check and make sure that * is required.'
+      }).subscribe(() => {
+        return;
       });
     } else {
       this.table.fields = this.formGroup.get('fields')?.value;
       this.tableService.saveOrUpdate(this.table)
         .subscribe((id) => {
           this.load(id);
-          this.generateService.generate(this.table.id!, this.tableOptions.row).subscribe((data: any[]) => {
-            this.data = data;
-            callback();
-          });
         });
+    }
+  }
+
+  initData(callback: () => void): void {
+    if (this.formGroup.invalid || this.formGroup.get('fields')?.value.some((field: Field) => !field.name || !field.generateType || field.name.includes(' '))) {
+      this.modalProvider.showError({
+        body: 'Table is invalid in this time, please double-check and make sure that * is required.'
+      }).subscribe(() => {
+        return;
+      });
+    } else {
+      if (!this.tableOptions) {
+        this.modalProvider.showError({
+          body: 'Please configure for table to generate by using options tab.'
+        });
+      } else {
+        this.table.fields = this.formGroup.get('fields')?.value;
+        this.tableService.saveOrUpdate(this.table)
+          .subscribe((id) => {
+            this.load(id);
+            this.generateService.generate(this.table.id!, this.tableOptions.row).subscribe((data: any[]) => {
+              this.data = data;
+              callback();
+            });
+          });
+      }
     }
   }
 
@@ -190,7 +217,8 @@ export class TableComponent {
     this.initData(() => {
       const options: PreviewModalOptions = {
         data: this.data,
-        format: this.tableOptions.type
+        format: this.tableOptions.type,
+        tableName: this.tableOptions.name
       };
       this.modalService.open(PreviewModal, options);
     });

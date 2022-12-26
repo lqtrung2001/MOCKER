@@ -15,6 +15,9 @@ import { PreviewModal, PreviewModalOptions } from '@shared/modal/preview/preview
 import { FormatEnum } from '@core/config/format.enum';
 import { saveAs } from 'file-saver';
 import { ConverterService } from '@core/util/converter.service';
+import { SQLTypeService } from '@core/service/sql-type.service';
+import { GenerateTypeService } from '@core/service/generate-type.service';
+import { AppConfigProviderService } from '@core/service/app-config-provider.service';
 
 @Component({
   selector: 'app-general',
@@ -36,8 +39,17 @@ export class GeneralComponent {
     private modalService: ModalService,
     private modalProvider: ModalProvider,
     private converterService: ConverterService,
-    private generateService: GenerateService
+    private generateService: GenerateService,
+    private sqlTypeService: SQLTypeService,
+    private generateTypeService: GenerateTypeService,
+    private appConfigProviderService: AppConfigProviderService
   ) {
+    sqlTypeService.getSQLTypes().subscribe((sqlTypes: SQLType[]) => {
+      appConfigProviderService.sqlTypes = sqlTypes;
+    });
+    generateTypeService.getGenerateTypes().subscribe((generateTypes: GenerateType[]) => {
+      appConfigProviderService.generateTypes = generateTypes;
+    });
     this.formGroup = formBuilder.group({
       fields: formBuilder.control([])
     });
@@ -95,19 +107,24 @@ export class GeneralComponent {
   }
 
   initData(callback: () => void): void {
-    if (this.formGroup.invalid) {
-      return;
-    }
-    if (!this.tableOptions) {
+    if (this.formGroup.invalid || this.formGroup.get('fields')?.value.some((field: Field) => !field.name || !field.generateType || field.name.includes(' '))) {
       this.modalProvider.showError({
-        body: 'Please configure for table to generate by using options tab.'
+        body: 'Table is invalid in this time, please double-check and make sure that * is required.'
+      }).subscribe(() => {
+        return;
       });
     } else {
-      this.table.fields = this.formGroup.get('fields')?.value;
-      this.generateService.generateWithTable(this.table, this.tableOptions.row).subscribe((data: any[]) => {
-        this.data = data;
-        callback();
-      });
+      if (!this.tableOptions) {
+        this.modalProvider.showError({
+          body: 'Please configure for table to generate by using options tab.'
+        });
+      } else {
+        this.table.fields = this.formGroup.get('fields')?.value;
+        this.generateService.generateWithTable(this.table, this.tableOptions.row).subscribe((data: any[]) => {
+          this.data = data;
+          callback();
+        });
+      }
     }
   }
 
@@ -141,7 +158,8 @@ export class GeneralComponent {
     this.initData(() => {
       const options: PreviewModalOptions = {
         data: this.data,
-        format: this.tableOptions.type
+        format: this.tableOptions.type,
+        tableName: this.tableOptions.name
       };
       this.modalService.open(PreviewModal, options);
     });

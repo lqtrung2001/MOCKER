@@ -28,6 +28,11 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
+    public Boolean checkIsExistingUsername(String username) {
+        return Optional.ofNullable(userRepository.findByUsername(username)).isPresent();
+    }
+
+    @Override
     public User authentication(String email, String password) {
         User userAuthentication = userRepository.findByEmailAndPassword(email, password);
         if (Optional.ofNullable(userAuthentication).isPresent()) {

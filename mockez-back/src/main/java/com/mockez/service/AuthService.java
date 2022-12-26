@@ -9,7 +9,6 @@ public interface AuthService {
 
     Boolean sendOTPCode(String username);
 
-
     User validateAndSave(Integer otpCode, User user);
 
 }

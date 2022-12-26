@@ -31,6 +31,8 @@ export class LoginComponent {
       username: formBuilder.control('', Validators.required),
       password: formBuilder.control('', Validators.required)
     });
+    // clear local storage
+    localStorage.clear();
     this.authFormGroup.valueChanges.subscribe(() => {
       if (this.invalid) {
         this.invalid = false;
@@ -40,32 +42,37 @@ export class LoginComponent {
 
   login(): void {
     if (this.authFormGroup.invalid) {
-      return;
-    }
-    this.authService.login(
-      this.authFormGroup.get('username')?.value,
-      this.authFormGroup.get('password')?.value
-    ).pipe(catchError((httpErrorResponse: HttpErrorResponse) => {
-      this.invalid = true;
-      return of(httpErrorResponse);
-    })).subscribe((httpResponse: HttpResponse<any>) => {
-      const token = httpResponse.headers.get('Authorization');
-      const userAgent = httpResponse.headers.get('User-Agent');
-      if (token && userAgent) {
-        localStorage.setItem('token', token);
-        this.userService.findOneByUsername(userAgent)
-          .subscribe((user: User) => {
-            user.password = this.authFormGroup.get('password')?.value;
-            localStorage.setItem('user', JSON.stringify(user));
-            const returnUrl = this.activatedRoute.snapshot.queryParamMap.get('returnUrl') || '/notification';
-            this.router.navigate([returnUrl]).then(() => {
-              console.log('Login successful');
-            });
-          });
-      } else {
+      this.modalProvider.showError({
+        body: 'Username and password are required.'
+      }).subscribe(() => {
+        return;
+      });
+    } else {
+      this.authService.login(
+        this.authFormGroup.get('username')?.value,
+        this.authFormGroup.get('password')?.value
+      ).pipe(catchError((httpErrorResponse: HttpErrorResponse) => {
         this.invalid = true;
-      }
-    });
+        return of(httpErrorResponse);
+      })).subscribe((httpResponse: HttpResponse<any>) => {
+        const token = httpResponse.headers.get('Authorization');
+        const userAgent = httpResponse.headers.get('User-Agent');
+        if (token && userAgent) {
+          localStorage.setItem('token', token);
+          this.userService.findOneByUsername(userAgent)
+            .subscribe((user: User) => {
+              user.password = this.authFormGroup.get('password')?.value;
+              localStorage.setItem('user', JSON.stringify(user));
+              const returnUrl = this.activatedRoute.snapshot.queryParamMap.get('returnUrl') || '/general';
+              this.router.navigate([returnUrl]).then(() => {
+                console.log('Login successful');
+              });
+            });
+        } else {
+          this.invalid = true;
+        }
+      });
+    }
   }
 
 }

@@ -9,26 +9,36 @@
       </div>
     </div>
     <div class='relative mt-5'>
-      <label class='block font-medium' for='name'>{{ 'modal.create_group.name' | translate }}</label>
-      <div class='input flex items-center'>
-        <input formControlName='name' class='relative pt-1 pb-3 mt-1 w-full' type='text' id='name'
+      <label class='block font-medium pl-3' for='name'>{{ 'modal.create_group.name' | translate }}</label>
+      <div class='input flex flex-col'>
+        <input formControlName='name'
+               class='{{ formGroup.get("name")?.invalid ? "border-red-300" : "" }} border rounded relative py-2 px-3 mt-1 w-full'
+               type='text' id='name'
                placeholder='{{ "modal.create_group.name_placeholder" | translate }}' />
+        <p class='ml-3 mt-2 text-red-500'
+           *ngIf='formGroup.get("name")?.errors?.["required"]'>{{ 'validator.required' | translate }}</p>
+        <p class='ml-3 mt-2 text-red-500'
+           *ngIf='formGroup.get("name")?.errors?.["maxlength"]'>{{ ('validator.max_length' | translate) + '255.' }}</p>
       </div>
     </div>
     <div class='relative mt-5'>
-      <label class='block font-medium' for='description'>{{ 'modal.create_group.description' | translate }}</label>
-      <div class='input flex items-center'>
+      <label class='block font-medium pl-3' for='description'>{{ 'modal.create_group.description' | translate }}</label>
+      <div class='input flex flex-col'>
         <textarea formControlName='description'
-                  class='relative leading-6 resize-none pt-1 pb-3 mt-1 w-full h-20 focus:outline-0'
+                  class='relative leading-6 rounded {{ formGroup.get("description")?.invalid ? "border-red-300" : "" }} border resize-none py-2 px-3 mt-1 w-full h-96 focus:outline-0'
                   type='text' id='description'
                   placeholder='{{ "modal.create_group.description_placeholder" | translate }}'></textarea>
+        <p class='ml-3 mt-2 text-red-500'
+           *ngIf='formGroup.get("description")?.errors?.["required"]'>{{ 'validator.required' | translate }}</p>
+        <p class='ml-3 mt-2 text-red-500'
+           *ngIf='formGroup.get("description")?.errors?.["maxlength"]'>{{ ('validator.max_length' | translate) + '4096.' }}</p>
       </div>
     </div>
     <div class='flex justify-end mt-4 -mr-3'>
       <button (click)='close(false)' type='button'
               class='bg-gray text-sm text-black rounded font-medium px-5 py-2 mr-3'>{{ 'label.cancel' | translate }}
       </button>
-      <button (click)='submit()' type='button'
+      <button (click)='submit()' type='submit'
               class='bg-green text-sm text-white hover:drop-shadow-xl rounded font-medium px-5 py-2 mr-3'>{{ 'label.save' | translate }}
       </button>
     </div>

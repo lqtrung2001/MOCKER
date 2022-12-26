@@ -33,12 +33,12 @@ export class ProfileComponent {
     private appContextProviderService: AppConfigProviderService
   ) {
     this.formGroup = formBuilder.group({
-      username: formBuilder.control('', [Validators.required]),
-      name: formBuilder.control('', [Validators.required]),
-      bio: formBuilder.control('', [Validators.required]),
-      phone: formBuilder.control('', []),
-      address: formBuilder.control('', []),
-      dob: formBuilder.control('', [])
+      username: formBuilder.control('', [Validators.required, Validators.maxLength(255)]),
+      name: formBuilder.control('', [Validators.required, Validators.maxLength(255)]),
+      bio: formBuilder.control('', [Validators.required, Validators.maxLength(255)]),
+      phone: formBuilder.control('', [Validators.required, Validators.maxLength(255)]),
+      address: formBuilder.control('', [Validators.required, Validators.maxLength(255)]),
+      dob: formBuilder.control('', [Validators.required])
     });
     const storage = localStorage.getItem('user');
     if (!storage) {

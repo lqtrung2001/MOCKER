@@ -28,8 +28,8 @@ export class SaveProjectModal extends Modal {
   ) {
     super();
     this.formGroup = formBuilder.group({
-      name: formBuilder.control('', Validators.required),
-      summary: formBuilder.control('', Validators.required),
+      name: formBuilder.control('', [Validators.required, Validators.maxLength(255)]),
+      summary: formBuilder.control('', [Validators.required, Validators.maxLength(1000)]),
       group: formBuilder.control({ id: '' }, Validators.required)
     });
   }

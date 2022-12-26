@@ -25,6 +25,7 @@ import { ToastModule } from '@shared/modal/toast-service';
 import { XmlPipe } from '@core/pipe/xml.pipe';
 import { SqlPipe } from '@core/pipe/sql.pipe';
 import { CsvPipe } from '@core/pipe/csv.pipe';
+import { SafeHtmlPipe } from '@core/pipe/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CsvPipe } from '@core/pipe/csv.pipe';
     CsvPipe,
     DateDurationPipe,
     PageNotFoundComponent,
-    SelectGroupModal
+    SelectGroupModal,
+    SafeHtmlPipe
   ],
   imports: [
     KeyValuePipe,
@@ -62,7 +64,8 @@ import { CsvPipe } from '@core/pipe/csv.pipe';
     PreviewModal,
     PageNotFoundComponent,
     SelectGroupModal,
-    DateDurationPipe
+    DateDurationPipe,
+    SafeHtmlPipe
   ],
   providers: []
 })

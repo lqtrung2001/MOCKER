@@ -29,10 +29,10 @@
       </table>
       <div *ngIf='tab==="FORMAT"'>
         <ng-container [ngSwitch]='options.format'>
-          <pre *ngSwitchCase='"JSON"'>{{ options.data | json }}</pre>
-          <pre *ngSwitchCase='"XML"'>{{ options.data | xml: options.tableName! }}</pre>
-          <pre *ngSwitchCase='"SQL"'>{{ options.data | sql: options.tableName! }}</pre>
-          <pre *ngSwitchCase='"CSV"'>{{ options.data | csv }}</pre>
+          <pre *ngSwitchCase='"JSON"'>{{ (options.data ? options.data : '') | json }}</pre>
+          <pre *ngSwitchCase='"XML"'>{{ (options.data ? options.data : []) | xml: options.tableName! }}</pre>
+          <pre *ngSwitchCase='"SQL"'>{{ (options.data ? options.data : []) | sql: options.tableName! }}</pre>
+          <pre *ngSwitchCase='"CSV"'>{{ (options.data ? options.data : []) | csv }}</pre>
         </ng-container>
       </div>
     </div>

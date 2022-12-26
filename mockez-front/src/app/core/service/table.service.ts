@@ -20,11 +20,11 @@ export class TableService {
   ) {
   }
 
-  public getTable(id: string): Observable<Table> {
+  getTable(id: string): Observable<Table> {
     return this.httpClient.get<Table>(`${environment.apiUrl}/${TableService.TABLE}/${id}`);
   }
 
-  public getTablesBySchema(schemaId: string): Observable<Table[]> {
+  getTablesBySchema(schemaId: string): Observable<Table[]> {
     return this.httpClient.get<Table[]>(`${environment.apiUrl}/${TableService.TABLE}?schemaId=${schemaId}`);
   }
 

@@ -41,7 +41,7 @@ public class User extends Base {
     @Column(name = "ID", updatable = false)
     private UUID id;
 
-    @Column(name = "USERNAME", nullable = false)
+    @Column(name = "USERNAME", nullable = false, unique = true)
     private String username;
 
     @Column(name = "PASSWORD", nullable = false)

@@ -17,8 +17,8 @@ import { SaveProjectModal } from '@app/component/project/modal/save-project/save
 
 @Component({
   selector: 'app-group',
-  templateUrl: './group.component.html',
-  styleUrls: ['./group.component.scss']
+  templateUrl: 'group.component.html',
+  styleUrls: ['group.component.scss']
 })
 export class GroupComponent {
 
@@ -55,7 +55,7 @@ export class GroupComponent {
     });
     this.formGroup = formBuilder.group({
       name: formBuilder.control('', [Validators.required]),
-      description: formBuilder.control('', [Validators.required])
+      description: formBuilder.control('', [Validators.required, Validators.maxLength(4096)])
     });
     this.tab = 'PROJECT';
     const id: string = activatedRoute.snapshot.params['id'];

@@ -3,11 +3,5 @@
 @tailwind utilities;
 
 #main {
-  .input:after {
-    content: '';
-    background-color: #E3E3E3;
-    height: 1.5px;
-    border-radius: 3px;
-    @apply w-full bottom-0 absolute;
-  }
+
 }

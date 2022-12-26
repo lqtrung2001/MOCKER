@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {User} from "@core/model/user";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from '@core/model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class AuthService {
     return this.httpClient.post('http://localhost:8080/login', {
       username,
       password
-    }, {observe: 'response'});
+    }, { observe: 'response' });
   }
 
   sentOTPCode(username: string): Observable<boolean> {
@@ -29,5 +29,9 @@ export class AuthService {
 
   validateAndSave(user: User, otpCode: number): Observable<User> {
     return this.httpClient.post<User>(`http://localhost:8080/auth/validate/${otpCode}`, user);
+  }
+
+  checkIsExistUsername(username: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(`http://localhost:8080/auth/check-exist/${username}`);
   }
 }
