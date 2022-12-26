@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import {SignupModal, SignupModalOptions} from "@app/component/auth/modal/sigup/sigup.modal";
-import {AuthService} from "@core/service/auth.service";
-import {ModalService} from "@shared/modal/modal-service/modal-service.service";
+import { SignupModal, SignupModalOptions } from '@app/component/auth/modal/sigup/sigup.modal';
+import { AuthService } from '@core/service/auth.service';
+import { ModalService } from '@shared/modal/modal-service/modal-service.service';
+import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent {
 
   username: FormControl;
 
@@ -22,31 +22,35 @@ export class ForgotPasswordComponent implements OnInit {
     private router: Router,
     private httpClient: HttpClient,
     private authService: AuthService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private modalProvider: ModalProvider
   ) {
     this.username = formBuilder.control('', Validators.required);
+    // clear local storage
+    localStorage.clear();
   }
 
-  ngOnInit(): void {
-
-  }
-
-  sendOPT(): void {
+  sendOTP(): void {
     if (this.username.invalid) {
-      return;
-    }
-    this.authService.sentOTPCode(this.username.value).subscribe((res: boolean) => {
-      if (!res) {
+      this.modalProvider.showError({
+        body: 'Username is required.'
+      }).subscribe(() => {
         return;
-      }
-      const options: SignupModalOptions = {username: this.username.value};
-      this.modalService.open(SignupModal, options)
-        .onResult().subscribe((close: boolean) => {
-        if (close) {
-          this.router.navigate(['/auth/login']).then();
-        }
       });
-    });
+    } else {
+      this.authService.sentOTPCode(this.username.value).subscribe((res: boolean) => {
+        if (!res) {
+          return;
+        }
+        const options: SignupModalOptions = { username: this.username.value };
+        this.modalService.open(SignupModal, options)
+          .onResult().subscribe((close: boolean) => {
+          if (close) {
+            this.router.navigate(['/auth/login']).then();
+          }
+        });
+      });
+    }
   }
 
 }
