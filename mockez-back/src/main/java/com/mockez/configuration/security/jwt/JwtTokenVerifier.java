@@ -47,30 +47,28 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
         if (Strings.isNullOrEmpty(authorizationHeader)
                 || !authorizationHeader.startsWith(jwtConfiguration.getTokenPrefix())) {
             filterChain.doFilter(request, response);
+        } else {
+            String token = authorizationHeader.replace(jwtConfiguration.getTokenPrefix(), EMPTY);
+            try {
+                Jws<Claims> claimsJws = Jwts.parser()
+                        .setSigningKey(secretKey)
+                        .parseClaimsJws(token);
+                Claims body = claimsJws.getBody();
+                String username = body.getSubject();
+                @SuppressWarnings("unchecked")
+                Set<SimpleGrantedAuthority> simpleGrantedAuthorities = ((List<Map<String, String>>) body.get("authorities")).stream()
+                        .map(s -> new SimpleGrantedAuthority(s.get("authority")))
+                        .collect(Collectors.toSet());
+                Authentication authentication = UsernamePasswordAuthenticationToken.authenticated(
+                        username,
+                        null,
+                        simpleGrantedAuthorities
+                );
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                filterChain.doFilter(request, response);
+            } catch (JwtException jwtException) {
+                throw new IllegalStateException(String.format("Token %s cannot be trusted", token));
+            }
         }
-        if (Strings.isNullOrEmpty(authorizationHeader)) {
-            throw new IllegalStateException("Invalid authorization header");
-        }
-        String token = authorizationHeader.replace(jwtConfiguration.getTokenPrefix(), EMPTY);
-        try {
-            Jws<Claims> claimsJws = Jwts.parser()
-                    .setSigningKey(secretKey)
-                    .parseClaimsJws(token);
-            Claims body = claimsJws.getBody();
-            String username = body.getSubject();
-            @SuppressWarnings("unchecked")
-            Set<SimpleGrantedAuthority> simpleGrantedAuthorities = ((List<Map<String, String>>) body.get("authorities")).stream()
-                    .map(s -> new SimpleGrantedAuthority(s.get("authority")))
-                    .collect(Collectors.toSet());
-            Authentication authentication = UsernamePasswordAuthenticationToken.authenticated(
-                    username,
-                    null,
-                    simpleGrantedAuthorities
-            );
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch (JwtException jwtException) {
-            throw new IllegalStateException(String.format("Token %s cannot be trusted", token));
-        }
-        filterChain.doFilter(request, response);
     }
 }

@@ -1,8 +1,8 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError, finalize, Observable } from 'rxjs';
-import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
-import { AppConfigProviderService } from '@core/service/app-config-provider.service';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {catchError, finalize, Observable, of, timeout} from 'rxjs';
+import {ModalProvider} from '@shared/modal/modal-provider/modal-provider.modal';
+import {AppConfigProviderService} from '@core/service/app-config-provider.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,7 @@ export class ApplicationHttpInterceptorService implements HttpInterceptor {
       .handle(request.clone({
         responseType: 'json',
         setHeaders: {
+          'Content-Type': 'application/json',
           Authorization: localStorage.getItem('token') || ''
         }
       }))

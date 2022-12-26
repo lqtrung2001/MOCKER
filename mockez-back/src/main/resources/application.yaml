@@ -12,3 +12,14 @@ spring:
       ddl-auto: update
     show-sql: false
     open-in-view: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: mockezservice@gmail.com
+    password: bhvlfkcmmrydbntg
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

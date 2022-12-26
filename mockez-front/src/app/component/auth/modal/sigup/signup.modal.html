@@ -1,0 +1,28 @@
+<div id='main' class='dialog text-sm'>
+  <div class='board' style='width: 400px'>
+    <div class='flex justify-between'>
+      <p class='font-bold'>Validate OTP</p>
+      <div class='flex'>
+        <p class='w-3 h-3 rounded-full bg-red'></p>
+        <p class='w-3 h-3 ml-3 rounded-full bg-yellow'></p>
+        <p class='w-3 h-3 ml-3 rounded-full bg-green'></p>
+      </div>
+    </div>
+    <div class='flex flex-col'>
+      <label for='opt-code' class='font-medium mt-3 pl-2'>Code:</label>
+      <input id='opt-code' [formControl]='otpCode'
+             type='number'
+             class='w-full mt-1 border rounded p-2'
+             placeholder='Enter OTP code'/>
+    </div>
+    <div class='mt-3 flex justify-end'>
+      <button (click)='close(false)' type='button'
+              class='bg-gray text-sm text-black rounded font-medium px-5 h-10 py-2 mr-3'>Cancel
+      </button>
+      <button (click)='submit()' type='button'
+              class='bg-green text-sm text-white rounded font-medium px-5 h-10 py-2'>
+        Submit
+      </button>
+    </div>
+  </div>
+</div>

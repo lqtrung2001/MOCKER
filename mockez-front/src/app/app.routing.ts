@@ -18,7 +18,8 @@ import { SignupComponent } from '@app/component/auth/component/signup/signup.com
 import { ForgotPasswordComponent } from '@app/component/auth/component/forgot-password/forgot-password.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'general', pathMatch: 'full' },
+  { path: '', component: LoginComponent },
+  // { path: '', redirectTo: 'general', pathMatch: 'full' },
   { path: AUTH + '/login', component: LoginComponent },
   { path: AUTH + '/signup', component: SignupComponent },
   { path: AUTH + '/forgot-password', component: ForgotPasswordComponent },

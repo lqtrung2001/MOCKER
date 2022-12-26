@@ -70,7 +70,7 @@ export class ProfileComponent {
       this.user.dob = new Date(this.user.dob);
     }
     this.user.gender = this.gender;
-    this.userService.update(this.user).subscribe((id: string) => {
+    this.userService.saveOrUpdate(this.user).subscribe((id: string) => {
       if (id) {
         this.userService.findOneByUsername(this.user.username!).subscribe((user: User) => {
           user.password = this.appContextProviderService.auth.password;
