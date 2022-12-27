@@ -38,7 +38,7 @@ export class ApplicationHttpInterceptorService implements HttpInterceptor {
         if (httpErrorResponse.status === 403) {
           this.modalProvider.showError({
             body: 'You have not permission to perform this action.',
-            detail: httpErrorResponse.error
+            detail: httpErrorResponse.error.error
           }).subscribe(() => {
             this.router.navigate(['/auth/login']).then();
           });
@@ -46,7 +46,7 @@ export class ApplicationHttpInterceptorService implements HttpInterceptor {
         } else {
           return this.modalProvider.showError({
             body: 'A error occurred while performing this action, please try again later or contact the administrator',
-            detail: httpErrorResponse.error
+            detail: httpErrorResponse.error.error
           });
         }
       }), finalize(() => {
