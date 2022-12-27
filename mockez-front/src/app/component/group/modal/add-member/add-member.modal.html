@@ -7,7 +7,7 @@
     <p *ngIf='filter.value && !this.users?.length && this.storage?.length'
        class='mt-3 text-sm text-center'>{{ "person.no_match" | translate }}</p>
     <p *ngIf='!this.storage?.length' class='mt-3 text-sm text-center'>{{ 'person.empty' | translate }}</p>
-    <div class='cards flex mt-5 flex-wrap overflow-y-scroll h-4/5'>
+    <div class='cards flex mt-5 flex-wrap content-start overflow-y-scroll h-4/5'>
       <div *ngFor='let user of users'
            class='card relative m-4 shadow flex items-center hover:drop-shadow-xl bg-white py-5 pl-10 pr-5 rounded-md w-96 h-32'>
         <div class='absolute left-4 rounded-md w-1 h-28'></div>

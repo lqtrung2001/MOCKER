@@ -27,7 +27,28 @@
       "name": "Name: *",
       "description": "Description: *",
       "name_placeholder": "Enter group name",
+      "description_placeholder": "Enter group description"
+    },
+    "create_schema": {
+      "title": "SAVE SCHEMA",
+      "name": "Name: *",
+      "description": "Description: *",
+      "name_placeholder": "Enter schema name",
+      "description_placeholder": "Enter schema description"
+    },
+    "create_project": {
+      "title": "CREATE PROJECT",
+      "name": "Name: *",
+      "description": "Description: *",
+      "name_placeholder": "Enter project name",
       "description_placeholder": "Enter project description"
+    },
+    "create_table": {
+      "title": "SAVE TABLE",
+      "name": "Name: *",
+      "description": "Description: *",
+      "name_placeholder": "Enter table name",
+      "description_placeholder": "Enter table description"
     },
     "preview": {
       "name": "preview",
