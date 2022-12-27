@@ -1,6 +1,6 @@
 # MOCKEZ
 
-### SPECIALIZED ESSAY - GRADUATION THESIS
+### ESSAY ON SOFTWARE ENGINEERING
 
 **Name:** Building a website MOCKEZ generates data for system testing.
 
@@ -21,9 +21,9 @@
 1. Front-end: Angular, Typescript, HTML, SCSS.
 2. Back-end: Spring Boot
 3. Database: Postgresql
+4. Docker
 
 **Source:**
 
 * Github: https://github.com/NachiLuong/MOCKEZ
-* Design: https://www.figma.com/files/team/1148069534911378273
 * Mockaroo: https://www.mockaroo.com/
