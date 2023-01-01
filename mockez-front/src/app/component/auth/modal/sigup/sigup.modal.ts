@@ -6,6 +6,7 @@ import { User } from '@core/model/user';
 import { UserService } from '@core/service/user.service';
 import { Router } from '@angular/router';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
+import { catchError, of } from 'rxjs';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -47,6 +48,12 @@ export class SignupModal extends Modal {
     user.password = this.options.password;
 
     this.authService.validateAndSave(user, this.otpCode.value)
+      .pipe(catchError(() => {
+        this.modalProvider.showError({
+          body: 'OTP code is wrong.'
+        });
+        return of();
+      }))
       .subscribe((user: User) => {
         if (user) {
           if (this.options.password) {

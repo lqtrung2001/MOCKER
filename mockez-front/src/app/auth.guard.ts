@@ -55,7 +55,7 @@ export class AuthGuard implements CanActivate {
   // not logged in so redirect to login page with the return url
   navigateToLogin(state: RouterStateSnapshot): void {
     this.modalProvider.showError({
-      body: `User isn't logged in`
+      body: `User isn't logged in, please login and try again.`
     }).subscribe(() => {
       this.router.navigate(['/auth/login'], { queryParams: { returnUrl: state.url } })
         .then(() => {

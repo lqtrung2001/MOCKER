@@ -77,7 +77,7 @@ public class AuthServiceImpl implements AuthService {
                 return userRepository.save(userForgotPassword);
             }
         }
-        throw new UnexpectedException("OTP is wrong");
+        throw new IllegalArgumentException("OTP is wrong");
     }
 
 }
