@@ -1,20 +1,27 @@
+@import '../../../../../variable-color';
+
+@tailwind base;
+@tailwind components;
 @tailwind utilities;
 
 #main {
+  color: $primary-text-color-bold;
 
-  .dock {
-    top: calc(50% - 8px);
+  nav {
+    > a:not(.logo):hover,
+    > .active {
+      color: $primary-color;
+    }
+
+    > a:not(.logo):hover:after,
+    > .active:after {
+      content: '';
+      @apply absolute w-full h-0.5 left-0 bottom-0;
+      background-color: $primary-color;
+    }
   }
 
-  .tab:hover:before,
-  .active:before {
-    content: '';
-    background-color: #00CA4E;
-    @apply h-full top-0 absolute w-1;
-  }
-
-  .tab:hover,
-  .active {
-    @apply bg-gray;
+  > div > i:hover {
+    color: $primary-color;
   }
 }

@@ -4,7 +4,7 @@ import { SQLTypeService } from '@core/service/sql-type.service';
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { SQLType } from '@core/model/sql-type';
 import { GenerateType } from '@core/model/generate-type';
-import { AppConfigProviderService } from '@core/service/app-config-provider.service';
+import { AppConfigService } from '@core/service/app-config.service';
 import { Category } from '@core/model/category';
 import { FormBuilder, FormControl } from '@angular/forms';
 
@@ -39,7 +39,7 @@ export class SelectTypeModal extends Modal {
   constructor(
     private categoryService: CategoryService,
     private sqlTypeService: SQLTypeService,
-    private appConfigProviderService: AppConfigProviderService,
+    private appConfigProviderService: AppConfigService,
     private formBuilder: FormBuilder
   ) {
     super();

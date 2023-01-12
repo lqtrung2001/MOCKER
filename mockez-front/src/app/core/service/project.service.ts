@@ -19,18 +19,18 @@ export class ProjectService {
   }
 
   getProject(id: string): Observable<Project> {
-    return this.httpClient.get<Project>(`${environment.apiUrl}/project/${id}`);
+    return this.httpClient.get<Project>(`${environment.API_URL}/project/${id}`);
   }
 
   getProjects(): Observable<Project[]> {
-    return this.httpClient.get<Project[]>(`${environment.apiUrl}/project`);
+    return this.httpClient.get<Project[]>(`${environment.API_URL}/project`);
   }
 
   saveOrUpdate(project: Project): Observable<string> {
-    return this.httpClient.post<string>(`${environment.apiUrl}/project`, project);
+    return this.httpClient.post<string>(`${environment.API_URL}/project`, project);
   }
 
   deleteProject(id: string): Observable<string> {
-    return this.httpClient.delete<string>(`${environment.apiUrl}/project/${id}`);
+    return this.httpClient.delete<string>(`${environment.API_URL}/project/${id}`);
   }
 }

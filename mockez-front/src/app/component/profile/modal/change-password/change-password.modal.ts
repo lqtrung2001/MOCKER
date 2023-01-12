@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '@core/service/user.service';
 import { AuthService } from '@core/service/auth.service';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
-import { AppConfigProviderService } from '@core/service/app-config-provider.service';
+import { AppConfigService } from '@core/service/app-config.service';
 import { User } from '@core/model/user';
 
 /**
@@ -35,7 +35,7 @@ export class ChangePasswordModal extends Modal {
     private userService: UserService,
     private authService: AuthService,
     private modalProvider: ModalProvider,
-    private appConfigProviderService: AppConfigProviderService
+    private appConfigProviderService: AppConfigService
   ) {
     super();
     this.formGroup = formBuilder.group({
@@ -56,7 +56,7 @@ export class ChangePasswordModal extends Modal {
     }
     const { currentPassword, newPassword } = this.formGroup.getRawValue();
     this.userService.changePassword(
-      this.appConfigProviderService.auth.id!,
+      this.appConfigProviderService.user.id!,
       currentPassword,
       newPassword
     ).subscribe((user: User) => {

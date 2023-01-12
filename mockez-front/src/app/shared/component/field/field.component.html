@@ -1,0 +1,10 @@
+<div id='main'>
+  <input [formControl]='formControl'
+         [placeholder]='placeholder'
+         [style]='style'
+         [type]='type'
+         class='{{ class }} {{ isValidated && formControl.invalid ? "invalid" : "" }} border-2 p-2.5 rounded mt-4 w-full'/>
+  <div *ngIf='isValidated && formControl.invalid'>
+    <app-form-error-processor [error]='formControl.errors'></app-form-error-processor>
+  </div>
+</div>

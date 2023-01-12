@@ -10,7 +10,7 @@ import {
   ChangePasswordModal,
   ChangePasswordModalOptions
 } from '@app/component/profile/modal/change-password/change-password.modal';
-import { AppConfigProviderService } from '@core/service/app-config-provider.service';
+import { AppConfigService } from '@core/service/app-config.service';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -34,7 +34,7 @@ export class ProfileComponent {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private modalService: ModalService,
-    private appContextProviderService: AppConfigProviderService
+    private appContextProviderService: AppConfigService
   ) {
     this.formGroup = formBuilder.group({
       username: formBuilder.control('', [Validators.required, Validators.maxLength(255)]),
@@ -77,7 +77,7 @@ export class ProfileComponent {
     this.userService.saveOrUpdate(this.user).subscribe((id: string) => {
       if (id) {
         this.userService.findOneByUsername(this.user.username!).subscribe((user: User) => {
-          user.password = this.appContextProviderService.auth.password;
+          user.password = this.appContextProviderService.user.password;
           localStorage.setItem('user', JSON.stringify(user));
           this.user = user;
         });

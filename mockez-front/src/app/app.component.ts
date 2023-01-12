@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { AppConfigProviderService } from '@core/service/app-config-provider.service';
+import { AppConfigService } from '@core/service/app-config.service';
+import { AuthService } from './core/service/auth.service';
+import { Observable, of } from 'rxjs';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -13,12 +15,20 @@ import { AppConfigProviderService } from '@core/service/app-config-provider.serv
 })
 export class AppComponent {
 
+  $authorized: Observable<boolean>;
+
   constructor(
     private translateService: TranslateService,
-    public appConfigProviderService: AppConfigProviderService
+    public appConfigService: AppConfigService,
+    public authService: AuthService
   ) {
-    translateService.setDefaultLang('en');
-    translateService.use('en');
+    const language: string = 'en';
+    translateService.setDefaultLang(language);
+    translateService.use(language);
+    authService.checkAuth().subscribe((success: boolean) => {
+        this.$authorized = of(success);
+      }
+    );
   }
 
 }

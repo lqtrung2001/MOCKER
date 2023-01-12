@@ -7,7 +7,6 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 import { Group } from '@core/model/group';
 import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project.modal';
-import { ToastService } from '@shared/modal/toast-service';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -30,8 +29,7 @@ export class ProjectsComponent {
     private modalService: ModalService,
     private formBuilder: FormBuilder,
     private modalProvider: ModalProvider,
-    private router: Router,
-    private toastService: ToastService
+    private router: Router
   ) {
     this.filter = formBuilder.control('');
     this.filter.valueChanges.subscribe((value: string) => {

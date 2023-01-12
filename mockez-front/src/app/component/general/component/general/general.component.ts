@@ -17,7 +17,7 @@ import { saveAs } from 'file-saver';
 import { ConverterService } from '@core/util/converter.service';
 import { SQLTypeService } from '@core/service/sql-type.service';
 import { GenerateTypeService } from '@core/service/generate-type.service';
-import { AppConfigProviderService } from '@core/service/app-config-provider.service';
+import { AppConfigService } from '@core/service/app-config.service';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -46,7 +46,7 @@ export class GeneralComponent {
     private generateService: GenerateService,
     private sqlTypeService: SQLTypeService,
     private generateTypeService: GenerateTypeService,
-    private appConfigProviderService: AppConfigProviderService
+    private appConfigProviderService: AppConfigService
   ) {
     sqlTypeService.getSQLTypes().subscribe((sqlTypes: SQLType[]) => {
       appConfigProviderService.sqlTypes = sqlTypes;

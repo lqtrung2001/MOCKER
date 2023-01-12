@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     try {
       const user: User = JSON.parse(localStorage.getItem('user')!);
-      return this.authService.login(user.username, user.password)
+      return this.authService.auth(user.username!, user.password!)
         .pipe(
           map((httpResponse: HttpResponse<any>) => {
             const token = httpResponse.headers.get('Authorization');

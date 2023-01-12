@@ -13,7 +13,7 @@ import { GroupMemberPk } from '@core/model/composite_key/group-member-pk';
 })
 export class GroupMemberService {
 
-  static GROUP_MEMBER_API = environment.apiUrl + '/group-member';
+  static GROUP_MEMBER_API = environment.API_URL + '/group-member';
 
   constructor(
     private httpClient: HttpClient

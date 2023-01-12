@@ -22,7 +22,7 @@
 
 ::-webkit-scrollbar-thumb {
   @apply bg-slate-400 rounded-3xl;
-  border: 3px solid #FFFFFF;
+  border: 3px solid #FFF;
 }
 
 input:-webkit-autofill,
@@ -42,7 +42,7 @@ body {
   }
 
   .icon {
-    width: 25px;
+    width: 22px;
   }
 
   .shadow-light {
@@ -79,6 +79,22 @@ body {
 
   .text-green {
     color: #00CA4E !important;
+  }
+
+  .text-primary-bold {
+    color: #333;
+  }
+
+  .center-box {
+    @apply relative;
+
+    > *:first-child {
+      @apply rounded absolute;
+      content: '';
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
   .dialog {

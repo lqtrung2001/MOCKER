@@ -19,18 +19,18 @@ export class SchemaService {
   }
 
   getSchemasByProject(projectId: string): Observable<Schema[]> {
-    return this.httpClient.get<Schema[]>(`${environment.apiUrl}/schema?projectId=${projectId}`);
+    return this.httpClient.get<Schema[]>(`${environment.API_URL}/schema?projectId=${projectId}`);
   }
 
   saveOrUpdate(schema: Schema): Observable<string> {
-    return this.httpClient.post<string>(`${environment.apiUrl}/schema`, schema);
+    return this.httpClient.post<string>(`${environment.API_URL}/schema`, schema);
   }
 
   deleteSchema(id: string): Observable<string> {
-    return this.httpClient.delete<string>(`${environment.apiUrl}/schema/${id}`);
+    return this.httpClient.delete<string>(`${environment.API_URL}/schema/${id}`);
   }
 
   getSchema(id: string): Observable<Schema> {
-    return this.httpClient.get<Schema>(`${environment.apiUrl}/schema/${id}`);
+    return this.httpClient.get<Schema>(`${environment.API_URL}/schema/${id}`);
   }
 }

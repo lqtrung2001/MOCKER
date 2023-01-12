@@ -21,19 +21,19 @@ export class TableService {
   }
 
   getTable(id: string): Observable<Table> {
-    return this.httpClient.get<Table>(`${environment.apiUrl}/${TableService.TABLE}/${id}`);
+    return this.httpClient.get<Table>(`${environment.API_URL}/${TableService.TABLE}/${id}`);
   }
 
   getTablesBySchema(schemaId: string): Observable<Table[]> {
-    return this.httpClient.get<Table[]>(`${environment.apiUrl}/${TableService.TABLE}?schemaId=${schemaId}`);
+    return this.httpClient.get<Table[]>(`${environment.API_URL}/${TableService.TABLE}?schemaId=${schemaId}`);
   }
 
   saveOrUpdate(table: Table): Observable<string> {
-    return this.httpClient.post<string>(`${environment.apiUrl}/${TableService.TABLE}`, table);
+    return this.httpClient.post<string>(`${environment.API_URL}/${TableService.TABLE}`, table);
   }
 
   delete(id: string): Observable<string> {
-    return this.httpClient.delete<string>(`${environment.apiUrl}/${TableService.TABLE}/${id}`);
+    return this.httpClient.delete<string>(`${environment.API_URL}/${TableService.TABLE}/${id}`);
   }
 
 }

@@ -19,6 +19,6 @@ export class SQLTypeService {
   }
 
   getSQLTypes(): Observable<SQLType[]> {
-    return this.httpClient.get<SQLType[]>(`${environment.apiUrl}/sql-type`);
+    return this.httpClient.get<SQLType[]>(`${environment.API_URL}/sql-type`);
   }
 }

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 import { TableService } from '@core/service/table.service';
 import { Table } from '@app/core/model/table';
-import { AppConfigProviderService } from '@core/service/app-config-provider.service';
+import { AppConfigService } from '@core/service/app-config.service';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { SaveTableModal, SaveTableModalOptions } from '@app/component/table/modal/save-table/save-table.modal';
 import { Schema } from '@core/model/schema';
@@ -33,7 +33,7 @@ export class TablesComponent {
     private modalProvider: ModalProvider,
     private formBuilder: FormBuilder,
     private tableService: TableService,
-    private appConfigProviderService: AppConfigProviderService,
+    private appConfigProviderService: AppConfigService,
     private schemaService: SchemaService
   ) {
     this.filter = formBuilder.control('');

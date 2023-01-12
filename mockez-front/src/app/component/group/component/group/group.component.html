@@ -1,7 +1,7 @@
 <div id='main' class='mx-auto h-full'>
   <div class='relative flex items-center bg-white py-3 px-5 w-full h-28'>
     <div class='w-1/12 flex justify-center'>
-      <img class='w-16' src='assets/group.png' alt='group' />
+      <img class='w-16' src='../../../../../assets/icon/group.png' alt='group' />
     </div>
     <div class='text-sm ml-5 w-11/12'>
       <p class='font-medium uppercase'>{{ group?.name | truncate:100 }}</p>
@@ -87,7 +87,7 @@
              class='card relative m-4 flex items-center shadow hover:drop-shadow-xl bg-white py-5 pl-10 pr-5 rounded-md w-96 h-32'>
           <div class='absolute left-4 rounded-md w-1 h-28 bg-green'></div>
           <div class='w-1/4'>
-            <img class='w-20' src='assets/profile.png' alt='profile' />
+            <img class='w-20' src='../../../../../assets/icon/profile.png' alt='profile' />
           </div>
           <div class='info ml-5 w-1/2'>
             <a class='font-medium hover:underline'
@@ -96,7 +96,7 @@
             <p class='text-sm text-gray-500'>{{ 'Phone: +' + groupMember?.user?.phone }}</p>
           </div>
           <div class='w-1/6 flex justify-end'>
-            <img class='w-5 cursor-pointer' src='assets/icon/general/leave.png' alt='leave'
+            <img class='w-5 cursor-pointer' src='../../../../../assets/icon/leave.png' alt='leave'
                  (click)='removeUser(groupMember)' />
           </div>
           <div class='absolute top-4 right-5 flex'>

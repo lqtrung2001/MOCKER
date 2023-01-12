@@ -19,7 +19,20 @@
   },
   "validator": {
     "required": "This field is required.",
-    "max_length": "The maximum number of characters allowed in this field is "
+    "email": "Please enter a valid email address.",
+    "max_length": "The maximum number of characters allowed in this field is {{ length }}."
+  },
+  "component": {
+    "login": {
+      "title": "Log in to your account",
+      "username_placeholder": "Enter username",
+      "password_placeholder": "Enter password",
+      "continue": "Continue",
+      "or": "OR",
+      "continue_with_SPACE": "Continue with ",
+      "cannot_login": "Can't log in?",
+      "sign_up": "Sign up for a account"
+    }
   },
   "modal": {
     "create_group": {

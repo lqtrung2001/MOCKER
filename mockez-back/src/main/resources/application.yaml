@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/mockez_db
-    username: mockez_user
-    password: mockez_password
+    url: jdbc:postgresql://localhost:5432/mocker_db
+    username: mocker_user
+    password: mocker_password
   jpa:
     properties:
       hibernate:

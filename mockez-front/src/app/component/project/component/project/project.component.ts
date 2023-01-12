@@ -6,7 +6,7 @@ import { ModalService } from '@shared/modal/modal-service/modal-service.service'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DeleteProjectModal } from '@app/component/project/modal/delete-project/delete-project.modal';
 import { SaveProjectModal } from '@app/component/project/modal/save-project/save-project.modal';
-import { AppConfigProviderService } from '@core/service/app-config-provider.service';
+import { AppConfigService } from '@core/service/app-config.service';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -29,7 +29,7 @@ export class ProjectComponent {
     private router: Router,
     private modalService: ModalService,
     private formBuilder: FormBuilder,
-    private appConfigProviderService: AppConfigProviderService
+    private appConfigProviderService: AppConfigService
   ) {
     this.formGroup = formBuilder.group({
       description: formBuilder.control('', [Validators.maxLength(4096)])

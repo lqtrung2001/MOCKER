@@ -1,12 +1,20 @@
-<div id='main' class='flex w-screen h-screen'>
-  <div id='navigation' class='z-10 bg-white w-80'>
+<div id='main' class='w-screen h-screen'>
+  <ng-container *ngIf='appConfigService.user; else noAuth'>
     <app-navigation></app-navigation>
-  </div>
-  <div id='content' class='bg-gray overflow-y-auto'>
+    <div class='flex'>
+      <div id='navigation' class='z-10 bg-white w-80'>
+        <app-module></app-module>
+      </div>
+      <div id='content' class='bg-gray overflow-y-auto'>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noAuth>
     <router-outlet></router-outlet>
-  </div>
+  </ng-template>
 </div>
-<div *ngIf='appConfigProviderService.isLoading' class='loading'>
+<div *ngIf='appConfigService.isLoading' class='loading'>
   <div class='lds-roller p-0 bg-transparent'>
     <div></div>
     <div></div>

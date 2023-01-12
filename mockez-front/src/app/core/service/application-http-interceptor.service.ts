@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
-import { AppConfigProviderService } from '@core/service/app-config-provider.service';
+import { AppConfigService } from '@core/service/app-config.service';
 import { Router } from '@angular/router';
 import { finalize, Observable } from 'rxjs';
 
@@ -16,7 +16,7 @@ export class ApplicationHttpInterceptorService implements HttpInterceptor {
 
   constructor(
     private modalProvider: ModalProvider,
-    private appConfigProviderService: AppConfigProviderService,
+    private appConfigProviderService: AppConfigService,
     private router: Router
   ) {
   }
@@ -37,7 +37,7 @@ export class ApplicationHttpInterceptorService implements HttpInterceptor {
         //   this.appConfigProviderService.isLoading = false;
         //   if (httpErrorResponse.status === 403) {
         //     this.modalProvider.showError({
-        //       body: 'You have not permission to perform this action.'
+        //       body: 'You have no permission to perform this action.'
         //     }).subscribe(() => {
         //       this.router.navigate(['/auth/login']).then();
         //     });

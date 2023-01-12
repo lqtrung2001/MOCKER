@@ -19,14 +19,14 @@ export class GenerateTypeService {
   }
 
   getGenerateType(id: string): Observable<GenerateType> {
-    return this.httpClient.get<GenerateType>(`${environment.apiUrl}/generate-type/${id}`);
+    return this.httpClient.get<GenerateType>(`${environment.API_URL}/generate-type/${id}`);
   }
 
   getGenerateTypeByType(sqlTypeId: string): Observable<GenerateType[]> {
-    return this.httpClient.get<GenerateType[]>(`${environment.apiUrl}/generate-type/${sqlTypeId}`);
+    return this.httpClient.get<GenerateType[]>(`${environment.API_URL}/generate-type/${sqlTypeId}`);
   }
 
   getGenerateTypes(): Observable<GenerateType[]> {
-    return this.httpClient.get<GenerateType[]>(`${environment.apiUrl}/generate-type/`);
+    return this.httpClient.get<GenerateType[]>(`${environment.API_URL}/generate-type/`);
   }
 }

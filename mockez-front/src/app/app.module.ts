@@ -20,13 +20,13 @@ import { ProfileModule } from '@app/component/profile/profile.module';
 import { GroupModule } from '@app/component/group/group.module';
 import { PersonModule } from '@app/component/person/person.module';
 import { MarkdownModule } from 'ngx-markdown';
-import { SharedModule } from '@shared/shared.module';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
  */
 
 @NgModule({
+  bootstrap: [AppComponent],
   declarations: [
     AppComponent,
     DialogModal
@@ -48,15 +48,13 @@ import { SharedModule } from '@shared/shared.module';
     GroupModule,
     PersonModule,
     StoreModule.forRoot({}),
-    MarkdownModule.forRoot(),
-    SharedModule
+    MarkdownModule.forRoot()
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: ApplicationHttpInterceptorService,
     multi: true
-  }],
-  bootstrap: [AppComponent]
+  }]
 })
 export class AppModule {
 }

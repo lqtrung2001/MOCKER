@@ -1,0 +1,20 @@
+@tailwind utilities;
+
+#main {
+
+  .dock {
+    top: calc(50% - 8px);
+  }
+
+  .tab:hover:before,
+  .active:before {
+    content: '';
+    background-color: #00CA4E;
+    @apply h-full top-0 absolute w-1;
+  }
+
+  .tab:hover,
+  .active {
+    @apply bg-gray;
+  }
+}

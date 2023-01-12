@@ -1,82 +1,76 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
-import { AuthService } from '@core/service/auth.service';
-import { UserService } from '@core/service/user.service';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AbstractComponent } from '@shared/util/abstract-component';
 import { User } from '@core/model/user';
-import { catchError, of } from 'rxjs';
+import { UserService } from '@core/service/user.service';
+import { Router } from '@angular/router';
+import { AuthService } from '@core/service/auth.service';
+import { AppConfigService } from '@core/service/app-config.service';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
  */
+
+export interface LoginMethod {
+  name: string;
+  icon: string;
+}
 
 @Component({
   selector: 'app-login',
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent extends AbstractComponent {
 
-  authFormGroup: FormGroup;
-  invalid: boolean = false;
+  loginMethods: LoginMethod[] = [];
+  formControls: {
+    username: FormControl,
+    password: FormControl
+  };
 
   constructor(
     private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute,
+    private userService: UserService,
     private router: Router,
-    private httpClient: HttpClient,
-    private modalProvider: ModalProvider,
     private authService: AuthService,
-    private userService: UserService
+    private appConfigService: AppConfigService
   ) {
-    this.authFormGroup = formBuilder.group({
-      username: formBuilder.control('', Validators.required),
-      password: formBuilder.control('', Validators.required)
-    });
-    // clear local storage
-    localStorage.clear();
-    this.authFormGroup.valueChanges.subscribe(() => {
-      if (this.invalid) {
-        this.invalid = false;
+    super();
+    this.initSupportLoginMethods();
+    this.formControls = {
+      username: formBuilder.control(undefined, [Validators.required, Validators.email]),
+      password: formBuilder.control(undefined, [Validators.required])
+    };
+  }
+
+  submit(): void {
+    if (this.invalid(this.formControls)) {
+      return;
+    }
+    const user: User = this.getRawValue(this.formControls);
+    this.authService.login(user.username!, user.password!).subscribe((success: boolean) => {
+      if (success) {
+        this.appConfigService.user = this.appConfigService.userLocalStorage!;
+        this.router.navigate(['/']).then();
       }
     });
   }
 
-  login(): void {
-    if (this.authFormGroup.invalid) {
-      this.modalProvider.showError({
-        body: 'Username and password are required.'
-      }).subscribe(() => {
-        return;
-      });
-    } else {
-      this.authService.login(
-        this.authFormGroup.get('username')?.value,
-        this.authFormGroup.get('password')?.value
-      ).pipe(catchError((httpErrorResponse: HttpErrorResponse) => {
-        this.invalid = true;
-        return of(httpErrorResponse);
-      })).subscribe((httpResponse: HttpResponse<any>) => {
-        const token = httpResponse.headers.get('Authorization');
-        const userAgent = httpResponse.headers.get('User-Agent');
-        if (token && userAgent) {
-          localStorage.setItem('token', token);
-          this.userService.findOneByUsername(userAgent)
-            .subscribe((user: User) => {
-              user.password = this.authFormGroup.get('password')?.value;
-              localStorage.setItem('user', JSON.stringify(user));
-              const returnUrl = this.activatedRoute.snapshot.queryParamMap.get('returnUrl') || '/general';
-              this.router.navigate([returnUrl]).then(() => {
-                console.log('Login successful');
-              });
-            });
-        } else {
-          this.invalid = true;
-        }
-      });
-    }
+  initSupportLoginMethods(): void {
+    this.loginMethods = [{
+      name: 'Google',
+      icon: 'google'
+    }, {
+      name: 'Microsoft',
+      icon: 'microsoft'
+    }, {
+      name: 'Github',
+      icon: 'github'
+    }, {
+      name: 'Facebook',
+      icon: 'facebook'
+    }];
   }
 
 }

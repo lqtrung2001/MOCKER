@@ -14,10 +14,8 @@
   background-color: rgba(0, 0, 0, 0.6);
 
   > div {
-    @apply absolute;
+    @apply absolute top-1/2 left-1/2;
     content: '';
-    top: 50%;
-    left: 50%;
     transform: translate(-50%, -50%);
   }
 
@@ -40,7 +38,7 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #fff;
+    background: #FFF;
     margin: -4px 0 0 -4px;
   }
 

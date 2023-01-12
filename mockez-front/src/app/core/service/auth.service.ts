@@ -1,7 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable, Injector } from '@angular/core';
+import { map, Observable, of } from 'rxjs';
 import { User } from '@core/model/user';
+import { AppHttpService } from '@core/service/app-http.service';
+import { HttpResponse } from '@angular/common/http';
+import { HTTP_HEADER_KEYS, LOCALSTORAGE_KEYS } from '@app/app.constant';
+import { UserService } from '@core/service/user.service';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -10,32 +13,52 @@ import { User } from '@core/model/user';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService extends AppHttpService<User> {
 
   constructor(
-    private httpClient: HttpClient
+    injector: Injector,
+    private userService: UserService
   ) {
+    super(injector);
   }
 
-  login(username: string | undefined, password: string | undefined): Observable<any> {
-    if (!username || !password) {
-      throw new Error(`Invalid username or password`);
+  auth(username: string, password: string): Observable<any> {
+    return this.post(`${this.BASE_URL}/login`, { username, password }, () => of(false));
+  }
+
+  checkAuth(): Observable<boolean> {
+    const user = this.appConfigService.userLocalStorage;
+    if (!user) {
+      return of(false);
     }
-    return this.httpClient.post('http://localhost:8080/login', {
-      username,
-      password
-    }, { observe: 'response' });
+    return this.auth(user.username!, user.password!);
+  }
+
+  login(username: string, password: string): Observable<boolean> {
+    return this.request<any>('POST', `${this.BASE_URL}/login`, { username, password }, () => of(false))
+      .pipe(map((httpResponse: HttpResponse<any>) => {
+        const token = httpResponse.headers.get(HTTP_HEADER_KEYS.AUTHORIZATION);
+        const userAgent = httpResponse.headers.get(HTTP_HEADER_KEYS.USER_AGENT);
+        localStorage.setItem(LOCALSTORAGE_KEYS.TOKEN, token!);
+        this.userService.findOneByUsername(userAgent!)
+          .subscribe((user: User) => {
+            user.password = password;
+            localStorage.setItem(LOCALSTORAGE_KEYS.AUTH, JSON.stringify(user));
+            this.appConfigService.user = user;
+          });
+        return true;
+      }));
   }
 
   sentOTPCode(username: string): Observable<boolean> {
-    return this.httpClient.post<boolean>(`http://localhost:8080/auth/sendcode`, username);
+    return this.request('POST', `${this.BASE_URL}/auth/sendcode`, username);
   }
 
   validateAndSave(user: User, otpCode: number): Observable<User> {
-    return this.httpClient.post<User>(`http://localhost:8080/auth/validate/${otpCode}`, user);
+    return this.post(`${this.BASE_URL}/auth/validate/${otpCode}`, user);
   }
 
   checkIsExistUsername(username: string): Observable<boolean> {
-    return this.httpClient.get<boolean>(`http://localhost:8080/auth/check-exist/${username}`);
+    return this.request<boolean>('GET', `${this.BASE_URL}/auth/check-exist/${username}`);
   }
 }

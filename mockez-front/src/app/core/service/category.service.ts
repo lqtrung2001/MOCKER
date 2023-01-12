@@ -19,14 +19,14 @@ export class CategoryService {
   }
 
   getCategories(): Observable<Category[]> {
-    return this.httpClient.get<Category[]>(`${environment.apiUrl}/category`);
+    return this.httpClient.get<Category[]>(`${environment.API_URL}/category`);
   }
 
   getCategory(id: string): Observable<Category> {
-    return this.httpClient.get<Category>(`${environment.apiUrl}/category/${id}`);
+    return this.httpClient.get<Category>(`${environment.API_URL}/category/${id}`);
   }
 
   getGenerateTypesCount(id: string): Observable<number> {
-    return this.httpClient.get<number>(`${environment.apiUrl}/category/${id}/generate-types/count`);
+    return this.httpClient.get<number>(`${environment.API_URL}/category/${id}/generate-types/count`);
   }
 }

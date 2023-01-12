@@ -9,7 +9,7 @@ import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal
 import { FormBuilder, FormControl } from '@angular/forms';
 import { SaveSchemaModal } from '@app/component/schema/modal/save-schema/save-schema-modal';
 import { DeleteSchemaModal } from '@app/component/schema/modal/delete-schema-modal/delete-schema.modal';
-import { AppConfigProviderService } from '@core/service/app-config-provider.service';
+import { AppConfigService } from '@core/service/app-config.service';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -39,7 +39,7 @@ export class SchemasComponent {
     private router: Router,
     private modalProvider: ModalProvider,
     private formBuilder: FormBuilder,
-    private appConfigProviderService: AppConfigProviderService
+    private appConfigProviderService: AppConfigService
   ) {
     this.filter = formBuilder.control('');
     this.filter.valueChanges.subscribe((value) => {

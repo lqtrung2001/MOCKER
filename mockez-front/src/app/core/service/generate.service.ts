@@ -25,10 +25,10 @@ export class GenerateService {
   }
 
   generate(tableId: string, row: number): Observable<any[]> {
-    return this.httpClient.post<any[]>(`${environment.apiUrl}/generate/${tableId}`, row);
+    return this.httpClient.post<any[]>(`${environment.API_URL}/generate/${tableId}`, row);
   }
 
   generateWithTable(table: Table, row: number): Observable<any[]> {
-    return this.httpClient.post<any[]>(`${environment.apiUrl}/generate?row=${row}`, table);
+    return this.httpClient.post<any[]>(`${environment.API_URL}/generate?row=${row}`, table);
   }
 }

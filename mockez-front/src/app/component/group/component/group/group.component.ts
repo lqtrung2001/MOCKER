@@ -7,7 +7,7 @@ import { Project } from '@core/model/project';
 import { GroupMember } from '@core/model/group-member';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
 import { DeleteGroupModal } from '@app/component/group/modal/delete-group/delete-group.modal';
-import { AppConfigProviderService } from '@core/service/app-config-provider.service';
+import { AppConfigService } from '@core/service/app-config.service';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 import { GroupMemberService } from '@core/service/group-member.service';
 import { AddMemberModal, AddMemberModalOptions } from '@app/component/group/modal/add-member/add-member.modal';
@@ -40,7 +40,7 @@ export class GroupComponent {
     private router: Router,
     private formBuilder: FormBuilder,
     private modalService: ModalService,
-    public appConfigProviderService: AppConfigProviderService,
+    public appConfigProviderService: AppConfigService,
     private modalProvider: ModalProvider,
     private groupMemberService: GroupMemberService
   ) {
@@ -126,7 +126,7 @@ export class GroupComponent {
   }
 
   removeUser(groupMember: GroupMember): void {
-    const isPrinciple: boolean = groupMember.user?.id === this.appConfigProviderService.auth.id;
+    const isPrinciple: boolean = groupMember.user?.id === this.appConfigProviderService.user.id;
     const content: string = isPrinciple
       ? 'Are you sure leaving this group anyway'
       : 'Are you sure you want to remove user from this group';

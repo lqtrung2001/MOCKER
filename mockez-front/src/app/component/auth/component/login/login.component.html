@@ -1,39 +1,23 @@
-<div id='main' class='drop-shadow-xl pt-20'>
-  <div [formGroup]='authFormGroup' class='board bg-white rounded-md text-sm pt-14 px-10 mx-auto w-96'>
-    <h1 class='text-center font-bold text-xl tracking-wider mb-14'>Login</h1>
-    <div class='relative'>
-      <label class='block font-medium' for='username'>Email</label>
-      <div class='input flex items-center'>
-        <div class='flex items-center w-1/12'>
-          <img class='icon' src='assets/icon/navigation/user.png' alt='user' />
-        </div>
-        <input formControlName='username' class='relative px-5 pt-1 pb-3 mt-3 w-11/12' type='email' id='username'
-               placeholder='Enter your email address' />
-      </div>
-    </div>
-    <div class='relative mt-5'>
-      <label class='block font-medium' for='password'>Password</label>
-      <div class='input flex items-center'>
-        <div class='flex items-center w-1/12'>
-          <img class='icon' src='assets/icon/lock.png' alt='lock' />
-        </div>
-        <input formControlName='password' class='relative px-5 pt-1 pb-3 mt-3 w-11/12' type='password' id='password'
-               placeholder='Enter your password' />
-      </div>
-    </div>
-    <p *ngIf='invalid' class='text-red text-center font-medium mt-5'>Email or password is incorrect</p>
-    <p class='text-right mt-5 underline cursor-pointer'><a routerLink='/auth/forgot-password'>Forgot password?</a></p>
-    <div class='text-center mt-8'>
-      <button class='bg-blue font-bold text-white rounded p-2.5 w-11/12'
-              (click)='login()'>LOGIN
-      </button>
-    </div>
-    <div class='text-center mt-8 text-gray-500'>
-      If you haven't account, <a routerLink='/auth/signup' class='underline text-blue-500'>sign up</a> now or by using
-    </div>
-    <div class='flex justify-center mt-5'>
-      <img class='w-8 mx-2 cursor-pointer' src='assets/icon/google.png' alt='google' />
-      <img class='w-8 mx-2 cursor-pointer' src='assets/icon/github.png' alt='github' />
-    </div>
+<div id='main' class='w-screen h-screen center-box'>
+  <div class='bg-white rounded drop-shadow-2xl text-sm text-center p-10'>
+    <img src='assets/png/logo.png' alt='logo' class='w-44 mx-auto'/>
+    <p class='font-bold mt-5 text-primary-bold'>{{ 'component.login.title' | translate }}</p>
+    <app-field ngDefaultControl [placeholder]='"component.login.username_placeholder" | translate' type='email'
+               [formControl]='formControls.username'></app-field>
+    <app-field ngDefaultControl [placeholder]='"component.login.password_placeholder" | translate' type='password'
+               [formControl]='formControls.password'></app-field>
+    <button class='bg-blue p-2.5 rounded mt-4 font-medium text-white w-full'
+            (click)='submit()'>{{ 'component.login.continue' | translate }}</button>
+    <p class='mt-4 text-gray-400'>{{ 'component.login.or' | translate }}</p>
+    <button *ngFor='let loginMethod of loginMethods'
+            class='border font-medium mt-4 p-2.5 rounded w-full shadow relative hover:shadow-xl'>
+      <img src='assets/png/login/{{ loginMethod.icon }}.png' [alt]='loginMethod.icon' class='icon absolute'/>
+      {{ 'component.login.continue_with_SPACE' | translate }} {{ loginMethod.name }}
+    </button>
+    <hr class='mt-8'/>
+    <p class='mt-4 text-blue'>
+      <a href='#' class='hover:underline'>{{ 'component.login.cannot_login' | translate }}</a>
+      &nbsp;&#8226;&nbsp;
+      <a href='#' class='hover:underline'>{{ 'component.login.sign_up' | translate }}</a></p>
   </div>
 </div>

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ConfigurationComponent } from '@shared/component/configuration/configuration.component';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   JsonPipe,
@@ -21,11 +20,13 @@ import { PageNotFoundComponent } from '@shared/component/page-not-found/page-not
 import { RouterLinkWithHref } from '@angular/router';
 import { SelectGroupModal } from '@shared/modal/select-group/select-group.modal';
 import { DateDurationPipe } from '@core/pipe/date-duration.pipe';
-import { ToastModule } from '@shared/modal/toast-service';
 import { XmlPipe } from '@core/pipe/xml.pipe';
 import { SqlPipe } from '@core/pipe/sql.pipe';
 import { CsvPipe } from '@core/pipe/csv.pipe';
 import { SafeHtmlPipe } from '@core/pipe/safe-html.pipe';
+import { FieldComponent } from '@shared/component/field/field.component';
+import { FieldDirective } from '@shared/directive/field.directive';
+import { FormErrorProcessorComponent } from '@shared/component/form-error-proccesser/form-error-processor.component';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -33,7 +34,6 @@ import { SafeHtmlPipe } from '@core/pipe/safe-html.pipe';
 
 @NgModule({
   declarations: [
-    ConfigurationComponent,
     TruncatePipe,
     SelectTypeModal,
     PreviewModal,
@@ -45,7 +45,10 @@ import { SafeHtmlPipe } from '@core/pipe/safe-html.pipe';
     DateDurationPipe,
     PageNotFoundComponent,
     SelectGroupModal,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    FieldComponent,
+    FieldDirective,
+    FormErrorProcessorComponent
   ],
   imports: [
     KeyValuePipe,
@@ -56,20 +59,21 @@ import { SafeHtmlPipe } from '@core/pipe/safe-html.pipe';
     NgForOf,
     ReactiveFormsModule,
     RouterLinkWithHref,
-    ToastModule,
     JsonPipe,
     NgSwitch,
     NgSwitchCase
   ],
   exports: [
     TruncatePipe,
-    ConfigurationComponent,
     CreateSchemaModal,
     PreviewModal,
     PageNotFoundComponent,
     SelectGroupModal,
     DateDurationPipe,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    FieldComponent,
+    FieldDirective,
+    FieldComponent
   ],
   providers: []
 })
