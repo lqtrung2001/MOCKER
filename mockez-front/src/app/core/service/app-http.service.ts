@@ -40,7 +40,7 @@ export abstract class AppHttpService<Type> implements HttpInterceptor {
   // GET method
   get(url: string, errorHandler?: (httpErrorResponse: HttpErrorResponse) => Observable<any>,
       headers?: HttpHeaders): Observable<Type> {
-    return this.httpClient.get<Type>(url, { headers })
+    return this.httpClient.get<Type>(url, { headers, observe: 'response' })
       .pipe(catchError(errorHandler || this.defaultErrorHandler),
         finalize(this.finalizeRequest));
   }
@@ -48,7 +48,7 @@ export abstract class AppHttpService<Type> implements HttpInterceptor {
   // POST method
   post(url: string, body?: any, errorHandler?: (httpErrorResponse: HttpErrorResponse) => Observable<any>,
        headers?: HttpHeaders): Observable<Type> {
-    return this.httpClient.post<Type>(url, body, { headers })
+    return this.httpClient.post<Type>(url, body, { headers, observe: 'response' })
       .pipe(catchError(errorHandler || this.defaultErrorHandler),
         finalize(this.finalizeRequest));
   }
@@ -57,7 +57,7 @@ export abstract class AppHttpService<Type> implements HttpInterceptor {
   put(url: string, body?: any,
       errorHandler?: (httpErrorResponse: HttpErrorResponse) => Observable<any>,
       headers?: HttpHeaders): Observable<Type> {
-    return this.httpClient.put<Type>(url, body, { headers })
+    return this.httpClient.put<Type>(url, body, { headers, observe: 'response' })
       .pipe(catchError(errorHandler || this.defaultErrorHandler),
         finalize(this.finalizeRequest));
   }
@@ -66,7 +66,7 @@ export abstract class AppHttpService<Type> implements HttpInterceptor {
   delete(url: string,
          errorHandler?: (httpErrorResponse: HttpErrorResponse) => Observable<any>,
          headers?: HttpHeaders): Observable<Type> {
-    return this.httpClient.delete<Type>(url, { headers })
+    return this.httpClient.delete<Type>(url, { headers, observe: 'response' })
       .pipe(catchError(errorHandler || this.defaultErrorHandler),
         finalize(this.finalizeRequest));
   }
@@ -98,11 +98,11 @@ export abstract class AppHttpService<Type> implements HttpInterceptor {
   };
 
   finalizeRequest(): void {
-    this.appConfigService.isLoading = false;
+    this.appConfigService.loading = false;
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.appConfigService.isLoading = true;
+    this.appConfigService.loading = true;
     return next
       // Add token when requesting
       .handle(request.clone({

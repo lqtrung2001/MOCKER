@@ -22,7 +22,7 @@ export class ApplicationHttpInterceptorService implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.appConfigProviderService.isLoading = true;
+    this.appConfigProviderService.loading = true;
     return next
       // Add token when requesting
       .handle(request.clone({
@@ -49,7 +49,7 @@ export class ApplicationHttpInterceptorService implements HttpInterceptor {
         //   }
         // }),
         finalize(() => {
-          this.appConfigProviderService.isLoading = false;
+          this.appConfigProviderService.loading = false;
         }));
   }
 }

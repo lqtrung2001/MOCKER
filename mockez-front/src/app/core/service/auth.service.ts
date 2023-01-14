@@ -31,7 +31,12 @@ export class AuthService extends AppHttpService<User> {
     if (!user) {
       return of(false);
     }
-    return this.auth(user.username!, user.password!);
+    return this.auth(user.username!, user.password!)
+      .pipe(map((httpResponse: HttpResponse<any>) => {
+        const token = httpResponse.headers.get(HTTP_HEADER_KEYS.AUTHORIZATION);
+        const userAgent = httpResponse.headers.get(HTTP_HEADER_KEYS.USER_AGENT);
+        return !!token && !!userAgent;
+      }));
   }
 
   login(username: string, password: string): Observable<boolean> {

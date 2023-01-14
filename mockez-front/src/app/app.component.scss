@@ -2,21 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-#main {
-  #content {
-    width: calc(100% - 20rem);
-  }
-}
-
-.loading {
+#loading {
 
   @apply fixed top-0 left-0 w-full h-full z-50;
   background-color: rgba(0, 0, 0, 0.6);
 
   > div {
-    @apply absolute top-1/2 left-1/2;
+    @apply absolute top-1/2 left-1/2 -translate-x-0.5 -translate-y-0.5;
     content: '';
-    transform: translate(-50%, -50%);
   }
 
   .lds-roller {

@@ -13,8 +13,8 @@ import { LOCALSTORAGE_KEYS } from '@app/app.constant';
 })
 export class AppConfigService {
 
-  public isLoading: boolean = false;
-  public user: User;
+  public loading: boolean = false;
+  public user: User | undefined;
   public sqlTypes: SQLType[] = [];
   public generateTypes: GenerateType[] = [];
 

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ModuleComponent } from '@shared/layout/component/module/module.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgForOf, NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
@@ -12,7 +11,6 @@ import { NavigationComponent } from '@shared/layout/component/navigation/navigat
 
 @NgModule({
   declarations: [
-    ModuleComponent,
     NavigationComponent
   ],
   imports: [
@@ -26,7 +24,6 @@ import { NavigationComponent } from '@shared/layout/component/navigation/navigat
     NgForOf
   ],
   exports: [
-    ModuleComponent,
     NavigationComponent
   ],
   providers: []
