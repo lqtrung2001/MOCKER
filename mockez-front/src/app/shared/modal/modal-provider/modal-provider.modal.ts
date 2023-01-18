@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
 import { DialogModal } from '@shared/modal/modal-provider/dialog/dialog.modal';
 import { Observable } from 'rxjs';
-import { SelectGroupModal } from '@shared/modal/select-group/select-group.modal';
-import { Group } from '@core/model/group';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -58,10 +56,6 @@ export class ModalProvider {
       title: 'Information',
       btnOk: true
     }).onResult();
-  }
-
-  public performAction(action: string): Observable<Group> {
-    return this.modalService.open(SelectGroupModal, { action }).onResult();
   }
 
 }

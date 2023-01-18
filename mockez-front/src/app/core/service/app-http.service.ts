@@ -11,9 +11,12 @@ import {
 import { catchError, finalize, Observable, of } from 'rxjs';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 import { AppConfigService } from '@core/service/app-config.service';
-import { LOCALSTORAGE_KEYS } from '@app/app.constant';
 import { environment } from '@environment/environment';
 import { Injectable, Injector } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { HttpMethod } from '@core/class/enum/http-method';
+import { Strings } from '@shared/util/strings';
+import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -30,17 +33,19 @@ export abstract class AppHttpService<Type> implements HttpInterceptor {
   protected modalProvider: ModalProvider;
   protected httpClient: HttpClient;
   protected appConfigService: AppConfigService;
+  protected translateService: TranslateService;
 
-  constructor(injector: Injector) {
+  constructor(private injector: Injector) {
     this.modalProvider = injector.get(ModalProvider);
     this.httpClient = injector.get(HttpClient);
     this.appConfigService = injector.get(AppConfigService);
+    this.translateService = injector.get(TranslateService);
   }
 
   // GET method
   get(url: string, errorHandler?: (httpErrorResponse: HttpErrorResponse) => Observable<any>,
       headers?: HttpHeaders): Observable<Type> {
-    return this.httpClient.get<Type>(url, { headers, observe: 'response' })
+    return this.httpClient.get<Type>(url, { headers })
       .pipe(catchError(errorHandler || this.defaultErrorHandler),
         finalize(this.finalizeRequest));
   }
@@ -48,7 +53,7 @@ export abstract class AppHttpService<Type> implements HttpInterceptor {
   // POST method
   post(url: string, body?: any, errorHandler?: (httpErrorResponse: HttpErrorResponse) => Observable<any>,
        headers?: HttpHeaders): Observable<Type> {
-    return this.httpClient.post<Type>(url, body, { headers, observe: 'response' })
+    return this.httpClient.post<Type>(url, body, { headers })
       .pipe(catchError(errorHandler || this.defaultErrorHandler),
         finalize(this.finalizeRequest));
   }
@@ -57,7 +62,7 @@ export abstract class AppHttpService<Type> implements HttpInterceptor {
   put(url: string, body?: any,
       errorHandler?: (httpErrorResponse: HttpErrorResponse) => Observable<any>,
       headers?: HttpHeaders): Observable<Type> {
-    return this.httpClient.put<Type>(url, body, { headers, observe: 'response' })
+    return this.httpClient.put<Type>(url, body, { headers })
       .pipe(catchError(errorHandler || this.defaultErrorHandler),
         finalize(this.finalizeRequest));
   }
@@ -66,19 +71,18 @@ export abstract class AppHttpService<Type> implements HttpInterceptor {
   delete(url: string,
          errorHandler?: (httpErrorResponse: HttpErrorResponse) => Observable<any>,
          headers?: HttpHeaders): Observable<Type> {
-    return this.httpClient.delete<Type>(url, { headers, observe: 'response' })
+    return this.httpClient.delete<Type>(url, { headers })
       .pipe(catchError(errorHandler || this.defaultErrorHandler),
         finalize(this.finalizeRequest));
   }
 
   // REQUEST
-  request<OtherType>(method: 'GET' | 'POST' | 'PUT' | 'DELETE', url: string, body?: any,
+  request<OtherType>(method: HttpMethod, url: string, body?: any,
                      errorHandler?: (httpErrorResponse: HttpErrorResponse) => Observable<any>,
                      headers?: HttpHeaders): Observable<OtherType> {
     return this.httpClient.request<OtherType>(method, url, {
       body,
-      headers,
-      observe: 'response'
+      headers
     }).pipe(catchError(errorHandler || this.defaultErrorHandler),
       finalize(this.finalizeRequest));
   }
@@ -86,12 +90,12 @@ export abstract class AppHttpService<Type> implements HttpInterceptor {
   defaultErrorHandler(httpErrorResponse: HttpErrorResponse): Observable<any> {
     if (httpErrorResponse.status === HttpStatusCode.Forbidden) {
       this.modalProvider.showError({
-        body: 'You are not allowed to access this action.'
+        body: this.translateService.instant('modal.error.no_permission')
       });
       return of(httpErrorResponse);
     } else {
       return this.modalProvider.showError({
-        body: 'A error occurred while performing this action, please try again later or contact the administrator.',
+        body: this.translateService.instant('modal.error.system_error'),
         detail: httpErrorResponse.message
       });
     }
@@ -109,7 +113,7 @@ export abstract class AppHttpService<Type> implements HttpInterceptor {
         responseType: 'json',
         setHeaders: {
           'Content-Type': 'application/json',
-          Authorization: localStorage.getItem(LOCALSTORAGE_KEYS.TOKEN) || ''
+          Authorization: localStorage.getItem(LocalStorageConstant.TOKEN) || Strings.EMPTY
         }
       }));
   }

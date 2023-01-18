@@ -1,0 +1,34 @@
+<div id='main' class='w-screen h-screen center-box'>
+  <div class='bg-white rounded drop-shadow-2xl text-sm text-center p-10'>
+    <img src='assets/png/logo.png' alt='logo' class='w-44 mx-auto'/>
+    <p class='font-bold mt-5 text-primary-bold'>{{ 'component.sign_up.title' | translate }}</p>
+    <moc-field ngDefaultControl
+               [placeholder]='"component.sign_up.email_address_placeholder" | translate' type='email'
+               [classesField]='isExistedUsername ? "invalid" : ""'
+               [formControl]='formControls.username'></moc-field>
+    <p *ngIf='isExistedUsername'
+       class='text-red text-center mt-2'>{{ 'component.sign_up.exist_username' | translate }}</p>
+    <moc-field ngDefaultControl
+               [placeholder]='"component.sign_up.password_placeholder" | translate' type='password'
+               [formControl]='formControls.password'></moc-field>
+    <moc-field ngDefaultControl
+               [placeholder]='"component.sign_up.confirm_password_placeholder" | translate' type='password'
+               [classesField]='isPasswordNotMatch ? "invalid" : ""'
+               [formControl]='formControls.confirmPassword'></moc-field>
+    <p *ngIf='isPasswordNotMatch'
+       class='text-red text-center mt-2'>{{ 'component.sign_up.password_not_match' | translate }}</p>
+    <p class='mt-4 text-gray-500 text-xs'>{{ 'component.sign_up.accept_terms_and_conditions' | translate }}</p>
+    <moc-button label='component.sign_up.sign_up' (click)='submit()'></moc-button>
+    <p class='mt-4 text-gray-400'>{{ 'component.sign_up.or' | translate }}</p>
+    <button *ngFor='let signInMethod of signInMethods'
+            class='border font-medium mt-4 p-2.5 rounded w-full shadow relative hover:shadow-xl'>
+      <img src='assets/png/auth/{{ signInMethod.icon }}.png' [alt]='signInMethod.icon' class='icon absolute'/>
+      {{ 'component.sign_up.continue_with_SPACE' | translate }} {{ signInMethod.name }}
+    </button>
+    <hr class='mt-8'/>
+    <p class='mt-4 text-blue'>
+      <a routerLink='/auth/sign-in'
+         class='hover:underline'>{{ 'component.sign_up.already_have_an_account_QUESTION_SPACE_login' | translate }}</a>
+    </p>
+  </div>
+</div>

@@ -14,7 +14,7 @@
                 class='bg-gray text-sm text-black rounded font-medium px-5 h-10 py-2 mr-3'
                 type='button'>Cancel
         </button>
-        <button (click)='modalInstance.close(true)' *ngIf='option.btnOk'
+        <button #buttonOk (click)='modalInstance.close(true)' *ngIf='option.btnOk'
                 class='bg-blue text-sm text-white rounded font-medium px-5 h-10 py-2 mr-3'
                 type='button'>OK
         </button>

@@ -27,5 +27,5 @@ public interface UserService {
 
     User changePassword(UUID id, String currentPassword, String newPassword);
 
-    Boolean checkIsExistingUsername(String username);
+    Boolean isExistedUsername(String username);
 }

@@ -7,185 +7,75 @@
     "save": "Save"
   },
   "message": {
-    "no_group_match": "No group match with this credential.",
-    "group_empty": "Group is empty in this time, please click create button for creating group.",
-    "no_table_match": "No table match with this credential.",
-    "table_empty": "Table is empty in this time, please click create button for creating table.",
-    "no_project_match": "No project match with this credential.",
-    "project_empty": "Project is empty in this time, please click create button for creating project.",
-    "no_schema_match": "No schema match with this credential.",
-    "schema_empty": "Schema is empty in this time, please click create button for creating schema.",
-    "no_person_match": "No person match with this credential."
   },
   "validator": {
     "required": "This field is required.",
     "email": "Please enter a valid email address.",
-    "max_length": "The maximum number of characters allowed in this field is {{ length }}."
+    "maxlength": "The maximum number of characters allowed in this field is {{ length }}.",
+    "minlength": "The minimum number of characters allowed in this field is {{ length }}."
   },
   "component": {
-    "login": {
+    "sign_in": {
       "title": "Log in to your account",
       "username_placeholder": "Enter username",
       "password_placeholder": "Enter password",
+      "invalid_auth": "Username or password is incorrect.",
+      "forget_password": "Forget password",
       "continue": "Continue",
       "or": "OR",
       "continue_with_SPACE": "Continue with ",
       "cannot_login": "Can't log in?",
       "sign_up": "Sign up for a account"
+    },
+    "sign_up": {
+      "title": "Sign up for your account",
+      "email_address_placeholder": "Enter email address",
+      "exist_username": "Username already registered.",
+      "password_not_match": "Password not match.",
+      "password_placeholder": "Enter password",
+      "confirm_password_placeholder": "Enter confirm password",
+      "accept_terms_and_conditions": "By signing up, I accept the Mocker Terms of Service and acknowledge the Privacy Policy.",
+      "sign_up": "Sign up",
+      "or": "OR",
+      "continue_with_SPACE": "Continue with ",
+      "already_have_an_account_QUESTION_SPACE_login": "Already have an Mocker account? Login"
+    },
+    "forget_password": {
+      "title": "Can't log in?",
+      "instruction": "We'll send a recovery link to",
+      "email_address_placeholder": "Enter email address",
+      "send_verification_code": "Send verification code",
+      "username_not_exist": "Username not exist.",
+      "return_sign_in": "Return to sign in"
     }
+  },
+  "audit": {
+    "login_failure": "Login failed!"
   },
   "modal": {
-    "create_group": {
-      "title": "CREATE GROUP",
-      "name": "Name: *",
-      "description": "Description: *",
-      "name_placeholder": "Enter group name",
-      "description_placeholder": "Enter group description"
+    "error": {
+      "no_permission": "You are not allowed to access this action.",
+      "system_error": "A error occurred while performing this action, please try again later or contact the administrator.",
+      "invalid_username_or_password": "The username or password you entered is invalid."
     },
-    "create_schema": {
-      "title": "SAVE SCHEMA",
-      "name": "Name: *",
-      "description": "Description: *",
-      "name_placeholder": "Enter schema name",
-      "description_placeholder": "Enter schema description"
+    "verification": {
+      "check_email": "Check your inbox to login",
+      "instruction": "To complete setup and sign in, please enter the verification code in the email we've sent to",
+      "verification_code_placeholder": "Enter verification code",
+      "resend_code": "Resend verification email",
+      "invalid_verification_code": "Invalid verification code."
     },
-    "create_project": {
-      "title": "CREATE PROJECT",
-      "name": "Name: *",
-      "description": "Description: *",
-      "name_placeholder": "Enter project name",
-      "description_placeholder": "Enter project description"
-    },
-    "create_table": {
-      "title": "SAVE TABLE",
-      "name": "Name: *",
-      "description": "Description: *",
-      "name_placeholder": "Enter table name",
-      "description_placeholder": "Enter table description"
-    },
-    "preview": {
-      "name": "preview",
-      "close": "close",
-      "table": "table",
-      "format": "format"
+    "change_password": {
+      "title": "Change password",
+      "instruction": "To complete reset your password, please enter new password for changing old password.",
+      "old_password_placeholder": "Enter old password",
+      "new_password_placeholder": "Enter new password",
+      "confirm_password_placeholder": "Enter confirm password",
+      "old_password": "Old password",
+      "new_password": "New password",
+      "confirm_password": "Confirm password",
+      "change_password": "Change password",
+      "password_not_match": "Password not match."
     }
-  },
-  "navigation": {
-    "name": "mockez",
-    "search": "search mockez",
-    "general": "general",
-    "dataset": "dataset",
-    "mock_api": "mock api",
-    "schema": "schema",
-    "project": "project"
-  },
-  "general": {
-    "table": {
-      "empty": "Table is empty, please add another field and config them by using below button.",
-      "name": "name",
-      "sql_type": "sql type",
-      "generate_type": "generate type",
-      "option": "option",
-      "blank": "blank",
-      "name_of_field": "name"
-    },
-    "config": {
-      "rows": "rows",
-      "format": "format",
-      "table_name": "table name",
-      "include_create_table": "include create table"
-    },
-    "footer": {
-      "download_data": "download data",
-      "preview": "preview",
-      "save_this_schema": "save this schema",
-      "more": "more"
-    }
-  },
-  "project": {
-    "title": "Project",
-    "search": {
-      "title": "What are you looking for?",
-      "placeholder": "Find a project...",
-      "btn_search": "Search",
-      "new": "New"
-    },
-    "table": {
-      "empty": "Project is empty, please add another project and config them by using create button.",
-      "summary": "Project summary",
-      "show": "Show",
-      "all_column": "All column",
-      "btn_delete": "Delete selected",
-      "name": "Name",
-      "shared_with": "Shared with",
-      "last_modified": "Last modified"
-    }
-  },
-  "schema": {
-    "title": "Schema",
-    "search": {
-      "title": "What are you looking for?",
-      "placeholder": "Search for name",
-      "btn_search": "Search",
-      "new": "New"
-    }
-  },
-  "table": {
-    "title": "Table",
-    "empty": "Field is empty, please add another project and config them by using add button.",
-    "summary": "Schema summary",
-    "show": "Show",
-    "all_column": "All column",
-    "btn_delete": "Delete selected",
-    "name": "Name",
-    "shared_with": "Shared with",
-    "last_modified": "Last modified"
-  },
-  "group": {
-  },
-  "person": {
-    "no_match": "No person matching the criteria.",
-    "empty": "Person is empty in this time.",
-    "card": {
-      "phone": "Phone"
-    },
-    "username_colon_required": "Username: *",
-    "username_placeholder": "Please enter your email",
-    "name_colon_required": "Name: *",
-    "name_placeholder": "Please enter your name",
-    "bio_colon_required": "Bio: *",
-    "bio_further_info": "This will be displayed on your profile.",
-    "bio_placeholder": "Please enter your bio",
-    "phone_colon_required": "Phone: *",
-    "phone_placeholder": "Please enter your phone",
-    "gender_colon_required": "Gender: *",
-    "gender": {
-      "male": "Male",
-      "female": "Female"
-    },
-    "address_colon_required": "Address: *",
-    "address_placeholder": "Please enter your address",
-    "date_of_birth_colon_required": "Date of birth: *"
-  },
-  "profile": {
-    "username_colon_required": "Username: *",
-    "username_placeholder": "Please enter your email",
-    "name_colon_required": "Name: *",
-    "name_placeholder": "Please enter your name",
-    "bio_colon_required": "Bio: *",
-    "bio_further_info": "This will be displayed on your profile.",
-    "bio_placeholder": "Please enter your bio",
-    "phone_colon_required": "Phone: *",
-    "phone_placeholder": "Please enter your phone",
-    "gender_colon_required": "Gender: *",
-    "gender": {
-      "male": "Male",
-      "female": "Female"
-    },
-    "address_colon_required": "Address: *",
-    "address_placeholder": "Please enter your address",
-    "date_of_birth_colon_required": "Date of birth: *",
-    "change_password": "Change password",
-    "save_change": "Save changes"
   }
 }

@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 #main {
+
   input:focus {
     border-color: $primary-color;
   }

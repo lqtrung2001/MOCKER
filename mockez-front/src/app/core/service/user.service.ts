@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '@core/model/user';
 import { AppHttpService } from '@core/service/app-http.service';
+import { HttpMethod } from '@core/class/enum/http-method';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -19,7 +20,7 @@ export class UserService extends AppHttpService<User> {
   }
 
   saveOrUpdate(user: User): Observable<string> {
-    return this.request<string>('PUT', `${this.API_URL}/${UserService.USER_API}`, user);
+    return this.request<string>(HttpMethod.PUT, `${this.API_URL}/${UserService.USER_API}`, user);
   }
 
   getUser(id: string): Observable<User> {
@@ -27,7 +28,7 @@ export class UserService extends AppHttpService<User> {
   }
 
   getUsers(): Observable<User[]> {
-    return this.request<User[]>('GET', `${this.API_URL}/${UserService.USER_API}`);
+    return this.request<User[]>(HttpMethod.GET, `${this.API_URL}/${UserService.USER_API}`);
   }
 
   changePassword(userId: string, currentPassword: string, newPassword: string): Observable<User> {
@@ -36,6 +37,5 @@ export class UserService extends AppHttpService<User> {
       currentPassword,
       newPassword
     });
-
   }
 }

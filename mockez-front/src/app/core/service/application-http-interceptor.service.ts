@@ -39,7 +39,7 @@ export class ApplicationHttpInterceptorService implements HttpInterceptor {
         //     this.modalProvider.showError({
         //       body: 'You have no permission to perform this action.'
         //     }).subscribe(() => {
-        //       this.router.navigate(['/auth/login']).then();
+        //       this.router.navigate(['/auth/sign-in']).then();
         //     });
         //     return of(httpErrorResponse);
         //   } else {

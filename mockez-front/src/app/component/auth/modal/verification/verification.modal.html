@@ -1,0 +1,19 @@
+<div id='main' class='dialog'>
+  <div class='text-sm'>
+    <p class='text-center text-gray-600 font-bold mt-4'>{{ 'modal.verification.check_email' | translate }}</p>
+    <img class='w-32 mt-4 mx-auto' src='assets/png/auth/email.svg' alt='email'/>
+    <p class='mt-4 text-gray-500'>{{ 'modal.verification.instruction' | translate }}</p>
+    <p class='mt-2 font-medium'>{{ options ? options.username : undefined }}</p>
+    <moc-field [formControl]='verificationCode'
+               [placeholder]='"modal.verification.verification_code_placeholder" | translate'
+               [classesField]='isInvalidVerificationCode ? "invalid" : ""'
+               ngDefaultControl></moc-field>
+    <p *ngIf='isInvalidVerificationCode'
+       class='text-red text-center mt-2'>{{ 'modal.verification.invalid_verification_code' | translate }}</p>
+    <hr class='mt-4'/>
+    <p class=' mt-4 text-center'>
+      <button (click)='resendVerificationCode()'
+              class='text-blue hover:underline'>{{ 'modal.verification.resend_code' | translate }}</button>
+    </p>
+  </div>
+</div>

@@ -2,10 +2,7 @@ package com.mockez.controller;
 
 import com.mockez.api.UserApi;
 import com.mockez.controller.maper.ApiAbstractMapper;
-import com.mockez.domain.dto.ChangPasswordRequestDto;
 import com.mockez.domain.dto.UserDto;
-import com.mockez.domain.exception.UnexpectedException;
-import com.mockez.domain.model.entity.User;
 import com.mockez.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -63,8 +60,4 @@ public class UserController implements UserApi {
         return ResponseEntity.ok(userService.saveUser(apiAbstractMapper.map(userDto)));
     }
 
-    @Override
-    public ResponseEntity<UserDto> changePassword(ChangPasswordRequestDto changPasswordRequestDto) {
-        return ResponseEntity.ok(apiAbstractMapper.map(userService.changePassword(changPasswordRequestDto.getUserId(), changPasswordRequestDto.getCurrentPassword(), changPasswordRequestDto.getNewPassword())));
-    }
 }

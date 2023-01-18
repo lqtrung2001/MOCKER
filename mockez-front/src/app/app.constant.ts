@@ -14,13 +14,3 @@ export const GROUP = 'group';
 export const PERSON = 'person';
 export const PROFILE = 'profile';
 export const SETTING = 'setting';
-
-export const HTTP_HEADER_KEYS = {
-  AUTHORIZATION: 'Authorization',
-  USER_AGENT: 'User-Agent'
-};
-
-export const LOCALSTORAGE_KEYS = {
-  AUTH: 'auth',
-  TOKEN: 'token'
-};

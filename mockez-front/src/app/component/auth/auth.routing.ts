@@ -7,10 +7,10 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   // {
   //   path: ROUTE.AUTH, children: [
-  //     { path: '', redirectTo: 'login', pathMatch: 'full' },
-  //     { path: 'login', component: LoginComponent, resolve: [] },
+  //     { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
+  //     { path: 'sign-in', component: LoginComponent, resolve: [] },
   //     { path: 'forgot-password', component: ForgotPasswordComponent, resolve: [] },
-  //     { path: 'signup', component: SignupComponent, resolve: [] }
+  //     { path: 'sign-up', component: SignupComponent, resolve: [] }
   //   ]
   // }
 ];

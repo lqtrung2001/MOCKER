@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public Boolean checkIsExistingUsername(String username) {
+    public Boolean isExistedUsername(String username) {
         return Optional.ofNullable(userRepository.findByUsername(username)).isPresent();
     }
 
@@ -82,14 +82,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User changePassword(UUID id, String currentPassword, String newPassword) {
-        if (Objects.equals(currentPassword, newPassword)) {
-            throw new UnexpectedException("Cannot change password when already in use");
-        }
-        User auth = applicationContextHolder.getCurrentUser();
-        if (!auth.getId().equals(id) || !passwordEncoder.matches(currentPassword, auth.getPassword())) {
-            throw new UnexpectedException("You have not permission to change the password");
-        }
-        auth.setPassword(passwordEncoder.encode(newPassword));
-        return userRepository.save(auth);
+        User user = userRepository.findById(id).orElseThrow();
+        user.setPassword(passwordEncoder.encode(newPassword));
+        return userRepository.save(user);
     }
 }

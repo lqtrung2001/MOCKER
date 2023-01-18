@@ -89,10 +89,8 @@ body {
     @apply relative;
 
     > *:first-child {
-      @apply rounded absolute;
+      @apply rounded absolute top-1/2 left-1/2;
       content: '';
-      top: 50%;
-      left: 50%;
       transform: translate(-50%, -50%);
     }
   }
@@ -102,10 +100,8 @@ body {
     background-color: rgba(0, 0, 0, 0.6);
 
     > div {
-      @apply rounded absolute p-7 bg-white;
+      @apply rounded absolute p-7 bg-white top-1/2 left-1/2;
       content: '';
-      top: 50%;
-      left: 50%;
       transform: translate(-50%, -50%);
     }
   }

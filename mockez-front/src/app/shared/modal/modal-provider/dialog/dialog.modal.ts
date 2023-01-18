@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { DialogOption } from '@shared/modal/modal-provider/modal-provider.modal';
 
@@ -11,7 +11,9 @@ import { DialogOption } from '@shared/modal/modal-provider/modal-provider.modal'
   templateUrl: 'dialog.modal.html',
   styleUrls: ['dialog.modal.scss']
 })
-export class DialogModal extends Modal {
+export class DialogModal extends Modal implements AfterViewInit {
+
+  @ViewChild('buttonOk') htmlButtonOkElement: HTMLButtonElement;
 
   option: DialogOption = {
     title: 'Dialog'
@@ -20,5 +22,10 @@ export class DialogModal extends Modal {
   onInjectInputs(option: DialogOption): void {
     this.option = option;
   }
+
+  ngAfterViewInit(): void {
+    this.htmlButtonOkElement.focus();
+  }
+
 
 }

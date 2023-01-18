@@ -7,8 +7,8 @@ import com.mockez.domain.model.entity.User;
  */
 public interface AuthService {
 
-    Boolean sendOTPCode(String username);
+    Boolean sendVerificationCode(String username);
 
-    User validateAndSave(Integer otpCode, User user);
+    User verifyAndSave(String verificationCode, User user);
 
 }
