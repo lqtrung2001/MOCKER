@@ -1,7 +1,8 @@
+import { FormControl } from '@angular/forms';
+
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
  */
-import { FormControl } from '@angular/forms';
 
 export class AbstractComponent {
 

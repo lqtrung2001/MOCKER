@@ -15,6 +15,7 @@ import { ApplicationHttpInterceptorService } from '@core/service/application-htt
 import { MarkdownModule } from 'ngx-markdown';
 import { SharedModule } from '@shared/shared.module';
 import { FeatureModule } from '@app/component/feature/feature.module';
+import { NotFoundModule } from '@app/component/not-found/not-found.module';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -38,7 +39,8 @@ import { FeatureModule } from '@app/component/feature/feature.module';
     FeatureModule,
     StoreModule.forRoot({}),
     MarkdownModule.forRoot(),
-    SharedModule
+    SharedModule,
+    NotFoundModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

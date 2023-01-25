@@ -5,6 +5,7 @@ import { AuthService } from '@app/core/service/auth.service';
 import { VerificationModal, VerificationModalOptions } from '@app/component/auth/modal/verification/verification.modal';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
 import { Router } from '@angular/router';
+import { AppConfigService } from '@core/service/app-config.service';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -45,10 +46,10 @@ export class ForgetPasswordComponent extends AbstractComponent {
       }
       this.authService.sendVerificationCode(this.username.value).subscribe((success: boolean) => {
         if (success) {
-          const validateOTPModalOptions: VerificationModalOptions = {
+          const verificationModalOptions: VerificationModalOptions = {
             username: this.username.value
           };
-          this.modalService.open(VerificationModal, validateOTPModalOptions).onResult()
+          this.modalService.open(VerificationModal, verificationModalOptions).onResult()
             .subscribe((success: boolean) => {
               if (success) {
                 this.router.navigate(['/']).then();

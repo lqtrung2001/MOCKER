@@ -1,22 +1,22 @@
-import { RouterModule, Routes } from '@angular/router';
-import { SignInComponent } from '@app/component/auth/component/sign-in/sign-in.component';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {
   ProjectComponent
 } from '@app/component/feature/component/workspace/component/project/component/project/project.component';
 import { AuthGuard } from '@app/auth.guard';
-import { SignUpComponent } from '@app/component/auth/component/sign-up/sign-up.component';
-import { ForgetPasswordComponent } from '@app/component/auth/component/forget-password/forget-password.component';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
  */
 
 const routes: Routes = [
-  { path: 'auth/sign-in', component: SignInComponent },
-  { path: 'auth/sign-up', component: SignUpComponent },
-  { path: 'auth/forget-password', component: ForgetPasswordComponent },
   { path: '', redirectTo: 'workspace/project', pathMatch: 'full' },
-  { path: 'workspace/project', component: ProjectComponent, canActivate: [AuthGuard] }
+  { path: 'auth', loadChildren: () => import('./component/auth/auth.module').then(m => m.AuthModule) },
+  { path: 'workspace/project', component: ProjectComponent, canActivate: [AuthGuard] },
+  {
+    path: 'not-found',
+    loadChildren: () => import('./component/not-found/not-found.module').then(m => m.NotFoundModule)
+  },
+  { path: '**', redirectTo: 'not-found' }
 ];
 
-export const ROUTING = RouterModule.forRoot(routes, { useHash: true });
+export const ROUTING = RouterModule.forRoot(routes, { useHash: true, preloadingStrategy: PreloadAllModules });

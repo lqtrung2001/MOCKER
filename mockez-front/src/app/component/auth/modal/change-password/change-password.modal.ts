@@ -62,8 +62,8 @@ export class ChangePasswordModal extends AbstractModal implements OnInit, AfterV
 
   ngOnInit(): void {
     // isShowOldPassword is false when forget password and want to change password
-    // this.isShowOldPassword = !this.options.oldPassword;
-    // this.formControls.oldPassword.patchValue(this.options.oldPassword);
+    this.isShowOldPassword = !this.options.oldPassword;
+    this.formControls.oldPassword.patchValue(this.options.oldPassword);
   }
 
   submit(): void {

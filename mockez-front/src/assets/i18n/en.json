@@ -42,11 +42,17 @@
     },
     "forget_password": {
       "title": "Can't log in?",
-      "instruction": "We'll send a recovery link to",
+      "instruction": "We'll send a verification code to",
       "email_address_placeholder": "Enter email address",
       "send_verification_code": "Send verification code",
       "username_not_exist": "Username not exist.",
       "return_sign_in": "Return to sign in"
+    },
+    "not_found": {
+      "oops": "Oops!",
+      "title": "404 - PAGE NOT FOUND",
+      "description": "The page you are looking for might have been removed had its name changed or is temporarily unavailable",
+      "go_to_homepage": "GO TO HOMEPAGE"
     }
   },
   "audit": {

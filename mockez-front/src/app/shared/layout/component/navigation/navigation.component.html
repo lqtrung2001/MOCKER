@@ -1,29 +1,31 @@
-<header id='main' class='text-gray-800 flex text-sm justify-between items-center px-5'>
-  <nav class='flex h-14'>
-    <a href='#' class='logo flex items-center mr-10 relative'>
-      <img src='assets/png/logo.png' alt='logo' class='w-28'/>
-    </a>
-    <a *ngFor='let navigation of navigations'
-       [routerLink]='navigation.routerLink'
-       class='px-4 flex items-center relative'
-       routerLinkActive='active'>
-      <i [class]='navigation.icon'></i>
-      <span class='ml-2 font-medium first-letter:underline'>{{ navigation.title }}</span>
-    </a>
-  </nav>
-  <div class='flex items-center text-lg'>
-    <div class='hover:bg-blue-50 w-9 h-9 flex justify-center items-center rounded-full ml-3 cursor-pointer'>
-      <i class='fa-regular fa-phone'></i>
+<div class='fixed w-screen z-50'>
+  <header id='main' class='text-gray-800 flex text-sm justify-between items-center px-5'>
+    <nav class='flex h-14'>
+      <a href='#' class='logo flex items-center mr-10 relative'>
+        <img src='assets/png/logo.png' alt='logo' class='w-28'/>
+      </a>
+      <a *ngFor='let navigation of navigations'
+         [routerLink]='navigation.routerLink'
+         class='px-4 flex items-center relative'
+         routerLinkActive='active'>
+        <i [class]='navigation.icon'></i>
+        <span class='ml-2 font-medium first-letter:underline'>{{ navigation.title }}</span>
+      </a>
+    </nav>
+    <div class='flex items-center text-lg'>
+      <div class='hover:bg-blue-50 w-9 h-9 flex justify-center items-center rounded-full ml-3 cursor-pointer'>
+        <i class='fa-regular fa-phone'></i>
+      </div>
+      <div class='hover:bg-blue-50 w-9 h-9 flex justify-center items-center rounded-full ml-3 cursor-pointer'>
+        <i class='fa-regular fa-circle-question'></i>
+      </div>
+      <div class='hover:bg-blue-50 w-9 h-9 flex justify-center items-center rounded-full ml-3 cursor-pointer'>
+        <i class='fa-regular fa-bell'></i>
+      </div>
+      <div class='hover:bg-blue-50 w-9 h-9 flex justify-center items-center rounded-full ml-3 cursor-pointer'>
+        <img [src]='avatarUrl' alt='avatar' class='icon rounded-full'/>
+      </div>
     </div>
-    <div class='hover:bg-blue-50 w-9 h-9 flex justify-center items-center rounded-full ml-3 cursor-pointer'>
-      <i class='fa-regular fa-circle-question'></i>
-    </div>
-    <div class='hover:bg-blue-50 w-9 h-9 flex justify-center items-center rounded-full ml-3 cursor-pointer'>
-      <i class='fa-regular fa-bell'></i>
-    </div>
-    <div class='hover:bg-blue-50 w-9 h-9 flex justify-center items-center rounded-full ml-3 cursor-pointer'>
-      <img [src]='avatarUrl' alt='avatar' class='icon rounded-full'/>
-    </div>
-  </div>
-</header>
-<hr/>
+  </header>
+  <hr/>
+</div>
