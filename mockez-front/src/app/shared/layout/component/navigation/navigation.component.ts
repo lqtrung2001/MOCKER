@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
+import { AbstractComponent } from '@core/class/abstract.component';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
- * */
+ * @author Do Quoc Viet
+ */
 
 export interface Navigation {
   routerLink: string;
@@ -11,16 +12,19 @@ export interface Navigation {
 }
 
 @Component({
-  selector: 'app-navigation',
+  selector: 'moc-navigation',
   templateUrl: 'navigation.component.html',
   styleUrls: ['navigation.component.scss']
 })
-export class NavigationComponent {
+export class NavigationComponent extends AbstractComponent {
 
   avatarUrl: string = 'https://yt3.ggpht.com/Cji7zw_9NO5VpKrfN3oP90Wiby3UhNG2t4q8j3wJiAMFSQicFKu-jXJ13H_mJfBKPD1lzaGGXZA=s88-c-k-c0x00ffffff-no-rj-mo';
   navigations: Navigation[] = [];
 
-  constructor() {
+  constructor(
+    injector: Injector
+  ) {
+    super(injector);
     this.navigations = [{
       routerLink: '/general',
       title: 'General',

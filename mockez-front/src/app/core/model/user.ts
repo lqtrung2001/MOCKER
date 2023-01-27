@@ -3,25 +3,23 @@ import { Gender } from '@core/model/enumeration/gender';
 import { GroupMember } from '@core/model/group-member';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 export class User extends Base {
-
-  public id: string | undefined = undefined;
-  public username: string | undefined = undefined;
-  public password: string | undefined = undefined;
-  public name: string | undefined = undefined;
-  public bio: string | undefined = undefined;
-  public phone: string | undefined = undefined;
-  public gender: Gender | undefined = undefined;
-  public address: string | undefined = undefined;
-  public dob: Date | undefined = undefined;
-  public isAccountNonExpired: boolean | undefined = undefined;
-  public isAccountNonLocked: boolean | undefined = undefined;
-  public isCredentialsNonExpired: boolean | undefined = undefined;
-  public isEnabled: boolean | undefined = undefined;
-  public grantedAuthorities: string | undefined = undefined;
+  public id: string;
+  public username: string;
+  public password: string;
+  public name: string;
+  public bio: string;
+  public phone: string;
+  public gender: Gender;
+  public address: string;
+  public dob: Date;
+  public isAccountNonExpired: boolean;
+  public isAccountNonLocked: boolean;
+  public isCredentialsNonExpired: boolean;
+  public isEnabled: boolean;
+  public grantedAuthorities: string;
   public groupMembers: GroupMember[] = [];
-
 }

@@ -1,12 +1,12 @@
 <div id='main' class='w-screen h-screen center-box'>
-  <div class='bg-white rounded drop-shadow-2xl text-sm text-center p-10'>
+  <div class='bg-white rounded drop-shadow-2xl text-sm text-center p-10' [formGroup]='formGroup'>
     <img src='assets/png/logo.png' alt='logo' class='w-44 mx-auto'/>
     <p class='font-bold mt-5 text-primary-bold'>{{ 'component.sign_in.title' | translate }}</p>
-    <moc-field [formControl]='formControls.username'
+    <moc-field [formControl]='formGroup.controls.username'
                [placeholder]='"component.sign_in.username_placeholder" | translate'
                ngDefaultControl
                type='email'></moc-field>
-    <moc-field [formControl]='formControls.password'
+    <moc-field [formControl]='formGroup.controls.password'
                [placeholder]='"component.sign_in.password_placeholder" | translate'
                ngDefaultControl
                type='password'></moc-field>

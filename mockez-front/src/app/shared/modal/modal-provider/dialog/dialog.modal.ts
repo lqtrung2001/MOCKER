@@ -1,31 +1,30 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { Modal } from '@shared/modal/modal-service/model/modal.model';
-import { DialogOption } from '@shared/modal/modal-provider/modal-provider.modal';
+import { Component, Injector } from '@angular/core';
+import { AbstractModal } from '@core/class/abstract.modal';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
+export interface DialogModalOptions {
+  title?: string;
+  body?: string;
+  detail?: string;
+  btnCancel?: boolean;
+  btnOk?: boolean;
+}
+
 @Component({
-  selector: 'app-dialog-modal',
+  selector: 'moc-dialog-modal',
   templateUrl: 'dialog.modal.html',
   styleUrls: ['dialog.modal.scss']
 })
-export class DialogModal extends Modal implements AfterViewInit {
+export class DialogModal extends AbstractModal {
+  override options: DialogModalOptions;
 
-  @ViewChild('buttonOk') htmlButtonOkElement: HTMLButtonElement;
-
-  option: DialogOption = {
-    title: 'Dialog'
-  };
-
-  onInjectInputs(option: DialogOption): void {
-    this.option = option;
+  constructor(
+    injector: Injector
+  ) {
+    super(injector);
   }
-
-  ngAfterViewInit(): void {
-    this.htmlButtonOkElement.focus();
-  }
-
 
 }

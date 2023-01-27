@@ -6,11 +6,14 @@ import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 import { NavigationComponent } from '@shared/layout/component/navigation/navigation.component';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 @NgModule({
   declarations: [
+    NavigationComponent
+  ],
+  exports: [
     NavigationComponent
   ],
   imports: [
@@ -22,9 +25,6 @@ import { NavigationComponent } from '@shared/layout/component/navigation/navigat
     RouterLinkWithHref,
     RouterLinkActive,
     NgForOf
-  ],
-  exports: [
-    NavigationComponent
   ],
   providers: []
 })

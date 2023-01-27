@@ -1,21 +1,17 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { AbstractComponent } from '@core/class/abstract-component';
+import { Component, Injector } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractComponent } from '@core/class/abstract.component';
 import { User } from '@core/model/user';
 import { UserService } from '@core/service/user.service';
-import { Router } from '@angular/router';
 import { AuthService } from '@core/service/auth.service';
-import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
-import { TranslateService } from '@ngx-translate/core';
-import { AuthConstant, SignInMethod } from '@app/component/auth/component/auth.constant';
-import { AppConfigService } from '@core/service/app-config.service';
+import { AuthConstant, SignInMethod } from '@app/component/auth/auth.constant';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
-type FormControls = {
+type Controls = {
   username: FormControl,
   password: FormControl
 };
@@ -27,36 +23,32 @@ type FormControls = {
 })
 export class SignInComponent extends AbstractComponent {
   signInMethods: SignInMethod[] = [];
-  formControls: FormControls;
+  formGroup: FormGroup<Controls>;
   invalidAuth: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
+    injector: Injector,
     private userService: UserService,
-    private router: Router,
-    private authService: AuthService,
-    private modalProvider: ModalProvider,
-    private translateService: TranslateService,
-    private appConfigService: AppConfigService
+    private authService: AuthService
   ) {
-    super();
+    super(injector);
     localStorage.clear();
     this.signInMethods = AuthConstant.signInMethods;
-    this.formControls = {
-      username: formBuilder.control(undefined, [Validators.required, Validators.email]),
-      password: formBuilder.control(undefined, [Validators.required, Validators.minLength(5)])
-    };
-    this.formControls.username.valueChanges.subscribe(() => this.invalidAuth = false);
-    this.formControls.password.valueChanges.subscribe(() => this.invalidAuth = false);
-    appConfigService.user = undefined;
+    this.formGroup = this.formBuilder.group({
+      username: this.formBuilder.control(undefined, [Validators.required, Validators.email]),
+      password: this.formBuilder.control(undefined, [Validators.required, Validators.minLength(5)])
+    });
+    this.formGroup.controls.username.valueChanges.subscribe(() => this.invalidAuth = false);
+    this.formGroup.controls.password.valueChanges.subscribe(() => this.invalidAuth = false);
+    this.appConfigService.user = undefined;
   }
 
   submit(): void {
-    this.markAllAsDirtyAndTouched(this.formControls);
-    if (this.invalid(this.formControls)) {
+    this.formGroup.markAllAsTouched();
+    if (this.formGroup.invalid) {
       return;
     }
-    const { username, password } = this.getRawValue(this.formControls);
+    const { username, password } = this.formGroup.getRawValue();
     this.authService.signIn(username!, password!).subscribe((userAgent: string) => {
       if (userAgent) {
         this.userService.findOneByUsername(userAgent)

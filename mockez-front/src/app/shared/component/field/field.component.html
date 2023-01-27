@@ -14,6 +14,6 @@
     </div>
   </div>
   <div *ngIf='isValidated && formControl.invalid'>
-    <moc-form-error-processor [error]='formControl.errors'></moc-form-error-processor>
+    <moc-error-message-processor [error]='formControl.errors'></moc-error-message-processor>
   </div>
 </div>

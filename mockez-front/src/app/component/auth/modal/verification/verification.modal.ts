@@ -1,17 +1,16 @@
 import { AbstractModal } from '@core/class/abstract.modal';
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component, Injector } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from '@core/service/auth.service';
 import { User } from '@core/model/user';
-import { of } from 'rxjs';
-import { ModalService } from '@shared/modal/modal-service/modal-service.service';
+import { catchError, of } from 'rxjs';
 import {
   ChangePasswordModal,
   ChangePasswordModalOptions
 } from '@app/component/auth/modal/change-password/change-password.modal';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 export interface VerificationModalOptions {
@@ -30,12 +29,11 @@ export class VerificationModal extends AbstractModal {
   isInvalidVerificationCode: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private modalService: ModalService
+    injector: Injector,
+    private authService: AuthService
   ) {
-    super();
-    this.verificationCode = formBuilder.control(undefined,
+    super(injector);
+    this.verificationCode = this.formBuilder.control(undefined,
       [Validators.required,
         Validators.minLength(5),
         Validators.maxLength(5)]);
@@ -46,10 +44,10 @@ export class VerificationModal extends AbstractModal {
           ...new User(),
           username: this.options.username,
           password: this.options.password
-        }, () => {
+        }).pipe(catchError(() => {
           this.isInvalidVerificationCode = true;
-          return of(false);
-        }).subscribe((user: User) => {
+          return of(new User());
+        })).subscribe((user: User) => {
           if (user) {
             if (this.options.password) {
               // Sign up

@@ -1,14 +1,12 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
 import { AbstractModal } from '@core/class/abstract.modal';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { AbstractComponent } from '@core/class/abstract-component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@core/service/auth.service';
 import { User } from '@core/model/user';
-import { AppConfigService } from '@core/service/app-config.service';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 export interface ChangePasswordModalOptions {
@@ -17,7 +15,7 @@ export interface ChangePasswordModalOptions {
   newPassword?: string;
 }
 
-type formControls = {
+type Controls = {
   oldPassword: FormControl;
   newPassword: FormControl;
   confirmPassword: FormControl;
@@ -30,26 +28,25 @@ type formControls = {
 })
 export class ChangePasswordModal extends AbstractModal implements OnInit, AfterViewInit {
   override options: ChangePasswordModalOptions;
-  formControls: formControls;
+  formGroup: FormGroup<Controls>;
   isPasswordNotMatch: boolean = false;
   isShowOldPassword: boolean = true;
 
   constructor(
-    private formBuilder: FormBuilder,
+    injector: Injector,
     private authService: AuthService,
-    private appConfigService: AppConfigService,
     private changeDetectorRef: ChangeDetectorRef
   ) {
-    super();
-    this.formControls = {
-      oldPassword: formBuilder.control(undefined, [Validators.required, Validators.minLength(5)]),
-      newPassword: formBuilder.control(undefined, [Validators.required, Validators.minLength(5)]),
-      confirmPassword: formBuilder.control(undefined, [Validators.required, Validators.minLength(5)])
-    };
-    this.formControls.confirmPassword.valueChanges.subscribe((value: string) => {
-      const password: string = this.formControls.newPassword.value;
-      this.isPasswordNotMatch = this.formControls.newPassword.valid
-        && this.formControls.confirmPassword.valid
+    super(injector);
+    this.formGroup = this.formBuilder.group({
+      oldPassword: this.formBuilder.control(undefined, [Validators.required, Validators.minLength(5)]),
+      newPassword: this.formBuilder.control(undefined, [Validators.required, Validators.minLength(5)]),
+      confirmPassword: this.formBuilder.control(undefined, [Validators.required, Validators.minLength(5)])
+    });
+    this.formGroup.controls.confirmPassword.valueChanges.subscribe((value: string) => {
+      const password: string = this.formGroup.controls.newPassword.value;
+      this.isPasswordNotMatch = this.formGroup.controls.newPassword.valid
+        && this.formGroup.controls.confirmPassword.valid
         && !!value
         && !!password
         && value !== password;
@@ -63,16 +60,15 @@ export class ChangePasswordModal extends AbstractModal implements OnInit, AfterV
   ngOnInit(): void {
     // isShowOldPassword is false when forget password and want to change password
     this.isShowOldPassword = !this.options.oldPassword;
-    this.formControls.oldPassword.patchValue(this.options.oldPassword);
+    this.formGroup.controls.oldPassword.patchValue(this.options.oldPassword);
   }
 
   submit(): void {
-    const abstractComponent: AbstractComponent = new AbstractComponent();
-    abstractComponent.markAllAsDirtyAndTouched(this.formControls);
-    if (this.isPasswordNotMatch || abstractComponent.invalid(this.formControls)) {
+    this.formGroup.markAllAsTouched();
+    if (this.isPasswordNotMatch || this.formGroup.invalid) {
       return;
     }
-    const { oldPassword, newPassword } = abstractComponent.getRawValue(this.formControls);
+    const { oldPassword, newPassword } = this.formGroup.getRawValue();
     this.authService.changePassword(this.options.id, oldPassword, newPassword).subscribe((user: User) => {
       if (user) {
         user.password = newPassword;

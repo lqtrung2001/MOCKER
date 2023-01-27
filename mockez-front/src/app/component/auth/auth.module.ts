@@ -11,7 +11,7 @@ import { ForgetPasswordComponent } from '@app/component/auth/component/forget-pa
 import { ChangePasswordModal } from '@app/component/auth/modal/change-password/change-password.modal';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 @NgModule({
@@ -22,9 +22,7 @@ import { ChangePasswordModal } from '@app/component/auth/modal/change-password/c
     ForgetPasswordComponent,
     ChangePasswordModal
   ],
-  exports: [
-    SignInComponent
-  ],
+  exports: [],
   imports: [
     ROUTING,
     ReactiveFormsModule,

@@ -11,7 +11,6 @@ import { User } from '@core/model/user';
   providedIn: 'root'
 })
 export class AppConfigService {
-
   public loading: boolean = false;
   public user: User | undefined;
   public sqlTypes: SQLType[] = [];

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Injector } from '@angular/core';
+import { AbstractComponent } from '@core/class/abstract.component';
 
 /**
  * @author Do Quoc Viet
@@ -10,11 +10,12 @@ import { Router } from '@angular/router';
   templateUrl: 'not-found.component.html',
   styleUrls: ['not-found.component.scss']
 })
-export class NotFoundComponent {
+export class NotFoundComponent extends AbstractComponent {
 
   constructor(
-    private router: Router
+    injector: Injector
   ) {
+    super(injector);
   }
 
   goToHomepage(): void {

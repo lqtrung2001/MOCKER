@@ -7,11 +7,9 @@ import { Table } from '@core/model/table';
  */
 
 export class Schema extends Base {
-
-  public id: string | undefined = undefined;
-  public name: string | undefined = undefined;
-  public description: string | undefined = undefined;
-  public project: Project | undefined = undefined;
+  public id: string;
+  public name: string;
+  public description: string;
+  public project: Project;
   public tables: Table[] = [];
-
 }

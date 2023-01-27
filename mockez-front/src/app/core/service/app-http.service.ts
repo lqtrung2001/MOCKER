@@ -19,17 +19,15 @@ import { Strings } from '@shared/util/strings';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 @Injectable({
   providedIn: 'root'
 })
-export abstract class AppHttpService<Type> implements HttpInterceptor {
-
+export class AppHttpService<Type> implements HttpInterceptor {
   API_URL = environment.API_URL;
   BASE_URL = environment.BASE_URL;
-
   protected modalProvider: ModalProvider;
   protected httpClient: HttpClient;
   protected appConfigService: AppConfigService;
@@ -43,52 +41,44 @@ export abstract class AppHttpService<Type> implements HttpInterceptor {
   }
 
   // GET method
-  get(url: string, errorHandler?: (httpErrorResponse: HttpErrorResponse) => Observable<any>,
-      headers?: HttpHeaders): Observable<Type> {
+  get(url: string, headers?: HttpHeaders): Observable<Type> {
     this.appConfigService.loading = true;
     return this.httpClient.get<Type>(url, { headers })
-      .pipe(catchError(errorHandler || this.defaultErrorHandler),
+      .pipe(catchError(this.defaultErrorHandler.bind(this)),
         finalize(this.finalizeRequest));
   }
 
   // POST method
-  post(url: string, body?: any, errorHandler?: (httpErrorResponse: HttpErrorResponse) => Observable<any>,
-       headers?: HttpHeaders): Observable<Type> {
+  post(url: string, body?: any, headers?: HttpHeaders): Observable<Type> {
     this.appConfigService.loading = true;
     return this.httpClient.post<Type>(url, body, { headers })
-      .pipe(catchError(errorHandler || this.defaultErrorHandler),
+      .pipe(catchError(this.defaultErrorHandler.bind(this)),
         finalize(this.finalizeRequest));
   }
 
   // PUT method
-  put(url: string, body?: any,
-      errorHandler?: (httpErrorResponse: HttpErrorResponse) => Observable<any>,
-      headers?: HttpHeaders): Observable<Type> {
+  put(url: string, body?: any, headers?: HttpHeaders): Observable<Type> {
     this.appConfigService.loading = true;
     return this.httpClient.put<Type>(url, body, { headers })
-      .pipe(catchError(errorHandler || this.defaultErrorHandler),
+      .pipe(catchError(this.defaultErrorHandler.bind(this)),
         finalize(this.finalizeRequest));
   }
 
   // DELETE method
-  delete(url: string,
-         errorHandler?: (httpErrorResponse: HttpErrorResponse) => Observable<any>,
-         headers?: HttpHeaders): Observable<Type> {
+  delete(url: string, headers?: HttpHeaders): Observable<Type> {
     this.appConfigService.loading = true;
     return this.httpClient.delete<Type>(url, { headers })
-      .pipe(catchError(errorHandler || this.defaultErrorHandler),
+      .pipe(catchError(this.defaultErrorHandler.bind(this)),
         finalize(this.finalizeRequest));
   }
 
   // REQUEST
-  request<OtherType>(method: HttpMethod, url: string, body?: any,
-                     errorHandler?: (httpErrorResponse: HttpErrorResponse) => Observable<any>,
-                     headers?: HttpHeaders): Observable<OtherType> {
+  request<OtherType>(method: HttpMethod, url: string, body?: any, headers?: HttpHeaders): Observable<OtherType> {
     this.appConfigService.loading = true;
     return this.httpClient.request<OtherType>(method, url, {
       body,
       headers
-    }).pipe(catchError(errorHandler || this.defaultErrorHandler),
+    }).pipe(catchError(this.defaultErrorHandler.bind(this)),
       finalize(this.finalizeRequest));
   }
 

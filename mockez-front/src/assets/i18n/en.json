@@ -51,7 +51,7 @@
     "not_found": {
       "oops": "Oops!",
       "title": "404 - PAGE NOT FOUND",
-      "description": "The page you are looking for might have been removed had its name changed or is temporarily unavailable",
+      "description": "The page you are looking for might have been removed had its name changed or is temporarily unavailable.",
       "go_to_homepage": "GO TO HOMEPAGE"
     }
   },

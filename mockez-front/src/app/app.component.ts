@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { AppConfigService } from '@core/service/app-config.service';
+import { Component, Injector } from '@angular/core';
+import { AbstractComponent } from '@core/class/abstract.component';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 @Component({
@@ -11,15 +10,15 @@ import { AppConfigService } from '@core/service/app-config.service';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent {
+export class AppComponent extends AbstractComponent {
 
   constructor(
-    private translateService: TranslateService,
-    public appConfigService: AppConfigService
+    injector: Injector
   ) {
+    super(injector);
     const language: string = 'en';
-    translateService.setDefaultLang(language);
-    translateService.use(language);
+    this.translateService.setDefaultLang(language);
+    this.translateService.use(language);
   }
 
 }

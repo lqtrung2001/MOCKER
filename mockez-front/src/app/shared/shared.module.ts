@@ -11,24 +11,24 @@ import {
   UpperCasePipe
 } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PageNotFoundComponent } from '@shared/component/page-not-found/page-not-found.component';
 import { RouterLinkWithHref } from '@angular/router';
 import { FieldComponent } from '@shared/component/field/field.component';
-import { FormErrorProcessorComponent } from '@shared/component/form-error-proccesser/form-error-processor.component';
+import { ErrorMessageProcessorComponent } from '@shared/component/error-message-processor/error-message-processor.component';
 import { LoadingComponent } from '@shared/component/loading/loading.component';
 import { ButtonComponent } from '@shared/component/button/button.component';
+import { ActionComponent } from '@shared/component/action/action.component';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 @NgModule({
   declarations: [
-    PageNotFoundComponent,
     FieldComponent,
     ButtonComponent,
-    FormErrorProcessorComponent,
-    LoadingComponent
+    ErrorMessageProcessorComponent,
+    LoadingComponent,
+    ActionComponent
   ],
   imports: [
     KeyValuePipe,
@@ -44,11 +44,11 @@ import { ButtonComponent } from '@shared/component/button/button.component';
     NgSwitchCase
   ],
   exports: [
-    PageNotFoundComponent,
     FieldComponent,
     FieldComponent,
     LoadingComponent,
-    ButtonComponent
+    ButtonComponent,
+    ActionComponent
   ],
   providers: []
 })

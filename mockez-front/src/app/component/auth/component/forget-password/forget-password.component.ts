@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
-import { AbstractComponent } from '@core/class/abstract-component';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component, Injector } from '@angular/core';
+import { AbstractComponent } from '@core/class/abstract.component';
+import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from '@app/core/service/auth.service';
 import { VerificationModal, VerificationModalOptions } from '@app/component/auth/modal/verification/verification.modal';
-import { ModalService } from '@shared/modal/modal-service/modal-service.service';
-import { Router } from '@angular/router';
-import { AppConfigService } from '@core/service/app-config.service';
+import { catchError, of } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 @Component({
@@ -21,14 +20,12 @@ export class ForgetPasswordComponent extends AbstractComponent {
   isNotExistedUsername: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private modalService: ModalService,
-    private router: Router
+    injector: Injector,
+    private authService: AuthService
   ) {
-    super();
+    super(injector);
     localStorage.clear();
-    this.username = formBuilder.control(undefined, [Validators.required, Validators.email]);
+    this.username = this.formBuilder.control(undefined, [Validators.required, Validators.email]);
     this.username.valueChanges.subscribe(() => {
       this.isNotExistedUsername = false;
     });
@@ -39,7 +36,11 @@ export class ForgetPasswordComponent extends AbstractComponent {
     if (this.username.invalid) {
       return;
     }
-    this.authService.isExistedUsername(this.username.value).subscribe((isExisted: boolean) => {
+    this.authService.isExistedUsername(this.username.value)
+      .pipe(catchError((httpErrorResponse: HttpErrorResponse) => {
+        console.log(httpErrorResponse);
+        return of(false);
+      })).subscribe((isExisted: boolean) => {
       if (!isExisted) {
         this.isNotExistedUsername = true;
         return;
@@ -57,6 +58,8 @@ export class ForgetPasswordComponent extends AbstractComponent {
             });
         }
       });
+    }, (error) => {
+        console.log(error);
     });
   }
 }

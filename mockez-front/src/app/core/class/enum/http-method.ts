@@ -1,7 +1,5 @@
 /**
- * @author Luong Quoc Trung
  * @author Do Quoc Viet
- * @enum HttpMethod
  */
 
 export enum HttpMethod {

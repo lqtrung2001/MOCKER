@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { AbstractComponent } from '@core/class/abstract.component';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -10,7 +11,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: 'field.component.html',
   styleUrls: ['field.component.scss']
 })
-export class FieldComponent implements OnInit {
+export class FieldComponent extends AbstractComponent implements OnInit {
   @ViewChild('inputElement') htmlInputElement: HTMLInputElement;
   @Input() type: string;
   @Input() placeholder: string;
@@ -21,6 +22,12 @@ export class FieldComponent implements OnInit {
   @Input() label: string;
   isShowEye: boolean = false;
   isShowPassword: boolean = false;
+
+  constructor(
+    injector: Injector
+  ) {
+    super(injector);
+  }
 
   get isValidated(): boolean {
     return this.formControl.touched || this.formControl.dirty;

@@ -4,11 +4,11 @@ import { ForgetPasswordComponent } from '@app/component/auth/component/forget-pa
 import { SignUpComponent } from '@app/component/auth/component/sign-up/sign-up.component';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 const routes: Routes = [
-  { path: 'auth', redirectTo: 'auth/sign-in' },
+  { path: 'auth', redirectTo: 'auth/sign-in', pathMatch: 'full' },
   {
     path: 'auth', children: [
       { path: 'sign-in', component: SignInComponent },

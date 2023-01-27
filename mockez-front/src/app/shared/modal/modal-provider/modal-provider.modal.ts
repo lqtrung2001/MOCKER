@@ -1,19 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
-import { DialogModal } from '@shared/modal/modal-provider/dialog/dialog.modal';
+import { DialogModal, DialogModalOptions } from '@shared/modal/modal-provider/dialog/dialog.modal';
 import { Observable } from 'rxjs';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
  */
-
-export interface DialogOption {
-  title?: string;
-  body?: string;
-  detail?: string;
-  btnCancel?: boolean;
-  btnOk?: boolean;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -25,26 +17,26 @@ export class ModalProvider {
   ) {
   }
 
-  public showConfirmation(option: DialogOption): Observable<any> {
+  public showConfirmation(dialogModalOptions: DialogModalOptions): Observable<any> {
     return this.modalService.open(DialogModal, {
-      ...option,
+      ...dialogModalOptions,
       title: 'Confirmation',
       btnCancel: true,
       btnOk: true
     }).onResult();
   }
 
-  public showError(option: DialogOption): Observable<any> {
+  public showError(dialogModalOptions: DialogModalOptions): Observable<any> {
     return this.modalService.open(DialogModal, {
-      ...option,
+      ...dialogModalOptions,
       title: 'Error',
       btnOk: true
     }).onResult();
   }
 
-  public showWarning(option: DialogOption): Observable<any> {
+  public showWarning(dialogModalOptions: DialogModalOptions): Observable<any> {
     return this.modalService.open(DialogModal, {
-      ...option,
+      ...dialogModalOptions,
       title: 'Warning',
       btnOk: true
     }).onResult();

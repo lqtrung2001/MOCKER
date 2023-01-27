@@ -4,16 +4,14 @@ import { Source } from '@core/model/source';
 import { SQLType } from '@core/model/sql-type';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 export class GenerateType extends Base {
-
-  public id: string | undefined = undefined;
-  public code: string | undefined = undefined;
-  public description: string | undefined = undefined;
-  public category: Category | undefined = undefined;
+  public id: string;
+  public code: string;
+  public description: string;
+  public category: Category;
   public sources: Source[] = [];
   public sqlTypes: SQLType[] = [];
-
 }

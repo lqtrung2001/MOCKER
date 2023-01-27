@@ -62,8 +62,8 @@ export class AuthService extends AppHttpService<User> {
     return this.request<boolean>(HttpMethod.POST, `${this.BASE_URL}/auth/send-verification-code`, username);
   }
 
-  verifyAndSave(verificationCode: string, user: User, errorHandler?: (httpErrorResponse: HttpErrorResponse) => Observable<any>): Observable<User> {
-    return this.post(`${this.BASE_URL}/auth/verify/${verificationCode}`, user, errorHandler);
+  verifyAndSave(verificationCode: string, user: User): Observable<User> {
+    return this.post(`${this.BASE_URL}/auth/verify/${verificationCode}`, user);
   }
 
   isExistedUsername(username: string): Observable<boolean> {

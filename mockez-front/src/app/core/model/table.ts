@@ -3,15 +3,13 @@ import { Schema } from '@core/model/schema';
 import { Field } from '@core/model/field';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 export class Table extends Base {
-
-  public id: string | undefined = undefined;
-  public name: string | undefined = undefined;
-  public description: string | undefined = undefined;
-  public schema: Schema | undefined = undefined;
+  public id: string;
+  public name: string;
+  public description: string;
+  public schema: Schema;
   public fields: Field[] = [];
-
 }
