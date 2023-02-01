@@ -4,6 +4,9 @@ import { PersonComponent } from '@app/component/people/component/person/person.c
 import { ROUTING } from '@app/component/people/people.routing';
 import { PeopleLayoutComponent } from '@app/component/people/people-layout.component';
 import { LayoutModule } from '@shared/layout/layout.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { DatePipe } from '@angular/common';
+import { SharedModule } from '@shared/shared.module';
 
 /**
  * @author Do Quoc Viet
@@ -18,7 +21,10 @@ import { LayoutModule } from '@shared/layout/layout.module';
   exports: [],
   imports: [
     ROUTING,
-    LayoutModule
+    LayoutModule,
+    TranslateModule,
+    DatePipe,
+    SharedModule
   ],
   providers: []
 })

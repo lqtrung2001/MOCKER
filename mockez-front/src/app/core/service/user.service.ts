@@ -5,14 +5,13 @@ import { AppHttpService } from '@core/service/app-http.service';
 import { HttpMethod } from '@core/class/enum/http-method';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService extends AppHttpService<User> {
-
   static USER_API = 'user';
 
   findOneByUsername(username: string): Observable<User> {

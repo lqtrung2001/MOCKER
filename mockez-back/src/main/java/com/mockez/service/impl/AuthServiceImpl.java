@@ -27,7 +27,6 @@ import java.util.Random;
 @Transactional
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
-
     private final JavaMailSender mailSender;
     private final UserRepository userRepository;
     protected Map<String, String> verificationMap = new HashMap<>();

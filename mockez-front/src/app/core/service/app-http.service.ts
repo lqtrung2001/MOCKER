@@ -17,6 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { HttpMethod } from '@core/class/enum/http-method';
 import { Strings } from '@shared/util/strings';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';
+import { HttpHeaderConstant } from '@core/constant/http-header.constant';
 
 /**
  * @author Do Quoc Viet
@@ -45,7 +46,7 @@ export class AppHttpService<Type> implements HttpInterceptor {
     this.appConfigService.loading = true;
     return this.httpClient.get<Type>(url, { headers })
       .pipe(catchError(this.defaultErrorHandler.bind(this)),
-        finalize(this.finalizeRequest));
+        finalize(this.finalizeRequest.bind(this)));
   }
 
   // POST method
@@ -53,7 +54,7 @@ export class AppHttpService<Type> implements HttpInterceptor {
     this.appConfigService.loading = true;
     return this.httpClient.post<Type>(url, body, { headers })
       .pipe(catchError(this.defaultErrorHandler.bind(this)),
-        finalize(this.finalizeRequest));
+        finalize(this.finalizeRequest.bind(this)));
   }
 
   // PUT method
@@ -61,7 +62,7 @@ export class AppHttpService<Type> implements HttpInterceptor {
     this.appConfigService.loading = true;
     return this.httpClient.put<Type>(url, body, { headers })
       .pipe(catchError(this.defaultErrorHandler.bind(this)),
-        finalize(this.finalizeRequest));
+        finalize(this.finalizeRequest.bind(this)));
   }
 
   // DELETE method
@@ -69,7 +70,7 @@ export class AppHttpService<Type> implements HttpInterceptor {
     this.appConfigService.loading = true;
     return this.httpClient.delete<Type>(url, { headers })
       .pipe(catchError(this.defaultErrorHandler.bind(this)),
-        finalize(this.finalizeRequest));
+        finalize(this.finalizeRequest.bind(this)));
   }
 
   // REQUEST
@@ -79,7 +80,7 @@ export class AppHttpService<Type> implements HttpInterceptor {
       body,
       headers
     }).pipe(catchError(this.defaultErrorHandler.bind(this)),
-      finalize(this.finalizeRequest));
+      finalize(this.finalizeRequest.bind(this)));
   }
 
   defaultErrorHandler(httpErrorResponse: HttpErrorResponse): Observable<any> {
@@ -108,7 +109,7 @@ export class AppHttpService<Type> implements HttpInterceptor {
       .handle(request.clone({
         responseType: 'json',
         setHeaders: {
-          'Content-Type': 'application/json',
+          [HttpHeaderConstant.CONTENT_TYPE]: 'application/json',
           Authorization: localStorage.getItem(LocalStorageConstant.TOKEN) || Strings.EMPTY
         }
       }));

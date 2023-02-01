@@ -43,7 +43,7 @@ export class VerificationModal extends AbstractModal {
         this.authService.verifyAndSave(verificationCode, {
           ...new User(),
           username: this.options.username,
-          password: this.options.password
+          password: this.options.password!
         }).pipe(catchError(() => {
           this.isInvalidVerificationCode = true;
           return of(new User());

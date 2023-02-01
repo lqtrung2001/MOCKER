@@ -4,16 +4,17 @@
     <p class='font-bold mt-5 text-primary-bold'>{{ 'component.sign_up.title' | translate }}</p>
     <moc-field ngDefaultControl
                [placeholder]='"component.sign_up.email_address_placeholder" | translate' type='email'
-               [classesField]='isExistedUsername ? "invalid" : ""'
+               classesField='{{ isExistedUsername ? "invalid" : "" }} mt-2'
                [formControl]='formGroup.controls.username'></moc-field>
     <p *ngIf='isExistedUsername'
        class='text-red text-center mt-2'>{{ 'component.sign_up.exist_username' | translate }}</p>
     <moc-field ngDefaultControl
                [placeholder]='"component.sign_up.password_placeholder" | translate' type='password'
+               classesField='mt-2'
                [formControl]='formGroup.controls.password'></moc-field>
     <moc-field ngDefaultControl
                [placeholder]='"component.sign_up.confirm_password_placeholder" | translate' type='password'
-               [classesField]='isPasswordNotMatch ? "invalid" : ""'
+               classesField='{{ isPasswordNotMatch ? "invalid" : "" }} mt-2'
                [formControl]='formGroup.controls.confirmPassword'></moc-field>
     <p *ngIf='isPasswordNotMatch'
        class='text-red text-center mt-2'>{{ 'component.sign_up.password_not_match' | translate }}</p>

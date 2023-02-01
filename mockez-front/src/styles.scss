@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+@import 'variable-size';
 
 @tailwind base;
 @tailwind components;
@@ -41,6 +42,10 @@ body {
     outline: none;
   }
 
+  .view-port-width-standard {
+    width: $view-port-width;
+  }
+
   .icon {
     width: 22px;
   }
@@ -63,6 +68,10 @@ body {
 
   .bg-green {
     background-color: #00CA4E !important;
+  }
+
+  .bg-blue-bold {
+    background-color: #172B4D !important;
   }
 
   .text-blue {

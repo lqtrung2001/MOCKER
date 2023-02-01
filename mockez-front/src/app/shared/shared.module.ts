@@ -5,15 +5,19 @@ import {
   KeyValuePipe,
   NgForOf,
   NgIf,
+  NgStyle,
   NgSwitch,
   NgSwitchCase,
+  NgTemplateOutlet,
   TitleCasePipe,
   UpperCasePipe
 } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLinkWithHref } from '@angular/router';
 import { FieldComponent } from '@shared/component/field/field.component';
-import { ErrorMessageProcessorComponent } from '@shared/component/error-message-processor/error-message-processor.component';
+import {
+  ErrorMessageProcessorComponent
+} from '@shared/component/error-message-processor/error-message-processor.component';
 import { LoadingComponent } from '@shared/component/loading/loading.component';
 import { ButtonComponent } from '@shared/component/button/button.component';
 import { ActionComponent } from '@shared/component/action/action.component';
@@ -41,7 +45,9 @@ import { ActionComponent } from '@shared/component/action/action.component';
     RouterLinkWithHref,
     JsonPipe,
     NgSwitch,
-    NgSwitchCase
+    NgSwitchCase,
+    NgTemplateOutlet,
+    NgStyle
   ],
   exports: [
     FieldComponent,

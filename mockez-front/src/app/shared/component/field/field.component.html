@@ -1,12 +1,12 @@
 <div id='main' class='text-sm'>
-  <p *ngIf='label' class='font-medium pl-2.5 mt-4 {{ classes }}'>{{ label | translate }}</p>
+  <p *ngIf='label' class='font-medium pl-2.5 mt-4 mb-2 {{ classes }}'>{{ label | translate }}</p>
   <div class='relative'>
     <input #inputElement
-           [formControl]='formControl'
+           [formControl]='$any(formControl)'
            [placeholder]='placeholder'
            [style]='styles'
            [type]='type'
-           class='{{ (isValidated && formControl.invalid) ? "invalid" : "" }} border-2 p-2.5 rounded mt-2 w-full {{ classesField }}'/>
+           class='{{ classesField }} {{ (isValidated && formControl.invalid) ? "invalid" : "" }} border-2 p-2.5 rounded w-full'/>
     <div (click)='showPasswordChange()'
          *ngIf='isShowEye'
          class='absolute right-3 top-4 cursor-pointer text-lg'>

@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 import { User } from '@core/model/user';
 import { AppHttpService } from '@core/service/app-http.service';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 import { HttpHeaderConstant } from '@core/constant/http-header.constant';
 import { HttpMethod } from '@core/class/enum/http-method';

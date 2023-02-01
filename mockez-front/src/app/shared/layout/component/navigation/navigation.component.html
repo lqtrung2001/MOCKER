@@ -1,5 +1,5 @@
-<div class='fixed w-screen z-40'>
-  <header id='main' class='text-gray-800 flex text-sm justify-between items-center px-5'>
+<div class='sticky top-0 w-screen z-40'>
+  <header id='main' class='bg-white text-gray-800 flex text-sm justify-between items-center px-5'>
     <nav class='flex h-14'>
       <a href='#' class='logo flex items-center mr-10 relative'>
         <img src='assets/png/logo.png' alt='logo' class='w-28'/>
@@ -22,12 +22,23 @@
       <div class='hover:bg-blue-50 w-9 h-9 flex justify-center items-center rounded-full ml-3 cursor-pointer'>
         <i class='fa-regular fa-bell'></i>
       </div>
-      <div class='hover:bg-blue-50 w-9 h-9 flex justify-center items-center rounded-full ml-3 cursor-pointer relative'>
-        <img [src]='avatarUrl' alt='avatar' class='icon rounded-full'/>
-      </div>
-      <moc-action>
-        <ng-template>
-
+      <moc-action [self]='self' [header]='header' [actions]='actions'>
+        <ng-template #self>
+          <div
+            class='hover:bg-blue-50 w-9 h-9 flex justify-center items-center rounded-full ml-3 cursor-pointer relative'>
+            <img [src]='avatarUrl' alt='avatar' class='icon rounded-full'/>
+          </div>
+        </ng-template>
+        <ng-template #header>
+          <div class='bg-blue-bold px-4 py-2.5 flex items-center text-white text-sm'>
+            <div class='w-7 h-7 bg-white flex justify-center items-center rounded-full'>
+              <img [src]='avatarUrl' alt='avatar' class='w-6 h-6 rounded-full'/>
+            </div>
+            <div class='ml-2'>
+              <p class='font-medium'>{{ 'Do Quoc Viet' }}</p>
+              <p class='text-xs text-gray-400'>{{ 'doquocviet.sept3rd@gmail.com' }}</p>
+            </div>
+          </div>
         </ng-template>
       </moc-action>
     </div>

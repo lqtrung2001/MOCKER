@@ -5,10 +5,12 @@
     <moc-field [formControl]='formGroup.controls.username'
                [placeholder]='"component.sign_in.username_placeholder" | translate'
                ngDefaultControl
+               classesField='mt-2'
                type='email'></moc-field>
     <moc-field [formControl]='formGroup.controls.password'
                [placeholder]='"component.sign_in.password_placeholder" | translate'
                ngDefaultControl
+               classesField='mt-2'
                type='password'></moc-field>
     <p class='mt-4 text-red' *ngIf='invalidAuth'>{{ 'component.sign_in.invalid_auth' | translate }}</p>
     <moc-button (click)='submit()' label='component.sign_in.continue'></moc-button>

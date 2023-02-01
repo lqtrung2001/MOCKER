@@ -1,0 +1,75 @@
+<div id='main'>
+  <div class='w-full h-44 relative'>
+    <div class='absolute drop-shadow-2xl -bottom-16 view-port-width-standard'>
+      <div class='w-32 h-32 rounded-full bg-white flex justify-center items-center'>
+        <img class='rounded-full avatar' [src]='avatarUrl' alt='avatar'/>
+      </div>
+    </div>
+  </div>
+  <div class='flex mt-20 view-port-width-standard mx-auto'>
+    <div class='left'>
+      <p class='text-3xl font-medium'>{{ user?.name }}</p>
+      <p class='mt-2 text-sm'>{{ user?.bio }}</p>
+      <div class='rounded border w-96 mt-5 p-5'>
+        <div class='text-sm'>
+          <p class='text-gray-500'>{{ 'ABOUT' | translate }}</p>
+          <div>
+            <div class='mt-3.5 flex items-center'>
+              <i class='w-1/12 text-gray-500 text-lg fa-regular fa-briefcase'></i>
+              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
+                         placeholder='Your job title'></moc-field>
+            </div>
+            <div class='mt-3.5 flex items-center'>
+              <i class='w-1/12 text-gray-500 text-lg fa-light fa-apartment'></i>
+              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
+                         placeholder='Your department'></moc-field>
+            </div>
+            <div class='mt-3.5 flex items-center'>
+              <i class='w-1/12 text-gray-500 text-lg fa-light fa-sitemap'></i>
+              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
+                         placeholder='Your organisation'></moc-field>
+            </div>
+            <div class='mt-3.5 flex items-center'>
+              <i class='w-1/12 text-gray-500 text-lg fa-regular fa-location-dot'></i>
+              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
+                         placeholder='Your location'></moc-field>
+            </div>
+          </div>
+        </div>
+        <div class='text-sm mt-5'>
+          <p class='text-gray-500'>{{ 'CONTACT' | translate }}</p>
+          <div>
+            <div class='mt-3.5 flex items-center'>
+              <i class='w-1/12 text-gray-500 text-lg fa-regular fa-envelopes'></i>
+              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
+                         placeholder='Your email'></moc-field>
+            </div>
+            <div class='mt-3.5 flex items-center'>
+              <i class='w-1/12 text-gray-500 text-lg fa-light fa-phone'></i>
+              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
+                         placeholder='Your phone'></moc-field>
+            </div>
+          </div>
+        </div>
+        <div class='text-sm mt-5'>
+          <p class='text-gray-500'>{{ 'MORE' | translate }}</p>
+          <div>
+            <div class='mt-3.5 flex items-center'>
+              <i class='w-1/12 text-gray-500 text-lg fa-regular fa-envelopes'></i>
+              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
+                         placeholder='Your gender'></moc-field>
+            </div>
+            <div class='mt-3.5 flex items-center'>
+              <i class='w-1/12 text-gray-500 text-lg fa-light fa-phone'></i>
+              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
+                         placeholder='Your date of birth'></moc-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='right'>
+
+    </div>
+  </div>
+</div>
