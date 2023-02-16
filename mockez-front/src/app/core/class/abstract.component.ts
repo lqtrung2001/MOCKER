@@ -5,9 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalProvider } from '@app/shared/modal/modal-provider/modal-provider.modal';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrProvider } from '@shared/modal/toastr-provider/toastr-provider';
 
 /**
  * @author Do Quoc Viet
+ * @date 05/02/2023
  */
 
 export abstract class AbstractComponent {
@@ -18,6 +20,7 @@ export abstract class AbstractComponent {
   protected modalService: ModalService;
   protected formBuilder: FormBuilder;
   protected translateService: TranslateService;
+  protected toastProvider: ToastrProvider;
 
   protected constructor(injector: Injector) {
     this.appConfigService = injector.get(AppConfigService);
@@ -27,6 +30,7 @@ export abstract class AbstractComponent {
     this.modalService = injector.get(ModalService);
     this.formBuilder = injector.get(FormBuilder);
     this.translateService = injector.get(TranslateService);
+    this.toastProvider = injector.get(ToastrProvider);
   }
 
 }

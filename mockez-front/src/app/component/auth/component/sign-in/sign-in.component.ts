@@ -9,6 +9,7 @@ import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 
 /**
  * @author Do Quoc Viet
+ * @date 05/02/2023
  */
 
 type Controls = {
@@ -57,7 +58,12 @@ export class SignInComponent extends AbstractComponent {
               user.password = password;
               localStorage.setItem(LocalStorageConstant.AUTH, JSON.stringify(user));
               this.appConfigService.user = user;
-              this.router.navigate(['/']).then();
+              this.router.navigate(['/']).then(() => {
+                this.toastProvider.showSuccess({
+                  title: 'Login',
+                  body: 'Login successfully'
+                });
+              });
             }
           });
       } else {
@@ -66,4 +72,9 @@ export class SignInComponent extends AbstractComponent {
     });
   }
 
+  signInWithMethod(signInMethod: SignInMethod): void {
+    this.toastProvider.showInformation({
+      body: 'This method not available in the application right now. Please try again later.'
+    });
+  }
 }

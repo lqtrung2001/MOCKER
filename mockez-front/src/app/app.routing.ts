@@ -2,27 +2,19 @@ import { NoPreloading, RouterModule, Routes } from '@angular/router';
 
 /**
  * @author Do Quoc Viet
+ * @date 05/02/2023
  */
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'workspace/project', pathMatch: 'full'
+    loadChildren: () => import('./component/general/general.module').then(module => module.GeneralModule)
   }, {
     path: 'auth',
     loadChildren: () => import('./component/auth/auth.module').then(module => module.AuthModule)
   }, {
-    path: 'general',
-    loadChildren: () => import('./component/general/general.module').then(module => module.GeneralModule)
-  }, {
-    path: 'workspace',
-    loadChildren: () => import('./component/workspace/workspace.module').then(module => module.WorkspaceModule)
-  }, {
-    path: 'group',
-    loadChildren: () => import('./component/group/group.module').then(module => module.GroupModule)
-  }, {
-    path: 'people',
-    loadChildren: () => import('./component/people/people.module').then(module => module.PeopleModule)
+    path: 'project',
+    loadChildren: () => import('./component/project/project.module').then(module => module.ProjectModule)
   }, {
     path: 'not-found',
     loadChildren: () => import('./component/not-found/not-found.module').then(module => module.NotFoundModule)

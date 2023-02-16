@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#main {
+  .tab-hover:hover {
+    @apply relative;
+    color: #4285F4;
+
+    &::after {
+      @apply absolute bottom-0 h-1 rounded-t-md;
+      content: '';
+      width: 90%;
+      left: 5%;
+      background-color: #4285F4;
+    }
+  }
+}

@@ -7,10 +7,12 @@
 #main {
 
   input:focus {
+    @apply border-2;
     border-color: $primary-color;
   }
 
   .invalid {
+    @apply border-2;
     border-color: $invalid-color !important;
   }
 }

@@ -53,6 +53,35 @@
       "title": "404 - PAGE NOT FOUND",
       "description": "The page you are looking for might have been removed had its name changed or is temporarily unavailable.",
       "go_to_homepage": "GO TO HOMEPAGE"
+    },
+    "projects": {
+      "my_projects": "My Projects",
+      "information": "A project is a group of schemas, datasets, and scenarios that can be shared with others or remain private.",
+      "create": "CREATE A PROJECT",
+      "name": "Name",
+      "shared_by": "Shared By",
+      "last_modified": "Last Modified"
+    },
+    "project": {
+      "my_project": "My Project",
+      "new_project": "New Project"
+    },
+    "general": {
+      "introduction": "Need some mock data to test your app? Mocker lets you generate up to 1,000 rows of realistic test data in CSV, JSON, SQL, and Excel formats.",
+      "row": "#Rows:",
+      "format": "Format:",
+      "download_data": "DOWNLOAD DATA",
+      "preview": "PREVIEW",
+      "save_this_table": "SAVE THIS TABLE",
+      "more": "MORE"
+    },
+    "table": {
+      "field_name": "FIELD NAME",
+      "generate_type": "GENERATE TYPE",
+      "sql_type": "SQL TYPE",
+      "options": "OPTIONS",
+      "field_name_placeholder": "Field name",
+      "add_another_field": "ADD ANOTHER FIELD"
     }
   },
   "audit": {

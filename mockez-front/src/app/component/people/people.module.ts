@@ -7,6 +7,7 @@ import { LayoutModule } from '@shared/layout/layout.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 /**
  * @author Do Quoc Viet
@@ -24,7 +25,8 @@ import { SharedModule } from '@shared/shared.module';
     LayoutModule,
     TranslateModule,
     DatePipe,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: []
 })
