@@ -1,0 +1,116 @@
+{
+  "label": {
+    "search_placeholder": "Find anything...",
+    "button_new": "New",
+    "member": "Member: ",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "message": {
+  },
+  "validator": {
+    "required": "This field is required.",
+    "email": "Please enter a valid email address.",
+    "maxlength": "The maximum number of characters allowed in this field is {{ length }}.",
+    "minlength": "The minimum number of characters allowed in this field is {{ length }}."
+  },
+  "component": {
+    "sign_in": {
+      "title": "Log in to your account",
+      "username_placeholder": "Enter username",
+      "password_placeholder": "Enter password",
+      "invalid_auth": "Username or password is incorrect.",
+      "forget_password": "Forget password",
+      "continue": "Continue",
+      "or": "OR",
+      "continue_with_SPACE": "Continue with ",
+      "cannot_login": "Can't log in?",
+      "sign_up": "Sign up for a account"
+    },
+    "sign_up": {
+      "title": "Sign up for your account",
+      "email_address_placeholder": "Enter email address",
+      "exist_username": "Username already registered.",
+      "password_not_match": "Password not match.",
+      "password_placeholder": "Enter password",
+      "confirm_password_placeholder": "Enter confirm password",
+      "accept_terms_and_conditions": "By signing up, I accept the Mocker Terms of Service and acknowledge the Privacy Policy.",
+      "sign_up": "Sign up",
+      "or": "OR",
+      "continue_with_SPACE": "Continue with ",
+      "already_have_an_account_QUESTION_SPACE_login": "Already have an Mocker account? Login"
+    },
+    "forget_password": {
+      "title": "Can't log in?",
+      "instruction": "We'll send a verification code to",
+      "email_address_placeholder": "Enter email address",
+      "send_verification_code": "Send verification code",
+      "username_not_exist": "Username not exist.",
+      "return_sign_in": "Return to sign in"
+    },
+    "not_found": {
+      "oops": "Oops!",
+      "title": "404 - PAGE NOT FOUND",
+      "description": "The page you are looking for might have been removed had its name changed or is temporarily unavailable.",
+      "go_to_homepage": "GO TO HOMEPAGE"
+    },
+    "projects": {
+      "my_projects": "My Projects",
+      "information": "A project is a group of schemas, datasets, and scenarios that can be shared with others or remain private.",
+      "create": "CREATE A PROJECT",
+      "name": "Name",
+      "shared_by": "Shared By",
+      "last_modified": "Last Modified"
+    },
+    "project": {
+      "my_project": "My Project",
+      "new_project": "New Project"
+    },
+    "general": {
+      "introduction": "Need some mock data to test your app? Mocker lets you generate up to 1,000 rows of realistic test data in CSV, JSON, SQL, and Excel formats.",
+      "row": "#Rows:",
+      "format": "Format:",
+      "download_data": "DOWNLOAD DATA",
+      "preview": "PREVIEW",
+      "save_this_table": "SAVE THIS TABLE",
+      "more": "MORE"
+    },
+    "table": {
+      "field_name": "FIELD NAME",
+      "generate_type": "GENERATE TYPE",
+      "sql_type": "SQL TYPE",
+      "options": "OPTIONS",
+      "field_name_placeholder": "Field name",
+      "add_another_field": "ADD ANOTHER FIELD"
+    }
+  },
+  "audit": {
+    "login_failure": "Login failed!"
+  },
+  "modal": {
+    "error": {
+      "no_permission": "You are not allowed to access this action.",
+      "system_error": "A error occurred while performing this action, please try again later or contact the administrator.",
+      "invalid_username_or_password": "The username or password you entered is invalid."
+    },
+    "verification": {
+      "check_email": "Check your inbox to login",
+      "instruction": "To complete setup and sign in, please enter the verification code in the email we've sent to",
+      "verification_code_placeholder": "Enter verification code",
+      "resend_code": "Resend verification email",
+      "invalid_verification_code": "Invalid verification code."
+    },
+    "change_password": {
+      "title": "Change password",
+      "instruction": "To complete reset your password, please enter new password for changing old password.",
+      "old_password_placeholder": "Enter old password",
+      "new_password_placeholder": "Enter new password",
+      "confirm_password_placeholder": "Enter confirm password",
+      "old_password": "Old password",
+      "new_password": "New password",
+      "confirm_password": "Confirm password",
+      "change_password": "Change password",
+      "password_not_match": "Password not match."
+    }
+  }
+}

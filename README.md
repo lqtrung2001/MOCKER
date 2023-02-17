@@ -1,6 +1,6 @@
 # MOCKER
 
-### SPECIALIZED ESSAY - GRADUATION THESIS
+### ESSAY ON SOFTWARE ENGINEERING
 
 **Name:** Building a website MOCKER generates data for system testing.
 
@@ -21,6 +21,7 @@
 1. Front-end: Angular, Typescript, HTML, SCSS.
 2. Back-end: Spring Boot
 3. Database: Postgresql
+4. Docker
 
 **Source:**
 

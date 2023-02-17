@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+@import 'variable-size';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply mr-0 p-0 box-border;
+}
+
+//::selection:not(input) {
+//  @apply bg-transparent;
+//}
+
+::-webkit-scrollbar {
+  @apply w-3 h-3;
+}
+
+::-webkit-scrollbar-track {
+  @apply rounded-lg bg-white;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-400 rounded-3xl;
+  border: 3px solid #FFF;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+body {
+  min-width: 1200px;
+  font-family: 'Roboto', sans-serif;
+
+  input, label {
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+  }
+
+  .view-port-width-standard {
+    width: $view-port-width;
+  }
+
+  .icon {
+    width: 22px;
+  }
+
+  .shadow-light {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.09);
+  }
+
+  .bg-blue {
+    background-color: #4285F4 !important;
+  }
+
+  .bg-yellow {
+    background-color: #FFBD44 !important;
+  }
+
+  .bg-red {
+    background-color: #FF605C !important;
+  }
+
+  .bg-green {
+    background-color: #00CA4E !important;
+  }
+
+  .bg-blue-bold {
+    background-color: #172B4D !important;
+  }
+
+  .text-blue {
+    color: #4285F4 !important;
+  }
+
+  .text-yellow {
+    color: #FFBD44 !important;
+  }
+
+  .text-red {
+    color: #FF605C !important;
+  }
+
+  .text-green {
+    color: #00CA4E !important;
+  }
+
+  .text-primary-bold {
+    color: #333;
+  }
+
+  .text-gray {
+    @apply text-gray-500;
+  }
+
+  .hover-underline-text-blue:hover {
+    color: #4285F4;
+    text-decoration: underline;
+  }
+
+  .center-box {
+    @apply relative;
+
+    > *:first-child {
+      @apply rounded absolute top-1/2 left-1/2;
+      content: '';
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .dialog {
+    @apply fixed top-0 left-0 w-full h-full z-10;
+    background-color: rgba(0, 0, 0, 0.6);
+
+    > div {
+      @apply rounded absolute p-7 bg-white top-1/2 left-1/2;
+      content: '';
+      transform: translate(-50%, -50%);
+    }
+  }
+}

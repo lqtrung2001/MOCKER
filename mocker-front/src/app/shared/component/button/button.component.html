@@ -1,0 +1,8 @@
+<div id='main' class='{{ class }}'>
+  <button
+    [style]='styles'
+    class='{{ selfClass }} bg-blue p-2.5 rounded font-medium text-white w-full hover:drop-shadow-md relative'>
+    {{ label | translate }}
+    <i *ngIf='icon' class='{{ !label ? "" : "absolute right-5 top-1/2 -translate-y-1/2" }} {{ icon }}'></i>
+  </button>
+</div>

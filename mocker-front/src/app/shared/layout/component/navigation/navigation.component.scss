@@ -1,0 +1,27 @@
+@import '/src/variable-color';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#main {
+  color: $primary-text-color-bold;
+
+  nav {
+    > a:not(.logo):hover,
+    > .active {
+      color: $primary-color;
+    }
+
+    > a:not(.logo):hover:after,
+    > .active:after {
+      content: '';
+      @apply absolute w-full h-0.5 left-0 bottom-0;
+      background-color: $primary-color;
+    }
+  }
+
+  > div > i:hover {
+    color: $primary-color;
+  }
+}

@@ -1,0 +1,32 @@
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgForOf, NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
+import { SharedModule } from '@shared/shared.module';
+import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
+import { NavigationComponent } from '@shared/layout/component/navigation/navigation.component';
+
+/**
+ * @author Do Quoc Viet
+ */
+
+@NgModule({
+  declarations: [
+    NavigationComponent
+  ],
+  exports: [
+    NavigationComponent
+  ],
+  imports: [
+    TranslateModule,
+    UpperCasePipe,
+    TitleCasePipe,
+    SharedModule,
+    NgIf,
+    RouterLinkWithHref,
+    RouterLinkActive,
+    NgForOf
+  ],
+  providers: []
+})
+export class LayoutModule {
+}

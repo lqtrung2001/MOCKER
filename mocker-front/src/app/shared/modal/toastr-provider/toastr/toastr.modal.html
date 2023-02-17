@@ -1,0 +1,24 @@
+<div id='main'
+     class='fixed left-10 text-sm bg-white rounded shadow-2xl w-96 h-40 {{ this.options && this.options.click ? "cursor-pointer" : "" }}'
+     [style.bottom]='bottom + "px"'
+     [style.z-index]='zIndex'
+     [style.opacity]='opacity'
+     [style.display]='visible'
+     (click)='click()'>
+  <div class='p-5 flex justify-between overflow-hidden'>
+    <div class='w-1/12 text-center'>
+      <i class='text-lg {{ style.icon }}'></i>
+    </div>
+    <div class='w-9/12'>
+      <p class='font-medium'>{{ options ? options.title : undefined }}</p>
+      <p
+        class='mt-2 text-justify' [innerHTML]='options ? options.body : undefined'></p>
+    </div>
+    <div class='w-1/12 text-center'>
+      <i (click)='toastrClose()' class='cursor-pointer fa-solid fa-xmark'></i>
+    </div>
+  </div>
+  <div class='process absolute bottom-2 w-full h-1.5 px-10'>
+    <p class='rounded-full {{ style.bgColor }} h-full' [style.width]='width + "%"'></p>
+  </div>
+</div>

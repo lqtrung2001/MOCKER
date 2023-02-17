@@ -1,0 +1,31 @@
+<div id='main' class='w-screen h-screen center-box'>
+  <div class='bg-white rounded drop-shadow-2xl text-sm text-center p-10' [formGroup]='formGroup'>
+    <img src='assets/png/logo.png' alt='logo' class='w-44 mx-auto'/>
+    <p class='font-bold mt-5 text-primary-bold'>{{ 'component.sign_in.title' | translate }}</p>
+    <moc-field [formControl]='formGroup.controls.username'
+               [placeholder]='"component.sign_in.username_placeholder" | translate'
+               ngDefaultControl
+               selfClass='mt-2'
+               type='email'></moc-field>
+    <moc-field [formControl]='formGroup.controls.password'
+               [placeholder]='"component.sign_in.password_placeholder" | translate'
+               ngDefaultControl
+               selfClass='mt-2'
+               type='password'></moc-field>
+    <p class='mt-4 text-red' *ngIf='invalidAuth'>{{ 'component.sign_in.invalid_auth' | translate }}</p>
+    <moc-button (click)='submit()' label='component.sign_in.continue'></moc-button>
+    <p class='mt-4 text-gray-400'>{{ 'component.sign_in.or' | translate }}</p>
+    <button *ngFor='let signInMethod of signInMethods'
+            (click)='signInWithMethod(signInMethod)'
+            class='border font-medium mt-4 p-2.5 rounded w-full shadow relative hover:shadow-xl'>
+      <img src='assets/png/auth/{{ signInMethod.icon }}.png' [alt]='signInMethod.icon' class='icon absolute'/>
+      {{ 'component.sign_in.continue_with_SPACE' | translate }} {{ signInMethod.name }}
+    </button>
+    <hr class='mt-8'/>
+    <p class='mt-4 text-blue'>
+      <a routerLink='/auth/forget-password'
+         class='hover:underline'>{{ 'component.sign_in.cannot_login' | translate }}</a>
+      &nbsp;&#8226;&nbsp;
+      <a routerLink='/auth/sign-up' class='hover:underline'>{{ 'component.sign_in.sign_up' | translate }}</a></p>
+  </div>
+</div>
