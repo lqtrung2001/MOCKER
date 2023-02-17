@@ -1,8 +1,8 @@
-# MOCKEZ
+# MOCKER
 
 ### SPECIALIZED ESSAY - GRADUATION THESIS
 
-**Name:** Building a website MOCKEZ generates data for system testing.
+**Name:** Building a website MOCKER generates data for system testing.
 
 **Detail:** Website construction can generate dummy data for testing data for the system.
 
@@ -24,6 +24,5 @@
 
 **Source:**
 
-* Github: https://github.com/NachiLuong/MOCKEZ
-* Design: https://www.figma.com/files/team/1148069534911378273
+* Github: https://github.com/NachiLuong/MOCKER
 * Mockaroo: https://www.mockaroo.com/
