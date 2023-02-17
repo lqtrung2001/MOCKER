@@ -1,0 +1,39 @@
+<div id='main' class='view-port-width-standard mx-auto text-sm'>
+  <p
+    class='text-3xl font-medium mt-5'>{{ ('component.project.' + (isNew ? 'new_project' : 'my_project')) | translate }}</p>
+  <ng-container *ngIf='isNew' [ngTemplateOutlet]='settings'></ng-container>
+  <moc-tab [tabs]='tabs' class='mt-5' *ngIf='!isNew'>
+    <ng-template #resources>
+      <div id='resources'>
+        <div class='mt-5'>
+          <button class='font-medium py-2 border rounded-l-md px-5'>{{ 'NEW SCHEMA' | translate }}</button>
+          <button class='font-medium py-2 border px-5'>{{ 'NEW DATASET' | translate }}</button>
+          <button class='font-medium py-2 border px-5'>{{ 'NEW API' | translate }}</button>
+          <button class='font-medium py-2 border rounded-r-md px-5'>{{ 'NEW SCENARIO' | translate }}</button>
+        </div>
+        <hr class='mt-5'/>
+        <ng-container *ngFor='let schema of project?.schemas'>
+          <div class='flex px-3 py-2 items-center'>
+            <div class='w-1/2 flex items-center'>
+              <i class='fa-regular fa-diagram-project'></i>
+              <div class='ml-3'>
+                <a routerLink='' class='font-medium hover-underline-text-blue uppercase'>{{ schema.name }}</a>
+                <p>{{ 'Schema' }}</p>
+              </div>
+            </div>
+            <div class='w-1/2'>{{ "Last modified " + (schema.modifiedDate | dateDistance) }}</div>
+          </div>
+          <hr/>
+        </ng-container>
+      </div>
+    </ng-template>
+  </moc-tab>
+  <ng-template #settings>
+    <div id='settings'>
+      <p class='mt-5 font-medium'>{{ 'Project Name' | translate }}</p>
+      <moc-field class='mt-3' [formControl]='formGroup.controls.name'
+                 [placeholder]='"project name" | translate'></moc-field>
+      <p class='mt-5 font-medium'>{{ 'Share With' | translate }}</p>
+    </div>
+  </ng-template>
+</div>

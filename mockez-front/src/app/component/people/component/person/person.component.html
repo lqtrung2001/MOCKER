@@ -8,61 +8,77 @@
   </div>
   <div class='flex mt-20 view-port-width-standard mx-auto'>
     <div class='left'>
-      <p class='text-3xl font-medium'>{{ user?.name }}</p>
-      <p class='mt-2 text-sm'>{{ user?.bio }}</p>
-      <div class='rounded border w-96 mt-5 p-5'>
+      <p class='text-3xl font-medium'>{{ user ? user.name : '' }}</p>
+      <p class='mt-2 text-sm'>{{ user ? user.bio : '' }}</p>
+      <div class='rounded border w-96 mt-5 p-5' [formGroup]='formGroup'>
         <div class='text-sm'>
           <p class='text-gray-500'>{{ 'ABOUT' | translate }}</p>
           <div>
-            <div class='mt-3.5 flex items-center'>
+            <div class='mt-2 flex items-center'>
               <i class='w-1/12 text-gray-500 text-lg fa-regular fa-briefcase'></i>
-              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
-                         placeholder='Your job title'></moc-field>
+              <moc-field selfClass='bg-transparent border-0 hover:bg-gray' class='w-11/12'
+                         placeholder='Your job title'
+                         ngDefaultControl
+                         [formControl]='formGroup.controls.job'></moc-field>
             </div>
-            <div class='mt-3.5 flex items-center'>
+            <div class='mt-2 flex items-center'>
               <i class='w-1/12 text-gray-500 text-lg fa-light fa-apartment'></i>
-              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
-                         placeholder='Your department'></moc-field>
+              <moc-field selfClass='bg-transparent border-0 hover:bg-gray' class='w-11/12'
+                         placeholder='Your department'
+                         ngDefaultControl
+                         [formControl]='formGroup.controls.department'></moc-field>
             </div>
-            <div class='mt-3.5 flex items-center'>
+            <div class='mt-2 flex items-center'>
               <i class='w-1/12 text-gray-500 text-lg fa-light fa-sitemap'></i>
-              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
-                         placeholder='Your organisation'></moc-field>
+              <moc-field selfClass='bg-transparent border-0 hover:bg-gray' class='w-11/12'
+                         placeholder='Your organisation'
+                         ngDefaultControl
+                         [formControl]='formGroup.controls.organisation'></moc-field>
             </div>
-            <div class='mt-3.5 flex items-center'>
+            <div class='mt-2 flex items-center'>
               <i class='w-1/12 text-gray-500 text-lg fa-regular fa-location-dot'></i>
-              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
-                         placeholder='Your location'></moc-field>
+              <moc-field selfClass='bg-transparent border-0 hover:bg-gray' class='w-11/12'
+                         placeholder='Your location'
+                         ngDefaultControl
+                         [formControl]='formGroup.controls.address'></moc-field>
             </div>
           </div>
         </div>
         <div class='text-sm mt-5'>
           <p class='text-gray-500'>{{ 'CONTACT' | translate }}</p>
           <div>
-            <div class='mt-3.5 flex items-center'>
+            <div class='mt-2 flex items-center'>
               <i class='w-1/12 text-gray-500 text-lg fa-regular fa-envelopes'></i>
-              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
-                         placeholder='Your email'></moc-field>
+              <moc-field selfClass='bg-transparent border-0 hover:bg-gray' class='w-11/12'
+                         placeholder='Your email'
+                         ngDefaultControl
+                         [formControl]='formGroup.controls.username'></moc-field>
             </div>
-            <div class='mt-3.5 flex items-center'>
+            <div class='mt-2 flex items-center'>
               <i class='w-1/12 text-gray-500 text-lg fa-light fa-phone'></i>
-              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
-                         placeholder='Your phone'></moc-field>
+              <moc-field selfClass='bg-transparent border-0 hover:bg-gray' class='w-11/12'
+                         placeholder='Your phone'
+                         ngDefaultControl
+                         [formControl]='formGroup.controls.phone'></moc-field>
             </div>
           </div>
         </div>
         <div class='text-sm mt-5'>
           <p class='text-gray-500'>{{ 'MORE' | translate }}</p>
           <div>
-            <div class='mt-3.5 flex items-center'>
+            <div class='mt-2 flex items-center'>
               <i class='w-1/12 text-gray-500 text-lg fa-regular fa-envelopes'></i>
-              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
-                         placeholder='Your gender'></moc-field>
+              <moc-field selfClass='bg-transparent border-0 hover:bg-gray' class='w-11/12'
+                         placeholder='Your gender'
+                         ngDefaultControl
+                         [formControl]='formGroup.controls.gender'></moc-field>
             </div>
-            <div class='mt-3.5 flex items-center'>
+            <div class='mt-2 flex items-center'>
               <i class='w-1/12 text-gray-500 text-lg fa-light fa-phone'></i>
-              <moc-field classesField='bg-transparent border-0' class='w-11/12 hover:bg-gray'
-                         placeholder='Your date of birth'></moc-field>
+              <moc-field selfClass='bg-transparent border-0 hover:bg-gray' class='w-11/12'
+                         placeholder='Your date of birth'
+                         ngDefaultControl
+                         [formControl]='formGroup.controls.dob'></moc-field>
             </div>
           </div>
         </div>

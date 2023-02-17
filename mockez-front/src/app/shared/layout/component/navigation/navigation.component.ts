@@ -28,25 +28,29 @@ export class NavigationComponent extends AbstractComponent {
   ) {
     super(injector);
     this.navigations = [{
-      routerLink: '/general',
-      title: 'General',
-      icon: 'fa-light fa-window-restore'
+      routerLink: '/schema',
+      title: 'schema',
+      icon: 'fa-regular fa-diagram-project'
     }, {
-      routerLink: '/workspace',
-      title: 'Workspace',
-      icon: 'fa-regular fa-display-code'
+      routerLink: '/dataset',
+      title: 'dataset',
+      icon: 'fa-regular fa-database'
     }, {
-      routerLink: '/group',
-      title: 'Group',
-      icon: 'fa-regular fa-buildings'
+      routerLink: '/mock-api',
+      title: 'mock api',
+      icon: 'fa-regular fa-server'
+    }, {
+      routerLink: '/scenario',
+      title: 'scenario',
+      icon: 'fa-regular fa-scroll'
+    }, {
+      routerLink: '/project',
+      title: 'project',
+      icon: 'fa-regular fa-list'
     }, {
       routerLink: '/people',
-      title: 'People',
+      title: 'people',
       icon: 'fa-regular fa-user'
-    }, {
-      routerLink: '/setting',
-      title: 'Setting',
-      icon: 'fa-regular fa-gear'
     }];
     this.actions = [{
       id: '1',

@@ -4,7 +4,7 @@ import { DialogModal, DialogModalOptions } from '@shared/modal/modal-provider/di
 import { Observable } from 'rxjs';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author  Do Quoc Viet
  */
 
 @Injectable({

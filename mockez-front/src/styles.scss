@@ -94,6 +94,15 @@ body {
     color: #333;
   }
 
+  .text-gray {
+    @apply text-gray-500;
+  }
+
+  .hover-underline-text-blue:hover {
+    color: #4285F4;
+    text-decoration: underline;
+  }
+
   .center-box {
     @apply relative;
 

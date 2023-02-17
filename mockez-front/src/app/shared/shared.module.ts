@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   JsonPipe,
-  KeyValuePipe,
+  KeyValuePipe, NgClass,
   NgForOf,
   NgIf,
   NgStyle,
@@ -21,6 +21,13 @@ import {
 import { LoadingComponent } from '@shared/component/loading/loading.component';
 import { ButtonComponent } from '@shared/component/button/button.component';
 import { ActionComponent } from '@shared/component/action/action.component';
+import { DescriptionComponent } from '@shared/component/description/description.component';
+import { TruncatePipe } from '@shared/pipe/truncate.pipe';
+import { TabComponent } from '@shared/component/tab/tab.component';
+import { DateDistancePipe } from '@shared/pipe/date-distance.pipe';
+import { TableComponent } from '@shared/component/table/table.component';
+import { CopyrightComponent } from '@shared/component/copyright/copyright.component';
+import { ChangeLogComponent } from '@shared/component/change-log/change-log.component';
 
 /**
  * @author Do Quoc Viet
@@ -30,9 +37,16 @@ import { ActionComponent } from '@shared/component/action/action.component';
   declarations: [
     FieldComponent,
     ButtonComponent,
+    DescriptionComponent,
     ErrorMessageProcessorComponent,
     LoadingComponent,
-    ActionComponent
+    ActionComponent,
+    TruncatePipe,
+    TabComponent,
+    DateDistancePipe,
+    TableComponent,
+    CopyrightComponent,
+    ChangeLogComponent
   ],
   imports: [
     KeyValuePipe,
@@ -47,14 +61,22 @@ import { ActionComponent } from '@shared/component/action/action.component';
     NgSwitch,
     NgSwitchCase,
     NgTemplateOutlet,
-    NgStyle
+    NgStyle,
+    NgClass
   ],
   exports: [
     FieldComponent,
     FieldComponent,
     LoadingComponent,
     ButtonComponent,
-    ActionComponent
+    ActionComponent,
+    DescriptionComponent,
+    TruncatePipe,
+    TabComponent,
+    DateDistancePipe,
+    TableComponent,
+    CopyrightComponent,
+    ChangeLogComponent
   ],
   providers: []
 })

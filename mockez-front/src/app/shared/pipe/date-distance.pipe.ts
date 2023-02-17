@@ -1,13 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Strings } from '@shared/util/strings';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
+ * @date 05/02/2023
  */
 
 @Pipe({
-  name: 'dateDurationPipe'
+  name: 'dateDistance'
 })
-export class DateDurationPipe implements PipeTransform {
+export class DateDistancePipe implements PipeTransform {
 
   transform(date: Date): string {
     const second: number = 1000;
@@ -18,7 +20,7 @@ export class DateDurationPipe implements PipeTransform {
     const today: Date = new Date();
     date = new Date(date);
     const diff: number = today.getTime() - date.getTime();
-    if (isNaN(diff)) return '';
+    if (isNaN(diff)) return Strings.EMPTY;
     const info = {
       second: Math.floor(diff / second),
       minute: Math.floor(diff / minute),

@@ -1,0 +1,52 @@
+<div id='main' [class]='class'>
+  <table class='w-full' [formGroup]='formGroup'>
+    <thead>
+    <tr>
+      <th class='pb-3'>{{ 'component.table.field_name' | translate }}</th>
+      <th class='pb-3'>{{ 'component.table.generate_type' | translate }}</th>
+      <th class='pb-3'>{{ 'component.table.sql_type' | translate }}</th>
+      <th class='pb-3'>{{ 'component.table.options' | translate }}</th>
+    </tr>
+    </thead>
+    <tbody formArrayName='fields' *ngFor='let field of formGroup.controls.fields.controls; let i = index;'>
+    <tr [formGroupName]='i'>
+      <td class='w-1/4 px-3 py-1.5 align-top'>
+        <moc-field ngDefaultControl selfClass='px-5'
+                   [formControl]='field.controls.fieldName'
+                   [placeholder]='"component.table.field_name_placeholder" | translate'></moc-field>
+      </td>
+      <td class='w-1/4 px-3 py-1.5 align-top'>
+        <moc-button icon='fa-solid fa-arrow-up-arrow-down'
+                    selfClass='text-left px-5 bg-white border mt-0 text-black'
+                    [label]='field.controls.generateType.value'></moc-button>
+      </td>
+      <td class='w-1/4 px-3 py-1.5 align-top'>
+        <moc-button icon='fa-solid fa-arrow-up-arrow-down'
+                    selfClass='text-left px-5 bg-white border mt-0 text-black'
+                    [label]='field.controls.sqlType.value'></moc-button>
+      </td>
+      <td class='w-1/4 px-3 py-1.5 align-top'>
+        <div class='flex justify-evenly'>
+          <p class='self-center'>{{ 'Blank:' }}</p>
+          <moc-field class='w-20' placeholder='0%' ngDefaultControl
+                     type='number'
+                     [min]='0'
+                     [max]='100'
+                     selfClass='text-center'
+                     [formControl]='field.controls.option.controls.blank'></moc-field>
+          <moc-button icon='fa-solid fa-sigma' class='w-12'
+                      selfClass='bg-white border text-black mt-0 h-10'></moc-button>
+          <i (click)='removeField(i)' class='text-lg cursor-pointer fa-regular fa-circle-xmark self-center'></i>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td class='w-1/4 px-3 pt-4'>
+        <moc-button (click)='insertField()' label='component.table.add_another_field'></moc-button>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+</div>

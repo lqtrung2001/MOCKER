@@ -1,0 +1,12 @@
+<div id='main' [ngClass]='class'>
+  <div class=''>
+    <button (click)='change(index)'
+            *ngFor='let tab of tabs; let index=index'
+            class='py-3 px-5 font-medium rounded-t-md {{ index===current ? "bg-blue text-white" : "tab-hover" }}'>
+      <i *ngIf='tab.icon' [ngClass]='tab.icon + " mr-3"'></i>
+      {{ tab.title }}
+    </button>
+  </div>
+  <hr/>
+  <ng-container [ngTemplateOutlet]='tabs[current].content'></ng-container>
+</div>

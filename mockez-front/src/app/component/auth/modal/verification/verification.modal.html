@@ -6,7 +6,7 @@
     <p class='mt-2 font-medium'>{{ options ? options.username : undefined }}</p>
     <moc-field [formControl]='verificationCode'
                [placeholder]='"modal.verification.verification_code_placeholder" | translate'
-               [classesField]='isInvalidVerificationCode ? "invalid" : ""'
+               [selfClass]='isInvalidVerificationCode ? "invalid" : ""'
                ngDefaultControl></moc-field>
     <p *ngIf='isInvalidVerificationCode'
        class='text-red text-center mt-2'>{{ 'modal.verification.invalid_verification_code' | translate }}</p>

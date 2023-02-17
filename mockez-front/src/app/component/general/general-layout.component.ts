@@ -3,19 +3,18 @@ import { Component, Injector } from '@angular/core';
 
 /**
  * @author Do Quoc Viet
+ * @date 05/02/2023
  */
 
 @Component({
-  selector: 'moc-projects',
-  templateUrl: 'projects.component.html',
-  styleUrls: ['projects.component.scss']
+  selector: 'moc-general-layout',
+  templateUrl: 'general-layout.component.html',
+  styleUrls: ['general-layout.component.scss']
 })
-export class ProjectsComponent extends AbstractComponent {
-
+export class GeneralLayoutComponent extends AbstractComponent {
   constructor(
     injector: Injector
   ) {
     super(injector);
   }
-
 }
