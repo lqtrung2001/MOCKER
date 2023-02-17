@@ -8,11 +8,11 @@
         <version>2.7.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.mockez</groupId>
-    <artifactId>mockez-back</artifactId>
+    <groupId>com.mocker</groupId>
+    <artifactId>mocker-back</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>mockez-back</name>
-    <description>mockez-back</description>
+    <name>mocker-back</name>
+    <description>mocker-back</description>
     <properties>
         <java.version>18</java.version>
         <jackson.databind.nullable.version>0.2.4</jackson.databind.nullable.version>
@@ -169,20 +169,20 @@
                 <version>${openapi.generator.maven.plugin.version}</version>
                 <executions>
                     <execution>
-                        <id>mockez</id>
+                        <id>mocker</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
                             <inputSpec>
-                                ${project.basedir}/src/main/resources/static/mockez.yaml
+                                ${project.basedir}/src/main/resources/static/mocker.yaml
                             </inputSpec>
                             <generatorName>spring</generatorName>
-                            <apiPackage>com.mockez.api</apiPackage>
+                            <apiPackage>com.mocker.api</apiPackage>
                             <generateApis>true</generateApis>
                             <generateApiTests>false</generateApiTests>
                             <generateApiDocumentation>false</generateApiDocumentation>
-                            <modelPackage>com.mockez.domain.dto</modelPackage>
+                            <modelPackage>com.mocker.domain.dto</modelPackage>
                             <generateModels>true</generateModels>
                             <modelNameSuffix>Dto</modelNameSuffix>
                             <generateModelTests>false</generateModelTests>
