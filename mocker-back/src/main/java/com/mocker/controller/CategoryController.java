@@ -27,7 +27,7 @@ public class CategoryController implements CategoryApi {
 
     @Override
     public ResponseEntity<List<CategoryDto>> getCategories() {
-        return ResponseEntity.ok(categoryService.getCategories().stream()
+        return ResponseEntity.ok(categoryService.getCategoriesFetchGenerateTypes().stream()
                 .map(apiAbstractMapper::map).collect(Collectors.toList()));
     }
 

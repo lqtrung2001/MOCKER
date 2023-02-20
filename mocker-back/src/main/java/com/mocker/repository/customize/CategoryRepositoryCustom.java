@@ -2,6 +2,7 @@ package com.mocker.repository.customize;
 
 import com.mocker.domain.model.entity.Category;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -13,4 +14,5 @@ public interface CategoryRepositoryCustom {
 
     Category getCategoryHasGenerateTypes(UUID id);
 
+    List<Category> getCategoriesFetchGenerateTypes();
 }

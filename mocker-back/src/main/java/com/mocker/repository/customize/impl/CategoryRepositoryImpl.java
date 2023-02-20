@@ -8,6 +8,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -37,5 +38,14 @@ public class CategoryRepositoryImpl implements CategoryRepositoryCustom {
                 .innerJoin(QCategory.category.generateTypes, QGenerateType.generateType)
                 .fetchJoin()
                 .fetchFirst();
+    }
+
+    @Override
+    public List<Category> getCategoriesFetchGenerateTypes() {
+        return new JPAQuery<Category>(entityManager)
+                .from(QCategory.category)
+                .innerJoin(QCategory.category.generateTypes, QGenerateType.generateType)
+                .fetchJoin()
+                .fetch();
     }
 }

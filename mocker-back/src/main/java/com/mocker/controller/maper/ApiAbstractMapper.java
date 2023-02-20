@@ -29,12 +29,13 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
  */
 
 @Mapper(componentModel = "spring")
 public interface ApiAbstractMapper {
 
+    @Mapping(target = "numberOfGenerateTypes", expression = "java(category.getGenerateTypes().size())")
     @Mapping(target = "generateTypes", ignore = true)
     CategoryDto map(Category category);
 
