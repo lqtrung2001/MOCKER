@@ -35,4 +35,9 @@ public class CategoryServiceImpl implements CategoryService {
     public Integer getGenerateTypesCount(UUID id) {
         return categoryRepository.getGenerateTypesCount(id);
     }
+
+    @Override
+    public List<Category> getCategoriesFetchGenerateTypes() {
+        return categoryRepository.getCategoriesFetchGenerateTypes();
+    }
 }

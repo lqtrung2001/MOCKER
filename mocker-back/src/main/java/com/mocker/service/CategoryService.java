@@ -30,4 +30,6 @@ public interface CategoryService {
      * @return number of generate-types in category
      */
     Integer getGenerateTypesCount(UUID id);
+
+    List<Category> getCategoriesFetchGenerateTypes();
 }

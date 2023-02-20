@@ -2,7 +2,7 @@ openapi: "3.0.3"
 info:
   title: mocker API
   description: Website MOCKER generates source for system testing.
-  version: 3.0.0
+  version: 3.0.1
 paths:
   /auth/send-verification-code:
     post:
@@ -1153,6 +1153,9 @@ components:
           description: list generate types of category
           items:
             $ref: '#/components/schemas/GenerateType'
+        numberOfGenerateTypes:
+          type: integer
+          description: count total generate-type in a category
       allOf:
         - $ref: '#/components/schemas/Base'
     Field:
@@ -1526,6 +1529,46 @@ components:
         * GROUP_ASSOCIATE - group associate.
         * USER - user.
         * ADMIN - admin.
+    RelationType:
+      type: object
+      description: RELATION-TYPE table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: id of relation type
+        code:
+          type: string
+          maxLength: 255
+          description: name of relation-type
+      allOf:
+        - $ref: '#/components/schemas/Base'
+    TableRelation:
+      type: object
+      description: TABLE-RELATION table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: id of table relation
+        source:
+          type: string
+          format: uuid
+          description: id of source
+        target:
+          type: string
+          format: uuid
+          description: id of target
+        name:
+          type: string
+          maxLength: 255
+          description: name of relation
+        relationType:
+          $ref: '#/components/schemas/RelationType'
+      allOf:
+        - $ref: '#/components/schemas/Base'
     Error:
       description: Schema for error response body
       type: object
