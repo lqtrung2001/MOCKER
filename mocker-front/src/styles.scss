@@ -95,7 +95,7 @@ body {
   }
 
   .text-gray {
-    @apply text-gray-500;
+    color: #6B7280 !important;
   }
 
   .hover-underline-text-blue:hover {
@@ -118,7 +118,7 @@ body {
     background-color: rgba(0, 0, 0, 0.6);
 
     > div {
-      @apply rounded absolute p-7 bg-white top-1/2 left-1/2;
+      @apply rounded absolute bg-white top-1/2 left-1/2;
       content: '';
       transform: translate(-50%, -50%);
     }

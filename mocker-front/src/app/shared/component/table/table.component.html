@@ -17,13 +17,15 @@
       </td>
       <td class='w-1/4 px-3 py-1.5 align-top'>
         <moc-button icon='fa-solid fa-arrow-up-arrow-down'
-                    selfClass='text-left px-5 bg-white border mt-0 text-black'
-                    [label]='field.controls.generateType.value'></moc-button>
+                    (click)='chooseType(field.controls.generateType)'
+                    selfClass='text-left px-5 btn-light {{ !field.controls.generateType.value.code ? "text-gray-400 !font-normal" : "" }}'
+                    [label]='field.controls.generateType.value.code || "Generate Type"'></moc-button>
       </td>
       <td class='w-1/4 px-3 py-1.5 align-top'>
         <moc-button icon='fa-solid fa-arrow-up-arrow-down'
-                    selfClass='text-left px-5 bg-white border mt-0 text-black'
-                    [label]='field.controls.sqlType.value'></moc-button>
+                    (click)='chooseType(field.controls.sqlType)'
+                    selfClass='text-left px-5 btn-light {{ !field.controls.sqlType.value.code ? "text-gray-400 !font-normal" : "" }}'
+                    [label]='field.controls.sqlType.value.code || "Sql Type"'></moc-button>
       </td>
       <td class='w-1/4 px-3 py-1.5 align-top'>
         <div class='flex justify-evenly'>
@@ -35,7 +37,7 @@
                      selfClass='text-center'
                      [formControl]='field.controls.option.controls.blank'></moc-field>
           <moc-button icon='fa-solid fa-sigma' class='w-12'
-                      selfClass='bg-white border text-black mt-0 h-10'></moc-button>
+                      selfClass='btn-light h-10'></moc-button>
           <i (click)='removeField(i)' class='text-lg cursor-pointer fa-regular fa-circle-xmark self-center'></i>
         </div>
       </td>
@@ -44,7 +46,8 @@
     <tfoot>
     <tr>
       <td class='w-1/4 px-3 pt-4'>
-        <moc-button (click)='insertField()' label='component.table.add_another_field'></moc-button>
+        <moc-button (click)='insertField()' selfClass='btn-primary'
+                    label='component.table.add_another_field'></moc-button>
       </td>
     </tr>
     </tfoot>

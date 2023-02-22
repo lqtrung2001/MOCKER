@@ -9,19 +9,20 @@
     <span class='mx-5'>{{ 'component.general.format' | translate }}</span>
     <moc-action [self]='self' [actions]='supportedFormat'>
       <ng-template #self>
-        <moc-button class='w-32' icon='fa-solid fa-arrow-up-arrow-down' selfClass='text-left bg-white border text-black'
+        <moc-button class='w-32' icon='fa-solid fa-arrow-up-arrow-down' selfClass='text-left btn-light'
                     [label]='formGroup.controls.format.value'></moc-button>
       </ng-template>
     </moc-action>
   </div>
   <hr class='mt-5'/>
   <div class='mt-5 flex'>
-    <moc-button class='w-52' label='component.general.download_data'></moc-button>
-    <moc-button class='w-52 ml-3' selfClass='px-5 bg-white border mt-0 text-black'
-                label='component.general.preview'></moc-button>
-    <moc-button class='w-52 ml-3' selfClass='px-5 bg-white border mt-0 text-black'
-                label='component.general.save_this_table'></moc-button>
-    <moc-button class='w-52 ml-3' selfClass='px-5 bg-white border mt-0 text-black' label='component.general.more'
+    <moc-button class='w-52' label='component.general.download_data' selfClass='btn-primary'></moc-button>
+    <moc-button class='w-52 ml-3' label='component.general.preview'
+                selfClass='px-5 btn-light'></moc-button>
+    <moc-button class='w-52 ml-3' label='component.general.save_this_table'
+                selfClass='px-5 btn-light'></moc-button>
+    <moc-button class='w-52 ml-3' label='component.general.more'
+                selfClass='px-5 btn-light'
                 icon='fa-solid fa-arrow-up-arrow-down'></moc-button>
   </div>
   <p class='mt-8 text-justify text-blue text-2xl'>{{ 'Mock your back-end API and start coding your UI today.' }}</p>

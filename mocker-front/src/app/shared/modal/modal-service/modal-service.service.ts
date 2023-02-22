@@ -6,27 +6,27 @@ import { Modal } from '@shared/modal/modal-service/model/modal.model';
 import { ModalRef } from '@shared/modal/modal-service/model/modal-ref.model';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
-
   private modalContainer!: HTMLElement;
   private modalContainerFactory!: ComponentFactory<ModalContainerComponent>;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
-    private addRef: ApplicationRef
+    private applicationRef: ApplicationRef
   ) {
     this.setupModalContainerFactory();
   }
 
   public open<T extends Modal>(component: Type<T>, inputs?: any): ModalRef {
+    document.body.style.overflow = 'hidden';
     this.setupModalContainerDiv();
-    const modalContainerRef = this.addRef.bootstrap(this.modalContainerFactory, this.modalContainer);
+    const modalContainerRef = this.applicationRef.bootstrap(this.modalContainerFactory, this.modalContainer);
     const modalComponentRef = modalContainerRef.instance.createModal(component);
 
     if (inputs) {

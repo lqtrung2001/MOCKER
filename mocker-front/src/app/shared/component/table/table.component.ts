@@ -1,6 +1,9 @@
 import { Component, Injector, Input } from '@angular/core';
 import { AbstractComponent } from '@core/class/abstract.component';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChooseTypeModal } from '@shared/modal/choose-type/choose-type.modal';
+import { GenerateType } from '@core/model/generate-type';
+import { SQLType } from '@core/model/sql-type';
 
 /**
  * @author Do Quoc Viet
@@ -57,6 +60,14 @@ export class TableComponent extends AbstractComponent {
 
   removeField(index: number) {
     this.formGroup.controls.fields.removeAt(index);
+  }
+
+  chooseType(control: FormControl): void {
+    this.modalService.open(ChooseTypeModal).onResult().subscribe((type: GenerateType | SQLType): void => {
+      if (type) {
+        control.setValue(type);
+      }
+    });
   }
 
 }

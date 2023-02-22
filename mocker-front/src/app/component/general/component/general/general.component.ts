@@ -2,6 +2,7 @@ import { AbstractComponent } from '@core/class/abstract.component';
 import { Component, Injector } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Action } from '@shared/component/action/action.component';
+import { ChooseTypeModal } from '@shared/modal/choose-type/choose-type.modal';
 
 /**
  * @author Do Quoc Viet
@@ -63,4 +64,5 @@ export class GeneralComponent extends AbstractComponent {
       }
     }];
   }
+
 }
