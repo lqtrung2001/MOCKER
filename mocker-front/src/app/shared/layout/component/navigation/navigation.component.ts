@@ -54,7 +54,7 @@ export class NavigationComponent extends AbstractComponent {
     }];
     this.actions = [{
       id: '1',
-      // icon: 'fa-regular fa-phone',
+      icon: 'fa-solid fa-repeat',
       label: 'Switch Account',
       click: () => {
         console.log('Switch Account');
@@ -68,7 +68,7 @@ export class NavigationComponent extends AbstractComponent {
       }
     }, {
       id: '3',
-      // icon: 'fa-regular fa-phone',
+      icon: 'fa-solid fa-right-from-bracket',
       label: 'Sign out',
       click: () => {
         this.router.navigate([`auth/sign-in`]).then();
