@@ -23,7 +23,6 @@ export class ToastrProvider {
   constructor(
     private modalService: ModalService
   ) {
-    // Currently toastr index
   }
 
   showError(toastrModalOptions: ToastrModalOptions): void {

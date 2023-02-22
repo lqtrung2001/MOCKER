@@ -82,6 +82,19 @@
       "options": "OPTIONS",
       "field_name_placeholder": "Field name",
       "add_another_field": "ADD ANOTHER FIELD"
+    },
+    "person": {
+      "my_account": "My Account",
+      "my_email": "My Email",
+      "save": "SAVE",
+      "my_password": "My Password",
+      "change_password": "CHANGE MY PASSWORD",
+      "my_api_key": "My API key",
+      "my_plan": "My Plan",
+      "change_plan": "CHANGE PLAN",
+      "generate_new_api_key": "GENERATE NEW API KEY",
+      "delete_my_account": "Delete My Account",
+      "my_payments": "My Payments"
     }
   },
   "audit": {

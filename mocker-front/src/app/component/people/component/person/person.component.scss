@@ -1,22 +1,5 @@
-@import 'variable-size';
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 #main {
-  > div:first-child {
-    background-image: url(https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2017/09/22/Pictures/ht-pune_2cf57a86-9fbd-11e7-ba2d-20fa1b34073f.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-
-    > div:first-child {
-      left: calc(50% - $view-port-width/2);
-
-      .avatar {
-        width: 95%;
-        height: 95%;
-      }
-    }
+  .panel {
+    width: 49%;
   }
 }
