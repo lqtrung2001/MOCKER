@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { DialogModal } from '@shared/modal/modal-provider/dialog/dialog.modal';
-import { NgIf, NgStyle, UpperCasePipe } from '@angular/common';
+import { NgForOf, NgIf, NgStyle, UpperCasePipe } from '@angular/common';
 import { ToastrModal } from '@shared/modal/toastr-provider/toastr/toastr.modal';
 import { ChooseTypeModal } from '@shared/modal/choose-type/choose-type.modal';
+import { SharedModule } from '@shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /**
  * @author Do Quoc Viet
@@ -19,7 +21,11 @@ import { ChooseTypeModal } from '@shared/modal/choose-type/choose-type.modal';
   imports: [
     UpperCasePipe,
     NgIf,
-    NgStyle
+    NgStyle,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgForOf
   ],
   providers: []
 })

@@ -10,6 +10,7 @@ export abstract class Modal {
   abstract onInjectInputs(input: any): void;
 
   public close(output?: any): void {
+    document.body.style.overflow = 'auto';
     this.modalInstance.close(output);
   }
 

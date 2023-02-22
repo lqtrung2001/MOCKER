@@ -1,2 +1,10 @@
-@tailwind components;
-@tailwind utilities;
+#main {
+  .btn-primary {
+    @apply text-white;
+    background-color: #4285F4 !important;
+  }
+
+  .btn-light {
+    @apply bg-white border text-black;
+  }
+}

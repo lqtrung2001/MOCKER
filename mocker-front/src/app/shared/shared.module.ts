@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   JsonPipe,
-  KeyValuePipe, NgClass,
+  KeyValuePipe,
+  NgClass,
   NgForOf,
   NgIf,
   NgStyle,
@@ -28,6 +29,7 @@ import { DateDistancePipe } from '@shared/pipe/date-distance.pipe';
 import { TableComponent } from '@shared/component/table/table.component';
 import { CopyrightComponent } from '@shared/component/copyright/copyright.component';
 import { ChangeLogComponent } from '@shared/component/change-log/change-log.component';
+import { DialogDirective } from '@shared/directive/dialog.directive';
 
 /**
  * @author Do Quoc Viet
@@ -46,7 +48,8 @@ import { ChangeLogComponent } from '@shared/component/change-log/change-log.comp
     DateDistancePipe,
     TableComponent,
     CopyrightComponent,
-    ChangeLogComponent
+    ChangeLogComponent,
+    DialogDirective
   ],
   imports: [
     KeyValuePipe,
@@ -76,7 +79,8 @@ import { ChangeLogComponent } from '@shared/component/change-log/change-log.comp
     DateDistancePipe,
     TableComponent,
     CopyrightComponent,
-    ChangeLogComponent
+    ChangeLogComponent,
+    DialogDirective
   ],
   providers: []
 })
