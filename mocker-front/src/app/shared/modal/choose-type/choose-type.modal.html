@@ -1,3 +1,24 @@
-<div id='main' class=''>
-
+<div id='main' dialog [modal]='this'>
+  <div class='p-3 text-sm'>
+    <div class='flex justify-between items-center'>
+      <p class='font-medium'>{{ 'Choose a Type' }}</p>
+      <moc-field class='w-60' placeholder='Find type...' [formControl]='searchFC' ngDefaultControl
+                 selfClass='p-2'></moc-field>
+    </div>
+    <div class='flex mt-3 overflow-x-scroll'>
+      <moc-button class='mx-0.5' selfClass='py-2 btn-light'
+                  label='All&nbsp;(20)'></moc-button>
+      <moc-button class='mx-0.5' selfClass='py-2 btn-light' *ngFor='let category of categories'
+                  label='{{ category.name | truncate: 20 }}&nbsp;(20)'></moc-button>
+    </div>
+    <div class='flex flex-wrap h-5/6 overflow-y-scroll'>
+      <div class='m-3 p-4 hover:bg-gray cursor-pointer rounded w-1/4 h-32' (click)='close(type)'
+           *ngFor='let type of types'>
+        <p class='font-medium first-letter:underline'>{{ type.code }}</p>
+        <p class='text-gray'>{{ type.modifiedBy | truncate: 10 }}</p>
+        <p class='text-gray'>{{ type.createdBy | truncate: 10 }}</p>
+        <p class='text-gray'>{{ type.modifiedByGroup | truncate: 10 }}</p>
+      </div>
+    </div>
+  </div>
 </div>
