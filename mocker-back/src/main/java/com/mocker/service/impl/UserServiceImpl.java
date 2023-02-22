@@ -83,6 +83,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User changePassword(UUID id, String currentPassword, String newPassword) {
         User user = userRepository.findById(id).orElseThrow();
+        // Check old password
+        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+            throw new UnexpectedException("Current password not match");
+        }
         user.setPassword(passwordEncoder.encode(newPassword));
         return userRepository.save(user);
     }

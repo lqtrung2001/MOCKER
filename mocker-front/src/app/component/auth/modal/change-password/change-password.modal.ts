@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@core/service/auth.service';
 import { User } from '@core/model/user';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';
+import { ToastrProvider } from '@shared/modal/toastr-provider/toastr-provider';
 
 /**
  * @author Do Quoc Viet
@@ -35,6 +36,7 @@ export class ChangePasswordModal extends AbstractModal implements OnInit, AfterV
   constructor(
     injector: Injector,
     private authService: AuthService,
+    private toastrProvider: ToastrProvider,
     private changeDetectorRef: ChangeDetectorRef
   ) {
     super(injector);
@@ -77,9 +79,16 @@ export class ChangePasswordModal extends AbstractModal implements OnInit, AfterV
         if (!this.isShowOldPassword) {
           // For set token
           this.authService.signIn(user.username!, user.password!).subscribe(() => {
+            this.toastrProvider.showSuccess({
+              body: 'Change password successfully'
+            });
             this.close(true);
           });
         }
+        this.toastrProvider.showSuccess({
+          body: 'Change password successfully'
+        });
+        this.close(true);
       }
     });
   }

@@ -5,7 +5,7 @@ import { ROUTING } from '@app/component/people/people.routing';
 import { PeopleLayoutComponent } from '@app/component/people/people-layout.component';
 import { LayoutModule } from '@shared/layout/layout.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgIf } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -26,7 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     TranslateModule,
     DatePipe,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   providers: []
 })

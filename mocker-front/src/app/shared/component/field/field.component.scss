@@ -12,7 +12,6 @@
   }
 
   .invalid {
-    @apply border-2;
-    border-color: $invalid-color !important;
+    border: 1px solid $invalid-color !important;
   }
 }

@@ -52,7 +52,7 @@ export class ToastrModal extends AbstractModal implements AfterViewInit {
 
   constructor(
     injector: Injector,
-    protected toastrProvider: ToastrProvider
+    private toastrProvider: ToastrProvider
   ) {
     super(injector);
     this.styles = new Map();
