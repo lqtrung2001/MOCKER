@@ -30,6 +30,7 @@ import { TableComponent } from '@shared/component/table/table.component';
 import { CopyrightComponent } from '@shared/component/copyright/copyright.component';
 import { ChangeLogComponent } from '@shared/component/change-log/change-log.component';
 import { DialogDirective } from '@shared/directive/dialog.directive';
+import { InstructionComponent } from '@shared/component/instruction/instruction.component';
 
 /**
  * @author Do Quoc Viet
@@ -49,7 +50,8 @@ import { DialogDirective } from '@shared/directive/dialog.directive';
     TableComponent,
     CopyrightComponent,
     ChangeLogComponent,
-    DialogDirective
+    DialogDirective,
+    InstructionComponent
   ],
   imports: [
     KeyValuePipe,
@@ -80,7 +82,8 @@ import { DialogDirective } from '@shared/directive/dialog.directive';
     TableComponent,
     CopyrightComponent,
     ChangeLogComponent,
-    DialogDirective
+    DialogDirective,
+    InstructionComponent
   ],
   providers: []
 })

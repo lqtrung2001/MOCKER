@@ -1,8 +1,8 @@
 <div id='main' class='view-port-width-standard mx-auto text-sm'>
   <p class='text-3xl font-medium mt-5'>{{ 'component.projects.my_projects' | translate }}</p>
   <moc-description class='mt-5' [description]='"component.projects.information" | translate'></moc-description>
-  <moc-button routerLink='new' [label]='"component.projects.create" | translate' selfClass='uppercase'
-              class='w-60'></moc-button>
+  <moc-button routerLink='new' [label]='"component.projects.create" | translate' selfClass='uppercase btn-primary'
+              class='w-60 mt-6'></moc-button>
   <table class='mt-10 w-full text-left'>
     <tr>
       <th><i (click)='selectAll()'
