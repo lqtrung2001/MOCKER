@@ -35,7 +35,6 @@ import org.mapstruct.Named;
 @Mapper(componentModel = "spring")
 public interface ApiAbstractMapper {
 
-    @Mapping(target = "numberOfGenerateTypes", expression = "java(category.getGenerateTypes().size())")
     @Mapping(target = "generateTypes", ignore = true)
     CategoryDto map(Category category);
 

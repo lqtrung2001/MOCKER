@@ -1,4 +1,4 @@
-package com.mocker.controller;
+package com.mocker.controller.category;
 
 import com.mocker.api.CategoryApi;
 import com.mocker.controller.maper.ApiAbstractMapper;
@@ -21,23 +21,23 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/v1")
 public class CategoryController implements CategoryApi {
-
-    private final ApiAbstractMapper apiAbstractMapper;
+    private final ApiCategoryMapper apiCategoryMapper;
     private final CategoryService categoryService;
 
     @Override
     public ResponseEntity<List<CategoryDto>> getCategories() {
         return ResponseEntity.ok(categoryService.getCategoriesFetchGenerateTypes().stream()
-                .map(apiAbstractMapper::map).collect(Collectors.toList()));
+                .map(apiCategoryMapper::map).collect(Collectors.toList()));
     }
 
     @Override
     public ResponseEntity<CategoryDto> getCategory(UUID id) {
-        return ResponseEntity.ok(apiAbstractMapper.mapWithEagerGenerateTypes(categoryService.getCategoryHasGenerateTypes(id)));
+        return ResponseEntity.ok(apiCategoryMapper.mapWithEagerGenerateTypes(categoryService.getCategoryHasGenerateTypes(id)));
     }
 
     @Override
     public ResponseEntity<Integer> getGenerateTypesCount(UUID id) {
         return ResponseEntity.ok(categoryService.getGenerateTypesCount(id));
     }
+    
 }

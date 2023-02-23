@@ -4,6 +4,7 @@ import com.mocker.domain.model.entity.Category;
 import com.mocker.repository.CategoryRepository;
 import com.mocker.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -37,6 +38,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Cacheable("categories")
     public List<Category> getCategoriesFetchGenerateTypes() {
         return categoryRepository.getCategoriesFetchGenerateTypes();
     }
