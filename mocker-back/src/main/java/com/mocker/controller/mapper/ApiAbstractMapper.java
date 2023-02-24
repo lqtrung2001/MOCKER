@@ -1,4 +1,4 @@
-package com.mocker.controller.maper;
+package com.mocker.controller.mapper;
 
 import com.mocker.domain.dto.CategoryDto;
 import com.mocker.domain.dto.FieldDto;
@@ -37,9 +37,6 @@ public interface ApiAbstractMapper {
 
     @Mapping(target = "generateTypes", ignore = true)
     CategoryDto map(Category category);
-
-    @Named("mapHasGenerateTypes")
-    CategoryDto mapWithEagerGenerateTypes(Category category);
 
     Category map(CategoryDto categoryDto);
 

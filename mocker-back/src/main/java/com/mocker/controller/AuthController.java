@@ -2,7 +2,7 @@ package com.mocker.controller;
 
 
 import com.mocker.api.AuthApi;
-import com.mocker.controller.maper.ApiAbstractMapper;
+import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.ChangePasswordDto;
 import com.mocker.domain.dto.UserDto;
 import com.mocker.service.AuthService;

@@ -1,7 +1,7 @@
 package com.mocker.controller;
 
 import com.mocker.api.ProjectApi;
-import com.mocker.controller.maper.ApiAbstractMapper;
+import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.ProjectDto;
 import com.mocker.service.ProjectService;
 import lombok.AllArgsConstructor;

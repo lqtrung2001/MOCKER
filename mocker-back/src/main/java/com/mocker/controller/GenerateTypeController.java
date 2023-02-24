@@ -2,7 +2,7 @@ package com.mocker.controller;
 
 import com.mocker.api.GenerateTypeApi;
 import com.mocker.configuration.security.ApplicationContextHolder;
-import com.mocker.controller.maper.ApiAbstractMapper;
+import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.GenerateTypeDto;
 import com.mocker.domain.model.entity.User;
 import com.mocker.service.GenerateTypeService;
