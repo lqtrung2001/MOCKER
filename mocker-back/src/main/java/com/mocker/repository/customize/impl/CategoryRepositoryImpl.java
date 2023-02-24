@@ -1,8 +1,6 @@
 package com.mocker.repository.customize.impl;
 
-import com.mocker.domain.model.entity.Category;
-import com.mocker.domain.model.entity.QCategory;
-import com.mocker.domain.model.entity.QGenerateType;
+import com.mocker.domain.model.entity.*;
 import com.mocker.repository.customize.CategoryRepositoryCustom;
 import com.querydsl.jpa.impl.JPAQuery;
 
@@ -42,10 +40,19 @@ public class CategoryRepositoryImpl implements CategoryRepositoryCustom {
 
     @Override
     public List<Category> getCategoriesFetchGenerateTypes() {
-        return new JPAQuery<Category>(entityManager)
+        List<Category> categories = new JPAQuery<Category>(entityManager)
                 .from(QCategory.category)
-                .innerJoin(QCategory.category.generateTypes, QGenerateType.generateType)
-                .fetchJoin()
+                .innerJoin(QCategory.category.generateTypes, QGenerateType.generateType).fetchJoin()
                 .fetch();
+        categories.forEach(category -> {
+            category.getGenerateTypes().forEach(generateType -> {
+                generateType.setSources(new JPAQuery<Source>(entityManager)
+                        .from(QSource.source)
+                        .where(QSource.source.generateType.id.eq(generateType.getId()))
+                        .limit(3)
+                        .fetch());
+            });
+        });
+        return categories;
     }
 }

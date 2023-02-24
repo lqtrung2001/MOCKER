@@ -13,12 +13,14 @@ public interface CategoryService {
 
     /**
      * CATEGORY.01 GET /category
+     *
      * @return categories
      */
     List<Category> getCategories();
 
     /**
      * CATEGORY.02 GET /category/{id}
+     *
      * @param id of category
      * @return category
      */
@@ -26,10 +28,12 @@ public interface CategoryService {
 
     /**
      * CATEGORY.03 GET /category/{id}/generate-types/count
+     *
      * @param id of category
      * @return number of generate-types in category
      */
     Integer getGenerateTypesCount(UUID id);
 
     List<Category> getCategoriesFetchGenerateTypes();
+
 }
