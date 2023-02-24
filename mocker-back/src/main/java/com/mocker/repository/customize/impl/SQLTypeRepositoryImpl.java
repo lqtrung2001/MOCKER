@@ -1,5 +1,6 @@
 package com.mocker.repository.customize.impl;
 
+import com.mocker.domain.model.entity.QGenerateType;
 import com.mocker.domain.model.entity.QSQLType;
 import com.mocker.domain.model.entity.SQLType;
 import com.mocker.repository.customize.SQLTypeRepositoryCustom;
@@ -10,7 +11,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
  */
 
 public class SQLTypeRepositoryImpl implements SQLTypeRepositoryCustom {
@@ -20,21 +21,9 @@ public class SQLTypeRepositoryImpl implements SQLTypeRepositoryCustom {
 
     @Override
     public List<SQLType> getSQLTypesFetchGenerateTypes() {
-        List<SQLType> SQLTypes = new JPAQuery<SQLType>(entityManager)
-                .from(QSQLType.sQLType).fetch();
-//        List<SQLType> SQLTypes = new JPAQuery<SQLType>(entityManager)
-//                .from(QSQLType.sQLType)
-//                .innerJoin(QSQLType.sQLType.generateTypes, QGenerateType.generateType).fetchJoin()
-//                .fetch();
-//        SQLTypes.forEach(sqlType -> {
-//            sqlType.getGenerateTypes().forEach(generateType -> {
-//                generateType.setSources(new JPAQuery<Source>(entityManager)
-//                        .from(QSource.source)
-//                        .where(QSource.source.generateType.id.eq(generateType.getId()))
-//                        .limit(3)
-//                        .fetch());
-//            });
-//        });
-        return SQLTypes;
+        return new JPAQuery<SQLType>(entityManager)
+                .from(QSQLType.sQLType)
+                .leftJoin(QSQLType.sQLType.generateTypes, QGenerateType.generateType).fetchJoin()
+                .fetch();
     }
 }

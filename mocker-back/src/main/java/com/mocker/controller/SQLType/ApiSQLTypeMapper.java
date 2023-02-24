@@ -1,10 +1,10 @@
 package com.mocker.controller.SQLType;
 
+import com.mocker.domain.dto.GenerateTypeDto;
+import com.mocker.domain.dto.SQLTypeDto;
 import com.mocker.domain.model.entity.GenerateType;
 import com.mocker.domain.model.entity.SQLType;
 import org.mapstruct.Mapper;
-import com.mocker.domain.dto.SQLTypeDto;
-import com.mocker.domain.dto.GenerateTypeDto;
 import org.mapstruct.Mapping;
 
 import java.util.List;
@@ -17,7 +17,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ApiSQLTypeMapper {
 
-    @Mapping(target = "generateTypes", ignore = true)
     SQLTypeDto map(SQLType sqlType);
 
     @Mapping(target = "category", ignore = true)
