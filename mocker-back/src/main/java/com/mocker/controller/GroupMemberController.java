@@ -1,6 +1,6 @@
 package com.mocker.controller;
 
-import com.mocker.controller.maper.ApiAbstractMapper;
+import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.GroupMemberPKDto;
 import com.mocker.service.GroupMemberService;
 import lombok.RequiredArgsConstructor;

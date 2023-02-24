@@ -1,7 +1,6 @@
-package com.mocker.controller;
+package com.mocker.controller.SQLType;
 
 import com.mocker.api.SqlTypeApi;
-import com.mocker.controller.maper.ApiAbstractMapper;
 import com.mocker.domain.dto.SQLTypeDto;
 import com.mocker.service.SQLTypeService;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +20,12 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/api/v1")
 public class SQLTypeController implements SqlTypeApi {
 
-    private final ApiAbstractMapper apiAbstractMapper;
+    private final ApiSQLTypeMapper apiSQLTypeMapper;
     private final SQLTypeService sqlTypeService;
 
     @Override
     public ResponseEntity<List<SQLTypeDto>> getSQLTypes() {
-        return ResponseEntity.ok(sqlTypeService.getSQLTypes().stream()
-                .map(apiAbstractMapper::map).collect(Collectors.toList()));
+        return ResponseEntity.ok(sqlTypeService.getSQLTypesFetchGenerateTypes().stream()
+                .map(apiSQLTypeMapper::map).collect(Collectors.toList()));
     }
 }

@@ -1,7 +1,6 @@
 package com.mocker.controller.category;
 
 import com.mocker.api.CategoryApi;
-import com.mocker.controller.maper.ApiAbstractMapper;
 import com.mocker.domain.dto.CategoryDto;
 import com.mocker.service.CategoryService;
 import lombok.RequiredArgsConstructor;

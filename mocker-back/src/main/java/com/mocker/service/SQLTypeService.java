@@ -15,4 +15,6 @@ public interface SQLTypeService {
      * @return sqlTypes
      */
     List<SQLType> getSQLTypes();
+
+    List<SQLType> getSQLTypesFetchGenerateTypes();
 }

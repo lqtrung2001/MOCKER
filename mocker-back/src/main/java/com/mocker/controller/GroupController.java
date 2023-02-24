@@ -2,7 +2,7 @@ package com.mocker.controller;
 
 import com.mocker.api.GroupApi;
 import com.mocker.configuration.security.ApplicationContextHolder;
-import com.mocker.controller.maper.ApiAbstractMapper;
+import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.GroupDto;
 import com.mocker.service.GroupService;
 import lombok.RequiredArgsConstructor;
