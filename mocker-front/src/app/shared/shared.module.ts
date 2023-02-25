@@ -26,11 +26,12 @@ import { DescriptionComponent } from '@shared/component/description/description.
 import { TruncatePipe } from '@shared/pipe/truncate.pipe';
 import { TabComponent } from '@shared/component/tab/tab.component';
 import { DateDistancePipe } from '@shared/pipe/date-distance.pipe';
-import { TableComponent } from '@shared/component/table/table.component';
+import { TableDetailComponent } from '@shared/component/table-detail/table-detail.component';
 import { CopyrightComponent } from '@shared/component/copyright/copyright.component';
 import { ChangeLogComponent } from '@shared/component/change-log/change-log.component';
 import { DialogDirective } from '@shared/directive/dialog.directive';
 import { InstructionComponent } from '@shared/component/instruction/instruction.component';
+import { TableComponent } from '@shared/component/table/table.component';
 
 /**
  * @author Do Quoc Viet
@@ -47,11 +48,12 @@ import { InstructionComponent } from '@shared/component/instruction/instruction.
     TruncatePipe,
     TabComponent,
     DateDistancePipe,
-    TableComponent,
+    TableDetailComponent,
     CopyrightComponent,
     ChangeLogComponent,
     DialogDirective,
-    InstructionComponent
+    InstructionComponent,
+    TableComponent
   ],
   imports: [
     KeyValuePipe,
@@ -79,11 +81,12 @@ import { InstructionComponent } from '@shared/component/instruction/instruction.
     TruncatePipe,
     TabComponent,
     DateDistancePipe,
-    TableComponent,
+    TableDetailComponent,
     CopyrightComponent,
     ChangeLogComponent,
     DialogDirective,
-    InstructionComponent
+    InstructionComponent,
+    TableComponent
   ],
   providers: []
 })

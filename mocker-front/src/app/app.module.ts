@@ -15,6 +15,7 @@ import { AppHttpService } from '@core/service/app-http.service';
 import { ModalModule } from '@shared/modal/modal.module';
 import { ProjectModule } from '@app/component/project/project.module';
 import { GeneralModule } from '@app/component/general/general.module';
+import { SchemaModule } from '@app/component/schema/schema.module';
 
 /**
  * @author Do Quoc Viet
@@ -41,7 +42,8 @@ import { GeneralModule } from '@app/component/general/general.module';
     ProjectModule,
     GeneralModule,
     PeopleModule,
-    ModalModule
+    ModalModule,
+    SchemaModule
   ],
   providers: [{
     multi: true,

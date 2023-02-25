@@ -1,73 +1,28 @@
 import { Component, Injector, Input } from '@angular/core';
-import { AbstractComponent } from '@core/class/abstract.component';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ChooseTypeModal } from '@shared/modal/choose-type/choose-type.modal';
-import { GenerateType } from '@core/model/generate-type';
-import { SQLType } from '@core/model/sql-type';
+import { AbstractSharedComponent } from '@shared/component/abstract-shared/abstract-shared.component';
+import { Table } from '@core/model/table';
+import { TableService } from '@core/service/table.service';
 
 /**
  * @author Do Quoc Viet
- * @class TableComponent
- * @date 11/02/2023
+ * @date 22/02/2023
  */
-
-type Controls = {
-  fieldName: FormControl;
-  generateType: FormControl;
-  sqlType: FormControl;
-  option: FormGroup<{
-    blank: FormControl
-  }>;
-}
 
 @Component({
   selector: 'moc-table',
   templateUrl: 'table.component.html',
   styleUrls: ['table.component.scss']
 })
-export class TableComponent extends AbstractComponent {
-  @Input() class: string;
-  formGroup: FormGroup<{
-    fields: FormArray<FormGroup<Controls>>
-  }>;
+export class TableComponent extends AbstractSharedComponent {
+  @Input() table: Table;
 
   constructor(
-    injector: Injector
+    injector: Injector,
+    private tableService: TableService
   ) {
     super(injector);
-    this.formGroup = this.formBuilder.group({
-      fields: this.formBuilder.array<FormGroup<Controls>>([])
-    });
-    this.insertField();
-    this.insertField();
-    this.insertField();
-    this.insertField();
-    this.insertField();
-    this.insertField();
-  }
-
-  insertField(): void {
-    const field: FormGroup = this.formBuilder.group<Controls>({
-      fieldName: this.formBuilder.control(undefined, [Validators.required]),
-      generateType: this.formBuilder.control('undefined', [Validators.required]),
-      sqlType: this.formBuilder.control('undefined', []),
-      option: this.formBuilder.group({
-        blank: this.formBuilder.control(undefined, [])
-      }, [])
-    });
-    this.formGroup.controls.fields.push(field);
-  }
-
-  removeField(index: number) {
-    this.formGroup.controls.fields.removeAt(index);
-  }
-
-  chooseType(control: FormControl): void {
-    this.modalService.open(ChooseTypeModal).onResult().subscribe((type: GenerateType | SQLType): void => {
-      if (type) {
-        control.setValue(type);
-      }
+    this.tableService.getTable('89192222-aa8e-4d66-82b5-190ef6f7d84f').subscribe((table: Table): void => {
+      this.table = table;
     });
   }
-
 }

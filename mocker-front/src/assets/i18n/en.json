@@ -95,6 +95,15 @@
       "generate_new_api_key": "GENERATE NEW API KEY",
       "delete_my_account": "Delete My Account",
       "my_payments": "My Payments"
+    },
+    "schemas": {
+      "my_schemas": "My Schemas",
+      "information": "A database schema is (generally) broadly divided into two categories: physical database schema that defines how the data-like files are actually stored; and logical database schema, which describes all the logical constraints -- including integrity, tables and views -- applied on the stored data.",
+      "create": "CREATE A SCHEMA",
+      "name": "Name",
+      "shared_by": "Shared By",
+      "group": "Group",
+      "last_modified": "Last Modified"
     }
   },
   "audit": {
@@ -124,6 +133,10 @@
       "confirm_password": "Confirm password",
       "change_password": "Change password",
       "password_not_match": "Password not match."
+    },
+    "choose_type": {
+      "title": "CHOOSE A TYPE",
+      "find_placeholder": "Find..."
     }
   }
 }

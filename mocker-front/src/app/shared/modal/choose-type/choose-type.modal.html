@@ -1,23 +1,31 @@
 <div id='main' dialog [modal]='this'>
   <div class='p-3 text-sm'>
     <div class='flex justify-between items-center'>
-      <p class='font-medium'>{{ 'Choose a Type' }}</p>
-      <moc-field class='w-60' placeholder='Find type...' [formControl]='searchFC' ngDefaultControl
+      <p class='font-medium'>{{ 'modal.choose_type.title' | translate }}</p>
+      <moc-field class='w-60' [placeholder]='"modal.choose_type.find_placeholder" | translate' [formControl]='formControl'
+                 ngDefaultControl
                  selfClass='p-2'></moc-field>
     </div>
-    <div class='flex mt-3 overflow-x-scroll'>
-      <moc-button class='mx-0.5' selfClass='py-2 btn-light'
-                  label='All&nbsp;(20)'></moc-button>
-      <moc-button class='mx-0.5' selfClass='py-2 btn-light' *ngFor='let category of categories'
-                  label='{{ category.name | truncate: 20 }}&nbsp;(20)'></moc-button>
+    <div *ngIf='options?.isGenerateType' class='flex mt-3 overflow-x-scroll'>
+      <moc-button class='mx-0.5' selfClass='py-2 {{ currentCategory ? "btn-light" : "btn-primary" }}'
+                  (click)='changeCategory()'
+                  label='All&nbsp;({{ numberOfGenerateTypes }})'></moc-button>
+      <moc-button class='mx-0.5'
+                  selfClass='py-2 {{ currentCategory?.id === category.id ? "btn-primary" : "btn-light" }}'
+                  *ngFor='let category of categories'
+                  (click)='changeCategory(category)'
+                  label='{{ category.name | truncate: 20 }}&nbsp;({{ category.generateTypes.length }})'></moc-button>
     </div>
-    <div class='flex flex-wrap h-5/6 overflow-y-scroll'>
-      <div class='m-3 p-4 hover:bg-gray cursor-pointer rounded w-1/4 h-32' (click)='close(type)'
-           *ngFor='let type of types'>
+    <div class='flex flex-wrap content-start h-5/6 overflow-y-scroll'>
+      <div
+        class='m-3 p-4 cursor-pointer rounded w-1/4 {{ (options.current && type.id === options.current.id) ? "bg-gray" : "hover:bg-gray" }}'
+        (click)='close(type)'
+        *ngFor='let type of types'>
         <p class='font-medium first-letter:underline'>{{ type.code }}</p>
-        <p class='text-gray'>{{ type.modifiedBy | truncate: 10 }}</p>
-        <p class='text-gray'>{{ type.createdBy | truncate: 10 }}</p>
-        <p class='text-gray'>{{ type.modifiedByGroup | truncate: 10 }}</p>
+        <p class='text-gray'>{{ type.description | truncate: 90 }}</p>
+        <ng-container *ngIf='options?.isGenerateType'>
+          <li class='text-gray' *ngFor='let source of type.sources'>{{ source.value | truncate: 20 }}</li>
+        </ng-container>
       </div>
     </div>
   </div>
