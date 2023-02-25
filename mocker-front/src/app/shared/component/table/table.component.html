@@ -1,55 +1,43 @@
-<div id='main' [class]='class'>
-  <table class='w-full' [formGroup]='formGroup'>
-    <thead>
-    <tr>
-      <th class='pb-3'>{{ 'component.table.field_name' | translate }}</th>
-      <th class='pb-3'>{{ 'component.table.generate_type' | translate }}</th>
-      <th class='pb-3'>{{ 'component.table.sql_type' | translate }}</th>
-      <th class='pb-3'>{{ 'component.table.options' | translate }}</th>
-    </tr>
-    </thead>
-    <tbody formArrayName='fields' *ngFor='let field of formGroup.controls.fields.controls; let i = index;'>
-    <tr [formGroupName]='i'>
-      <td class='w-1/4 px-3 py-1.5 align-top'>
-        <moc-field ngDefaultControl selfClass='px-5'
-                   [formControl]='field.controls.fieldName'
-                   [placeholder]='"component.table.field_name_placeholder" | translate'></moc-field>
-      </td>
-      <td class='w-1/4 px-3 py-1.5 align-top'>
-        <moc-button icon='fa-solid fa-arrow-up-arrow-down'
-                    (click)='chooseType(field.controls.generateType)'
-                    selfClass='text-left px-5 btn-light {{ !field.controls.generateType.value.code ? "text-gray-400 !font-normal" : "" }}'
-                    [label]='field.controls.generateType.value.code || "Generate Type"'></moc-button>
-      </td>
-      <td class='w-1/4 px-3 py-1.5 align-top'>
-        <moc-button icon='fa-solid fa-arrow-up-arrow-down'
-                    (click)='chooseType(field.controls.sqlType)'
-                    selfClass='text-left px-5 btn-light {{ !field.controls.sqlType.value.code ? "text-gray-400 !font-normal" : "" }}'
-                    [label]='field.controls.sqlType.value.code || "Sql Type"'></moc-button>
-      </td>
-      <td class='w-1/4 px-3 py-1.5 align-top'>
-        <div class='flex justify-evenly'>
-          <p class='self-center'>{{ 'Blank:' }}</p>
-          <moc-field class='w-20' placeholder='0%' ngDefaultControl
-                     type='number'
-                     [min]='0'
-                     [max]='100'
-                     selfClass='text-center'
-                     [formControl]='field.controls.option.controls.blank'></moc-field>
-          <moc-button icon='fa-solid fa-sigma' class='w-12'
-                      selfClass='btn-light h-10'></moc-button>
-          <i (click)='removeField(i)' class='text-lg cursor-pointer fa-regular fa-circle-xmark self-center'></i>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-    <tfoot>
-    <tr>
-      <td class='w-1/4 px-3 pt-4'>
-        <moc-button (click)='insertField()' selfClass='btn-primary'
-                    label='component.table.add_another_field'></moc-button>
-      </td>
-    </tr>
-    </tfoot>
-  </table>
+<div id='main' class='{{ class }} text-sm'>
+  <div class='{{ selfClass }} border rounded w-72 overflow-hidden'>
+    <p class='bg-blue cursor-pointer h-8 heading text-center leading-8 font-medium text-white uppercase'>
+      <i class='fa-regular fa-table mr-3'></i>
+      {{ table.name }}
+      <i class='edit-icon hidden ml-3 fa-solid fa-pen-to-square'></i>
+    </p>
+    <div class='overflow-x-scroll'>
+      <div class='px-5 mt-3 flex justify-between items-center'>
+        <p class='w-1/12'>
+          <i class='fa-solid fa-key text-yellow'></i>
+        </p>
+        <p class='w-1/2'>{{ 'group' }}</p>
+        <p class='w-1/3 uppercase'>{{ 'VARCHAR(20)' }}</p>
+      </div>
+      <div class='px-5 mt-3 flex justify-between items-center'>
+        <p class='w-1/12'>
+        </p>
+        <p class='w-1/2'>{{ 'number_id' }}</p>
+        <p class='w-1/3 uppercase'>{{ 'VARCHAR(20)' }}</p>
+      </div>
+      <div class='px-5 mt-3 flex justify-between items-center'>
+        <p class='w-1/12'>
+        </p>
+        <p class='w-1/2'>{{ 'group_number' }}</p>
+        <p class='w-1/3 uppercase'>{{ 'VARCHAR(20)' }}</p>
+      </div>
+      <div class='px-5 mt-3 flex justify-between items-center'>
+        <p class='w-1/12'>
+        </p>
+        <p class='w-1/2'>{{ 'group_id' }}</p>
+        <p class='w-1/3 uppercase'>{{ 'INT' }}</p>
+      </div>
+      <div class='px-5 mt-3 flex justify-between items-center'>
+        <p class='w-1/12'>
+          <i class='fa-regular fa-key'></i>
+        </p>
+        <p class='w-1/2'>{{ 'number_id' }}</p>
+        <p class='w-1/3 uppercase'>{{ 'DATE' }}</p>
+      </div>
+    </div>
+  </div>
 </div>

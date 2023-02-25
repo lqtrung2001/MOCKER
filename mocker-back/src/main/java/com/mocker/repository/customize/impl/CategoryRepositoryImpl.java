@@ -42,17 +42,14 @@ public class CategoryRepositoryImpl implements CategoryRepositoryCustom {
     public List<Category> getCategoriesFetchGenerateTypes() {
         List<Category> categories = new JPAQuery<Category>(entityManager)
                 .from(QCategory.category)
-                .innerJoin(QCategory.category.generateTypes, QGenerateType.generateType).fetchJoin()
                 .fetch();
-        categories.forEach(category -> {
-            category.getGenerateTypes().forEach(generateType -> {
-                generateType.setSources(new JPAQuery<Source>(entityManager)
-                        .from(QSource.source)
-                        .where(QSource.source.generateType.id.eq(generateType.getId()))
-                        .limit(3)
-                        .fetch());
-            });
-        });
+        categories.forEach(category ->
+                category.getGenerateTypes().forEach(generateType ->
+                        generateType.setSources(new JPAQuery<Source>(entityManager)
+                                .from(QSource.source)
+                                .where(QSource.source.generateType.id.eq(generateType.getId()))
+                                .limit(3)
+                                .fetch())));
         return categories;
     }
 }

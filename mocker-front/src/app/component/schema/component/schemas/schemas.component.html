@@ -1,0 +1,42 @@
+<div id='main' class='view-port-width-standard mx-auto text-sm'>
+  <p class='text-3xl font-medium mt-5'>{{ 'component.schemas.my_schemas' | translate }}</p>
+  <moc-description class='mt-5' [description]='"component.schemas.information" | translate'></moc-description>
+  <moc-button routerLink='new' [label]='"component.schemas.create" | translate' selfClass='uppercase btn-primary'
+              class='w-60 mt-6'></moc-button>
+  <table class='mt-10 w-full text-left'>
+    <tr>
+      <th><i (click)='selectAll()'
+             class='ml-3 cursor-pointer fa-regular fa-square{{ isSelectAll ? "-check" : undefined }} text-lg'></i></th>
+      <th colspan='3'>{{ 'component.schemas.name' | translate }}</th>
+      <th colspan='3'>{{ 'component.schemas.shared_by' | translate }}</th>
+      <th colspan='3'>{{ 'component.schemas.group' | translate }}</th>
+      <th colspan='3'>{{ 'component.schemas.last_modified' | translate }}</th>
+      <th [className]='canDeleteSelected ? "cursor-pointer" : undefined'><i
+        class='fa-regular fa-trash-list text-lg {{ canDeleteSelected ? undefined : "text-gray" }}'></i></th>
+    </tr>
+    <tr>
+      <td colspan='11' class='py-4'>
+        <hr/>
+      </td>
+    </tr>
+    <ng-container *ngFor='let schema of schemas'>
+      <tr>
+        <th><i (click)='select(schema.id)'
+               class='ml-3 cursor-pointer fa-regular fa-square{{ isCheck(schema.id) ? "-check" : undefined }} text-lg'></i>
+        </th>
+        <td colspan='3'><a [routerLink]='schema.id'
+                           class='font-medium hover-underline-text-blue uppercase'>{{ schema.name | truncate: 20 }}</a>
+        </td>
+        <td colspan='3' class='uppercase'>{{ schema.project.name | truncate: 20 }}</td>
+        <td colspan='3' class='uppercase'>{{ schema.project.group.name | truncate: 20 }}</td>
+        <td colspan='3'>{{ schema.modifiedDate | date }}</td>
+        <th class='cursor-pointer'><i (click)='delete(schema.id)' class='fa-regular fa-trash text-lg'></i></th>
+      </tr>
+      <tr>
+        <td colspan='11' class='py-4'>
+          <hr/>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+</div>

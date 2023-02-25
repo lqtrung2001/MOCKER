@@ -5,6 +5,7 @@ import { ToastrModal } from '@shared/modal/toastr-provider/toastr/toastr.modal';
 import { ChooseTypeModal } from '@shared/modal/choose-type/choose-type.modal';
 import { SharedModule } from '@shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 /**
  * @author Do Quoc Viet
@@ -25,7 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    NgForOf
+    NgForOf,
+    TranslateModule
   ],
   providers: []
 })

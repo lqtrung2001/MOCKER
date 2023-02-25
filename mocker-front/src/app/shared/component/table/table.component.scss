@@ -1,0 +1,7 @@
+#main {
+  .heading:hover {
+    > .edit-icon {
+      display: inline-block !important;
+    }
+  }
+}

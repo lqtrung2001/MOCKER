@@ -1,0 +1,55 @@
+<div id='main' [class]='class'>
+  <table class='w-full' [formGroup]='formGroup'>
+    <thead>
+    <tr>
+      <th class='pb-3 first-letter:underline'>{{ 'component.table.field_name' | translate }}</th>
+      <th class='pb-3 first-letter:underline'>{{ 'component.table.generate_type' | translate }}</th>
+      <th class='pb-3 first-letter:underline'>{{ 'component.table.sql_type' | translate }}</th>
+      <th class='pb-3 first-letter:underline'>{{ 'component.table.options' | translate }}</th>
+    </tr>
+    </thead>
+    <tbody formArrayName='fields' *ngFor='let field of formGroup.controls.fields.controls; let i = index;'>
+    <tr [formGroupName]='i'>
+      <td class='w-1/4 px-3 py-1.5 align-top'>
+        <moc-field ngDefaultControl selfClass='px-5'
+                   [formControl]='field.controls.fieldName'
+                   [placeholder]='"component.table.field_name_placeholder" | translate'></moc-field>
+      </td>
+      <td class='w-1/4 px-3 py-1.5 align-top'>
+        <moc-button icon='fa-solid fa-arrow-up-arrow-down'
+                    (click)='chooseType(field.controls.generateType, true)'
+                    selfClass='text-left px-5 btn-light {{ !field.controls.generateType.value ? "text-gray-400 !font-normal" : "" }}'
+                    [label]='field.controls.generateType.value?.code || "Generate Type"'></moc-button>
+      </td>
+      <td class='w-1/4 px-3 py-1.5 align-top'>
+        <moc-button icon='fa-solid fa-arrow-up-arrow-down'
+                    (click)='chooseType(field.controls.sqlType, false)'
+                    selfClass='text-left px-5 btn-light {{ !field.controls.sqlType.value ? "text-gray-400 !font-normal" : "" }}'
+                    [label]='field.controls.sqlType.value?.code || "Sql Type"'></moc-button>
+      </td>
+      <td class='w-1/4 px-3 py-1.5 align-top'>
+        <div class='flex justify-evenly'>
+          <p class='self-center'>{{ 'Blank:' }}</p>
+          <moc-field class='w-20' placeholder='0%' ngDefaultControl
+                     type='number'
+                     [min]='0'
+                     [max]='100'
+                     selfClass='text-center'
+                     [formControl]='field.controls.option.controls.blank'></moc-field>
+          <moc-button icon='fa-solid fa-sigma' class='w-12'
+                      selfClass='btn-light h-10'></moc-button>
+          <i (click)='removeField(i)' class='text-lg cursor-pointer fa-regular fa-circle-xmark self-center'></i>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td class='w-1/4 px-3 pt-4'>
+        <moc-button (click)='insertField()' selfClass='btn-primary'
+                    label='component.table.add_another_field'></moc-button>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+</div>
