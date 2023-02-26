@@ -1,4 +1,4 @@
-import { Component, Injector, Input } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
 import { AbstractComponent } from '@core/class/abstract.component';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ChooseTypeModal, ChooseTypeModalOptions } from '@shared/modal/choose-type/choose-type.modal';
@@ -11,8 +11,8 @@ import { SQLType } from '@core/model/sql-type';
  * @date 11/02/2023
  */
 
-type Controls = {
-  fieldName: FormControl;
+export type Controls = {
+  name: FormControl;
   generateType: FormControl;
   sqlType: FormControl;
   option: FormGroup<{
@@ -25,9 +25,9 @@ type Controls = {
   templateUrl: 'table-detail.component.html',
   styleUrls: ['table-detail.component.scss']
 })
-export class TableDetailComponent extends AbstractComponent {
+export class TableDetailComponent extends AbstractComponent implements OnInit {
   @Input() class: string;
-  formGroup: FormGroup<{
+  @Input('table') formGroup: FormGroup<{
     fields: FormArray<FormGroup<Controls>>
   }>;
 
@@ -35,20 +35,20 @@ export class TableDetailComponent extends AbstractComponent {
     injector: Injector
   ) {
     super(injector);
-    this.formGroup = this.formBuilder.group({
-      fields: this.formBuilder.array<FormGroup<Controls>>([])
-    });
-    this.insertField();
-    this.insertField();
-    this.insertField();
-    this.insertField();
-    this.insertField();
-    this.insertField();
+  }
+
+  ngOnInit(): void {
+    // Default values is 3 fields
+    if (!this.formGroup.controls.fields.length) {
+      this.insertField();
+      this.insertField();
+      this.insertField();
+    }
   }
 
   insertField(): void {
     const field: FormGroup = this.formBuilder.group<Controls>({
-      fieldName: this.formBuilder.control(undefined, [Validators.required]),
+      name: this.formBuilder.control(undefined, [Validators.required]),
       generateType: this.formBuilder.control(undefined, [Validators.required]),
       sqlType: this.formBuilder.control(undefined, []),
       option: this.formBuilder.group({

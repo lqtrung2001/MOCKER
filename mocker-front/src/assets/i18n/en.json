@@ -136,7 +136,9 @@
     },
     "choose_type": {
       "title": "CHOOSE A TYPE",
-      "find_placeholder": "Find..."
+      "find_placeholder": "Find...",
+      "not_match": "No any types match with current credential.",
+      "clear_credential": "Clear credential"
     }
   }
 }

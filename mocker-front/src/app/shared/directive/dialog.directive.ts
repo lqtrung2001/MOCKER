@@ -33,10 +33,20 @@ export class DialogDirective implements AfterContentInit {
 
   closeListenerProcessor(): void {
     this.renderer.listen(this.elementRef.nativeElement, 'click', (event: Event): void => {
-      if (!this.content.contains(event.target as Node)) {
+      if (!this.isDescendant(this.content, event.target as HTMLElement)) {
         this.modal.close();
       }
     });
+  }
+
+  isDescendant(parent: HTMLElement, child: HTMLElement): boolean {
+    while (child !== null) {
+      if (child === parent) {
+        return true;
+      }
+      child = (child.parentNode) as HTMLElement;
+    }
+    return false;
   }
 
 }

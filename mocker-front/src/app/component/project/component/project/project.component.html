@@ -31,7 +31,7 @@
   <ng-template #settings>
     <div id='settings'>
       <p class='mt-5 font-medium'>{{ 'Project Name' | translate }}</p>
-      <moc-field class='mt-3' [formControl]='formGroup.controls.name'
+      <moc-field class='mt-3' [control]='formGroup.controls.name'
                  [placeholder]='"project name" | translate'></moc-field>
       <p class='mt-5 font-medium'>{{ 'Share With' | translate }}</p>
     </div>

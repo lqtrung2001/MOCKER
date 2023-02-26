@@ -2,8 +2,8 @@
   <div class='p-3 text-sm'>
     <div class='flex justify-between items-center'>
       <p class='font-medium'>{{ 'modal.choose_type.title' | translate }}</p>
-      <moc-field class='w-60' [placeholder]='"modal.choose_type.find_placeholder" | translate' [formControl]='formControl'
-                 ngDefaultControl
+      <moc-field class='w-60' [placeholder]='"modal.choose_type.find_placeholder" | translate'
+                 [control]='formControl'
                  selfClass='p-2'></moc-field>
     </div>
     <div *ngIf='options?.isGenerateType' class='flex mt-3 overflow-x-scroll'>
@@ -15,6 +15,11 @@
                   *ngFor='let category of categories'
                   (click)='changeCategory(category)'
                   label='{{ category.name | truncate: 20 }}&nbsp;({{ category.generateTypes.length }})'></moc-button>
+    </div>
+    <div class='text-center {{ types && types.length ? "hidden" : "" }}'>
+      <p>{{ 'modal.choose_type.not_match' | translate }}</p>
+      <p class='hover:underline text-blue cursor-pointer'
+         (click)='formControl.setValue(undefined)'>{{ 'modal.choose_type.clear_credential' | translate }}</p>
     </div>
     <div class='flex flex-wrap content-start h-5/6 overflow-y-scroll'>
       <div
