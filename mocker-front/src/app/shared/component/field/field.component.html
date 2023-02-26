@@ -2,7 +2,7 @@
   <p *ngIf='label' class='font-medium pl-2.5 mt-4 mb-2'>{{ label | translate }}</p>
   <div class='relative'>
     <input #inputElement
-           [formControl]='formControl'
+           [formControl]='control'
            [placeholder]='placeholder'
            [style]='styles'
            [type]='type'
@@ -10,14 +10,14 @@
            [max]='max'
            [minlength]='minLength'
            [maxlength]='maxLength'
-           class='{{ selfClass }} {{ (isValidated && formControl.invalid) ? "invalid" : "" }} border p-2.5 rounded w-full'/>
+           class='{{ selfClass }} {{ (isValidated && control.invalid) ? "invalid" : "" }} border p-2.5 rounded w-full'/>
     <div (click)='showPasswordChange()'
          *ngIf='isShowEye'
          class='absolute right-3 top-4 cursor-pointer text-lg'>
       <i class='fa-regular fa-eye{{ isShowPassword ? "-slash" : "" }} text-gray-500'></i>
     </div>
   </div>
-  <div *ngIf='isValidated && formControl.invalid'>
-    <moc-error-message-processor [error]='formControl.errors'></moc-error-message-processor>
+  <div *ngIf='isValidated && control.invalid'>
+    <moc-error-message-processor [error]='control.errors'></moc-error-message-processor>
   </div>
 </div>

@@ -1,11 +1,11 @@
 <div id='main' class='view-port-width-standard mx-auto text-sm'>
   <moc-description class='mt-5' [description]='"component.general.introduction" | translate'></moc-description>
-  <moc-table-detail class='mt-16'></moc-table-detail>
+  <moc-table-detail [table]='formGroup.controls.table' class='mt-16'></moc-table-detail>
   <hr class='mt-5'/>
   <div class='flex items-center mt-5' [formGroup]='formGroup'>
     <span class='mr-5'>{{ 'component.general.row' | translate }}</span>
-    <moc-field class='w-32' selfClass='text-right px-5' ngDefaultControl
-               [formControl]='formGroup.controls.rows'></moc-field>
+    <moc-field class='w-32' selfClass='text-right px-5'
+               [control]='formGroup.controls.rows'></moc-field>
     <span class='mx-5'>{{ 'component.general.format' | translate }}</span>
     <moc-action [self]='self' [actions]='supportedFormat'>
       <ng-template #self>
@@ -16,7 +16,7 @@
   </div>
   <hr class='mt-5'/>
   <div class='mt-5 flex'>
-    <moc-button class='w-52' label='component.general.download_data' selfClass='btn-primary'></moc-button>
+    <moc-button (click)='download()' class='w-52' label='component.general.download_data' selfClass='btn-primary'></moc-button>
     <moc-button class='w-52 ml-3' label='component.general.preview'
                 selfClass='px-5 btn-light'></moc-button>
     <moc-button class='w-52 ml-3' label='component.general.save_this_table'

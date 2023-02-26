@@ -13,7 +13,7 @@ import {
   TitleCasePipe,
   UpperCasePipe
 } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLinkWithHref } from '@angular/router';
 import { FieldComponent } from '@shared/component/field/field.component';
 import {
@@ -69,7 +69,8 @@ import { TableComponent } from '@shared/component/table/table.component';
     NgSwitchCase,
     NgTemplateOutlet,
     NgStyle,
-    NgClass
+    NgClass,
+    FormsModule
   ],
   exports: [
     FieldComponent,

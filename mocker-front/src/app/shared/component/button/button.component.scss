@@ -1,3 +1,5 @@
+@import 'variable-color';
+
 #main {
   .btn-primary {
     @apply text-white;
@@ -7,4 +9,9 @@
   .btn-light {
     @apply bg-white border text-black;
   }
+
+  .invalid {
+    border: 1px solid $invalid-color !important;
+  }
+
 }

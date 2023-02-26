@@ -2,20 +2,17 @@
   <div class='bg-white rounded drop-shadow-2xl text-sm text-center p-10' [formGroup]='formGroup'>
     <img src='assets/png/logo.png' alt='logo' class='w-44 mx-auto'/>
     <p class='font-bold mt-5 text-primary-bold'>{{ 'component.sign_up.title' | translate }}</p>
-    <moc-field ngDefaultControl
-               [placeholder]='"component.sign_up.email_address_placeholder" | translate' type='email'
+    <moc-field [placeholder]='"component.sign_up.email_address_placeholder" | translate' type='email'
                selfClass='{{ isExistedUsername ? "invalid" : "" }} mt-2'
-               [formControl]='formGroup.controls.username'></moc-field>
+               [control]='formGroup.controls.username'></moc-field>
     <p *ngIf='isExistedUsername'
        class='text-red text-center mt-2'>{{ 'component.sign_up.exist_username' | translate }}</p>
-    <moc-field ngDefaultControl
-               [placeholder]='"component.sign_up.password_placeholder" | translate' type='password'
+    <moc-field [placeholder]='"component.sign_up.password_placeholder" | translate' type='password'
                selfClass='mt-2'
-               [formControl]='formGroup.controls.password'></moc-field>
-    <moc-field ngDefaultControl
-               [placeholder]='"component.sign_up.confirm_password_placeholder" | translate' type='password'
+               [control]='formGroup.controls.password'></moc-field>
+    <moc-field [placeholder]='"component.sign_up.confirm_password_placeholder" | translate' type='password'
                selfClass='{{ isPasswordNotMatch ? "invalid" : "" }} mt-2'
-               [formControl]='formGroup.controls.confirmPassword'></moc-field>
+               [control]='formGroup.controls.confirmPassword'></moc-field>
     <p *ngIf='isPasswordNotMatch'
        class='text-red text-center mt-2'>{{ 'component.sign_up.password_not_match' | translate }}</p>
     <p class='mt-4 text-gray-500 text-xs'>{{ 'component.sign_up.accept_terms_and_conditions' | translate }}</p>
