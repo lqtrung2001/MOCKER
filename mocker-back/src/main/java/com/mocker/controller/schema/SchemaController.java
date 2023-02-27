@@ -1,7 +1,6 @@
-package com.mocker.controller;
+package com.mocker.controller.schema;
 
 import com.mocker.api.SchemaApi;
-import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.SchemaDto;
 import com.mocker.service.SchemaService;
 import lombok.RequiredArgsConstructor;
@@ -22,15 +21,18 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/api/v1")
 public class SchemaController implements SchemaApi {
 
-    private final ApiAbstractMapper apiAbstractMapper;
+    private final ApiSchemaMapper apiSchemaMapper;
     private final SchemaService schemaService;
 
     @Override
-    public ResponseEntity<List<SchemaDto>> getSchemasByProject(UUID projectId) {
-//        throw new ApiRequestException("Sai roi");
+    public ResponseEntity<List<SchemaDto>> getSchemasWithAccess() {
+        return ResponseEntity.ok(apiSchemaMapper.map(schemaService.getSchemasWithAccess()));
+    }
 
+    @Override
+    public ResponseEntity<List<SchemaDto>> getSchemasByProject(UUID projectId) {
         return ResponseEntity.ok(schemaService.getSchemasByProject(projectId).stream()
-                .map(apiAbstractMapper::map).collect(Collectors.toList()));
+                .map(apiSchemaMapper::map).collect(Collectors.toList()));
     }
 
     @Override
@@ -40,11 +42,11 @@ public class SchemaController implements SchemaApi {
 
     @Override
     public ResponseEntity<UUID> saveOrUpdateSchema(SchemaDto schemaDto) {
-        return ResponseEntity.ok(schemaService.saveOrUpdate(apiAbstractMapper.map(schemaDto)));
+        return ResponseEntity.ok(schemaService.saveOrUpdate(apiSchemaMapper.map(schemaDto)));
     }
 
     @Override
     public ResponseEntity<SchemaDto> getSchema(UUID id) {
-        return ResponseEntity.ok(apiAbstractMapper.map(schemaService.getSchema(id)));
+        return ResponseEntity.ok(apiSchemaMapper.map(schemaService.getSchema(id)));
     }
 }

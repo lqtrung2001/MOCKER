@@ -2,6 +2,7 @@ package com.mocker.service;
 
 import com.mocker.domain.model.entity.Schema;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,4 +24,6 @@ public interface SchemaService {
     UUID delete(UUID id);
 
     Schema getSchema(UUID id);
+
+    List<Schema> getSchemasWithAccess();
 }
