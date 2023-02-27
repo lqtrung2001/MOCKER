@@ -13,4 +13,5 @@ public interface SchemaRepositoryCustom {
 
     List<Schema> getSchemasByProject(UUID projectId);
 
+    List<Schema> getSchemasWithAccess(UUID userId);
 }

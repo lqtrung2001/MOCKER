@@ -1,5 +1,6 @@
 package com.mocker.service.impl;
 
+import com.mocker.configuration.security.ApplicationContextHolder;
 import com.mocker.domain.model.entity.Schema;
 import com.mocker.domain.model.entity.Table;
 import com.mocker.repository.SchemaRepository;
@@ -23,6 +24,8 @@ public class SchemaServiceImpl implements SchemaService {
     private final SchemaRepository schemaRepository;
     private final TableService tableService;
     private final TableRepository tableRepository;
+    private final ApplicationContextHolder applicationContextHolder;
+
 
     @Override
     public List<Schema> getSchemasByProject(UUID projectId) {
@@ -37,6 +40,12 @@ public class SchemaServiceImpl implements SchemaService {
     @Override
     public Schema getSchema(UUID id) {
         return schemaRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public List<Schema> getSchemasWithAccess() {
+        UUID authId = applicationContextHolder.getCurrentUser().getId();
+        return schemaRepository.getSchemasWithAccess(authId);
     }
 
     @Override
