@@ -70,6 +70,7 @@
       "introduction": "Need some mock data to test your app? Mocker lets you generate up to 1,000 rows of realistic test data in CSV, JSON, SQL, and Excel formats.",
       "row": "#Rows:",
       "format": "Format:",
+      "table_name": "Table Name",
       "download_data": "DOWNLOAD DATA",
       "preview": "PREVIEW",
       "save_this_table": "SAVE THIS TABLE",

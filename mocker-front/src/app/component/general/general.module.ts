@@ -6,6 +6,7 @@ import { LayoutModule } from '@shared/layout/layout.module';
 import { SharedModule } from '@shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 /**
  * @author Do Quoc Viet
@@ -23,7 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LayoutModule,
     SharedModule,
     TranslateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   providers: []
 })
