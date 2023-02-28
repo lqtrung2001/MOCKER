@@ -43,12 +43,12 @@ export class ChooseTypeModal extends AbstractModal implements OnInit {
         if (this.options?.isGenerateType) {
           this.categories = this.categories.filter((category: Category): boolean =>
             !!category.generateTypes
-              .filter((generateType: GenerateType) => generateType.code.includes(value))
+              .filter((generateType: GenerateType) => generateType.code.toUpperCase().includes(value.toUpperCase()))
               .length);
           this.types = this.categories[0]?.generateTypes;
           this.currentCategory = undefined;
         } else {
-          this.types = this.appConfigService.sqlTypes.filter((sqlType: SQLType): boolean => sqlType.code.includes(value));
+          this.types = this.appConfigService.sqlTypes.filter((sqlType: SQLType): boolean => sqlType.code.toUpperCase().includes(value.toUpperCase()));
         }
       } else {
         // reset value

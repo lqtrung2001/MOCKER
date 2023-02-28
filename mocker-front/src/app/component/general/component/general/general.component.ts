@@ -19,6 +19,7 @@ type Controls = {
   }>
   rows: FormControl;
   format: FormControl;
+  tableName: FormControl;
 }
 
 @Component({
@@ -39,9 +40,11 @@ export class GeneralComponent extends AbstractComponent {
         fields: this.formBuilder.array<FormGroup<Controls>>([])
       }),
       rows: this.formBuilder.control(1, [Validators.required]),
-      format: this.formBuilder.control('SQL', [Validators.required])
+      format: this.formBuilder.control('SQL', [Validators.required]),
+      tableName: this.formBuilder.control('Mocker', [])
     });
-    const tableConfigStorage = JSON.parse(localStorage.getItem(LocalStorageConstant.TABLE_CONFIG) || '');
+    // TODO check JSON.parse method
+    const tableConfigStorage = JSON.parse(localStorage.getItem(LocalStorageConstant.TABLE_CONFIG) || 'false');
     if (tableConfigStorage) {
       this.formGroup.patchValue(tableConfigStorage);
       const { table } = tableConfigStorage;
@@ -77,6 +80,7 @@ export class GeneralComponent extends AbstractComponent {
       label: 'SQL',
       click: () => {
         this.formGroup.controls.format.setValue('SQL');
+        this.formGroup.controls.tableName.setValidators([Validators.required]);
       }
     }, {
       id: '2',
@@ -84,6 +88,7 @@ export class GeneralComponent extends AbstractComponent {
       label: 'JSON',
       click: () => {
         this.formGroup.controls.format.setValue('JSON');
+        this.formGroup.controls.tableName.setValidators([Validators.required]);
       }
     }, {
       id: '3',
@@ -91,6 +96,7 @@ export class GeneralComponent extends AbstractComponent {
       label: 'XML',
       click: () => {
         this.formGroup.controls.format.setValue('XML');
+        this.formGroup.controls.tableName.setValidators([Validators.required]);
       }
     }, {
       id: '4',
@@ -98,8 +104,12 @@ export class GeneralComponent extends AbstractComponent {
       label: 'CSV',
       click: () => {
         this.formGroup.controls.format.setValue('CSV');
+        this.formGroup.controls.tableName.setValidators([]);
       }
     }];
   }
 
+  get isShowTableNameField(): boolean {
+    return this.formGroup.controls.format.value !== 'CSV';
+  }
 }
