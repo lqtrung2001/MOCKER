@@ -556,7 +556,7 @@ paths:
         schema:
           type: number
     post:
-      operationId: showGenerate
+      operationId: generateWithTable
       tags:
         - Generate
       description: Show generate random row in table
