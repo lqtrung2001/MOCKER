@@ -6,12 +6,9 @@ import com.querydsl.jpa.impl.JPAQuery;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import static com.mocker.domain.model.entity.QGroup.group;
 import static com.mocker.domain.model.entity.QGroupMember.groupMember;
 
 /**

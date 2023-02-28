@@ -1,6 +1,7 @@
 package com.mocker.repository.customize.impl;
 
-import com.mocker.domain.model.entity.*;
+import com.mocker.domain.model.entity.Category;
+import com.mocker.domain.model.entity.QGenerateType;
 import com.mocker.repository.customize.CategoryRepositoryCustom;
 import com.querydsl.jpa.impl.JPAQuery;
 
@@ -8,6 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
+import static com.mocker.domain.model.entity.QCategory.category;
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -21,9 +25,9 @@ public class CategoryRepositoryImpl implements CategoryRepositoryCustom {
     @Override
     public Integer getGenerateTypesCount(UUID id) {
         return new JPAQuery<Integer>(entityManager)
-                .from(QCategory.category)
-                .where(QCategory.category.id.eq(id))
-                .innerJoin(QCategory.category.generateTypes, QGenerateType.generateType)
+                .from(category)
+                .where(category.id.eq(id))
+                .innerJoin(category.generateTypes, QGenerateType.generateType)
                 .fetch()
                 .size();
     }
@@ -31,25 +35,24 @@ public class CategoryRepositoryImpl implements CategoryRepositoryCustom {
     @Override
     public Category getCategoryHasGenerateTypes(UUID id) {
         return new JPAQuery<Category>(entityManager)
-                .from(QCategory.category)
-                .where(QCategory.category.id.eq(id))
-                .innerJoin(QCategory.category.generateTypes, QGenerateType.generateType)
+                .from(category)
+                .where(category.id.eq(id))
+                .innerJoin(category.generateTypes, QGenerateType.generateType)
                 .fetchJoin()
                 .fetchFirst();
     }
 
     @Override
     public List<Category> getCategoriesFetchGenerateTypes() {
-        List<Category> categories = new JPAQuery<Category>(entityManager)
-                .from(QCategory.category)
-                .fetch();
-        categories.forEach(category ->
-                category.getGenerateTypes().forEach(generateType ->
-                        generateType.setSources(new JPAQuery<Source>(entityManager)
-                                .from(QSource.source)
-                                .where(QSource.source.generateType.id.eq(generateType.getId()))
-                                .limit(3)
-                                .fetch())));
-        return categories;
+        // TODO: check fetchAll() method
+        return new JPAQuery<Category>(entityManager)
+                .from(category)
+                .fetchAll()
+                .fetch()
+                .stream()
+                .peek(category -> category.setGenerateTypes(category.getGenerateTypes().stream()
+                        .peek(generateType -> generateType.setSources(generateType.getSources().stream()
+                                .limit(3).collect(Collectors.toList()))).collect(Collectors.toList()))
+                ).collect(Collectors.toList());
     }
 }
