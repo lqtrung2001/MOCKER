@@ -32,7 +32,8 @@ public class GenerateController implements GenerateApi {
     }
 
     @Override
-    public ResponseEntity<List<Map<String, String>>> showGenerate(BigDecimal row, TableDto tableDto) {
+    public ResponseEntity<List<Map<String, String>>> generateWithTable(BigDecimal row, TableDto tableDto) {
         return ResponseEntity.ok(generateService.generateWithTable(apiAbstractMapper.map(tableDto), row.intValue()));
     }
+
 }

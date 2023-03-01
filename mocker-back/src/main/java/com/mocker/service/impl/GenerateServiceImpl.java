@@ -46,7 +46,11 @@ public class GenerateServiceImpl implements GenerateService {
             Map<String, String> map = new HashMap<>();
             fields.forEach(field -> {
                 int index = random.nextInt(0, field.getGenerateType().getSources().size());
-                map.put(field.getName(), field.getGenerateType().getSources().get(index).getValue());
+                if (random.nextInt(0, 100) > field.getOption().getBlank()) {
+                    map.put(field.getName(), field.getGenerateType().getSources().get(index).getValue());
+                } else {
+                    map.put(field.getName(), null);
+                }
             });
             result.add(map);
         }
