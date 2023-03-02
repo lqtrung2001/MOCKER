@@ -6,6 +6,8 @@ import { GenerateService } from '@core/service/generate.service';
 import { Table } from '@core/model/table';
 import { Field } from '@core/model/field';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';
+import { ConverterService } from '@app/core/service/utility/converter.service';
+import * as FileSaver from 'file-saver';
 
 /**
  * @author Do Quoc Viet
@@ -32,7 +34,8 @@ export class GeneralComponent extends AbstractComponent {
 
   constructor(
     injector: Injector,
-    private generateService: GenerateService
+    private generateService: GenerateService,
+    private converterService: ConverterService
   ) {
     super(injector);
     this.formGroup = this.formBuilder.group({
@@ -68,9 +71,28 @@ export class GeneralComponent extends AbstractComponent {
     }
     localStorage.setItem(LocalStorageConstant.TABLE_CONFIG, JSON.stringify(this.formGroup.getRawValue()));
     const table: Table = this.formGroup.controls.table.getRawValue() as Table;
-    this.generateService.generateWithTable(table, this.formGroup.controls.rows.value).subscribe((data: any[]): void => {
-      console.log(data);
-    });
+    this.generateService.generateWithTable(table, this.formGroup.controls.rows.value)
+      .subscribe((data: any[]): void => {
+        let metadata: any[];
+        const tableName: string = this.formGroup.controls.tableName.value;
+        const format: string = this.formGroup.controls.format.value;
+        switch (format) {
+          case 'SQL':
+            metadata = this.converterService.toSQL(data, tableName);
+            break;
+          case 'JSON':
+            metadata = this.converterService.toJSON(data, tableName);
+            break;
+          case 'XML':
+            metadata = this.converterService.toXML(data, tableName);
+            break;
+          case 'CSV':
+            metadata = this.converterService.toCSV(data);
+            break;
+        }
+        // @ts-ignore
+        FileSaver.saveAs(new File(metadata, `${tableName || 'Mocker'}.${format.toLowerCase()}`, { type: 'text/plain;charset=utf-8' }));
+      });
   }
 
   get supportedFormat(): Action[] {

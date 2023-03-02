@@ -1,32 +1,27 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Category } from '@core/model/category';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { environment } from '@environment/environment';
+import { AppHttpService } from '@core/service/app-http.service';
+import { HttpMethod } from '@core/class/enum/http-method';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
+ * @class CategoryService
  */
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
-
+export class CategoryService extends AppHttpService<Category> {
   constructor(
-    private httpClient: HttpClient
+    injector: Injector
   ) {
+    super(injector);
   }
 
   getCategories(): Observable<Category[]> {
-    return this.httpClient.get<Category[]>(`${environment.API_URL}/category`);
+    return this.request<Category[]>(HttpMethod.GET, `${environment.API_URL}/category`);
   }
 
-  getCategory(id: string): Observable<Category> {
-    return this.httpClient.get<Category>(`${environment.API_URL}/category/${id}`);
-  }
-
-  getGenerateTypesCount(id: string): Observable<number> {
-    return this.httpClient.get<number>(`${environment.API_URL}/category/${id}/generate-types/count`);
-  }
 }

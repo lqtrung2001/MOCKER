@@ -18,7 +18,6 @@ export interface Action {
   styleUrls: ['action.component.scss']
 })
 export class ActionComponent extends AbstractComponent implements AfterViewInit {
-  @Input() self!: TemplateRef<any>;
   @Input() header: TemplateRef<any>;
   @Input() footer: TemplateRef<any>;
   @Input() behavior: 'click' | 'hover' = 'click';

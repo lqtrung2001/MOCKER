@@ -1,24 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SQLType } from '@core/model/sql-type';
-import { HttpClient } from '@angular/common/http';
 import { environment } from '@environment/environment';
+import { AppHttpService } from '@core/service/app-http.service';
+import { HttpMethod } from '@core/class/enum/http-method';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
+ * @class SQLTypeService
  */
 
 @Injectable({
   providedIn: 'root'
 })
-export class SQLTypeService {
-
+export class SQLTypeService extends AppHttpService<SQLType> {
   constructor(
-    private httpClient: HttpClient
+    injector: Injector
   ) {
+    super(injector);
   }
 
   getSQLTypes(): Observable<SQLType[]> {
-    return this.httpClient.get<SQLType[]>(`${environment.API_URL}/sql-type`);
+    return this.request<SQLType[]>(HttpMethod.GET, `${environment.API_URL}/sql-type`);
   }
 }

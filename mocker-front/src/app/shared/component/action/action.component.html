@@ -1,6 +1,6 @@
 <div id='main' class='relative' (mouseleave)='isShown=false'>
   <div #dock (click)='selfTrigger()' (mouseenter)='selfTrigger("hover")'>
-    <ng-container [ngTemplateOutlet]='self'></ng-container>
+    <ng-content></ng-content>
   </div>
   <div #popup
        class='{{ isShown ? "" : "hidden" }} bg-white absolute rounded overflow-hidden w-72 z-10 drop-shadow-2xl'>
