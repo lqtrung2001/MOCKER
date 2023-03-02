@@ -32,6 +32,11 @@ import { ChangeLogComponent } from '@shared/component/change-log/change-log.comp
 import { DialogDirective } from '@shared/directive/dialog.directive';
 import { InstructionComponent } from '@shared/component/instruction/instruction.component';
 import { TableComponent } from '@shared/component/table/table.component';
+import { PreviewModal } from '@shared/modal/preview/preview.modal';
+import { CsvPipe } from '@shared/pipe/csv.pipe';
+import { SqlPipe } from '@shared/pipe/sql.pipe';
+import { XmlPipe } from '@shared/pipe/xml.pipe';
+import { MocJsonPipe } from '@shared/pipe/moc-json.pipe';
 
 /**
  * @author Do Quoc Viet
@@ -53,7 +58,12 @@ import { TableComponent } from '@shared/component/table/table.component';
     ChangeLogComponent,
     DialogDirective,
     InstructionComponent,
-    TableComponent
+    TableComponent,
+    PreviewModal,
+    CsvPipe,
+    SqlPipe,
+    XmlPipe,
+    MocJsonPipe
   ],
   imports: [
     KeyValuePipe,

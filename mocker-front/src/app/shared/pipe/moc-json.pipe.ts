@@ -4,21 +4,21 @@ import { Strings } from '@shared/util/strings';
 
 /**
  * @author Do Quoc Viet
- * @class XmlPipe
+ * @class MocJsonPipe
  * @date 02/03/2023
  */
 
 @Pipe({
-  name: 'xml'
+  name: 'mocJson'
 })
-export class XmlPipe implements PipeTransform {
+export class MocJsonPipe implements PipeTransform {
   constructor(
     private converterService: ConverterService
   ) {
   }
 
   transform(arr: string[], tableName: string): string {
-    return this.converterService.toXML(arr, tableName).join(Strings.EMPTY);
+    return this.converterService.toJSON(arr, tableName).join(Strings.EMPTY);
   }
-}
 
+}

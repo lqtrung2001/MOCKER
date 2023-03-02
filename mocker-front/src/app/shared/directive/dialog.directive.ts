@@ -3,6 +3,8 @@ import { Modal } from '@shared/modal/modal-service/model/modal.model';
 
 /**
  * @author Do Quoc Viet
+ * @class DialogDirective
+ * @date 03/03/2023
  */
 
 @Directive({
@@ -40,13 +42,8 @@ export class DialogDirective implements AfterContentInit {
   }
 
   isDescendant(parent: HTMLElement, child: HTMLElement): boolean {
-    while (child !== null) {
-      if (child === parent) {
-        return true;
-      }
-      child = (child.parentNode) as HTMLElement;
-    }
-    return false;
+    const { x, y, width, height } = child.getBoundingClientRect();
+    return !!x && !!y && !!width && !!height || !x && !y && !width && !height;
   }
 
 }

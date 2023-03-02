@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mockez-front": {
+    "mocker-front": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/mockez-front",
+            "allowedCommonJsDependencies": ["file-saver"],
+            "outputPath": "dist/mocker-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -71,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "mockez-front:build:production"
+              "browserTarget": "mocker-front:build:production"
             },
             "development": {
-              "browserTarget": "mockez-front:build:development"
+              "browserTarget": "mocker-front:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "mockez-front:build"
+            "browserTarget": "mocker-front:build"
           }
         },
         "test": {

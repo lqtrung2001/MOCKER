@@ -50,7 +50,7 @@ export class ConverterService {
     ];
   }
 
-  variableToXml(variable: any, arrayItemPropertyName: any = null): string {
+  private variableToXml(variable: any, arrayItemPropertyName: any = null): string {
     if (Array.isArray(variable)) {
       return `<${arrayItemPropertyName}>${variable.reduce((xml, propertyValue) => {
         return `${xml}\n\t<row>\n\t\t${(this.variableToXml(propertyValue))}</row>`;

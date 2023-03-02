@@ -1,5 +1,6 @@
 import { Component, Injector, Input, TemplateRef } from '@angular/core';
 import { AbstractComponent } from '@core/class/abstract.component';
+import { AbstractSharedComponent } from '@shared/component/abstract-shared/abstract-shared.component';
 
 /**
  * @author Do Quoc Viet
@@ -17,8 +18,7 @@ export interface Tab {
   templateUrl: 'tab.component.html',
   styleUrls: ['tab.component.scss']
 })
-export class TabComponent extends AbstractComponent {
-  @Input() class: string;
+export class TabComponent extends AbstractSharedComponent {
   @Input() tabs: Tab[] = [];
   current: number;
 

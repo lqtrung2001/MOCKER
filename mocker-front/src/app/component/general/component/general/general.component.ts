@@ -8,6 +8,7 @@ import { Field } from '@core/model/field';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 import { ConverterService } from '@app/core/service/utility/converter.service';
 import * as FileSaver from 'file-saver';
+import { PreviewModal, PreviewModalOptions } from '@shared/modal/preview/preview.modal';
 
 /**
  * @author Do Quoc Viet
@@ -31,6 +32,7 @@ type Controls = {
 })
 export class GeneralComponent extends AbstractComponent {
   formGroup: FormGroup<Controls>;
+  data: any[];
 
   constructor(
     injector: Injector,
@@ -46,6 +48,9 @@ export class GeneralComponent extends AbstractComponent {
       format: this.formBuilder.control('SQL', [Validators.required]),
       tableName: this.formBuilder.control('Mocker', [])
     });
+    this.formGroup.valueChanges.subscribe(() => {
+      this.data = [];
+    });
     // TODO check JSON.parse method
     const tableConfigStorage = JSON.parse(localStorage.getItem(LocalStorageConstant.TABLE_CONFIG) || 'false');
     if (tableConfigStorage) {
@@ -57,7 +62,7 @@ export class GeneralComponent extends AbstractComponent {
           generateType: this.formBuilder.control(field.generateType, [Validators.required]),
           sqlType: this.formBuilder.control(field.sqlType, []),
           option: this.formBuilder.group({
-            blank: this.formBuilder.control(field.option?.blank, [])
+            blank: this.formBuilder.control(field.option?.blank || 0, [])
           }, [])
         }));
       });
@@ -71,28 +76,67 @@ export class GeneralComponent extends AbstractComponent {
     }
     localStorage.setItem(LocalStorageConstant.TABLE_CONFIG, JSON.stringify(this.formGroup.getRawValue()));
     const table: Table = this.formGroup.controls.table.getRawValue() as Table;
-    this.generateService.generateWithTable(table, this.formGroup.controls.rows.value)
-      .subscribe((data: any[]): void => {
-        let metadata: any[];
-        const tableName: string = this.formGroup.controls.tableName.value;
-        const format: string = this.formGroup.controls.format.value;
-        switch (format) {
-          case 'SQL':
-            metadata = this.converterService.toSQL(data, tableName);
-            break;
-          case 'JSON':
-            metadata = this.converterService.toJSON(data, tableName);
-            break;
-          case 'XML':
-            metadata = this.converterService.toXML(data, tableName);
-            break;
-          case 'CSV':
-            metadata = this.converterService.toCSV(data);
-            break;
-        }
-        // @ts-ignore
-        FileSaver.saveAs(new File(metadata, `${tableName || 'Mocker'}.${format.toLowerCase()}`, { type: 'text/plain;charset=utf-8' }));
-      });
+    if (!this.data.length) {
+      this.generateService.generateWithTable(table, this.formGroup.controls.rows.value)
+        .subscribe((data: any[]): void => {
+          this.data = data;
+          this.startDownload();
+        });
+    } else {
+      this.startDownload();
+    }
+  }
+
+  startDownload(): void {
+    const tableName: string = this.formGroup.controls.tableName.value;
+    const format: string = this.formGroup.controls.format.value;
+    let data: any[] = this.data;
+    switch (format) {
+      case 'SQL':
+        data = this.converterService.toSQL(data, tableName);
+        break;
+      case 'JSON':
+        data = this.converterService.toJSON(data, tableName);
+        break;
+      case 'XML':
+        data = this.converterService.toXML(data, tableName);
+        break;
+      case 'CSV':
+        data = this.converterService.toCSV(data);
+        break;
+    }
+    FileSaver.saveAs(new File(data, `${tableName || 'Mocker'}.${format.toLowerCase()}`, { type: 'text/plain;charset=utf-8' }));
+  }
+
+  preview(): void {
+    this.formGroup.markAllAsTouched();
+    if (this.formGroup.invalid) {
+      return;
+    }
+    localStorage.setItem(LocalStorageConstant.TABLE_CONFIG, JSON.stringify(this.formGroup.getRawValue()));
+    const table: Table = this.formGroup.controls.table.getRawValue() as Table;
+    const format = this.formGroup.controls.format.value;
+    if (!this.data.length) {
+      this.generateService.generateWithTable(table, this.formGroup.controls.rows.value)
+        .subscribe((data: any[]): void => {
+          this.data = data;
+          const options: PreviewModalOptions = {
+            data,
+            tableName: this.formGroup.controls.tableName.value,
+            format,
+            download: this.download.bind(this)
+          };
+          this.modalService.open(PreviewModal, options);
+        });
+    } else {
+      const options: PreviewModalOptions = {
+        data: this.data,
+        tableName: this.formGroup.controls.tableName.value,
+        format,
+        download: this.download.bind(this)
+      };
+      this.modalService.open(PreviewModal, options);
+    }
   }
 
   get supportedFormat(): Action[] {
