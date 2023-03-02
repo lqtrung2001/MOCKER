@@ -1,22 +1,24 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ConverterService } from '@core/util/converter.service';
+import { ConverterService } from '@core/service/utility/converter.service';
+import { Strings } from '@shared/util/strings';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
+ * @class SqlPipe
+ * @date 02/03/2023
  */
 
 @Pipe({
   name: 'sql'
 })
 export class SqlPipe implements PipeTransform {
-
   constructor(
     private converterService: ConverterService
   ) {
   }
 
-  transform(value: string[], tableName: string): string {
-    return this.converterService.JSONArrayToSQL(tableName, value).join('');
+  transform(array: string[], tableName: string): string {
+    return this.converterService.toSQL(array, tableName).join(Strings.EMPTY);
   }
 
 }

@@ -52,7 +52,7 @@ export class TableDetailComponent extends AbstractComponent implements OnInit {
       generateType: this.formBuilder.control(undefined, [Validators.required]),
       sqlType: this.formBuilder.control(undefined, []),
       option: this.formBuilder.group({
-        blank: this.formBuilder.control(undefined, [])
+        blank: this.formBuilder.control(0, [])
       }, [])
     });
     this.formGroup.controls.fields.push(field);

@@ -1,0 +1,14 @@
+#main {
+  > div {
+    width: 1200px;
+    height: 800px;
+  }
+
+  .h-150 {
+    height: 600px;
+  }
+
+  table tr:nth-child(odd) > td {
+    @apply bg-gray;
+  }
+}

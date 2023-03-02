@@ -140,6 +140,12 @@
       "find_placeholder": "Find...",
       "not_match": "No any types match with current credential.",
       "clear_credential": "Clear credential"
+    },
+    "preview": {
+      "title": "Preview",
+      "show_first_100_rows": "Show first 100 rows",
+      "download_data": "DOWNLOAD DATA",
+      "close": "CLOSE"
     }
   }
 }
