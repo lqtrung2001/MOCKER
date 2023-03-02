@@ -43,7 +43,7 @@ export class AppHttpService<Type> implements HttpInterceptor {
 
   // GET method
   get(url: string, headers?: HttpHeaders): Observable<Type> {
-    this.appConfigService.loading = true;
+    this.appConfigService.loading.setValue(true);
     return this.httpClient.get<Type>(url, { headers })
       .pipe(catchError(this.defaultErrorHandler.bind(this)),
         finalize(this.finalizeRequest.bind(this)));
@@ -51,7 +51,7 @@ export class AppHttpService<Type> implements HttpInterceptor {
 
   // POST method
   post(url: string, body?: any, headers?: HttpHeaders): Observable<Type> {
-    this.appConfigService.loading = true;
+    this.appConfigService.loading.setValue(true);
     return this.httpClient.post<Type>(url, body, { headers })
       .pipe(catchError(this.defaultErrorHandler.bind(this)),
         finalize(this.finalizeRequest.bind(this)));
@@ -59,7 +59,7 @@ export class AppHttpService<Type> implements HttpInterceptor {
 
   // PUT method
   put(url: string, body?: any, headers?: HttpHeaders): Observable<Type> {
-    this.appConfigService.loading = true;
+    this.appConfigService.loading.setValue(true);
     return this.httpClient.put<Type>(url, body, { headers })
       .pipe(catchError(this.defaultErrorHandler.bind(this)),
         finalize(this.finalizeRequest.bind(this)));
@@ -67,7 +67,7 @@ export class AppHttpService<Type> implements HttpInterceptor {
 
   // DELETE method
   delete(url: string, headers?: HttpHeaders): Observable<Type> {
-    this.appConfigService.loading = true;
+    this.appConfigService.loading.setValue(true);
     return this.httpClient.delete<Type>(url, { headers })
       .pipe(catchError(this.defaultErrorHandler.bind(this)),
         finalize(this.finalizeRequest.bind(this)));
@@ -75,7 +75,7 @@ export class AppHttpService<Type> implements HttpInterceptor {
 
   // REQUEST
   request<OtherType>(method: HttpMethod, url: string, body?: any, headers?: HttpHeaders): Observable<OtherType> {
-    this.appConfigService.loading = true;
+    this.appConfigService.loading.setValue(true);
     return this.httpClient.request<OtherType>(method, url, {
       body,
       headers
@@ -99,7 +99,7 @@ export class AppHttpService<Type> implements HttpInterceptor {
 
   finalizeRequest(): void {
     if (this.appConfigService.loading) {
-      this.appConfigService.loading = false;
+      this.appConfigService.loading.setValue(false);
     }
   }
 

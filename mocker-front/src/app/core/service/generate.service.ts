@@ -1,34 +1,30 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Field } from '../model/field';
 import { environment } from '@environment/environment';
 import { Table } from '@core/model/table';
+import { AppHttpService } from '@core/service/app-http.service';
+import { HttpMethod } from '@core/class/enum/http-method';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
+ * @class GenerateService
  */
-
-export interface GenerateReq {
-  row: number;
-  fields: Field[];
-}
 
 @Injectable({
   providedIn: 'root'
 })
-export class GenerateService {
-
+export class GenerateService extends AppHttpService<any> {
   constructor(
-    private httpClient: HttpClient
+    injector: Injector
   ) {
+    super(injector);
   }
 
-  generate(tableId: string, row: number): Observable<any[]> {
-    return this.httpClient.post<any[]>(`${environment.API_URL}/generate/${tableId}`, row);
+  generateWithTableId(id: string, row: number): Observable<any[]> {
+    return this.request<any[]>(HttpMethod.POST, `${environment.API_URL}/generate/${id}`, row);
   }
 
   generateWithTable(table: Table, row: number): Observable<any[]> {
-    return this.httpClient.post<any[]>(`${environment.API_URL}/generate?row=${row}`, table);
+    return this.request<any[]>(HttpMethod.POST, `${environment.API_URL}/generate?row=${row}`, table);
   }
 }
