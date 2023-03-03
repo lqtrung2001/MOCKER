@@ -1,7 +1,7 @@
 <div id='main' class='w-screen h-screen center-box'>
   <div class='bg-white rounded drop-shadow-2xl text-sm text-center p-10' [formGroup]='formGroup'>
     <img src='assets/png/logo.png' alt='logo' class='w-44 mx-auto'/>
-    <p class='font-bold mt-5 text-primary-bold'>{{ 'component.sign_up.title' | translate }}</p>
+    <p class='font-bold mt-5 text-primary-solid'>{{ 'component.sign_up.title' | translate }}</p>
     <moc-field [placeholder]='"component.sign_up.email_address_placeholder" | translate' type='email'
                selfClass='{{ isExistedUsername ? "invalid" : "" }} mt-2'
                [control]='formGroup.controls.username'></moc-field>

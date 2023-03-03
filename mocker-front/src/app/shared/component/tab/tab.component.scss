@@ -4,15 +4,12 @@
 
 #main {
   .tab-hover:hover {
-    @apply relative;
-    color: #4285F4;
+    @apply relative text-blue;
 
     &::after {
-      @apply absolute bottom-0 h-1 rounded-t-md;
+      @apply absolute bottom-0 h-1 rounded-t-md bg-blue w-9/10;
       content: '';
-      width: 90%;
       left: 5%;
-      background-color: #4285F4;
     }
   }
 }
