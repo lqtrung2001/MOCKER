@@ -697,18 +697,10 @@ paths:
           $ref: '#/components/responses/ServerError'
   /schema:
     get:
-      parameters:
-        - in: query
-          name: projectId
-          required: true
-          description: The projectId
-          schema:
-            type: string
-            format: uuid
-      operationId: getSchemasByProject
+      operationId: getSchemas
       tags:
         - Schema
-      description: Return schemas by projectId
+      description: Return schemas
       responses:
         200:
           description: The query is successful
@@ -801,31 +793,6 @@ paths:
               schema:
                 type: string
                 format: uuid
-        400:
-          $ref: '#/components/responses/BadRequest'
-        401:
-          $ref: '#/components/responses/AuthenticationError'
-        403:
-          $ref: '#/components/responses/Unauthorized'
-        404:
-          $ref: '#/components/responses/NotFound'
-        500:
-          $ref: '#/components/responses/ServerError'
-  /schema/user:
-    get:
-      operationId: getSchemasWithAccess
-      tags:
-        - Schema
-      description: Return schema has access
-      responses:
-        200:
-          description: The query is successful
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Schema'
         400:
           $ref: '#/components/responses/BadRequest'
         401:

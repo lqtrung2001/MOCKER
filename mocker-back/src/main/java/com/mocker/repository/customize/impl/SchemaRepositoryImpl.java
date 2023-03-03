@@ -29,7 +29,7 @@ public class SchemaRepositoryImpl implements SchemaRepositoryCustom {
     }
 
     @Override
-    public List<Schema> getSchemasWithAccess(UUID userId) {
+    public List<Schema> getSchemas(UUID userId) {
         return new JPAQuery<Schema>(entityManager)
                 .from(QSchema.schema)
                 .where(QSchema.schema.project.in(new JPAQuery<Project>(entityManager)

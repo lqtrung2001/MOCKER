@@ -1,25 +1,30 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Schema } from '@core/model/schema';
 import { environment } from '@environment/environment';
+import { AppHttpService } from '@core/service/app-http.service';
+import { HttpMethod } from '@core/class/enum/http-method';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 @Injectable({
   providedIn: 'root'
 })
-export class SchemaService {
-
+export class SchemaService extends AppHttpService<Schema> {
   constructor(
-    private httpClient: HttpClient
+    injector: Injector
   ) {
+    super(injector);
   }
 
   getSchemasByProject(projectId: string): Observable<Schema[]> {
     return this.httpClient.get<Schema[]>(`${environment.API_URL}/schema?projectId=${projectId}`);
+  }
+
+  getSchemas(): Observable<Schema[]> {
+    return this.request<Schema[]>(HttpMethod.GET, `${environment.API_URL}/schema`);
   }
 
   saveOrUpdate(schema: Schema): Observable<string> {

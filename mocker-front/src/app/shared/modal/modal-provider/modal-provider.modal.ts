@@ -1,10 +1,16 @@
 import { Injectable } from '@angular/core';
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
-import { DialogModal, DialogModalOptions } from '@shared/modal/modal-provider/dialog/dialog.modal';
+import {
+  DialogModal,
+  DialogModalOptions,
+  DialogModalOptionsCustom
+} from '@shared/modal/modal-provider/dialog/dialog.modal';
 import { Observable } from 'rxjs';
 
 /**
  * @author  Do Quoc Viet
+ * @class ModalProvider
+ * @date 03/03/2023
  */
 
 @Injectable({
@@ -18,36 +24,38 @@ export class ModalProvider {
   }
 
   public showConfirmation(dialogModalOptions: DialogModalOptions): Observable<any> {
-    return this.modalService.open(DialogModal, {
-      ...dialogModalOptions,
-      title: 'Confirmation',
-      btnCancel: true,
-      btnOk: true
-    }).onResult();
+    const options: DialogModalOptionsCustom = {
+      title: 'modal.dialog.confirmation',
+      ...dialogModalOptions
+    };
+    return this.modalService.open(DialogModal, options).onResult();
   }
 
   public showError(dialogModalOptions: DialogModalOptions): Observable<any> {
-    return this.modalService.open(DialogModal, {
+    const options: DialogModalOptionsCustom = {
+      title: 'modal.dialog.error',
       ...dialogModalOptions,
-      title: 'Error',
-      btnOk: true
-    }).onResult();
+      type: 'ERROR'
+    };
+    return this.modalService.open(DialogModal, options).onResult();
   }
 
   public showWarning(dialogModalOptions: DialogModalOptions): Observable<any> {
-    return this.modalService.open(DialogModal, {
+    const options: DialogModalOptionsCustom = {
+      title: 'modal.dialog.warning',
       ...dialogModalOptions,
-      title: 'Warning',
-      btnOk: true
-    }).onResult();
+      type: 'WARNING'
+    };
+    return this.modalService.open(DialogModal, options).onResult();
   }
 
-  public showInformation(message: string): Observable<any> {
-    return this.modalService.open(DialogModal, {
-      body: message,
-      title: 'Information',
-      btnOk: true
-    }).onResult();
+  public showInformation(dialogModalOptions: DialogModalOptions): Observable<any> {
+    const options: DialogModalOptionsCustom = {
+      ...dialogModalOptions,
+      title: 'modal.dialog.information',
+      type: 'INFORMATION'
+    };
+    return this.modalService.open(DialogModal, options).onResult();
   }
 
 }

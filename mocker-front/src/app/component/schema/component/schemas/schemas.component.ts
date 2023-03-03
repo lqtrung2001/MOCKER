@@ -22,7 +22,7 @@ export class SchemasComponent extends AbstractComponent {
     private schemaService: SchemaService
   ) {
     super(injector);
-    this.schemaService.getSchemasByProject('2b2979df-afa5-4f74-b877-9896ee9df605').subscribe((schemas: Schema[]): void => {
+    this.schemaService.getSchemas().subscribe((schemas: Schema[]): void => {
       this.schemas = schemas;
     });
   }

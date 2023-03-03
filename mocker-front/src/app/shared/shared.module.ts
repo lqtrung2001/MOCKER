@@ -29,7 +29,7 @@ import { DateDistancePipe } from '@shared/pipe/date-distance.pipe';
 import { TableDetailComponent } from '@shared/component/table-detail/table-detail.component';
 import { CopyrightComponent } from '@shared/component/copyright/copyright.component';
 import { ChangeLogComponent } from '@shared/component/change-log/change-log.component';
-import { DialogDirective } from '@shared/directive/dialog.directive';
+import { PopupDirective } from '@shared/directive/popup.directive';
 import { InstructionComponent } from '@shared/component/instruction/instruction.component';
 import { TableComponent } from '@shared/component/table/table.component';
 import { PreviewModal } from '@shared/modal/preview/preview.modal';
@@ -56,7 +56,7 @@ import { MocJsonPipe } from '@shared/pipe/moc-json.pipe';
     TableDetailComponent,
     CopyrightComponent,
     ChangeLogComponent,
-    DialogDirective,
+    PopupDirective,
     InstructionComponent,
     TableComponent,
     PreviewModal,
@@ -95,7 +95,7 @@ import { MocJsonPipe } from '@shared/pipe/moc-json.pipe';
     TableDetailComponent,
     CopyrightComponent,
     ChangeLogComponent,
-    DialogDirective,
+    PopupDirective,
     InstructionComponent,
     TableComponent
   ],

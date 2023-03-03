@@ -9,8 +9,9 @@ import { HttpMethod } from '@core/class/enum/http-method';
 import { Strings } from '@shared/util/strings';
 
 /**
- * @author Luong Quoc Trung
  * @author Do Quoc Viet
+ * @class AuthService
+ * @date 03/03/2023
  */
 
 @Injectable({

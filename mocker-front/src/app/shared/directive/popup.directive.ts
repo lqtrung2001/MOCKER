@@ -3,15 +3,16 @@ import { Modal } from '@shared/modal/modal-service/model/modal.model';
 
 /**
  * @author Do Quoc Viet
- * @class DialogDirective
+ * @class PopupDirective
  * @date 03/03/2023
  */
 
 @Directive({
-  selector: '[dialog]'
+  selector: '[popup]'
 })
-export class DialogDirective implements AfterContentInit {
+export class PopupDirective implements AfterContentInit {
   @Input() modal: Modal;
+  @Input() dialog: boolean;
   content: HTMLDivElement;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {
@@ -35,7 +36,7 @@ export class DialogDirective implements AfterContentInit {
 
   closeListenerProcessor(): void {
     this.renderer.listen(this.elementRef.nativeElement, 'click', (event: Event): void => {
-      if (!this.isDescendant(this.content, event.target as HTMLElement)) {
+      if (!this.isDescendant(this.content, event.target as HTMLElement) && !this.dialog) {
         this.modal.close();
       }
     });

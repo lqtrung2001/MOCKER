@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -25,14 +24,8 @@ public class SchemaController implements SchemaApi {
     private final SchemaService schemaService;
 
     @Override
-    public ResponseEntity<List<SchemaDto>> getSchemasWithAccess() {
-        return ResponseEntity.ok(apiSchemaMapper.map(schemaService.getSchemasWithAccess()));
-    }
-
-    @Override
-    public ResponseEntity<List<SchemaDto>> getSchemasByProject(UUID projectId) {
-        return ResponseEntity.ok(schemaService.getSchemasByProject(projectId).stream()
-                .map(apiSchemaMapper::map).collect(Collectors.toList()));
+    public ResponseEntity<List<SchemaDto>> getSchemas() {
+        return ResponseEntity.ok(apiSchemaMapper.map(schemaService.getSchemas()));
     }
 
     @Override
