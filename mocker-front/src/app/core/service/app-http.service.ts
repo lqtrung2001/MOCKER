@@ -21,6 +21,8 @@ import { HttpHeaderConstant } from '@core/constant/http-header.constant';
 
 /**
  * @author Do Quoc Viet
+ * @class AppHttpService
+ * @date 03/03/2023
  */
 
 @Injectable({

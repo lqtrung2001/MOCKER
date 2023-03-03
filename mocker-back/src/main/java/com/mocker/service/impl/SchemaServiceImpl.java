@@ -4,7 +4,6 @@ import com.mocker.configuration.security.ApplicationContextHolder;
 import com.mocker.domain.model.entity.Schema;
 import com.mocker.domain.model.entity.Table;
 import com.mocker.repository.SchemaRepository;
-import com.mocker.repository.TableRepository;
 import com.mocker.service.SchemaService;
 import com.mocker.service.TableService;
 import lombok.RequiredArgsConstructor;
@@ -14,16 +13,14 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
  */
 
 @Service
 @RequiredArgsConstructor
 public class SchemaServiceImpl implements SchemaService {
-
     private final SchemaRepository schemaRepository;
     private final TableService tableService;
-    private final TableRepository tableRepository;
     private final ApplicationContextHolder applicationContextHolder;
 
 
@@ -43,9 +40,8 @@ public class SchemaServiceImpl implements SchemaService {
     }
 
     @Override
-    public List<Schema> getSchemasWithAccess() {
-        UUID authId = applicationContextHolder.getCurrentUser().getId();
-        return schemaRepository.getSchemasWithAccess(authId);
+    public List<Schema> getSchemas() {
+        return schemaRepository.getSchemas(applicationContextHolder.getCurrentUser().getId());
     }
 
     @Override

@@ -146,6 +146,14 @@
       "show_first_100_rows": "Show first 100 rows",
       "download_data": "DOWNLOAD DATA",
       "close": "CLOSE"
+    },
+    "dialog": {
+      "confirmation": "CONFIRMATION",
+      "error": "ERROR",
+      "warning": "WARNING",
+      "information": "INFORMATION",
+      "cancel": "Cancel",
+      "ok": "OK"
     }
   }
 }

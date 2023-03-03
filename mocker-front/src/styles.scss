@@ -63,13 +63,4 @@ body {
     }
   }
 
-  .dialog {
-    @apply fixed top-0 left-0 w-full h-full z-10;
-    background-color: rgba(0, 0, 0, 0.6);
-
-    > div {
-      @apply rounded absolute bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
-      content: '';
-    }
-  }
 }
