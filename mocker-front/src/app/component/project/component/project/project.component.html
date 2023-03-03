@@ -1,4 +1,4 @@
-<div id='main' class='view-port-width-standard mx-auto text-sm'>
+<div id='main' class='viewport-width-standard mx-auto text-sm'>
   <p
     class='text-3xl font-medium mt-5'>{{ ('component.project.' + (isNew ? 'new_project' : 'my_project')) | translate }}</p>
   <ng-container *ngIf='isNew' [ngTemplateOutlet]='settings'></ng-container>
@@ -6,10 +6,10 @@
     <ng-template #resources>
       <div id='resources'>
         <div class='mt-5'>
-          <button class='font-medium py-2 border rounded-l-md px-5'>{{ 'NEW SCHEMA' | translate }}</button>
-          <button class='font-medium py-2 border px-5'>{{ 'NEW DATASET' | translate }}</button>
-          <button class='font-medium py-2 border px-5'>{{ 'NEW API' | translate }}</button>
-          <button class='font-medium py-2 border rounded-r-md px-5'>{{ 'NEW SCENARIO' | translate }}</button>
+          <button class='hover:text-blue font-medium py-2 border rounded-l-md px-5'>{{ 'NEW SCHEMA' | translate }}</button>
+          <button class='hover:text-blue font-medium py-2 border px-5'>{{ 'NEW DATASET' | translate }}</button>
+          <button class='hover:text-blue font-medium py-2 border px-5'>{{ 'NEW API' | translate }}</button>
+          <button class='hover:text-blue font-medium py-2 border rounded-r-md px-5'>{{ 'NEW SCENARIO' | translate }}</button>
         </div>
         <hr class='mt-5'/>
         <ng-container *ngFor='let schema of project?.schemas'>

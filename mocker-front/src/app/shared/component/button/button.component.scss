@@ -2,8 +2,7 @@
 
 #main {
   .btn-primary {
-    @apply text-white;
-    background-color: #4285F4 !important;
+    @apply text-white bg-blue;
   }
 
   .btn-light {
