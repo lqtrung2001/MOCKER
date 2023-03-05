@@ -19,7 +19,7 @@ import { PreviewModal, PreviewModalOptions } from '@shared/modal/preview/preview
 type Controls = {
   table: FormGroup<{
     fields: FormArray<FormGroup>
-  }>
+  }>;
   rows: FormControl;
   format: FormControl;
   tableName: FormControl;

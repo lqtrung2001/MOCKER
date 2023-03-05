@@ -1,7 +1,8 @@
-import { Component, Injector, Input } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
 import { AbstractSharedComponent } from '@shared/component/abstract-shared/abstract-shared.component';
 import { Table } from '@core/model/table';
 import { TableService } from '@core/service/table.service';
+import { TableConfigModal, TableConfigModalOptions } from '@app/component/schema/modal/table-config/table-config.modal';
 
 /**
  * @author Do Quoc Viet
@@ -13,7 +14,7 @@ import { TableService } from '@core/service/table.service';
   templateUrl: 'table.component.html',
   styleUrls: ['table.component.scss']
 })
-export class TableComponent extends AbstractSharedComponent {
+export class TableComponent extends AbstractSharedComponent implements OnInit {
   @Input() table: Table;
 
   constructor(
@@ -21,8 +22,18 @@ export class TableComponent extends AbstractSharedComponent {
     private tableService: TableService
   ) {
     super(injector);
-    this.tableService.getTable('89192222-aa8e-4d66-82b5-190ef6f7d84f').subscribe((table: Table): void => {
+  }
+
+  ngOnInit(): void {
+    this.tableService.getTable(this.table.id).subscribe((table: Table): void => {
       this.table = table;
     });
+  }
+
+  openDetail(): void {
+    const options: TableConfigModalOptions = {
+      table: this.table
+    };
+    this.modalService.open(TableConfigModal, options);
   }
 }

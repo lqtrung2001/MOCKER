@@ -1,5 +1,5 @@
 import { AbstractComponent } from '@core/class/abstract.component';
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { Project } from '@core/model/project';
 import { ProjectService } from '@app/core/service/project.service';
 
@@ -13,7 +13,7 @@ import { ProjectService } from '@app/core/service/project.service';
   templateUrl: 'projects.component.html',
   styleUrls: ['projects.component.scss']
 })
-export class ProjectsComponent extends AbstractComponent {
+export class ProjectsComponent extends AbstractComponent implements OnInit {
   projects: Project[] = [];
   selects: string[] = [];
 
@@ -22,6 +22,9 @@ export class ProjectsComponent extends AbstractComponent {
     private projectService: ProjectService
   ) {
     super(injector);
+  }
+
+  ngOnInit(): void {
     this.projectService.getProjects().subscribe((projects: Project[]): void => {
       this.projects = projects;
     });

@@ -59,7 +59,7 @@ export class ForgetPasswordComponent extends AbstractComponent {
         }
       });
     }, (error) => {
-        console.log(error);
+      console.log(error);
     });
   }
 }

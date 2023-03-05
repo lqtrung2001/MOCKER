@@ -154,6 +154,9 @@
       "information": "INFORMATION",
       "cancel": "Cancel",
       "ok": "OK"
+    },
+    "table_config": {
+      "title": "TABLE CONFIGURATION:"
     }
   }
 }

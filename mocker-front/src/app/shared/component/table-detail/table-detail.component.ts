@@ -4,6 +4,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ChooseTypeModal, ChooseTypeModalOptions } from '@shared/modal/choose-type/choose-type.modal';
 import { GenerateType } from '@core/model/generate-type';
 import { SQLType } from '@core/model/sql-type';
+import { AbstractSharedComponent } from '@shared/component/abstract-shared/abstract-shared.component';
 
 /**
  * @author Do Quoc Viet
@@ -25,8 +26,7 @@ export type Controls = {
   templateUrl: 'table-detail.component.html',
   styleUrls: ['table-detail.component.scss']
 })
-export class TableDetailComponent extends AbstractComponent implements OnInit {
-  @Input() class: string;
+export class TableDetailComponent extends AbstractSharedComponent implements OnInit {
   @Input('table') formGroup: FormGroup<{
     fields: FormArray<FormGroup<Controls>>
   }>;

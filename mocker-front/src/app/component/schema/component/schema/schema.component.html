@@ -1,5 +1,3 @@
 <div id='main' class='viewport-width-standard mx-auto text-sm'>
-  <moc-table class='mt-20'></moc-table>
-  <moc-table class='mt-20'></moc-table>
-  <moc-table class='mt-20'></moc-table>
+  <moc-table class='mt-20' *ngFor='let table of schema?.tables' [table]='table'></moc-table>
 </div>

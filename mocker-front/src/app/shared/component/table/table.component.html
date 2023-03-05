@@ -1,6 +1,6 @@
 <div id='main' class='{{ class }} text-sm'>
   <div class='{{ selfClass }} border rounded w-72 overflow-hidden'>
-    <p class='bg-blue cursor-pointer h-8 heading text-center leading-8 font-medium text-white uppercase'>
+    <p (click)='openDetail()' class='bg-blue cursor-pointer h-8 heading text-center leading-8 font-medium text-white uppercase'>
       <i class='fa-regular fa-table mr-3'></i>
       {{ table.name }}
       <i class='edit-icon hidden ml-3 fa-solid fa-pen-to-square'></i>

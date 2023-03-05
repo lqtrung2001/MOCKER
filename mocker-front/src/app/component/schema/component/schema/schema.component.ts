@@ -25,7 +25,6 @@ export class SchemaComponent extends AbstractComponent {
     if (id) {
       this.schemaService.getSchema(id).subscribe((schema: Schema): void => {
         this.schema = schema;
-        console.log(this.schema);
       });
     }
   }

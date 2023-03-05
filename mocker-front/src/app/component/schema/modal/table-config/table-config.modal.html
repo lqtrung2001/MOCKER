@@ -1,0 +1,6 @@
+<div id='main' popup [modal]='this' [opacity]='0.5'>
+  <div class='text-sm p-5 w-300 h-210'>
+    <p class='font-bold text-medium'>{{ 'modal.table_config.title' | translate }}</p>
+    <moc-table-detail class='mt-3' selfClass='max-h-150 overflow-y-auto' [table]='formGroup.controls.table'></moc-table-detail>
+  </div>
+</div>
