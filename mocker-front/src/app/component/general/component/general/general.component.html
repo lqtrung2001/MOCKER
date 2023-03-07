@@ -13,7 +13,7 @@
     </moc-action>
     <span *ngIf='isShowTableNameField' class='mt-3 mx-5'>{{ 'component.general.table_name' | translate }}</span>
     <moc-field *ngIf='isShowTableNameField' class='w-32' selfClass='px-5'
-               [control]='formGroup.controls.tableName'></moc-field>
+               [control]='formGroup.controls.table.controls.name'></moc-field>
   </div>
   <hr class='mt-5'/>
   <div class='mt-5 flex'>

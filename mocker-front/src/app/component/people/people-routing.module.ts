@@ -3,6 +3,7 @@ import { PeopleComponent } from '@app/component/people/component/people/people.c
 import { PersonComponent } from '@app/component/people/component/person/person.component';
 import { PeopleLayoutComponent } from '@app/component/people/people-layout.component';
 import { AuthGuard } from '@app/auth.guard';
+import { NgModule } from '@angular/core';
 
 /**
  * @author Do Quoc viet
@@ -10,11 +11,16 @@ import { AuthGuard } from '@app/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'people', component: PeopleLayoutComponent, canActivate: [AuthGuard], children: [
+    path: '', component: PeopleLayoutComponent, canActivate: [AuthGuard], children: [
       { path: '', component: PeopleComponent },
       { path: ':id', component: PersonComponent }
     ]
   }
 ];
 
-export const ROUTING = RouterModule.forChild(routes);
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class PeopleRoutingModule {
+}

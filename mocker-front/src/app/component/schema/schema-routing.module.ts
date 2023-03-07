@@ -3,6 +3,7 @@ import { SchemaLayoutComponent } from '@app/component/schema/schema-layout.compo
 import { SchemasComponent } from '@app/component/schema/component/schemas/schemas.component';
 import { SchemaComponent } from '@app/component/schema/component/schema/schema.component';
 import { AuthGuard } from '@app/auth.guard';
+import { NgModule } from '@angular/core';
 
 /**
  * @author Do Quoc Viet
@@ -11,7 +12,7 @@ import { AuthGuard } from '@app/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'schema', component: SchemaLayoutComponent, children: [
+    path: '', component: SchemaLayoutComponent, children: [
       { path: '', component: SchemasComponent },
       { path: 'new', component: SchemaComponent },
       { path: ':id', component: SchemaComponent }
@@ -19,4 +20,9 @@ const routes: Routes = [
   }
 ];
 
-export const ROUTING = RouterModule.forChild(routes);
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class SchemaRoutingModule {
+}

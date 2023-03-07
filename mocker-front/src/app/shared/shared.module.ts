@@ -37,6 +37,9 @@ import { CsvPipe } from '@shared/pipe/csv.pipe';
 import { SqlPipe } from '@shared/pipe/sql.pipe';
 import { XmlPipe } from '@shared/pipe/xml.pipe';
 import { MocJsonPipe } from '@shared/pipe/moc-json.pipe';
+import { DialogModal } from '@shared/modal/modal-provider/dialog/dialog.modal';
+import { ChooseTypeModal } from '@shared/modal/choose-type/choose-type.modal';
+import { ToastrModal } from '@shared/modal/toastr-provider/toastr/toastr.modal';
 
 /**
  * @author Do Quoc Viet
@@ -63,7 +66,10 @@ import { MocJsonPipe } from '@shared/pipe/moc-json.pipe';
     CsvPipe,
     SqlPipe,
     XmlPipe,
-    MocJsonPipe
+    MocJsonPipe,
+    DialogModal,
+    ChooseTypeModal,
+    ToastrModal
   ],
   imports: [
     KeyValuePipe,
@@ -97,7 +103,10 @@ import { MocJsonPipe } from '@shared/pipe/moc-json.pipe';
     ChangeLogComponent,
     PopupDirective,
     InstructionComponent,
-    TableComponent
+    TableComponent,
+    DialogModal,
+    ChooseTypeModal,
+    ToastrModal
   ],
   providers: []
 })

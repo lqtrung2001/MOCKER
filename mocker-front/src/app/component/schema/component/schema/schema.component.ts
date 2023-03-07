@@ -2,10 +2,10 @@ import { Component, Injector } from '@angular/core';
 import { AbstractComponent } from '@core/class/abstract.component';
 import { Schema } from '@core/model/schema';
 import { SchemaService } from '@core/service/schema.service';
+import { Table } from '@core/model/table';
 
 /**
  * @author Do Quoc Viet
- * @date 22/02/2023
  */
 
 @Component({
@@ -25,8 +25,19 @@ export class SchemaComponent extends AbstractComponent {
     if (id) {
       this.schemaService.getSchema(id).subscribe((schema: Schema): void => {
         this.schema = schema;
-        console.log(this.schema);
       });
     }
   }
+
+  get tables(): Table[] {
+    if (!this.schema) {
+      return [];
+    }
+    const { tables, ...schema } = this.schema;
+    return tables.map((table: Table) => {
+      table.schema = schema as Schema;
+      return table;
+    });
+  }
+
 }

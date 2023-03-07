@@ -3,6 +3,8 @@ import { GenerateType } from '@core/model/generate-type';
 
 /**
  * @author Do Quoc Viet
+ * @class Category
+ * @date 04/03/2023
  */
 
 export class Category extends Base {

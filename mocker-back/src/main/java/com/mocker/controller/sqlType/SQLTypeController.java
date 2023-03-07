@@ -1,4 +1,4 @@
-package com.mocker.controller.SQLType;
+package com.mocker.controller.sqlType;
 
 import com.mocker.api.SqlTypeApi;
 import com.mocker.domain.dto.SQLTypeDto;

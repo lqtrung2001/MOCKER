@@ -2,7 +2,7 @@
   <button
     [style]='styles'
     (click)='clicked=true'
-    class='{{ selfClass }} {{ isValidated && control && control.invalid ? "invalid" : "" }} p-2.5 rounded font-medium w-full hover:drop-shadow-md relative'>
+    class='{{ selfClass }} {{ isValidated && control && control.invalid ? "invalid" : "" }} py-2.5 px-5 rounded font-medium w-full hover:drop-shadow-md relative'>
     {{ label | translate }}
     <i *ngIf='icon' class='{{ !label ? "" : "absolute right-5 top-1/2 -translate-y-1/2" }} {{ icon }}'></i>
   </button>
