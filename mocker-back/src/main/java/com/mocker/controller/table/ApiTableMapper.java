@@ -1,22 +1,30 @@
 package com.mocker.controller.table;
 
-import com.mocker.domain.dto.FieldDto;
+import com.mocker.controller.field.ApiFieldMapper;
 import com.mocker.domain.dto.TableDto;
-import com.mocker.domain.model.entity.*;
+import com.mocker.domain.model.entity.Group;
+import com.mocker.domain.model.entity.Project;
+import com.mocker.domain.model.entity.Schema;
+import com.mocker.domain.model.entity.Table;
+import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+
+import java.util.List;
 
 /**
  * @author Do Quoc Viet
  */
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {ApiFieldMapper.class})
 public interface ApiTableMapper {
 
+    @Named("mapFetchFields")
     TableDto mapFetchFields(Table table);
 
-    @Mapping(target = "table", ignore = true)
-    FieldDto map(Field field);
+    @IterableMapping(qualifiedByName = "mapFetchFields")
+    List<TableDto> map(List<Table> tables);
 
     @Mapping(target = "projects", ignore = true)
     @Mapping(target = "groupMembers", ignore = true)

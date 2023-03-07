@@ -17,6 +17,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ApiSQLTypeMapper {
 
+    @Mapping(target = "generateTypes", ignore = true)
     SQLTypeDto map(SQLType sqlType);
 
     @Mapping(target = "category", ignore = true)
@@ -24,5 +25,4 @@ public interface ApiSQLTypeMapper {
     @Mapping(target = "sources", ignore = true)
     GenerateTypeDto map(GenerateType generateType);
 
-    List<GenerateTypeDto> mapToGenerateTypesDto(List<GenerateType> generateTypes);
 }

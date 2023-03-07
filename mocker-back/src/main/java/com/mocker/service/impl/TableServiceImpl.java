@@ -12,9 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -76,6 +74,7 @@ public class TableServiceImpl implements TableService {
         if (table == null) {
             throw new UnexpectedException("Table " + id + " does not exist");
         }
+        optionRepository.deleteAll(table.getFields().stream().map(Field::getOption).toList());
         fieldRepository.deleteAll(table.getFields());
         tableRepository.deleteById(id);
         return id;

@@ -13,9 +13,11 @@ import static com.mocker.domain.model.entity.QField.field;
 import static com.mocker.domain.model.entity.QTable.table;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
+@SuppressWarnings("unused")
 public class TableRepositoryImpl implements TableRepositoryCustom {
 
     @PersistenceContext
@@ -26,6 +28,7 @@ public class TableRepositoryImpl implements TableRepositoryCustom {
         return new JPAQuery<Table>(entityManager)
                 .from(table)
                 .where(table.schema.id.eq(schemaId))
+                .leftJoin(table.fields, field).fetchJoin()
                 .fetch();
     }
 

@@ -40,6 +40,6 @@ public class SchemaController implements SchemaApi {
 
     @Override
     public ResponseEntity<SchemaDto> getSchema(UUID id) {
-        return ResponseEntity.ok(apiSchemaMapper.mapFetchTables(schemaService.getSchema(id)));
+        return ResponseEntity.ok(apiSchemaMapper.map(schemaService.getSchema(id)));
     }
 }

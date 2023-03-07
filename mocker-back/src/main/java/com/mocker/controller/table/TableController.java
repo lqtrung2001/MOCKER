@@ -1,6 +1,5 @@
 package com.mocker.controller.table;
 
-import com.mocker.api.TableApi;
 import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.TableDto;
 import com.mocker.service.TableService;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -32,10 +30,7 @@ public class TableController implements com.mocker.api.TableApi {
 
     @Override
     public ResponseEntity<List<TableDto>> getTablesBySchema(UUID schemaId) {
-        return ResponseEntity.ok(tableService.getTablesBySchema(schemaId)
-                .stream()
-                .map(apiAbstractMapper::map)
-                .collect(Collectors.toList()));
+        return ResponseEntity.ok(apiTableMapper.map(tableService.getTablesBySchema(schemaId)));
     }
 
     @Override
