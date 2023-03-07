@@ -1,5 +1,5 @@
 import { AbstractComponent } from '@core/class/abstract.component';
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { Schema } from '@core/model/schema';
 import { SchemaService } from '@core/service/schema.service';
 
@@ -13,7 +13,7 @@ import { SchemaService } from '@core/service/schema.service';
   templateUrl: 'schemas.component.html',
   styleUrls: ['schemas.component.scss']
 })
-export class SchemasComponent extends AbstractComponent {
+export class SchemasComponent extends AbstractComponent implements OnInit {
   schemas: Schema[] = [];
   selects: string[] = [];
 
@@ -22,6 +22,9 @@ export class SchemasComponent extends AbstractComponent {
     private schemaService: SchemaService
   ) {
     super(injector);
+  }
+
+  ngOnInit(): void {
     this.schemaService.getSchemas().subscribe((schemas: Schema[]): void => {
       this.schemas = schemas;
     });

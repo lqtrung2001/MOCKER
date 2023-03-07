@@ -1,23 +1,23 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Table } from '@core/model/table';
 import { environment } from '@environment/environment';
+import { AppHttpService } from '@core/service/app-http.service';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 @Injectable({
   providedIn: 'root'
 })
-export class TableService {
-
+export class TableService extends AppHttpService<Table> {
   static TABLE = 'table';
 
   constructor(
-    private httpClient: HttpClient
+    injector: Injector
   ) {
+    super(injector);
   }
 
   getTable(id: string): Observable<Table> {
@@ -28,11 +28,11 @@ export class TableService {
     return this.httpClient.get<Table[]>(`${environment.API_URL}/${TableService.TABLE}?schemaId=${schemaId}`);
   }
 
-  saveOrUpdate(table: Table): Observable<string> {
-    return this.httpClient.post<string>(`${environment.API_URL}/${TableService.TABLE}`, table);
+  saveOrUpdate(table: Table): Observable<Table> {
+    return this.post(`${environment.API_URL}/${TableService.TABLE}`, table);
   }
 
-  delete(id: string): Observable<string> {
+  delete1(id: string): Observable<string> {
     return this.httpClient.delete<string>(`${environment.API_URL}/${TableService.TABLE}/${id}`);
   }
 

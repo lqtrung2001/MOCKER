@@ -28,7 +28,7 @@ export class ModalProvider {
       title: 'modal.dialog.confirmation',
       ...dialogModalOptions
     };
-    return this.modalService.open(DialogModal, options).onResult();
+    return this.modalService.open(DialogModal, options);
   }
 
   public showError(dialogModalOptions: DialogModalOptions): Observable<any> {
@@ -37,7 +37,7 @@ export class ModalProvider {
       ...dialogModalOptions,
       type: 'ERROR'
     };
-    return this.modalService.open(DialogModal, options).onResult();
+    return this.modalService.open(DialogModal, options);
   }
 
   public showWarning(dialogModalOptions: DialogModalOptions): Observable<any> {
@@ -46,7 +46,7 @@ export class ModalProvider {
       ...dialogModalOptions,
       type: 'WARNING'
     };
-    return this.modalService.open(DialogModal, options).onResult();
+    return this.modalService.open(DialogModal, options);
   }
 
   public showInformation(dialogModalOptions: DialogModalOptions): Observable<any> {
@@ -55,7 +55,7 @@ export class ModalProvider {
       title: 'modal.dialog.information',
       type: 'INFORMATION'
     };
-    return this.modalService.open(DialogModal, options).onResult();
+    return this.modalService.open(DialogModal, options);
   }
 
 }

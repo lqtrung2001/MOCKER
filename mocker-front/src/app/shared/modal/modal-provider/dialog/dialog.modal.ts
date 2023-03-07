@@ -43,14 +43,12 @@ export class DialogModal extends AbstractModal {
 
   get color(): string {
     switch (this.options.type) {
-      case 'CONFIRMATION':
-        return 'blue';
       case 'ERROR':
         return 'red';
       case 'WARNING':
         return 'yellow';
       default:
-        return 'green';
+        return 'blue';
     }
   }
 
