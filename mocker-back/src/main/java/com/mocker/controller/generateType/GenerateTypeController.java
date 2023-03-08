@@ -1,9 +1,11 @@
-package com.mocker.controller;
+package com.mocker.controller.generateType;
 
 import com.mocker.api.GenerateTypeApi;
 import com.mocker.configuration.security.ApplicationContextHolder;
 import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.GenerateTypeDto;
+import com.mocker.domain.exception.InternalException;
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.User;
 import com.mocker.service.GenerateTypeService;
 import lombok.RequiredArgsConstructor;
@@ -29,18 +31,18 @@ public class GenerateTypeController implements GenerateTypeApi {
     private final ApplicationContextHolder applicationContextHolder;
 
     @Override
-    public ResponseEntity<GenerateTypeDto> getGenerateType(UUID id) {
+    public ResponseEntity<GenerateTypeDto> getGenerateType(UUID id) throws InternalException {
         return ResponseEntity.ok(apiAbstractMapper.map(generateTypeService.getGenerateType(id)));
     }
 
     @Override
-    public ResponseEntity<List<GenerateTypeDto>> getGenerateTypesBySQLType(UUID sqlTypeId) {
+    public ResponseEntity<List<GenerateTypeDto>> getGenerateTypesBySQLType(UUID sqlTypeId) throws NotFoundException {
         return ResponseEntity.ok(generateTypeService.getGenerateTypesBySQLType(sqlTypeId)
                 .stream().map(apiAbstractMapper::map).collect(Collectors.toList()));
     }
 
     @Override
-    public ResponseEntity<List<GenerateTypeDto>> getGenerateTypes() {
+    public ResponseEntity<List<GenerateTypeDto>> getGenerateTypes() throws InternalException {
         User user = applicationContextHolder.getCurrentUser();
         return ResponseEntity.ok(generateTypeService.getGenerateTypes().stream()
                 .map(apiAbstractMapper::map).collect(Collectors.toList()));

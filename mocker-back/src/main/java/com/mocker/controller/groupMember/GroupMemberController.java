@@ -1,4 +1,4 @@
-package com.mocker.controller;
+package com.mocker.controller.groupMember;
 
 import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.GroupMemberPKDto;

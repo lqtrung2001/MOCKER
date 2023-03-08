@@ -1,13 +1,7 @@
 package com.mocker.domain.exception;
 
-public class NotFoundException extends RuntimeException {
-
-    public NotFoundException(String msg) {
-        super(msg);
+public class NotFoundException extends AbstractException {
+    public NotFoundException(String message, String... params) {
+        super(message, params);
     }
-
-    public NotFoundException(String msg, Throwable throwable) {
-        super(msg, throwable);
-    }
-
 }

@@ -1,10 +1,11 @@
-package com.mocker.controller;
+package com.mocker.controller.auth;
 
 
 import com.mocker.api.AuthApi;
 import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.ChangePasswordDto;
 import com.mocker.domain.dto.UserDto;
+import com.mocker.domain.exception.InternalException;
 import com.mocker.service.AuthService;
 import com.mocker.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +28,12 @@ public class AuthController implements AuthApi {
     private final UserService userService;
 
     @Override
-    public ResponseEntity<Boolean> sendVerificationCode(String username) {
+    public ResponseEntity<Boolean> sendVerificationCode(String username) throws InternalException {
         return ResponseEntity.ok(authService.sendVerificationCode(username));
     }
 
     @Override
-    public ResponseEntity<UserDto> verifyAndSave(String verificationCode, UserDto userDto) {
+    public ResponseEntity<UserDto> verifyAndSave(String verificationCode, UserDto userDto) throws InternalException {
         return ResponseEntity.ok(apiAbstractMapper.map(authService.verifyAndSave(verificationCode, apiAbstractMapper.map(userDto))));
     }
 
@@ -42,7 +43,7 @@ public class AuthController implements AuthApi {
     }
 
     @Override
-    public ResponseEntity<UserDto> changePassword(UUID id, ChangePasswordDto changePasswordDto) {
+    public ResponseEntity<UserDto> changePassword(UUID id, ChangePasswordDto changePasswordDto) throws InternalException {
         return ResponseEntity.ok(apiAbstractMapper.map(userService.changePassword(id, changePasswordDto.getOldPassword(), changePasswordDto.getNewPassword())));
     }
 }

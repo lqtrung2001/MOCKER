@@ -1,5 +1,6 @@
 package com.mocker.service.impl;
 
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.SQLType;
 import com.mocker.repository.SQLTypeRepository;
 import com.mocker.service.SQLTypeService;
@@ -16,7 +17,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SQLTypeServiceImpl implements SQLTypeService {
-
     private final SQLTypeRepository sqlTypeRepository;
 
     @Override
@@ -26,7 +26,11 @@ public class SQLTypeServiceImpl implements SQLTypeService {
 
     @Override
     @Cacheable("SQLTypes")
-    public List<SQLType> getSQLTypesFetchGenerateTypes() {
-        return sqlTypeRepository.getSQLTypesFetchGenerateTypes();
+    public List<SQLType> getSQLTypesFetchGenerateTypes() throws NotFoundException {
+        try {
+            return sqlTypeRepository.getSQLTypesFetchGenerateTypes();
+        } catch (Exception e) {
+            throw new NotFoundException("validation.notFound");
+        }
     }
 }

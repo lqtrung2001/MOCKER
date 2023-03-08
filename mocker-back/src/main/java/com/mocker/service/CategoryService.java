@@ -1,5 +1,6 @@
 package com.mocker.service;
 
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Category;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public interface CategoryService {
      * @param id of category
      * @return category
      */
-    Category getCategoryHasGenerateTypes(UUID id);
+    Category getCategoryHasGenerateTypes(UUID id) throws NotFoundException;
 
     /**
      * CATEGORY.03 GET /category/{id}/generate-types/count
@@ -32,8 +33,8 @@ public interface CategoryService {
      * @param id of category
      * @return number of generate-types in category
      */
-    Integer getGenerateTypesCount(UUID id);
+    Integer getGenerateTypesCount(UUID id) throws NotFoundException;
 
-    List<Category> getCategoriesFetchGenerateTypes();
+    List<Category> getCategoriesFetchGenerateTypes() throws NotFoundException;
 
 }

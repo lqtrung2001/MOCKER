@@ -1,6 +1,7 @@
 package com.mocker.service.impl;
 
 import com.mocker.configuration.security.ApplicationContextHolder;
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Group;
 import com.mocker.domain.model.entity.GroupMember;
 import com.mocker.domain.model.entity.Project;
@@ -32,7 +33,6 @@ public class GroupServiceImpl implements GroupService {
     private final GroupMemberRepository groupMemberRepository;
     private final ApplicationContextHolder applicationContextHolder;
     private final ProjectRepository projectRepository;
-    private final SchemaRepository schemaRepository;
     private final ProjectService projectService;
 
     @Override
@@ -41,11 +41,16 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Group getGroup(UUID id) {
-        Group group = groupRepository.findById(id).orElseThrow();
-        group.setGroupMembers(groupMemberRepository.findAllByGroup(group));
-        group.setProjects(projectRepository.findAllByGroup(group));
-        return group;
+    public Group getGroup(UUID id) throws NotFoundException {
+        try {
+            Group group = groupRepository.findById(id).orElseThrow();
+            group.setGroupMembers(groupMemberRepository.findAllByGroup(group));
+            group.setProjects(projectRepository.findAllByGroup(group));
+            return group;
+        }catch (Exception e){
+            throw new NotFoundException("validation.dataNotFound");
+        }
+
     }
 
     @Override

@@ -1,13 +1,16 @@
-package com.mocker.controller;
+package com.mocker.controller.table;
 
 import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.TableDto;
+import com.mocker.domain.exception.InternalException;
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.service.TableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.rmi.UnexpectedException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -38,12 +41,12 @@ public class TableController implements com.mocker.api.TableApi {
     }
 
     @Override
-    public ResponseEntity<UUID> saveOrUpdateTable(TableDto tableDto) {
+    public ResponseEntity<UUID> saveOrUpdateTable(TableDto tableDto) throws InternalException {
         return ResponseEntity.ok(tableService.saveOrUpdateTable(apiAbstractMapper.map(tableDto)));
     }
 
     @Override
-    public ResponseEntity<UUID> deleteTable(UUID id) {
+    public ResponseEntity<UUID> deleteTable(UUID id){
         return ResponseEntity.ok(tableService.delete(id));
     }
 }
