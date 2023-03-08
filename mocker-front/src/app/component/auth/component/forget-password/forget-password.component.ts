@@ -50,7 +50,7 @@ export class ForgetPasswordComponent extends AbstractComponent {
           const verificationModalOptions: VerificationModalOptions = {
             username: this.username.value
           };
-          this.modalService.open(VerificationModal, verificationModalOptions).onResult()
+          this.modalService.open(VerificationModal, verificationModalOptions)
             .subscribe((success: boolean) => {
               if (success) {
                 this.router.navigate(['/']).then();
@@ -59,7 +59,7 @@ export class ForgetPasswordComponent extends AbstractComponent {
         }
       });
     }, (error) => {
-        console.log(error);
+      console.log(error);
     });
   }
 }

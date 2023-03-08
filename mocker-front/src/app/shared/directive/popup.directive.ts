@@ -1,4 +1,4 @@
-import { AfterContentInit, Directive, ElementRef, Input, Renderer2 } from '@angular/core';
+import { AfterContentInit, Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
 
 /**
@@ -10,14 +10,18 @@ import { Modal } from '@shared/modal/modal-service/model/modal.model';
 @Directive({
   selector: '[popup]'
 })
-export class PopupDirective implements AfterContentInit {
+export class PopupDirective implements OnInit, AfterContentInit {
   @Input() modal: Modal;
   @Input() dialog: boolean;
+  @Input() opacity: number;
   content: HTMLDivElement;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {
     this.addClasses('fixed top-0 left-0 w-full h-full z-10', elementRef.nativeElement);
-    this.renderer.setStyle(elementRef.nativeElement, 'background-color', 'rgba(0, 0, 0, 0.6)');
+  }
+
+  ngOnInit(): void {
+   this.renderer.setStyle(this.elementRef.nativeElement, 'background-color', 'rgba(9, 30, 66, 0.54)');
   }
 
   ngAfterContentInit(): void {

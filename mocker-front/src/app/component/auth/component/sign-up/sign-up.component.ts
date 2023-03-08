@@ -70,7 +70,7 @@ export class SignUpComponent extends AbstractComponent {
             username,
             password
           };
-          this.modalService.open(VerificationModal, validateOTPModalOptions).onResult().subscribe((user: User) => {
+          this.modalService.open(VerificationModal, validateOTPModalOptions).subscribe((user: User) => {
             if (user) {
               // For set token
               localStorage.setItem(LocalStorageConstant.AUTH, JSON.stringify(user));

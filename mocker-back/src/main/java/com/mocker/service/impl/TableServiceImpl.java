@@ -2,6 +2,7 @@ package com.mocker.service.impl;
 
 import com.mocker.domain.exception.InternalException;
 import com.mocker.domain.model.entity.Field;
+import com.mocker.domain.model.entity.Option;
 import com.mocker.domain.model.entity.Table;
 import com.mocker.repository.FieldRepository;
 import com.mocker.repository.OptionRepository;
@@ -9,11 +10,10 @@ import com.mocker.repository.TableRepository;
 import com.mocker.service.TableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -38,7 +38,7 @@ public class TableServiceImpl implements TableService {
     }
 
     @Override
-    public UUID saveOrUpdateTable(Table table) throws InternalException {
+    public Table saveOrUpdateTable(Table table) throws InternalException {
         try {
             if (table.getId() != null) {
                 List<UUID> ids = table.getFields().stream().map(Field::getId).toList();
@@ -52,16 +52,25 @@ public class TableServiceImpl implements TableService {
                 fieldRepository.deleteAllById(fieldIdsNeedToRemove);
             }
             List<Field> fields = table.getFields();
-            Table save = tableRepository.save(table.toBuilder().fields(null).build());
-            Optional.ofNullable(fields).ifPresent(items ->
-                    fieldRepository.saveAll(items
-                            .stream()
-                            .map(i -> i.toBuilder().table(save).build())
-                            .collect(Collectors.toList())));
-            return save.getId();
+            table.setFields(null);
+            Table save = tableRepository.save(table);
+            if (!CollectionUtils.isEmpty(fields)) {
+                fields.forEach(item -> {
+                    Option option = item.getOption();
+                    optionRepository.save(option
+                            .toBuilder()
+                            .field(fieldRepository.save(item.toBuilder()
+                                    .table(save)
+                                    .option(null)
+                                    .build()))
+                            .build());
+                });
+            }
+            return save.toBuilder().fields(fields).build();
         } catch (Exception e) {
             throw new InternalException("validation.dataAccessError");
         }
+
     }
 
     @Override

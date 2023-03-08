@@ -1,14 +1,12 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
-import { AbstractComponent } from '@core/class/abstract.component';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ChooseTypeModal, ChooseTypeModalOptions } from '@shared/modal/choose-type/choose-type.modal';
 import { GenerateType } from '@core/model/generate-type';
 import { SQLType } from '@core/model/sql-type';
+import { AbstractSharedComponent } from '@shared/component/abstract-shared/abstract-shared.component';
 
 /**
  * @author Do Quoc Viet
- * @class TableDetailComponent
- * @date 11/02/2023
  */
 
 export type Controls = {
@@ -25,10 +23,10 @@ export type Controls = {
   templateUrl: 'table-detail.component.html',
   styleUrls: ['table-detail.component.scss']
 })
-export class TableDetailComponent extends AbstractComponent implements OnInit {
-  @Input() class: string;
+export class TableDetailComponent extends AbstractSharedComponent implements OnInit {
   @Input('table') formGroup: FormGroup<{
-    fields: FormArray<FormGroup<Controls>>
+    name: FormControl;
+    fields: FormArray<FormGroup<Controls>>;
   }>;
 
   constructor(
@@ -67,7 +65,7 @@ export class TableDetailComponent extends AbstractComponent implements OnInit {
       current: control.value,
       isGenerateType
     };
-    this.modalService.open(ChooseTypeModal, options).onResult()
+    this.modalService.open(ChooseTypeModal, options)
       .subscribe((type: GenerateType | SQLType): void => {
         if (type) {
           control.setValue(type);

@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { SchemaLayoutComponent } from '@app/component/schema/schema-layout.component';
 import { SchemasComponent } from '@app/component/schema/component/schemas/schemas.component';
 import { SchemaComponent } from '@app/component/schema/component/schema/schema.component';
-import { ROUTING } from '@app/component/schema/schema.routing';
 import { LayoutModule } from '@shared/layout/layout.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
 import { DatePipe, NgForOf } from '@angular/common';
+import { SchemaRoutingModule } from '@app/component/schema/schema-routing.module';
+import { TableConfigModal } from '@app/component/schema/modal/table-config/table-config.modal';
+import { ReactiveFormsModule } from '@angular/forms';
 
 /**
  * @author Do Quoc Viet
@@ -15,19 +17,21 @@ import { DatePipe, NgForOf } from '@angular/common';
 
 @NgModule({
   declarations: [
-    SchemaLayoutComponent,
     SchemasComponent,
-    SchemaComponent
+    SchemaComponent,
+    SchemaLayoutComponent,
+    TableConfigModal
   ],
+  exports: [],
   imports: [
-    ROUTING,
+    SchemaRoutingModule,
     LayoutModule,
     TranslateModule,
     SharedModule,
     DatePipe,
-    NgForOf
+    NgForOf,
+    ReactiveFormsModule
   ],
-  exports: [],
   providers: []
 })
 export class SchemaModule {

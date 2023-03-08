@@ -9,6 +9,10 @@
     @apply bg-white border text-black;
   }
 
+  .btn-red {
+    @apply bg-red border text-white;
+  }
+
   .invalid {
     border: 1px solid $invalid-color !important;
   }

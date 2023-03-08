@@ -1,10 +1,8 @@
 package com.mocker.service;
 
 import com.mocker.domain.exception.InternalException;
-import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Table;
 
-import java.rmi.UnexpectedException;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,7 +16,7 @@ public interface TableService {
 
     List<Table> getTablesBySchema(UUID schemaId);
 
-    UUID saveOrUpdateTable(Table table) throws InternalException;
+    Table saveOrUpdateTable(Table table) throws InternalException;
 
-    UUID delete(UUID id) ;
+    UUID delete(UUID id);
 }

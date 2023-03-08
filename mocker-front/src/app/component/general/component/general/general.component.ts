@@ -12,17 +12,15 @@ import { PreviewModal, PreviewModalOptions } from '@shared/modal/preview/preview
 
 /**
  * @author Do Quoc Viet
- * @class GeneralComponent
- * @date 05/02/2023
  */
 
 type Controls = {
   table: FormGroup<{
-    fields: FormArray<FormGroup>
-  }>
+    name: FormControl;
+    fields: FormArray<FormGroup>;
+  }>;
   rows: FormControl;
   format: FormControl;
-  tableName: FormControl;
 }
 
 @Component({
@@ -42,11 +40,11 @@ export class GeneralComponent extends AbstractComponent {
     super(injector);
     this.formGroup = this.formBuilder.group({
       table: this.formBuilder.group({
+        name: this.formBuilder.control(undefined, [Validators.required]),
         fields: this.formBuilder.array<FormGroup<Controls>>([])
       }),
       rows: this.formBuilder.control(1, [Validators.required]),
-      format: this.formBuilder.control('SQL', [Validators.required]),
-      tableName: this.formBuilder.control('Mocker', [])
+      format: this.formBuilder.control('SQL', [Validators.required])
     });
     this.formGroup.valueChanges.subscribe(() => {
       this.data = [];
@@ -88,7 +86,7 @@ export class GeneralComponent extends AbstractComponent {
   }
 
   startDownload(): void {
-    const tableName: string = this.formGroup.controls.tableName.value;
+    const tableName: string = this.formGroup.controls.table.controls.name.value;
     const format: string = this.formGroup.controls.format.value;
     let data: any[] = this.data;
     switch (format) {
@@ -122,7 +120,7 @@ export class GeneralComponent extends AbstractComponent {
           this.data = data;
           const options: PreviewModalOptions = {
             data,
-            tableName: this.formGroup.controls.tableName.value,
+            tableName: this.formGroup.controls.table.controls.name.value,
             format,
             download: this.download.bind(this)
           };
@@ -131,7 +129,7 @@ export class GeneralComponent extends AbstractComponent {
     } else {
       const options: PreviewModalOptions = {
         data: this.data,
-        tableName: this.formGroup.controls.tableName.value,
+        tableName: this.formGroup.controls.table.controls.name.value,
         format,
         download: this.download.bind(this)
       };
@@ -146,7 +144,7 @@ export class GeneralComponent extends AbstractComponent {
       label: 'SQL',
       click: () => {
         this.formGroup.controls.format.setValue('SQL');
-        this.formGroup.controls.tableName.setValidators([Validators.required]);
+        this.formGroup.controls.table.controls.name.setValidators([Validators.required]);
       }
     }, {
       id: '2',
@@ -154,7 +152,7 @@ export class GeneralComponent extends AbstractComponent {
       label: 'JSON',
       click: () => {
         this.formGroup.controls.format.setValue('JSON');
-        this.formGroup.controls.tableName.setValidators([Validators.required]);
+        this.formGroup.controls.table.controls.name.setValidators([Validators.required]);
       }
     }, {
       id: '3',
@@ -162,7 +160,7 @@ export class GeneralComponent extends AbstractComponent {
       label: 'XML',
       click: () => {
         this.formGroup.controls.format.setValue('XML');
-        this.formGroup.controls.tableName.setValidators([Validators.required]);
+        this.formGroup.controls.table.controls.name.setValidators([Validators.required]);
       }
     }, {
       id: '4',
@@ -170,7 +168,7 @@ export class GeneralComponent extends AbstractComponent {
       label: 'CSV',
       click: () => {
         this.formGroup.controls.format.setValue('CSV');
-        this.formGroup.controls.tableName.setValidators([]);
+        this.formGroup.controls.table.controls.name.setValidators([]);
       }
     }];
   }

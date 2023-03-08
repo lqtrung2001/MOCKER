@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 import { User } from '@core/model/user';
 import { AppHttpService } from '@core/service/app-http.service';
@@ -18,12 +18,6 @@ import { Strings } from '@shared/util/strings';
   providedIn: 'root'
 })
 export class AuthService extends AppHttpService<User> {
-
-  constructor(
-    injector: Injector
-  ) {
-    super(injector);
-  }
 
   checkAuthorized(): Observable<any> {
     const storage = localStorage.getItem(LocalStorageConstant.AUTH);

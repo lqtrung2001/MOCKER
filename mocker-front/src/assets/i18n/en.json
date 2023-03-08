@@ -76,12 +76,13 @@
       "save_this_table": "SAVE THIS TABLE",
       "more": "MORE"
     },
-    "table": {
+    "table_detail": {
       "field_name": "FIELD NAME",
       "generate_type": "GENERATE TYPE",
       "sql_type": "SQL TYPE",
       "options": "OPTIONS",
       "field_name_placeholder": "Field name",
+      "instruction": "Please click ADD ANOTHER FIELD button to add an field to this table.",
       "add_another_field": "ADD ANOTHER FIELD"
     },
     "person": {
@@ -154,6 +155,16 @@
       "information": "INFORMATION",
       "cancel": "Cancel",
       "ok": "OK"
+    },
+    "table_config": {
+      "title": "TABLE CONFIGURATION:",
+      "table_name":"Table Name:",
+      "table_name_placeholder": "Table name",
+      "rows": "Rows:",
+      "rows_placeholder": "Rows",
+      "save": "SAVE",
+      "delete": "DELETE THIS TABLE",
+      "close": "CLOSE"
     }
   }
 }

@@ -2,6 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@app/auth.guard';
 import { GeneralComponent } from '@app/component/general/component/general/general.component';
 import { GeneralLayoutComponent } from '@app/component/general/general-layout.component';
+import { NgModule } from '@angular/core';
 
 /**
  * @author Do Quoc Viet
@@ -16,4 +17,9 @@ const routes: Routes = [
   }
 ];
 
-export const ROUTING = RouterModule.forChild(routes);
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class GeneralRoutingModule {
+}

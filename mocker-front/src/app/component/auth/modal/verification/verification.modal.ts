@@ -59,7 +59,7 @@ export class VerificationModal extends AbstractModal {
                 id: user.id!,
                 oldPassword: verificationCode
               };
-              this.modalService.open(ChangePasswordModal, changePasswordModalOptions).onResult().subscribe((success: boolean) => {
+              this.modalService.open(ChangePasswordModal, changePasswordModalOptions).subscribe((success: boolean) => {
                 if (success) {
                   this.close(true);
                 }

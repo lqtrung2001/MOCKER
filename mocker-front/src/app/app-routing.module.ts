@@ -1,4 +1,5 @@
-import { NoPreloading, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 
 /**
  * @author Do Quoc Viet
@@ -13,6 +14,9 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./component/auth/auth.module').then(module => module.AuthModule)
   }, {
+    path: 'schema',
+    loadChildren: () => import('./component/schema/schema.module').then(module => module.SchemaModule)
+  }, {
     path: 'project',
     loadChildren: () => import('./component/project/project.module').then(module => module.ProjectModule)
   }, {
@@ -24,4 +28,9 @@ const routes: Routes = [
   }
 ];
 
-export const ROUTING = RouterModule.forRoot(routes, { useHash: true, preloadingStrategy: NoPreloading });
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {
+}

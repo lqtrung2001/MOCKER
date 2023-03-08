@@ -10,14 +10,17 @@ import com.mocker.service.TableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
 /**
  * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class SchemaServiceImpl implements SchemaService {
     private final SchemaRepository schemaRepository;
@@ -37,7 +40,7 @@ public class SchemaServiceImpl implements SchemaService {
 
     @Override
     public Schema getSchema(UUID id) {
-        return schemaRepository.findById(id).orElseThrow();
+        return schemaRepository.getSchema(id);
     }
 
     @Override

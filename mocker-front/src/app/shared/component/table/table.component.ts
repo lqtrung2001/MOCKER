@@ -1,11 +1,11 @@
 import { Component, Injector, Input } from '@angular/core';
 import { AbstractSharedComponent } from '@shared/component/abstract-shared/abstract-shared.component';
 import { Table } from '@core/model/table';
+import { TableConfigModal, TableConfigModalOptions } from '@app/component/schema/modal/table-config/table-config.modal';
 import { TableService } from '@core/service/table.service';
 
 /**
  * @author Do Quoc Viet
- * @date 22/02/2023
  */
 
 @Component({
@@ -21,8 +21,24 @@ export class TableComponent extends AbstractSharedComponent {
     private tableService: TableService
   ) {
     super(injector);
-    this.tableService.getTable('89192222-aa8e-4d66-82b5-190ef6f7d84f').subscribe((table: Table): void => {
-      this.table = table;
-    });
+  }
+
+  openDetail(): void {
+    const options: TableConfigModalOptions = {
+      table: this.table
+    };
+    this.modalService.open(TableConfigModal, options)
+      .subscribe((result: boolean) => {
+        if (result) {
+          this.refresh();
+        }
+      });
+  }
+
+  private refresh() {
+    this.tableService.getTable(this.table.id)
+      .subscribe((table: Table): void => {
+        this.table = table;
+      });
   }
 }

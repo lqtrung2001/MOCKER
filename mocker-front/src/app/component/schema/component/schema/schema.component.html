@@ -1,5 +1,5 @@
 <div id='main' class='viewport-width-standard mx-auto text-sm'>
-  <moc-table class='mt-20'></moc-table>
-  <moc-table class='mt-20'></moc-table>
-  <moc-table class='mt-20'></moc-table>
+  <div class='flex flex-wrap'>
+    <moc-table class='mt-20 m-5' *ngFor='let table of tables' [table]='table'></moc-table>
+  </div>
 </div>
