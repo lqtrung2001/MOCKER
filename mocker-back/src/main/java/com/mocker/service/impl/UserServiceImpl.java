@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UUID update(User user) throws NotFoundException, InternalException {
         if (user.getId() == null) {
-            throw new NotFoundException("validation.dataNotFound");
+            throw new NotFoundException("validation.data_not_found");
         }
         String currentPassword = getUser(user.getId()).getPassword();
         user.setPassword(currentPassword);
@@ -66,10 +66,10 @@ public class UserServiceImpl implements UserService {
             try {
                 return userRepository.findById(id).orElseThrow();
             } catch (Exception e) {
-                throw new NotFoundException("validation.dataNotFound");
+                throw new NotFoundException("validation.data_not_found");
             }
         } catch (Exception e) {
-            throw new InternalException("validation.dataAccessError");
+            throw new InternalException("validation.validation.data_access_error");
         }
 
     }
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userRepository.findAll();
         } catch (Exception e) {
-            throw new NotFoundException("validation.notFound");
+            throw new NotFoundException("validation.not_found");
         }
     }
 
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
             userRepository.deleteById(id);
             return id;
         } catch (Exception e) {
-            throw new InternalException("validation.dataAccessError");
+            throw new InternalException("validation.validation.data_access_error");
         }
     }
 
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userRepository.save(user).getId();
         } catch (Exception e) {
-            throw new InternalException("validation.dataAccessError");
+            throw new InternalException("validation.validation.data_access_error");
         }
     }
 
@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow();
         // Check old password
         if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
-            throw new InternalException("validation.matchPassword");
+            throw new InternalException("validation.match_password");
         }
         user.setPassword(passwordEncoder.encode(newPassword));
         return userRepository.save(user);

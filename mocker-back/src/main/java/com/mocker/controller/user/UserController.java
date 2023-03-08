@@ -3,11 +3,9 @@ package com.mocker.controller.user;
 import com.mocker.api.UserApi;
 import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.UserDto;
-import com.mocker.domain.exception.InternalException;
-import com.mocker.domain.exception.NotFoundException;
-import com.mocker.domain.exception.PermissionException;
 import com.mocker.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +17,6 @@ import java.util.stream.Collectors;
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
  */
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/v1")
@@ -28,36 +25,42 @@ public class UserController implements UserApi {
     private final ApiAbstractMapper apiAbstractMapper;
     private final UserService userService;
 
+    @SneakyThrows
     @Override
-    public ResponseEntity<UUID> updateUser(UserDto userDto) throws NotFoundException, InternalException {
+    public ResponseEntity<UUID> updateUser(UserDto userDto) {
         return ResponseEntity.ok(userService.update(apiAbstractMapper.map(userDto)));
     }
 
+    @SneakyThrows
     @Override
-    public ResponseEntity<UserDto> getUser(UUID id) throws NotFoundException, InternalException {
+    public ResponseEntity<UserDto> getUser(UUID id) {
         return ResponseEntity.ok(apiAbstractMapper.map(userService.getUser(id)));
     }
 
+    @SneakyThrows
     @Override
-    public ResponseEntity<UserDto> getUserByUsername(String username) throws PermissionException {
+    public ResponseEntity<UserDto> getUserByUsername(String username) {
         return ResponseEntity.ok(apiAbstractMapper.map(userService.getUserByUsername(username)));
     }
 
+    @SneakyThrows
     @Override
-    public ResponseEntity<List<UserDto>> getUsers() throws NotFoundException {
+    public ResponseEntity<List<UserDto>> getUsers() {
         return ResponseEntity.ok(userService.getUsers()
                 .stream()
                 .map(apiAbstractMapper::map)
                 .collect(Collectors.toList()));
     }
 
+    @SneakyThrows
     @Override
-    public ResponseEntity<UUID> deleteUser(UUID id) throws InternalException {
+    public ResponseEntity<UUID> deleteUser(UUID id) {
         return ResponseEntity.ok(userService.delete(id));
     }
 
+    @SneakyThrows
     @Override
-    public ResponseEntity<UUID> saveUser(UserDto userDto) throws InternalException {
+    public ResponseEntity<UUID> saveUser(UserDto userDto) {
         return ResponseEntity.ok(userService.saveUser(apiAbstractMapper.map(userDto)));
     }
 

@@ -28,7 +28,7 @@ public class GenerateTypeServiceImpl implements GenerateTypeService {
         try {
             return generateTypeRepository.findById(id).orElseThrow();
         } catch (Exception e) {
-            throw new InternalException("validation.dataAccessError");
+            throw new InternalException("validation.validation.data_access_error");
 
         }
     }
@@ -38,7 +38,7 @@ public class GenerateTypeServiceImpl implements GenerateTypeService {
         try {
             return sqlTypeRepository.findById(sqlTypeId).orElseThrow().getGenerateTypes();
         } catch (Exception e) {
-            throw new NotFoundException("validation.dataAccessError");
+            throw new NotFoundException("validation.validation.data_access_error");
         }
     }
 

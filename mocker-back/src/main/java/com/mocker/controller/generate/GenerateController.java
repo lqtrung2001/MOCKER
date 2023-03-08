@@ -3,7 +3,6 @@ package com.mocker.controller.generate;
 import com.mocker.api.GenerateApi;
 import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.TableDto;
-import com.mocker.domain.exception.InternalException;
 import com.mocker.service.GenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,12 +27,12 @@ public class GenerateController implements GenerateApi {
     private final GenerateService generateService;
 
     @Override
-    public ResponseEntity<List<Map<String, String>>> generate(UUID tableId, Integer row) throws InternalException {
+    public ResponseEntity<List<Map<String, String>>> generate(UUID tableId, Integer row) {
         return ResponseEntity.ok(generateService.generateWithTableId(tableId, row));
     }
 
     @Override
-    public ResponseEntity<List<Map<String, String>>> generateWithTable(BigDecimal row, TableDto tableDto) throws InternalException {
+    public ResponseEntity<List<Map<String, String>>> generateWithTable(BigDecimal row, TableDto tableDto) {
         return ResponseEntity.ok(generateService.generateWithTable(apiAbstractMapper.map(tableDto), row.intValue()));
     }
 

@@ -33,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
         try {
             return categoryRepository.getCategoryHasGenerateTypes(id);
         } catch (Exception e) {
-            throw new NotFoundException("validation.notFound");
+            throw new NotFoundException("exception.not_found");
         }
     }
 
@@ -42,17 +42,19 @@ public class CategoryServiceImpl implements CategoryService {
         try {
             return categoryRepository.getGenerateTypesCount(id);
         } catch (Exception e) {
-            throw new NotFoundException("validation.notFound");
+            throw new NotFoundException("exception.not_found");
         }
     }
 
     @Override
     @Cacheable("categories")
     public List<Category> getCategoriesFetchGenerateTypes() throws NotFoundException {
+        // TODO: Do Quoc Viet
+        if(true) throw new NotFoundException("exception.not_found");
         try {
             return categoryRepository.getCategoriesFetchGenerateTypes();
         } catch (Exception e) {
-            throw new NotFoundException("validation.notFound");
+            throw new NotFoundException("exception.not_found");
         }
     }
 }

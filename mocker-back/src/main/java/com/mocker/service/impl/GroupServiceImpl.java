@@ -10,7 +10,6 @@ import com.mocker.domain.model.entity.enumeration.Role;
 import com.mocker.repository.GroupMemberRepository;
 import com.mocker.repository.GroupRepository;
 import com.mocker.repository.ProjectRepository;
-import com.mocker.repository.SchemaRepository;
 import com.mocker.service.GroupService;
 import com.mocker.service.ProjectService;
 import lombok.RequiredArgsConstructor;
@@ -47,8 +46,8 @@ public class GroupServiceImpl implements GroupService {
             group.setGroupMembers(groupMemberRepository.findAllByGroup(group));
             group.setProjects(projectRepository.findAllByGroup(group));
             return group;
-        }catch (Exception e){
-            throw new NotFoundException("validation.dataNotFound");
+        } catch (Exception e) {
+            throw new NotFoundException("validation.data_not_found");
         }
 
     }

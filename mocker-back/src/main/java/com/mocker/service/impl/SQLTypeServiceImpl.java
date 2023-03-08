@@ -30,7 +30,7 @@ public class SQLTypeServiceImpl implements SQLTypeService {
         try {
             return sqlTypeRepository.getSQLTypesFetchGenerateTypes();
         } catch (Exception e) {
-            throw new NotFoundException("validation.notFound");
+            throw new NotFoundException("validation.not_found");
         }
     }
 }

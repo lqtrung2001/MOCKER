@@ -83,7 +83,7 @@ public class AuthServiceImpl implements AuthService {
                 }
             }
             catch (Exception exception) {
-                throw new InternalException("validation.dataAccessError");
+                throw new InternalException("validation.data_access_error");
             }
 
         }

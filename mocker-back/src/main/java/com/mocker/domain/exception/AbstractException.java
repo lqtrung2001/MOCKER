@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public abstract class AbstractException extends Exception {
+public abstract class AbstractException extends RuntimeException {
     private String message;
     private CodeEnum codeEnum;
 

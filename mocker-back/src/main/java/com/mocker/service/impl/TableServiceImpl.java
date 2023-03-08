@@ -68,7 +68,7 @@ public class TableServiceImpl implements TableService {
             }
             return save.toBuilder().fields(fields).build();
         } catch (Exception e) {
-            throw new InternalException("validation.dataAccessError");
+            throw new InternalException("validation.validation.data_access_error");
         }
 
     }
@@ -77,7 +77,7 @@ public class TableServiceImpl implements TableService {
     public UUID delete(UUID id) {
         Table table = tableRepository.findOneWithEagerFields(id);
         if (table == null) {
-            throw new IllegalStateException("validation.dataAccessError");
+            throw new IllegalStateException("validation.validation.data_access_error");
         }
         fieldRepository.deleteAll(table.getFields());
         tableRepository.deleteById(id);

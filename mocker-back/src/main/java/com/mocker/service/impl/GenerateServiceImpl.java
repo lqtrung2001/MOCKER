@@ -24,17 +24,17 @@ public class GenerateServiceImpl implements GenerateService {
     private final SourceRepository sourceRepository;
 
     @Override
-    public List<Map<String, String>> generateWithTableId(UUID tableId, Integer row) throws InternalException {
+    public List<Map<String, String>> generateWithTableId(UUID tableId, Integer row) {
         Table table = tableRepository.findOneWithEagerFields(tableId);
         return generate(table, row);
     }
 
     @Override
-    public List<Map<String, String>> generateWithTable(Table table, Integer row) throws InternalException {
+    public List<Map<String, String>> generateWithTable(Table table, Integer row) {
         return generate(table, row);
     }
 
-    public List<Map<String, String>> generate(Table table, Integer row) throws InternalException {
+    public List<Map<String, String>> generate(Table table, Integer row) {
         try {
             List<Map<String, String>> result = new ArrayList<>();
             Random random = new Random();
@@ -58,7 +58,7 @@ public class GenerateServiceImpl implements GenerateService {
             }
             return result;
         } catch (Exception e) {
-            throw new InternalException("validation.dataAccessError");
+            throw new InternalException("validation.validation.data_access_error");
         }
     }
 }
