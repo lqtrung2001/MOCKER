@@ -1,8 +1,9 @@
 package com.mocker.service.impl;
 
 import com.mocker.configuration.security.ApplicationContextHolder;
+import com.mocker.domain.exception.InternalException;
 import com.mocker.domain.exception.NotFoundException;
-import com.mocker.domain.exception.UnexpectedException;
+import com.mocker.domain.exception.PermissionException;
 import com.mocker.domain.model.entity.User;
 import com.mocker.repository.UserRepository;
 import com.mocker.service.UserService;
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User authentication(String email, String password) {
+    public User authentication(String email, String password) throws NotFoundException {
         User userAuthentication = userRepository.findByEmailAndPassword(email, password);
         if (Optional.ofNullable(userAuthentication).isPresent()) {
             return userAuthentication;
@@ -42,17 +43,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByUsername(String username) {
+    public User getUserByUsername(String username) throws PermissionException {
         if (Objects.equals(username, applicationContextHolder.getCurrentUser().getUsername())) {
             return userRepository.findByUsername(username);
         }
-        throw new UnexpectedException("You cannot access this user");
+        throw new PermissionException("validation.permission");
     }
 
     @Override
-    public UUID update(User user) {
+    public UUID update(User user) throws NotFoundException, InternalException {
         if (user.getId() == null) {
-            throw new UnexpectedException("Invalid user id");
+            throw new NotFoundException("validation.data_not_found");
         }
         String currentPassword = getUser(user.getId()).getPassword();
         user.setPassword(currentPassword);
@@ -60,32 +61,53 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(UUID id) {
-        return userRepository.findById(id).orElseThrow();
+    public User getUser(UUID id) throws NotFoundException, InternalException {
+        try {
+            try {
+                return userRepository.findById(id).orElseThrow();
+            } catch (Exception e) {
+                throw new NotFoundException("validation.data_not_found");
+            }
+        } catch (Exception e) {
+            throw new InternalException("validation.validation.data_access_error");
+        }
+
     }
 
     @Override
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public List<User> getUsers() throws NotFoundException {
+        try {
+            return userRepository.findAll();
+        } catch (Exception e) {
+            throw new NotFoundException("validation.not_found");
+        }
     }
 
     @Override
-    public UUID delete(UUID id) {
-        userRepository.deleteById(id);
-        return id;
+    public UUID delete(UUID id) throws InternalException {
+        try {
+            userRepository.deleteById(id);
+            return id;
+        } catch (Exception e) {
+            throw new InternalException("validation.validation.data_access_error");
+        }
     }
 
     @Override
-    public UUID saveUser(User user) {
-        return userRepository.save(user).getId();
+    public UUID saveUser(User user) throws InternalException {
+        try {
+            return userRepository.save(user).getId();
+        } catch (Exception e) {
+            throw new InternalException("validation.validation.data_access_error");
+        }
     }
 
     @Override
-    public User changePassword(UUID id, String currentPassword, String newPassword) {
+    public User changePassword(UUID id, String currentPassword, String newPassword) throws InternalException {
         User user = userRepository.findById(id).orElseThrow();
         // Check old password
         if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
-            throw new UnexpectedException("Current password not match");
+            throw new InternalException("validation.match_password");
         }
         user.setPassword(passwordEncoder.encode(newPassword));
         return userRepository.save(user);

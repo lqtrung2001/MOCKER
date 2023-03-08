@@ -2,6 +2,7 @@ package com.mocker.controller.category;
 
 import com.mocker.api.CategoryApi;
 import com.mocker.domain.dto.CategoryDto;
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,18 +25,18 @@ public class CategoryController implements CategoryApi {
     private final CategoryService categoryService;
 
     @Override
-    public ResponseEntity<List<CategoryDto>> getCategories() {
+    public ResponseEntity<List<CategoryDto>> getCategories() throws NotFoundException {
         return ResponseEntity.ok(categoryService.getCategoriesFetchGenerateTypes().stream()
                 .map(apiCategoryMapper::map).collect(Collectors.toList()));
     }
 
     @Override
-    public ResponseEntity<CategoryDto> getCategory(UUID id) {
+    public ResponseEntity<CategoryDto> getCategory(UUID id) throws NotFoundException {
         return ResponseEntity.ok(apiCategoryMapper.mapWithEagerGenerateTypes(categoryService.getCategoryHasGenerateTypes(id)));
     }
 
     @Override
-    public ResponseEntity<Integer> getGenerateTypesCount(UUID id) {
+    public ResponseEntity<Integer> getGenerateTypesCount(UUID id) throws NotFoundException {
         return ResponseEntity.ok(categoryService.getGenerateTypesCount(id));
     }
     

@@ -1,5 +1,6 @@
 package com.mocker.service;
 
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.SQLType;
 
 import java.util.List;
@@ -16,5 +17,5 @@ public interface SQLTypeService {
      */
     List<SQLType> getSQLTypes();
 
-    List<SQLType> getSQLTypesFetchGenerateTypes();
+    List<SQLType> getSQLTypesFetchGenerateTypes() throws NotFoundException;
 }

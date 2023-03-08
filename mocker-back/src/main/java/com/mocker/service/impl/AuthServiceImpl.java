@@ -1,6 +1,6 @@
 package com.mocker.service.impl;
 
-import com.mocker.domain.exception.UnexpectedException;
+import com.mocker.domain.exception.InternalException;
 import com.mocker.domain.model.entity.User;
 import com.mocker.domain.model.entity.enumeration.Gender;
 import com.mocker.repository.UserRepository;
@@ -33,7 +33,7 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public Boolean sendVerificationCode(String username) {
+    public Boolean sendVerificationCode(String username) throws InternalException {
         try {
             Random random = new Random();
             String verificationCode = String.valueOf(random.nextInt(10000, 99999));
@@ -46,7 +46,7 @@ public class AuthServiceImpl implements AuthService {
             verificationMap.put(username, verificationCode);
             return true;
         } catch (Exception exception) {
-            throw new UnexpectedException(Strings.EMPTY);
+            throw new InternalException("validation.messaging");
         }
     }
 
@@ -56,32 +56,38 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public User verifyAndSave(String verificationCode, User user) {
+    public User verifyAndSave(String verificationCode, User user) throws InternalException {
         if (verificationMap.containsKey(user.getUsername()) && verificationMap.get(user.getUsername()).equals(verificationCode)) {
             verificationMap.remove(user.getUsername());
-            if (Strings.isNotBlank(user.getPassword())) {
-                return userRepository.save(User.builder()
-                        .username(user.getUsername())
-                        .password(passwordEncoder.encode(user.getPassword()))
-                        .name("User-" + verificationCode)
-                        .bio("N/A")
-                        .address("N/A")
-                        .dob(OffsetDateTime.now())
-                        .gender(Gender.MALE)
-                        .phone("N/A")
-                        .grantedAuthorities("ROLE_USER")
-                        .isAccountNonExpired(true)
-                        .isCredentialsNonExpired(true)
-                        .isAccountNonLocked(true)
-                        .isEnabled(true)
-                        .build());
-            } else {
-                User userForgotPassword = userRepository.findByUsername(user.getUsername());
-                userForgotPassword.setPassword(passwordEncoder.encode(verificationCode));
-                return userRepository.save(userForgotPassword);
+            try{
+                if (Strings.isNotBlank(user.getPassword())) {
+                    return userRepository.save(User.builder()
+                            .username(user.getUsername())
+                            .password(passwordEncoder.encode(user.getPassword()))
+                            .name("User-" + verificationCode)
+                            .bio("N/A")
+                            .address("N/A")
+                            .dob(OffsetDateTime.now())
+                            .gender(Gender.MALE)
+                            .phone("N/A")
+                            .grantedAuthorities("ROLE_USER")
+                            .isAccountNonExpired(true)
+                            .isCredentialsNonExpired(true)
+                            .isAccountNonLocked(true)
+                            .isEnabled(true)
+                            .build());
+                } else {
+                    User userForgotPassword = userRepository.findByUsername(user.getUsername());
+                    userForgotPassword.setPassword(passwordEncoder.encode(verificationCode));
+                    return userRepository.save(userForgotPassword);
+                }
             }
+            catch (Exception exception) {
+                throw new InternalException("validation.data_access_error");
+            }
+
         }
-        throw new IllegalStateException("Verification code is not correct");
+        throw new InternalException("validation.invalidVerificationCode");
     }
 
 }

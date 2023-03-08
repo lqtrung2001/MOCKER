@@ -1,9 +1,10 @@
-package com.mocker.controller;
+package com.mocker.controller.group;
 
 import com.mocker.api.GroupApi;
 import com.mocker.configuration.security.ApplicationContextHolder;
 import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.GroupDto;
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.service.GroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +42,7 @@ public class GroupController implements GroupApi {
     }
 
     @Override
-    public ResponseEntity<GroupDto> getGroup(UUID id) {
+    public ResponseEntity<GroupDto> getGroup(UUID id) throws NotFoundException {
         return ResponseEntity.ok(apiAbstractMapper.mapWithEagerProjectsAndGroupMembers(groupService.getGroup(id)));
     }
 

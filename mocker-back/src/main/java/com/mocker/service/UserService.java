@@ -1,5 +1,8 @@
 package com.mocker.service;
 
+import com.mocker.domain.exception.InternalException;
+import com.mocker.domain.exception.NotFoundException;
+import com.mocker.domain.exception.PermissionException;
 import com.mocker.domain.model.entity.User;
 
 import java.util.List;
@@ -11,21 +14,21 @@ import java.util.UUID;
 
 public interface UserService {
 
-    User authentication(String email, String password);
+    User authentication(String email, String password) throws NotFoundException;
 
-    User getUserByUsername(String username);
+    User getUserByUsername(String username) throws PermissionException;
 
-    UUID update(User user);
+    UUID update(User user) throws NotFoundException, InternalException;
 
-    User getUser(UUID id);
+    User getUser(UUID id) throws NotFoundException, InternalException;
 
-    List<User> getUsers();
+    List<User> getUsers() throws NotFoundException;
 
-    UUID delete(UUID id);
+    UUID delete(UUID id) throws InternalException;
 
-    UUID saveUser(User user);
+    UUID saveUser(User user) throws InternalException;
 
-    User changePassword(UUID id, String currentPassword, String newPassword);
+    User changePassword(UUID id, String currentPassword, String newPassword) throws InternalException;
 
     Boolean isExistedUsername(String username);
 }

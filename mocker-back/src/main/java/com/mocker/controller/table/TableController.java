@@ -1,6 +1,5 @@
 package com.mocker.controller.table;
 
-import com.mocker.api.TableApi;
 import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.TableDto;
 import com.mocker.service.TableService;

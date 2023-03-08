@@ -1,4 +1,4 @@
-package com.mocker.controller;
+package com.mocker.controller.project;
 
 import com.mocker.api.ProjectApi;
 import com.mocker.controller.mapper.ApiAbstractMapper;

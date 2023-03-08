@@ -1,5 +1,7 @@
 package com.mocker.service;
 
+import com.mocker.domain.exception.InternalException;
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Schema;
 
 import java.util.List;

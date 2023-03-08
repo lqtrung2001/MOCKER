@@ -1,4 +1,4 @@
-package com.mocker.controller;
+package com.mocker.controller.generate;
 
 import com.mocker.api.GenerateApi;
 import com.mocker.controller.mapper.ApiAbstractMapper;

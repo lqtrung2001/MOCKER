@@ -1,6 +1,6 @@
 package com.mocker.service.impl;
 
-import com.mocker.domain.exception.UnexpectedException;
+import com.mocker.domain.exception.InternalException;
 import com.mocker.domain.model.entity.Field;
 import com.mocker.domain.model.entity.Option;
 import com.mocker.domain.model.entity.Table;
@@ -12,9 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -40,46 +38,50 @@ public class TableServiceImpl implements TableService {
     }
 
     @Override
-    public Table saveOrUpdateTable(Table table) {
-        if (table.getId() != null) {
-            List<UUID> ids = table.getFields().stream().map(Field::getId).toList();
-            List<UUID> fieldIdsNeedToRemove = tableRepository.findOneWithEagerFields(table.getId())
-                    .getFields()
-                    .stream()
-                    .map(Field::getId)
-                    .filter(id -> !ids.contains(id))
-                    .toList();
-            optionRepository.deleteAll(optionRepository.findAllByFieldIds(fieldIdsNeedToRemove));
-            fieldRepository.deleteAllById(fieldIdsNeedToRemove);
+    public Table saveOrUpdateTable(Table table) throws InternalException {
+        try {
+            if (table.getId() != null) {
+                List<UUID> ids = table.getFields().stream().map(Field::getId).toList();
+                List<UUID> fieldIdsNeedToRemove = tableRepository.findOneWithEagerFields(table.getId())
+                        .getFields()
+                        .stream()
+                        .map(Field::getId)
+                        .filter(id -> !ids.contains(id))
+                        .toList();
+                optionRepository.deleteAll(optionRepository.findAllByFieldIds(fieldIdsNeedToRemove));
+                fieldRepository.deleteAllById(fieldIdsNeedToRemove);
+            }
+            List<Field> fields = table.getFields();
+            table.setFields(null);
+            Table save = tableRepository.save(table);
+            if (!CollectionUtils.isEmpty(fields)) {
+                fields.forEach(item -> {
+                    Option option = item.getOption();
+                    optionRepository.save(option
+                            .toBuilder()
+                            .field(fieldRepository.save(item.toBuilder()
+                                    .table(save)
+                                    .option(null)
+                                    .build()))
+                            .build());
+                });
+            }
+            return save.toBuilder().fields(fields).build();
+        } catch (Exception e) {
+            throw new InternalException("validation.validation.data_access_error");
         }
-        List<Field> fields = table.getFields();
-        table.setFields(null);
-        Table save = tableRepository.save(table);
-        if (!CollectionUtils.isEmpty(fields)) {
-            fields.forEach(item -> {
-                Option option = item.getOption();
-                optionRepository.save(option
-                        .toBuilder()
-                        .field(fieldRepository.save(item.toBuilder()
-                                .table(save)
-                                .option(null)
-                                .build()))
-                        .build());
-            });
-        }
-        return save.toBuilder().fields(fields).build();
+
     }
 
     @Override
     public UUID delete(UUID id) {
         Table table = tableRepository.findOneWithEagerFields(id);
         if (table == null) {
-            throw new UnexpectedException("Table " + id + " does not exist");
+            throw new IllegalStateException("validation.validation.data_access_error");
         }
         fieldRepository.deleteAll(table.getFields());
         tableRepository.deleteById(id);
         return id;
     }
-
 
 }

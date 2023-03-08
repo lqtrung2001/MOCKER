@@ -1,6 +1,7 @@
 package com.mocker.service.impl;
 
 import com.mocker.configuration.security.ApplicationContextHolder;
+import com.mocker.domain.exception.InternalException;
 import com.mocker.domain.model.entity.Schema;
 import com.mocker.domain.model.entity.Table;
 import com.mocker.repository.SchemaRepository;
@@ -48,7 +49,7 @@ public class SchemaServiceImpl implements SchemaService {
     }
 
     @Override
-    public UUID delete(UUID id) {
+    public UUID delete(UUID id){
         tableService.getTablesBySchema(id).stream().map(Table::getId).forEach(tableService::delete);
         schemaRepository.deleteById(id);
         return id;

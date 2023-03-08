@@ -1,5 +1,6 @@
 package com.mocker.service;
 
+import com.mocker.domain.exception.InternalException;
 import com.mocker.domain.model.entity.Table;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface TableService {
 
     List<Table> getTablesBySchema(UUID schemaId);
 
-    Table saveOrUpdateTable(Table table);
+    Table saveOrUpdateTable(Table table) throws InternalException;
 
     UUID delete(UUID id);
 }

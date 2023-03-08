@@ -1,6 +1,7 @@
 package com.mocker.service.impl;
 
 import com.mocker.configuration.security.ApplicationContextHolder;
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Group;
 import com.mocker.domain.model.entity.GroupMember;
 import com.mocker.domain.model.entity.Project;
@@ -9,7 +10,6 @@ import com.mocker.domain.model.entity.enumeration.Role;
 import com.mocker.repository.GroupMemberRepository;
 import com.mocker.repository.GroupRepository;
 import com.mocker.repository.ProjectRepository;
-import com.mocker.repository.SchemaRepository;
 import com.mocker.service.GroupService;
 import com.mocker.service.ProjectService;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +32,6 @@ public class GroupServiceImpl implements GroupService {
     private final GroupMemberRepository groupMemberRepository;
     private final ApplicationContextHolder applicationContextHolder;
     private final ProjectRepository projectRepository;
-    private final SchemaRepository schemaRepository;
     private final ProjectService projectService;
 
     @Override
@@ -41,11 +40,16 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Group getGroup(UUID id) {
-        Group group = groupRepository.findById(id).orElseThrow();
-        group.setGroupMembers(groupMemberRepository.findAllByGroup(group));
-        group.setProjects(projectRepository.findAllByGroup(group));
-        return group;
+    public Group getGroup(UUID id) throws NotFoundException {
+        try {
+            Group group = groupRepository.findById(id).orElseThrow();
+            group.setGroupMembers(groupMemberRepository.findAllByGroup(group));
+            group.setProjects(projectRepository.findAllByGroup(group));
+            return group;
+        } catch (Exception e) {
+            throw new NotFoundException("validation.data_not_found");
+        }
+
     }
 
     @Override
