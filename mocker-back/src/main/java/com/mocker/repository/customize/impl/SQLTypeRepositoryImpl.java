@@ -14,6 +14,7 @@ import java.util.List;
  * @author Luong Quoc Trung
  */
 
+@SuppressWarnings("unused")
 public class SQLTypeRepositoryImpl implements SQLTypeRepositoryCustom {
 
     @PersistenceContext

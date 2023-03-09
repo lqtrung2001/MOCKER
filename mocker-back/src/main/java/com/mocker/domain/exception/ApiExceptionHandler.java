@@ -12,18 +12,10 @@ import java.time.ZonedDateTime;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
-    // TODO: Luong Quoc Trung consider to using validation abstract class instead
+
     @ExceptionHandler(value = {ApiRequestException.class})
     public ResponseEntity<ErrorDto> handlerApiRequestException(ApiRequestException e) {
-        ErrorDto errorDto = new ErrorDto();
-        errorDto.setTimestamp(ZonedDateTime.now(ZoneId.of("UTC")).toString());
-        errorDto.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
-        errorDto.setError(HttpStatus.UNPROCESSABLE_ENTITY.name());
-        errorDto.setMessage(getMessage(ApiRequestException.class));
-        errorDto.setPath(e.getStackTrace()[0].toString());
-        errorDto.setCode(ErrorDto.CodeEnum.BAD_REQUEST);
-        errorDto.setAdditionalMessage(e.getMessage());
-        return ResponseEntity.ok(errorDto);
+        return getError(HttpStatus.UNPROCESSABLE_ENTITY, e.getMessage(), e.getStackTrace()[0].toString());
     }
 
     @ExceptionHandler(value = {AuthenticationException.class})
@@ -36,7 +28,7 @@ public class ApiExceptionHandler {
         errorDto.setPath(e.getStackTrace()[0].toString());
         errorDto.setCode(ErrorDto.CodeEnum.AUTHENTICATION_EXCEPTION);
         errorDto.setAdditionalMessage(e.getMessage());
-        return ResponseEntity.ok(errorDto);
+        return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(value = {BadRequestException.class})
@@ -49,20 +41,12 @@ public class ApiExceptionHandler {
         errorDto.setPath(e.getStackTrace()[0].toString());
         errorDto.setCode(ErrorDto.CodeEnum.BAD_REQUEST);
         errorDto.setAdditionalMessage(e.getMessage());
-        return ResponseEntity.ok(errorDto);
+        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = {ConflictException.class})
     public ResponseEntity<ErrorDto> handleConflictException(ConflictException e) {
-        ErrorDto errorDto = new ErrorDto();
-        errorDto.setTimestamp(ZonedDateTime.now(ZoneId.of("UTC")).toString());
-        errorDto.setStatus(HttpStatus.CONFLICT.value());
-        errorDto.setError(HttpStatus.CONFLICT.name());
-        errorDto.setMessage(getMessage(ConflictException.class));
-        errorDto.setPath(e.getStackTrace()[0].toString());
-        errorDto.setCode(ErrorDto.CodeEnum.CONFLICT);
-        errorDto.setAdditionalMessage(e.getMessage());
-        return ResponseEntity.ok(errorDto);
+        return getError(HttpStatus.CONFLICT, e.getMessage(), e.getStackTrace()[0].toString());
     }
 
 
@@ -76,20 +60,12 @@ public class ApiExceptionHandler {
         errorDto.setPath(e.getStackTrace()[0].toString());
         errorDto.setCode(ErrorDto.CodeEnum.BAD_REQUEST);
         errorDto.setAdditionalMessage(e.getMessage());
-        return ResponseEntity.ok(errorDto);
+        return new ResponseEntity<>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = {MethodNotAllowedException.class})
     public ResponseEntity<ErrorDto> handleMethodNotAllowedException(MethodNotAllowedException e) {
-        ErrorDto errorDto = new ErrorDto();
-        errorDto.setTimestamp(ZonedDateTime.now(ZoneId.of("UTC")).toString());
-        errorDto.setStatus(HttpStatus.METHOD_NOT_ALLOWED.value());
-        errorDto.setError(HttpStatus.METHOD_NOT_ALLOWED.name());
-        errorDto.setMessage(getMessage(MethodNotAllowedException.class));
-        errorDto.setPath(e.getStackTrace()[0].toString());
-        errorDto.setCode(ErrorDto.CodeEnum.BAD_REQUEST);
-        errorDto.setAdditionalMessage(e.getMessage());
-        return ResponseEntity.ok(errorDto);
+        return getError(HttpStatus.METHOD_NOT_ALLOWED, e.getMessage(), e.getStackTrace()[0].toString());
     }
 
     @ExceptionHandler(value = {NotFoundException.class})
@@ -102,33 +78,17 @@ public class ApiExceptionHandler {
         errorDto.setPath(e.getStackTrace()[0].toString());
         errorDto.setCode(ErrorDto.CodeEnum.NOT_FOUND);
         errorDto.setAdditionalMessage(e.getMessage());
-        return ResponseEntity.ok(errorDto);
+        return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = {PermissionException.class})
     public ResponseEntity<ErrorDto> handlePermissionException(PermissionException e) {
-        ErrorDto errorDto = new ErrorDto();
-        errorDto.setTimestamp(ZonedDateTime.now(ZoneId.of("UTC")).toString());
-        errorDto.setStatus(HttpStatus.FORBIDDEN.value());
-        errorDto.setError(HttpStatus.FORBIDDEN.name());
-        errorDto.setMessage(getMessage(PermissionException.class));
-        errorDto.setPath(e.getStackTrace()[0].toString());
-        errorDto.setCode(ErrorDto.CodeEnum.PERMISSION_EXCEPTION);
-        errorDto.setAdditionalMessage(e.getMessage());
-        return ResponseEntity.ok(errorDto);
+        return getError(HttpStatus.FORBIDDEN, e.getMessage(), e.getStackTrace()[0].toString());
     }
 
     @ExceptionHandler(value = {ServiceUnavailableException.class})
     public ResponseEntity<ErrorDto> handleServiceUnavailableException(ServiceUnavailableException e) {
-        ErrorDto errorDto = new ErrorDto();
-        errorDto.setTimestamp(ZonedDateTime.now(ZoneId.of("UTC")).toString());
-        errorDto.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
-        errorDto.setError(HttpStatus.SERVICE_UNAVAILABLE.name());
-        errorDto.setMessage(getMessage(ServiceUnavailableException.class));
-        errorDto.setPath(e.getStackTrace()[0].toString());
-        errorDto.setCode(ErrorDto.CodeEnum.BAD_REQUEST);
-        errorDto.setAdditionalMessage(e.getMessage());
-        return ResponseEntity.ok(errorDto);
+        return getError(HttpStatus.SERVICE_UNAVAILABLE, e.getMessage(), e.getStackTrace()[0].toString());
     }
 
     private String getMessage(Class<? extends AbstractException> clazz) {
@@ -142,5 +102,17 @@ public class ApiExceptionHandler {
             default -> message.append("business_application_error");
         }
         return MessageContextHelper.getMessage(message.toString());
+    }
+
+    private ResponseEntity<ErrorDto> getError(HttpStatus httpStatus, String additionalMessage, String path) {
+        ErrorDto errorDto = new ErrorDto();
+        errorDto.setTimestamp(ZonedDateTime.now(ZoneId.of("UTC")).toString());
+        errorDto.setStatus(httpStatus.value());
+        errorDto.setError(httpStatus.name());
+        errorDto.setMessage("exception.business_application_error");
+        errorDto.setPath(path);
+        errorDto.setCode(ErrorDto.CodeEnum.BAD_REQUEST);
+        errorDto.setAdditionalMessage(additionalMessage);
+        return new ResponseEntity<>(errorDto, httpStatus);
     }
 }

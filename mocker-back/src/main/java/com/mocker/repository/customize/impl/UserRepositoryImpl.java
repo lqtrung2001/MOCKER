@@ -19,6 +19,7 @@ import static com.mocker.domain.model.entity.QUser.user;
  * @author Luong Quoc Trung, Do Quoc Viet
  */
 
+@SuppressWarnings("unused")
 public class UserRepositoryImpl implements UserRepositoryCustom {
 
     @PersistenceContext

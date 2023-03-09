@@ -15,6 +15,7 @@ import java.util.UUID;
  * @author Luong Quoc Trung, Do Quoc Viet
  */
 
+@SuppressWarnings("unused")
 public class ProjectRepositoryImpl implements ProjectRepositoryCustom {
 
     @PersistenceContext
