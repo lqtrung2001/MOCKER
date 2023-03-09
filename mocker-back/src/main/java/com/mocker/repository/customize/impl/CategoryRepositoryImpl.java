@@ -17,6 +17,7 @@ import static com.mocker.domain.model.entity.QCategory.category;
  * @author Luong Quoc Trung, Do Quoc Viet
  */
 
+@SuppressWarnings("unused")
 public class CategoryRepositoryImpl implements CategoryRepositoryCustom {
 
     @PersistenceContext

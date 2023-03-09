@@ -19,6 +19,7 @@ import static com.mocker.domain.model.entity.QProject.project;
  * @author Luong Quoc Trung, Do Quoc Viet
  */
 
+@SuppressWarnings("unused")
 public class GroupRepositoryImpl implements GroupRepositoryCustom {
 
     @PersistenceContext

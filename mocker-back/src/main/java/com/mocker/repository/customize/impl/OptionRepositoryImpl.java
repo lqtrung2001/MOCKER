@@ -15,6 +15,7 @@ import static com.mocker.domain.model.entity.QOption.option;
  * @author Luong Quoc Trung, Do Quoc Viet
  */
 
+@SuppressWarnings("unused")
 public class OptionRepositoryImpl implements OptionRepositoryCustom {
 
     @PersistenceContext
