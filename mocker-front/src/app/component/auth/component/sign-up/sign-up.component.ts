@@ -1,10 +1,10 @@
 import { Component, Injector } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AbstractComponent } from '@core/class/abstract.component';
+import { AbstractComponent } from '@core/common/abstract.component';
 import { AuthConstant, SignInMethod } from '@app/component/auth/auth.constant';
 import { AuthService } from '@app/core/service/auth.service';
 import { VerificationModal, VerificationModalOptions } from '@app/component/auth/modal/verification/verification.modal';
-import { User } from '@core/model/user';
+import { UserModel } from '@core/domain/model/user.model';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 
 type Controls = {
@@ -70,7 +70,7 @@ export class SignUpComponent extends AbstractComponent {
             username,
             password
           };
-          this.modalService.open(VerificationModal, validateOTPModalOptions).subscribe((user: User) => {
+          this.modalService.open(VerificationModal, validateOTPModalOptions).subscribe((user: UserModel) => {
             if (user) {
               // For set token
               localStorage.setItem(LocalStorageConstant.AUTH, JSON.stringify(user));

@@ -1,9 +1,9 @@
-import { AbstractModal } from '@core/class/abstract.modal';
+import { AbstractModal } from '@core/common/abstract.modal';
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Table } from '@core/model/table';
+import { TableModel } from '@core/domain/model/table.model';
 import { TableService } from '@core/service/table.service';
-import { Field } from '@core/model/field';
+import { FieldModel } from '@core/domain/model/field.model';
 
 /**
  * @author Do Quoc Viet
@@ -11,7 +11,7 @@ import { Field } from '@core/model/field';
  */
 
 export interface TableConfigModalOptions {
-  table: Table;
+  table: TableModel;
 }
 
 type Controls = {
@@ -31,7 +31,7 @@ type Controls = {
 export class TableConfigModal extends AbstractModal implements OnInit {
   override options: TableConfigModalOptions;
   formGroup: FormGroup<Controls>;
-  table: Table;
+  table: TableModel;
 
   constructor(
     injector: Injector,
@@ -56,7 +56,7 @@ export class TableConfigModal extends AbstractModal implements OnInit {
   patchValues(): void {
     this.formGroup.controls.table.patchValue(this.table);
     this.formGroup.controls.table.controls.fields = this.formBuilder.array<FormGroup<Controls>>([]);
-    this.table?.fields.forEach((field: Field): void => {
+    this.table?.fields.forEach((field: FieldModel): void => {
       this.formGroup.controls.table.controls.fields.push(this.formBuilder.group({
         name: this.formBuilder.control(field.name, [Validators.required]),
         generateType: this.formBuilder.control(field.generateType, [Validators.required]),
@@ -73,14 +73,14 @@ export class TableConfigModal extends AbstractModal implements OnInit {
     if (this.formGroup.invalid) {
       return;
     }
-    const { name, description, fields } = this.formGroup.controls.table.getRawValue() as Table;
-    const table: Table = {
+    const { name, description, fields } = this.formGroup.controls.table.getRawValue() as TableModel;
+    const table: TableModel = {
       ...this.table,
       name,
       description,
       fields
     };
-    this.tableService.saveOrUpdate(table).subscribe((table: Table) => {
+    this.tableService.saveOrUpdate(table).subscribe((table: TableModel) => {
       this.table = table;
       this.patchValues();
     });

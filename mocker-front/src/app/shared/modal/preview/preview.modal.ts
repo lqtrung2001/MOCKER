@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Injector, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { AbstractModal } from '@core/class/abstract.modal';
+import { AbstractModal } from '@core/common/abstract.modal';
 import { Tab } from '@shared/component/tab/tab.component';
 
 /**

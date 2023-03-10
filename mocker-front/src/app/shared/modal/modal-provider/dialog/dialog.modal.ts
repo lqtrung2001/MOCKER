@@ -1,5 +1,5 @@
 import { Component, Injector } from '@angular/core';
-import { AbstractModal } from '@core/class/abstract.modal';
+import { AbstractModal } from '@core/common/abstract.modal';
 
 /**
  * @author Do Quoc Viet
@@ -67,7 +67,7 @@ export class DialogModal extends AbstractModal {
       default:
         icon = 'fa-solid fa-circle-info';
     }
-    return `${icon} text-${this.color} text-7xl align-middle`;
+    return `${icon} text-${this.color} text-8xl align-middle`;
   }
 
   get isShowBtnCancel(): boolean {

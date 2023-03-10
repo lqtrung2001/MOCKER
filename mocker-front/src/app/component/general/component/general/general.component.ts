@@ -1,12 +1,12 @@
-import { AbstractComponent } from '@core/class/abstract.component';
+import { AbstractComponent } from '@core/common/abstract.component';
 import { Component, Injector } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Action } from '@shared/component/action/action.component';
 import { GenerateService } from '@core/service/generate.service';
-import { Table } from '@core/model/table';
-import { Field } from '@core/model/field';
+import { TableModel } from '@core/domain/model/table.model';
+import { FieldModel } from '@core/domain/model/field.model';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';
-import { ConverterService } from '@app/core/service/utility/converter.service';
+import { ConverterUtil } from '@core/util/converter.util';
 import * as FileSaver from 'file-saver';
 import { PreviewModal, PreviewModalOptions } from '@shared/modal/preview/preview.modal';
 
@@ -35,7 +35,7 @@ export class GeneralComponent extends AbstractComponent {
   constructor(
     injector: Injector,
     private generateService: GenerateService,
-    private converterService: ConverterService
+    private converterService: ConverterUtil
   ) {
     super(injector);
     this.formGroup = this.formBuilder.group({
@@ -54,7 +54,7 @@ export class GeneralComponent extends AbstractComponent {
     if (tableConfigStorage) {
       this.formGroup.patchValue(tableConfigStorage);
       const { table } = tableConfigStorage;
-      table.fields.forEach((field: Field) => {
+      table.fields.forEach((field: FieldModel) => {
         this.formGroup.controls.table.controls.fields.push(this.formBuilder.group({
           name: this.formBuilder.control(field.name, [Validators.required]),
           generateType: this.formBuilder.control(field.generateType, [Validators.required]),
@@ -73,7 +73,7 @@ export class GeneralComponent extends AbstractComponent {
       return;
     }
     localStorage.setItem(LocalStorageConstant.TABLE_CONFIG, JSON.stringify(this.formGroup.getRawValue()));
-    const table: Table = this.formGroup.controls.table.getRawValue() as Table;
+    const table: TableModel = this.formGroup.controls.table.getRawValue() as TableModel;
     if (!this.data.length) {
       this.generateService.generateWithTable(table, this.formGroup.controls.rows.value)
         .subscribe((data: any[]): void => {
@@ -112,7 +112,7 @@ export class GeneralComponent extends AbstractComponent {
       return;
     }
     localStorage.setItem(LocalStorageConstant.TABLE_CONFIG, JSON.stringify(this.formGroup.getRawValue()));
-    const table: Table = this.formGroup.controls.table.getRawValue() as Table;
+    const table: TableModel = this.formGroup.controls.table.getRawValue() as TableModel;
     const format = this.formGroup.controls.format.value;
     if (!this.data.length) {
       this.generateService.generateWithTable(table, this.formGroup.controls.rows.value)

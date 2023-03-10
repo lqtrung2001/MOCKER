@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Strings } from '@shared/util/strings';
+import { StringUtil } from '@core/util/string.util';
 
 /**
  * @author Do Quoc Viet
@@ -13,7 +13,7 @@ import { Strings } from '@shared/util/strings';
 export class TruncatePipe implements PipeTransform {
   transform(value: string | undefined, limit: number): string {
     if (value === undefined) {
-      return Strings.EMPTY;
+      return StringUtil.EMPTY;
     }
     return value?.length > limit ? value.substring(0, limit) + '...' : value;
   }

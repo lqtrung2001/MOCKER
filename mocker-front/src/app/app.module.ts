@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
@@ -7,12 +7,12 @@ import { TRANSLATE } from '@app/app.translate';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@shared/layout/layout.module';
 import { SharedModule } from '@shared/shared.module';
-import { AppHttpService } from '@core/service/app-http.service';
+import { AbstractService } from '@core/service/abstract.service';
 import { AppRoutingModule } from '@app/app-routing.module';
+import { ErrorHandlerConfig } from '@core/config/error-handler.config';
 
 /**
  * @author Do Quoc Viet
- * @date 05/02/2023
  */
 
 @NgModule({
@@ -34,7 +34,10 @@ import { AppRoutingModule } from '@app/app-routing.module';
   providers: [{
     multi: true,
     provide: HTTP_INTERCEPTORS,
-    useClass: AppHttpService
+    useClass: AbstractService
+  }, {
+    provide: ErrorHandler,
+    useClass: ErrorHandlerConfig
   }]
 })
 export class AppModule {

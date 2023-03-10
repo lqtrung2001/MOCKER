@@ -1,6 +1,6 @@
-import { AbstractComponent } from '@core/class/abstract.component';
+import { AbstractComponent } from '@core/common/abstract.component';
 import { Component, Injector } from '@angular/core';
-import { User } from '@core/model/user';
+import { UserModel } from '@core/domain/model/user.model';
 import { UserService } from '@core/service/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
@@ -26,7 +26,7 @@ type Controls = {
   styleUrls: ['person.component.scss']
 })
 export class PersonComponent extends AbstractComponent {
-  user: User;
+  user: UserModel;
   formGroup: FormGroup<Controls>;
   isExistedUsername: boolean = false;
 
@@ -41,7 +41,7 @@ export class PersonComponent extends AbstractComponent {
       apiKey: this.formBuilder.control(undefined, [])
     });
     const id: string = this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.userService.getUser(id).subscribe((user: User) => {
+    this.userService.getUser(id).subscribe((user: UserModel) => {
       this.user = user;
       this.formGroup.patchValue(user);
     });
@@ -61,7 +61,7 @@ export class PersonComponent extends AbstractComponent {
             //   username,
             //   password
             // };
-            // this.modalService.open(VerificationModal, validateOTPModalOptions).onResult().subscribe((user: User) => {
+            // this.modalService.open(VerificationModal, validateOTPModalOptions).onResult().subscribe((user: UserModel) => {
             //   if (user) {
             //     // For set token
             //     localStorage.setItem(LocalStorageConstant.AUTH, JSON.stringify(user));

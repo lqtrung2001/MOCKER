@@ -1,33 +1,28 @@
 import { Injectable } from '@angular/core';
-import { environment } from '@environment/environment';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { GroupMemberPk } from '@core/model/composite_key/group-member-pk';
+import { GroupMemberPkModel } from '@core/domain/model/composite_key/group-member-pk.model';
+import { AbstractService } from '@core/service/abstract.service';
+import { GroupMemberModel } from '@core/domain/model/group-member.model';
+import { HttpMethodEnum } from '@core/domain/enum/http-method.enum';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 @Injectable({
   providedIn: 'root'
 })
-export class GroupMemberService {
+export class GroupMemberService extends AbstractService<GroupMemberModel> {
+  static GROUP_MEMBER_API = 'group-member';
 
-  static GROUP_MEMBER_API = environment.API_URL + '/group-member';
-
-  constructor(
-    private httpClient: HttpClient
-  ) {
-  }
-
-  delete(id: GroupMemberPk): Observable<GroupMemberPk> {
-    return this.httpClient.delete<GroupMemberPk>(`${GroupMemberService.GROUP_MEMBER_API}`, {
+  deleteGroupMember(id: GroupMemberPkModel): Observable<GroupMemberPkModel> {
+    return this.request<GroupMemberPkModel>(HttpMethodEnum.DELETE, `${this.API_URL}/${GroupMemberService.GROUP_MEMBER_API}`, {
       body: id
     });
   }
 
-  addMember(groupMemberPk: GroupMemberPk): Observable<GroupMemberPk> {
-    return this.httpClient.post<GroupMemberPk>(`${GroupMemberService.GROUP_MEMBER_API}`, {
+  addMember(groupMemberPk: GroupMemberPkModel): Observable<GroupMemberPkModel> {
+    return this.request<GroupMemberPkModel>(HttpMethodEnum.POST, `${this.API_URL}/${GroupMemberService.GROUP_MEMBER_API}`, {
       groupId: groupMemberPk.groupId,
       userId: groupMemberPk.userId
     });

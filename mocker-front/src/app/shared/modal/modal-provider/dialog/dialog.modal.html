@@ -1,13 +1,13 @@
 <div id='main' popup [modal]='this' [dialog]='true'>
   <div class='w-150 flex justify-between pt-10 px-5 pb-5 overflow-hidden'>
     <div class='absolute top-0 left-0 bg-{{ color }} w-full h-1.5'></div>
-    <div class='w-1/5 text-center'>
+    <div class='w-1/6'>
       <i [class]='icon'></i>
     </div>
     <div class='w-3/4'>
       <p class='font-bold'>{{ options.title! | translate }}</p>
-      <div *ngIf='options.body' class='text-sm text-justify mt-5'>{{ options.body | translate }}</div>
-      <div *ngIf='!options.body' class='text-sm text-justify mt-5'>{{ options.detail }}</div>
+      <p *ngIf='options.body' class='text-sm mt-2'>{{ options.body | translate }}</p>
+      <p *ngIf='!options.body' class='text-sm mt-2 overflow-auto' [innerHTML]='options.detail'></p>
       <div class='flex flex-row-reverse mt-5'>
         <div class='flex text-sm justify-end'>
           <moc-button (click)='modalInstance.close(false)' *ngIf='isShowBtnCancel'

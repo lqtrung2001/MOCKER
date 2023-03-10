@@ -1,27 +1,21 @@
-import { Injectable, Injector } from '@angular/core';
-import { Category } from '@core/model/category';
+import { Injectable } from '@angular/core';
+import { CategoryModel } from '@core/domain/model/category.model';
 import { Observable } from 'rxjs';
-import { environment } from '@environment/environment';
-import { AppHttpService } from '@core/service/app-http.service';
-import { HttpMethod } from '@core/class/enum/http-method';
+import { AbstractService } from '@core/service/abstract.service';
+import { HttpMethodEnum } from '@core/domain/enum/http-method.enum';
 
 /**
  * @author Do Quoc Viet
- * @class CategoryService
  */
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService extends AppHttpService<Category> {
-  constructor(
-    injector: Injector
-  ) {
-    super(injector);
-  }
+export class CategoryService extends AbstractService<CategoryModel> {
+  static CATEGORY_API = 'category';
 
-  getCategories(): Observable<Category[]> {
-    return this.request<Category[]>(HttpMethod.GET, `${environment.API_URL}/category`);
+  getCategories(): Observable<CategoryModel[]> {
+    return this.request<CategoryModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${CategoryService.CATEGORY_API}`);
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, Injector, Input } from '@angular/core';
-import { AbstractSharedComponent } from '@shared/component/abstract-shared/abstract-shared.component';
+import { AbstractSharedComponent } from '@shared/component/common/abstract-shared.component';
 import { ControlValueAccessor, FormControl } from '@angular/forms';
 
 /**

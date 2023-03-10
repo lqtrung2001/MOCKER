@@ -1,6 +1,6 @@
-import { AbstractComponent } from '@core/class/abstract.component';
+import { AbstractComponent } from '@core/common/abstract.component';
 import { Component, Injector, OnInit } from '@angular/core';
-import { Schema } from '@core/model/schema';
+import { SchemaModel } from '@core/domain/model/schema.model';
 import { SchemaService } from '@core/service/schema.service';
 
 /**
@@ -14,7 +14,7 @@ import { SchemaService } from '@core/service/schema.service';
   styleUrls: ['schemas.component.scss']
 })
 export class SchemasComponent extends AbstractComponent implements OnInit {
-  schemas: Schema[] = [];
+  schemas: SchemaModel[] = [];
   selects: string[] = [];
 
   constructor(
@@ -25,7 +25,7 @@ export class SchemasComponent extends AbstractComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.schemaService.getSchemas().subscribe((schemas: Schema[]): void => {
+    this.schemaService.getSchemas().subscribe((schemas: SchemaModel[]): void => {
       this.schemas = schemas;
     });
   }
@@ -50,7 +50,7 @@ export class SchemasComponent extends AbstractComponent implements OnInit {
     if (this.isSelectAll) {
       this.selects = [];
     } else {
-      this.selects = this.schemas.map((schema: Schema) => schema.id);
+      this.selects = this.schemas.map((schema: SchemaModel) => schema.id);
     }
   }
 
