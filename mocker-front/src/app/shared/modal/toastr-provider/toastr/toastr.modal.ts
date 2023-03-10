@@ -1,4 +1,4 @@
-import { AbstractModal } from '@core/class/abstract.modal';
+import { AbstractModal } from '@core/common/abstract.modal';
 import { AfterViewInit, Component, Injector } from '@angular/core';
 import { ToastrProvider } from '@shared/modal/toastr-provider/toastr-provider';
 

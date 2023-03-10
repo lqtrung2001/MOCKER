@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Injector } from '@angular/core';
-import { AbstractComponent } from '@core/class/abstract.component';
+import { AbstractComponent } from '@core/common/abstract.component';
 
 /**
  * @author Do Quoc Viet

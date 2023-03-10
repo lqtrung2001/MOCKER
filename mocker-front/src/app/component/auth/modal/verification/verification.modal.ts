@@ -1,8 +1,8 @@
-import { AbstractModal } from '@core/class/abstract.modal';
+import { AbstractModal } from '@core/common/abstract.modal';
 import { Component, Injector } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from '@core/service/auth.service';
-import { User } from '@core/model/user';
+import { UserModel } from '@core/domain/model/user.model';
 import { catchError, of } from 'rxjs';
 import {
   ChangePasswordModal,
@@ -41,13 +41,13 @@ export class VerificationModal extends AbstractModal {
       this.isInvalidVerificationCode = false;
       if (verificationCode?.length === 5 && !this.verificationCode.invalid) {
         this.authService.verifyAndSave(verificationCode, {
-          ...new User(),
+          ...new UserModel(),
           username: this.options.username,
           password: this.options.password!
         }).pipe(catchError(() => {
           this.isInvalidVerificationCode = true;
-          return of(new User());
-        })).subscribe((user: User) => {
+          return of(new UserModel());
+        })).subscribe((user: UserModel) => {
           if (user) {
             if (this.options.password) {
               // Sign up

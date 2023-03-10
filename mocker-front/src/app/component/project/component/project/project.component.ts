@@ -1,9 +1,9 @@
 import { Component, Injector, TemplateRef, ViewChild } from '@angular/core';
 import { ProjectService } from '@app/core/service/project.service';
-import { AbstractComponent } from '@core/class/abstract.component';
-import { Project } from '@core/model/project';
+import { AbstractComponent } from '@core/common/abstract.component';
+import { ProjectModel } from '@core/domain/model/project.model';
 import { Tab } from '@shared/component/tab/tab.component';
-import { Schema } from '@core/model/schema';
+import { SchemaModel } from '@core/domain/model/schema.model';
 import { SchemaService } from '@core/service/schema.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -24,7 +24,7 @@ type Controls = {
 export class ProjectComponent extends AbstractComponent {
   @ViewChild('resources') resources: TemplateRef<any>;
   @ViewChild('settings') settings: TemplateRef<any>;
-  project: Project;
+  project: ProjectModel;
   isNew: boolean = false;
   formGroup: FormGroup<Controls>;
 
@@ -40,11 +40,11 @@ export class ProjectComponent extends AbstractComponent {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.isNew = !id;
     if (id) {
-      this.projectService.getProject(id).subscribe((project: Project): void => {
+      this.projectService.getProject(id).subscribe((project: ProjectModel): void => {
         this.project = project;
         this.formGroup.patchValue(project);
         // TODO check this endpoint
-        this.schemaService.getSchemasByProject(id).subscribe((schemas: Schema[]): void => {
+        this.schemaService.getSchemasByProject(id).subscribe((schemas: SchemaModel[]): void => {
           this.project.schemas = schemas;
         });
       });

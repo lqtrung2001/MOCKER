@@ -6,7 +6,11 @@
     "cancel": "Cancel",
     "save": "Save"
   },
-  "message": {
+  "error": {
+    "authentication": {
+      "title": "Authentication Error",
+      "message": "The current user is not authenticated to access this page. Please sign-in and try again."
+    }
   },
   "validator": {
     "required": "This field is required.",
@@ -112,11 +116,6 @@
     "login_failure": "Login failed!"
   },
   "modal": {
-    "error": {
-      "no_permission": "You are not allowed to access this action.",
-      "system_error": "A error occurred while performing this action, please try again later or contact the administrator.",
-      "invalid_username_or_password": "The username or password you entered is invalid."
-    },
     "verification": {
       "check_email": "Check your inbox to login",
       "instruction": "To complete setup and sign in, please enter the verification code in the email we've sent to",
@@ -158,7 +157,7 @@
     },
     "table_config": {
       "title": "TABLE CONFIGURATION:",
-      "table_name":"Table Name:",
+      "table_name": "Table Name:",
       "table_name_placeholder": "Table name",
       "rows": "Rows:",
       "rows_placeholder": "Rows",

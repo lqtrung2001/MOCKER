@@ -22,13 +22,13 @@ public class ApiExceptionHandler {
     public ResponseEntity<ErrorDto> handleAuthenticationException(AuthenticationException e) {
         ErrorDto errorDto = new ErrorDto();
         errorDto.setTimestamp(ZonedDateTime.now(ZoneId.of("UTC")).toString());
-        errorDto.setStatus(HttpStatus.UNAUTHORIZED.value());
-        errorDto.setError(HttpStatus.UNAUTHORIZED.name());
+        errorDto.setStatus(HttpStatus.FORBIDDEN.value());
+        errorDto.setError(HttpStatus.FORBIDDEN.name());
         errorDto.setMessage(getMessage(AuthenticationException.class));
         errorDto.setPath(e.getStackTrace()[0].toString());
         errorDto.setCode(ErrorDto.CodeEnum.AUTHENTICATION_EXCEPTION);
         errorDto.setAdditionalMessage(e.getMessage());
-        return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(errorDto, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(value = {BadRequestException.class})
@@ -48,7 +48,6 @@ public class ApiExceptionHandler {
     public ResponseEntity<ErrorDto> handleConflictException(ConflictException e) {
         return getError(HttpStatus.CONFLICT, e.getMessage(), e.getStackTrace()[0].toString());
     }
-
 
     @ExceptionHandler(value = {InternalException.class})
     public ResponseEntity<ErrorDto> handleInternalException(InternalException e) {

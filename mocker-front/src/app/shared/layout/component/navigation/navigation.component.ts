@@ -1,5 +1,5 @@
 import { Component, Injector } from '@angular/core';
-import { AbstractComponent } from '@core/class/abstract.component';
+import { AbstractComponent } from '@core/common/abstract.component';
 import { Action } from '@shared/component/action/action.component';
 
 /**

@@ -1,4 +1,4 @@
-import { AbstractComponent } from '@core/class/abstract.component';
+import { AbstractComponent } from '@core/common/abstract.component';
 import { AfterViewInit, Component, ElementRef, Injector, Input, TemplateRef, ViewChild } from '@angular/core';
 
 /**

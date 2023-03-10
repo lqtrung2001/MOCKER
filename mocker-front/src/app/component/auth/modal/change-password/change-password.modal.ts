@@ -1,8 +1,8 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
-import { AbstractModal } from '@core/class/abstract.modal';
+import { AbstractModal } from '@core/common/abstract.modal';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@core/service/auth.service';
-import { User } from '@core/model/user';
+import { UserModel } from '@core/domain/model/user.model';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 import { ToastrProvider } from '@shared/modal/toastr-provider/toastr-provider';
 
@@ -71,7 +71,7 @@ export class ChangePasswordModal extends AbstractModal implements OnInit, AfterV
       return;
     }
     const { oldPassword, newPassword } = this.formGroup.getRawValue();
-    this.authService.changePassword(this.options.id, oldPassword, newPassword).subscribe((user: User) => {
+    this.authService.changePassword(this.options.id, oldPassword, newPassword).subscribe((user: UserModel) => {
       if (user) {
         user.password = newPassword;
         this.appConfigService.user = user;

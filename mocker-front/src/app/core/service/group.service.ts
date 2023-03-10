@@ -1,36 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '@environment/environment';
-import { Group } from '@core/model/group';
+import { GroupModel } from '@core/domain/model/group.model';
+import { AbstractService } from '@core/service/abstract.service';
+import { HttpMethodEnum } from '@core/domain/enum/http-method.enum';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 @Injectable({
   providedIn: 'root'
 })
-export class GroupService {
+export class GroupService extends AbstractService<GroupModel> {
+  static GROUP_API = 'group';
 
-  constructor(
-    private httpClient: HttpClient
-  ) {
+  getGroupsWithAccess(): Observable<GroupModel[]> {
+    return this.request<GroupModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${GroupService.GROUP_API}`);
   }
 
-  getGroupsWithAccess(): Observable<Group[]> {
-    return this.httpClient.get<Group[]>(`${environment.API_URL}/group`);
+  getGroup(id: string): Observable<GroupModel> {
+    return this.get(`${this.API_URL}/${GroupService.GROUP_API}/${id}`);
   }
 
-  getGroup(id: string): Observable<Group> {
-    return this.httpClient.get<Group>(`${environment.API_URL}/group/${id}`);
+  saveOrUpdate(group: GroupModel): Observable<string> {
+    return this.request<string>(HttpMethodEnum.POST, `${this.API_URL}/${GroupService.GROUP_API}`, group);
   }
 
-  saveOrUpdate(group: Group): Observable<string> {
-    return this.httpClient.post<string>(`${environment.API_URL}/group`, group);
-  }
-
-  delete(id: string): Observable<string> {
-    return this.httpClient.delete<string>(`${environment.API_URL}/group/${id}`);
+  deleteGroup(id: string): Observable<string> {
+    return this.request<string>(HttpMethodEnum.DELETE, `${this.API_URL}/${GroupService.GROUP_API}/${id}`);
   }
 }

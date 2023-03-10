@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ConverterService } from '@core/service/utility/converter.service';
+import { ConverterUtil } from '@core/util/converter.util';
 
 /**
  * @author Do Quoc Viet
@@ -12,7 +12,7 @@ import { ConverterService } from '@core/service/utility/converter.service';
 })
 export class CsvPipe implements PipeTransform {
   constructor(
-    private converterService: ConverterService
+    private converterService: ConverterUtil
   ) {
   }
 

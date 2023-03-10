@@ -1,7 +1,7 @@
 import { Component, Injector } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AbstractComponent } from '@core/class/abstract.component';
-import { User } from '@core/model/user';
+import { AbstractComponent } from '@core/common/abstract.component';
+import { UserModel } from '@core/domain/model/user.model';
 import { UserService } from '@core/service/user.service';
 import { AuthService } from '@core/service/auth.service';
 import { AuthConstant, SignInMethod } from '@app/component/auth/auth.constant';
@@ -53,7 +53,7 @@ export class SignInComponent extends AbstractComponent {
     this.authService.signIn(username!, password!).subscribe((userAgent: string) => {
       if (userAgent) {
         this.userService.findOneByUsername(userAgent)
-          .subscribe((user: User) => {
+          .subscribe((user: UserModel) => {
             if (user) {
               user.password = password;
               localStorage.setItem(LocalStorageConstant.AUTH, JSON.stringify(user));

@@ -1,8 +1,8 @@
 import { Component, Injector } from '@angular/core';
-import { AbstractComponent } from '@core/class/abstract.component';
-import { Schema } from '@core/model/schema';
+import { AbstractComponent } from '@core/common/abstract.component';
+import { SchemaModel } from '@core/domain/model/schema.model';
 import { SchemaService } from '@core/service/schema.service';
-import { Table } from '@core/model/table';
+import { TableModel } from '@core/domain/model/table.model';
 
 /**
  * @author Do Quoc Viet
@@ -14,7 +14,7 @@ import { Table } from '@core/model/table';
   styleUrls: ['schema.component.scss']
 })
 export class SchemaComponent extends AbstractComponent {
-  schema: Schema;
+  schema: SchemaModel;
 
   constructor(
     injector: Injector,
@@ -23,19 +23,19 @@ export class SchemaComponent extends AbstractComponent {
     super(injector);
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
-      this.schemaService.getSchema(id).subscribe((schema: Schema): void => {
+      this.schemaService.getSchema(id).subscribe((schema: SchemaModel): void => {
         this.schema = schema;
       });
     }
   }
 
-  get tables(): Table[] {
+  get tables(): TableModel[] {
     if (!this.schema) {
       return [];
     }
     const { tables, ...schema } = this.schema;
-    return tables.map((table: Table) => {
-      table.schema = schema as Schema;
+    return tables.map((table: TableModel) => {
+      table.schema = schema as SchemaModel;
       return table;
     });
   }

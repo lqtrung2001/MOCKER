@@ -1,6 +1,6 @@
 import { Component, Injector, Input } from '@angular/core';
-import { AbstractSharedComponent } from '@shared/component/abstract-shared/abstract-shared.component';
-import { Table } from '@core/model/table';
+import { AbstractSharedComponent } from '@shared/component/common/abstract-shared.component';
+import { TableModel } from '@core/domain/model/table.model';
 import { TableConfigModal, TableConfigModalOptions } from '@app/component/schema/modal/table-config/table-config.modal';
 import { TableService } from '@core/service/table.service';
 
@@ -14,7 +14,7 @@ import { TableService } from '@core/service/table.service';
   styleUrls: ['table.component.scss']
 })
 export class TableComponent extends AbstractSharedComponent {
-  @Input() table: Table;
+  @Input() table: TableModel;
 
   constructor(
     injector: Injector,
@@ -37,7 +37,7 @@ export class TableComponent extends AbstractSharedComponent {
 
   private refresh() {
     this.tableService.getTable(this.table.id)
-      .subscribe((table: Table): void => {
+      .subscribe((table: TableModel): void => {
         this.table = table;
       });
   }

@@ -1,6 +1,6 @@
-import { AbstractComponent } from '@core/class/abstract.component';
+import { AbstractComponent } from '@core/common/abstract.component';
 import { Component, Injector, OnInit } from '@angular/core';
-import { Project } from '@core/model/project';
+import { ProjectModel } from '@core/domain/model/project.model';
 import { ProjectService } from '@app/core/service/project.service';
 
 /**
@@ -14,7 +14,7 @@ import { ProjectService } from '@app/core/service/project.service';
   styleUrls: ['projects.component.scss']
 })
 export class ProjectsComponent extends AbstractComponent implements OnInit {
-  projects: Project[] = [];
+  projects: ProjectModel[] = [];
   selects: string[] = [];
 
   constructor(
@@ -25,7 +25,7 @@ export class ProjectsComponent extends AbstractComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.projectService.getProjects().subscribe((projects: Project[]): void => {
+    this.projectService.getProjects().subscribe((projects: ProjectModel[]): void => {
       this.projects = projects;
     });
   }
@@ -50,7 +50,7 @@ export class ProjectsComponent extends AbstractComponent implements OnInit {
     if (this.isSelectAll) {
       this.selects = [];
     } else {
-      this.selects = this.projects.map((project: Project) => project.id);
+      this.selects = this.projects.map((project: ProjectModel) => project.id);
     }
   }
 

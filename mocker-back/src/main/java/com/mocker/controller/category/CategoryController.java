@@ -25,7 +25,7 @@ public class CategoryController implements CategoryApi {
     private final CategoryService categoryService;
 
     @Override
-    public ResponseEntity<List<CategoryDto>> getCategories() throws NotFoundException {
+    public ResponseEntity<List<CategoryDto>> getCategories() {
         return ResponseEntity.ok(categoryService.getCategoriesFetchGenerateTypes().stream()
                 .map(apiCategoryMapper::map).collect(Collectors.toList()));
     }

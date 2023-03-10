@@ -1,6 +1,6 @@
 import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
 import { ControlValueAccessor, FormControl } from '@angular/forms';
-import { AbstractSharedComponent } from '@shared/component/abstract-shared/abstract-shared.component';
+import { AbstractSharedComponent } from '@shared/component/common/abstract-shared.component';
 
 /**
  * @author Do Quoc Viet

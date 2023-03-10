@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ConverterService } from '@core/service/utility/converter.service';
-import { Strings } from '@shared/util/strings';
+import { ConverterUtil } from '@core/util/converter.util';
+import { StringUtil } from '@core/util/string.util';
 
 /**
  * @author Do Quoc Viet
@@ -13,12 +13,12 @@ import { Strings } from '@shared/util/strings';
 })
 export class SqlPipe implements PipeTransform {
   constructor(
-    private converterService: ConverterService
+    private converterService: ConverterUtil
   ) {
   }
 
   transform(array: string[], tableName: string): string {
-    return this.converterService.toSQL(array, tableName).join(Strings.EMPTY);
+    return this.converterService.toSQL(array, tableName).join(StringUtil.EMPTY);
   }
 
 }
