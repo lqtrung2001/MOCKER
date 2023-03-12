@@ -3,7 +3,7 @@ import { ProjectModel } from '@core/domain/model/project.model';
 import { TableModel } from '@core/domain/model/table.model';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 export class SchemaModel extends BaseModel {

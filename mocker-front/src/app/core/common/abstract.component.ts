@@ -20,7 +20,7 @@ export abstract class AbstractComponent {
   protected modalService: ModalService;
   protected formBuilder: FormBuilder;
   protected translateService: TranslateService;
-  protected toastProvider: ToastrProvider;
+  protected toastrProvider: ToastrProvider;
 
   protected constructor(injector: Injector) {
     this.appConfigService = injector.get(ApplicationConfig);
@@ -30,7 +30,7 @@ export abstract class AbstractComponent {
     this.modalService = injector.get(ModalService);
     this.formBuilder = injector.get(FormBuilder);
     this.translateService = injector.get(TranslateService);
-    this.toastProvider = injector.get(ToastrProvider);
+    this.toastrProvider = injector.get(ToastrProvider);
   }
 
 }

@@ -2,7 +2,7 @@
 
 #main {
 
-  input:focus {
+  input:focus, textarea:focus {
     @apply border-2;
     border-color: $primary-color;
   }

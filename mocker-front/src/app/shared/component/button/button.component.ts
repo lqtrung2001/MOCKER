@@ -1,11 +1,9 @@
 import { Component, Injector, Input } from '@angular/core';
 import { AbstractSharedComponent } from '@shared/component/common/abstract-shared.component';
-import { ControlValueAccessor, FormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 /**
  * @author Do Quoc Viet
- * @class ButtonComponent
- * @date 12/02/2023
  */
 
 @Component({
@@ -13,7 +11,7 @@ import { ControlValueAccessor, FormControl } from '@angular/forms';
   templateUrl: 'button.component.html',
   styleUrls: ['button.component.scss']
 })
-export class ButtonComponent extends AbstractSharedComponent implements ControlValueAccessor {
+export class ButtonComponent extends AbstractSharedComponent {
   @Input() label: string;
   @Input() styles: string;
   @Input() icon: string;
@@ -28,18 +26,6 @@ export class ButtonComponent extends AbstractSharedComponent implements ControlV
 
   get isValidated(): boolean {
     return this.clicked || this.control?.touched || this.control?.dirty;
-  }
-
-  registerOnChange(fn: any): void {
-  }
-
-  registerOnTouched(fn: any): void {
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-  }
-
-  writeValue(obj: any): void {
   }
 
 }

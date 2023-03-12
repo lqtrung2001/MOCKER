@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       backgroundColor: {
         'blue': '#4285F4',
+        'blue-light': '#c7d6ff',
         'blue-solid': '#172B4D',
         'gray': '#F0F2F5',
         'green': '#00CA4E',
@@ -24,6 +25,9 @@ module.exports = {
       },
       maxHeight: {
         '150': '600px'
+      },
+      minHeight: {
+        '26': '104px'
       },
       minWidth: {
         '300': '1200px'
