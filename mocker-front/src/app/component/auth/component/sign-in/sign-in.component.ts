@@ -59,7 +59,7 @@ export class SignInComponent extends AbstractComponent {
               localStorage.setItem(LocalStorageConstant.AUTH, JSON.stringify(user));
               this.appConfigService.user = user;
               this.router.navigate(['/']).then(() => {
-                this.toastProvider.showSuccess({
+                this.toastrProvider.showSuccess({
                   title: 'Login',
                   body: 'Login successfully'
                 });
@@ -73,7 +73,7 @@ export class SignInComponent extends AbstractComponent {
   }
 
   signInWithMethod(signInMethod: SignInMethod): void {
-    this.toastProvider.showInformation({
+    this.toastrProvider.showInformation({
       body: 'This method not available in the application right now. Please try again later.'
     });
   }

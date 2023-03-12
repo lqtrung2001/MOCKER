@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, Injector, Input } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ChooseTypeModal, ChooseTypeModalOptions } from '@shared/modal/choose-type/choose-type.modal';
 import { GenerateTypeModel } from '@core/domain/model/generate-type.model';
@@ -23,7 +23,7 @@ export type Controls = {
   templateUrl: 'table-detail.component.html',
   styleUrls: ['table-detail.component.scss']
 })
-export class TableDetailComponent extends AbstractSharedComponent implements OnInit {
+export class TableDetailComponent extends AbstractSharedComponent {
   @Input('table') formGroup: FormGroup<{
     name: FormControl;
     fields: FormArray<FormGroup<Controls>>;
@@ -33,15 +33,6 @@ export class TableDetailComponent extends AbstractSharedComponent implements OnI
     injector: Injector
   ) {
     super(injector);
-  }
-
-  ngOnInit(): void {
-    // Default values is 3 fields
-    if (!this.formGroup.controls.fields.length) {
-      this.insertField();
-      this.insertField();
-      this.insertField();
-    }
   }
 
   insertField(): void {

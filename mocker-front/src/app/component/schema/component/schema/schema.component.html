@@ -1,5 +1,29 @@
-<div id='main' class='viewport-width-standard mx-auto text-sm'>
-  <div class='flex flex-wrap'>
-    <moc-table class='mt-20 m-5' *ngFor='let table of tables' [table]='table'></moc-table>
+<div id='main' class='flex text-sm h-[calc(100vh_-_57px)]'>
+  <div class='w-96 h-full border border-t-0 p-5'>
+    <p class='text-3xl font-medium'>{{ 'component.schema.schema' | translate }}</p>
+    <div>
+      <moc-field label='component.schema.name' [control]='formGroup.controls.name'></moc-field>
+      <moc-field [textArea]='true' label='component.schema.description' selfClass='h-32 overflow-auto'
+                 [control]='formGroup.controls.description'></moc-field>
+      <div class='mt-3 flex justify-between items-center'>
+        <moc-button (click)='submit()' icon='fa-solid fa-floppy-disk' class='w-49/100 inline'
+                    label='component.schema.save'
+                    selfClass='btn-primary text-left'></moc-button>
+        <moc-button (click)='delete()' icon='fa-solid fa-trash' class='w-49/100 inline'
+                    label='component.schema.delete'
+                    selfClass='btn-red text-left'></moc-button>
+      </div>
+    </div>
+    <div>
+      <p class='font-medium mt-5'>{{ 'component.schema.project_information' | translate }}</p>
+      <a routerLink='/project/{{ schema ? schema.project.id : undefined }}'
+         class='uppercase font-medium mt-3 inline-block underline hover:text-blue cursor-pointer'>{{ schema ? schema.project.name : undefined }}</a>
+      <p class='mt-3'>{{ schema ? schema.project.description : undefined }}</p>
+    </div>
+  </div>
+  <div class='p-5'>
+    <moc-button (click)='createTable()' class='w-44 inline-block' icon='fa-solid fa-folder-plus'
+                label='component.schema.create_table' selfClass='btn-primary text-left'></moc-button>
+    <moc-diagram [tables]='tables'></moc-diagram>
   </div>
 </div>

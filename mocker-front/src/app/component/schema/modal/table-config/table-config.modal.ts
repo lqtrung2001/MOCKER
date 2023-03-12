@@ -4,6 +4,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TableModel } from '@core/domain/model/table.model';
 import { TableService } from '@core/service/table.service';
 import { FieldModel } from '@core/domain/model/field.model';
+import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 
 /**
  * @author Do Quoc Viet
@@ -70,7 +71,14 @@ export class TableConfigModal extends AbstractModal implements OnInit {
 
   submit(): void {
     this.formGroup.markAllAsTouched();
-    if (this.formGroup.invalid) {
+    this.formGroup.controls.table.controls.fields.markAllAsTouched();
+    if (this.formGroup.invalid || this.formGroup.controls.table.controls.fields.invalid) {
+      return;
+    }
+    if (!this.formGroup.controls.table.controls.fields.length) {
+      this.modalProvider.showWarning({
+        body: 'warning.table_is_empty'
+      });
       return;
     }
     const { name, description, fields } = this.formGroup.controls.table.getRawValue() as TableModel;

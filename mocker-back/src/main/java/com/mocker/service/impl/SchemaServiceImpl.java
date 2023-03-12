@@ -1,8 +1,6 @@
 package com.mocker.service.impl;
 
 import com.mocker.configuration.security.ApplicationContextHolder;
-import com.mocker.domain.exception.AuthenticationException;
-import com.mocker.domain.exception.InternalException;
 import com.mocker.domain.model.entity.Schema;
 import com.mocker.domain.model.entity.Table;
 import com.mocker.repository.SchemaRepository;
@@ -35,8 +33,8 @@ public class SchemaServiceImpl implements SchemaService {
     }
 
     @Override
-    public UUID saveOrUpdate(Schema schema) {
-        return schemaRepository.save(schema).getId();
+    public Schema saveOrUpdate(Schema schema) {
+        return schemaRepository.save(schema);
     }
 
     @Override

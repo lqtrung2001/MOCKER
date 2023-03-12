@@ -22,12 +22,12 @@ export class SchemaService extends AbstractService<SchemaModel> {
     return this.request<SchemaModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${SchemaService.SCHEMA_API}`);
   }
 
-  saveOrUpdate(schema: SchemaModel): Observable<string> {
-    return this.httpClient.post<string>(`${this.API_URL}/${SchemaService.SCHEMA_API}`, schema);
+  saveOrUpdate(schema: SchemaModel): Observable<SchemaModel> {
+    return this.post(`${this.API_URL}/${SchemaService.SCHEMA_API}`, schema);
   }
 
   deleteSchema(id: string): Observable<string> {
-    return this.httpClient.delete<string>(`${this.API_URL}/${SchemaService.SCHEMA_API}/${id}`);
+    return this.request<string>(HttpMethodEnum.DELETE, `${this.API_URL}/${SchemaService.SCHEMA_API}/${id}`);
   }
 
   getSchema(id: string): Observable<SchemaModel> {

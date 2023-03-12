@@ -1,5 +1,6 @@
 package com.mocker.controller.schema;
 
+import com.mocker.controller.table.ApiTableMapper;
 import com.mocker.domain.dto.GroupDto;
 import com.mocker.domain.dto.ProjectDto;
 import com.mocker.domain.dto.SchemaDto;

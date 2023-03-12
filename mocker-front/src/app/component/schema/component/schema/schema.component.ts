@@ -3,10 +3,17 @@ import { AbstractComponent } from '@core/common/abstract.component';
 import { SchemaModel } from '@core/domain/model/schema.model';
 import { SchemaService } from '@core/service/schema.service';
 import { TableModel } from '@core/domain/model/table.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TableConfigModal } from '@app/component/schema/modal/table-config/table-config.modal';
 
 /**
  * @author Do Quoc Viet
  */
+
+type Controls = {
+  name: FormControl;
+  description: FormControl;
+}
 
 @Component({
   selector: 'moc-schema',
@@ -15,16 +22,22 @@ import { TableModel } from '@core/domain/model/table.model';
 })
 export class SchemaComponent extends AbstractComponent {
   schema: SchemaModel;
+  formGroup: FormGroup<Controls>;
 
   constructor(
     injector: Injector,
     private schemaService: SchemaService
   ) {
     super(injector);
+    this.formGroup = this.formBuilder.group({
+      name: this.formBuilder.control(undefined, [Validators.required]),
+      description: this.formBuilder.control(undefined, [Validators.required])
+    });
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
       this.schemaService.getSchema(id).subscribe((schema: SchemaModel): void => {
         this.schema = schema;
+        this.formGroup.patchValue(schema);
       });
     }
   }
@@ -37,7 +50,49 @@ export class SchemaComponent extends AbstractComponent {
     return tables.map((table: TableModel) => {
       table.schema = schema as SchemaModel;
       return table;
+    }).filter((table: TableModel): boolean => !!table.fields.length);
+  }
+
+  submit(): void {
+    this.formGroup.markAllAsTouched();
+    if (this.formGroup.invalid) {
+      return;
+    }
+    this.schema = {
+      ...this.schema,
+      ...this.formGroup.getRawValue()
+    };
+    this.schemaService.saveOrUpdate(this.schema).subscribe((schema: SchemaModel): void => {
+      this.schemaService.getSchema(schema.id).subscribe((schema: SchemaModel): void => {
+        this.schema = schema;
+        this.formGroup.patchValue(schema);
+      });
+      this.toastrProvider.showSuccess({
+        body: 'message.schema_save_success'
+      });
     });
+  }
+
+  delete(): void {
+    this.modalProvider.showConfirmation({
+      body: 'message.schema_delete_confirm'
+    }).subscribe((result: boolean): void => {
+      if (result) {
+        this.schemaService.deleteSchema(this.schema.id).subscribe((id: string): void => {
+          if (id) {
+            const detail: string = this.translateService.instant('message.schema_delete_success', { name: this.schema.name });
+            this.toastrProvider.showSuccess({
+              detail
+            });
+            this.router.navigate(['/schema']).then();
+          }
+        });
+      }
+    });
+  }
+
+  createTable(): void {
+    this.modalService.open(TableConfigModal, {});
   }
 
 }

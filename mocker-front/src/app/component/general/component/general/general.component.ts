@@ -40,7 +40,7 @@ export class GeneralComponent extends AbstractComponent {
     super(injector);
     this.formGroup = this.formBuilder.group({
       table: this.formBuilder.group({
-        name: this.formBuilder.control(undefined, [Validators.required]),
+        name: this.formBuilder.control('MOCKER', [Validators.required]),
         fields: this.formBuilder.array<FormGroup<Controls>>([])
       }),
       rows: this.formBuilder.control(1, [Validators.required]),
@@ -49,7 +49,6 @@ export class GeneralComponent extends AbstractComponent {
     this.formGroup.valueChanges.subscribe(() => {
       this.data = [];
     });
-    // TODO check JSON.parse method
     const tableConfigStorage = JSON.parse(localStorage.getItem(LocalStorageConstant.TABLE_CONFIG) || 'false');
     if (tableConfigStorage) {
       this.formGroup.patchValue(tableConfigStorage);
@@ -70,6 +69,12 @@ export class GeneralComponent extends AbstractComponent {
   download(): void {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.invalid) {
+      return;
+    }
+    if (!this.formGroup.controls.table.controls.fields.length) {
+      this.modalProvider.showWarning({
+        body: 'warning.fields_empty_when_generating'
+      });
       return;
     }
     localStorage.setItem(LocalStorageConstant.TABLE_CONFIG, JSON.stringify(this.formGroup.getRawValue()));

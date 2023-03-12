@@ -1,7 +1,8 @@
 <div id='main' class='text-sm {{ class }}'>
   <p *ngIf='label' class='font-medium pl-2.5 mt-4 mb-2'>{{ label | translate }}</p>
   <div class='relative'>
-    <input #inputElement
+    <input *ngIf='!textArea' #inputElement
+           [readonly]='readonly'
            [formControl]='control'
            [placeholder]='placeholder || ""'
            [style]='styles'
@@ -11,6 +12,14 @@
            [minlength]='minLength'
            [maxlength]='maxLength'
            class='{{ selfClass }} {{ (isValidated && control.invalid) ? "invalid" : "" }} border p-2.5 rounded w-full'/>
+    <textarea *ngIf='textArea' #inputElement
+              [readonly]='readonly'
+              [formControl]='control'
+              [placeholder]='placeholder || ""'
+              [style]='styles'
+              [minlength]='minLength'
+              [maxlength]='maxLength'
+              class='{{ selfClass }} {{ (isValidated && control.invalid) ? "invalid" : "" }} border p-2.5 rounded w-full'></textarea>
     <div (click)='showPasswordChange()'
          *ngIf='isShowEye'
          class='absolute right-3 top-4 cursor-pointer text-lg'>

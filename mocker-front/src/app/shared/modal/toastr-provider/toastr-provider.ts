@@ -10,7 +10,6 @@ import {
 
 /**
  * @author Do Quoc Viet
- * @date 01/02/2023
  */
 
 @Injectable({
@@ -73,18 +72,18 @@ export class ToastrProvider {
     const index: number = Math.random();
     this.toastrPositions.forEach((toastrPosition: ToastrPosition, i) => {
       i++;
-      toastrPosition.bottom = i * 170 + 40;
+      toastrPosition.bottom = i;
       toastrPosition.zIndex = 100 - i;
     });
     this.toastrPositions.unshift({
       id: index,
-      bottom: 40,
+      bottom: 0,
       zIndex: 100
     });
     return index;
   }
 
-  show(toastrModalCustomOptions: ToastrModalCustomOptions): void {
+  private show(toastrModalCustomOptions: ToastrModalCustomOptions): void {
     this.modalService.open(ToastrModal, toastrModalCustomOptions);
   }
 
