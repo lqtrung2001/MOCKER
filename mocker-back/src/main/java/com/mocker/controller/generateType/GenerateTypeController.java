@@ -2,6 +2,7 @@ package com.mocker.controller.generateType;
 
 import com.mocker.api.GenerateTypeApi;
 import com.mocker.configuration.security.ApplicationContextHolder;
+import com.mocker.controller.generate.ApiGenerateMapper;
 import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.GenerateTypeDto;
 import com.mocker.domain.exception.InternalException;
@@ -27,24 +28,25 @@ import java.util.stream.Collectors;
 public class GenerateTypeController implements GenerateTypeApi {
 
     private final ApiAbstractMapper apiAbstractMapper;
+    private final ApiGenerateMapper apiGenerateMapper;
     private final GenerateTypeService generateTypeService;
     private final ApplicationContextHolder applicationContextHolder;
 
     @Override
     public ResponseEntity<GenerateTypeDto> getGenerateType(UUID id) throws InternalException {
-        return ResponseEntity.ok(apiAbstractMapper.map(generateTypeService.getGenerateType(id)));
+        return ResponseEntity.ok(apiGenerateMapper.map(generateTypeService.getGenerateType(id)));
     }
 
     @Override
     public ResponseEntity<List<GenerateTypeDto>> getGenerateTypesBySQLType(UUID sqlTypeId) throws NotFoundException {
         return ResponseEntity.ok(generateTypeService.getGenerateTypesBySQLType(sqlTypeId)
-                .stream().map(apiAbstractMapper::map).collect(Collectors.toList()));
+                .stream().map(apiGenerateMapper::map).collect(Collectors.toList()));
     }
 
     @Override
     public ResponseEntity<List<GenerateTypeDto>> getGenerateTypes() throws InternalException {
         User user = applicationContextHolder.getCurrentUser();
         return ResponseEntity.ok(generateTypeService.getGenerateTypes().stream()
-                .map(apiAbstractMapper::map).collect(Collectors.toList()));
+                .map(apiGenerateMapper::map).collect(Collectors.toList()));
     }
 }

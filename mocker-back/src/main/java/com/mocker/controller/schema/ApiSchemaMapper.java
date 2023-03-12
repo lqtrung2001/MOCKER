@@ -1,9 +1,22 @@
 package com.mocker.controller.schema;
 
+import com.mocker.controller.mapper.ApiAbstractMapper;
+import com.mocker.domain.dto.FieldDto;
+import com.mocker.domain.dto.GenerateTypeDto;
 import com.mocker.domain.dto.GroupDto;
+import com.mocker.domain.dto.OptionDto;
 import com.mocker.domain.dto.ProjectDto;
+import com.mocker.domain.dto.SQLTypeDto;
 import com.mocker.domain.dto.SchemaDto;
-import com.mocker.domain.model.entity.*;
+import com.mocker.domain.dto.TableDto;
+import com.mocker.domain.model.entity.Field;
+import com.mocker.domain.model.entity.GenerateType;
+import com.mocker.domain.model.entity.Group;
+import com.mocker.domain.model.entity.Option;
+import com.mocker.domain.model.entity.Project;
+import com.mocker.domain.model.entity.SQLType;
+import com.mocker.domain.model.entity.Schema;
+import com.mocker.domain.model.entity.Table;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -16,7 +29,7 @@ import java.util.List;
  * @author Do Quoc Viet
  */
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {ApiAbstractMapper.class})
 public interface ApiSchemaMapper {
 
     Schema map(SchemaDto schemaDto);
@@ -31,21 +44,21 @@ public interface ApiSchemaMapper {
     SchemaDto mapFetchTables(Schema schema);
 
     @Mapping(target = "schema", ignore = true)
-    com.mocker.domain.dto.TableDto map(Table table);
+    TableDto map(Table table);
 
     @Mapping(target = "generateTypes", ignore = true)
-    com.mocker.domain.dto.SQLTypeDto map(SQLType sqlType);
+    SQLTypeDto map(SQLType sqlType);
 
     @Mapping(target = "category", ignore = true)
     @Mapping(target = "sqlTypes", ignore = true)
     @Mapping(target = "sources", ignore = true)
-    com.mocker.domain.dto.GenerateTypeDto map(GenerateType generateType);
+    GenerateTypeDto map(GenerateType generateType);
 
     @Mapping(target = "field", ignore = true)
-    com.mocker.domain.dto.OptionDto map(Option option);
+    OptionDto map(Option option);
 
     @Mapping(target = "table", ignore = true)
-    com.mocker.domain.dto.FieldDto map(Field field);
+    FieldDto map(Field field);
 
     @Mapping(target = "schemas", ignore = true)
     ProjectDto map(Project project);

@@ -23,24 +23,25 @@ import java.util.stream.Collectors;
 public class ProjectController implements ProjectApi {
 
     private final ApiAbstractMapper apiAbstractMapper;
+    private final ApiProjectMapper apiProjectMapper;
     private final ProjectService projectService;
 
     @Override
     public ResponseEntity<ProjectDto> getProject(UUID id) {
-        return ResponseEntity.ok(apiAbstractMapper.map(projectService.getProject(id)));
+        return ResponseEntity.ok(apiProjectMapper.map(projectService.getProject(id)));
     }
 
     @Override
     public ResponseEntity<List<ProjectDto>> getProjects() {
         return ResponseEntity.ok(projectService.getProjects()
                 .stream()
-                .map(apiAbstractMapper::map)
+                .map(apiProjectMapper::map)
                 .collect(Collectors.toList()));
     }
 
     @Override
     public ResponseEntity<UUID> saveOrUpdate(ProjectDto projectDto) {
-        return ResponseEntity.ok(projectService.saveOrUpdate(apiAbstractMapper.map(projectDto)));
+        return ResponseEntity.ok(projectService.saveOrUpdate(apiProjectMapper.map(projectDto)));
     }
 
     @Override

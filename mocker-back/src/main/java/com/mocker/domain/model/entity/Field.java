@@ -36,7 +36,7 @@ public class Field extends Base {
 
     @ManyToOne
     @ToString.Exclude
-    @JoinColumn(name = "SQL_TYPE_ID", nullable = false, foreignKey = @ForeignKey(name = "FIELD_SQL_TYPE_ID_FK"))
+    @JoinColumn(name = "SQL_TYPE_ID", nullable = true, foreignKey = @ForeignKey(name = "FIELD_SQL_TYPE_ID_FK"))
     private SQLType sqlType = SQLType.builder().build();
 
     @ManyToOne

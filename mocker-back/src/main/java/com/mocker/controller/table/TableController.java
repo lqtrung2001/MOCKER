@@ -33,13 +33,13 @@ public class TableController implements com.mocker.api.TableApi {
     public ResponseEntity<List<TableDto>> getTablesBySchema(UUID schemaId) {
         return ResponseEntity.ok(tableService.getTablesBySchema(schemaId)
                 .stream()
-                .map(apiAbstractMapper::map)
+                .map(apiTableMapper::map)
                 .collect(Collectors.toList()));
     }
 
     @Override
     public ResponseEntity<TableDto> saveOrUpdateTable(TableDto tableDto) {
-        return ResponseEntity.ok(apiAbstractMapper.mapWithEagerFields(tableService.saveOrUpdateTable(apiAbstractMapper.map(tableDto))));
+        return ResponseEntity.ok(apiTableMapper.mapWithEagerFields(tableService.saveOrUpdateTable(apiTableMapper.map(tableDto))));
     }
 
     @Override

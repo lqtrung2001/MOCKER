@@ -24,6 +24,7 @@ import java.util.UUID;
 public class GenerateController implements GenerateApi {
 
     private final ApiAbstractMapper apiAbstractMapper;
+    private final ApiGenerateMapper apiGenerateMapper;
     private final GenerateService generateService;
 
     @Override
@@ -33,7 +34,7 @@ public class GenerateController implements GenerateApi {
 
     @Override
     public ResponseEntity<List<Map<String, String>>> generateWithTable(BigDecimal row, TableDto tableDto) {
-        return ResponseEntity.ok(generateService.generateWithTable(apiAbstractMapper.map(tableDto), row.intValue()));
+        return ResponseEntity.ok(generateService.generateWithTable(apiGenerateMapper.map(tableDto), row.intValue()));
     }
 
 }
