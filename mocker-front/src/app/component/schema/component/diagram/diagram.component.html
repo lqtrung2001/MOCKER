@@ -1,0 +1,11 @@
+<div id='main'>
+  <div class='flex flex-wrap'>
+    <moc-table (map)='map($event)' (cdkDragEnded)='dragEnded($event)'
+               (cdkDragMoved)='dragMoved($event)'
+               (cdkDragStarted)='dragStarted($event)'
+               *ngFor='let table of tables'
+               [table]='table'
+               cdkDrag
+               class='mt-20'></moc-table>
+  </div>
+</div>

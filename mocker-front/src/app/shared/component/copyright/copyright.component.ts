@@ -1,5 +1,5 @@
 import { Component, Injector } from '@angular/core';
-import { AbstractSharedComponent } from '@shared/component/abstract-shared/abstract-shared.component';
+import { AbstractSharedComponent } from '@shared/component/common/abstract-shared.component';
 
 @Component({
   selector: 'moc-copyright',

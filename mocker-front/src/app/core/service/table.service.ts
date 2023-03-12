@@ -1,8 +1,7 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Table } from '@core/model/table';
-import { environment } from '@environment/environment';
-import { AppHttpService } from '@core/service/app-http.service';
+import { TableModel } from '@core/domain/model/table.model';
+import { AbstractService } from '@core/service/abstract.service';
 
 /**
  * @author Do Quoc Viet
@@ -11,29 +10,23 @@ import { AppHttpService } from '@core/service/app-http.service';
 @Injectable({
   providedIn: 'root'
 })
-export class TableService extends AppHttpService<Table> {
+export class TableService extends AbstractService<TableModel> {
   static TABLE = 'table';
 
-  constructor(
-    injector: Injector
-  ) {
-    super(injector);
+  getTable(id: string): Observable<TableModel> {
+    return this.httpClient.get<TableModel>(`${this.API_URL}/${TableService.TABLE}/${id}`);
   }
 
-  getTable(id: string): Observable<Table> {
-    return this.httpClient.get<Table>(`${environment.API_URL}/${TableService.TABLE}/${id}`);
+  getTablesBySchema(schemaId: string): Observable<TableModel[]> {
+    return this.httpClient.get<TableModel[]>(`${this.API_URL}/${TableService.TABLE}?schemaId=${schemaId}`);
   }
 
-  getTablesBySchema(schemaId: string): Observable<Table[]> {
-    return this.httpClient.get<Table[]>(`${environment.API_URL}/${TableService.TABLE}?schemaId=${schemaId}`);
-  }
-
-  saveOrUpdate(table: Table): Observable<Table> {
-    return this.post(`${environment.API_URL}/${TableService.TABLE}`, table);
+  saveOrUpdate(table: TableModel): Observable<TableModel> {
+    return this.post(`${this.API_URL}/${TableService.TABLE}`, table);
   }
 
   delete1(id: string): Observable<string> {
-    return this.httpClient.delete<string>(`${environment.API_URL}/${TableService.TABLE}/${id}`);
+    return this.httpClient.delete<string>(`${this.API_URL}/${TableService.TABLE}/${id}`);
   }
 
 }

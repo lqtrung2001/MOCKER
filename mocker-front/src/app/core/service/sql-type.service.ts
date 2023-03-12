@@ -1,9 +1,8 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SQLType } from '@core/model/sql-type';
-import { environment } from '@environment/environment';
-import { AppHttpService } from '@core/service/app-http.service';
-import { HttpMethod } from '@core/class/enum/http-method';
+import { SqlTypeModel } from '@core/domain/model/sql-type.model';
+import { AbstractService } from '@core/service/abstract.service';
+import { HttpMethodEnum } from '@core/domain/enum/http-method.enum';
 
 /**
  * @author Do Quoc Viet
@@ -13,14 +12,10 @@ import { HttpMethod } from '@core/class/enum/http-method';
 @Injectable({
   providedIn: 'root'
 })
-export class SQLTypeService extends AppHttpService<SQLType> {
-  constructor(
-    injector: Injector
-  ) {
-    super(injector);
-  }
+export class SQLTypeService extends AbstractService<SqlTypeModel> {
+  static SQL_TYPE_API = 'sql-type';
 
-  getSQLTypes(): Observable<SQLType[]> {
-    return this.request<SQLType[]>(HttpMethod.GET, `${environment.API_URL}/sql-type`);
+  getSQLTypes(): Observable<SqlTypeModel[]> {
+    return this.request<SqlTypeModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${SQLTypeService.SQL_TYPE_API}`);
   }
 }

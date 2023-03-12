@@ -9,8 +9,6 @@ import { Observable } from 'rxjs';
 
 /**
  * @author  Do Quoc Viet
- * @class ModalProvider
- * @date 03/03/2023
  */
 
 @Injectable({

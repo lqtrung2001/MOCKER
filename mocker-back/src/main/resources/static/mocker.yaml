@@ -430,7 +430,7 @@ paths:
       operationId: getGenerateType
       tags:
         - GenerateType
-      description: Return a generatetype
+      description: Return a generate type
       responses:
         200:
           description: The query is successful
@@ -737,8 +737,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                format: uuid
+                $ref: '#/components/schemas/Schema'
         400:
           $ref: '#/components/responses/BadRequest'
         401:

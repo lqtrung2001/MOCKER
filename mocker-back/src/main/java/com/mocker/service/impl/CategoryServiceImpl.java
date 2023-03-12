@@ -48,13 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Cacheable("categories")
-    public List<Category> getCategoriesFetchGenerateTypes() throws NotFoundException {
-        // TODO: Do Quoc Viet
-        if(true) throw new NotFoundException("exception.not_found");
-        try {
-            return categoryRepository.getCategoriesFetchGenerateTypes();
-        } catch (Exception e) {
-            throw new NotFoundException("exception.not_found");
-        }
+    public List<Category> getCategoriesFetchGenerateTypes() {
+        return categoryRepository.getCategoriesFetchGenerateTypes();
     }
 }

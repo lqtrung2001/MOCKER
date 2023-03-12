@@ -7,6 +7,19 @@
     "save": "Save"
   },
   "message": {
+    "schema_save_success": "Schema saved successfully",
+    "schema_delete_confirm": "Are you sure you want to delete this schema?",
+    "schema_delete_success": "Schema with name {{name}} is deleted successfully"
+  },
+  "error": {
+    "authentication": {
+      "title": "Authentication Error",
+      "message": "The current user is not authenticated to access this page. Please sign-in and try again."
+    }
+  },
+  "warning": {
+    "fields_empty_when_generating": "Can't generate data because its fields are empty.",
+    "table_is_empty": "Can't save table with empty fields."
   },
   "validator": {
     "required": "This field is required.",
@@ -106,17 +119,21 @@
       "shared_by": "Shared By",
       "group": "Group",
       "last_modified": "Last Modified"
+    },
+    "schema": {
+      "schema": "Schema",
+      "name": "Name:",
+      "description": "Description:",
+      "save": "SAVE",
+      "delete": "DELETE",
+      "project_information": "Project Information:",
+      "create_table": "CREATE TABLE"
     }
   },
   "audit": {
     "login_failure": "Login failed!"
   },
   "modal": {
-    "error": {
-      "no_permission": "You are not allowed to access this action.",
-      "system_error": "A error occurred while performing this action, please try again later or contact the administrator.",
-      "invalid_username_or_password": "The username or password you entered is invalid."
-    },
     "verification": {
       "check_email": "Check your inbox to login",
       "instruction": "To complete setup and sign in, please enter the verification code in the email we've sent to",
@@ -158,7 +175,7 @@
     },
     "table_config": {
       "title": "TABLE CONFIGURATION:",
-      "table_name":"Table Name:",
+      "table_name": "Table Name:",
       "table_name_placeholder": "Table name",
       "rows": "Rows:",
       "rows_placeholder": "Rows",

@@ -1,10 +1,17 @@
-import { AbstractModal } from '@core/class/abstract.modal';
-import { AfterViewInit, Component, Injector } from '@angular/core';
+import { AbstractModal } from '@core/common/abstract.modal';
+import {
+  AfterContentChecked,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Injector,
+  ViewChild
+} from '@angular/core';
 import { ToastrProvider } from '@shared/modal/toastr-provider/toastr-provider';
 
 /**
  * @author Do Quoc Viet
- * @date 01/02/2023
  */
 
 export interface ToastrModalOptions {
@@ -43,8 +50,9 @@ type Style = {
   templateUrl: 'toastr.modal.html',
   styleUrls: ['toastr.modal.scss']
 })
-export class ToastrModal extends AbstractModal implements AfterViewInit {
+export class ToastrModal extends AbstractModal implements AfterViewInit, AfterContentChecked {
   override options: ToastrModalCustomOptions;
+  @ViewChild('element') element: ElementRef;
   styles: Map<ToastrType, Style>;
   width: number;
   opacity: number;
@@ -52,7 +60,8 @@ export class ToastrModal extends AbstractModal implements AfterViewInit {
 
   constructor(
     injector: Injector,
-    private toastrProvider: ToastrProvider
+    private toastrProvider: ToastrProvider,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     super(injector);
     this.styles = new Map();
@@ -74,6 +83,10 @@ export class ToastrModal extends AbstractModal implements AfterViewInit {
     });
     this.width = 100;
     this.opacity = 100;
+  }
+
+  ngAfterContentChecked(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   ngAfterViewInit(): void {
@@ -100,7 +113,7 @@ export class ToastrModal extends AbstractModal implements AfterViewInit {
     this.toastrProvider.toastrPositions = toastrPositions.filter((t: ToastrPosition) => t.id !== this.options?.id);
     this.toastrProvider.toastrPositions.forEach((toastrPosition: ToastrPosition, i: number) => {
       if (index > 0 && i >= index) {
-        toastrPosition.bottom -= 170;
+        toastrPosition.bottom -= 1;
         toastrPosition.zIndex++;
       }
     });
@@ -114,8 +127,9 @@ export class ToastrModal extends AbstractModal implements AfterViewInit {
 
   get bottom(): number {
     const id: number = this.options?.id;
-    return this.toastrProvider.toastrPositions
+    const buttonIndex: number = this.toastrProvider.toastrPositions
       .find((toastrPosition: ToastrPosition) => toastrPosition.id === id)?.bottom || 0;
+    return buttonIndex * ((<HTMLDivElement>this.element?.nativeElement).getBoundingClientRect().height + 10) + 10;
   }
 
   get zIndex(): number {

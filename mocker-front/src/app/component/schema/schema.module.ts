@@ -9,6 +9,8 @@ import { DatePipe, NgForOf } from '@angular/common';
 import { SchemaRoutingModule } from '@app/component/schema/schema-routing.module';
 import { TableConfigModal } from '@app/component/schema/modal/table-config/table-config.modal';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DiagramComponent } from '@app/component/schema/component/diagram/diagram.component';
+import { CdkDrag } from '@angular/cdk/drag-drop';
 
 /**
  * @author Do Quoc Viet
@@ -20,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SchemasComponent,
     SchemaComponent,
     SchemaLayoutComponent,
-    TableConfigModal
+    TableConfigModal,
+    DiagramComponent
   ],
   exports: [],
   imports: [
@@ -30,7 +33,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     DatePipe,
     NgForOf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CdkDrag
   ],
   providers: []
 })

@@ -35,6 +35,6 @@ public interface CategoryService {
      */
     Integer getGenerateTypesCount(UUID id) throws NotFoundException;
 
-    List<Category> getCategoriesFetchGenerateTypes() throws NotFoundException;
+    List<Category> getCategoriesFetchGenerateTypes();
 
 }

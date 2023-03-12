@@ -1,7 +1,7 @@
 import { Component, Injector, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Strings } from '@shared/util/strings';
-import { AbstractComponent } from '@core/class/abstract.component';
+import { StringUtil } from '@core/util/string.util';
+import { AbstractComponent } from '@core/common/abstract.component';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -23,7 +23,7 @@ export class ErrorMessageProcessorComponent extends AbstractComponent {
 
   get errorMessage(): string {
     if (this.error instanceof Object) {
-      const errorType: string = Object.keys(this.error).length ? Object.keys(this.error)[0] : Strings.EMPTY;
+      const errorType: string = Object.keys(this.error).length ? Object.keys(this.error)[0] : StringUtil.EMPTY;
       let parameter: any;
       switch (errorType) {
         case 'maxlength':
@@ -39,7 +39,7 @@ export class ErrorMessageProcessorComponent extends AbstractComponent {
       }
       return this.translateService.instant(`validator.${errorType}`, parameter);
     }
-    return Strings.EMPTY;
+    return StringUtil.EMPTY;
   }
 
 }

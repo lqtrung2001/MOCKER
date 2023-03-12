@@ -33,7 +33,7 @@ body {
   @apply min-w-300;
   font-family: 'Roboto', sans-serif;
 
-  input, label {
+  input, label, textarea {
     font-family: 'Roboto', sans-serif;
     @apply outline-0;
   }

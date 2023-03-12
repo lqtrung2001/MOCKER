@@ -20,7 +20,7 @@ public interface SchemaService {
      */
     List<Schema> getSchemasByProject(UUID projectId);
 
-    UUID saveOrUpdate(Schema schema);
+    Schema saveOrUpdate(Schema schema);
 
     UUID delete(UUID id);
 

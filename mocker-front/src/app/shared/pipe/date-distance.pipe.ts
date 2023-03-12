@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Strings } from '@shared/util/strings';
+import { StringUtil } from '@core/util/string.util';
 
 /**
  * @author Do Quoc Viet
@@ -20,7 +20,7 @@ export class DateDistancePipe implements PipeTransform {
     const today: Date = new Date();
     date = new Date(date);
     const diff: number = today.getTime() - date.getTime();
-    if (isNaN(diff)) return Strings.EMPTY;
+    if (isNaN(diff)) return StringUtil.EMPTY;
     const info = {
       second: Math.floor(diff / second),
       minute: Math.floor(diff / minute),

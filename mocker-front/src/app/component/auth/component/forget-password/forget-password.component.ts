@@ -1,5 +1,5 @@
 import { Component, Injector } from '@angular/core';
-import { AbstractComponent } from '@core/class/abstract.component';
+import { AbstractComponent } from '@core/common/abstract.component';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from '@app/core/service/auth.service';
 import { VerificationModal, VerificationModalOptions } from '@app/component/auth/modal/verification/verification.modal';

@@ -1,32 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GenerateType } from '@core/model/generate-type';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '@environment/environment';
+import { GenerateTypeModel } from '@core/domain/model/generate-type.model';
+import { AbstractService } from '@core/service/abstract.service';
+import { HttpMethodEnum } from '@core/domain/enum/http-method.enum';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 @Injectable({
   providedIn: 'root'
 })
-export class GenerateTypeService {
+export class GenerateTypeService extends AbstractService<GenerateTypeModel> {
+  static GENERATE_TYPE_API = 'generate-type';
 
-  constructor(
-    private httpClient: HttpClient
-  ) {
+  getGenerateType(id: string): Observable<GenerateTypeModel> {
+    return this.get(`${this.API_URL}/${GenerateTypeService.GENERATE_TYPE_API}/${id}`);
   }
 
-  getGenerateType(id: string): Observable<GenerateType> {
-    return this.httpClient.get<GenerateType>(`${environment.API_URL}/generate-type/${id}`);
+  getGenerateTypeByType(sqlTypeId: string): Observable<GenerateTypeModel[]> {
+    return this.request<GenerateTypeModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${GenerateTypeService.GENERATE_TYPE_API}/${sqlTypeId}`);
   }
 
-  getGenerateTypeByType(sqlTypeId: string): Observable<GenerateType[]> {
-    return this.httpClient.get<GenerateType[]>(`${environment.API_URL}/generate-type/${sqlTypeId}`);
-  }
-
-  getGenerateTypes(): Observable<GenerateType[]> {
-    return this.httpClient.get<GenerateType[]>(`${environment.API_URL}/generate-type/`);
+  getGenerateTypes(): Observable<GenerateTypeModel[]> {
+    return this.request<GenerateTypeModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${GenerateTypeService.GENERATE_TYPE_API}/`);
   }
 }
