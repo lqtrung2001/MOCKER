@@ -1,5 +1,6 @@
 package com.mocker.controller.category;
 
+import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.CategoryDto;
 import com.mocker.domain.dto.GenerateTypeDto;
 import com.mocker.domain.dto.SourceDto;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author Luong Quoc Trung
  */
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {ApiAbstractMapper.class})
 public interface ApiCategoryMapper {
 
     CategoryDto map(Category category);

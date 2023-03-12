@@ -23,24 +23,25 @@ import java.util.stream.Collectors;
 public class UserController implements UserApi {
 
     private final ApiAbstractMapper apiAbstractMapper;
+    private final ApiUserMapper apiUserMapper;
     private final UserService userService;
 
     @SneakyThrows
     @Override
     public ResponseEntity<UUID> updateUser(UserDto userDto) {
-        return ResponseEntity.ok(userService.update(apiAbstractMapper.map(userDto)));
+        return ResponseEntity.ok(userService.update(apiUserMapper.map(userDto)));
     }
 
     @SneakyThrows
     @Override
     public ResponseEntity<UserDto> getUser(UUID id) {
-        return ResponseEntity.ok(apiAbstractMapper.map(userService.getUser(id)));
+        return ResponseEntity.ok(apiUserMapper.map(userService.getUser(id)));
     }
 
     @SneakyThrows
     @Override
     public ResponseEntity<UserDto> getUserByUsername(String username) {
-        return ResponseEntity.ok(apiAbstractMapper.map(userService.getUserByUsername(username)));
+        return ResponseEntity.ok(apiUserMapper.map(userService.getUserByUsername(username)));
     }
 
     @SneakyThrows
@@ -48,7 +49,7 @@ public class UserController implements UserApi {
     public ResponseEntity<List<UserDto>> getUsers() {
         return ResponseEntity.ok(userService.getUsers()
                 .stream()
-                .map(apiAbstractMapper::map)
+                .map(apiUserMapper::map)
                 .collect(Collectors.toList()));
     }
 
@@ -61,7 +62,7 @@ public class UserController implements UserApi {
     @SneakyThrows
     @Override
     public ResponseEntity<UUID> saveUser(UserDto userDto) {
-        return ResponseEntity.ok(userService.saveUser(apiAbstractMapper.map(userDto)));
+        return ResponseEntity.ok(userService.saveUser(apiUserMapper.map(userDto)));
     }
 
 }

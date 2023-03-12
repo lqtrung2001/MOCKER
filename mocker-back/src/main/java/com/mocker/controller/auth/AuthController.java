@@ -24,6 +24,7 @@ import java.util.UUID;
 @RequestMapping(path = "")
 public class AuthController implements AuthApi {
     private final ApiAbstractMapper apiAbstractMapper;
+    private final ApiAuthMapper apiAuthMapper;
     private final AuthService authService;
     private final UserService userService;
 
@@ -34,7 +35,7 @@ public class AuthController implements AuthApi {
 
     @Override
     public ResponseEntity<UserDto> verifyAndSave(String verificationCode, UserDto userDto) throws InternalException {
-        return ResponseEntity.ok(apiAbstractMapper.map(authService.verifyAndSave(verificationCode, apiAbstractMapper.map(userDto))));
+        return ResponseEntity.ok(apiAuthMapper.map(authService.verifyAndSave(verificationCode, apiAuthMapper.map(userDto))));
     }
 
     @Override
@@ -44,6 +45,6 @@ public class AuthController implements AuthApi {
 
     @Override
     public ResponseEntity<UserDto> changePassword(UUID id, ChangePasswordDto changePasswordDto) throws InternalException {
-        return ResponseEntity.ok(apiAbstractMapper.map(userService.changePassword(id, changePasswordDto.getOldPassword(), changePasswordDto.getNewPassword())));
+        return ResponseEntity.ok(apiAuthMapper.map(userService.changePassword(id, changePasswordDto.getOldPassword(), changePasswordDto.getNewPassword())));
     }
 }

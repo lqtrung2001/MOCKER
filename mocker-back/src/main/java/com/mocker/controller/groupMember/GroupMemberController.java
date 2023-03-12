@@ -18,15 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class GroupMemberController implements com.mocker.api.GroupMemberApi {
 
     private final ApiAbstractMapper apiAbstractMapper;
+    private final ApiGroupMemberMapper apiGroupMemberMapper;
     private final GroupMemberService groupMemberService;
 
     @Override
     public ResponseEntity<GroupMemberPKDto> deleteGroupMember(GroupMemberPKDto groupMemberPKDto) {
-        return ResponseEntity.ok(apiAbstractMapper.map(groupMemberService.delete(apiAbstractMapper.map(groupMemberPKDto))));
+        return ResponseEntity.ok(apiGroupMemberMapper.map(groupMemberService.delete(apiGroupMemberMapper.map(groupMemberPKDto))));
     }
 
     @Override
     public ResponseEntity<GroupMemberPKDto> addGroupMember(GroupMemberPKDto groupMemberPKDto) {
-        return ResponseEntity.ok(apiAbstractMapper.map(groupMemberService.add(apiAbstractMapper.map(groupMemberPKDto))));
+        return ResponseEntity.ok(apiGroupMemberMapper.map(groupMemberService.add(apiGroupMemberMapper.map(groupMemberPKDto))));
     }
 }

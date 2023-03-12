@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 public class GroupController implements GroupApi {
 
     private final ApiAbstractMapper apiAbstractMapper;
+    private final ApiGroupMapper apiGroupMapper;
     private final GroupService groupService;
     private final ApplicationContextHolder applicationContextHolder;
 
@@ -32,7 +33,7 @@ public class GroupController implements GroupApi {
     public ResponseEntity<List<GroupDto>> getGroupsWithAccess() {
         UUID authId = applicationContextHolder.getCurrentUser().getId();
         return ResponseEntity.ok(groupService.getGroupsWithAccess(authId)
-                .stream().map(apiAbstractMapper::map)
+                .stream().map(apiGroupMapper::map)
                 .collect(Collectors.toList()));
     }
 
@@ -43,11 +44,11 @@ public class GroupController implements GroupApi {
 
     @Override
     public ResponseEntity<GroupDto> getGroup(UUID id) throws NotFoundException {
-        return ResponseEntity.ok(apiAbstractMapper.mapWithEagerProjectsAndGroupMembers(groupService.getGroup(id)));
+        return ResponseEntity.ok(apiGroupMapper.mapWithEagerProjectsAndGroupMembers(groupService.getGroup(id)));
     }
 
     @Override
     public ResponseEntity<UUID> saveOrUpdateGroup(GroupDto groupDto) {
-        return ResponseEntity.ok(groupService.saveOrUpdate(apiAbstractMapper.map(groupDto)));
+        return ResponseEntity.ok(groupService.saveOrUpdate(apiGroupMapper.map(groupDto)));
     }
 }
