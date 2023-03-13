@@ -5,7 +5,7 @@ import { getTestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 declare const require: {

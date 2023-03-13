@@ -1,15 +1,15 @@
-<div id='main' class='relative' (mouseleave)='isShown=false'>
+<div (mouseleave)='isShown=false' class='tw-relative' id='main'>
   <div #dock (click)='selfTrigger()' (mouseenter)='selfTrigger("hover")'>
     <ng-content></ng-content>
   </div>
   <div #popup
-       class='{{ isShown ? "" : "hidden" }} bg-white absolute rounded overflow-hidden w-72 z-10 drop-shadow-2xl'>
+       class='{{ isShown ? "" : "tw-hidden" }} tw-bg-white tw-absolute tw-rounded tw-overflow-hidden tw-w-72 tw-z-10 tw-drop-shadow-2xl'>
     <ng-container [ngTemplateOutlet]='header'></ng-container>
-    <div *ngFor='let action of actions'
-         class='flex text-sm items-center px-4 py-2.5 hover:bg-gray cursor-pointer'
-         (click)='actionClick(action)'>
+    <div (click)='actionClick(action)'
+         *ngFor='let action of actions'
+         class='tw-flex tw-text-sm tw-items-center tw-px-4 tw-py-2.5 hover:tw-bg-gray tw-cursor-pointer'>
       <i *ngIf='action.icon' class='{{ action.icon }} icon'></i>
-      <p class='ml-2'>{{ action.label }}</p>
+      <p class='tw-ml-2'>{{ action.label }}</p>
     </div>
     <ng-container [ngTemplateOutlet]='footer'></ng-container>
   </div>

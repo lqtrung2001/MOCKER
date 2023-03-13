@@ -1,0 +1,32 @@
+<div class='tw-text-sm {{ class }}' id='main'>
+  <p *ngIf='label' class='tw-font-medium tw-pl-2.5 tw-mt-4 tw-mb-2'>{{ label | translate }}</p>
+  <div class='tw-relative'>
+    <input #inputElement *ngIf='!textArea'
+           [formControl]='control'
+           [max]='max'
+           [maxlength]='maxLength'
+           [min]='min'
+           [minlength]='minLength'
+           [placeholder]='placeholder || ""'
+           [readonly]='readonly'
+           [style]='styles'
+           [type]='type'
+           class='{{ selfClass }} {{ (isValidated && control.invalid) ? "invalid" : "" }} tw-border tw-p-2.5 tw-rounded tw-w-full'/>
+    <textarea #inputElement *ngIf='textArea'
+              [formControl]='control'
+              [maxlength]='maxLength'
+              [minlength]='minLength'
+              [placeholder]='placeholder || ""'
+              [readonly]='readonly'
+              [style]='styles'
+              class='{{ selfClass }} {{ (isValidated && control.invalid) ? "invalid" : "" }} tw-border tw-p-2.5 tw-rounded tw-w-full'></textarea>
+    <div (click)='showPasswordChange()'
+         *ngIf='isShowEye'
+         class='tw-absolute tw-right-3 tw-top-4 tw-cursor-pointer tw-text-lg'>
+      <i class='fa-regular fa-eye{{ isShowPassword ? "-slash" : "" }} tw-text-gray'></i>
+    </div>
+  </div>
+  <div *ngIf='isValidated && control.invalid'>
+    <moc-error-message-processor [error]='control.errors'></moc-error-message-processor>
+  </div>
+</div>

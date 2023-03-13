@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import {
+  DatePipe,
   JsonPipe,
   KeyValuePipe,
   NgClass,
@@ -15,7 +16,7 @@ import {
 } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLinkWithHref } from '@angular/router';
-import { FieldComponent } from '@shared/component/field/field.component';
+import { InputComponent } from '@shared/component/input/input.component';
 import {
   ErrorMessageProcessorComponent
 } from '@shared/component/error-message-processor/error-message-processor.component';
@@ -47,7 +48,7 @@ import { ToastrModal } from '@shared/modal/toastr-provider/toastr/toastr.modal';
 
 @NgModule({
   declarations: [
-    FieldComponent,
+    InputComponent,
     ButtonComponent,
     DescriptionComponent,
     ErrorMessageProcessorComponent,
@@ -86,11 +87,12 @@ import { ToastrModal } from '@shared/modal/toastr-provider/toastr/toastr.modal';
     NgTemplateOutlet,
     NgStyle,
     NgClass,
-    FormsModule
+    FormsModule,
+    DatePipe
   ],
   exports: [
-    FieldComponent,
-    FieldComponent,
+    InputComponent,
+    InputComponent,
     LoadingComponent,
     ButtonComponent,
     ActionComponent,

@@ -5,6 +5,7 @@ module.exports = {
   ],
   important: true,
   plugins: [],
+  prefix: 'tw-',
   theme: {
     extend: {
       backgroundColor: {
@@ -41,7 +42,11 @@ module.exports = {
         'yellow': '#FFBD44'
       },
       width: {
+        '100': '400px',
+        '112': '448px',
+        '125': '500px',
         '150': '600px',
+        '232': '928px',
         '300': '1200px',
         '49/100': '49%',
         '9/10': '90%'

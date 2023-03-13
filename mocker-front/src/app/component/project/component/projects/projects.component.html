@@ -1,37 +1,39 @@
-<div id='main' class='viewport-width-standard mx-auto text-sm'>
-  <p class='text-3xl font-medium mt-5'>{{ 'component.projects.my_projects' | translate }}</p>
-  <moc-description class='mt-5' [description]='"component.projects.information" | translate'></moc-description>
-  <moc-button routerLink='new' [label]='"component.projects.create" | translate' selfClass='uppercase btn-primary'
-              class='w-60 mt-6'></moc-button>
-  <table class='mt-10 w-full text-left'>
+<div class='tw-w-300 tw-mx-auto tw-text-sm' id='main'>
+  <p class='tw-text-3xl tw-font-medium tw-mt-5'>{{ 'component.projects.my_projects' | translate }}</p>
+  <moc-description [description]='"component.projects.information" | translate' class='tw-mt-5'></moc-description>
+  <moc-button [label]='"component.projects.create" | translate' class='tw-w-60 tw-mt-6' routerLink='new'
+              selfClass='tw-uppercase btn-primary'></moc-button>
+  <table class='tw-mt-10 tw-w-full tw-text-left'>
     <tr>
-      <th><i (click)='selectAll()'
-             class='ml-3 cursor-pointer fa-regular fa-square{{ isSelectAll ? "-check" : undefined }} text-lg'></i></th>
+      <th>
+        <i (click)='selectAll()'
+           class='tw-ml-3 tw-cursor-pointer fa-regular fa-square{{ isSelectAll ? "-check" : undefined }} tw-text-lg'></i>
+      </th>
       <th colspan='3'>{{ 'component.projects.name' | translate }}</th>
       <th colspan='3'>{{ 'component.projects.shared_by' | translate }}</th>
       <th colspan='3'>{{ 'component.projects.last_modified' | translate }}</th>
-      <th [className]='canDeleteSelected ? "cursor-pointer" : undefined'><i
-        class='fa-regular fa-trash-list text-lg {{ canDeleteSelected ? undefined : "text-gray" }}'></i></th>
+      <th [className]='canDeleteSelected ? "cursor-pointer" : undefined'>
+        <i class='fa-regular fa-trash-list tw-text-lg {{ canDeleteSelected ? undefined : "text-gray" }}'></i></th>
     </tr>
     <tr>
-      <td colspan='11' class='py-4'>
+      <td class='tw-py-4' colspan='11'>
         <hr/>
       </td>
     </tr>
     <ng-container *ngFor='let project of projects'>
       <tr>
         <th><i (click)='select(project.id)'
-               class='ml-3 cursor-pointer fa-regular fa-square{{ isCheck(project.id) ? "-check" : undefined }} text-lg'></i>
+               class='tw-ml-3 tw-cursor-pointer fa-regular fa-square{{ isCheck(project.id) ? "-check" : undefined }} tw-text-lg'></i>
         </th>
         <td colspan='3'><a [routerLink]='project.id'
-                           class='font-medium hover-underline-text-blue uppercase'>{{ project.name | truncate: 20 }}</a>
+                           class='tw-font-medium hover:tw-underline hover:tw-text-blue tw-uppercase'>{{ project.name | truncate: 20 }}</a>
         </td>
         <td colspan='3'>{{ project.group.name | truncate: 20 }}</td>
         <td colspan='3'>{{ project.modifiedDate | date }}</td>
-        <th class='cursor-pointer'><i (click)='delete(project.id)' class='fa-regular fa-trash text-lg'></i></th>
+        <th class='tw-cursor-pointer'><i (click)='delete(project.id)' class='fa-regular fa-trash tw-text-lg'></i></th>
       </tr>
       <tr>
-        <td colspan='11' class='py-4'>
+        <td class='tw-py-4' colspan='11'>
           <hr/>
         </td>
       </tr>

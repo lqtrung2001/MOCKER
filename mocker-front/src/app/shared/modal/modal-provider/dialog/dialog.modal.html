@@ -1,23 +1,23 @@
-<div id='main' popup [modal]='this' [dialog]='true' class='!z-50'>
-  <div class='w-150 flex justify-between pt-10 px-5 pb-5 overflow-hidden'>
-    <div class='absolute top-0 left-0 bg-{{ color }} w-full h-1.5'></div>
-    <div class='w-1/6'>
+<div [dialog]='true' [modal]='this' class='!tw-z-50' id='main' popup>
+  <div class='tw-w-150 tw-flex tw-justify-between tw-pt-10 tw-px-5 tw-pb-5 tw-overflow-hidden'>
+    <div class='tw-absolute tw-top-0 tw-left-0 tw-bg-{{ color }} tw-w-full tw-h-1.5'></div>
+    <div class='tw-w-1/6'>
       <i [class]='icon'></i>
     </div>
-    <div class='w-3/4'>
-      <p class='font-bold'>{{ options.title! | translate }}</p>
-      <p *ngIf='options.body' class='text-sm mt-2'>{{ options.body | translate }}</p>
-      <p *ngIf='!options.body' class='text-sm mt-2 overflow-auto' [innerHTML]='options.detail'></p>
-      <div class='flex flex-row-reverse mt-5'>
-        <div class='flex text-sm justify-end'>
+    <div class='tw-w-3/4'>
+      <p class='tw-font-bold'>{{ options.title! | translate }}</p>
+      <p *ngIf='options.body' class='tw-text-sm tw-mt-2'>{{ options.body | translate }}</p>
+      <p *ngIf='!options.body' [innerHTML]='options.detail' class='tw-text-sm tw-mt-2 tw-overflow-auto'></p>
+      <div class='tw-flex tw-flex-row-reverse tw-mt-5'>
+        <div class='tw-flex tw-text-sm tw-justify-end'>
           <moc-button (click)='modalInstance.close(false)' *ngIf='isShowBtnCancel'
-                      selfClass='btn-light'
-                      label='modal.dialog.cancel'>
+                      label='modal.dialog.cancel'
+                      selfClass='btn-light'>
           </moc-button>
           <moc-button (click)='modalInstance.close(true)' *ngIf='isShowBtnOK'
-                      class='ml-1'
-                      selfClass='w-12 btn-primary bg-{{ color }}'
-                      label='modal.dialog.ok'>
+                      class='tw-ml-1'
+                      label='modal.dialog.ok'
+                      selfClass='tw-w-12 btn-primary tw-bg-{{ color }}'>
           </moc-button>
         </div>
       </div>

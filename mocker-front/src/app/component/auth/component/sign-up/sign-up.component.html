@@ -1,32 +1,36 @@
-<div id='main' class='w-screen h-screen center-box'>
-  <div class='bg-white rounded drop-shadow-2xl text-sm text-center p-10' [formGroup]='formGroup'>
-    <img src='assets/png/logo.png' alt='logo' class='w-44 mx-auto'/>
-    <p class='font-bold mt-5 text-primary-solid'>{{ 'component.sign_up.title' | translate }}</p>
-    <moc-field [placeholder]='"component.sign_up.email_address_placeholder" | translate' type='email'
-               selfClass='{{ isExistedUsername ? "invalid" : "" }} mt-2'
-               [control]='formGroup.controls.username'></moc-field>
+<div class='tw-w-screen tw-h-screen tw-center-box tw-bg-center tw-bg-contain tw-bg-no-repeat' id='main'>
+  <div [formGroup]='formGroup'
+       class='tw-w-100 tw-bg-white tw-rounded tw-drop-shadow-2xl tw-text-sm tw-text-center tw-p-10'>
+    <img alt='logo' class='tw-w-44 tw-mx-auto' src='assets/png/logo.png'/>
+    <p class='tw-font-bold tw-mt-5 text-primary-solid'>{{ 'component.sign_up.title' | translate }}</p>
+    <moc-input [control]='formGroup.controls.username'
+               [placeholder]='"component.sign_up.email_address_placeholder" | translate'
+               selfClass='{{ isExistedUsername ? "invalid" : "" }} tw-mt-2'
+               type='email'></moc-input>
     <p *ngIf='isExistedUsername'
-       class='text-red text-center mt-2'>{{ 'component.sign_up.exist_username' | translate }}</p>
-    <moc-field [placeholder]='"component.sign_up.password_placeholder" | translate' type='password'
-               selfClass='mt-2'
-               [control]='formGroup.controls.password'></moc-field>
-    <moc-field [placeholder]='"component.sign_up.confirm_password_placeholder" | translate' type='password'
-               selfClass='{{ isPasswordNotMatch ? "invalid" : "" }} mt-2'
-               [control]='formGroup.controls.confirmPassword'></moc-field>
+       class='tw-text-red tw-text-center tw-mt-2'>{{ 'component.sign_up.exist_username' | translate }}</p>
+    <moc-input [control]='formGroup.controls.password'
+               [placeholder]='"component.sign_up.password_placeholder" | translate'
+               selfClass='tw-mt-2'
+               type='password'></moc-input>
+    <moc-input [control]='formGroup.controls.confirmPassword'
+               [placeholder]='"component.sign_up.confirm_password_placeholder" | translate'
+               selfClass='{{ isPasswordNotMatch ? "invalid" : "" }} tw-mt-2'
+               type='password'></moc-input>
     <p *ngIf='isPasswordNotMatch'
-       class='text-red text-center mt-2'>{{ 'component.sign_up.password_not_match' | translate }}</p>
-    <p class='mt-4 text-gray-500 text-xs'>{{ 'component.sign_up.accept_terms_and_conditions' | translate }}</p>
-    <moc-button label='component.sign_up.sign_up' (click)='submit()'></moc-button>
-    <p class='mt-4 text-gray-400'>{{ 'component.sign_up.or' | translate }}</p>
+       class='tw-text-red tw-text-center tw-mt-2'>{{ 'component.sign_up.password_not_match' | translate }}</p>
+    <p class='tw-mt-4 tw-text-gray tw-text-xs'>{{ 'component.sign_up.accept_terms_and_conditions' | translate }}</p>
+    <moc-button (click)='submit()' label='component.sign_up.sign_up'></moc-button>
+    <p class='tw-mt-4 tw-text-gray'>{{ 'component.sign_up.or' | translate }}</p>
     <button *ngFor='let signInMethod of signInMethods'
-            class='border font-medium mt-4 p-2.5 rounded w-full shadow relative hover:shadow-xl'>
-      <img src='assets/png/auth/{{ signInMethod.icon }}.png' [alt]='signInMethod.icon' class='icon absolute'/>
+            class='tw-border tw-font-medium tw-mt-4 tw-p-2.5 tw-rounded tw-w-full tw-shadow tw-relative hover:tw-shadow-xl'>
+      <img [alt]='signInMethod.icon' class='icon tw-absolute' src='assets/png/auth/{{ signInMethod.icon }}.png'/>
       {{ 'component.sign_up.continue_with_SPACE' | translate }} {{ signInMethod.name }}
     </button>
-    <hr class='mt-8'/>
-    <p class='mt-4 text-blue'>
-      <a routerLink='/auth/sign-in'
-         class='hover:underline'>{{ 'component.sign_up.already_have_an_account_QUESTION_SPACE_login' | translate }}</a>
+    <hr class='tw-mt-8'/>
+    <p class='tw-mt-4 tw-text-blue'>
+      <a class='hover:tw-underline'
+         routerLink='/auth/sign-in'>{{ 'component.sign_up.already_have_an_account_QUESTION_SPACE_login' | translate }}</a>
     </p>
   </div>
 </div>

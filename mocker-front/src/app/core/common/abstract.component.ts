@@ -9,7 +9,6 @@ import { ToastrProvider } from '@shared/modal/toastr-provider/toastr-provider';
 
 /**
  * @author Do Quoc Viet
- * @date 05/02/2023
  */
 
 export abstract class AbstractComponent {

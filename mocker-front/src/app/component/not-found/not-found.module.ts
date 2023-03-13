@@ -6,7 +6,7 @@ import { LayoutModule } from '@shared/layout/layout.module';
 import { NotFoundRoutingModule } from '@app/component/not-found/not-found-routing.module';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 @NgModule({

@@ -1,9 +1,9 @@
-<div id='main' [class]='class'>
+<div [class]='class' id='main'>
   <div [class]='selfClass'>
     <button (click)='change(index)'
             *ngFor='let tab of tabs; let index=index'
-            class='py-3 px-5 font-medium rounded-t-md {{ index === current ? "bg-blue text-white" : "tab-hover" }}'>
-      <i *ngIf='tab.icon' [class]='tab.icon + " mr-3"'></i>
+            class='tw-py-3 tw-px-5 tw-font-medium tw-rounded-t-md {{ index === current ? "tw-bg-blue tw-text-white" : "tab-hover" }}'>
+      <i *ngIf='tab.icon' [class]='tab.icon + " tw-mr-3"'></i>
       {{ tab.title }}
     </button>
   </div>

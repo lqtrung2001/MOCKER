@@ -1,60 +1,60 @@
-<div id='main' [class]='class'>
+<div [class]='class' id='main'>
   <div [class]='selfClass'>
-    <table class='w-full' [formGroup]='formGroup'>
-      <thead class='sticky top-0 bg-white z-20'>
+    <table class='tw-w-full' [formGroup]='formGroup'>
+      <thead class='tw-sticky tw-top-0 tw-bg-white tw-z-20'>
       <tr>
-        <th class='pb-3 first-letter:underline'>{{ 'component.table_detail.field_name' | translate }}</th>
-        <th class='pb-3 first-letter:underline'>{{ 'component.table_detail.generate_type' | translate }}</th>
-        <th class='pb-3 first-letter:underline'>{{ 'component.table_detail.sql_type' | translate }}</th>
-        <th class='pb-3 first-letter:underline'>{{ 'component.table_detail.options' | translate }}</th>
+        <th class='tw-pb-3 first-letter:tw-underline'>{{ 'component.table_detail.field_name' | translate }}</th>
+        <th class='tw-pb-3 first-letter:tw-underline'>{{ 'component.table_detail.generate_type' | translate }}</th>
+        <th class='tw-pb-3 first-letter:tw-underline'>{{ 'component.table_detail.sql_type' | translate }}</th>
+        <th class='tw-pb-3 first-letter:tw-underline'>{{ 'component.table_detail.options' | translate }}</th>
       </tr>
       </thead>
-      <tbody formArrayName='fields' *ngFor='let field of formGroup.controls.fields.controls; let i = index;'>
+      <tbody *ngFor='let field of formGroup.controls.fields.controls; let i = index;' formArrayName='fields'>
       <tr [formGroupName]='i'>
-        <td class='w-1/4 px-3 py-1.5 align-top'>
-          <moc-field selfClass='px-5'
-                     [control]='field.controls.name'
-                     [placeholder]='"component.table_detail.field_name_placeholder" | translate'></moc-field>
+        <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
+          <moc-input [control]='field.controls.name'
+                     [placeholder]='"component.table_detail.field_name_placeholder" | translate'
+                     selfClass='tw-px-5'></moc-input>
         </td>
-        <td class='w-1/4 px-3 py-1.5 align-top'>
-          <moc-button icon='fa-solid fa-arrow-up-arrow-down'
-                      (click)='chooseType(field.controls.generateType, true)'
+        <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
+          <moc-button (click)='chooseType(field.controls.generateType, true)'
                       [control]='field.controls.generateType'
-                      selfClass='text-left px-5 btn-light {{ !field.controls.generateType.value ? "text-gray-400 !font-normal" : "" }}'
-                      [label]='field.controls.generateType.value?.code || "Generate Type"'>
+                      [label]='field.controls.generateType.value?.code || "Generate Type"'
+                      icon='fa-solid fa-arrow-up-arrow-down'
+                      selfClass='tw-text-left tw-px-5 btn-light {{ !field.controls.generateType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
           </moc-button>
         </td>
-        <td class='w-1/4 px-3 py-1.5 align-top'>
-          <moc-button icon='fa-solid fa-arrow-up-arrow-down'
-                      (click)='chooseType(field.controls.sqlType, false)'
+        <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
+          <moc-button (click)='chooseType(field.controls.sqlType, false)'
                       [control]='field.controls.sqlType'
-                      selfClass='text-left px-5 btn-light {{ !field.controls.sqlType.value ? "text-gray-400 !font-normal" : "" }}'
-                      [label]='field.controls.sqlType.value?.code || "Sql Type"'>
+                      [label]='field.controls.sqlType.value?.code || "Sql Type"'
+                      icon='fa-solid fa-arrow-up-arrow-down'
+                      selfClass='tw-text-left tw-px-5 btn-light {{ !field.controls.sqlType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
           </moc-button>
         </td>
-        <td class='w-1/4 px-3 py-1.5 align-top'>
-          <div class='flex justify-between'>
-            <p class='self-center'>{{ 'Blank:' }}</p>
-            <moc-field class='w-20' placeholder='0%'
-                       type='number'
+        <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
+          <div class='tw-flex tw-justify-between'>
+            <p class='tw-self-center'>{{ 'Blank:' }}</p>
+            <moc-input [control]='field.controls.option.controls.blank' [max]='100'
                        [min]='0'
-                       [max]='100'
-                       selfClass='text-center'
-                       [control]='field.controls.option.controls.blank'></moc-field>
-            <moc-button icon='fa-solid fa-sigma' class='w-12'
-                        selfClass='btn-light h-10'></moc-button>
-            <i (click)='removeField(i)' class='text-lg cursor-pointer fa-regular fa-circle-xmark self-center'></i>
+                       class='tw-w-20'
+                       placeholder='0%'
+                       selfClass='tw-text-center'
+                       type='number'></moc-input>
+            <moc-button class='tw-w-12' icon='fa-solid fa-sigma'
+                        selfClass='btn-light tw-h-10'></moc-button>
+            <i (click)='removeField(i)' class='tw-text-lg tw-cursor-pointer fa-regular fa-circle-xmark tw-self-center'></i>
           </div>
         </td>
       </tr>
       </tbody>
       <tfoot>
       <tr>
-        <td colspan='4' class='py-3 text-center'>{{ 'component.table_detail.instruction' | translate }}</td>
+        <td class='tw-py-3 tw-text-center' colspan='4'>{{ 'component.table_detail.instruction' | translate }}</td>
       </tr>
       </tfoot>
     </table>
   </div>
-  <moc-button class='w-[calc(208px)] mt-3 inline-block' (click)='insertField()' selfClass='btn-primary'
-              label='component.table_detail.add_another_field'></moc-button>
+  <moc-button (click)='insertField()' class='tw-w-[calc(208px)] tw-mt-3 tw-inline-block' label='component.table_detail.add_another_field'
+              selfClass='btn-primary'></moc-button>
 </div>

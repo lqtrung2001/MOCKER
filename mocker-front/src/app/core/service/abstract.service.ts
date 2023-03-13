@@ -214,7 +214,7 @@ export class AbstractService<Type> implements HttpInterceptor {
   }
 
   getEntity(id: string): Observable<Type> {
-    return this.request<Type>(HttpMethodEnum.GET, `${this.API_URL}/${this.ENTITY_URL}/${id}`);
+    return this.get(`${this.API_URL}/${this.ENTITY_URL}/${id}`);
   }
 
   getEntities(): Observable<Type[]> {

@@ -6,7 +6,6 @@ import { NgModule } from '@angular/core';
 
 /**
  * @author Do Quoc Viet
- * @date 05/02/2023
  */
 
 const routes: Routes = [

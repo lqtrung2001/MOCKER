@@ -1,10 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ConverterUtil } from '@core/util/converter.util';
+import { StringUtil } from '@core/util/string.util';
 
 /**
  * @author Do Quoc Viet
- * @class CsvPipe
- * @date 02/03/2023
  */
 
 @Pipe({
@@ -17,7 +16,7 @@ export class CsvPipe implements PipeTransform {
   }
 
   transform(arr: string[]): string {
-    return this.converterService.toCSV(arr).join('');
+    return this.converterService.toCSV(arr).join(StringUtil.EMPTY);
   }
 
 }

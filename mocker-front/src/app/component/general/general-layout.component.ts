@@ -3,7 +3,6 @@ import { Component, Injector } from '@angular/core';
 
 /**
  * @author Do Quoc Viet
- * @date 05/02/2023
  */
 
 @Component({

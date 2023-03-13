@@ -13,7 +13,6 @@ import { FormControl } from '@angular/forms';
 })
 export class ButtonComponent extends AbstractSharedComponent {
   @Input() label: string;
-  @Input() styles: string;
   @Input() icon: string;
   @Input() control: FormControl;
   clicked: boolean;

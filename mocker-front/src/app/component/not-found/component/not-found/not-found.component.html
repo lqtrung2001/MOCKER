@@ -1,9 +1,9 @@
 <moc-navigation></moc-navigation>
-<div id='main' class='w-screen h-screen center-box'>
-  <div class='text-center w-96'>
-    <p class='text-9xl font-bold tracking-wide'>{{ 'component.not_found.oops' | translate }}</p>
-    <p class='text-xl mt-4 font-bold'>{{ 'component.not_found.title' | translate }}</p>
-    <p class='mt-4 text-sm'>{{ 'component.not_found.description' | translate }}</p>
-    <moc-button (click)='goToHomepage()' [label]='"component.not_found.go_to_homepage" | translate'></moc-button>
+<div class='tw-w-screen tw-h-screen center-box' id='main'>
+  <div class='tw-text-center tw-w-96'>
+    <p class='tw-text-9xl tw-font-bold tw-tracking-wide'>{{ 'component.not_found.oops' | translate }}</p>
+    <p class='tw-text-xl tw-mt-4 tw-font-bold'>{{ 'component.not_found.title' | translate }}</p>
+    <p class='tw-mt-4 tw-text-sm'>{{ 'component.not_found.description' | translate }}</p>
+    <moc-button (click)='goToHomepage()' label='component.not_found.go_to_homepage'></moc-button>
   </div>
 </div>

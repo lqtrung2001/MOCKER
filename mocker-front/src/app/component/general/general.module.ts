@@ -10,7 +10,6 @@ import { GeneralRoutingModule } from '@app/component/general/general-routing.mod
 
 /**
  * @author Do Quoc Viet
- * @date 05/02/2023
  */
 
 @NgModule({

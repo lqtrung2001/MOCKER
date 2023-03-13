@@ -66,20 +66,20 @@ export class ToastrModal extends AbstractModal implements AfterViewInit, AfterCo
     super(injector);
     this.styles = new Map();
     this.styles.set(ToastrType.ERROR, {
-      icon: 'text-red fa-solid fa-circle-xmark',
-      bgColor: 'bg-red'
+      icon: 'tw-text-red fa-solid fa-circle-xmark',
+      bgColor: 'tw-bg-red'
     });
     this.styles.set(ToastrType.WARNING, {
-      icon: 'text-yellow fa-solid fa-triangle-exclamation',
-      bgColor: 'bg-yellow'
+      icon: 'tw-text-yellow fa-solid fa-triangle-exclamation',
+      bgColor: 'tw-bg-yellow'
     });
     this.styles.set(ToastrType.INFORMATION, {
-      icon: 'text-blue fa-solid fa-circle-info',
-      bgColor: 'bg-blue'
+      icon: 'tw-text-blue fa-solid fa-circle-info',
+      bgColor: 'tw-bg-blue'
     });
     this.styles.set(ToastrType.SUCCESS, {
-      icon: 'text-green fa-sharp fa-solid fa-circle-check',
-      bgColor: 'bg-green'
+      icon: 'tw-text-green fa-sharp fa-solid fa-circle-check',
+      bgColor: 'tw-bg-green'
     });
     this.width = 100;
     this.opacity = 100;
@@ -141,7 +141,7 @@ export class ToastrModal extends AbstractModal implements AfterViewInit, AfterCo
   get visible(): string {
     const toastrPositions: ToastrPosition[] = this.toastrProvider.toastrPositions;
     const index = toastrPositions.indexOf(toastrPositions.find((t: ToastrPosition) => t.id === this.options?.id)!);
-    return index >= 5 ? 'none' : 'block';
+    return index >= 9 ? 'none' : 'block';
   }
 
 }

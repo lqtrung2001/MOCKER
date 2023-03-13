@@ -2,15 +2,15 @@
 
 #main {
   .btn-primary {
-    @apply text-white bg-blue;
+    @apply tw-text-white tw-bg-blue;
   }
 
   .btn-light {
-    @apply bg-white border text-black;
+    @apply tw-bg-white tw-border tw-text-black;
   }
 
   .btn-red {
-    @apply bg-red border text-white;
+    @apply tw-bg-red tw-border tw-text-white;
   }
 
   .invalid {

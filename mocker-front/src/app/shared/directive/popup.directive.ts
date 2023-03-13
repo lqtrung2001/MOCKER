@@ -3,8 +3,6 @@ import { Modal } from '@shared/modal/modal-service/model/modal.model';
 
 /**
  * @author Do Quoc Viet
- * @class PopupDirective
- * @date 03/03/2023
  */
 
 @Directive({
@@ -17,16 +15,16 @@ export class PopupDirective implements OnInit, AfterContentInit {
   content: HTMLDivElement;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {
-    this.addClasses('fixed top-0 left-0 w-full h-full z-10', elementRef.nativeElement);
+    this.addClasses('tw-fixed tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-10', elementRef.nativeElement);
   }
 
   ngOnInit(): void {
-   this.renderer.setStyle(this.elementRef.nativeElement, 'background-color', 'rgba(9, 30, 66, 0.54)');
+    this.renderer.setStyle(this.elementRef.nativeElement, 'background-color', 'rgba(9, 30, 66, 0.54)');
   }
 
   ngAfterContentInit(): void {
     this.content = this.elementRef.nativeElement.children[0];
-    this.addClasses('rounded absolute bg-white top-1/2 left-1/2', this.content);
+    this.addClasses('tw-rounded tw-absolute tw-bg-white tw-top-1/2 tw-left-1/2', this.content);
     this.renderer.setStyle(this.content, 'content', '');
     this.renderer.setStyle(this.content, 'transform', 'translate(-50%, -50%)');
     this.closeListenerProcessor();

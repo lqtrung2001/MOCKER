@@ -10,7 +10,6 @@ import { ProjectRoutingModule } from '@app/component/project/project-routing.mod
 
 /**
  * @author Do Quoc Viet
- * @date 05/02/2023
  */
 
 @NgModule({

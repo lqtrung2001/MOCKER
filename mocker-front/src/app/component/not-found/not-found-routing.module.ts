@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 
 /**
  * @author Do Quoc Viet
- * @class NotFoundRoutingModule
  */
 
 const routes: Routes = [
