@@ -1,10 +1,9 @@
-<div id='main' class='{{ class }}'>
+<div [class]='class' id='main'>
   <button
-    [style]='styles'
     (click)='clicked=true'
-    class='{{ selfClass }} {{ isValidated && control && control.invalid ? "invalid" : "" }} py-2.5 px-5 rounded font-medium w-full hover:drop-shadow-md relative'>
+    class='{{ selfClass }} {{ isValidated && control && control.invalid ? "invalid" : "" }} tw-py-2.5 tw-px-5 tw-rounded tw-font-medium tw-w-full hover:tw-drop-shadow-md tw-relative'>
     {{ label | translate }}
-    <i *ngIf='icon' class='{{ !label ? "" : "absolute right-5 top-1/2 -translate-y-1/2" }} {{ icon }}'></i>
+    <i *ngIf='icon' class='{{ !label ? "" : "tw-absolute tw-right-5 tw-top-1/2 -tw-translate-y-1/2" }} {{ icon }}'></i>
   </button>
   <div *ngIf='isValidated && control && control.invalid'>
     <moc-error-message-processor [error]='control.errors'></moc-error-message-processor>

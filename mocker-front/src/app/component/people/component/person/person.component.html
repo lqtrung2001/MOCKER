@@ -1,48 +1,49 @@
-<div id='main' class='viewport-width-standard mx-auto text-sm'>
-  <p class='text-3xl font-medium mt-5'>{{ 'component.person.my_account' | translate }}</p>
-  <div class='mt-5 flex justify-between'>
-    <div class='p-5 w-49/100 border rounded'>
-      <p class='font-medium'>{{ 'component.person.my_email' | translate }}</p>
-      <moc-field type='email' [control]='formGroup.controls.username' class='mt-5'></moc-field>
+<div class='tw-w-300 tw-mx-auto tw-text-sm' id='main'>
+  <p class='tw-text-3xl tw-font-medium tw-mt-5'>{{ 'component.person.my_account' | translate }}</p>
+  <div class='tw-mt-5 tw-flex tw-justify-between'>
+    <div class='tw-p-5 tw-w-49/100 tw-border tw-rounded'>
+      <p class='tw-font-medium'>{{ 'component.person.my_email' | translate }}</p>
+      <moc-input [control]='formGroup.controls.username' class='tw-mt-5' type='email'></moc-input>
       <p *ngIf='isExistedUsername'
-         class='text-red text-center mt-2'>{{ 'component.sign_up.exist_username' | translate }}</p>
-      <moc-button class='mt-3 text-right'
-                  selfClass='w-28 {{ formGroup.controls.username.value === user.username ? "btn-light" : "btn-primary" }}'
-                  label='component.person.save'></moc-button>
+         class='tw-text-red tw-text-center tw-mt-2'>{{ 'component.sign_up.exist_username' | translate }}</p>
+      <moc-button class='tw-mt-3 tw-text-right'
+                  label='component.person.save'
+                  selfClass='tw-w-28 {{ formGroup.controls.username.value === user.username ? "btn-light" : "btn-primary" }}'></moc-button>
     </div>
-    <div class='p-5 w-49/100 border rounded'>
-      <p class='font-medium'>{{ 'component.person.my_password' | translate }}</p>
-      <moc-button (click)='changePassword()' class='mt-3' selfClass='w-52 btn-primary'
-                  label='component.person.change_password'></moc-button>
-    </div>
-  </div>
-  <div class='mt-5 flex justify-between'>
-    <div class='p-5 w-49/100 border rounded'>
-      <p class='font-medium'>{{ 'component.person.my_api_key' | translate }}</p>
-      <moc-field [control]='formGroup.controls.apiKey' class='mt-5'></moc-field>
-      <p class='mt-3'>{{ 'You have used 0 of the maximum requests allowed by the free tier in the last 24 hours.' }}</p>
-      <moc-button class='mt-8 text-right' selfClass='w-52 btn-primary'
-                  label='component.person.generate_new_api_key'></moc-button>
-    </div>
-    <div class='p-5 w-49/100 border rounded'>
-      <p class='font-medium'>{{ 'component.person.my_plan' | translate }}</p>
-      <p class='mt-5'><b>Free</b> - 1,000 rows/download - Free</p>
-      <moc-button class='mt-20 text-right' selfClass='w-36 btn-primary'
-                  label='component.person.change_plan'></moc-button>
+    <div class='tw-p-5 tw-w-49/100 tw-border tw-rounded'>
+      <p class='tw-font-medium'>{{ 'component.person.my_password' | translate }}</p>
+      <moc-button (click)='changePassword()' class='mt-3' label='component.person.change_password'
+                  selfClass='tw-w-52 btn-primary'></moc-button>
     </div>
   </div>
-  <div class='mt-5 flex justify-between'>
-    <div class='p-5 w-49/100 border rounded'>
-      <p class='font-medium'>{{ 'component.person.delete_my_account' | translate }}</p>
+  <div class='tw-mt-5 tw-flex tw-justify-between'>
+    <div class='tw-p-5 tw-w-49/100 tw-border tw-rounded'>
+      <p class='tw-font-medium'>{{ 'component.person.my_api_key' | translate }}</p>
+      <moc-input [control]='formGroup.controls.apiKey' class='tw-mt-5'></moc-input>
       <p
-        class='mt-3'>{{ 'If you delete your account, all of your data will be lost forever. Proceed with caution!' }}</p>
-      <moc-button class='mt-8 text-right' selfClass='w-52 text-white bg-red uppercase'
-                  label='component.person.delete_my_account'></moc-button>
+        class='tw-mt-3'>{{ 'You have used 0 of the maximum requests allowed by the free tier in the last 24 hours.' }}</p>
+      <moc-button class='tw-mt-8 text-right' label='component.person.generate_new_api_key'
+                  selfClass='tw-w-52 btn-primary'></moc-button>
     </div>
-    <div class='p-5 w-49/100 border rounded'>
-      <p class='font-medium'>{{ 'component.person.my_payments' | translate }}</p>
-      <p class='mt-3'>{{ 'Here are all the payments that you have made for Mockaroo:' }}</p>
-      <moc-description class='mt-3' description='You have not made any payments.'></moc-description>
+    <div class='tw-p-5 tw-w-49/100 tw-border tw-rounded'>
+      <p class='tw-font-medium'>{{ 'component.person.my_plan' | translate }}</p>
+      <p class='tw-mt-5'><b>Free</b> - 1,000 rows/download - Free</p>
+      <moc-button class='tw-mt-20 tw-text-right' label='component.person.change_plan'
+                  selfClass='tw-w-36 btn-primary'></moc-button>
+    </div>
+  </div>
+  <div class='tw-mt-5 tw-flex tw-justify-between'>
+    <div class='tw-p-5 tw-w-49/100 tw-border tw-rounded'>
+      <p class='tw-font-medium'>{{ 'component.person.delete_my_account' | translate }}</p>
+      <p
+        class='tw-mt-3'>{{ 'If you delete your account, all of your data will be lost forever. Proceed with caution!' }}</p>
+      <moc-button class='tw-mt-8 tw-text-right' label='component.person.delete_my_account'
+                  selfClass='tw-w-52 tw-text-white tw-bg-red tw-uppercase'></moc-button>
+    </div>
+    <div class='tw-p-5 tw-w-49/100 tw-border tw-rounded'>
+      <p class='tw-font-medium'>{{ 'component.person.my_payments' | translate }}</p>
+      <p class='tw-mt-3'>{{ 'Here are all the payments that you have made for MOCKER:' }}</p>
+      <moc-description class='tw-mt-3' description='You have not made any payments.'></moc-description>
     </div>
   </div>
   <moc-copyright></moc-copyright>

@@ -1,30 +1,28 @@
-<div id='main' class='viewport-width-standard mx-auto text-sm'>
-  <moc-description class='mt-5' [description]='"component.general.introduction" | translate'></moc-description>
-  <moc-table-detail [table]='formGroup.controls.table' class='mt-16'></moc-table-detail>
-  <hr class='mt-5'/>
-  <div class='flex mt-5' [formGroup]='formGroup'>
-    <span class='mt-3 mr-5'>{{ 'component.general.row' | translate }}</span>
-    <moc-field class='w-24' selfClass='px-5'
-               [control]='formGroup.controls.rows'></moc-field>
-    <span class='mt-3 mx-5'>{{ 'component.general.format' | translate }}</span>
+<div class='tw-w-300 tw-mx-auto tw-text-sm' id='main'>
+  <moc-description [description]='"component.general.introduction" | translate' class='tw-mt-5'></moc-description>
+  <moc-table-detail [table]='formGroup.controls.table' class='tw-mt-16'></moc-table-detail>
+  <hr class='tw-mt-5'/>
+  <div [formGroup]='formGroup' class='tw-flex tw-mt-5'>
+    <span class='tw-mt-3 tw-mr-5'>{{ 'component.general.row' | translate }}</span>
+    <moc-input [control]='formGroup.controls.rows' class='tw-w-24' selfClass='tw-px-5'></moc-input>
+    <span class='tw-mt-3 tw-mx-5'>{{ 'component.general.format' | translate }}</span>
     <moc-action [actions]='supportedFormat'>
-      <moc-button class='w-32' icon='fa-solid fa-arrow-up-arrow-down' selfClass='text-left btn-light'
-                  [label]='formGroup.controls.format.value'></moc-button>
+      <moc-button [label]='formGroup.controls.format.value' class='tw-w-32' icon='fa-solid fa-arrow-up-arrow-down'
+                  selfClass='tw-text-left tw-btn-light'></moc-button>
     </moc-action>
-    <span *ngIf='isShowTableNameField' class='mt-3 mx-5'>{{ 'component.general.table_name' | translate }}</span>
-    <moc-field *ngIf='isShowTableNameField' class='w-32' selfClass='px-5'
-               [control]='formGroup.controls.table.controls.name'></moc-field>
+    <span *ngIf='isShowTableNameField' class='tw-mt-3 tw-mx-5'>{{ 'component.general.table_name' | translate }}</span>
+    <moc-input *ngIf='isShowTableNameField' [control]='formGroup.controls.table.controls.name' class='tw-w-32'
+               selfClass='tw-px-5'></moc-input>
   </div>
-  <hr class='mt-5'/>
-  <div class='mt-5 flex'>
-    <moc-button (click)='download()' class='w-52' label='component.general.download_data'
+  <hr class='tw-mt-5'/>
+  <div class='tw-mt-5 tw-flex'>
+    <moc-button (click)='download()' class='tw-w-52' label='component.general.download_data'
                 selfClass='btn-primary'></moc-button>
-    <moc-button (click)='preview()' class='w-52 ml-3' label='component.general.preview'
-                selfClass='px-5 btn-light'></moc-button>
-    <moc-button class='w-52 ml-3' label='component.general.save_this_table'
-                selfClass='px-5 btn-light'></moc-button>
-    <moc-button class='w-52 ml-3' label='component.general.more'
-                selfClass='px-5 btn-light'
-                icon='fa-solid fa-arrow-up-arrow-down'></moc-button>
+    <moc-button (click)='preview()' class='tw-w-52 tw-ml-3' label='component.general.preview'
+                selfClass='tw-px-5 btn-light'></moc-button>
+    <moc-button class='tw-w-52 tw-ml-3' label='component.general.save_this_table'
+                selfClass='tw-px-5 btn-light'></moc-button>
+    <moc-button class='tw-w-52 tw-ml-3' icon='fa-solid fa-arrow-up-arrow-down' label='component.general.more'
+                selfClass='tw-px-5 btn-light'></moc-button>
   </div>
 </div>

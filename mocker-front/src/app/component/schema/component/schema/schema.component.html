@@ -1,29 +1,29 @@
-<div id='main' class='flex text-sm h-[calc(100vh_-_57px)]'>
-  <div class='w-96 h-full border border-t-0 p-5'>
-    <p class='text-3xl font-medium'>{{ 'component.schema.schema' | translate }}</p>
+<div class='tw-flex tw-text-sm tw-h-[calc(100vh_-_57px)]' id='main'>
+  <div class='tw-w-96 tw-h-full tw-border tw-border-t-0 tw-p-5'>
+    <p class='tw-text-3xl tw-font-medium'>{{ 'component.schema.schema' | translate }}</p>
     <div>
-      <moc-field label='component.schema.name' [control]='formGroup.controls.name'></moc-field>
-      <moc-field [textArea]='true' label='component.schema.description' selfClass='h-32 overflow-auto'
-                 [control]='formGroup.controls.description'></moc-field>
-      <div class='mt-3 flex justify-between items-center'>
-        <moc-button (click)='submit()' icon='fa-solid fa-floppy-disk' class='w-49/100 inline'
+      <moc-input [control]='formGroup.controls.name' label='component.schema.name'></moc-input>
+      <moc-input [control]='formGroup.controls.description' [textArea]='true' label='component.schema.description'
+                 selfClass='tw-h-32 tw-overflow-auto'></moc-input>
+      <div class='tw-mt-3 tw-flex tw-justify-between tw-items-center'>
+        <moc-button (click)='submit()' class='tw-w-49/100 tw-inline' icon='fa-solid fa-floppy-disk'
                     label='component.schema.save'
-                    selfClass='btn-primary text-left'></moc-button>
-        <moc-button (click)='delete()' icon='fa-solid fa-trash' class='w-49/100 inline'
+                    selfClass='btn-primary tw-text-left'></moc-button>
+        <moc-button (click)='delete()' class='tw-w-49/100 tw-inline' icon='fa-solid fa-trash'
                     label='component.schema.delete'
-                    selfClass='btn-red text-left'></moc-button>
+                    selfClass='btn-red tw-text-left'></moc-button>
       </div>
     </div>
     <div>
-      <p class='font-medium mt-5'>{{ 'component.schema.project_information' | translate }}</p>
-      <a routerLink='/project/{{ schema ? schema.project.id : undefined }}'
-         class='uppercase font-medium mt-3 inline-block underline hover:text-blue cursor-pointer'>{{ schema ? schema.project.name : undefined }}</a>
-      <p class='mt-3'>{{ schema ? schema.project.description : undefined }}</p>
+      <p class='tw-font-medium tw-mt-5'>{{ 'component.schema.project_information' | translate }}</p>
+      <a class='tw-uppercase tw-font-medium tw-mt-3 tw-inline-block tw-underline hover:tw-text-blue tw-cursor-pointer'
+         routerLink='/project/{{ schema ? schema.project.id : undefined }}'>{{ schema ? schema.project.name : undefined }}</a>
+      <p class='tw-mt-3'>{{ schema ? schema.project.description : undefined }}</p>
     </div>
   </div>
-  <div class='p-5'>
-    <moc-button (click)='createTable()' class='w-44 inline-block' icon='fa-solid fa-folder-plus'
-                label='component.schema.create_table' selfClass='btn-primary text-left'></moc-button>
+  <div class='tw-p-5'>
+    <moc-button (click)='createTable()' class='tw-w-44 tw-inline-block' icon='fa-solid fa-folder-plus'
+                label='component.schema.create_table' selfClass='btn-primary tw-text-left'></moc-button>
     <moc-diagram [tables]='tables'></moc-diagram>
   </div>
 </div>

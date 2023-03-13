@@ -4,8 +4,6 @@ import { StringUtil } from '@core/util/string.util';
 
 /**
  * @author Do Quoc Viet
- * @class SqlPipe
- * @date 02/03/2023
  */
 
 @Pipe({

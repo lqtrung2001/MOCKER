@@ -1,27 +1,33 @@
-<div id='main' class='viewport-width-standard mx-auto text-sm'>
+<div class='tw-w-300 tw-mx-auto tw-text-sm' id='main'>
   <p
-    class='text-3xl font-medium mt-5'>{{ ('component.project.' + (isNew ? 'new_project' : 'my_project')) | translate }}</p>
+    class='tw-text-3xl tw-font-medium tw-mt-5'>{{ ('component.project.' + (isNew ? 'new_project' : 'my_project')) | translate }}</p>
   <ng-container *ngIf='isNew' [ngTemplateOutlet]='settings'></ng-container>
-  <moc-tab [tabs]='tabs' class='mt-5' *ngIf='!isNew'>
+  <moc-tab *ngIf='!isNew' [tabs]='tabs' class='tw-mt-5'>
     <ng-template #resources>
       <div id='resources'>
-        <div class='mt-5'>
-          <button class='hover:text-blue font-medium py-2 border rounded-l-md px-5'>{{ 'NEW SCHEMA' | translate }}</button>
-          <button class='hover:text-blue font-medium py-2 border px-5'>{{ 'NEW DATASET' | translate }}</button>
-          <button class='hover:text-blue font-medium py-2 border px-5'>{{ 'NEW API' | translate }}</button>
-          <button class='hover:text-blue font-medium py-2 border rounded-r-md px-5'>{{ 'NEW SCENARIO' | translate }}</button>
+        <div class='tw-mt-5'>
+          <button
+            class='hover:tw-text-blue tw-font-medium tw-py-2 tw-border tw-rounded-l-md tw-px-5'>{{ 'component.project.new_schema' | translate }}</button>
+          <button
+            class='hover:tw-text-blue tw-font-medium tw-py-2 tw-border tw-px-5'>{{ 'NEW DATASET' | translate }}</button>
+          <button
+            class='hover:tw-text-blue tw-font-medium tw-py-2 tw-border tw-px-5'>{{ 'NEW API' | translate }}</button>
+          <button
+            class='hover:tw-text-blue tw-font-medium tw-py-2 tw-border tw-rounded-r-md tw-px-5'>{{ 'NEW SCENARIO' | translate }}</button>
         </div>
-        <hr class='mt-5'/>
+        <hr class='tw-mt-5'/>
         <ng-container *ngFor='let schema of project?.schemas'>
-          <div class='flex px-3 py-2 items-center'>
-            <div class='w-1/2 flex items-center'>
+          <div class='tw-flex tw-px-3 tw-py-2 tw-items-center'>
+            <div class='tw-w-1/2 tw-flex tw-items-center'>
               <i class='fa-regular fa-diagram-project'></i>
-              <div class='ml-3'>
-                <a routerLink='' class='font-medium hover-underline-text-blue uppercase'>{{ schema.name }}</a>
-                <p>{{ 'Schema' }}</p>
+              <div class='tw-ml-3'>
+                <a class='tw-font-medium hover:tw-underline hover:tw-text-blue tw-uppercase'
+                   routerLink='schema/{{ schema.id }}'>{{ schema.name }}</a>
+                <p>{{ 'component.project.schema' }}</p>
               </div>
             </div>
-            <div class='w-1/2'>{{ "Last modified " + (schema.modifiedDate | dateDistance) }}</div>
+            <div
+              class='tw-w-1/2'>{{ ('component.project.last_modified' | translate) + (schema.modifiedDate | dateDistance) }}</div>
           </div>
           <hr/>
         </ng-container>
@@ -30,10 +36,10 @@
   </moc-tab>
   <ng-template #settings>
     <div id='settings'>
-      <p class='mt-5 font-medium'>{{ 'ProjectModel Name' | translate }}</p>
-      <moc-field class='mt-3' [control]='formGroup.controls.name'
-                 [placeholder]='"project name" | translate'></moc-field>
-      <p class='mt-5 font-medium'>{{ 'Share With' | translate }}</p>
+      <p class='tw-mt-5 tw-font-medium'>{{ 'component.project.project_name' | translate }}</p>
+      <moc-input [control]='formGroup.controls.name' [placeholder]='"component.project.project_name_placeholder" | translate'
+                 class='tw-mt-3'></moc-input>
+      <p class='tw-mt-5 tw-font-medium'>{{ 'component.project.share_with' | translate }}</p>
     </div>
   </ng-template>
 </div>

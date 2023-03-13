@@ -3,7 +3,7 @@
 #main {
 
   input:focus, textarea:focus {
-    @apply border-2;
+    @apply tw-border-2;
     border-color: $primary-color;
   }
 

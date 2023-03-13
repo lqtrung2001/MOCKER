@@ -3,7 +3,6 @@ import { StringUtil } from '@core/util/string.util';
 
 /**
  * @author Do Quoc Viet
- * @date 05/02/2023
  */
 
 @Pipe({
@@ -32,7 +31,7 @@ export class DateDistancePipe implements PipeTransform {
     };
     for (const [key, value] of Object.entries(info).reverse()) {
       if (value) {
-        return value + ' ' + key + (value > 1 ? 's' : '') + ' ago';
+        return value + ' ' + key + (value > 1 ? 's' : StringUtil.EMPTY) + ' ago';
       }
     }
     return '';

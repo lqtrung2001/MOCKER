@@ -77,7 +77,13 @@
     },
     "project": {
       "my_project": "My Project",
-      "new_project": "New Project"
+      "new_project": "New Project",
+      "new_schema": "NEW SCHEMA",
+      "schema": "Schema",
+      "last_modified": "Last Modified ",
+      "project_name": "Project Name",
+      "project_name_placeholder": "Project Name",
+      "share_with": "Share With"
     },
     "general": {
       "introduction": "Need some mock data to test your app? Mocker lets you generate up to 1,000 rows of realistic test data in CSV, JSON, SQL, and Excel formats.",

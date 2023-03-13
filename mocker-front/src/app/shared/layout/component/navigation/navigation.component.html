@@ -1,40 +1,40 @@
-<div class='sticky top-0 z-10'>
-  <header id='main' class='bg-white text-gray-800 flex text-sm justify-between items-center px-5'>
-    <nav class='flex h-14'>
-      <a routerLink='/' class='logo flex items-center mr-10 relative'>
-        <img src='assets/png/logo.png' alt='logo' class='w-28'/>
+<div class='tw-sticky tw-top-0 tw-z-10'>
+  <header class='tw-bg-white tw-flex tw-text-sm tw-justify-between tw-items-center tw-px-5' id='main'>
+    <nav class='tw-flex tw-h-14'>
+      <a class='logo tw-flex tw-items-center tw-mr-10 tw-relative' routerLink='/'>
+        <img alt='logo' class='tw-w-28' src='assets/png/logo.png'/>
       </a>
       <a *ngFor='let navigation of navigations'
          [routerLink]='navigation.routerLink'
-         class='px-4 flex items-center relative'
+         class='tw-px-4 tw-flex tw-items-center tw-relative'
          routerLinkActive='active'>
         <i [class]='navigation.icon'></i>
-        <span class='ml-2 font-medium first-letter:underline uppercase'>{{ navigation.title }}</span>
+        <span class='tw-ml-2 tw-font-medium first-letter:tw-underline tw-uppercase'>{{ navigation.title }}</span>
       </a>
     </nav>
-    <div class='flex items-center text-lg'>
-      <div class='hover:bg-blue-50 w-9 h-9 flex justify-center items-center rounded-full ml-3 cursor-pointer'>
+    <div class='tw-flex tw-items-center tw-text-lg'>
+      <div class='hover:tw-bg-blue tw-w-9 tw-h-9 tw-flex tw-justify-center tw-items-center tw-rounded-full tw-ml-3 tw-cursor-pointer'>
         <i class='fa-regular fa-phone'></i>
       </div>
-      <div class='hover:bg-blue-50 w-9 h-9 flex justify-center items-center rounded-full ml-3 cursor-pointer'>
+      <div class='hover:tw-bg-blue-50 tw-w-9 tw-h-9 tw-flex tw-justify-center tw-items-center tw-rounded-full tw-ml-3 tw-cursor-pointer'>
         <i class='fa-regular fa-circle-question'></i>
       </div>
-      <div class='hover:bg-blue-50 w-9 h-9 flex justify-center items-center rounded-full ml-3 cursor-pointer'>
+      <div class='hover:tw-bg-blue-50 tw-w-9 tw-h-9 tw-flex tw-justify-center tw-items-center tw-rounded-full tw-ml-3 tw-cursor-pointer'>
         <i class='fa-regular fa-bell'></i>
       </div>
-      <moc-action [header]='header' [actions]='actions'>
+      <moc-action [actions]='actions' [header]='header'>
         <div
-          class='hover:bg-blue-50 w-9 h-9 flex justify-center items-center rounded-full ml-3 cursor-pointer relative'>
-          <img [src]='avatarUrl' alt='avatar' class='icon rounded-full'/>
+          class='hover:tw-bg-blue-50 tw-w-9 tw-h-9 tw-flex tw-justify-center tw-items-center tw-rounded-full tw-ml-3 tw-cursor-pointer tw-relative'>
+          <img [src]='avatarUrl' alt='avatar' class='icon tw-rounded-full'/>
         </div>
         <ng-template #header>
-          <div class='bg-blue-solid px-4 py-2.5 flex items-center text-white text-sm'>
-            <div class='w-7 h-7 bg-white flex justify-center items-center rounded-full'>
-              <img [src]='avatarUrl' alt='avatar' class='w-6 h-6 rounded-full'/>
+          <div class='tw-bg-blue-solid tw-px-4 tw-py-2.5 tw-flex tw-items-center tw-text-white tw-text-sm'>
+            <div class='tw-w-7 tw-h-7 tw-bg-white tw-flex tw-justify-center tw-items-center tw-rounded-full'>
+              <img [src]='avatarUrl' alt='avatar' class='tw-w-6 tw-h-6 tw-rounded-full'/>
             </div>
-            <div class='ml-2'>
-              <p class='font-medium'>{{ 'Do Quoc Viet' }}</p>
-              <p class='text-xs text-gray-400'>{{ 'doquocviet.sept3rd@gmail.com' }}</p>
+            <div class='tw-ml-2'>
+              <p class='tw-font-medium'>{{ 'Do Quoc Viet' }}</p>
+              <p class='tw-text-xs tw-text-gray'>{{ 'doquocviet.sept3rd@gmail.com' }}</p>
             </div>
           </div>
         </ng-template>

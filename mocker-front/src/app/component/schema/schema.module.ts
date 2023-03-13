@@ -14,7 +14,6 @@ import { CdkDrag } from '@angular/cdk/drag-drop';
 
 /**
  * @author Do Quoc Viet
- * @date 22/02/2023
  */
 
 @NgModule({

@@ -5,7 +5,7 @@ import { AppModule } from '@app/app.module';
 import { environment } from '@environment/environment';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 if (environment.production) {

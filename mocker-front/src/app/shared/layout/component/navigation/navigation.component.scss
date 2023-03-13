@@ -1,9 +1,5 @@
 @import '/src/variable-color';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 #main {
   color: $primary-text-color-bold;
 
@@ -16,7 +12,7 @@
     > a:not(.logo):hover:after,
     > .active:after {
       content: '';
-      @apply absolute w-full h-0.5 left-0 bottom-0;
+      @apply tw-absolute tw-w-full tw-h-0.5 tw-left-0 tw-bottom-0;
       background-color: $primary-color;
     }
   }

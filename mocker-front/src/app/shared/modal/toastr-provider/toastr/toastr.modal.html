@@ -1,24 +1,25 @@
-<div id='main' #element
-     class='fixed left-10 text-sm bg-white rounded shadow-2xl w-96 min-h-26 max-h-40 {{ this.options && this.options.click ? "cursor-pointer" : "" }}'
+<div #element (click)='click()'
      [style.bottom]='bottom + "px"'
-     [style.z-index]='zIndex'
-     [style.opacity]='opacity'
      [style.display]='visible'
-     (click)='click()'>
-  <div class='p-5 flex justify-between overflow-hidden'>
-    <div class='w-1/12 text-center'>
-      <i class='text-lg {{ style.icon }}'></i>
+     [style.opacity]='opacity'
+     [style.z-index]='zIndex'
+     class='tw-fixed tw-left-10 tw-text-sm tw-bg-white tw-rounded tw-shadow-2xl tw-w-96 tw-min-h-26 tw-max-h-40 {{ this.options && this.options.click ? "tw-cursor-pointer" : "" }}'
+     id='main'>
+  <div class='tw-p-5 tw-flex tw-justify-between tw-overflow-hidden'>
+    <div class='tw-w-1/12 tw-text-center'>
+      <i class='tw-text-lg {{ style.icon }}'></i>
     </div>
-    <div class='w-9/12'>
-      <p class='font-medium'>{{ options ? options.title : undefined }}</p>
-      <p *ngIf='options.body' class='mt-2 text-justify'>{{ (options ? (options.body | translate) : undefined) | truncate: 130 }}</p>
-      <p *ngIf='!options.body' class='mt-2 text-justify' [innerHTML]='options.detail'></p>
+    <div class='tw-w-9/12'>
+      <p class='tw-font-medium'>{{ options ? options.title : undefined }}</p>
+      <p *ngIf='options.body'
+         class='tw-mt-2 tw-text-justify'>{{ (options ? (options.body | translate) : undefined) | truncate: 130 }}</p>
+      <p *ngIf='!options.body' class='tw-mt-2 tw-text-justify' [innerHTML]='options.detail'></p>
     </div>
-    <div class='w-1/12 text-center'>
-      <i (click)='toastrClose()' class='cursor-pointer fa-solid fa-xmark'></i>
+    <div class='tw-w-1/12 tw-text-center'>
+      <i (click)='toastrClose()' class='tw-cursor-pointer fa-solid fa-xmark'></i>
     </div>
   </div>
-  <div class='process absolute bottom-2 w-full h-1.5 px-10'>
-    <p class='rounded-full {{ style.bgColor }} h-full' [style.width]='width + "%"'></p>
+  <div class='tw-absolute tw-bottom-2 tw-w-full tw-h-1.5 tw-px-10'>
+    <p class='tw-rounded-full {{ style.bgColor }} tw-h-full' [style.width]='width + "%"'></p>
   </div>
 </div>

@@ -4,16 +4,16 @@
 
 #main {
 
-  @apply fixed top-0 left-0 w-full h-full z-50;
+  @apply tw-fixed tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-50;
   background-color: rgba(9, 30, 66, 0.54);
 
   > div {
-    @apply absolute top-1/2 left-1/2 -translate-x-0.5 -translate-y-0.5;
+    @apply tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-0.5 -tw-translate-y-0.5;
     content: '';
   }
 
   .lds-roller {
-    @apply inline-block relative w-20 h-20;
+    @apply tw-inline-block tw-relative tw-w-20 tw-h-20;
   }
 
   .lds-roller div {
@@ -25,7 +25,7 @@
     content: ' ';
     width: 7px;
     height: 7px;
-    @apply block absolute rounded-full bg-white -mt-1 -ml-1;
+    @apply tw-block tw-absolute tw-rounded-full tw-bg-white -tw-mt-1 -tw-ml-1;
   }
 
   .lds-roller div:nth-child(1) {

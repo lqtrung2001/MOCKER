@@ -1,13 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 #main {
   .tab-hover:hover {
-    @apply relative text-blue;
+    @apply tw-relative tw-text-blue;
 
     &::after {
-      @apply absolute bottom-0 h-1 rounded-t-md bg-blue w-9/10;
+      @apply tw-absolute tw-bottom-0 tw-h-1 tw-rounded-t-md tw-bg-blue tw-w-9/10;
       content: '';
       left: 5%;
     }

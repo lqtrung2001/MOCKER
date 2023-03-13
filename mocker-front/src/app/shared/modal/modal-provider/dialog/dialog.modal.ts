@@ -3,8 +3,6 @@ import { AbstractModal } from '@core/common/abstract.modal';
 
 /**
  * @author Do Quoc Viet
- * @class DialogModal
- * @date 03/03/2023
  */
 
 export interface DialogModalOptions {
@@ -67,7 +65,7 @@ export class DialogModal extends AbstractModal {
       default:
         icon = 'fa-solid fa-circle-info';
     }
-    return `${icon} text-${this.color} text-8xl align-middle`;
+    return `${icon} tw-text-${this.color} tw-text-8xl tw-align-middle`;
   }
 
   get isShowBtnCancel(): boolean {

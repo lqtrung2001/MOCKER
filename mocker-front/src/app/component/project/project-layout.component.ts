@@ -3,7 +3,6 @@ import { AbstractComponent } from '@core/common/abstract.component';
 
 /**
  * @author Do Quoc Viet
- * @date 04/03/2023
  */
 
 @Component({

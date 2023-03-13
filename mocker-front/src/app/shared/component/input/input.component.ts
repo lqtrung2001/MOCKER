@@ -7,11 +7,11 @@ import { AbstractSharedComponent } from '@shared/component/common/abstract-share
  */
 
 @Component({
-  selector: 'moc-field',
-  templateUrl: 'field.component.html',
-  styleUrls: ['field.component.scss']
+  selector: 'moc-input',
+  templateUrl: 'input.component.html',
+  styleUrls: ['input.component.scss']
 })
-export class FieldComponent extends AbstractSharedComponent implements OnInit {
+export class InputComponent extends AbstractSharedComponent implements OnInit {
   @ViewChild('inputElement') htmlInputElement: HTMLInputElement;
   @Input() readonly: boolean;
   @Input() type: 'number' | 'email' | 'password' | 'text';

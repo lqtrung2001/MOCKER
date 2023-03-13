@@ -9,7 +9,6 @@ import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 
 /**
  * @author Do Quoc Viet
- * @date 05/02/2023
  */
 
 type Controls = {
