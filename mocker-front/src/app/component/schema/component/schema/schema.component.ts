@@ -35,7 +35,7 @@ export class SchemaComponent extends AbstractComponent {
     });
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
-      this.schemaService.getSchema(id).subscribe((schema: SchemaModel): void => {
+      this.schemaService.getEntity(id).subscribe((schema: SchemaModel): void => {
         this.schema = schema;
         this.formGroup.patchValue(schema);
       });
@@ -62,8 +62,8 @@ export class SchemaComponent extends AbstractComponent {
       ...this.schema,
       ...this.formGroup.getRawValue()
     };
-    this.schemaService.saveOrUpdate(this.schema).subscribe((schema: SchemaModel): void => {
-      this.schemaService.getSchema(schema.id).subscribe((schema: SchemaModel): void => {
+    this.schemaService.upsertEntity(this.schema).subscribe((schema: SchemaModel): void => {
+      this.schemaService.getEntity(schema.id).subscribe((schema: SchemaModel): void => {
         this.schema = schema;
         this.formGroup.patchValue(schema);
       });
@@ -78,8 +78,8 @@ export class SchemaComponent extends AbstractComponent {
       body: 'message.schema_delete_confirm'
     }).subscribe((result: boolean): void => {
       if (result) {
-        this.schemaService.deleteSchema(this.schema.id).subscribe((id: string): void => {
-          if (id) {
+        this.schemaService.deleteEntity(this.schema.id).subscribe((schema: SchemaModel): void => {
+          if (schema) {
             const detail: string = this.translateService.instant('message.schema_delete_success', { name: this.schema.name });
             this.toastrProvider.showSuccess({
               detail

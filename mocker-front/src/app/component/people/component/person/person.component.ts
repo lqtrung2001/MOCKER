@@ -41,7 +41,7 @@ export class PersonComponent extends AbstractComponent {
       apiKey: this.formBuilder.control(undefined, [])
     });
     const id: string = this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.userService.getUser(id).subscribe((user: UserModel) => {
+    this.userService.getEntity(id).subscribe((user: UserModel) => {
       this.user = user;
       this.formGroup.patchValue(user);
     });

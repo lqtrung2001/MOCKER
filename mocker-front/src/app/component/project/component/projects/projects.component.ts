@@ -25,7 +25,7 @@ export class ProjectsComponent extends AbstractComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.projectService.getProjects().subscribe((projects: ProjectModel[]): void => {
+    this.projectService.getEntities().subscribe((projects: ProjectModel[]): void => {
       this.projects = projects;
     });
   }

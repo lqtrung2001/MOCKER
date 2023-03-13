@@ -38,7 +38,7 @@ export class TableComponent extends AbstractSharedComponent {
   }
 
   private refresh() {
-    this.tableService.getTable(this.table.id)
+    this.tableService.getEntity(this.table.id)
       .subscribe((table: TableModel): void => {
         this.table = table;
       });

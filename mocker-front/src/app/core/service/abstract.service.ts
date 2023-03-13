@@ -36,6 +36,7 @@ import { Exception } from '@core/domain/exception/exception';
   providedIn: 'root'
 })
 export class AbstractService<Type> implements HttpInterceptor {
+  ENTITY_URL: string;
   API_URL = environment.API_URL;
   BASE_URL = environment.BASE_URL;
   protected modalProvider: ModalProvider;
@@ -50,7 +51,12 @@ export class AbstractService<Type> implements HttpInterceptor {
     this.translateService = injector.get(TranslateService);
   }
 
-  // GET method
+  /**
+   * @param url
+   * @param headers
+   * @return Observable<Type>
+   * @summary Generic method for getting API requests
+   */
   get(url: string, headers?: HttpHeaders): Observable<Type> {
     this.appConfigService.loading.setValue(true);
     return this.httpClient.get<Type>(url, { headers })
@@ -58,7 +64,13 @@ export class AbstractService<Type> implements HttpInterceptor {
         finalize(this.finalizeRequest.bind(this)));
   }
 
-  // POST method
+  /**
+   * @param url
+   * @param body
+   * @param headers
+   * @return Observable<Type>
+   * @summary Generic method for posting API requests
+   */
   post(url: string, body?: any, headers?: HttpHeaders): Observable<Type> {
     this.appConfigService.loading.setValue(true);
     return this.httpClient.post<Type>(url, body, { headers })
@@ -66,7 +78,13 @@ export class AbstractService<Type> implements HttpInterceptor {
         finalize(this.finalizeRequest.bind(this)));
   }
 
-  // PUT method
+  /**
+   * @param url
+   * @param body
+   * @param headers
+   * @return Observable<Type>
+   * @summary Generic method for putting API requests
+   */
   put(url: string, body?: any, headers?: HttpHeaders): Observable<Type> {
     this.appConfigService.loading.setValue(true);
     return this.httpClient.put<Type>(url, body, { headers })
@@ -74,7 +92,12 @@ export class AbstractService<Type> implements HttpInterceptor {
         finalize(this.finalizeRequest.bind(this)));
   }
 
-  // DELETE method
+  /**
+   * @param url
+   * @param headers
+   * @return Observable<Type>
+   * @summary Generic method for deleting API requests
+   */
   delete(url: string, headers?: HttpHeaders): Observable<Type> {
     this.appConfigService.loading.setValue(true);
     return this.httpClient.delete<Type>(url, { headers })
@@ -82,7 +105,13 @@ export class AbstractService<Type> implements HttpInterceptor {
         finalize(this.finalizeRequest.bind(this)));
   }
 
-  // REQUEST
+  /**
+   * @param method
+   * @param url
+   * @param body
+   * @param headers
+   * @summary Generic method for requesting API requests
+   */
   request<OtherType>(method: HttpMethodEnum, url: string, body?: any, headers?: HttpHeaders): Observable<OtherType> {
     this.appConfigService.loading.setValue(true);
     return this.httpClient.request<OtherType>(method, url, {
@@ -92,6 +121,10 @@ export class AbstractService<Type> implements HttpInterceptor {
       finalize(this.finalizeRequest.bind(this)));
   }
 
+  /**
+   * @param httpErrorResponse
+   * @method Default error handler
+   */
   defaultErrorHandler(httpErrorResponse: HttpErrorResponse): Observable<any> {
     const error: ErrorModel = httpErrorResponse.error;
     if (!error.message) {
@@ -115,12 +148,21 @@ export class AbstractService<Type> implements HttpInterceptor {
     }
   };
 
+  /**
+   * @method finalize request
+   */
   finalizeRequest(): void {
     if (this.appConfigService.loading) {
       this.appConfigService.loading.setValue(false);
     }
   }
 
+  /**
+   * @param request
+   * @param next
+   * @return Observable
+   * @summary interceptor API request and response
+   */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next
       // Add token when requesting
@@ -133,6 +175,9 @@ export class AbstractService<Type> implements HttpInterceptor {
       }));
   }
 
+  /**
+   * @method Authentication
+   */
   authentication(): void {
     const storage = localStorage.getItem(LocalStorageConstant.AUTH);
     let authenticationException = new AuthenticationException(this.translateService.instant('error.authentication.title'), this.translateService.instant('error.authentication.message'));
@@ -161,8 +206,35 @@ export class AbstractService<Type> implements HttpInterceptor {
       });
   }
 
+  /**
+   * @method Authorization
+   */
   authorization(): void {
 
+  }
+
+  getEntity(id: string): Observable<Type> {
+    return this.request<Type>(HttpMethodEnum.GET, `${this.API_URL}/${this.ENTITY_URL}/${id}`);
+  }
+
+  getEntities(): Observable<Type[]> {
+    return this.request<Type[]>(HttpMethodEnum.GET, `${this.API_URL}/${this.ENTITY_URL}`);
+  }
+
+  upsertEntity(entity: Type): Observable<Type> {
+    return this.post(`${this.API_URL}/${this.ENTITY_URL}`, entity);
+  }
+
+  upsertEntities(entities: Type[]): Observable<Type[]> {
+    return this.request<Type[]>(HttpMethodEnum.POST, `${this.API_URL}/${this.ENTITY_URL}`, entities);
+  }
+
+  deleteEntity(id: string): Observable<Type> {
+    return this.delete(`${this.API_URL}/${this.ENTITY_URL}/${id}`);
+  }
+
+  deleteEntities(ids: string[]): Observable<Type[]> {
+    return this.request<Type[]>(HttpMethodEnum.DELETE, `${this.API_URL}/${this.ENTITY_URL}`, ids);
   }
 
 }

@@ -61,7 +61,7 @@ export class ChooseTypeModal extends AbstractModal implements OnInit {
     if (this.options?.isGenerateType) {
       this.categories = this.appConfigService.categories;
       if (!this.categories.length) {
-        this.categoryService.getCategories().subscribe((categories: CategoryModel[]): void => {
+        this.categoryService.getEntities().subscribe((categories: CategoryModel[]): void => {
           this.categories = categories;
           this.appConfigService.categories = categories;
           const category: CategoryModel | undefined = this.categories
@@ -80,7 +80,7 @@ export class ChooseTypeModal extends AbstractModal implements OnInit {
     } else {
       this.types = this.appConfigService.sqlTypes;
       if (!this.types.length) {
-        this.sqlTypeService.getSQLTypes().subscribe((sqlTypes: SqlTypeModel[]): void => {
+        this.sqlTypeService.getEntities().subscribe((sqlTypes: SqlTypeModel[]): void => {
           this.types = sqlTypes;
           this.appConfigService.sqlTypes = sqlTypes;
           this.unShiftIfExist(this.types, this.options?.current);

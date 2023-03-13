@@ -40,7 +40,7 @@ export class ProjectComponent extends AbstractComponent {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.isNew = !id;
     if (id) {
-      this.projectService.getProject(id).subscribe((project: ProjectModel): void => {
+      this.projectService.getEntity(id).subscribe((project: ProjectModel): void => {
         this.project = project;
         this.formGroup.patchValue(project);
         // TODO check this endpoint
