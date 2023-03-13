@@ -25,7 +25,7 @@ export class SchemasComponent extends AbstractComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.schemaService.getSchemas().subscribe((schemas: SchemaModel[]): void => {
+    this.schemaService.getEntities().subscribe((schemas: SchemaModel[]): void => {
       this.schemas = schemas;
     });
   }

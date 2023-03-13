@@ -26,8 +26,7 @@ export class ConverterUtil {
     const keys: string = Object.keys(arr[0]).map((key: string) => `"${key}"`).join(', ');
     return arr.map((element: any) => {
       const values: string = Object.keys(arr[0]).map((key: string) => `"${element[key]}"`).join(', ').replace(/"/g, '\"');
-      return `INSERT INTO "${tableName}" (${keys})
-              VALUES (${values});  `;
+      return `INSERT INTO "${tableName}" (${keys}) VALUES (${values});\n`;
     });
   }
 

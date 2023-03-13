@@ -4,7 +4,6 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TableModel } from '@core/domain/model/table.model';
 import { TableService } from '@core/service/table.service';
 import { FieldModel } from '@core/domain/model/field.model';
-import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 
 /**
  * @author Do Quoc Viet
@@ -88,7 +87,7 @@ export class TableConfigModal extends AbstractModal implements OnInit {
       description,
       fields
     };
-    this.tableService.saveOrUpdate(table).subscribe((table: TableModel) => {
+    this.tableService.upsertEntity(table).subscribe((table: TableModel) => {
       this.table = table;
       this.patchValues();
     });
@@ -99,8 +98,8 @@ export class TableConfigModal extends AbstractModal implements OnInit {
       body: 'Are you sure you want to delete this table?'
     }).subscribe((result: boolean) => {
       if (result) {
-        this.tableService.delete1(this.table.id).subscribe((id: string): void => {
-          if (id) {
+        this.tableService.deleteEntity(this.table.id).subscribe((table: TableModel): void => {
+          if (table) {
             this.close();
           }
         });

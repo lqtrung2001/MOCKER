@@ -3,7 +3,5 @@
  */
 
 export class StringUtil {
-
   static EMPTY = '';
-
 }
