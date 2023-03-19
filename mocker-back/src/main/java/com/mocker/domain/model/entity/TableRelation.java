@@ -20,7 +20,7 @@ import java.util.UUID;
 @Table(name = "[TABLE_RELATION]")
 @ToString(callSuper = true)
 @SuperBuilder(toBuilder = true)
-public class TableRelation {
+public class TableRelation extends Base {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
