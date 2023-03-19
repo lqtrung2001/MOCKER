@@ -20,7 +20,7 @@ import java.util.UUID;
 @Table(name = "[TABLE_RELATION]")
 @ToString(callSuper = true)
 @SuperBuilder(toBuilder = true)
-public class TableRelation {
+public class TableRelation extends Base {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -38,6 +38,16 @@ public class TableRelation {
 
     @Column(name = "NAME")
     private String name;
+
+    @ManyToOne
+    @ToString.Exclude
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "TABLE_RELATION_SOURCE_FIELD_FK"))
+    private Field source = Field.builder().build();
+
+    @ManyToOne
+    @ToString.Exclude
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "TABLE_RELATION_TARGET_FIELD_FK"))
+    private Field target = Field.builder().build();
 
     @ManyToOne
     @ToString.Exclude
