@@ -3,6 +3,7 @@ package com.mocker.controller.project;
 import com.mocker.api.ProjectApi;
 import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.ProjectDto;
+import com.mocker.domain.dto.SchemaDto;
 import com.mocker.service.ProjectService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -40,12 +41,21 @@ public class ProjectController implements ProjectApi {
     }
 
     @Override
-    public ResponseEntity<UUID> saveOrUpdate(ProjectDto projectDto) {
-        return ResponseEntity.ok(projectService.saveOrUpdate(apiProjectMapper.map(projectDto)));
+    public ResponseEntity<List<SchemaDto>> getSchemasByProject(UUID projectId) {
+        return ResponseEntity.ok(projectService.getSchemasByProject(projectId)
+                .stream()
+                .map(apiProjectMapper::map)
+                .collect(Collectors.toList()));
     }
 
     @Override
-    public ResponseEntity<UUID> deleteProject(UUID id) {
-        return ResponseEntity.ok(projectService.delete(id));
+    public ResponseEntity<ProjectDto> upsertProject(ProjectDto projectDto) {
+        return ResponseEntity.ok(apiProjectMapper.map(projectService.upsert(apiProjectMapper.map(projectDto))));
+
+    }
+
+    @Override
+    public ResponseEntity<ProjectDto> deleteProject(UUID id) {
+        return ResponseEntity.ok(apiProjectMapper.map(projectService.delete(id)));
     }
 }

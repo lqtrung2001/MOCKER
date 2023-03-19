@@ -24,11 +24,13 @@ public interface UserService {
 
     List<User> getUsers() throws NotFoundException;
 
-    UUID delete(UUID id) throws InternalException;
+    User delete(UUID id) throws InternalException;
 
     UUID saveUser(User user) throws InternalException;
 
     User changePassword(UUID id, String currentPassword, String newPassword) throws InternalException;
 
     Boolean isExistedUsername(String username);
+
+    User upsert(User user);
 }

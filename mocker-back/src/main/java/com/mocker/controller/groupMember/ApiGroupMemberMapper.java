@@ -3,8 +3,10 @@ package com.mocker.controller.groupMember;
 import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.GroupMemberPKDto;
 import com.mocker.domain.dto.ProjectDto;
+import com.mocker.domain.model.entity.GroupMember;
 import com.mocker.domain.model.entity.Project;
 import com.mocker.domain.model.entity.composite_key.GroupMemberPK;
+import com.mocker.domain.dto.GroupMemberDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -18,4 +20,8 @@ public interface ApiGroupMemberMapper {
 
     @Mapping(target = "schemas", ignore = true)
     ProjectDto map(Project project);
+
+    GroupMember map(GroupMemberDto groupMemberDto);
+
+    GroupMemberDto map(GroupMember groupMember);
 }

@@ -3,7 +3,9 @@ package com.mocker.service;
 import com.mocker.domain.exception.InternalException;
 import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Schema;
+import com.mocker.domain.model.entity.Table;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,11 +22,13 @@ public interface SchemaService {
      */
     List<Schema> getSchemasByProject(UUID projectId);
 
-    Schema saveOrUpdate(Schema schema);
+    Schema upsert(Schema schema);
 
-    UUID delete(UUID id);
+    Schema delete(UUID id);
 
     Schema getSchema(UUID id);
 
     List<Schema> getSchemas();
+
+    List<Table> getTablesBySchema(UUID schemaId);
 }

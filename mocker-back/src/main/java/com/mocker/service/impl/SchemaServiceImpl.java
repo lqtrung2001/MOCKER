@@ -4,6 +4,7 @@ import com.mocker.configuration.security.ApplicationContextHolder;
 import com.mocker.domain.model.entity.Schema;
 import com.mocker.domain.model.entity.Table;
 import com.mocker.repository.SchemaRepository;
+import com.mocker.repository.TableRepository;
 import com.mocker.service.SchemaService;
 import com.mocker.service.TableService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ import java.util.UUID;
 public class SchemaServiceImpl implements SchemaService {
     private final SchemaRepository schemaRepository;
     private final TableService tableService;
+    private final TableRepository tableRepository;
     private final ApplicationContextHolder applicationContextHolder;
 
 
@@ -33,7 +35,7 @@ public class SchemaServiceImpl implements SchemaService {
     }
 
     @Override
-    public Schema saveOrUpdate(Schema schema) {
+    public Schema upsert(Schema schema) {
         return schemaRepository.save(schema);
     }
 
@@ -48,9 +50,15 @@ public class SchemaServiceImpl implements SchemaService {
     }
 
     @Override
-    public UUID delete(UUID id) {
+    public List<Table> getTablesBySchema(UUID schemaId) {
+        return tableRepository.findAllBySchema(schemaId);
+    }
+
+    @Override
+    public Schema delete(UUID id) {
+        Schema schema = schemaRepository.getSchema(id);
         tableService.getTablesBySchema(id).stream().map(Table::getId).forEach(tableService::delete);
         schemaRepository.deleteById(id);
-        return id;
+        return schema;
     }
 }

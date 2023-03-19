@@ -2,6 +2,7 @@ package com.mocker.controller.schema;
 
 import com.mocker.api.SchemaApi;
 import com.mocker.domain.dto.SchemaDto;
+import com.mocker.domain.dto.TableDto;
 import com.mocker.service.SchemaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -29,13 +31,21 @@ public class SchemaController implements SchemaApi {
     }
 
     @Override
-    public ResponseEntity<UUID> deleteSchema(UUID id) {
-        return ResponseEntity.ok(schemaService.delete(id));
+    public ResponseEntity<SchemaDto> deleteSchema(UUID id) {
+        return ResponseEntity.ok(apiSchemaMapper.map(schemaService.delete(id)));
     }
 
     @Override
-    public ResponseEntity<SchemaDto> saveOrUpdateSchema(SchemaDto schemaDto) {
-        return ResponseEntity.ok(apiSchemaMapper.map(schemaService.saveOrUpdate(apiSchemaMapper.map(schemaDto))));
+    public ResponseEntity<List<TableDto>> getTablesBySchema(UUID schemaId) {
+        return ResponseEntity.ok(schemaService.getTablesBySchema(schemaId)
+                .stream()
+                .map(apiSchemaMapper::map)
+                .collect(Collectors.toList()));
+    }
+
+    @Override
+    public ResponseEntity<SchemaDto> upsertSchema(SchemaDto schemaDto) {
+        return ResponseEntity.ok(apiSchemaMapper.map(schemaService.upsert(apiSchemaMapper.map(schemaDto))));
     }
 
     @Override

@@ -34,6 +34,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User upsert(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
     public User authentication(String email, String password) throws NotFoundException {
         User userAuthentication = userRepository.findByEmailAndPassword(email, password);
         if (Optional.ofNullable(userAuthentication).isPresent()) {
@@ -84,10 +89,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UUID delete(UUID id) throws InternalException {
+    public User delete(UUID id) throws InternalException {
         try {
+           User user = userRepository.findById(id).orElseThrow();
             userRepository.deleteById(id);
-            return id;
+            return user;
         } catch (Exception e) {
             throw new InternalException("validation.validation.data_access_error");
         }
