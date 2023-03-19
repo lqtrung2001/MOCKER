@@ -42,12 +42,12 @@ public class TableRelation {
     @ManyToOne
     @ToString.Exclude
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "TABLE_RELATION_SOURCE_FIELD_FK"))
-    private Field fieldSource = Field.builder().build();
+    private Field source = Field.builder().build();
 
     @ManyToOne
     @ToString.Exclude
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "TABLE_RELATION_TARGET_FIELD_FK"))
-    private Field fieldTarget = Field.builder().build();
+    private Field target = Field.builder().build();
 
     @ManyToOne
     @ToString.Exclude

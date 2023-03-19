@@ -57,11 +57,11 @@ public class Field extends Base {
     private com.mocker.domain.model.entity.Table table = com.mocker.domain.model.entity.Table.builder().build();
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "fieldSource")
-    private List<TableRelation> tableRelationSource = emptyList();
+    @OneToMany(mappedBy = "source")
+    private List<TableRelation> tableRelationSources = emptyList();
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "fieldTarget")
-    private List<TableRelation> tableRelationTarget = emptyList();
+    @OneToMany(mappedBy = "target")
+    private List<TableRelation> tableRelationTargets = emptyList();
 
 }
