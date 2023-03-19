@@ -30,16 +30,8 @@ public class GroupController implements GroupApi {
     private final ApplicationContextHolder applicationContextHolder;
 
     @Override
-    public ResponseEntity<List<GroupDto>> getGroupsWithAccess() {
-        UUID authId = applicationContextHolder.getCurrentUser().getId();
-        return ResponseEntity.ok(groupService.getGroupsWithAccess(authId)
-                .stream().map(apiGroupMapper::map)
-                .collect(Collectors.toList()));
-    }
-
-    @Override
-    public ResponseEntity<UUID> deleteGroup(UUID id) {
-        return ResponseEntity.ok(groupService.delete(id));
+    public ResponseEntity<GroupDto> deleteGroup(UUID id) {
+        return ResponseEntity.ok(apiGroupMapper.map(groupService.delete(id)));
     }
 
     @Override
@@ -48,7 +40,16 @@ public class GroupController implements GroupApi {
     }
 
     @Override
-    public ResponseEntity<UUID> saveOrUpdateGroup(GroupDto groupDto) {
-        return ResponseEntity.ok(groupService.saveOrUpdate(apiGroupMapper.map(groupDto)));
+    public ResponseEntity<List<GroupDto>> getGroups() {
+        UUID authId = applicationContextHolder.getCurrentUser().getId();
+        return ResponseEntity.ok(groupService.getGroupsWithAccess(authId)
+                .stream().map(apiGroupMapper::map)
+                .collect(Collectors.toList()));
     }
+
+    @Override
+    public ResponseEntity<GroupDto> upsertGroup(GroupDto groupDto) {
+        return ResponseEntity.ok(apiGroupMapper.map(groupService.upsert(apiGroupMapper.map(groupDto))));
+    }
+
 }

@@ -1,6 +1,6 @@
 package com.mocker.service;
 
-import com.mocker.domain.model.entity.composite_key.GroupMemberPK;
+import com.mocker.domain.model.entity.GroupMember;
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -8,7 +8,7 @@ import com.mocker.domain.model.entity.composite_key.GroupMemberPK;
 
 public interface GroupMemberService {
 
-    GroupMemberPK delete(GroupMemberPK id);
+    GroupMember delete(GroupMember groupMember);
 
-    GroupMemberPK add(GroupMemberPK id);
+    GroupMember upsert(GroupMember groupMember);
 }

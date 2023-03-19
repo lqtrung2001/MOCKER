@@ -38,7 +38,7 @@ public class TableServiceImpl implements TableService {
     }
 
     @Override
-    public Table saveOrUpdateTable(Table table) throws InternalException {
+    public Table upsert(Table table) throws InternalException {
         try {
             if (table.getId() != null) {
                 List<UUID> ids = table.getFields().stream().map(Field::getId).toList();
@@ -74,14 +74,14 @@ public class TableServiceImpl implements TableService {
     }
 
     @Override
-    public UUID delete(UUID id) {
+    public Table delete(UUID id) {
         Table table = tableRepository.findOneWithEagerFields(id);
         if (table == null) {
             throw new IllegalStateException("validation.validation.data_access_error");
         }
         fieldRepository.deleteAll(table.getFields());
         tableRepository.deleteById(id);
-        return id;
+        return table;
     }
 
 }

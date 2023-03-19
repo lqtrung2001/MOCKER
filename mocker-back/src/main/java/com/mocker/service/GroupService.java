@@ -16,7 +16,7 @@ public interface GroupService {
 
     Group getGroup(UUID id) throws NotFoundException;
 
-    UUID delete(UUID id);
+    Group delete(UUID id);
 
-    UUID saveOrUpdate(Group group);
+    Group upsert(Group group);
 }

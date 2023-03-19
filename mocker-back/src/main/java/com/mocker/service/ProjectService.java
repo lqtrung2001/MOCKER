@@ -1,7 +1,9 @@
 package com.mocker.service;
 
 import com.mocker.domain.model.entity.Project;
+import com.mocker.domain.model.entity.Schema;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,8 +17,9 @@ public interface ProjectService {
 
     List<Project> getProjects();
 
-    UUID saveOrUpdate(Project project);
+    Project upsert(Project project);
 
-    UUID delete(UUID id);
+    Project delete(UUID id);
 
+    List<Schema> getSchemasByProject(UUID projectId);
 }

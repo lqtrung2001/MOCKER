@@ -16,7 +16,7 @@ public interface TableService {
 
     List<Table> getTablesBySchema(UUID schemaId);
 
-    Table saveOrUpdateTable(Table table) throws InternalException;
+    Table upsert(Table table) throws InternalException;
 
-    UUID delete(UUID id);
+    Table delete(UUID id);
 }

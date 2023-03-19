@@ -27,16 +27,16 @@ public class GroupMemberServiceImpl implements GroupMemberService {
     private final UserRepository userRepository;
 
     @Override
-    public GroupMemberPK delete(GroupMemberPK id) {
-        groupMemberRepository.deleteById(id);
-        return id;
+    public GroupMember delete(GroupMember groupMember) {
+        groupMemberRepository.deleteById(groupMember.getId());
+        return groupMember;
     }
 
     @Override
-    public GroupMemberPK add(GroupMemberPK groupMemberPK) {
-        Group group = groupRepository.findById(groupMemberPK.getGroupId()).orElseThrow();
-        User user = userRepository.findById(groupMemberPK.getUserId()).orElseThrow();
-        groupMemberRepository.save(GroupMember.builder().id(groupMemberPK).group(group).user(user).role(Role.GROUP_ADMIN).build());
-        return groupMemberPK;
+    public GroupMember upsert(GroupMember groupMember) {
+        Group group = groupRepository.findById(groupMember.getGroup().getId()).orElseThrow();
+        User user = userRepository.findById(groupMember.getUser().getId()).orElseThrow();
+        groupMemberRepository.save(GroupMember.builder().id(groupMember.getId()).group(group).user(user).role(Role.GROUP_ADMIN).build());
+        return groupMember;
     }
 }

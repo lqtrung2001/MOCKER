@@ -4,6 +4,7 @@ import com.mocker.configuration.security.ApplicationContextHolder;
 import com.mocker.domain.model.entity.Project;
 import com.mocker.domain.model.entity.Schema;
 import com.mocker.repository.ProjectRepository;
+import com.mocker.repository.SchemaRepository;
 import com.mocker.repository.UserRepository;
 import com.mocker.service.ProjectService;
 import com.mocker.service.SchemaService;
@@ -23,6 +24,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
+    private final SchemaRepository schemaRepository;
     private final ApplicationContextHolder applicationContextHolder;
     private final SchemaService schemaService;
 
@@ -38,15 +40,21 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public UUID saveOrUpdate(Project project) {
-        return projectRepository.save(project).getId();
+    public Project upsert(Project project) {
+        return projectRepository.save(project);
     }
 
     @Override
-    public UUID delete(UUID id) {
+    public Project delete(UUID id) {
+        Project project = projectRepository.findById(id).orElseThrow();
         // Delete schema
         schemaService.getSchemasByProject(id).stream().map(Schema::getId).forEach(schemaService::delete);
         projectRepository.deleteById(id);
-        return id;
+        return project;
+    }
+
+    @Override
+    public List<Schema> getSchemasByProject(UUID projectId) {
+        return schemaRepository.getSchemasByProject(projectId);
     }
 }

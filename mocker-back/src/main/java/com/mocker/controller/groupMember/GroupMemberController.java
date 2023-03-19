@@ -1,7 +1,7 @@
 package com.mocker.controller.groupMember;
 
 import com.mocker.controller.mapper.ApiAbstractMapper;
-import com.mocker.domain.dto.GroupMemberPKDto;
+import com.mocker.domain.dto.GroupMemberDto;
 import com.mocker.service.GroupMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +22,13 @@ public class GroupMemberController implements com.mocker.api.GroupMemberApi {
     private final GroupMemberService groupMemberService;
 
     @Override
-    public ResponseEntity<GroupMemberPKDto> deleteGroupMember(GroupMemberPKDto groupMemberPKDto) {
-        return ResponseEntity.ok(apiGroupMemberMapper.map(groupMemberService.delete(apiGroupMemberMapper.map(groupMemberPKDto))));
+    public ResponseEntity<GroupMemberDto> deleteGroupMember(GroupMemberDto groupMemberDto) {
+        return ResponseEntity.ok(apiGroupMemberMapper.map(groupMemberService.delete(apiGroupMemberMapper.map(groupMemberDto))));
     }
 
     @Override
-    public ResponseEntity<GroupMemberPKDto> addGroupMember(GroupMemberPKDto groupMemberPKDto) {
-        return ResponseEntity.ok(apiGroupMemberMapper.map(groupMemberService.add(apiGroupMemberMapper.map(groupMemberPKDto))));
+    public ResponseEntity<GroupMemberDto> upsertGroupMember(GroupMemberDto groupMemberDto) {
+        return ResponseEntity.ok(apiGroupMemberMapper.map(groupMemberService.upsert(apiGroupMemberMapper.map(groupMemberDto))));
     }
+
 }

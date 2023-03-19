@@ -26,11 +26,6 @@ public class UserController implements UserApi {
     private final ApiUserMapper apiUserMapper;
     private final UserService userService;
 
-    @SneakyThrows
-    @Override
-    public ResponseEntity<UUID> updateUser(UserDto userDto) {
-        return ResponseEntity.ok(userService.update(apiUserMapper.map(userDto)));
-    }
 
     @SneakyThrows
     @Override
@@ -55,14 +50,12 @@ public class UserController implements UserApi {
 
     @SneakyThrows
     @Override
-    public ResponseEntity<UUID> deleteUser(UUID id) {
-        return ResponseEntity.ok(userService.delete(id));
+    public ResponseEntity<UserDto> deleteUser(UUID id) {
+        return ResponseEntity.ok(apiUserMapper.map(userService.delete(id)));
     }
 
-    @SneakyThrows
     @Override
-    public ResponseEntity<UUID> saveUser(UserDto userDto) {
-        return ResponseEntity.ok(userService.saveUser(apiUserMapper.map(userDto)));
+    public ResponseEntity<UserDto> upsertUser(UserDto userDto) {
+        return ResponseEntity.ok(apiUserMapper.map(userService.upsert(apiUserMapper.map(userDto))));
     }
-
 }

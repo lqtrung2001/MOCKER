@@ -53,18 +53,18 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public UUID delete(UUID id) {
+    public Group delete(UUID id) {
         Group group = groupRepository.findById(id).orElseThrow();
         List<GroupMember> groupMembers = groupMemberRepository.findAllByGroup(group);
         List<Project> projects = projectRepository.findAllByGroup(group);
         groupMemberRepository.deleteAll(groupMembers);
         projects.stream().map(Project::getId).forEach(projectService::delete);
         groupRepository.delete(group);
-        return id;
+        return group;
     }
 
     @Override
-    public UUID saveOrUpdate(Group group) {
+    public Group upsert(Group group) {
         // After saving group, update the group member for saved group and auth user
         boolean isNew = group.getId() == null;
         groupRepository.save(group);
@@ -77,6 +77,6 @@ public class GroupServiceImpl implements GroupService {
                     .role(Role.GROUP_ADMIN).build();
             groupMemberRepository.save(build);
         }
-        return group.getId();
+        return group;
     }
 }

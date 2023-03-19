@@ -35,9 +35,4 @@ public class CategoryController implements CategoryApi {
         return ResponseEntity.ok(apiCategoryMapper.mapWithEagerGenerateTypes(categoryService.getCategoryHasGenerateTypes(id)));
     }
 
-    @Override
-    public ResponseEntity<Integer> getGenerateTypesCount(UUID id) throws NotFoundException {
-        return ResponseEntity.ok(categoryService.getGenerateTypesCount(id));
-    }
-    
 }
