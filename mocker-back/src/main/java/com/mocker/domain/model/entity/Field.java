@@ -6,7 +6,10 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Table;
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
+
+import static java.util.Collections.emptyList;
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -52,5 +55,13 @@ public class Field extends Base {
     @ToString.Exclude
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "FIELD_TABLE_ID_FK"))
     private com.mocker.domain.model.entity.Table table = com.mocker.domain.model.entity.Table.builder().build();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "fieldSource")
+    private List<TableRelation> tableRelationSource = emptyList();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "fieldTarget")
+    private List<TableRelation> tableRelationTarget = emptyList();
 
 }

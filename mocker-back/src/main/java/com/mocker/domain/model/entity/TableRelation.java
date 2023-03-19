@@ -41,6 +41,16 @@ public class TableRelation {
 
     @ManyToOne
     @ToString.Exclude
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "TABLE_RELATION_SOURCE_FIELD_FK"))
+    private Field fieldSource = Field.builder().build();
+
+    @ManyToOne
+    @ToString.Exclude
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "TABLE_RELATION_TARGET_FIELD_FK"))
+    private Field fieldTarget = Field.builder().build();
+
+    @ManyToOne
+    @ToString.Exclude
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "RELATION_TYPE_TABLE_RELATION_FK"))
     private RelationType relationType = RelationType.builder().build();
 }

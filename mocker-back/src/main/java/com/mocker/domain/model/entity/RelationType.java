@@ -23,7 +23,7 @@ import static java.util.Collections.emptyList;
 @Table(name = "[RELATION_TYPE]")
 @ToString(callSuper = true)
 @SuperBuilder(toBuilder = true)
-public class RelationType {
+public class RelationType extends Base{
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
