@@ -1,5 +1,7 @@
 package com.mocker.domain.model.entity;
 
+import com.mocker.domain.model.entity.enumeration.Gender;
+import com.mocker.domain.model.entity.enumeration.RelationType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
@@ -30,14 +32,12 @@ public class TableRelation extends Base {
     @Column(name = "ID", updatable = false)
     private UUID id;
 
-    @Column(name = "SOURCE", nullable = false)
-    private UUID source;
-
-    @Column(name = "TARGET", nullable = false)
-    private UUID target;
-
     @Column(name = "NAME")
     private String name;
+
+    @Column(name = "RelationType", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private RelationType relationType;
 
     @ManyToOne
     @ToString.Exclude
@@ -49,8 +49,4 @@ public class TableRelation extends Base {
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "TABLE_RELATION_TARGET_FIELD_FK"))
     private Field target = Field.builder().build();
 
-    @ManyToOne
-    @ToString.Exclude
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "RELATION_TYPE_TABLE_RELATION_FK"))
-    private RelationType relationType = RelationType.builder().build();
 }
