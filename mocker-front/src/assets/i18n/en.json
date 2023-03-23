@@ -207,8 +207,10 @@
       "description_placeholder": "Relation description",
       "relation_type": "Relation type:",
       "relation_type_placeholder": "Relation type",
+      "delete": "DELETE",
       "cancel": "CANCEL",
-      "ok": "OK"
+      "ok": "OK",
+      "delete_confirmation": "Are you sure you want to delete this relation?"
     }
   }
 }

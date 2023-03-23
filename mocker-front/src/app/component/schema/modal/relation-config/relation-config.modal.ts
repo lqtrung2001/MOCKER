@@ -5,6 +5,7 @@ import { Option } from '@shared/component/dropdown/dropdown.component';
 import { RelationTypeEnum } from '@core/domain/enum/relation-type.enum';
 import { RelationTypeUtil } from '@core/util/relation-type.util';
 import { FieldModel } from '@core/domain/model/field.model';
+import { TableRelationModel } from '@core/domain/model/table-relation.model';
 
 /**
  * @author Do Quoc Viet
@@ -16,6 +17,11 @@ export interface RelationConfigModalOptions {
   target: FieldModel;
   description: string;
   relationType: RelationTypeEnum;
+}
+
+export interface RelationConfigModalClosedOptions {
+  remove?: boolean;
+  tableRelation: TableRelationModel;
 }
 
 type Controls = {
@@ -52,16 +58,30 @@ export class RelationConfigModal extends AbstractModal implements OnInit {
     this.formGroup.controls.target.setValue(`[${this.options.target.table.name}] ${this.options.target.name}`);
   }
 
-  override close(): void {
+  override close(remove?: boolean): void {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.invalid) {
       return;
     }
     const { description, relationType } = this.formGroup.getRawValue();
-    super.close({
-      ...this.options,
-      description,
-      relationType: RelationTypeUtil.fromValue(relationType)
+    const closeOptions: RelationConfigModalClosedOptions = {
+      remove,
+      tableRelation: {
+        ...this.options,
+        description,
+        relationType: RelationTypeUtil.fromValue(relationType)
+      } as TableRelationModel
+    };
+    super.close(closeOptions);
+  }
+
+  delete(): void {
+    this.modalProvider.showConfirmation({
+      body: 'modal.relation_config.delete_confirmation'
+    }).subscribe((result: boolean) => {
+      if (result) {
+        this.close(true);
+      }
     });
   }
 

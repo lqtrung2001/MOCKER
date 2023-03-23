@@ -21,7 +21,13 @@
                   selfClass='tw-text-left btn-light'></moc-button>
     </moc-dropdown>
     <div class='tw-flex tw-mt-3 tw-float-right tw-clear-both'>
+      <moc-button *ngIf='options.id'
+                  (click)='delete()'
+                  label='modal.relation_config.delete'
+                  selfClass='btn-red'>
+      </moc-button>
       <moc-button (click)='modalInstance.close(false)'
+                  class='tw-ml-1'
                   label='modal.relation_config.cancel'
                   selfClass='btn-light'>
       </moc-button>
