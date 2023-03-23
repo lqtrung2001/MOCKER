@@ -5,6 +5,7 @@ import { TableRelationModel } from '@core/domain/model/table-relation.model';
 import { AbstractSharedComponent } from '@shared/component/common/abstract-shared.component';
 import {
   RelationConfigModal,
+  RelationConfigModalClosedOptions,
   RelationConfigModalOptions
 } from '@app/component/schema/modal/relation-config/relation-config.modal';
 import { TableRelationService } from '@core/service/table-relation.service';
@@ -69,9 +70,6 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
   relationMapping(field: FieldModel): void {
     if (this.current) {
       if (this.current.id === field.id) {
-        this.modalProvider.showWarning({
-          detail: `These fields <b>${this.current.name}</b> and <b>${field.name}</b> are same, so can't be mapped each other.`
-        });
         this.current = undefined;
         return;
       }
@@ -90,27 +88,47 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
         };
       }
       this.modalService.open(RelationConfigModal, relationConfigModalOptions)
-        .subscribe((result: TableRelationModel) => {
-          if (result) {
-            this.tableRelationService.upsertEntity(result)
-              .subscribe((tableRelation: TableRelationModel): void => {
-                if (relationLineExisted) {
-                  this.relationLines
-                    .forEach((relationLine: RelationLine, index: number): void => {
-                      if (relationLine.tableRelation.id === relationLineExisted.tableRelation.id) {
-                        relationLine.leaderLine.remove();
-                        this.relationLines.splice(index, index + 1);
-                      }
+        .subscribe((relationConfigModalCloseOptions: RelationConfigModalClosedOptions) => {
+          if (relationConfigModalCloseOptions) {
+            // Removed
+            if (relationConfigModalCloseOptions.remove && relationLineExisted) {
+              this.tableRelationService.deleteEntity(relationLineExisted.tableRelation.id)
+                .subscribe((response: TableRelationModel): void => {
+                  if (response) {
+                    this.relationLines
+                      .forEach((relationLine: RelationLine, index: number): void => {
+                        if (relationLine.tableRelation.id === relationLineExisted.tableRelation.id) {
+                          relationLine.leaderLine.remove();
+                          this.relationLines.splice(index, index + 1);
+                        }
+                      });
+                    this.toastrProvider.showSuccess({
+                      detail: `Success delete mapping from <b>${response.source.name}</b> to <b>${response.target.name}</b>`
                     });
-                }
-                this.relationLines.push(DrawUtil.newRelationLine(tableRelation));
-                this.relationLines[this.relationLines.length - 1].leaderLine.position();
-                this.toastrProvider.showSuccess({
-                  detail: `Success config mapping from <b>${tableRelation.source.name}</b> to <b>${tableRelation.target.name}</b>`
+                  }
                 });
-                this.current = undefined;
-              });
+            } else {
+              // Updated
+              this.tableRelationService.upsertEntity(relationConfigModalCloseOptions.tableRelation)
+                .subscribe((response: TableRelationModel): void => {
+                  if (relationLineExisted) {
+                    this.relationLines
+                      .forEach((relationLine: RelationLine, index: number): void => {
+                        if (relationLine.tableRelation.id === relationLineExisted.tableRelation.id) {
+                          relationLine.leaderLine.remove();
+                          this.relationLines.splice(index, index + 1);
+                        }
+                      });
+                  }
+                  this.relationLines.push(DrawUtil.newRelationLine(response));
+                  this.relationLines[this.relationLines.length - 1].leaderLine.position();
+                  this.toastrProvider.showSuccess({
+                    detail: `Success config mapping from <b>${response.source.name}</b> to <b>${response.target.name}</b>`
+                  });
+                });
+            }
           }
+          this.current = undefined;
         });
     } else {
       this.current = field;

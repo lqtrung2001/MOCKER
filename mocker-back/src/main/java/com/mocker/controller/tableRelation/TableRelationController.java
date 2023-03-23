@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 /**
  * @author Do Quoc Viet
  */
@@ -18,6 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class TableRelationController implements TableRelationApi {
     private final ApiTableRelationMapper apiTableRelationMapper;
     private final TableRelationService tableRelationService;
+
+    @Override
+    public ResponseEntity<TableRelationDto> deleteTableRelation(UUID id) {
+        return ResponseEntity.ok(apiTableRelationMapper.map(tableRelationService.delete(id)));
+    }
 
     @Override
     public ResponseEntity<TableRelationDto> upsertTableRelation(TableRelationDto tableRelationDto) {

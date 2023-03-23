@@ -5,7 +5,7 @@ import { SchemaComponent } from '@app/component/schema/component/schema/schema.c
 import { LayoutModule } from '@shared/layout/layout.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
-import { DatePipe, NgForOf } from '@angular/common';
+import { DatePipe, NgForOf, NgIf } from '@angular/common';
 import { SchemaRoutingModule } from '@app/component/schema/schema-routing.module';
 import { TableConfigModal } from '@app/component/schema/modal/table-config/table-config.modal';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -35,7 +35,8 @@ import { RelationConfigModal } from '@app/component/schema/modal/relation-config
     DatePipe,
     NgForOf,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
+    NgIf
   ],
   providers: []
 })

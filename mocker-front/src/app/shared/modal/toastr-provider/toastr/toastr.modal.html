@@ -12,8 +12,8 @@
     <div class='tw-w-9/12'>
       <p class='tw-font-medium'>{{ options ? options.title : undefined }}</p>
       <p *ngIf='options.body'
-         class='tw-mt-2 tw-text-justify'>{{ (options ? (options.body | translate) : undefined) | truncate: 130 }}</p>
-      <p *ngIf='!options.body' class='tw-mt-2 tw-text-justify' [innerHTML]='options.detail'></p>
+         class='tw-mt-2'>{{ (options ? (options.body | translate) : undefined) | truncate: 130 }}</p>
+      <p *ngIf='!options.body' class='tw-mt-2' [innerHTML]='options.detail'></p>
     </div>
     <div class='tw-w-1/12 tw-text-center'>
       <i (click)='toastrClose()' class='tw-cursor-pointer fa-solid fa-xmark'></i>
