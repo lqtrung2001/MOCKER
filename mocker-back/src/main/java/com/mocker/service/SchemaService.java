@@ -1,25 +1,18 @@
 package com.mocker.service;
 
-import com.mocker.domain.exception.InternalException;
-import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Schema;
 import com.mocker.domain.model.entity.Table;
+import com.mocker.domain.model.entity.TableRelation;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
 public interface SchemaService {
-
-    /**
-     * SCHEMA.01 GET /schema/{projectId}
-     * @param projectId of project
-     * @return schemas by projectId
-     */
     List<Schema> getSchemasByProject(UUID projectId);
 
     Schema upsert(Schema schema);
@@ -31,4 +24,6 @@ public interface SchemaService {
     List<Schema> getSchemas();
 
     List<Table> getTablesBySchema(UUID schemaId);
+
+    List<TableRelation> getTableRelationsBySchema(UUID schemaId);
 }

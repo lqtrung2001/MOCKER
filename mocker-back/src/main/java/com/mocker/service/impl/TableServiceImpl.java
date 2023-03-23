@@ -29,12 +29,12 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public Table getTable(UUID id) {
-        return tableRepository.findOneWithEagerFields(id);
+        return tableRepository.findOneFetchFields(id);
     }
 
     @Override
     public List<Table> getTablesBySchema(UUID schemaId) {
-        return tableRepository.findAllBySchema(schemaId);
+        return tableRepository.findAllBySchemaFetchFields(schemaId);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class TableServiceImpl implements TableService {
         try {
             if (table.getId() != null) {
                 List<UUID> ids = table.getFields().stream().map(Field::getId).toList();
-                List<UUID> fieldIdsNeedToRemove = tableRepository.findOneWithEagerFields(table.getId())
+                List<UUID> fieldIdsNeedToRemove = tableRepository.findOneFetchFields(table.getId())
                         .getFields()
                         .stream()
                         .map(Field::getId)
@@ -75,7 +75,7 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public Table delete(UUID id) {
-        Table table = tableRepository.findOneWithEagerFields(id);
+        Table table = tableRepository.findOneFetchFields(id);
         if (table == null) {
             throw new IllegalStateException("validation.validation.data_access_error");
         }

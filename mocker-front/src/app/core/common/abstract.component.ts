@@ -12,7 +12,7 @@ import { ToastrProvider } from '@shared/modal/toastr-provider/toastr-provider';
  */
 
 export abstract class AbstractComponent {
-  protected appConfigService: ApplicationConfig;
+  protected applicationConfig: ApplicationConfig;
   protected router: Router;
   protected activatedRoute: ActivatedRoute;
   protected modalProvider: ModalProvider;
@@ -22,7 +22,7 @@ export abstract class AbstractComponent {
   protected toastrProvider: ToastrProvider;
 
   protected constructor(injector: Injector) {
-    this.appConfigService = injector.get(ApplicationConfig);
+    this.applicationConfig = injector.get(ApplicationConfig);
     this.router = injector.get(Router);
     this.activatedRoute = injector.get(ActivatedRoute);
     this.modalProvider = injector.get(ModalProvider);

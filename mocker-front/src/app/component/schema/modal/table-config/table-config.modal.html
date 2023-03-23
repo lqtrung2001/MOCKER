@@ -1,7 +1,8 @@
 <div [modal]='this' [opacity]='0.5' id='main' popup>
   <div class='tw-text-sm tw-p-5 tw-w-300 tw-h-210'>
     <p class='tw-font-bold tw-text-medium'>{{ 'modal.table_config.title' | translate }}</p>
-    <moc-table-detail [table]='$any(formGroup.controls.table)' class='mt-10'
+    <moc-table-detail [table]='$any(formGroup.controls.table)'
+                      class='tw-mt-10'
                       selfClass='tw-h-150 tw-overflow-y-auto'></moc-table-detail>
     <div class='tw-mt-5 tw-flex'>
       <div class='tw-flex'>
@@ -19,7 +20,7 @@
                   selfClass='btn-primary tw-text-left'></moc-button>
       <moc-button (click)='delete()' class='tw-ml-5 tw-w-56' icon='fa-solid fa-trash' label='modal.table_config.delete'
                   selfClass='btn-red tw-text-left'></moc-button>
-      <moc-button (click)='close(options.table ? options.table.id : undefined)' class='tw-ml-5 tw-w-40'
+      <moc-button (click)='close(table)' class='tw-ml-5 tw-w-40'
                   icon='fa-solid fa-right-from-bracket'
                   label='modal.table_config.close' selfClass='btn-light tw-text-left'></moc-button>
     </div>

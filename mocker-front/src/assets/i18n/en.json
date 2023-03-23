@@ -11,6 +11,12 @@
     "schema_delete_confirm": "Are you sure you want to delete this schema?",
     "schema_delete_success": "Schema with name {{name}} is deleted successfully"
   },
+  "enum": {
+    "one_to_one": "ONE TO ONE",
+    "one_to_many": "ONE TO MANY",
+    "many_to_one": "MANY TO ONE",
+    "many_to_many": "MANY TO MANY"
+  },
   "error": {
     "authentication": {
       "title": "Authentication Error",
@@ -133,7 +139,9 @@
       "save": "SAVE",
       "delete": "DELETE",
       "project_information": "Project Information:",
-      "create_table": "CREATE TABLE"
+      "create_table": "CREATE TABLE",
+      "download": "DOWNLOAD",
+      "preview": "PREVIEW"
     }
   },
   "audit": {
@@ -188,6 +196,19 @@
       "save": "SAVE",
       "delete": "DELETE THIS TABLE",
       "close": "CLOSE"
+    },
+    "relation_config": {
+      "title": "RELATION CONFIGURATION:",
+      "source": "Source:",
+      "source_placeholder": "Source",
+      "target": "Target:",
+      "target_placeholder": "Target",
+      "description": "Relation description:",
+      "description_placeholder": "Relation description",
+      "relation_type": "Relation type:",
+      "relation_type_placeholder": "Relation type",
+      "cancel": "CANCEL",
+      "ok": "OK"
     }
   }
 }

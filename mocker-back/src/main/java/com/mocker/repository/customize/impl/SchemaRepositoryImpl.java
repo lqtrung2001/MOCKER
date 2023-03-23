@@ -3,6 +3,7 @@ package com.mocker.repository.customize.impl;
 import com.mocker.domain.model.entity.Group;
 import com.mocker.domain.model.entity.Project;
 import com.mocker.domain.model.entity.Schema;
+import com.mocker.domain.model.entity.TableRelation;
 import com.mocker.repository.customize.SchemaRepositoryCustom;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.hibernate.Hibernate;
@@ -17,6 +18,7 @@ import static com.mocker.domain.model.entity.QGroupMember.groupMember;
 import static com.mocker.domain.model.entity.QProject.project;
 import static com.mocker.domain.model.entity.QSchema.schema;
 import static com.mocker.domain.model.entity.QTable.table;
+import static com.mocker.domain.model.entity.QTableRelation.tableRelation;
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -59,6 +61,19 @@ public class SchemaRepositoryImpl implements SchemaRepositoryCustom {
         Optional.ofNullable(entity).ifPresent(value -> value.getTables()
                 .forEach(table -> Hibernate.initialize(table.getFields())));
         return entity;
+    }
+
+    @Override
+    public List<TableRelation> getTableRelationsBySchema(UUID schemaId) {
+        List<UUID> tableIds = new JPAQuery<UUID>(entityManager)
+                .from(table)
+                .where(table.schema.id.eq(schemaId))
+                .select(table.id)
+                .fetch();
+        return new JPAQuery<TableRelation>(entityManager)
+                .from(tableRelation)
+                .where(tableRelation.source.table.id.in(tableIds))
+                .fetch();
     }
 }
 

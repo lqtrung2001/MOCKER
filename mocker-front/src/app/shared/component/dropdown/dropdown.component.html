@@ -3,13 +3,13 @@
     <ng-content></ng-content>
   </div>
   <div #popup
-       class='{{ isShown ? "" : "tw-hidden" }} tw-bg-white tw-absolute tw-rounded tw-overflow-hidden tw-w-72 tw-z-10 tw-drop-shadow-2xl'>
+       class='{{ isShown ? "" : "tw-hidden" }} tw-bg-white tw-absolute tw-rounded tw-overflow-hidden tw-w-72 tw-z-50 tw-drop-shadow-2xl'>
     <ng-container [ngTemplateOutlet]='header'></ng-container>
-    <div (click)='actionClick(action)'
-         *ngFor='let action of actions'
+    <div (click)='optionClick(option)'
+         *ngFor='let option of options'
          class='tw-flex tw-text-sm tw-items-center tw-px-4 tw-py-2.5 hover:tw-bg-gray tw-cursor-pointer'>
-      <i *ngIf='action.icon' class='{{ action.icon }} icon'></i>
-      <p class='tw-ml-2'>{{ action.label }}</p>
+      <i *ngIf='option.icon' class='{{ option.icon }} icon'></i>
+      <p class='tw-ml-2'>{{ option.label }}</p>
     </div>
     <ng-container [ngTemplateOutlet]='footer'></ng-container>
   </div>

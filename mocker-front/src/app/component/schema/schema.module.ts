@@ -10,7 +10,8 @@ import { SchemaRoutingModule } from '@app/component/schema/schema-routing.module
 import { TableConfigModal } from '@app/component/schema/modal/table-config/table-config.modal';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DiagramComponent } from '@app/component/schema/component/diagram/diagram.component';
-import { CdkDrag } from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { RelationConfigModal } from '@app/component/schema/modal/relation-config/relation-config.modal';
 
 /**
  * @author Do Quoc Viet
@@ -22,7 +23,8 @@ import { CdkDrag } from '@angular/cdk/drag-drop';
     SchemaComponent,
     SchemaLayoutComponent,
     TableConfigModal,
-    DiagramComponent
+    DiagramComponent,
+    RelationConfigModal
   ],
   exports: [],
   imports: [
@@ -33,7 +35,7 @@ import { CdkDrag } from '@angular/cdk/drag-drop';
     DatePipe,
     NgForOf,
     ReactiveFormsModule,
-    CdkDrag
+    DragDropModule
   ],
   providers: []
 })

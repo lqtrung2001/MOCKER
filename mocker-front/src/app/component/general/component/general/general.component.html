@@ -6,10 +6,10 @@
     <span class='tw-mt-3 tw-mr-5'>{{ 'component.general.row' | translate }}</span>
     <moc-input [control]='formGroup.controls.rows' class='tw-w-24' selfClass='tw-px-5'></moc-input>
     <span class='tw-mt-3 tw-mx-5'>{{ 'component.general.format' | translate }}</span>
-    <moc-action [actions]='supportedFormat'>
+    <moc-dropdown [options]='supportedFormat'>
       <moc-button [label]='formGroup.controls.format.value' class='tw-w-32' icon='fa-solid fa-arrow-up-arrow-down'
-                  selfClass='tw-text-left tw-btn-light'></moc-button>
-    </moc-action>
+                  selfClass='tw-text-left btn-light'></moc-button>
+    </moc-dropdown>
     <span *ngIf='isShowTableNameField' class='tw-mt-3 tw-mx-5'>{{ 'component.general.table_name' | translate }}</span>
     <moc-input *ngIf='isShowTableNameField' [control]='formGroup.controls.table.controls.name' class='tw-w-32'
                selfClass='tw-px-5'></moc-input>

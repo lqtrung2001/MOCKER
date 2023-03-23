@@ -13,7 +13,8 @@ import static com.mocker.domain.model.entity.QField.field;
 import static com.mocker.domain.model.entity.QTable.table;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
 @SuppressWarnings("unused")
@@ -23,15 +24,17 @@ public class TableRepositoryImpl implements TableRepositoryCustom {
     EntityManager entityManager;
 
     @Override
-    public List<Table> findAllBySchema(UUID schemaId) {
+    public List<Table> findAllBySchemaFetchFields(UUID schemaId) {
         return new JPAQuery<Table>(entityManager)
                 .from(table)
                 .where(table.schema.id.eq(schemaId))
+                .leftJoin(table.fields, field).fetchJoin()
+                .distinct()
                 .fetch();
     }
 
     @Override
-    public Table findOneWithEagerFields(UUID id) {
+    public Table findOneFetchFields(UUID id) {
         return new JPAQuery<Table>(entityManager)
                 .from(table)
                 .where(table.id.eq(id))

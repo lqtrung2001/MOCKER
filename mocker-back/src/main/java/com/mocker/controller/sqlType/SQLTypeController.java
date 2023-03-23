@@ -1,7 +1,6 @@
-package com.mocker.controller.SQLType;
+package com.mocker.controller.sqlType;
 
 import com.mocker.api.SqlTypeApi;
-import com.mocker.controller.SQLType.ApiSQLTypeMapper;
 import com.mocker.domain.dto.SQLTypeDto;
 import com.mocker.domain.exception.NotFoundException;
 import com.mocker.service.SQLTypeService;

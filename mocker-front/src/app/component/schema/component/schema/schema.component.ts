@@ -1,4 +1,4 @@
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { AbstractComponent } from '@core/common/abstract.component';
 import { SchemaModel } from '@core/domain/model/schema.model';
 import { SchemaService } from '@core/service/schema.service';
@@ -20,7 +20,7 @@ type Controls = {
   templateUrl: 'schema.component.html',
   styleUrls: ['schema.component.scss']
 })
-export class SchemaComponent extends AbstractComponent {
+export class SchemaComponent extends AbstractComponent implements OnInit {
   schema: SchemaModel;
   formGroup: FormGroup<Controls>;
 
@@ -33,6 +33,9 @@ export class SchemaComponent extends AbstractComponent {
       name: this.formBuilder.control(undefined, [Validators.required]),
       description: this.formBuilder.control(undefined, [Validators.required])
     });
+  }
+
+  ngOnInit(): void {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
       this.schemaService.getEntity(id).subscribe((schema: SchemaModel): void => {
@@ -40,17 +43,6 @@ export class SchemaComponent extends AbstractComponent {
         this.formGroup.patchValue(schema);
       });
     }
-  }
-
-  get tables(): TableModel[] {
-    if (!this.schema) {
-      return [];
-    }
-    const { tables, ...schema } = this.schema;
-    return tables.map((table: TableModel) => {
-      table.schema = schema as SchemaModel;
-      return table;
-    }).filter((table: TableModel): boolean => !!table.fields.length);
   }
 
   submit(): void {

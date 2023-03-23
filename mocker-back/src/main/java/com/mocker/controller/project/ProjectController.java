@@ -15,7 +15,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
 @RestController
@@ -40,13 +41,13 @@ public class ProjectController implements ProjectApi {
                 .collect(Collectors.toList()));
     }
 
-    @Override
-    public ResponseEntity<List<SchemaDto>> getSchemasByProject(UUID projectId) {
-        return ResponseEntity.ok(projectService.getSchemasByProject(projectId)
-                .stream()
-                .map(apiProjectMapper::map)
-                .collect(Collectors.toList()));
-    }
+//    @Override
+//    public ResponseEntity<List<SchemaDto>> getSchemasByProject(UUID projectId) {
+//        return ResponseEntity.ok(projectService.getSchemasByProject(projectId)
+//                .stream()
+//                .map(apiProjectMapper::map)
+//                .collect(Collectors.toList()));
+//    }
 
     @Override
     public ResponseEntity<ProjectDto> upsertProject(ProjectDto projectDto) {

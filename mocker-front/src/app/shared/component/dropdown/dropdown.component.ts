@@ -1,11 +1,11 @@
-import { AbstractComponent } from '@core/common/abstract.component';
 import { AfterViewInit, Component, ElementRef, Injector, Input, TemplateRef, ViewChild } from '@angular/core';
+import { AbstractSharedComponent } from '@shared/component/common/abstract-shared.component';
 
 /**
  * @author Do Quoc Viet
  */
 
-export interface Action {
+export interface Option {
   id: string;
   icon?: string;
   label: string;
@@ -13,15 +13,15 @@ export interface Action {
 }
 
 @Component({
-  selector: 'moc-action',
-  templateUrl: 'action.component.html',
-  styleUrls: ['action.component.scss']
+  selector: 'moc-dropdown',
+  templateUrl: 'dropdown.component.html',
+  styleUrls: ['dropdown.component.scss']
 })
-export class ActionComponent extends AbstractComponent implements AfterViewInit {
+export class DropdownComponent extends AbstractSharedComponent implements AfterViewInit {
   @Input() header: TemplateRef<any>;
   @Input() footer: TemplateRef<any>;
   @Input() behavior: 'click' | 'hover' = 'click';
-  @Input() actions: Action[] = [];
+  @Input() options: Option[] = [];
   @ViewChild('popup') popup: ElementRef;
   @ViewChild('dock') dock: ElementRef;
   isShown: boolean = false;
@@ -36,7 +36,8 @@ export class ActionComponent extends AbstractComponent implements AfterViewInit 
     this.isShown = this.behavior === behavior;
   }
 
-  ngAfterViewInit(): void {
+  override ngAfterViewInit(): void {
+    super.ngAfterViewInit();
     // Setting position for actions
     const windowWidth: number = window.innerWidth;
     const dockLeft: number = this.dock.nativeElement.getBoundingClientRect().left;
@@ -51,10 +52,10 @@ export class ActionComponent extends AbstractComponent implements AfterViewInit 
     }
   }
 
-  actionClick(action: Action): void {
+  optionClick(option: Option): void {
     this.isShown = false;
     // callback
-    action.click();
+    option.click();
   }
 
 }

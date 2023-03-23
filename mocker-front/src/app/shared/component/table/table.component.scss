@@ -1,7 +1,7 @@
 #main {
-  .heading:hover {
-    > .edit-icon {
-      display: inline-block !important;
+  .field {
+    &:hover .option {
+      display: block !important;
     }
   }
 }
