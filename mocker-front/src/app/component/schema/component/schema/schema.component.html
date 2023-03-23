@@ -21,9 +21,15 @@
       <p class='tw-mt-3'>{{ schema ? schema.project.description : undefined }}</p>
     </div>
   </div>
-  <div class='tw-p-5'>
-    <moc-button (click)='createTable()' class='tw-w-44 tw-inline-block' icon='fa-solid fa-folder-plus'
-                label='component.schema.create_table' selfClass='btn-primary tw-text-left'></moc-button>
-    <moc-diagram [tables]='tables'></moc-diagram>
+  <div class='tw-p-5 tw-w-[calc(100%_-_384px)]'>
+    <div class='tw-flex tw-justify-between tw-w-150'>
+      <moc-button (click)='createTable()' class='tw-w-44 tw-inline-block' icon='fa-solid fa-folder-plus'
+                  label='component.schema.create_table' selfClass='btn-primary tw-text-left'></moc-button>
+      <moc-button (click)='createTable()' class='tw-w-44 tw-inline-block' icon='fa-solid fa-download'
+                  label='component.schema.download' selfClass='btn-primary tw-text-left'></moc-button>
+      <moc-button (click)='createTable()' class='tw-w-44 tw-inline-block' icon='fa-solid fa-display-code'
+                  label='component.schema.preview' selfClass='btn-light tw-text-left'></moc-button>
+    </div>
+    <moc-diagram class='tw-w-full tw-h-[calc(100%_-_42px)] tw-mt-3' [schema]='schema'></moc-diagram>
   </div>
 </div>

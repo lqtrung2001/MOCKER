@@ -17,7 +17,8 @@ import java.util.List;
  * @author Luong Quoc Trung
  */
 
-@Mapper(componentModel = "spring", uses = {ApiAbstractMapper.class})
+@Mapper(componentModel = "spring", uses = {
+        ApiAbstractMapper.class})
 public interface ApiCategoryMapper {
 
     CategoryDto map(Category category);

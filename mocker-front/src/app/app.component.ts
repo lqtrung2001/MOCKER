@@ -19,7 +19,7 @@ export class AppComponent extends AbstractComponent {
     const language: string = 'en';
     this.translateService.setDefaultLang(language);
     this.translateService.use(language);
-    this.appConfigService.loading.valueChanges.subscribe(() => {
+    this.applicationConfig.loading.valueChanges.subscribe(() => {
       this.changeDetectorRef.detectChanges();
     });
   }

@@ -1,9 +1,14 @@
 package com.mocker.controller.schema;
 
 import com.mocker.api.SchemaApi;
+import com.mocker.controller.table.ApiTableMapperDecorator;
+import com.mocker.controller.tableRelation.ApiTableRelationMapper;
 import com.mocker.domain.dto.SchemaDto;
 import com.mocker.domain.dto.TableDto;
+import com.mocker.domain.dto.TableRelationDto;
+import com.mocker.repository.TableRelationRepository;
 import com.mocker.service.SchemaService;
+import com.mocker.service.TableRelationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,19 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/v1")
 public class SchemaController implements SchemaApi {
-
     private final ApiSchemaMapper apiSchemaMapper;
+    private final ApiTableMapperDecorator apiTableMapperDecorator;
+    private final ApiTableRelationMapper apiTableRelationMapper;
     private final SchemaService schemaService;
+    private final TableRelationService tableRelationService;
 
     @Override
     public ResponseEntity<List<SchemaDto>> getSchemas() {
@@ -37,10 +44,12 @@ public class SchemaController implements SchemaApi {
 
     @Override
     public ResponseEntity<List<TableDto>> getTablesBySchema(UUID schemaId) {
-        return ResponseEntity.ok(schemaService.getTablesBySchema(schemaId)
-                .stream()
-                .map(apiSchemaMapper::map)
-                .collect(Collectors.toList()));
+        return ResponseEntity.ok(apiTableMapperDecorator.mapToTablesDtoFetchFields(schemaService.getTablesBySchema(schemaId)));
+    }
+
+    @Override
+    public ResponseEntity<List<TableRelationDto>> getTableRelationsBySchema(UUID id) {
+        return ResponseEntity.ok(apiTableRelationMapper.map(schemaService.getTableRelationsBySchema(id)));
     }
 
     @Override
@@ -50,6 +59,6 @@ public class SchemaController implements SchemaApi {
 
     @Override
     public ResponseEntity<SchemaDto> getSchema(UUID id) {
-        return ResponseEntity.ok(apiSchemaMapper.mapFetchTables(schemaService.getSchema(id)));
+        return ResponseEntity.ok(apiSchemaMapper.map(schemaService.getSchema(id)));
     }
 }

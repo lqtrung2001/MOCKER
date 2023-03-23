@@ -40,7 +40,7 @@ export class SignInComponent extends AbstractComponent {
     });
     this.formGroup.controls.username.valueChanges.subscribe(() => this.invalidAuth = false);
     this.formGroup.controls.password.valueChanges.subscribe(() => this.invalidAuth = false);
-    this.appConfigService.user = undefined;
+    this.applicationConfig.user = undefined;
   }
 
   submit(): void {
@@ -56,7 +56,7 @@ export class SignInComponent extends AbstractComponent {
             if (user) {
               user.password = password;
               localStorage.setItem(LocalStorageConstant.AUTH, JSON.stringify(user));
-              this.appConfigService.user = user;
+              this.applicationConfig.user = user;
               this.router.navigate(['/']).then(() => {
                 this.toastrProvider.showSuccess({
                   title: 'Login',

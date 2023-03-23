@@ -43,11 +43,11 @@ public class TableRelation extends Base {
     @Column(name = "ID", updatable = false)
     private UUID id;
 
-    @Column(name = "NAME")
-    private String name;
+    @Column(name = "DESCRIPTION")
+    private String description;
 
-    @Column(name = "RelationType", nullable = false)
     @Enumerated(EnumType.STRING)
+    @Column(name = "RELATION_TYPE", nullable = false)
     private RelationType relationType;
 
     @ManyToOne

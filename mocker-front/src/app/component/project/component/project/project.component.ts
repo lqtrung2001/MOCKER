@@ -4,7 +4,6 @@ import { AbstractComponent } from '@core/common/abstract.component';
 import { ProjectModel } from '@core/domain/model/project.model';
 import { Tab } from '@shared/component/tab/tab.component';
 import { SchemaModel } from '@core/domain/model/schema.model';
-import { SchemaService } from '@core/service/schema.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 /**
@@ -30,8 +29,7 @@ export class ProjectComponent extends AbstractComponent {
 
   constructor(
     injector: Injector,
-    private projectService: ProjectService,
-    private schemaService: SchemaService
+    private projectService: ProjectService
   ) {
     super(injector);
     this.formGroup = this.formBuilder.group({
@@ -43,8 +41,7 @@ export class ProjectComponent extends AbstractComponent {
       this.projectService.getEntity(id).subscribe((project: ProjectModel): void => {
         this.project = project;
         this.formGroup.patchValue(project);
-        // TODO check this endpoint
-        this.schemaService.getSchemasByProject(id).subscribe((schemas: SchemaModel[]): void => {
+        this.projectService.getSchemasByProject(id).subscribe((schemas: SchemaModel[]): void => {
           this.project.schemas = schemas;
         });
       });

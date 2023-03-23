@@ -1,6 +1,6 @@
 import { Component, Injector } from '@angular/core';
 import { AbstractComponent } from '@core/common/abstract.component';
-import { Action } from '@shared/component/action/action.component';
+import { Option } from '@shared/component/dropdown/dropdown.component';
 
 /**
  * @author Do Quoc Viet
@@ -21,7 +21,7 @@ export class NavigationComponent extends AbstractComponent {
 
   avatarUrl: string = 'https://yt3.ggpht.com/Cji7zw_9NO5VpKrfN3oP90Wiby3UhNG2t4q8j3wJiAMFSQicFKu-jXJ13H_mJfBKPD1lzaGGXZA=s88-c-k-c0x00ffffff-no-rj-mo';
   navigations: Navigation[] = [];
-  actions: Action[] = [];
+  options: Option[] = [];
 
   constructor(
     injector: Injector
@@ -52,7 +52,7 @@ export class NavigationComponent extends AbstractComponent {
       title: 'people',
       icon: 'fa-regular fa-user'
     }];
-    this.actions = [{
+    this.options = [{
       id: '1',
       icon: 'fa-solid fa-repeat',
       label: 'Switch Account',
@@ -64,7 +64,7 @@ export class NavigationComponent extends AbstractComponent {
       icon: 'fa-regular fa-id-card',
       label: 'Profile',
       click: () => {
-        this.router.navigate([`people/${this.appConfigService.user?.id}`]).then();
+        this.router.navigate([`people/${this.applicationConfig.user?.id}`]).then();
       }
     }, {
       id: '3',

@@ -7,9 +7,15 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-@Mapper(componentModel = "spring", uses = {ApiAbstractMapper.class})
+/**
+ * @author Do Quoc Viet
+ */
+
+@Mapper(componentModel = "spring", uses = {
+        ApiAbstractMapper.class})
 public interface ApiGroupMapper {
-    Group map(com.mocker.domain.dto.GroupDto groupDto);
+
+    Group map(GroupDto groupDto);
 
     @Mapping(target = "projects", ignore = true)
     @Mapping(target = "groupMembers", ignore = true)
@@ -17,4 +23,5 @@ public interface ApiGroupMapper {
 
     @Named("mapWithEagerProjectsAndGroupMembers")
     GroupDto mapWithEagerProjectsAndGroupMembers(Group group);
+
 }

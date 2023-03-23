@@ -22,7 +22,7 @@ import {
 } from '@shared/component/error-message-processor/error-message-processor.component';
 import { LoadingComponent } from '@shared/component/loading/loading.component';
 import { ButtonComponent } from '@shared/component/button/button.component';
-import { ActionComponent } from '@shared/component/action/action.component';
+import { DropdownComponent } from '@shared/component/dropdown/dropdown.component';
 import { DescriptionComponent } from '@shared/component/description/description.component';
 import { TruncatePipe } from '@shared/pipe/truncate.pipe';
 import { TabComponent } from '@shared/component/tab/tab.component';
@@ -53,7 +53,7 @@ import { ToastrModal } from '@shared/modal/toastr-provider/toastr/toastr.modal';
     DescriptionComponent,
     ErrorMessageProcessorComponent,
     LoadingComponent,
-    ActionComponent,
+    DropdownComponent,
     TruncatePipe,
     TabComponent,
     DateDistancePipe,
@@ -95,7 +95,7 @@ import { ToastrModal } from '@shared/modal/toastr-provider/toastr/toastr.modal';
     InputComponent,
     LoadingComponent,
     ButtonComponent,
-    ActionComponent,
+    DropdownComponent,
     DescriptionComponent,
     TruncatePipe,
     TabComponent,

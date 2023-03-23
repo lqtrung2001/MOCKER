@@ -724,7 +724,7 @@ paths:
     get:
       operationId: getTablesBySchema
       tags:
-        - Table
+        - Schema
       description: Get tables by schema
       responses:
         200:
@@ -735,6 +735,39 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Table'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /schema/{id}/tables/table-relations:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The schema Id
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: getTableRelationsBySchema
+      tags:
+        - Schema
+      description: Get table relations by schema
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TableRelation'
         400:
           $ref: '#/components/responses/BadRequest'
         401:
@@ -923,6 +956,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Table'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /table-relation:
+    post:
+      operationId: upsertTableRelation
+      tags:
+        - TableRelation
+      description: update or insert a table relation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TableRelation'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableRelation'
         400:
           $ref: '#/components/responses/BadRequest'
         401:
@@ -1408,19 +1470,17 @@ components:
         * ADMIN - admin.
     RelationType:
       type: object
-      description: RELATION-TYPE table
-      properties:
-        id:
-          readOnly: true
-          type: string
-          format: uuid
-          description: Relation type id
-        code:
-          type: string
-          maxLength: 255
-          description: Name of relation-type
-      allOf:
-        - $ref: '#/components/schemas/Base'
+      enum:
+        - ONE_TO_ONE
+        - ONE_TO_MANY
+        - MANY_TO_ONE
+        - MANY_TO_MANY
+      description: |
+        Mocker relation type:
+        * ONE_TO_ONE - one-to-one relation.
+        * ONE_TO_MANY - one-to-many relation.
+        * MANY_TO_ONE - many-to-one relation.
+        * MANY_TO_MANY - many-to-many relation.
     TableRelation:
       type: object
       description: TABLE-RELATION table
@@ -1431,17 +1491,13 @@ components:
           format: uuid
           description: Table relation id
         source:
-          type: string
-          format: uuid
-          description: Source id
+          $ref: '#/components/schemas/Field'
         target:
-          type: string
-          format: uuid
-          description: Target id
-        name:
+          $ref: '#/components/schemas/Field'
+        description:
           type: string
           maxLength: 255
-          description: Name of relation
+          description: Description of relation
         relationType:
           $ref: '#/components/schemas/RelationType'
       allOf:

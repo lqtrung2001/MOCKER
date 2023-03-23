@@ -1,7 +1,6 @@
 import { AbstractComponent } from '@core/common/abstract.component';
 import { Component, Injector } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Action } from '@shared/component/action/action.component';
 import { GenerateService } from '@core/service/generate.service';
 import { TableModel } from '@core/domain/model/table.model';
 import { FieldModel } from '@core/domain/model/field.model';
@@ -9,6 +8,7 @@ import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 import { ConverterUtil } from '@core/util/converter.util';
 import * as FileSaver from 'file-saver';
 import { PreviewModal, PreviewModalOptions } from '@shared/modal/preview/preview.modal';
+import { Option } from '@shared/component/dropdown/dropdown.component';
 
 /**
  * @author Do Quoc Viet
@@ -142,7 +142,7 @@ export class GeneralComponent extends AbstractComponent {
     }
   }
 
-  get supportedFormat(): Action[] {
+  get supportedFormat(): Option[] {
     return [{
       id: '1',
       icon: 'fa-regular fa-database',

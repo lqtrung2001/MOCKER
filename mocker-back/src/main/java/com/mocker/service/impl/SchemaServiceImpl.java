@@ -3,6 +3,7 @@ package com.mocker.service.impl;
 import com.mocker.configuration.security.ApplicationContextHolder;
 import com.mocker.domain.model.entity.Schema;
 import com.mocker.domain.model.entity.Table;
+import com.mocker.domain.model.entity.TableRelation;
 import com.mocker.repository.SchemaRepository;
 import com.mocker.repository.TableRepository;
 import com.mocker.service.SchemaService;
@@ -51,7 +52,12 @@ public class SchemaServiceImpl implements SchemaService {
 
     @Override
     public List<Table> getTablesBySchema(UUID schemaId) {
-        return tableRepository.findAllBySchema(schemaId);
+        return tableRepository.findAllBySchemaFetchFields(schemaId);
+    }
+
+    @Override
+    public List<TableRelation> getTableRelationsBySchema(UUID schemaId) {
+        return schemaRepository.getTableRelationsBySchema(schemaId);
     }
 
     @Override

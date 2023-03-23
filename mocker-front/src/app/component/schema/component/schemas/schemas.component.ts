@@ -5,7 +5,6 @@ import { SchemaService } from '@core/service/schema.service';
 
 /**
  * @author Do Quoc viet
- * @date 22/02/2023
  */
 
 @Component({

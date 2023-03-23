@@ -10,11 +10,11 @@
       <p *ngIf='!options.body' [innerHTML]='options.detail' class='tw-text-sm tw-mt-2 tw-overflow-auto'></p>
       <div class='tw-flex tw-flex-row-reverse tw-mt-5'>
         <div class='tw-flex tw-text-sm tw-justify-end'>
-          <moc-button (click)='modalInstance.close(false)' *ngIf='isShowBtnCancel'
+          <moc-button (click)='close(false)' *ngIf='isShowBtnCancel'
                       label='modal.dialog.cancel'
                       selfClass='btn-light'>
           </moc-button>
-          <moc-button (click)='modalInstance.close(true)' *ngIf='isShowBtnOK'
+          <moc-button (click)='close(true)' *ngIf='isShowBtnOK'
                       class='tw-ml-1'
                       label='modal.dialog.ok'
                       selfClass='tw-w-12 btn-primary tw-bg-{{ color }}'>

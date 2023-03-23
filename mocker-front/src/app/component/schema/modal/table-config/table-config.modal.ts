@@ -87,10 +87,11 @@ export class TableConfigModal extends AbstractModal implements OnInit {
       description,
       fields
     };
-    this.tableService.upsertEntity(table).subscribe((table: TableModel) => {
-      this.table = table;
-      this.patchValues();
-    });
+    this.tableService.upsertEntity(table)
+      .subscribe((table: TableModel) => {
+        this.table = table;
+        this.patchValues();
+      });
   }
 
   delete(): void {

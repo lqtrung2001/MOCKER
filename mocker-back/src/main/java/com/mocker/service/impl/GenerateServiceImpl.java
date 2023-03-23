@@ -25,7 +25,7 @@ public class GenerateServiceImpl implements GenerateService {
 
     @Override
     public List<Map<String, String>> generateWithTableId(UUID tableId, Integer row) {
-        Table table = tableRepository.findOneWithEagerFields(tableId);
+        Table table = tableRepository.findOneFetchFields(tableId);
         return generate(table, row);
     }
 

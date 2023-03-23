@@ -43,7 +43,8 @@
                        type='number'></moc-input>
             <moc-button class='tw-w-12' icon='fa-solid fa-sigma'
                         selfClass='btn-light tw-h-10'></moc-button>
-            <i (click)='removeField(i)' class='tw-text-lg tw-cursor-pointer fa-regular fa-circle-xmark tw-self-center'></i>
+            <i (click)='removeField(i)'
+               class='tw-text-lg tw-cursor-pointer fa-regular fa-circle-xmark tw-self-center'></i>
           </div>
         </td>
       </tr>
@@ -55,6 +56,7 @@
       </tfoot>
     </table>
   </div>
-  <moc-button (click)='insertField()' class='tw-w-[calc(208px)] tw-mt-3 tw-inline-block' label='component.table_detail.add_another_field'
+  <moc-button (click)='insertField()' class='tw-w-[calc(208px)] tw-mt-3 tw-inline-block'
+              label='component.table_detail.add_another_field'
               selfClass='btn-primary'></moc-button>
 </div>

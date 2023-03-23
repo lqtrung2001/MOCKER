@@ -8,7 +8,7 @@
          [routerLink]='navigation.routerLink'
          class='tw-px-4 tw-flex tw-items-center tw-relative'
          routerLinkActive='active'>
-        <i [class]='navigation.icon'></i>
+        <i [class]='navigation.icon + " fa-flip"'></i>
         <span class='tw-ml-2 tw-font-medium first-letter:tw-underline tw-uppercase'>{{ navigation.title }}</span>
       </a>
     </nav>
@@ -22,7 +22,7 @@
       <div class='hover:tw-bg-blue-50 tw-w-9 tw-h-9 tw-flex tw-justify-center tw-items-center tw-rounded-full tw-ml-3 tw-cursor-pointer'>
         <i class='fa-regular fa-bell'></i>
       </div>
-      <moc-action [actions]='actions' [header]='header'>
+      <moc-dropdown [options]='options' [header]='header'>
         <div
           class='hover:tw-bg-blue-50 tw-w-9 tw-h-9 tw-flex tw-justify-center tw-items-center tw-rounded-full tw-ml-3 tw-cursor-pointer tw-relative'>
           <img [src]='avatarUrl' alt='avatar' class='icon tw-rounded-full'/>
@@ -38,7 +38,7 @@
             </div>
           </div>
         </ng-template>
-      </moc-action>
+      </moc-dropdown>
     </div>
   </header>
   <hr/>
