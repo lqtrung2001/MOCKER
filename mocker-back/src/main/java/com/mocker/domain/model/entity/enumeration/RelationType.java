@@ -17,4 +17,9 @@ public enum RelationType {
     MANY_TO_MANY("MANY_TO_MANY");
 
     private final String value;
+
+    public static Boolean isRelationOneTo(RelationType relationType) {
+        return RelationType.ONE_TO_MANY.equals(relationType) || RelationType.ONE_TO_ONE.equals(relationType);
+    }
+
 }

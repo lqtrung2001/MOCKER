@@ -7,9 +7,11 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Table;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import static java.util.Collections.emptyList;
+import static java.util.Collections.emptySet;
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -58,10 +60,10 @@ public class Field extends Base {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "source")
-    private List<TableRelation> tableRelationSources = emptyList();
+    private Set<TableRelation> tableRelationSources = emptySet();
 
     @ToString.Exclude
     @OneToMany(mappedBy = "target")
-    private List<TableRelation> tableRelationTargets = emptyList();
+    private Set<TableRelation> tableRelationTargets = emptySet();
 
 }

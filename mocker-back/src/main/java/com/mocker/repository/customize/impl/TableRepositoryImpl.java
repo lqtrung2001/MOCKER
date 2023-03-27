@@ -34,6 +34,15 @@ public class TableRepositoryImpl implements TableRepositoryCustom {
     }
 
     @Override
+    public List<Table> findAllBySchema(UUID schemaId) {
+        return new JPAQuery<Table>(entityManager)
+                .from(table)
+                .where(table.schema.id.eq(schemaId))
+                .distinct()
+                .fetch();
+    }
+
+    @Override
     public Table findOneFetchFields(UUID id) {
         return new JPAQuery<Table>(entityManager)
                 .from(table)
