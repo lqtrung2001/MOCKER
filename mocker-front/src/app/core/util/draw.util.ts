@@ -50,34 +50,41 @@ export class DrawUtil {
     );
     sourceHTMLElement.addEventListener('mouseover', () => {
       if (!this.removedLeaderLines.includes(leaderLine._id)) {
+        this.moveToLastElement(leaderLine._id);
         leaderLine.setOptions({
           color: 'rgb(30,41,248)'
         });
+        leaderLine.size = 2;
         targetHTMLElement.style.backgroundColor = '#c7d6ff';
       }
     });
     sourceHTMLElement.addEventListener('mouseout', () => {
       if (!this.removedLeaderLines.includes(leaderLine._id)) {
+        this.moveToLastElement(leaderLine._id);
         leaderLine.setOptions({
           color: '#000'
         });
+        leaderLine.size = 1.5;
         targetHTMLElement.style.backgroundColor = '#fff';
       }
     });
     targetHTMLElement.addEventListener('mouseover', () => {
       if (!this.removedLeaderLines.includes(leaderLine._id)) {
-        console.log(leaderLine._id);
+        this.moveToLastElement(leaderLine._id);
         leaderLine.setOptions({
           color: 'rgb(30,41,248)'
         });
+        leaderLine.size = 2;
         sourceHTMLElement.style.backgroundColor = '#c7d6ff';
       }
     });
     targetHTMLElement.addEventListener('mouseout', () => {
       if (!this.removedLeaderLines.includes(leaderLine._id)) {
+        this.moveToLastElement(leaderLine._id);
         leaderLine.setOptions({
           color: '#000'
         });
+        leaderLine.size = 1.5;
         sourceHTMLElement.style.backgroundColor = '#fff';
       }
     });
@@ -131,6 +138,15 @@ export class DrawUtil {
       return 'right';
     }
     return 'auto';
+  }
+
+  static moveToLastElement(id: number): void {
+    document.querySelectorAll('svg').forEach((svgElement: SVGElement): void => {
+      if (svgElement.querySelector(`defs path[id='leader-line-${id}-line-path']`)) {
+        svgElement.remove();
+        document.querySelector('body')!.appendChild(svgElement);
+      }
+    });
   }
 
 }

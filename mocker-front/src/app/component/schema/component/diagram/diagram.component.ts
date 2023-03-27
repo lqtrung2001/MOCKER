@@ -175,9 +175,9 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
   }
 
   ngOnDestroy(): void {
-    this.relationLines.forEach((leaderLine: any) => {
-      DrawUtil.removedLeaderLines.push(leaderLine._id);
-      leaderLine.remove();
+    this.relationLines.forEach((relationLine: RelationLine): void => {
+      DrawUtil.removedLeaderLines.push(relationLine.leaderLine._id);
+      relationLine.leaderLine.remove();
     });
   }
 
