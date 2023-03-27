@@ -9,11 +9,13 @@ import { AbstractSharedComponent } from '@shared/component/common/abstract-share
  * @author Do Quoc Viet
  */
 
-export type Controls = {
+export type FieldControls = {
+  id: FormControl;
   name: FormControl;
   generateType: FormControl;
   sqlType: FormControl;
   option: FormGroup<{
+    id: FormControl;
     blank: FormControl
   }>;
 }
@@ -24,10 +26,8 @@ export type Controls = {
   styleUrls: ['table-detail.component.scss']
 })
 export class TableDetailComponent extends AbstractSharedComponent {
-  @Input('table') formGroup: FormGroup<{
-    name: FormControl;
-    fields: FormArray<FormGroup<Controls>>;
-  }>;
+  @Input('fields') formArray: FormArray<FormGroup<FieldControls>>;
+  @Input() relations: string[] = [];
 
   constructor(
     injector: Injector
@@ -36,22 +36,30 @@ export class TableDetailComponent extends AbstractSharedComponent {
   }
 
   insertField(): void {
-    const field: FormGroup = this.formBuilder.group<Controls>({
+    const field: FormGroup<FieldControls> = this.formBuilder.group({
+      id: this.formBuilder.control(undefined, []),
       name: this.formBuilder.control(undefined, [Validators.required]),
       generateType: this.formBuilder.control(undefined, [Validators.required]),
       sqlType: this.formBuilder.control(undefined, []),
       option: this.formBuilder.group({
+        id: this.formBuilder.control(undefined, []),
         blank: this.formBuilder.control(0, [])
       }, [])
     });
-    this.formGroup.controls.fields.push(field);
+    this.formArray.push(field);
   }
 
-  removeField(index: number) {
-    this.formGroup.controls.fields.removeAt(index);
+  removeField(index: number, id: string): void {
+    if (this.isReadonly(id)) {
+      return;
+    }
+    this.formArray.removeAt(index);
   }
 
-  chooseType(control: FormControl, isGenerateType: boolean): void {
+  chooseType(control: FormControl, isGenerateType: boolean, id: string): void {
+    if (this.isReadonly(id)) {
+      return;
+    }
     const options: ChooseTypeModalOptions = {
       current: control.value,
       isGenerateType
@@ -62,6 +70,10 @@ export class TableDetailComponent extends AbstractSharedComponent {
           control.setValue(type);
         }
       });
+  }
+
+  isReadonly(id: string): boolean {
+    return this.relations.includes(id);
   }
 
 }

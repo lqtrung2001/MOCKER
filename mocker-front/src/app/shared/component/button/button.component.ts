@@ -15,6 +15,8 @@ export class ButtonComponent extends AbstractSharedComponent {
   @Input() label: string;
   @Input() icon: string;
   @Input() control: FormControl;
+  @Input() click: void;
+  @Input() readonly: boolean = false;
   clicked: boolean;
 
   constructor(
@@ -27,4 +29,10 @@ export class ButtonComponent extends AbstractSharedComponent {
     return this.clicked || this.control?.touched || this.control?.dirty;
   }
 
+  buttonClick(): void {
+    if (this.readonly) {
+      return;
+    }
+    this.clicked = true;
+  }
 }

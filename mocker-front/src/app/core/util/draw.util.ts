@@ -18,9 +18,14 @@ type Plug = {
 }
 
 export class DrawUtil {
+  static removedLeaderLines: string[] = [];
+
   static newRelationLine(tableRelation: TableRelationModel): RelationLine {
-    const sourceHTMLElement: HTMLElement = document.getElementById(tableRelation.source.id)!;
-    const targetHTMLElement: HTMLElement = document.getElementById(tableRelation.target.id)!;
+    const sourceHTMLElement: HTMLElement | null = document.getElementById(tableRelation.source.id);
+    const targetHTMLElement: HTMLElement | null = document.getElementById(tableRelation.target.id);
+    if (!sourceHTMLElement || !targetHTMLElement) {
+      throw Error('Cannot find elements are defined');
+    }
     // DOC: https://anseki.github.io/leader-line/
     const plug = this.getPlug(tableRelation.relationType);
     const leaderLine = new LeaderLine(
@@ -43,43 +48,44 @@ export class DrawUtil {
         color: '#000'
       }
     );
-    // @ts-ignore
-    sourceHTMLElement.removeAllListeners('mouseover');
-    // @ts-ignore
-    sourceHTMLElement.removeAllListeners('mouseout');
     sourceHTMLElement.addEventListener('mouseover', () => {
-      leaderLine.setOptions({
-        color: 'rgb(30,41,248)'
-      });
-      targetHTMLElement.style.backgroundColor = '#c7d6ff';
+      if (!this.removedLeaderLines.includes(leaderLine._id)) {
+        leaderLine.setOptions({
+          color: 'rgb(30,41,248)'
+        });
+        targetHTMLElement.style.backgroundColor = '#c7d6ff';
+      }
     });
     sourceHTMLElement.addEventListener('mouseout', () => {
-      leaderLine.setOptions({
-        color: '#000'
-      });
-      targetHTMLElement.style.backgroundColor = '#fff';
+      if (!this.removedLeaderLines.includes(leaderLine._id)) {
+        leaderLine.setOptions({
+          color: '#000'
+        });
+        targetHTMLElement.style.backgroundColor = '#fff';
+      }
     });
-    // @ts-ignore
-    targetHTMLElement.removeAllListeners('mouseover');
-    // @ts-ignore
-    targetHTMLElement.removeAllListeners('mouseout');
     targetHTMLElement.addEventListener('mouseover', () => {
-      leaderLine.setOptions({
-        color: 'rgb(30,41,248)'
-      });
-      sourceHTMLElement.style.backgroundColor = '#c7d6ff';
+      if (!this.removedLeaderLines.includes(leaderLine._id)) {
+        console.log(leaderLine._id);
+        leaderLine.setOptions({
+          color: 'rgb(30,41,248)'
+        });
+        sourceHTMLElement.style.backgroundColor = '#c7d6ff';
+      }
     });
     targetHTMLElement.addEventListener('mouseout', () => {
-      leaderLine.setOptions({
-        color: '#000'
-      });
-      sourceHTMLElement.style.backgroundColor = '#fff';
+      if (!this.removedLeaderLines.includes(leaderLine._id)) {
+        leaderLine.setOptions({
+          color: '#000'
+        });
+        sourceHTMLElement.style.backgroundColor = '#fff';
+      }
     });
     const socket: string = this.getSocketPosition(tableRelation.source.id, tableRelation.target.id);
     leaderLine.setOptions({ startSocket: socket, endSocket: socket });
     return {
       tableRelation,
-      leaderLine: leaderLine
+      leaderLine
     };
   }
 
@@ -126,4 +132,5 @@ export class DrawUtil {
     }
     return 'auto';
   }
+
 }

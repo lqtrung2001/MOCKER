@@ -4,13 +4,19 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TableModel } from '@core/domain/model/table.model';
 import { TableService } from '@core/service/table.service';
 import { FieldModel } from '@core/domain/model/field.model';
+import { FieldControls } from '@shared/component/table-detail/table-detail.component';
 
 /**
  * @author Do Quoc Viet
- * @license Ho Chi Minh City University of Technology and Education
  */
 
 export interface TableConfigModalOptions {
+  table: TableModel;
+  relations: string[];
+}
+
+export interface TableConfigModalCloseOptions {
+  change: boolean;
   table: TableModel;
 }
 
@@ -18,7 +24,7 @@ type Controls = {
   table: FormGroup<{
     name: FormControl,
     description: FormControl,
-    fields: FormArray<FormGroup>
+    fields: FormArray<FormGroup<FieldControls>>
   }>;
   rows: FormControl;
 }
@@ -32,6 +38,7 @@ export class TableConfigModal extends AbstractModal implements OnInit {
   override options: TableConfigModalOptions;
   formGroup: FormGroup<Controls>;
   table: TableModel;
+  change: boolean;
 
   constructor(
     injector: Injector,
@@ -42,7 +49,7 @@ export class TableConfigModal extends AbstractModal implements OnInit {
       table: this.formBuilder.group({
         name: this.formBuilder.control(undefined, [Validators.required]),
         description: this.formBuilder.control(undefined, [Validators.required]),
-        fields: this.formBuilder.array<FormGroup<Controls>>([])
+        fields: this.formBuilder.array<FormGroup<FieldControls>>([])
       }),
       rows: this.formBuilder.control(99, [Validators.required])
     });
@@ -55,13 +62,15 @@ export class TableConfigModal extends AbstractModal implements OnInit {
 
   patchValues(): void {
     this.formGroup.controls.table.patchValue(this.table);
-    this.formGroup.controls.table.controls.fields = this.formBuilder.array<FormGroup<Controls>>([]);
+    this.formGroup.controls.table.controls.fields = this.formBuilder.array<FormGroup>([]);
     this.table?.fields.forEach((field: FieldModel): void => {
       this.formGroup.controls.table.controls.fields.push(this.formBuilder.group({
+        id: this.formBuilder.control(field.id, []),
         name: this.formBuilder.control(field.name, [Validators.required]),
         generateType: this.formBuilder.control(field.generateType, [Validators.required]),
         sqlType: this.formBuilder.control(field.sqlType, []),
         option: this.formBuilder.group({
+          id: this.formBuilder.control(field.option?.id, []),
           blank: this.formBuilder.control(field.option?.blank || 0, [])
         }, [])
       }));
@@ -87,16 +96,31 @@ export class TableConfigModal extends AbstractModal implements OnInit {
       description,
       fields
     };
+    table.fields = table.fields.map((field: FieldModel): FieldModel => {
+      const found = this.table.fields.find((item: FieldModel): boolean => item.id === field.id);
+      if (found) {
+        return {
+          ...found,
+          ...field,
+          option: {
+            ...found.option,
+            ...field.option
+          }
+        };
+      }
+      return field;
+    });
     this.tableService.upsertEntity(table)
       .subscribe((table: TableModel) => {
         this.table = table;
         this.patchValues();
+        this.change = true;
       });
   }
 
   delete(): void {
     this.modalProvider.showConfirmation({
-      body: 'Are you sure you want to delete this table?'
+      body: 'modal.table_config.delete_confirmation'
     }).subscribe((result: boolean) => {
       if (result) {
         this.tableService.deleteEntity(this.table.id).subscribe((table: TableModel): void => {
@@ -106,6 +130,14 @@ export class TableConfigModal extends AbstractModal implements OnInit {
         });
       }
     });
+  }
+
+  override close() {
+    const closeOptions: TableConfigModalCloseOptions = {
+      change: this.change,
+      table: this.table
+    };
+    super.close(closeOptions);
   }
 
 }

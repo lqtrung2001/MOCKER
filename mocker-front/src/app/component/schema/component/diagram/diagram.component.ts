@@ -1,5 +1,4 @@
 import { Component, Injector, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
-import { CdkDragMove } from '@angular/cdk/drag-drop';
 import { FieldModel } from '@core/domain/model/field.model';
 import { TableRelationModel } from '@core/domain/model/table-relation.model';
 import { AbstractSharedComponent } from '@shared/component/common/abstract-shared.component';
@@ -58,12 +57,16 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
     }
   }
 
-  dragMoved(event: CdkDragMove) {
-    // console.log(event);
+  dragMoved(table: TableModel) {
     this.relationLines.forEach((relationLine: RelationLine): void => {
-      const socket: string = DrawUtil.getSocketPosition(relationLine.tableRelation.source.id, relationLine.tableRelation.target.id);
-      relationLine.leaderLine.setOptions({ startSocket: socket, endSocket: socket });
-      relationLine.leaderLine.position();
+      const containRelation: boolean = table.fields
+        .map((field: FieldModel): string => field.id)
+        .some((id: string): boolean => id === relationLine.tableRelation.source.id || id === relationLine.tableRelation.target.id);
+      if (containRelation) {
+        const socket: string = DrawUtil.getSocketPosition(relationLine.tableRelation.source.id, relationLine.tableRelation.target.id);
+        relationLine.leaderLine.setOptions({ startSocket: socket, endSocket: socket });
+        relationLine.leaderLine.position();
+      }
     });
   }
 
@@ -115,8 +118,10 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
                     this.relationLines
                       .forEach((relationLine: RelationLine, index: number): void => {
                         if (relationLine.tableRelation.id === relationLineExisted.tableRelation.id) {
+                          DrawUtil.removedLeaderLines.push(relationLine.leaderLine._id);
                           relationLine.leaderLine.remove();
                           this.relationLines.splice(index, index + 1);
+                          return;
                         }
                       });
                   }
@@ -133,7 +138,6 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
     } else {
       this.current = field;
       this.toastrProvider.showInformation({
-        timeout: 1,
         detail: `This current selected field is <b>${field.name}</b>`
       });
     }
@@ -147,7 +151,8 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
   }
 
   get foreignKeys(): string[] {
-    return this.relationLines.map((relationLine: RelationLine): TableRelationModel => relationLine.tableRelation)
+    return this.relationLines
+      .map((relationLine: RelationLine): TableRelationModel => relationLine.tableRelation)
       .map((tableRelation: TableRelationModel): string[] => {
         switch (tableRelation.relationType) {
           case RelationTypeEnum.ONE_TO_ONE:
@@ -162,8 +167,42 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
       }).reduce((previous, current) => [...previous, ...current], []);
   }
 
+  get relations(): string[] {
+    return this.relationLines
+      .map((relationLine: RelationLine): TableRelationModel => relationLine.tableRelation)
+      .map((tableRelation: TableRelationModel): string[] => [tableRelation.source.id, tableRelation.target.id])
+      .reduce((previous, current) => [...previous, ...current], []);
+  }
+
   ngOnDestroy(): void {
-    this.relationLines.forEach((leaderLine: any) => leaderLine.remove());
+    this.relationLines.forEach((leaderLine: any) => {
+      DrawUtil.removedLeaderLines.push(leaderLine._id);
+      leaderLine.remove();
+    });
+  }
+
+  reDrawRelationLine(table: TableModel): void {
+    const tableRelations: TableRelationModel[] = [];
+    this.relationLines.forEach((relationLine: RelationLine): void => {
+      const containRelation: boolean = table.fields
+        .map((field: FieldModel): string => field.id)
+        .some((id: string): boolean => relationLine.tableRelation.source.id === id || relationLine.tableRelation.target.id === id);
+      if (containRelation) {
+        DrawUtil.removedLeaderLines.push(relationLine.leaderLine._id);
+        relationLine.leaderLine.remove();
+        tableRelations.push(relationLine.tableRelation);
+      }
+    });
+    this.relationLines = this.relationLines.filter((relationLine: RelationLine): boolean => !tableRelations
+      .map((tableRelation: TableRelationModel): string => tableRelation.id)
+      .includes(relationLine.tableRelation.id));
+    setTimeout(() => {
+      // Synchronize functions
+      tableRelations.forEach((tableRelation: TableRelationModel): void => {
+        this.relationLines.push(DrawUtil.newRelationLine(tableRelation));
+        this.relationLines[this.relationLines.length - 1].leaderLine.position();
+      });
+    });
   }
 
 }

@@ -1,0 +1,8 @@
+<div *ngIf='isShown'
+     [style.bottom]='position ? position.bottom + "px" : undefined'
+     [style.left]='position ? position.left + "px" : undefined'
+     [style.right]='position ? position.right + "px" : undefined'
+     [style.top]='position ? position.top + "px" : undefined'
+     class='{{ class }} tw-absolute tw-left-0 tw-top-full tw-text-sm tw-z-20 tw-bg-white tw-p-2 tw-drop-shadow-2xl tw-rounded-md'>
+  <ng-content></ng-content>
+</div>

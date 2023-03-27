@@ -1,13 +1,15 @@
 <div class='{{ class }} tw-bg-solid tw-overflow-auto' id='main'>
   <div class='tw-flex tw-flex-wrap tw-justify-between'>
-    <moc-table cdkDragBoundary='moc-diagram'
-               (cdkDragMoved)='dragMoved($event)'
+    <moc-table (cdkDragMoved)='dragMoved(table)'
+               (refresh)='reDrawRelationLine($event)'
                (relationMapping)='relationMapping($event)'
                *ngFor='let table of schema?.tables'
-               [table]='table'
                [current]='current'
+               [foreignKeys]='foreignKeys'
+               [relations]='relations'
+               [table]='table'
                cdkDrag
-               [foreignKeys]='foreignKeys'>
+               cdkDragBoundary='moc-diagram'>
       <i cdkDragHandle class='tw-ml-3 tw-cursor-pointer fa-solid fa-arrows-up-down-left-right'></i>
     </moc-table>
   </div>

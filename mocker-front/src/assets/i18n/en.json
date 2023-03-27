@@ -108,7 +108,11 @@
       "options": "OPTIONS",
       "field_name_placeholder": "Field name",
       "instruction": "Please click ADD ANOTHER FIELD button to add an field to this table.",
-      "add_another_field": "ADD ANOTHER FIELD"
+      "add_another_field": "ADD ANOTHER FIELD",
+      "field_is_mapped": "This field is mapped to another field in this schema, please delete relationships between fields and try again.",
+      "generate_type_placeholder": "Generate type",
+      "sql_type_placeholder": "SQL type",
+      "blank": "Blank:"
     },
     "person": {
       "my_account": "My Account",
@@ -195,7 +199,8 @@
       "rows_placeholder": "Rows",
       "save": "SAVE",
       "delete": "DELETE THIS TABLE",
-      "close": "CLOSE"
+      "close": "CLOSE",
+      "delete_confirmation": "Are you sure you want to delete this table?"
     },
     "relation_config": {
       "title": "RELATION CONFIGURATION:",

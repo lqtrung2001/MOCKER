@@ -41,6 +41,7 @@ import { MocJsonPipe } from '@shared/pipe/moc-json.pipe';
 import { DialogModal } from '@shared/modal/modal-provider/dialog/dialog.modal';
 import { ChooseTypeModal } from '@shared/modal/choose-type/choose-type.modal';
 import { ToastrModal } from '@shared/modal/toastr-provider/toastr/toastr.modal';
+import { TooltipComponent } from '@shared/component/tooltip/tooltip.component';
 
 /**
  * @author Do Quoc Viet
@@ -70,7 +71,8 @@ import { ToastrModal } from '@shared/modal/toastr-provider/toastr/toastr.modal';
     MocJsonPipe,
     DialogModal,
     ChooseTypeModal,
-    ToastrModal
+    ToastrModal,
+    TooltipComponent
   ],
   imports: [
     KeyValuePipe,

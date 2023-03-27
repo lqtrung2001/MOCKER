@@ -1,6 +1,6 @@
 <div [class]='class' id='main'>
   <div [class]='selfClass'>
-    <table class='tw-w-full' [formGroup]='formGroup'>
+    <table class='tw-w-full'>
       <thead class='tw-sticky tw-top-0 tw-bg-white tw-z-20'>
       <tr>
         <th class='tw-pb-3 first-letter:tw-underline'>{{ 'component.table_detail.field_name' | translate }}</th>
@@ -9,44 +9,54 @@
         <th class='tw-pb-3 first-letter:tw-underline'>{{ 'component.table_detail.options' | translate }}</th>
       </tr>
       </thead>
-      <tbody *ngFor='let field of formGroup.controls.fields.controls; let i = index;' formArrayName='fields'>
-      <tr [formGroupName]='i'>
+      <tbody *ngFor='let field of formArray.controls; let i = index;' [formGroup]='$any(formArray)'>
+      <tr [formGroupName]='i' class='tw-relative' #fieldElement>
         <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
-          <moc-input [control]='field.controls.name'
+          <moc-input [readonly]='isReadonly(field.controls.id.value)'
+                     [control]='field.controls.name'
                      [placeholder]='"component.table_detail.field_name_placeholder" | translate'
                      selfClass='tw-px-5'></moc-input>
         </td>
         <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
-          <moc-button (click)='chooseType(field.controls.generateType, true)'
+          <moc-button (click)='chooseType(field.controls.generateType, true, field.controls.id.value)'
+                      [readonly]='isReadonly(field.controls.id.value)'
                       [control]='field.controls.generateType'
-                      [label]='field.controls.generateType.value?.code || "Generate Type"'
+                      [label]='field.controls.generateType.value?.code || ("component.table_detail.generate_type_placeholder" | translate)'
                       icon='fa-solid fa-arrow-up-arrow-down'
                       selfClass='tw-text-left tw-px-5 btn-light {{ !field.controls.generateType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
           </moc-button>
         </td>
         <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
-          <moc-button (click)='chooseType(field.controls.sqlType, false)'
+          <moc-button (click)='chooseType(field.controls.sqlType, false, field.controls.id.value)'
+                      [readonly]='isReadonly(field.controls.id.value)'
                       [control]='field.controls.sqlType'
-                      [label]='field.controls.sqlType.value?.code || "Sql Type"'
+                      [label]='field.controls.sqlType.value?.code || ("component.table_detail.sql_type_placeholder" | translate)'
                       icon='fa-solid fa-arrow-up-arrow-down'
                       selfClass='tw-text-left tw-px-5 btn-light {{ !field.controls.sqlType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
           </moc-button>
         </td>
         <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
           <div class='tw-flex tw-justify-between'>
-            <p class='tw-self-center'>{{ 'Blank:' }}</p>
+            <p class='tw-self-center'>{{ 'component.table_detail.blank' | translate }}</p>
             <moc-input [control]='field.controls.option.controls.blank' [max]='100'
+                       [readonly]='isReadonly(field.controls.id.value)'
                        [min]='0'
                        class='tw-w-20'
                        placeholder='0%'
                        selfClass='tw-text-center'
                        type='number'></moc-input>
-            <moc-button class='tw-w-12' icon='fa-solid fa-sigma'
+            <moc-button [readonly]='isReadonly(field.controls.id.value)'
+                        class='tw-w-12'
+                        icon='fa-solid fa-sigma'
                         selfClass='btn-light tw-h-10'></moc-button>
-            <i (click)='removeField(i)'
-               class='tw-text-lg tw-cursor-pointer fa-regular fa-circle-xmark tw-self-center'></i>
+            <i (click)='removeField(i, field.controls.id.value)'
+               class='tw-text-lg {{ isReadonly(field.controls.id.value) ? "" : "tw-cursor-pointer" }} fa-regular fa-circle-xmark tw-self-center'></i>
           </div>
         </td>
+        <moc-tooltip *ngIf='isReadonly(field.controls.id.value)'
+                     [dock]='fieldElement'>
+          <p class='tw-text-red'>{{ 'component.table_detail.field_is_mapped' | translate }}</p>
+        </moc-tooltip>
       </tr>
       </tbody>
       <tfoot>
