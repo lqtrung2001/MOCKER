@@ -182,6 +182,11 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
   }
 
   reDrawRelationLine(table: TableModel): void {
+    this.schema.tables.forEach((item: TableModel, index: number): void => {
+      if (item.id === table.id) {
+        this.schema.tables[index] = table;
+      }
+    });
     const tableRelations: TableRelationModel[] = [];
     this.relationLines.forEach((relationLine: RelationLine): void => {
       const containRelation: boolean = table.fields
