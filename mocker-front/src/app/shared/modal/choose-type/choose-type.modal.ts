@@ -1,11 +1,11 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { AbstractModal } from '@core/common/abstract.modal';
 import { FormControl } from '@angular/forms';
-import { GenerateTypeModel } from '@core/domain/model/generate-type.model';
+import { GenerateTypeModel } from '@core/domain/model/entity/generate-type.model';
 import { GenerateTypeService } from '@core/service/generate-type.service';
 import { CategoryService } from '@core/service/category.service';
-import { CategoryModel } from '@core/domain/model/category.model';
-import { SqlTypeModel } from '@core/domain/model/sql-type.model';
+import { CategoryModel } from '@core/domain/model/entity/category.model';
+import { SqlTypeModel } from '@core/domain/model/entity/sql-type.model';
 import { SQLTypeService } from '@core/service/sql-type.service';
 
 /**

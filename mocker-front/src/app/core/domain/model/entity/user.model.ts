@@ -1,6 +1,6 @@
-import { BaseModel } from '@core/domain/model/base.model';
+import { BaseModel } from '@core/domain/model/entity/base.model';
 import { GenderEnum } from '@core/domain/enum/gender.enum';
-import { GroupMemberModel } from '@core/domain/model/group-member.model';
+import { GroupMemberModel } from '@core/domain/model/entity/group-member.model';
 
 /**
  * @author Do Quoc Viet

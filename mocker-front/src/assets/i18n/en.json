@@ -142,10 +142,15 @@
       "description": "Description:",
       "save": "SAVE",
       "delete": "DELETE",
-      "project_information": "Project Information:",
+      "project_information": "Project Information:"
+    },
+    "diagram": {
       "create_table": "CREATE TABLE",
       "download": "DOWNLOAD",
-      "preview": "PREVIEW"
+      "preview": "PREVIEW",
+      "generated": "Data are generated successfully, please click preview button on the top of table for viewing its data.",
+      "format": "Format",
+      "filename": "File Name"
     }
   },
   "audit": {

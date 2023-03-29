@@ -2,13 +2,13 @@ import { AbstractComponent } from '@core/common/abstract.component';
 import { Component, Injector } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { GenerateService } from '@core/service/generate.service';
-import { TableModel } from '@core/domain/model/table.model';
-import { FieldModel } from '@core/domain/model/field.model';
+import { TableModel } from '@core/domain/model/entity/table.model';
+import { FieldModel } from '@core/domain/model/entity/field.model';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';
-import { ConverterUtil } from '@core/util/converter.util';
-import * as FileSaver from 'file-saver';
 import { PreviewModal, PreviewModalOptions } from '@shared/modal/preview/preview.modal';
 import { Option } from '@shared/component/dropdown/dropdown.component';
+import { DownloadUtil } from '@core/util/download.util';
+import { FormatEnum } from '@core/domain/enum/format.enum';
 
 /**
  * @author Do Quoc Viet
@@ -34,8 +34,7 @@ export class GeneralComponent extends AbstractComponent {
 
   constructor(
     injector: Injector,
-    private generateService: GenerateService,
-    private converterService: ConverterUtil
+    private generateService: GenerateService
   ) {
     super(injector);
     this.formGroup = this.formBuilder.group({
@@ -44,7 +43,7 @@ export class GeneralComponent extends AbstractComponent {
         fields: this.formBuilder.array<FormGroup<Controls>>([])
       }),
       rows: this.formBuilder.control(1, [Validators.required]),
-      format: this.formBuilder.control('SQL', [Validators.required])
+      format: this.formBuilder.control(FormatEnum.SQL, [Validators.required])
     });
     this.formGroup.valueChanges.subscribe(() => {
       this.data = [];
@@ -92,23 +91,7 @@ export class GeneralComponent extends AbstractComponent {
 
   startDownload(): void {
     const tableName: string = this.formGroup.controls.table.controls.name.value;
-    const format: string = this.formGroup.controls.format.value;
-    let data: any[] = this.data;
-    switch (format) {
-      case 'SQL':
-        data = this.converterService.toSQL(data, tableName);
-        break;
-      case 'JSON':
-        data = this.converterService.toJSON(data, tableName);
-        break;
-      case 'XML':
-        data = this.converterService.toXML(data, tableName);
-        break;
-      case 'CSV':
-        data = this.converterService.toCSV(data);
-        break;
-    }
-    FileSaver.saveAs(new File(data, `${tableName || 'Mocker'}.${format.toLowerCase()}`, { type: 'text/plain;charset=utf-8' }));
+    DownloadUtil.download(this.data, this.formGroup.controls.format.value, tableName, tableName);
   }
 
   preview(): void {
@@ -142,43 +125,19 @@ export class GeneralComponent extends AbstractComponent {
     }
   }
 
-  get supportedFormat(): Option[] {
-    return [{
-      id: '1',
-      icon: 'fa-regular fa-database',
-      label: 'SQL',
+  get formats(): Option[] {
+    return this.applicationConfig.formats.map((format): Option => ({
+      id: format.format,
+      icon: format.icon,
+      label: format.format,
       click: () => {
-        this.formGroup.controls.format.setValue('SQL');
+        this.formGroup.controls.format.setValue(format.format);
         this.formGroup.controls.table.controls.name.setValidators([Validators.required]);
       }
-    }, {
-      id: '2',
-      icon: 'fa-sharp fa-regular fa-paperclip-vertical',
-      label: 'JSON',
-      click: () => {
-        this.formGroup.controls.format.setValue('JSON');
-        this.formGroup.controls.table.controls.name.setValidators([Validators.required]);
-      }
-    }, {
-      id: '3',
-      icon: 'fa-regular fa-file-excel',
-      label: 'XML',
-      click: () => {
-        this.formGroup.controls.format.setValue('XML');
-        this.formGroup.controls.table.controls.name.setValidators([Validators.required]);
-      }
-    }, {
-      id: '4',
-      icon: 'fa-regular fa-file-csv',
-      label: 'CSV',
-      click: () => {
-        this.formGroup.controls.format.setValue('CSV');
-        this.formGroup.controls.table.controls.name.setValidators([]);
-      }
-    }];
+    }));
   }
 
   get isShowTableNameField(): boolean {
-    return this.formGroup.controls.format.value !== 'CSV';
+    return this.formGroup.controls.format.value !== FormatEnum.CSV;
   }
 }

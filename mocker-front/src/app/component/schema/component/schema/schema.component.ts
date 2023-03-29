@@ -1,10 +1,8 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { AbstractComponent } from '@core/common/abstract.component';
-import { SchemaModel } from '@core/domain/model/schema.model';
+import { SchemaModel } from '@core/domain/model/entity/schema.model';
 import { SchemaService } from '@core/service/schema.service';
-import { TableModel } from '@core/domain/model/table.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TableConfigModal } from '@app/component/schema/modal/table-config/table-config.modal';
 
 /**
  * @author Do Quoc Viet
@@ -81,10 +79,6 @@ export class SchemaComponent extends AbstractComponent implements OnInit {
         });
       }
     });
-  }
-
-  createTable(): void {
-    this.modalService.open(TableConfigModal, {});
   }
 
 }

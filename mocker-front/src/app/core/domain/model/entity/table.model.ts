@@ -1,6 +1,6 @@
-import { BaseModel } from '@core/domain/model/base.model';
-import { SchemaModel } from '@core/domain/model/schema.model';
-import { FieldModel } from '@core/domain/model/field.model';
+import { BaseModel } from '@core/domain/model/entity/base.model';
+import { SchemaModel } from '@core/domain/model/entity/schema.model';
+import { FieldModel } from '@core/domain/model/entity/field.model';
 
 /**
  * @author Do Quoc Viet

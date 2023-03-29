@@ -2,7 +2,7 @@ import { AbstractModal } from '@core/common/abstract.modal';
 import { Component, Injector } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from '@core/service/auth.service';
-import { UserModel } from '@core/domain/model/user.model';
+import { UserModel } from '@core/domain/model/entity/user.model';
 import { catchError, of } from 'rxjs';
 import {
   ChangePasswordModal,

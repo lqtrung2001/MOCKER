@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ProjectModel } from '@core/domain/model/project.model';
+import { ProjectModel } from '@core/domain/model/entity/project.model';
 import { AbstractService } from '@core/service/abstract.service';
 import { Observable } from 'rxjs';
-import { SchemaModel } from '@core/domain/model/schema.model';
+import { SchemaModel } from '@core/domain/model/entity/schema.model';
 import { HttpMethodEnum } from '@core/domain/enum/http-method.enum';
 
 /**

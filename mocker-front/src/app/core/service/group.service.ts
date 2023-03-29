@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GroupModel } from '@core/domain/model/group.model';
+import { GroupModel } from '@core/domain/model/entity/group.model';
 import { AbstractService } from '@core/service/abstract.service';
 
 /**

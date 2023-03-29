@@ -1,8 +1,8 @@
 import { Component, Injector, Input } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ChooseTypeModal, ChooseTypeModalOptions } from '@shared/modal/choose-type/choose-type.modal';
-import { GenerateTypeModel } from '@core/domain/model/generate-type.model';
-import { SqlTypeModel } from '@core/domain/model/sql-type.model';
+import { GenerateTypeModel } from '@core/domain/model/entity/generate-type.model';
+import { SqlTypeModel } from '@core/domain/model/entity/sql-type.model';
 import { AbstractSharedComponent } from '@shared/component/common/abstract-shared.component';
 
 /**

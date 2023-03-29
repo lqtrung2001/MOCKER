@@ -1,5 +1,5 @@
-import { BaseModel } from '@core/domain/model/base.model';
-import { GenerateTypeModel } from '@core/domain/model/generate-type.model';
+import { BaseModel } from '@core/domain/model/entity/base.model';
+import { GenerateTypeModel } from '@core/domain/model/entity/generate-type.model';
 
 /**
  * @author Do Quoc Viet

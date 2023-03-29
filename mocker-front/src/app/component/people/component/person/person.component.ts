@@ -1,6 +1,6 @@
 import { AbstractComponent } from '@core/common/abstract.component';
 import { Component, Injector } from '@angular/core';
-import { UserModel } from '@core/domain/model/user.model';
+import { UserModel } from '@core/domain/model/entity/user.model';
 import { UserService } from '@core/service/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {

@@ -4,8 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Option } from '@shared/component/dropdown/dropdown.component';
 import { RelationTypeEnum } from '@core/domain/enum/relation-type.enum';
 import { RelationTypeUtil } from '@core/util/relation-type.util';
-import { FieldModel } from '@core/domain/model/field.model';
-import { TableRelationModel } from '@core/domain/model/table-relation.model';
+import { FieldModel } from '@core/domain/model/entity/field.model';
+import { TableRelationModel } from '@core/domain/model/entity/table-relation.model';
 
 /**
  * @author Do Quoc Viet

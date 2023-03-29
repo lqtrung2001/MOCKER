@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SqlTypeModel } from '@core/domain/model/sql-type.model';
+import { SqlTypeModel } from '@core/domain/model/entity/sql-type.model';
 import { AbstractService } from '@core/service/abstract.service';
 
 /**

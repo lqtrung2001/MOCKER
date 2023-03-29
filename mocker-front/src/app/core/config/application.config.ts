@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { SqlTypeModel } from '@core/domain/model/sql-type.model';
-import { UserModel } from '@core/domain/model/user.model';
-import { CategoryModel } from '@core/domain/model/category.model';
+import { SqlTypeModel } from '@core/domain/model/entity/sql-type.model';
+import { UserModel } from '@core/domain/model/entity/user.model';
+import { CategoryModel } from '@core/domain/model/entity/category.model';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { FormatEnum } from '@core/domain/enum/format.enum';
 
 /**
  * @author Do Quoc Viet
@@ -16,6 +17,27 @@ export class ApplicationConfig {
   public user: UserModel | undefined;
   public sqlTypes: SqlTypeModel[] = [];
   public categories: CategoryModel[] = [];
+  public formats: {
+    icon: string;
+    format: FormatEnum
+  }[] = [
+    {
+      icon: 'fa-regular fa-database',
+      format: FormatEnum.SQL
+    },
+    {
+      icon: 'fa-sharp fa-regular fa-paperclip-vertical',
+      format: FormatEnum.JSON
+    },
+    {
+      icon: 'fa-regular fa-file-excel',
+      format: FormatEnum.XML
+    },
+    {
+      icon: 'fa-regular fa-file-csv',
+      format: FormatEnum.CSV
+    }
+  ];
 
   constructor(
     private formBuilder: FormBuilder

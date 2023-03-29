@@ -1,7 +1,7 @@
 import { BaseModel } from './base.model';
-import { CategoryModel } from '@core/domain/model/category.model';
-import { SourceModel } from '@core/domain/model/source.model';
-import { SqlTypeModel } from '@core/domain/model/sql-type.model';
+import { CategoryModel } from '@core/domain/model/entity/category.model';
+import { SourceModel } from '@core/domain/model/entity/source.model';
+import { SqlTypeModel } from '@core/domain/model/entity/sql-type.model';
 
 /**
  * @author Do Quoc Viet
