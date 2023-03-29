@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserModel } from '@core/domain/model/user.model';
+import { UserModel } from '@core/domain/model/entity/user.model';
 import { AbstractService } from '@core/service/abstract.service';
 
 /**

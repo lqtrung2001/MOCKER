@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CategoryModel } from '@core/domain/model/category.model';
+import { CategoryModel } from '@core/domain/model/entity/category.model';
 import { AbstractService } from '@core/service/abstract.service';
 
 /**

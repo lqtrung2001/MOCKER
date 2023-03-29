@@ -1,9 +1,10 @@
-<div class='{{ class }} tw-text-sm tw-rounded-md tw-overflow-hidden tw-z-10 tw-shadow' id='main'>
+<div class='{{ class }} tw-text-sm tw-rounded-md tw-overflow-hidden tw-z-10 tw-drop-shadow-xl' id='main'>
   <div class='{{ selfClass }} tw-border tw-rounded tw-w-72'>
     <p class='tw-bg-blue tw-h-8 tw-text-center tw-leading-8 tw-font-medium tw-text-white tw-uppercase'>
       <i class='fa-regular fa-table tw-mr-3'></i>
       {{ table.name }}
       <i (click)='openDetail()' class='tw-ml-3 fa-solid fa-pen-to-square tw-cursor-pointer'></i>
+      <i *ngIf='dataDetail.length' (click)='preview()' class='fa-regular fa-eye tw-ml-3 tw-cursor-pointer'></i>
       <ng-content></ng-content>
     </p>
     <div class='tw-bg-white'>

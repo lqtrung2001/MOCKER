@@ -1,5 +1,5 @@
 import { AbstractService } from '@core/service/abstract.service';
-import { TableRelationModel } from '@core/domain/model/table-relation.model';
+import { TableRelationModel } from '@core/domain/model/entity/table-relation.model';
 import { Injectable, Injector } from '@angular/core';
 
 /**

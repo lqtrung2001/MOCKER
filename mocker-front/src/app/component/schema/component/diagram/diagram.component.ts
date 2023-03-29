@@ -1,6 +1,6 @@
 import { Component, Injector, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
-import { FieldModel } from '@core/domain/model/field.model';
-import { TableRelationModel } from '@core/domain/model/table-relation.model';
+import { FieldModel } from '@core/domain/model/entity/field.model';
+import { TableRelationModel } from '@core/domain/model/entity/table-relation.model';
 import { AbstractSharedComponent } from '@shared/component/common/abstract-shared.component';
 import {
   RelationConfigModal,
@@ -9,16 +9,27 @@ import {
 } from '@app/component/schema/modal/relation-config/relation-config.modal';
 import { TableRelationService } from '@core/service/table-relation.service';
 import { SchemaService } from '@app/core/service/schema.service';
-import { SchemaModel } from '@core/domain/model/schema.model';
-import { TableModel } from '@core/domain/model/table.model';
+import { SchemaModel } from '@core/domain/model/entity/schema.model';
+import { TableModel } from '@core/domain/model/entity/table.model';
 import { DrawUtil, RelationLine } from '@core/util/draw.util';
 import { RelationTypeEnum } from '@core/domain/enum/relation-type.enum';
 import { StringUtil } from '@core/util/string.util';
+import { TableConfigModal } from '@app/component/schema/modal/table-config/table-config.modal';
+import { DataModel } from '@core/domain/model/data.model';
+import { GenerateService } from '@core/service/generate.service';
+import { DownloadUtil } from '@core/util/download.util';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Option } from '@shared/component/dropdown/dropdown.component';
+import { FormatEnum } from '@core/domain/enum/format.enum';
 
 /**
  * @author Do Quoc Viet
  */
 
+type Controls = {
+  format: FormControl;
+  filename: FormControl;
+}
 
 @Component({
   selector: 'moc-diagram',
@@ -27,15 +38,22 @@ import { StringUtil } from '@core/util/string.util';
 })
 export class DiagramComponent extends AbstractSharedComponent implements OnChanges, OnDestroy {
   @Input() schema: SchemaModel;
+  data: DataModel | undefined;
   current: FieldModel | undefined;
   relationLines: RelationLine[] = [];
+  formGroup: FormGroup<Controls>;
 
   constructor(
     injector: Injector,
     private tableRelationService: TableRelationService,
-    private schemaService: SchemaService
+    private schemaService: SchemaService,
+    private generateService: GenerateService
   ) {
     super(injector);
+    this.formGroup = this.formBuilder.group({
+      format: this.formBuilder.control(FormatEnum.SQL, [Validators.required]),
+      filename: this.formBuilder.control('MOCKER', [Validators.required])
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -182,6 +200,8 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
   }
 
   reDrawRelationLine(table: TableModel): void {
+    // refresh data when the tables are updated
+    this.data = undefined;
     this.schema.tables.forEach((item: TableModel, index: number): void => {
       if (item.id === table.id) {
         this.schema.tables[index] = table;
@@ -208,6 +228,63 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
         this.relationLines[this.relationLines.length - 1].leaderLine.position();
       });
     });
+  }
+
+  createTable(): void {
+    this.modalService.open(TableConfigModal, {});
+  }
+
+  download(): void {
+    this.formGroup.markAllAsTouched();
+    if (this.formGroup.invalid) {
+      return;
+    }
+    const callback: () => void = () => {
+      DownloadUtil.download(this.data!, this.formGroup.controls.format.value, this.formGroup.controls.filename.value);
+    };
+    if (this.data) {
+      callback();
+    } else {
+      this.initializeData(callback);
+    }
+  }
+
+  preview(): void {
+    this.formGroup.markAllAsTouched();
+    if (this.formGroup.invalid) {
+      return;
+    }
+    const callback: () => void = () => {
+      this.modalProvider.showInformation({
+        body: 'component.diagram.generated'
+      });
+    };
+    if (this.data) {
+      callback();
+    } else {
+      this.initializeData(callback);
+    }
+  }
+
+  initializeData(callback?: () => void): void {
+    this.generateService.generateBySchema(this.schema.id)
+      .subscribe((data: DataModel): void => {
+        this.data = data;
+        if (callback) {
+          callback();
+        }
+      });
+  }
+
+  get formats(): Option[] {
+    return this.applicationConfig.formats.map((format): Option => ({
+      id: format.format,
+      icon: format.icon,
+      label: format.format,
+      click: () => {
+        this.formGroup.controls.format.setValue(format.format);
+      }
+    }));
   }
 
 }

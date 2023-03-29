@@ -4,7 +4,7 @@ import { AbstractComponent } from '@core/common/abstract.component';
 import { AuthConstant, SignInMethod } from '@app/component/auth/auth.constant';
 import { AuthService } from '@app/core/service/auth.service';
 import { VerificationModal, VerificationModalOptions } from '@app/component/auth/modal/verification/verification.modal';
-import { UserModel } from '@core/domain/model/user.model';
+import { UserModel } from '@core/domain/model/entity/user.model';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 
 type Controls = {

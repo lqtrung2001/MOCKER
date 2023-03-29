@@ -1,6 +1,6 @@
 import { AbstractComponent } from '@core/common/abstract.component';
 import { Component, Injector, OnInit } from '@angular/core';
-import { SchemaModel } from '@core/domain/model/schema.model';
+import { SchemaModel } from '@core/domain/model/entity/schema.model';
 import { SchemaService } from '@core/service/schema.service';
 
 /**

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { SchemaModel } from '@core/domain/model/schema.model';
+import { SchemaModel } from '@core/domain/model/entity/schema.model';
 import { AbstractService } from '@core/service/abstract.service';
 import { Observable } from 'rxjs';
-import { TableModel } from '@core/domain/model/table.model';
+import { TableModel } from '@core/domain/model/entity/table.model';
 import { HttpMethodEnum } from '@core/domain/enum/http-method.enum';
-import { TableRelationModel } from '@core/domain/model/table-relation.model';
+import { TableRelationModel } from '@core/domain/model/entity/table-relation.model';
 
 /**
  * @author Do Quoc Viet

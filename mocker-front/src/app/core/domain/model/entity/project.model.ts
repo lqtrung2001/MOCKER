@@ -1,6 +1,6 @@
-import { BaseModel } from '@core/domain/model/base.model';
-import { GroupModel } from '@core/domain/model/group.model';
-import { SchemaModel } from '@core/domain/model/schema.model';
+import { BaseModel } from '@core/domain/model/entity/base.model';
+import { GroupModel } from '@core/domain/model/entity/group.model';
+import { SchemaModel } from '@core/domain/model/entity/schema.model';
 
 /**
  * @author Do Quoc Viet

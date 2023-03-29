@@ -6,7 +6,7 @@
     <span class='tw-mt-3 tw-mr-5'>{{ 'component.general.row' | translate }}</span>
     <moc-input [control]='formGroup.controls.rows' class='tw-w-24' selfClass='tw-px-5'></moc-input>
     <span class='tw-mt-3 tw-mx-5'>{{ 'component.general.format' | translate }}</span>
-    <moc-dropdown [options]='supportedFormat'>
+    <moc-dropdown [options]='formats'>
       <moc-button [label]='formGroup.controls.format.value' class='tw-w-32' icon='fa-solid fa-arrow-up-arrow-down'
                   selfClass='tw-text-left btn-light'></moc-button>
     </moc-dropdown>

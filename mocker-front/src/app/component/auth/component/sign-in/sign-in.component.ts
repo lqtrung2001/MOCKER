@@ -1,7 +1,7 @@
 import { Component, Injector } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AbstractComponent } from '@core/common/abstract.component';
-import { UserModel } from '@core/domain/model/user.model';
+import { UserModel } from '@core/domain/model/entity/user.model';
 import { UserService } from '@core/service/user.service';
 import { AuthService } from '@core/service/auth.service';
 import { AuthConstant, SignInMethod } from '@app/component/auth/auth.constant';

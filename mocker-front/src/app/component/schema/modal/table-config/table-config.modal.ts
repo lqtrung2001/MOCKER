@@ -1,9 +1,9 @@
 import { AbstractModal } from '@core/common/abstract.modal';
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { TableModel } from '@core/domain/model/table.model';
+import { TableModel } from '@core/domain/model/entity/table.model';
 import { TableService } from '@core/service/table.service';
-import { FieldModel } from '@core/domain/model/field.model';
+import { FieldModel } from '@core/domain/model/entity/field.model';
 import { FieldControls } from '@shared/component/table-detail/table-detail.component';
 
 /**

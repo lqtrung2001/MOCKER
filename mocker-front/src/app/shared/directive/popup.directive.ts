@@ -15,7 +15,7 @@ export class PopupDirective implements OnInit, AfterContentInit {
   content: HTMLDivElement;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {
-    this.addClasses('tw-fixed tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-10', elementRef.nativeElement);
+    this.addClasses('tw-fixed tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-40', elementRef.nativeElement);
   }
 
   ngOnInit(): void {

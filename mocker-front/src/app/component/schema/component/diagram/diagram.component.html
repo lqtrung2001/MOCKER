@@ -1,15 +1,37 @@
-<div class='{{ class }} tw-bg-solid tw-overflow-auto' id='main'>
-  <div class='tw-flex tw-flex-wrap tw-justify-between'>
+<div class='{{ class }} tw-overflow-auto' id='main'>
+  <div class='tw-flex tw-items-start'>
+    <div class='tw-flex tw-items-center tw-w-140 tw-justify-between'>
+      <moc-button (click)='createTable()' class='tw-w-44' icon='fa-solid fa-folder-plus'
+                  label='component.diagram.create_table' selfClass='btn-primary tw-text-left'></moc-button>
+      <moc-button (click)='download()' class='tw-w-44' icon='fa-solid fa-download'
+                  label='component.diagram.download' selfClass='btn-primary tw-text-left'></moc-button>
+      <moc-button (click)='preview()' class='tw-w-44' icon='fa-solid fa-display-code'
+                  label='component.diagram.preview' selfClass='btn-light tw-text-left'></moc-button>
+    </div>
+    <div class='tw-flex tw-ml-5'>
+      <span class='tw-mt-3 tw-mx-5'>{{ 'component.diagram.format' | translate }}</span>
+      <moc-dropdown [options]='formats'>
+        <moc-button [label]='formGroup.controls.format.value' class='tw-w-32' icon='fa-solid fa-arrow-up-arrow-down'
+                    selfClass='tw-text-left btn-light'></moc-button>
+      </moc-dropdown>
+      <span class='tw-mt-3 tw-mx-5'>{{ 'component.diagram.filename' | translate }}</span>
+      <moc-input [control]='formGroup.controls.filename' class='tw-w-32'
+                 selfClass='tw-px-5'></moc-input>
+    </div>
+  </div>
+  <div class='diagram tw-mt-3 tw-flex tw-h-160 tw-flex-wrap tw-justify-between'>
     <moc-table (cdkDragMoved)='dragMoved(table)'
                (refresh)='reDrawRelationLine($event)'
                (relationMapping)='relationMapping($event)'
                *ngFor='let table of schema?.tables'
                [current]='current'
+               [dataDetail]='data ? data[table.name].values : []'
                [foreignKeys]='foreignKeys'
+               [format]='formGroup.controls.format.value'
                [relations]='relations'
                [table]='table'
                cdkDrag
-               cdkDragBoundary='moc-diagram'>
+    >
       <i cdkDragHandle class='tw-ml-3 tw-cursor-pointer fa-solid fa-arrows-up-down-left-right'></i>
     </moc-table>
   </div>

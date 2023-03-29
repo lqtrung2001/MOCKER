@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractService } from '@core/service/abstract.service';
-import { GroupMemberModel } from '@core/domain/model/group-member.model';
+import { GroupMemberModel } from '@core/domain/model/entity/group-member.model';
 
 /**
  * @author Do Quoc Viet

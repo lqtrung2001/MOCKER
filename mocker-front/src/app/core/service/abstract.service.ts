@@ -20,7 +20,7 @@ import { StringUtil } from '@core/util/string.util';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 import { HttpHeaderConstant } from '@core/constant/http-header.constant';
 import { ErrorModel } from '@core/domain/model/error.model';
-import { UserModel } from '@core/domain/model/user.model';
+import { UserModel } from '@core/domain/model/entity/user.model';
 import { UnauthorizedException } from '@core/domain/exception/unauthorized.exception';
 import { BadRequestException } from '@core/domain/exception/bad-request.exception';
 import { InternalException } from '@core/domain/exception/internal.exception';

@@ -1,5 +1,5 @@
 import { RelationTypeEnum } from '@core/domain/enum/relation-type.enum';
-import { TableRelationModel } from '@core/domain/model/table-relation.model';
+import { TableRelationModel } from '@core/domain/model/entity/table-relation.model';
 
 /**
  * @author Do Quoc Viet
@@ -35,17 +35,17 @@ export class DrawUtil {
         endPlugOutline: false,
         animOptions: { duration: 3000, timing: 'linear' },
         // startLabel: '1',
-        middleLabel: tableRelation.description,
+        middleLabel: LeaderLine.captionLabel(`${tableRelation.description}`, {color: 'red'}),
         // endLabel: 'n',
         startPlug: plug.start,
         endPlug: plug.end,
-        path: 'fluid',
+        path: 'grid',
         // startSocket: 'auto',
         // endSocket: 'auto',
         size: 1.5,
         startPlugSize: 2,
         endPlugSize: 2,
-        color: '#000'
+        color: '#333'
       }
     );
     sourceHTMLElement.addEventListener('mouseover', () => {
@@ -54,7 +54,7 @@ export class DrawUtil {
         leaderLine.setOptions({
           color: 'rgb(30,41,248)'
         });
-        leaderLine.size = 2;
+        leaderLine.size = 1.75;
         targetHTMLElement.style.backgroundColor = '#c7d6ff';
       }
     });
@@ -62,7 +62,7 @@ export class DrawUtil {
       if (!this.removedLeaderLines.includes(leaderLine._id)) {
         this.moveToLastElement(leaderLine._id);
         leaderLine.setOptions({
-          color: '#000'
+          color: '#333'
         });
         leaderLine.size = 1.5;
         targetHTMLElement.style.backgroundColor = '#fff';
@@ -74,7 +74,7 @@ export class DrawUtil {
         leaderLine.setOptions({
           color: 'rgb(30,41,248)'
         });
-        leaderLine.size = 2;
+        leaderLine.size = 1.75;
         sourceHTMLElement.style.backgroundColor = '#c7d6ff';
       }
     });
@@ -82,7 +82,7 @@ export class DrawUtil {
       if (!this.removedLeaderLines.includes(leaderLine._id)) {
         this.moveToLastElement(leaderLine._id);
         leaderLine.setOptions({
-          color: '#000'
+          color: '#333'
         });
         leaderLine.size = 1.5;
         sourceHTMLElement.style.backgroundColor = '#fff';

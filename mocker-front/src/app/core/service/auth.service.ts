@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
-import { UserModel } from '@core/domain/model/user.model';
+import { UserModel } from '@core/domain/model/entity/user.model';
 import { AbstractService } from '@core/service/abstract.service';
 import { HttpResponse } from '@angular/common/http';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';

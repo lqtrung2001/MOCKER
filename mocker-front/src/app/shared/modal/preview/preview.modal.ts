@@ -1,18 +1,17 @@
 import { ChangeDetectorRef, Component, Injector, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractModal } from '@core/common/abstract.modal';
 import { Tab } from '@shared/component/tab/tab.component';
+import { FormatEnum } from '@core/domain/enum/format.enum';
 
 /**
  * @author Do Quoc Viet
- * @class PreviewModal
- * @date 02/03/2023
  */
 
 export interface PreviewModalOptions {
   data: any[];
   tableName?: string;
   download: () => void;
-  format: 'SQL' | 'JSON' | 'XML' | 'CSV';
+  format: FormatEnum;
 }
 
 @Component({

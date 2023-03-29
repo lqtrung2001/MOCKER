@@ -1,5 +1,5 @@
-import { BaseModel } from '@core/domain/model/base.model';
-import { FieldModel } from '@core/domain/model/field.model';
+import { BaseModel } from '@core/domain/model/entity/base.model';
+import { FieldModel } from '@core/domain/model/entity/field.model';
 
 /**
  * @author Do Quoc Viet

@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ConverterUtil } from '@core/util/converter.util';
 import { StringUtil } from '@core/util/string.util';
+import { DownloadUtil } from '@core/util/download.util';
 
 /**
  * @author Do Quoc Viet
@@ -10,13 +10,8 @@ import { StringUtil } from '@core/util/string.util';
   name: 'xml'
 })
 export class XmlPipe implements PipeTransform {
-  constructor(
-    private converterService: ConverterUtil
-  ) {
-  }
-
   transform(arr: string[], tableName: string): string {
-    return this.converterService.toXML(arr, tableName).join(StringUtil.EMPTY);
+    return DownloadUtil.dataToXML(arr, tableName).join(StringUtil.EMPTY);
   }
 }
 

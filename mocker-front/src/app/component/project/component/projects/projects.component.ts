@@ -1,6 +1,6 @@
 import { AbstractComponent } from '@core/common/abstract.component';
 import { Component, Injector, OnInit } from '@angular/core';
-import { ProjectModel } from '@core/domain/model/project.model';
+import { ProjectModel } from '@core/domain/model/entity/project.model';
 import { ProjectService } from '@app/core/service/project.service';
 
 /**

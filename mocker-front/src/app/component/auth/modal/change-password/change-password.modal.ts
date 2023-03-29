@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Injector, OnInit } from '@
 import { AbstractModal } from '@core/common/abstract.modal';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@core/service/auth.service';
-import { UserModel } from '@core/domain/model/user.model';
+import { UserModel } from '@core/domain/model/entity/user.model';
 import { LocalStorageConstant } from '@core/constant/local-storage.constant';
 import { ToastrProvider } from '@shared/modal/toastr-provider/toastr-provider';
 
