@@ -1,7 +1,7 @@
 import { Component, Injector, Input } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { StringUtil } from '@core/util/string.util';
 import { AbstractComponent } from '@core/common/abstract.component';
+import { ValidationErrors } from '@angular/forms';
 
 /**
  * @author Luong Quoc Trung, Do Quoc Viet
@@ -13,7 +13,7 @@ import { AbstractComponent } from '@core/common/abstract.component';
   styleUrls: ['error-message-processor.component.scss']
 })
 export class ErrorMessageProcessorComponent extends AbstractComponent {
-  @Input() error: any;
+  @Input() error: ValidationErrors | null;
 
   constructor(
     injector: Injector
@@ -22,8 +22,11 @@ export class ErrorMessageProcessorComponent extends AbstractComponent {
   }
 
   get errorMessage(): string {
-    if (this.error instanceof Object) {
+    if (this.error) {
       const errorType: string = Object.keys(this.error).length ? Object.keys(this.error)[0] : StringUtil.EMPTY;
+      if (!errorType) {
+        return StringUtil.EMPTY;
+      }
       let parameter: any;
       switch (errorType) {
         case 'maxlength':

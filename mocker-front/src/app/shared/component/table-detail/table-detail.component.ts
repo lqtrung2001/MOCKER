@@ -4,6 +4,7 @@ import { ChooseTypeModal, ChooseTypeModalOptions } from '@shared/modal/choose-ty
 import { GenerateTypeModel } from '@core/domain/model/entity/generate-type.model';
 import { SqlTypeModel } from '@core/domain/model/entity/sql-type.model';
 import { AbstractSharedComponent } from '@shared/component/common/abstract-shared.component';
+import { UniqueFieldNameValidator } from '@shared/validator/unique-field-name.validator';
 
 /**
  * @author Do Quoc Viet
@@ -36,9 +37,10 @@ export class TableDetailComponent extends AbstractSharedComponent {
   }
 
   insertField(): void {
+    const index: number = this.formArray.length;
     const field: FormGroup<FieldControls> = this.formBuilder.group({
       id: this.formBuilder.control(undefined, []),
-      name: this.formBuilder.control(undefined, [Validators.required]),
+      name: this.formBuilder.control(undefined, [Validators.required, UniqueFieldNameValidator(this.formArray, index)]),
       generateType: this.formBuilder.control(undefined, [Validators.required]),
       sqlType: this.formBuilder.control(undefined, []),
       option: this.formBuilder.group({
