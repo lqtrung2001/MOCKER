@@ -31,7 +31,8 @@
     "required": "This field is required.",
     "email": "Please enter a valid email address.",
     "maxlength": "The maximum number of characters allowed in this field is {{ length }}.",
-    "minlength": "The minimum number of characters allowed in this field is {{ length }}."
+    "minlength": "The minimum number of characters allowed in this field is {{ length }}.",
+    "unique_field_name": "These fields name in the table is conflicting with one another."
   },
   "component": {
     "sign_in": {
