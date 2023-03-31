@@ -14,6 +14,8 @@ public interface TableRepositoryCustom {
 
     List<Table> findAllBySchemaFetchFields(UUID schemaId);
 
+    List<Table> findAllBySchema(UUID schemaId);
+
     Table findOneFetchFields(UUID id);
 
 }

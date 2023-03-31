@@ -37,4 +37,8 @@ public class GenerateController implements GenerateApi {
         return ResponseEntity.ok(generateService.generateWithTable(apiGenerateMapper.map(tableDto), row.intValue()));
     }
 
+    @Override
+    public ResponseEntity<Map<String, Map<String, Object>>> generateWithSchema(UUID id) {
+        return ResponseEntity.ok(generateService.generateWithSchema(id));
+    }
 }
