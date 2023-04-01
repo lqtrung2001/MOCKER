@@ -1,7 +1,6 @@
 package com.mocker.controller.user;
 
 import com.mocker.api.UserApi;
-import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.UserDto;
 import com.mocker.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +20,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/v1")
 public class UserController implements UserApi {
-
-    private final ApiAbstractMapper apiAbstractMapper;
     private final ApiUserMapper apiUserMapper;
     private final UserService userService;
 
@@ -58,4 +55,5 @@ public class UserController implements UserApi {
     public ResponseEntity<UserDto> upsertUser(UserDto userDto) {
         return ResponseEntity.ok(apiUserMapper.map(userService.upsert(apiUserMapper.map(userDto))));
     }
+
 }

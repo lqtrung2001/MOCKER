@@ -37,8 +37,8 @@ import { Exception } from '@core/domain/exception/exception';
 })
 export class AbstractService<Type> implements HttpInterceptor {
   ENTITY_URL: string;
-  API_URL = environment.API_URL;
-  BASE_URL = environment.BASE_URL;
+  API_URL: string = environment.API_URL;
+  BASE_URL: string = environment.BASE_URL;
   protected modalProvider: ModalProvider;
   protected httpClient: HttpClient;
   protected appConfigService: ApplicationConfig;

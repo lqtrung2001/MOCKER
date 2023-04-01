@@ -2,7 +2,6 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { AbstractModal } from '@core/common/abstract.modal';
 import { FormControl } from '@angular/forms';
 import { GenerateTypeModel } from '@core/domain/model/entity/generate-type.model';
-import { GenerateTypeService } from '@core/service/generate-type.service';
 import { CategoryService } from '@core/service/category.service';
 import { CategoryModel } from '@core/domain/model/entity/category.model';
 import { SqlTypeModel } from '@core/domain/model/entity/sql-type.model';
@@ -32,7 +31,6 @@ export class ChooseTypeModal extends AbstractModal implements OnInit {
 
   constructor(
     injector: Injector,
-    private generateTypeService: GenerateTypeService,
     private sqlTypeService: SQLTypeService,
     private categoryService: CategoryService
   ) {
@@ -114,9 +112,9 @@ export class ChooseTypeModal extends AbstractModal implements OnInit {
   }
 
   get numberOfGenerateTypes(): number {
-    return this.categories?.map((category: CategoryModel) => category.generateTypes)
-      .map((generateTypes: GenerateTypeModel[]) => generateTypes.length)
-      .reduce((previous: number, current: number) => previous + current, 0);
+    return this.categories?.map((category: CategoryModel): GenerateTypeModel[] => category.generateTypes)
+      .map((generateTypes: GenerateTypeModel[]): number => generateTypes.length)
+      .reduce((previous: number, current: number): number => previous + current, 0);
   }
 
 }

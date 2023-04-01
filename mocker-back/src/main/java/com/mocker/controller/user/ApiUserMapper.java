@@ -6,6 +6,11 @@ import com.mocker.domain.model.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+/**
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
+ */
+
 @Mapper(componentModel = "spring", uses = {ApiAbstractMapper.class})
 public interface ApiUserMapper {
     User map(UserDto userDto);

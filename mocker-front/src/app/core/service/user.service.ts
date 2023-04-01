@@ -11,7 +11,7 @@ import { AbstractService } from '@core/service/abstract.service';
   providedIn: 'root'
 })
 export class UserService extends AbstractService<UserModel> {
-  override ENTITY_URL = 'user';
+  override ENTITY_URL: string = 'user';
 
   findOneByUsername(username: string): Observable<UserModel> {
     return this.get(`${this.API_URL}/${this.ENTITY_URL}/find-by-username?username=${username}`);

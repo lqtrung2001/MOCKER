@@ -5,7 +5,8 @@ import com.mocker.domain.dto.GroupDto;
 import com.mocker.domain.model.entity.Group;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+
+import java.util.List;
 
 /**
  * @author Do Quoc Viet
@@ -21,7 +22,6 @@ public interface ApiGroupMapper {
     @Mapping(target = "groupMembers", ignore = true)
     GroupDto map(Group group);
 
-    @Named("mapWithEagerProjectsAndGroupMembers")
-    GroupDto mapWithEagerProjectsAndGroupMembers(Group group);
+    List<GroupDto> mapToGroupsDto(List<Group> groups);
 
 }

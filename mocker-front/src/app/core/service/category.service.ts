@@ -10,5 +10,5 @@ import { AbstractService } from '@core/service/abstract.service';
   providedIn: 'root'
 })
 export class CategoryService extends AbstractService<CategoryModel> {
-  override ENTITY_URL = 'category';
+  override ENTITY_URL: string = 'category';
 }

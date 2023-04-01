@@ -10,5 +10,5 @@ import { AbstractService } from '@core/service/abstract.service';
   providedIn: 'root'
 })
 export class TableService extends AbstractService<TableModel> {
-  override ENTITY_URL = 'table';
+  override ENTITY_URL: string = 'table';
 }

@@ -10,5 +10,5 @@ import { AbstractService } from '@core/service/abstract.service';
   providedIn: 'root'
 })
 export class GenerateTypeService extends AbstractService<GenerateTypeModel> {
-  override ENTITY_URL = 'generate-type';
+  override ENTITY_URL: string = 'generate-type';
 }
