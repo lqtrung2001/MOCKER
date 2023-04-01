@@ -1,4 +1,4 @@
-<div class='{{ class }} tw-text-sm tw-rounded-md tw-overflow-hidden tw-z-10 tw-drop-shadow-xl' id='main'>
+<div class='{{ class }} tw-text-sm tw-rounded-md tw-z-10 tw-drop-shadow-xl' id='main'>
   <div class='{{ selfClass }} tw-border tw-rounded tw-w-72'>
     <p class='tw-bg-blue tw-h-8 tw-text-center tw-leading-8 tw-font-medium tw-text-white tw-uppercase'>
       <i class='fa-regular fa-table tw-mr-3'></i>
@@ -20,5 +20,8 @@
         <p class='tw-w-1/3 tw-uppercase'>{{ field.sqlType.code || 'DEFAULT' }}</p>
       </div>
     </div>
+  </div>
+  <div *ngIf='position' class='tw-absolute tw-text-blue -tw-top-5 tw-right-0'>
+    [ X: {{ position.x }}, Y: {{ position.y }} ]
   </div>
 </div>

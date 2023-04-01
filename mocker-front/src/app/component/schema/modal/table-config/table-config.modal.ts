@@ -16,8 +16,9 @@ export interface TableConfigModalOptions {
 }
 
 export interface TableConfigModalCloseOptions {
-  change: boolean;
+  change?: boolean;
   table: TableModel;
+  deleted?: boolean;
 }
 
 type Controls = {
@@ -48,7 +49,7 @@ export class TableConfigModal extends AbstractModal implements OnInit {
     this.formGroup = this.formBuilder.group({
       table: this.formBuilder.group({
         name: this.formBuilder.control(undefined, [Validators.required]),
-        description: this.formBuilder.control(undefined, [Validators.required]),
+        description: this.formBuilder.control('Description', [Validators.required]),
         fields: this.formBuilder.array<FormGroup<FieldControls>>([])
       }),
       rows: this.formBuilder.control(99, [Validators.required])
@@ -97,7 +98,7 @@ export class TableConfigModal extends AbstractModal implements OnInit {
       fields
     };
     table.fields = table.fields.map((field: FieldModel): FieldModel => {
-      const found = this.table.fields.find((item: FieldModel): boolean => item.id === field.id);
+      const found: FieldModel | undefined = this.table.fields.find((item: FieldModel): boolean => item.id === field.id);
       if (found) {
         return {
           ...found,
@@ -111,33 +112,50 @@ export class TableConfigModal extends AbstractModal implements OnInit {
       return field;
     });
     this.tableService.upsertEntity(table)
-      .subscribe((table: TableModel) => {
+      .subscribe((table: TableModel): void => {
         this.table = table;
         this.patchValues();
         this.change = true;
+        const closeOptions: TableConfigModalCloseOptions = {
+          change: true,
+          table: this.table
+        };
+        super.close(closeOptions);
       });
   }
 
   delete(): void {
     this.modalProvider.showConfirmation({
       body: 'modal.table_config.delete_confirmation'
-    }).subscribe((result: boolean) => {
+    }).subscribe((result: boolean): void => {
       if (result) {
-        this.tableService.deleteEntity(this.table.id).subscribe((table: TableModel): void => {
-          if (table) {
-            this.close();
-          }
-        });
+        this.tableService.deleteEntity(this.table.id)
+          .subscribe((table: TableModel): void => {
+            if (table) {
+              const closeOptions: TableConfigModalCloseOptions = {
+                table,
+                deleted: true
+              };
+              super.close(closeOptions);
+            }
+          });
       }
     });
   }
 
-  override close() {
-    const closeOptions: TableConfigModalCloseOptions = {
-      change: this.change,
-      table: this.table
-    };
-    super.close(closeOptions);
+  override close(): void {
+    if (this.formGroup.dirty || this.formGroup.controls.table.controls.fields.dirty) {
+      this.modalProvider.showConfirmation({
+        body: 'modal.table_config.close_without_save'
+      }).subscribe((result: boolean): void => {
+        if (result) {
+          super.close();
+        }
+      });
+    } else {
+      super.close();
+    }
+
   }
 
 }

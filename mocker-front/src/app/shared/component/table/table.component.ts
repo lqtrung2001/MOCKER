@@ -16,6 +16,11 @@ import { FormatEnum } from '@core/domain/enum/format.enum';
  * @author Do Quoc Viet
  */
 
+export type Position = {
+  x: number;
+  y: number;
+}
+
 @Component({
   selector: 'moc-table',
   templateUrl: 'table.component.html',
@@ -26,10 +31,12 @@ export class TableComponent extends AbstractSharedComponent {
   @Input() current: FieldModel | undefined;
   @Input() foreignKeys: string[] = [];
   @Input() relations: string[] = [];
+  @Input() position: Position | undefined;
   @Input() dataDetail: DataDetail[] = [];
+  @Input() format: FormatEnum;
   @Output() relationMapping: EventEmitter<FieldModel> = new EventEmitter();
   @Output() refresh: EventEmitter<TableModel> = new EventEmitter();
-  @Input() format: FormatEnum;
+  @Output() deleted: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
     injector: Injector
@@ -43,11 +50,14 @@ export class TableComponent extends AbstractSharedComponent {
       relations: this.relations
     };
     this.modalService.open(TableConfigModal, options)
-      .subscribe((closeOptions: TableConfigModalCloseOptions) => {
+      .subscribe((closeOptions: TableConfigModalCloseOptions): void => {
         if (closeOptions) {
           this.table = closeOptions.table;
-          if (closeOptions.change) {
+          if (closeOptions.change && !closeOptions.deleted) {
             this.refresh.emit(this.table);
+          }
+          if (closeOptions.deleted) {
+            this.deleted.emit(true);
           }
         }
       });

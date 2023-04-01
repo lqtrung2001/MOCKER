@@ -25,12 +25,12 @@
       <div
         (click)='close(type)'
         *ngFor='let type of types'
-        class='tw-m-3 p-4 tw-cursor-pointer tw-rounded tw-w-1/4 {{ (options.current && type.id === options.current.id) ? "tw-bg-gray" : "hover:tw-bg-gray" }}'>
+        class='tw-m-3 tw-p-4 tw-cursor-pointer tw-rounded tw-w-1/4 {{ (options.current && type.id === options.current.id) ? "tw-bg-gray" : "hover:tw-bg-gray" }}'>
         <p class='tw-font-medium first-letter:tw-underline'>{{ type.code }}</p>
         <p class='tw-text-gray'>{{ type.description | truncate: 90 }}</p>
-        <ng-container *ngIf='options?.isGenerateType'>
+        <div *ngIf='options?.isGenerateType' class='tw-p-2'>
           <li class='tw-text-gray' *ngFor='let source of type.sources'>{{ source.value | truncate: 20 }}</li>
-        </ng-container>
+        </div>
       </div>
     </div>
   </div>

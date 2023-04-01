@@ -4,7 +4,8 @@ import { ChooseTypeModal, ChooseTypeModalOptions } from '@shared/modal/choose-ty
 import { GenerateTypeModel } from '@core/domain/model/entity/generate-type.model';
 import { SqlTypeModel } from '@core/domain/model/entity/sql-type.model';
 import { AbstractSharedComponent } from '@shared/component/common/abstract-shared.component';
-import { UniqueFieldNameValidator } from '@shared/validator/unique-field-name.validator';
+import { UniqueNameValidator } from '@shared/validator/unique-name.validator';
+import { UnSpaceValidator } from '@shared/validator/un-space.validator';
 
 /**
  * @author Do Quoc Viet
@@ -40,7 +41,7 @@ export class TableDetailComponent extends AbstractSharedComponent {
     const index: number = this.formArray.length;
     const field: FormGroup<FieldControls> = this.formBuilder.group({
       id: this.formBuilder.control(undefined, []),
-      name: this.formBuilder.control(undefined, [Validators.required, UniqueFieldNameValidator(this.formArray, index)]),
+      name: this.formBuilder.control(undefined, [Validators.required, UniqueNameValidator(this.formArray, index), UnSpaceValidator()]),
       generateType: this.formBuilder.control(undefined, [Validators.required]),
       sqlType: this.formBuilder.control(undefined, []),
       option: this.formBuilder.group({
@@ -75,7 +76,7 @@ export class TableDetailComponent extends AbstractSharedComponent {
   }
 
   isReadonly(id: string): boolean {
-    return this.relations.includes(id);
+    return this.relations?.includes(id);
   }
 
 }

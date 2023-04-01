@@ -32,7 +32,8 @@
     "email": "Please enter a valid email address.",
     "maxlength": "The maximum number of characters allowed in this field is {{ length }}.",
     "minlength": "The minimum number of characters allowed in this field is {{ length }}.",
-    "unique_field_name": "These fields name in the table is conflicting with one another."
+    "unique_field_name": "These fields name in the table is conflicting with one another.",
+    "un_space": "The field name must has not space."
   },
   "component": {
     "sign_in": {
@@ -151,7 +152,8 @@
       "preview": "PREVIEW",
       "generated": "Data are generated successfully, please click preview button on the top of table for viewing its data.",
       "format": "Format",
-      "filename": "File Name"
+      "filename": "File Name",
+      "invalid_mapping": "Can not mapping these fields because they are not same generate type. Please double-check again."
     }
   },
   "audit": {
@@ -206,7 +208,8 @@
       "save": "SAVE",
       "delete": "DELETE THIS TABLE",
       "close": "CLOSE",
-      "delete_confirmation": "Are you sure you want to delete this table?"
+      "delete_confirmation": "Are you sure you want to delete this table?",
+      "close_without_save": "Are you sure you want to close this table without saving it?"
     },
     "relation_config": {
       "title": "RELATION CONFIGURATION:",

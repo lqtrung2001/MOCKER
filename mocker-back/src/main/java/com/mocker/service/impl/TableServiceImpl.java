@@ -6,12 +6,14 @@ import com.mocker.domain.model.entity.Option;
 import com.mocker.domain.model.entity.Table;
 import com.mocker.repository.FieldRepository;
 import com.mocker.repository.OptionRepository;
+import com.mocker.repository.TableRelationRepository;
 import com.mocker.repository.TableRepository;
 import com.mocker.service.TableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,10 +25,10 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class TableServiceImpl implements TableService {
-
     private final TableRepository tableRepository;
     private final FieldRepository fieldRepository;
     private final OptionRepository optionRepository;
+    private final TableRelationRepository tableRelationRepository;
 
     @Override
     public Table getTable(UUID id) {
@@ -75,6 +77,15 @@ public class TableServiceImpl implements TableService {
         if (table == null) {
             throw new IllegalStateException("validation.validation.data_access_error");
         }
+        optionRepository.deleteAll(table.getFields()
+                .stream()
+                .map(Field::getOption)
+                .toList());
+        tableRelationRepository.deleteAll(table.getFields()
+                .stream()
+                .map(tableRelationRepository::findSourceAndTargetRelationsByField)
+                .flatMap(Collection::stream)
+                .toList());
         fieldRepository.deleteAll(table.getFields());
         tableRepository.deleteById(id);
         return table;
