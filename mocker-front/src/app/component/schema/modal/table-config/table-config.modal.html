@@ -9,7 +9,7 @@
       <div class='tw-flex'>
         <span class='tw-mt-3'>{{ 'modal.table_config.table_name' | translate }}</span>
         <moc-input [control]='formGroup.controls.table.controls.name' class='tw-ml-5'
-                   placeholder='modal.table_config.table_name_placeholder'></moc-input>
+                   [placeholder]='"modal.table_config.table_name_placeholder" | translate'></moc-input>
       </div>
       <div class='tw-flex tw-ml-5'>
         <span class='tw-mt-3'>{{ 'modal.table_config.rows' | translate }}</span>

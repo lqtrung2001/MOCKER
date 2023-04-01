@@ -5,7 +5,7 @@ import { FieldControls } from '@shared/component/table-detail/table-detail.compo
  * @author Do Quoc Viet
  */
 
-export function UniqueFieldNameValidator(formArray: FormArray<FormGroup<FieldControls>>, index: number): ValidatorFn {
+export function UniqueNameValidator(formArray: FormArray<FormGroup<FieldControls>>, index: number): ValidatorFn {
   return (control: AbstractControl): (ValidationErrors | null) => {
     const names: string[] = formArray.controls
       .map((formGroup: FormGroup<FieldControls>, i: number): string => {

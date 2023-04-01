@@ -1,4 +1,4 @@
-<div class='{{ class }} tw-overflow-auto' id='main'>
+<div class='{{ class }}' id='main'>
   <div class='tw-flex tw-items-start'>
     <div class='tw-flex tw-items-center tw-w-140 tw-justify-between'>
       <moc-button (click)='createTable()' class='tw-w-44' icon='fa-solid fa-folder-plus'
@@ -19,20 +19,27 @@
                  selfClass='tw-px-5'></moc-input>
     </div>
   </div>
-  <div class='diagram tw-mt-3 tw-flex tw-h-160 tw-flex-wrap tw-justify-between'>
-    <moc-table (cdkDragMoved)='dragMoved(table)'
-               (refresh)='reDrawRelationLine($event)'
-               (relationMapping)='relationMapping($event)'
-               *ngFor='let table of schema?.tables'
-               [current]='current'
-               [dataDetail]='data ? data[table.name].values : []'
-               [foreignKeys]='foreignKeys'
-               [format]='formGroup.controls.format.value'
-               [relations]='relations'
-               [table]='table'
-               cdkDrag
-    >
-      <i cdkDragHandle class='tw-ml-3 tw-cursor-pointer fa-solid fa-arrows-up-down-left-right'></i>
-    </moc-table>
+  <div (scroll)='onScroll()' class='diagram tw-border tw-mt-3 tw-h-full tw-w-full tw-overflow-auto'>
+    <div #diagram class='tw-relative'>
+      <moc-table
+        (cdkDragMoved)='dragMoved(table, $event)'
+        (cdkDragEnded)='dragEnded(table, $event)'
+        (refresh)='reDrawRelationLine($event)'
+        (relationMapping)='relationMapping($event)'
+        (deleted)='tableDeleted(table, $event)'
+        *ngFor='let table of schema?.tables'
+        [current]='current'
+        [dataDetail]='data ? data[table.name].values : []'
+        [foreignKeys]='foreignKeys'
+        [format]='formGroup.controls.format.value'
+        [relations]='relations'
+        [table]='table'
+        [position]='tableIdIsBeingMoved === table.id ? position : undefined'
+        cdkDrag
+        class='tw-absolute tw-top-0'
+        cdkDragBoundary='.diagram'>
+        <i cdkDragHandle class='tw-ml-3 tw-cursor-pointer fa-solid fa-arrows-up-down-left-right'></i>
+      </moc-table>
+    </div>
   </div>
 </div>

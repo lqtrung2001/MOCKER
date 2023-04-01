@@ -3,6 +3,6 @@
  */
 
 export class StringUtil {
-  static EMPTY = '';
-  static SPACE = '\u00A0';
+  public static EMPTY: string = '';
+  public static SPACE: string = ' ';
 }

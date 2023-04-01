@@ -30,10 +30,10 @@ export class TooltipComponent extends AbstractSharedComponent implements OnInit 
     if (!this.dock) {
       throw new Error('Cannot find the specified element');
     }
-    this.dock.addEventListener('mouseover', () => {
+    this.dock.addEventListener('mouseover', (): void => {
       this.isShown = true;
     });
-    this.dock.addEventListener('mouseout', () => {
+    this.dock.addEventListener('mouseout', (): void => {
       this.isShown = false;
     });
   }
