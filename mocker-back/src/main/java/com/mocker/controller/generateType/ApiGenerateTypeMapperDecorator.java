@@ -38,5 +38,5 @@ import org.mapstruct.Mapper;
         ApiTableMapper.class,
         ApiTableRelationMapper.class,
         ApiUserMapper.class})
-public class ApiGenerateTypeMapperDecorator {
+public interface ApiGenerateTypeMapperDecorator {
 }
