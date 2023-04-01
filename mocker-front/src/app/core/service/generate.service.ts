@@ -21,59 +21,5 @@ export class GenerateService extends AbstractService<any> {
 
   generateBySchema(schemaId: string): Observable<DataModel> {
     return this.request<DataModel>(HttpMethodEnum.GET, `${this.API_URL}/${this.ENTITY_URL}/schema/${schemaId}`);
-    // const result: DataModel = {
-    //   ROLE2: {
-    //     index: 1,
-    //     values: [
-    //       {
-    //         'role': 'Estimator',
-    //         'custom': 'null'
-    //       },
-    //       {
-    //         'role': 'Subcontractor',
-    //         'custom': 'null'
-    //       },
-    //       {
-    //         'role': 'Construction Manager',
-    //         'custom': 'null'
-    //       }
-    //     ]
-    //   },
-    //   PRODUCT: {
-    //     index: 2,
-    //     values: [
-    //       {
-    //         'id': 'Construction Manager',
-    //         'username': 'peassebyl5'
-    //       },
-    //       {
-    //         'id': 'Supervisor',
-    //         'username': 'hbugsln'
-    //       },
-    //       {
-    //         'id': 'Subcontractor',
-    //         'username': 'rmaypoleen'
-    //       }
-    //     ]
-    //   },
-    //   USER: {
-    //     index: 3,
-    //     values: [
-    //       {
-    //         'domain': 'bravesites.com',
-    //         'id': 'Supervisor'
-    //       },
-    //       {
-    //         'domain': 'joomla.org',
-    //         'id': 'Construction Expeditor'
-    //       },
-    //       {
-    //         'domain': 'irs.gov',
-    //         'id': 'Project Manager'
-    //       }
-    //     ]
-    //   }
-    // };
-    // return of(result);
   }
 }
