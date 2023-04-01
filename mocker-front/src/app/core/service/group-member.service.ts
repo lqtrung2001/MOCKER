@@ -10,6 +10,6 @@ import { GroupMemberModel } from '@core/domain/model/entity/group-member.model';
   providedIn: 'root'
 })
 export class GroupMemberService extends AbstractService<GroupMemberModel> {
-  override ENTITY_URL = 'group-member';
+  override ENTITY_URL: string = 'group-member';
 
 }

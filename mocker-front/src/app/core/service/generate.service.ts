@@ -13,7 +13,7 @@ import { DataModel } from '@core/domain/model/data.model';
   providedIn: 'root'
 })
 export class GenerateService extends AbstractService<any> {
-  override ENTITY_URL = 'generate';
+  override ENTITY_URL: string = 'generate';
 
   generateWithTable(table: TableModel, row: number): Observable<any[]> {
     return this.request<any[]>(HttpMethodEnum.POST, `${this.API_URL}/${this.ENTITY_URL}?row=${row}`, table);

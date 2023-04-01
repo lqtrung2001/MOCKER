@@ -13,7 +13,7 @@ import { HttpMethodEnum } from '@core/domain/enum/http-method.enum';
   providedIn: 'root'
 })
 export class ProjectService extends AbstractService<ProjectModel> {
-  override ENTITY_URL = 'project';
+  override ENTITY_URL: string = 'project';
 
   getSchemasByProject(projectId: string): Observable<SchemaModel[]> {
     return this.request<SchemaModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${this.ENTITY_URL}/${projectId}/schemas`);

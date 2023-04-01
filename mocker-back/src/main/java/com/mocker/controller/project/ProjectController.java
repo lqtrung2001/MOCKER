@@ -1,9 +1,7 @@
 package com.mocker.controller.project;
 
 import com.mocker.api.ProjectApi;
-import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.ProjectDto;
-import com.mocker.domain.dto.SchemaDto;
 import com.mocker.service.ProjectService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +21,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @RequestMapping(path = "/api/v1")
 public class ProjectController implements ProjectApi {
-
-    private final ApiAbstractMapper apiAbstractMapper;
     private final ApiProjectMapper apiProjectMapper;
     private final ProjectService projectService;
 
@@ -40,14 +36,6 @@ public class ProjectController implements ProjectApi {
                 .map(apiProjectMapper::map)
                 .collect(Collectors.toList()));
     }
-
-//    @Override
-//    public ResponseEntity<List<SchemaDto>> getSchemasByProject(UUID projectId) {
-//        return ResponseEntity.ok(projectService.getSchemasByProject(projectId)
-//                .stream()
-//                .map(apiProjectMapper::map)
-//                .collect(Collectors.toList()));
-//    }
 
     @Override
     public ResponseEntity<ProjectDto> upsertProject(ProjectDto projectDto) {

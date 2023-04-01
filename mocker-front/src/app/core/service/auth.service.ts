@@ -16,7 +16,7 @@ import { StringUtil } from '@core/util/string.util';
   providedIn: 'root'
 })
 export class AuthService extends AbstractService<UserModel> {
-  static AUTH_API = 'auth';
+  static AUTH_API: string = 'auth';
 
   signIn(username: string, password: string): Observable<string> {
     return this.httpClient.post<any>(`${this.BASE_URL}/login`,

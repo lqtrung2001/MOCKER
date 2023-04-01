@@ -1,7 +1,7 @@
 package com.mocker.controller.generate;
 
 import com.mocker.api.GenerateApi;
-import com.mocker.controller.mapper.ApiAbstractMapper;
+import com.mocker.controller.table.ApiTableMapper;
 import com.mocker.domain.dto.TableDto;
 import com.mocker.service.GenerateService;
 import lombok.RequiredArgsConstructor;
@@ -15,16 +15,16 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/v1")
 public class GenerateController implements GenerateApi {
-
-    private final ApiAbstractMapper apiAbstractMapper;
     private final ApiGenerateMapper apiGenerateMapper;
+    private final ApiTableMapper apiTableMapper;
     private final GenerateService generateService;
 
     @Override
@@ -34,7 +34,7 @@ public class GenerateController implements GenerateApi {
 
     @Override
     public ResponseEntity<List<Map<String, String>>> generateWithTable(BigDecimal row, TableDto tableDto) {
-        return ResponseEntity.ok(generateService.generateWithTable(apiGenerateMapper.map(tableDto), row.intValue()));
+        return ResponseEntity.ok(generateService.generateWithTable(apiTableMapper.map(tableDto), row.intValue()));
     }
 
     @Override

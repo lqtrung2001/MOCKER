@@ -15,9 +15,11 @@ import java.util.List;
         ApiTableRelationMapper.class,
         ApiFieldMapper.class})
 public interface ApiTableRelationMapper {
+
     TableRelation map(TableRelationDto tableRelationDto);
 
     TableRelationDto map(TableRelation tableRelation);
 
     List<TableRelationDto> map(List<TableRelation> tableRelations);
+
 }

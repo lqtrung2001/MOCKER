@@ -15,8 +15,12 @@ import org.mapstruct.Mapping;
         ApiAbstractMapper.class,
         ApiCategoryMapper.class})
 public interface ApiGenerateTypeMapper {
+
+    GenerateType map(GenerateTypeDto generateTypeDto);
+
     @Mapping(target = "category", ignore = true)
     @Mapping(target = "sqlTypes", ignore = true)
     @Mapping(target = "sources", ignore = true)
     GenerateTypeDto map(GenerateType generateType);
+
 }

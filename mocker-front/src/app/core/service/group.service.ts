@@ -10,5 +10,5 @@ import { AbstractService } from '@core/service/abstract.service';
   providedIn: 'root'
 })
 export class GroupService extends AbstractService<GroupModel> {
-  override ENTITY_URL = 'group';
+  override ENTITY_URL: string = 'group';
 }

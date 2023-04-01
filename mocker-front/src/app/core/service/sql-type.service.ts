@@ -10,5 +10,5 @@ import { AbstractService } from '@core/service/abstract.service';
   providedIn: 'root'
 })
 export class SQLTypeService extends AbstractService<SqlTypeModel> {
-  override ENTITY_URL = 'sql-type';
+  override ENTITY_URL: string = 'sql-type';
 }

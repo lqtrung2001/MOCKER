@@ -14,7 +14,7 @@ import { TableRelationModel } from '@core/domain/model/entity/table-relation.mod
   providedIn: 'root'
 })
 export class SchemaService extends AbstractService<SchemaModel> {
-  override ENTITY_URL = 'schema';
+  override ENTITY_URL: string = 'schema';
 
   getTablesBySchema(schemaId: string): Observable<TableModel[]> {
     return this.request<TableModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${this.ENTITY_URL}/${schemaId}/tables`);

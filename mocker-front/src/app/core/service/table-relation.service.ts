@@ -10,7 +10,7 @@ import { Injectable, Injector } from '@angular/core';
   providedIn: 'root'
 })
 export class TableRelationService extends AbstractService<TableRelationModel> {
-  override ENTITY_URL = 'table-relation';
+  override ENTITY_URL: string = 'table-relation';
 
   constructor(injector: Injector) {
     super(injector);
