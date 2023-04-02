@@ -26,7 +26,7 @@ export class DialogModal extends AbstractModal {
     type: 'CONFIRMATION'
   };
 
-  override onInjectInputs(dialogModalOptionsCustom: DialogModalOptionsCustom) {
+  override onInjectInputs(dialogModalOptionsCustom: DialogModalOptionsCustom): void {
     this.options = {
       ...this.defaultOptions,
       ...dialogModalOptionsCustom
@@ -50,31 +50,12 @@ export class DialogModal extends AbstractModal {
     }
   }
 
-  get icon(): string {
-    let icon: string;
-    switch (this.options.type) {
-      case 'CONFIRMATION':
-        icon = 'fa-solid fa-circle-question';
-        break;
-      case 'ERROR':
-        icon = 'fa-sharp fa-solid fa-circle-xmark';
-        break;
-      case 'WARNING':
-        icon = 'fa-solid fa-triangle-exclamation';
-        break;
-      default:
-        icon = 'fa-solid fa-circle-info';
-    }
-    return `${icon} tw-text-${this.color} tw-text-8xl tw-align-middle`;
-  }
-
   get isShowBtnCancel(): boolean {
-    const type = this.options.type;
-    return type === 'CONFIRMATION' || type === 'ERROR';
+    return this.options.type === 'CONFIRMATION' || this.options.type !== 'ERROR';
   }
 
   get isShowBtnOK(): boolean {
-    return this.options.type !== 'ERROR';
+    return true;
   }
 
 }
