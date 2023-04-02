@@ -33,10 +33,9 @@ export class ErrorHandlerConfig implements ErrorHandler {
         }
       });
     } else {
-      // this.modalProvider.showError({
-      //   detail: error.message
-      // });
-      console.log(error);
+      this.modalProvider.showError({
+        detail: error.message
+      });
     }
   }
 
