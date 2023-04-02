@@ -6,10 +6,10 @@ import { CategoryService } from '@core/service/category.service';
 import { CategoryModel } from '@core/domain/model/entity/category.model';
 import { SqlTypeModel } from '@core/domain/model/entity/sql-type.model';
 import { SQLTypeService } from '@core/service/sql-type.service';
+import { StringUtil } from '@core/util/string.util';
 
 /**
  * @author Do Quoc Viet
- * @class ChooseTypeModal
  */
 
 export interface ChooseTypeModalOptions {
@@ -25,7 +25,7 @@ export interface ChooseTypeModalOptions {
 export class ChooseTypeModal extends AbstractModal implements OnInit {
   override options: ChooseTypeModalOptions;
   formControl: FormControl;
-  types: any[];
+  types: SqlTypeModel[] | GenerateTypeModel[];
   categories: CategoryModel[];
   currentCategory: CategoryModel | undefined;
 
@@ -36,17 +36,18 @@ export class ChooseTypeModal extends AbstractModal implements OnInit {
   ) {
     super(injector);
     this.formControl = this.formBuilder.control(undefined, []);
-    this.formControl.valueChanges.subscribe((value: string) => {
+    this.formControl.valueChanges.subscribe((value: string): void => {
       if (value) {
         if (this.options?.isGenerateType) {
           this.categories = this.categories.filter((category: CategoryModel): boolean =>
             !!category.generateTypes
-              .filter((generateType: GenerateTypeModel) => generateType.code.toUpperCase().includes(value.toUpperCase()))
+              .filter((generateType: GenerateTypeModel): boolean => generateType.code.toUpperCase().includes(value.toUpperCase()))
               .length);
           this.types = this.categories[0]?.generateTypes;
           this.currentCategory = undefined;
         } else {
-          this.types = this.appConfigService.sqlTypes.filter((sqlType: SqlTypeModel): boolean => sqlType.code.toUpperCase().includes(value.toUpperCase()));
+          this.types = this.appConfigService.sqlTypes
+            .filter((sqlType: SqlTypeModel): boolean => sqlType.code.toUpperCase().includes(value.toUpperCase()));
         }
       } else {
         // reset value
@@ -64,16 +65,24 @@ export class ChooseTypeModal extends AbstractModal implements OnInit {
           this.appConfigService.categories = categories;
           const category: CategoryModel | undefined = this.categories
             .find((category: CategoryModel): boolean => category.generateTypes
-              .includes((this.options?.current as GenerateTypeModel)));
+              .map((generateType: GenerateTypeModel): string => generateType.id)
+              .includes(this.options?.current?.id || StringUtil.EMPTY));
           this.unShiftIfExist(this.categories, category);
           this.changeCategory(category);
+          if (this.options?.current) {
+            this.unShiftIfExist(this.types, this.options?.current);
+          }
         });
       } else {
         const category: CategoryModel | undefined = this.categories
           .find((category: CategoryModel): boolean => category.generateTypes
-            .includes((this.options?.current as GenerateTypeModel)));
+            .map((generateType: GenerateTypeModel): string => generateType.id)
+            .includes(this.options?.current?.id || StringUtil.EMPTY));
         this.unShiftIfExist(this.categories, category);
         this.changeCategory(category);
+        if (this.options?.current) {
+          this.unShiftIfExist(this.types, this.options?.current);
+        }
       }
     } else {
       this.types = this.appConfigService.sqlTypes;
@@ -94,19 +103,18 @@ export class ChooseTypeModal extends AbstractModal implements OnInit {
       this.types = category.generateTypes;
       this.currentCategory = category;
     } else {
-      this.types = this.categories.map((category: CategoryModel) => category.generateTypes)
+      this.types = this.categories
+        .map((category: CategoryModel): GenerateTypeModel[] => category.generateTypes)
         .reduce((previous: GenerateTypeModel[], current: GenerateTypeModel[]) => [...previous, ...current], []);
       this.currentCategory = undefined;
     }
-    if (this.options?.current) {
-      this.unShiftIfExist(this.types, this.options?.current);
-    }
   }
 
-  unShiftIfExist(array: any[], element: any): void {
+  unShiftIfExist(array: any[], element: CategoryModel | GenerateTypeModel | SqlTypeModel | undefined): void {
     if (!element || !array?.length) {
       return;
     }
+    element = array.find((obj: CategoryModel | GenerateTypeModel | SqlTypeModel): boolean => obj.id === element?.id);
     array.splice(array.indexOf(element), 1);
     array.unshift(element);
   }

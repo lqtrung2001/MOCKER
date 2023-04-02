@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SignInComponent } from '@app/component/auth/component/sign-in/sign-in.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgForOf, NgIf } from '@angular/common';
+import { NgForOf, NgIf, NgOptimizedImage } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SignUpComponent } from '@app/component/auth/component/sign-up/sign-up.component';
@@ -29,7 +29,8 @@ import { AuthRoutingModule } from '@app/component/auth/auth-routing.module';
     NgForOf,
     SharedModule,
     TranslateModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    NgOptimizedImage
   ],
   providers: []
 })

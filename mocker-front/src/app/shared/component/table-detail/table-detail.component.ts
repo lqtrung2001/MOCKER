@@ -69,9 +69,7 @@ export class TableDetailComponent extends AbstractSharedComponent {
     };
     this.modalService.open(ChooseTypeModal, options)
       .subscribe((type: GenerateTypeModel | SqlTypeModel): void => {
-        if (type) {
-          control.setValue(type);
-        }
+        control.setValue(type);
       });
   }
 

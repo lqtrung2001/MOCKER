@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { NgForOf, NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
+import { NgForOf, NgIf, NgOptimizedImage, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
 import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 import { NavigationComponent } from '@shared/layout/component/navigation/navigation.component';
@@ -24,7 +24,8 @@ import { NavigationComponent } from '@shared/layout/component/navigation/navigat
     NgIf,
     RouterLinkWithHref,
     RouterLinkActive,
-    NgForOf
+    NgForOf,
+    NgOptimizedImage
   ],
   providers: []
 })
