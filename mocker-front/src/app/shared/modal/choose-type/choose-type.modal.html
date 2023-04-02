@@ -1,5 +1,5 @@
 <div [modal]='this' id='main' popup>
-  <div class='tw-w-232 tw-h-200 tw-p-3 tw-text-sm'>
+  <div class='tw-relative tw-w-232 tw-h-200 tw-p-5 tw-text-sm'>
     <div class='tw-flex tw-justify-between tw-items-center'>
       <p class='tw-font-medium'>{{ 'modal.choose_type.title' | translate }}</p>
       <moc-input [control]='formControl' [placeholder]='"modal.choose_type.find_placeholder" | translate'
@@ -7,12 +7,13 @@
                  selfClass='tw-p-2'></moc-input>
     </div>
     <div *ngIf='options?.isGenerateType' class='tw-flex tw-mt-3 tw-overflow-x-scroll'>
-      <moc-button (click)='changeCategory()' class='tw-mx-0.5'
+      <moc-button (click)='changeCategory()'
+                  class='tw-mx-0.5 tw-mb-2'
                   label='All&nbsp;({{ numberOfGenerateTypes }})'
                   selfClass='tw-py-2 {{ currentCategory ? "btn-light" : "btn-primary" }}'></moc-button>
       <moc-button (click)='changeCategory(category)'
                   *ngFor='let category of categories'
-                  class='tw-mx-0.5'
+                  class='tw-mx-0.5 tw-mb-2'
                   label='{{ category.name | truncate: 20 }}&nbsp;({{ category.generateTypes.length }})'
                   selfClass='tw-py-2 {{ currentCategory?.id === category.id ? "btn-primary" : "btn-light" }}'></moc-button>
     </div>
@@ -21,10 +22,11 @@
       <p (click)='formControl.setValue(undefined)'
          class='hover:tw-underline tw-text-blue tw-cursor-pointer'>{{ 'modal.choose_type.clear_credential' | translate }}</p>
     </div>
-    <div class='tw-flex tw-flex-wrap tw-content-start tw-h-5/6 tw-overflow-y-scroll'>
+    <div
+      class='tw-flex tw-mt-5 tw-flex-wrap tw-content-start {{ options.isGenerateType ? "tw-h-5/6" : "tw-h-9/10" }} tw-overflow-y-scroll'>
       <div
         (click)='close(type)'
-        *ngFor='let type of types'
+        *ngFor='let type of $any(types)'
         class='tw-m-3 tw-p-4 tw-cursor-pointer tw-rounded tw-w-1/4 {{ (options.current && type.id === options.current.id) ? "tw-bg-gray" : "hover:tw-bg-gray" }}'>
         <p class='tw-font-medium first-letter:tw-underline'>{{ type.code }}</p>
         <p class='tw-text-gray'>{{ type.description | truncate: 90 }}</p>
@@ -32,6 +34,10 @@
           <li class='tw-text-gray' *ngFor='let source of type.sources'>{{ source.value | truncate: 20 }}</li>
         </div>
       </div>
+    </div>
+    <div class='tw-absolute tw-bottom-5 tw-right-5'>
+      <moc-button (click)='close()' *ngIf='options.current' selfClass='btn-primary'
+                  label='modal.choose_type.clear_selected_type'></moc-button>
     </div>
   </div>
 </div>

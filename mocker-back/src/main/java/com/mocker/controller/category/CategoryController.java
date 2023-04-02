@@ -24,9 +24,7 @@ public class CategoryController implements CategoryApi {
 
     @Override
     public ResponseEntity<List<CategoryDto>> getCategories() {
-        return ResponseEntity.ok(apiCategoryMapperDecorator
-                .mapToCategoriesDtoFetchGenerateTypes(categoryService
-                        .getCategoriesFetchGenerateTypes()));
+        return ResponseEntity.ok(apiCategoryMapperDecorator.mapToCategoriesDtoFetchGenerateTypes(categoryService.getCategoriesFetchGenerateTypes()));
     }
 
 }
