@@ -57,9 +57,10 @@ public class SchemaRepositoryImpl implements SchemaRepositoryCustom {
                 .from(schema)
                 .where(schema.id.eq(id))
                 .leftJoin(schema.tables, table).fetchJoin()
-                .fetchOne();
-        Optional.ofNullable(entity).ifPresent(value -> value.getTables()
-                .forEach(table -> Hibernate.initialize(table.getFields())));
+                .fetchFirst();
+        Optional.ofNullable(entity)
+                .ifPresent(value -> value.getTables()
+                        .forEach(table -> Hibernate.initialize(table.getFields())));
         return entity;
     }
 

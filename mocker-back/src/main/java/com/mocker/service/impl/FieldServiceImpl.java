@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
 @Service

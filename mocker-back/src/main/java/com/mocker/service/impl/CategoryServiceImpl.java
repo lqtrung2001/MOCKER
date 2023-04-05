@@ -1,6 +1,5 @@
 package com.mocker.service.impl;
 
-import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Category;
 import com.mocker.repository.CategoryRepository;
 import com.mocker.service.CategoryService;
@@ -13,7 +12,8 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
 @Service
@@ -29,21 +29,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category getCategoryHasGenerateTypes(UUID id) throws NotFoundException {
-        try {
-            return categoryRepository.getCategoryHasGenerateTypes(id);
-        } catch (Exception e) {
-            throw new NotFoundException("exception.not_found");
-        }
+    public Category getCategoryHasGenerateTypes(UUID id) {
+        return categoryRepository.getCategoryHasGenerateTypes(id);
     }
 
     @Override
-    public Integer getGenerateTypesCount(UUID id) throws NotFoundException {
-        try {
-            return categoryRepository.getGenerateTypesCount(id);
-        } catch (Exception e) {
-            throw new NotFoundException("exception.not_found");
-        }
+    public Integer getGenerateTypesCount(UUID id) {
+        return categoryRepository.getGenerateTypesCount(id);
     }
 
     @Override

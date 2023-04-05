@@ -2,7 +2,6 @@ package com.mocker.controller.sqlType;
 
 import com.mocker.api.SqlTypeApi;
 import com.mocker.domain.dto.SQLTypeDto;
-import com.mocker.domain.exception.NotFoundException;
 import com.mocker.service.SQLTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,7 @@ public class SQLTypeController implements SqlTypeApi {
     private final SQLTypeService sqlTypeService;
 
     @Override
-    public ResponseEntity<List<SQLTypeDto>> getSQLTypes() throws NotFoundException {
+    public ResponseEntity<List<SQLTypeDto>> getSQLTypes() {
         return ResponseEntity.ok(sqlTypeService.getSQLTypesFetchGenerateTypes().stream()
                 .map(apiSQLTypeMapper::map).collect(Collectors.toList()));
     }

@@ -1,9 +1,9 @@
 package com.mocker.service.impl;
 
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Group;
 import com.mocker.domain.model.entity.GroupMember;
 import com.mocker.domain.model.entity.User;
-import com.mocker.domain.model.entity.composite_key.GroupMemberPK;
 import com.mocker.domain.model.entity.enumeration.Role;
 import com.mocker.repository.GroupMemberRepository;
 import com.mocker.repository.GroupRepository;
@@ -13,8 +13,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
 @Service
@@ -28,15 +31,25 @@ public class GroupMemberServiceImpl implements GroupMemberService {
 
     @Override
     public GroupMember delete(GroupMember groupMember) {
+        if (groupMemberRepository.findById(groupMember.getId()).isEmpty()) {
+            throw new NotFoundException("GroupMember with id " + groupMember.getId() + " does not exist.");
+        }
         groupMemberRepository.deleteById(groupMember.getId());
         return groupMember;
     }
 
     @Override
     public GroupMember upsert(GroupMember groupMember) {
-        Group group = groupRepository.findById(groupMember.getGroup().getId()).orElseThrow();
-        User user = userRepository.findById(groupMember.getUser().getId()).orElseThrow();
-        groupMemberRepository.save(GroupMember.builder().id(groupMember.getId()).group(group).user(user).role(Role.GROUP_ADMIN).build());
+        UUID groupId = groupMember.getGroup().getId();
+        Group group = groupRepository.findById(groupId).orElseThrow(() -> new NotFoundException(groupId));
+        UUID userId = groupMember.getUser().getId();
+        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException(userId));
+        groupMemberRepository.save(GroupMember.builder()
+                .id(groupMember.getId())
+                .group(group)
+                .user(user)
+                .role(Role.GROUP_ADMIN)
+                .build());
         return groupMember;
     }
 }

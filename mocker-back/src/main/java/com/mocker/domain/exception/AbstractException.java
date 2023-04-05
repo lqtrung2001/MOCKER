@@ -7,6 +7,11 @@ import lombok.Setter;
 
 import java.util.Optional;
 
+/**
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
+ */
+
 @Getter
 @Setter
 public abstract class AbstractException extends RuntimeException {

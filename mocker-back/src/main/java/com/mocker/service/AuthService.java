@@ -1,6 +1,5 @@
 package com.mocker.service;
 
-import com.mocker.domain.exception.InternalException;
 import com.mocker.domain.model.entity.User;
 
 /**
@@ -8,8 +7,8 @@ import com.mocker.domain.model.entity.User;
  */
 public interface AuthService {
 
-    Boolean sendVerificationCode(String username) throws InternalException;
+    Boolean sendVerificationCode(String username);
 
-    User verifyAndSave(String verificationCode, User user) throws InternalException;
+    User verifyAndSave(String verificationCode, User user);
 
 }

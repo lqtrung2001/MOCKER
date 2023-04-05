@@ -1,6 +1,7 @@
 package com.mocker.service.impl;
 
 import com.mocker.configuration.security.ApplicationContextHolder;
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Schema;
 import com.mocker.domain.model.entity.Table;
 import com.mocker.domain.model.entity.TableRelation;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -24,11 +26,11 @@ import java.util.UUID;
 @Transactional
 @RequiredArgsConstructor
 public class SchemaServiceImpl implements SchemaService {
+
     private final SchemaRepository schemaRepository;
     private final TableService tableService;
     private final TableRepository tableRepository;
     private final ApplicationContextHolder applicationContextHolder;
-
 
     @Override
     public List<Schema> getSchemasByProject(UUID projectId) {
@@ -42,7 +44,9 @@ public class SchemaServiceImpl implements SchemaService {
 
     @Override
     public Schema getSchema(UUID id) {
-        return schemaRepository.getSchema(id);
+        return Optional
+                .ofNullable(schemaRepository.getSchema(id))
+                .orElseThrow(() -> new NotFoundException(id));
     }
 
     @Override
@@ -62,8 +66,13 @@ public class SchemaServiceImpl implements SchemaService {
 
     @Override
     public Schema delete(UUID id) {
-        Schema schema = schemaRepository.getSchema(id);
-        tableService.getTablesBySchema(id).stream().map(Table::getId).forEach(tableService::delete);
+        Schema schema = Optional
+                .ofNullable(schemaRepository.getSchema(id))
+                .orElseThrow(() -> new NotFoundException(id));
+        tableService.getTablesBySchema(id)
+                .stream()
+                .map(Table::getId)
+                .forEach(tableService::delete);
         schemaRepository.deleteById(id);
         return schema;
     }

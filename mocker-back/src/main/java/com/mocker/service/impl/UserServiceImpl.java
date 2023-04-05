@@ -1,7 +1,7 @@
 package com.mocker.service.impl;
 
 import com.mocker.configuration.security.ApplicationContextHolder;
-import com.mocker.domain.exception.InternalException;
+import com.mocker.domain.exception.BadRequestException;
 import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.exception.PermissionException;
 import com.mocker.domain.model.entity.User;
@@ -17,7 +17,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
 @Service
@@ -39,24 +40,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User authentication(String email, String password) throws NotFoundException {
-        User userAuthentication = userRepository.findByEmailAndPassword(email, password);
-        if (Optional.ofNullable(userAuthentication).isPresent()) {
-            return userAuthentication;
-        }
-        throw new NotFoundException("User with email: " + email + " does not exist");
+    public User authentication(String email, String password) {
+        return Optional.ofNullable(userRepository.findByEmailAndPassword(email, password))
+                .orElseThrow(() -> new NotFoundException("User with email: " + email + " does not exist"));
     }
 
     @Override
-    public User getUserByUsername(String username) throws PermissionException {
-        if (Objects.equals(username, applicationContextHolder.getCurrentUser().getUsername())) {
-            return userRepository.findByUsername(username);
+    public User getUserByUsername(String username) {
+        if (!Objects.equals(username, applicationContextHolder.getCurrentUser().getUsername())) {
+            throw new PermissionException("validation.permission");
         }
-        throw new PermissionException("validation.permission");
+        return Optional.ofNullable(userRepository.findByUsername(username))
+                .orElseThrow(() -> new NotFoundException(username));
     }
 
     @Override
-    public UUID update(User user) throws NotFoundException, InternalException {
+    public UUID update(User user) {
         if (user.getId() == null) {
             throw new NotFoundException("validation.data_not_found");
         }
@@ -66,54 +65,35 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(UUID id) throws NotFoundException, InternalException {
-        try {
-            try {
-                return userRepository.findById(id).orElseThrow();
-            } catch (Exception e) {
-                throw new NotFoundException("validation.data_not_found");
-            }
-        } catch (Exception e) {
-            throw new InternalException("validation.validation.data_access_error");
-        }
-
+    public User getUser(UUID id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(id));
     }
 
     @Override
-    public List<User> getUsers() throws NotFoundException {
-        try {
-            return userRepository.findAll();
-        } catch (Exception e) {
-            throw new NotFoundException("validation.not_found");
-        }
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
 
     @Override
-    public User delete(UUID id) throws InternalException {
-        try {
-           User user = userRepository.findById(id).orElseThrow();
-            userRepository.deleteById(id);
-            return user;
-        } catch (Exception e) {
-            throw new InternalException("validation.validation.data_access_error");
-        }
+    public User delete(UUID id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(id));
+        userRepository.deleteById(id);
+        return user;
     }
 
     @Override
-    public UUID saveUser(User user) throws InternalException {
-        try {
-            return userRepository.save(user).getId();
-        } catch (Exception e) {
-            throw new InternalException("validation.validation.data_access_error");
-        }
+    public UUID saveUser(User user) {
+        return userRepository.save(user).getId();
     }
 
     @Override
-    public User changePassword(UUID id, String currentPassword, String newPassword) throws InternalException {
+    public User changePassword(UUID id, String currentPassword, String newPassword) {
         User user = userRepository.findById(id).orElseThrow();
         // Check old password
         if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
-            throw new InternalException("validation.match_password");
+            throw new BadRequestException("validation.match_password");
         }
         user.setPassword(passwordEncoder.encode(newPassword));
         return userRepository.save(user);

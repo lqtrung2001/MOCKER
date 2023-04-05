@@ -5,6 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
+/**
+ * @author Luong Quoc Trung
+ */
+
 @Configuration
 @PropertySource("classpath:i18n/message.properties")
 public class MessageContextHelper {
