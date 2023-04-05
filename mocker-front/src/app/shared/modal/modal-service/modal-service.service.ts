@@ -1,4 +1,11 @@
-import { ApplicationRef, ComponentFactory, ComponentFactoryResolver, Injectable, Type } from '@angular/core';
+import {
+  ApplicationRef,
+  ComponentFactory,
+  ComponentFactoryResolver,
+  ComponentRef,
+  Injectable,
+  Type
+} from '@angular/core';
 import {
   ModalContainerComponent
 } from '@shared/modal/modal-service/component/modal-container/modal-container.component';
@@ -27,8 +34,8 @@ export class ModalService {
   public open<T extends Modal>(component: Type<T>, inputs?: any): Observable<any> {
     document.body.style.overflow = 'hidden';
     this.setupModalContainerDiv();
-    const modalContainerRef = this.applicationRef.bootstrap(this.modalContainerFactory, this.modalContainer);
-    const modalComponentRef = modalContainerRef.instance.createModal(component);
+    const modalContainerRef: ComponentRef<ModalContainerComponent> = this.applicationRef.bootstrap(this.modalContainerFactory, this.modalContainer);
+    const modalComponentRef: ComponentRef<T> = modalContainerRef.instance.createModal(component);
 
     if (inputs) {
       modalComponentRef.instance.onInjectInputs(inputs);

@@ -1,6 +1,6 @@
 package com.mocker.service.impl;
 
-import com.mocker.domain.exception.InternalException;
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Field;
 import com.mocker.domain.model.entity.Option;
 import com.mocker.domain.model.entity.Table;
@@ -15,6 +15,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -41,7 +42,7 @@ public class TableServiceImpl implements TableService {
     }
 
     @Override
-    public Table upsert(Table table) throws InternalException {
+    public Table upsert(Table table) {
         if (table.getId() != null) {
             List<UUID> ids = table.getFields().stream().map(Field::getId).toList();
             List<UUID> fieldIdsNeedToRemove = tableRepository.findOneFetchFields(table.getId())
@@ -73,10 +74,7 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public Table delete(UUID id) {
-        Table table = tableRepository.findOneFetchFields(id);
-        if (table == null) {
-            throw new IllegalStateException("validation.validation.data_access_error");
-        }
+        Table table = Optional.ofNullable(tableRepository.findOneFetchFields(id)).orElseThrow(() -> new NotFoundException(id));
         optionRepository.deleteAll(table.getFields()
                 .stream()
                 .map(Field::getOption)

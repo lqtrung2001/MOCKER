@@ -1,6 +1,6 @@
 package com.mocker.service.impl;
 
-import com.mocker.domain.exception.InternalException;
+import com.mocker.domain.exception.BadRequestException;
 import com.mocker.domain.model.entity.User;
 import com.mocker.domain.model.entity.enumeration.Gender;
 import com.mocker.repository.UserRepository;
@@ -20,7 +20,8 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
 @Service
@@ -33,21 +34,17 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public Boolean sendVerificationCode(String username) throws InternalException {
-        try {
-            Random random = new Random();
-            String verificationCode = String.valueOf(random.nextInt(10000, 99999));
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom("mocker.service@gmail.com");
-            message.setTo(username);
-            message.setText("The verification code is: " + verificationCode);
-            message.setSubject("Mocker account verification code");
-            send(message);
-            verificationMap.put(username, verificationCode);
-            return true;
-        } catch (Exception exception) {
-            throw new InternalException("validation.messaging");
-        }
+    public Boolean sendVerificationCode(String username) {
+        Random random = new Random();
+        String verificationCode = String.valueOf(random.nextInt(10000, 99999));
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("mocker.service@gmail.com");
+        message.setTo(username);
+        message.setText("The verification code is: " + verificationCode);
+        message.setSubject("Mocker account verification code");
+        send(message);
+        verificationMap.put(username, verificationCode);
+        return true;
     }
 
     @Async
@@ -56,38 +53,32 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public User verifyAndSave(String verificationCode, User user) throws InternalException {
-        if (verificationMap.containsKey(user.getUsername()) && verificationMap.get(user.getUsername()).equals(verificationCode)) {
-            verificationMap.remove(user.getUsername());
-            try{
-                if (Strings.isNotBlank(user.getPassword())) {
-                    return userRepository.save(User.builder()
-                            .username(user.getUsername())
-                            .password(passwordEncoder.encode(user.getPassword()))
-                            .name("User-" + verificationCode)
-                            .bio("N/A")
-                            .address("N/A")
-                            .dob(OffsetDateTime.now())
-                            .gender(Gender.MALE)
-                            .phone("N/A")
-                            .grantedAuthorities("ROLE_USER")
-                            .isAccountNonExpired(true)
-                            .isCredentialsNonExpired(true)
-                            .isAccountNonLocked(true)
-                            .isEnabled(true)
-                            .build());
-                } else {
-                    User userForgotPassword = userRepository.findByUsername(user.getUsername());
-                    userForgotPassword.setPassword(passwordEncoder.encode(verificationCode));
-                    return userRepository.save(userForgotPassword);
-                }
-            }
-            catch (Exception exception) {
-                throw new InternalException("validation.data_access_error");
-            }
-
+    public User verifyAndSave(String verificationCode, User user) {
+        if (!verificationMap.containsKey(user.getUsername()) || !verificationMap.get(user.getUsername()).equals(verificationCode)) {
+            throw new BadRequestException("");
         }
-        throw new InternalException("validation.invalidVerificationCode");
+        verificationMap.remove(user.getUsername());
+        if (Strings.isNotBlank(user.getPassword())) {
+            return userRepository.save(User.builder()
+                    .username(user.getUsername())
+                    .password(passwordEncoder.encode(user.getPassword()))
+                    .name("User-" + verificationCode)
+                    .bio("N/A")
+                    .address("N/A")
+                    .dob(OffsetDateTime.now())
+                    .gender(Gender.MALE)
+                    .phone("N/A")
+                    .grantedAuthorities("ROLE_USER")
+                    .isAccountNonExpired(true)
+                    .isCredentialsNonExpired(true)
+                    .isAccountNonLocked(true)
+                    .isEnabled(true)
+                    .build());
+        } else {
+            User userForgotPassword = userRepository.findByUsername(user.getUsername());
+            userForgotPassword.setPassword(passwordEncoder.encode(verificationCode));
+            return userRepository.save(userForgotPassword);
+        }
     }
 
 }

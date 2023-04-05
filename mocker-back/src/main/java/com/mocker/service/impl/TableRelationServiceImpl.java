@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 /**
+ * @author Luong Quoc Trung
  * @author Do Quoc Viet
  */
 

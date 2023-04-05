@@ -23,7 +23,6 @@ import { ErrorModel } from '@core/domain/model/error.model';
 import { UserModel } from '@core/domain/model/entity/user.model';
 import { UnauthorizedException } from '@core/domain/exception/unauthorized.exception';
 import { BadRequestException } from '@core/domain/exception/bad-request.exception';
-import { InternalException } from '@core/domain/exception/internal.exception';
 import { NotFoundException } from '@core/domain/exception/not-found.exception';
 import { AuthenticationException } from '@core/domain/exception/authentication.exception';
 import { Exception } from '@core/domain/exception/exception';
@@ -141,8 +140,6 @@ export class AbstractService<Type> implements HttpInterceptor {
         throw new NotFoundException(error.message, error.additionalMessage);
       case HttpStatusCode.Unauthorized:
         throw new UnauthorizedException(error.message, error.additionalMessage);
-      case HttpStatusCode.InternalServerError:
-        throw new InternalException(error.message, error.additionalMessage, error.path);
       default:
         throw new Exception(error.message, error.additionalMessage, error.path);
     }

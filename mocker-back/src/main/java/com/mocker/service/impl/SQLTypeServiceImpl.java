@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
 @Service
@@ -26,7 +27,7 @@ public class SQLTypeServiceImpl implements SQLTypeService {
 
     @Override
     @Cacheable("SQLTypes")
-    public List<SQLType> getSQLTypesFetchGenerateTypes() throws NotFoundException {
+    public List<SQLType> getSQLTypesFetchGenerateTypes() {
         try {
             return sqlTypeRepository.getSQLTypesFetchGenerateTypes();
         } catch (Exception e) {

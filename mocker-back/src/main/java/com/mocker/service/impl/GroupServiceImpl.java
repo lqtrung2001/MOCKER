@@ -20,7 +20,8 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
 @Service
@@ -40,21 +41,16 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Group getGroup(UUID id) throws NotFoundException {
-        try {
-            Group group = groupRepository.findById(id).orElseThrow();
-            group.setGroupMembers(groupMemberRepository.findAllByGroup(group));
-            group.setProjects(projectRepository.findAllByGroup(group));
-            return group;
-        } catch (Exception e) {
-            throw new NotFoundException("validation.data_not_found");
-        }
-
+    public Group getGroup(UUID id) {
+        Group group = groupRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
+        group.setGroupMembers(groupMemberRepository.findAllByGroup(group));
+        group.setProjects(projectRepository.findAllByGroup(group));
+        return group;
     }
 
     @Override
     public Group delete(UUID id) {
-        Group group = groupRepository.findById(id).orElseThrow();
+        Group group = groupRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         List<GroupMember> groupMembers = groupMemberRepository.findAllByGroup(group);
         List<Project> projects = projectRepository.findAllByGroup(group);
         groupMemberRepository.deleteAll(groupMembers);
