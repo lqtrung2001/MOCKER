@@ -25,7 +25,7 @@
     <div
       class='tw-flex tw-mt-5 tw-flex-wrap tw-content-start {{ options.isGenerateType ? "tw-h-5/6" : "tw-h-9/10" }} tw-overflow-y-scroll'>
       <div
-        (click)='close(type)'
+        (click)='close({type: type})'
         *ngFor='let type of $any(types)'
         class='tw-m-3 tw-p-4 tw-cursor-pointer tw-rounded tw-w-1/4 {{ (options.current && type.id === options.current.id) ? "tw-bg-gray" : "hover:tw-bg-gray" }}'>
         <p class='tw-font-medium first-letter:tw-underline'>{{ type.code }}</p>
@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class='tw-absolute tw-bottom-5 tw-right-5'>
-      <moc-button (click)='close()' *ngIf='options.current' selfClass='btn-primary'
+      <moc-button (click)='close({clear: true})' *ngIf='options.current' selfClass='btn-primary'
                   label='modal.choose_type.clear_selected_type'></moc-button>
     </div>
   </div>

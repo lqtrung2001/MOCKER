@@ -92,7 +92,7 @@ export class ToastrModal extends AbstractModal implements AfterViewInit, AfterCo
   ngAfterViewInit(): void {
     let timeout: number = this.options.timeout || 3000;
     let counter: number = 0;
-    this.interval = setInterval(() => {
+    this.interval = setInterval((): void => {
       counter += 20;
       const percent: number = 100 - (counter / timeout) * 100;
       this.width = percent;
@@ -109,9 +109,9 @@ export class ToastrModal extends AbstractModal implements AfterViewInit, AfterCo
 
   toastrClose(): void {
     const toastrPositions: ToastrPosition[] = this.toastrProvider.toastrPositions;
-    const index = toastrPositions.indexOf(toastrPositions.find((t: ToastrPosition) => t.id === this.options?.id)!);
-    this.toastrProvider.toastrPositions = toastrPositions.filter((t: ToastrPosition) => t.id !== this.options?.id);
-    this.toastrProvider.toastrPositions.forEach((toastrPosition: ToastrPosition, i: number) => {
+    const index: number = toastrPositions.indexOf(toastrPositions.find((t: ToastrPosition): boolean => t.id === this.options?.id)!);
+    this.toastrProvider.toastrPositions = toastrPositions.filter((t: ToastrPosition): boolean => t.id !== this.options?.id);
+    this.toastrProvider.toastrPositions.forEach((toastrPosition: ToastrPosition, i: number): void => {
       if (index > 0 && i >= index) {
         toastrPosition.bottom -= 1;
         toastrPosition.zIndex++;
@@ -128,19 +128,19 @@ export class ToastrModal extends AbstractModal implements AfterViewInit, AfterCo
   get bottom(): number {
     const id: number = this.options?.id;
     const buttonIndex: number = this.toastrProvider.toastrPositions
-      .find((toastrPosition: ToastrPosition) => toastrPosition.id === id)?.bottom || 0;
+      .find((toastrPosition: ToastrPosition): boolean => toastrPosition.id === id)?.bottom || 0;
     return buttonIndex * ((<HTMLDivElement>this.element?.nativeElement).getBoundingClientRect().height + 10) + 10;
   }
 
   get zIndex(): number {
     const id: number = this.options?.id;
     return this.toastrProvider.toastrPositions
-      .find((toastrPosition: ToastrPosition) => toastrPosition.id === id)?.zIndex || 0;
+      .find((toastrPosition: ToastrPosition): boolean => toastrPosition.id === id)?.zIndex || 0;
   }
 
   get visible(): string {
     const toastrPositions: ToastrPosition[] = this.toastrProvider.toastrPositions;
-    const index = toastrPositions.indexOf(toastrPositions.find((t: ToastrPosition) => t.id === this.options?.id)!);
+    const index: number = toastrPositions.indexOf(toastrPositions.find((t: ToastrPosition): boolean => t.id === this.options?.id)!);
     return index >= 9 ? 'none' : 'block';
   }
 
