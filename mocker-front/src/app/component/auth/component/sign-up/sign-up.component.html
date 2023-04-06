@@ -1,4 +1,4 @@
-<div class='tw-w-screen tw-h-screen tw-center-box tw-bg-center tw-bg-contain tw-bg-no-repeat' id='main'>
+<div class='tw-w-screen tw-h-screen center-box tw-bg-center tw-bg-contain tw-bg-no-repeat' id='main'>
   <div [formGroup]='formGroup'
        class='tw-w-100 tw-bg-white tw-rounded tw-drop-shadow-2xl tw-text-sm tw-text-center tw-p-10'>
     <img alt='logo' class='tw-w-44 tw-mx-auto' src='assets/png/logo.png'/>
@@ -20,7 +20,8 @@
     <p *ngIf='isPasswordNotMatch'
        class='tw-text-red tw-text-center tw-mt-2'>{{ 'component.sign_up.password_not_match' | translate }}</p>
     <p class='tw-mt-4 tw-text-gray tw-text-xs'>{{ 'component.sign_up.accept_terms_and_conditions' | translate }}</p>
-    <moc-button (click)='submit()' label='component.sign_up.sign_up'></moc-button>
+    <moc-button (click)='submit()' class='tw-mt-3' selfClass='btn-primary'
+                label='component.sign_up.sign_up'></moc-button>
     <p class='tw-mt-4 tw-text-gray'>{{ 'component.sign_up.or' | translate }}</p>
     <button *ngFor='let signInMethod of signInMethods'
             class='tw-border tw-font-medium tw-mt-4 tw-p-2.5 tw-rounded tw-w-full tw-shadow tw-relative hover:tw-shadow-xl'>

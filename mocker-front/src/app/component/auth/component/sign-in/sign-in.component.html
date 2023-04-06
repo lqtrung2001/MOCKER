@@ -12,7 +12,7 @@
                selfClass='tw-mt-2'
                type='password'></moc-input>
     <p *ngIf='invalidAuth' class='tw-mt-4 tw-text-red'>{{ 'component.sign_in.invalid_auth' | translate }}</p>
-    <moc-button (click)='submit()' label='component.sign_in.continue'></moc-button>
+    <moc-button (click)='submit()' class='tw-mt-3' selfClass='btn-primary' label='component.sign_in.continue'></moc-button>
     <p class='tw-mt-4 tw-text-gray'>{{ 'component.sign_in.or' | translate }}</p>
     <button (click)='signInWithMethod(signInMethod)'
             *ngFor='let signInMethod of signInMethods'
