@@ -12,6 +12,11 @@ import { StringUtil } from '@core/util/string.util';
  * @author Do Quoc Viet
  */
 
+export interface ChooseTypeModalCloseOptions {
+  type: SqlTypeModel | GenerateTypeModel;
+  clear: boolean;
+}
+
 export interface ChooseTypeModalOptions {
   current?: SqlTypeModel | GenerateTypeModel;
   isGenerateType: boolean;
