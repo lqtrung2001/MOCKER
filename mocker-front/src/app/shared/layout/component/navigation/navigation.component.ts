@@ -32,21 +32,13 @@ export class NavigationComponent extends AbstractComponent {
       title: 'schema',
       icon: 'fa-regular fa-diagram-project'
     }, {
-      routerLink: '/dataset',
-      title: 'dataset',
-      icon: 'fa-regular fa-database'
-    }, {
-      routerLink: '/mock-api',
-      title: 'mock api',
-      icon: 'fa-regular fa-server'
-    }, {
-      routerLink: '/scenario',
-      title: 'scenario',
-      icon: 'fa-regular fa-scroll'
-    }, {
       routerLink: '/project',
       title: 'project',
       icon: 'fa-regular fa-list'
+    }, {
+      routerLink: '/group',
+      title: 'group',
+      icon: 'fa-light fa-user-group'
     }, {
       routerLink: '/people',
       title: 'people',

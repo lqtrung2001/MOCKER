@@ -8,18 +8,21 @@
          [routerLink]='navigation.routerLink'
          class='tw-px-4 tw-flex tw-items-center tw-relative'
          routerLinkActive='active'>
-        <i [class]='navigation.icon + " fa-flip"'></i>
+        <i [class]='navigation.icon'></i>
         <span class='tw-ml-2 tw-font-medium first-letter:tw-underline tw-uppercase'>{{ navigation.title }}</span>
       </a>
     </nav>
     <div class='tw-flex tw-items-center tw-text-lg'>
-      <div class='hover:tw-bg-blue tw-w-9 tw-h-9 tw-flex tw-justify-center tw-items-center tw-rounded-full tw-ml-3 tw-cursor-pointer'>
+      <div
+        class='hover:tw-bg-blue tw-w-9 tw-h-9 tw-flex tw-justify-center tw-items-center tw-rounded-full tw-ml-3 tw-cursor-pointer'>
         <i class='fa-regular fa-phone'></i>
       </div>
-      <div class='hover:tw-bg-blue-50 tw-w-9 tw-h-9 tw-flex tw-justify-center tw-items-center tw-rounded-full tw-ml-3 tw-cursor-pointer'>
+      <div
+        class='hover:tw-bg-blue-50 tw-w-9 tw-h-9 tw-flex tw-justify-center tw-items-center tw-rounded-full tw-ml-3 tw-cursor-pointer'>
         <i class='fa-regular fa-circle-question'></i>
       </div>
-      <div class='hover:tw-bg-blue-50 tw-w-9 tw-h-9 tw-flex tw-justify-center tw-items-center tw-rounded-full tw-ml-3 tw-cursor-pointer'>
+      <div
+        class='hover:tw-bg-blue-50 tw-w-9 tw-h-9 tw-flex tw-justify-center tw-items-center tw-rounded-full tw-ml-3 tw-cursor-pointer'>
         <i class='fa-regular fa-bell'></i>
       </div>
       <moc-dropdown [options]='options' [header]='header'>
