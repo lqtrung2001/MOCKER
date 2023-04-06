@@ -41,8 +41,8 @@ export class DropdownComponent extends AbstractSharedComponent implements AfterV
     // Setting position for actions
     const windowWidth: number = window.innerWidth;
     const dockLeft: number = this.dock.nativeElement.getBoundingClientRect().left;
-    if (windowWidth - dockLeft < 72 * 4) {
-      this.popup.nativeElement.classList.add('right-0');
+    if ((windowWidth - dockLeft) < (72 * 4)) {
+      this.popup.nativeElement.classList.add('tw-right-0');
     }
     const windowHeight: number = window.innerHeight;
     const dockBottom: number = this.dock.nativeElement.getBoundingClientRect().bottom;
