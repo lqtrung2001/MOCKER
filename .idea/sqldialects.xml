@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/00-mocker.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/01-user.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/02-project.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/03-schema.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/04-table.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/05-sql-type.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/generate-type/category-advanced.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/generate-type/category-basic.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/generate-type/category-car.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/generate-type/category-commerce.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/generate-type/category-construction.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/generate-type/category-crypto.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/generate-type/category-health.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/generate-type/category-it.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/generate-type/category-location.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/generate-type/category-nature.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/generate-type/category-personal.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/mocker-back/DATABASE/generate-type/category-product.sql" dialect="PostgreSQL" />
+  </component>
+</project>
