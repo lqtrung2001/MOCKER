@@ -179,6 +179,7 @@ public class GenerateServiceImpl implements GenerateService {
     }
 
     public List<Map<String, String>> generate(Table table, Integer row) {
+        boolean unique = true;
         List<Map<String, String>> result = new ArrayList<>();
         Random random = new Random();
         List<Field> fields = table.getFields().stream().peek(field -> {
@@ -186,16 +187,21 @@ public class GenerateServiceImpl implements GenerateService {
             generateType.setSources(sourceRepository.findAllByGenerateType(generateType));
             field.setGenerateType(generateType);
         }).toList();
-        int count = 0;
-        while (count++ < row) {
+        Map<String, List<Integer>> mapDuplicate = new HashMap<>();
+        fields.forEach(field -> mapDuplicate.put(field.getName(), new ArrayList<>()));
+        while (result.size() < row) {
             Map<String, String> map = new HashMap<>();
             fields.forEach(field -> {
                 int index = random.nextInt(0, field.getGenerateType().getSources().size());
                 if (random.nextInt(0, 100) > field.getOption().getBlank()) {
+                    if (unique && mapDuplicate.get(field.getName()).contains(index)) {
+                        return;
+                    }
                     map.put(field.getName(), field.getGenerateType().getSources().get(index).getValue());
                 } else {
                     map.put(field.getName(), null);
                 }
+                mapDuplicate.get(field.getName()).add(index);
             });
             result.add(map);
         }
