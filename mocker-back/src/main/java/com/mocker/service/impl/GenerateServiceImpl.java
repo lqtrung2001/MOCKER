@@ -1,6 +1,8 @@
 package com.mocker.service.impl;
 
 import com.mocker.constant.GenerateConstant;
+import com.mocker.domain.exception.BadRequestException;
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Field;
 import com.mocker.domain.model.entity.GenerateType;
 import com.mocker.domain.model.entity.Table;
@@ -42,6 +44,9 @@ public class GenerateServiceImpl implements GenerateService {
     @Override
     public List<Map<String, String>> generateWithTableId(UUID tableId, Integer row) {
         Table table = tableRepository.findOneFetchFields(tableId);
+        if (table == null) {
+            throw new NotFoundException(tableId);
+        }
         return generate(table, row);
     }
 
@@ -54,6 +59,9 @@ public class GenerateServiceImpl implements GenerateService {
     @Override
     public Map<String, Map<String, Object>> generateWithSchema(UUID id) {
         int numberGenerate = 5;
+        if (numberGenerate <= 0) {
+            throw new BadRequestException("Row must be greater than zero");
+        }
         List<Table> tables = tableRepository.findAllBySchema(id);
         List<Table> sortedTables = new ArrayList<>(tables);
         tables.forEach(table -> {
@@ -283,6 +291,9 @@ public class GenerateServiceImpl implements GenerateService {
     }
 
     public List<Map<String, String>> generate(Table table, Integer row) {
+        if (row <= 0) {
+            throw new BadRequestException("Row must be greater than zero");
+        }
         boolean unique = true;
         List<Map<String, String>> result = new ArrayList<>();
         Random random = new Random();
@@ -291,6 +302,19 @@ public class GenerateServiceImpl implements GenerateService {
             generateType.setSources(sourceRepository.findAllByGenerateType(generateType));
             field.setGenerateType(generateType);
         }).toList();
+        if (fields.isEmpty()) {
+            throw new NotFoundException(table.getName());
+        }
+        Set<String> uniqueFields = new HashSet<>();
+        fields.forEach(field -> {
+            if (!uniqueFields.add(field.getName())) {
+                throw new BadRequestException("Fields is duplicate");
+            }
+            if (field.getName().contains(" ")) {
+                throw new BadRequestException("Field have spacing");
+            }
+        });
+
         Map<String, List<Integer>> mapDuplicate = new HashMap<>();
         fields.forEach(field -> mapDuplicate.put(field.getName(), new ArrayList<>()));
         while (result.size() < row) {

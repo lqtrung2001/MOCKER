@@ -1,6 +1,7 @@
 package com.mocker.service.impl;
 
 import com.mocker.configuration.security.ApplicationContextHolder;
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Project;
 import com.mocker.domain.model.entity.Schema;
 import com.mocker.repository.ProjectRepository;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -31,7 +33,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project getProject(UUID id) {
-        return projectRepository.findById(id).orElseThrow();
+        return projectRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
     @Override
@@ -42,12 +44,13 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project upsert(Project project) {
-        return projectRepository.save(project);
+        return Optional.of(projectRepository.save(project))
+                .orElseThrow(() -> new NotFoundException(project.getId()));
     }
 
     @Override
     public Project delete(UUID id) {
-        Project project = projectRepository.findById(id).orElseThrow();
+        Project project = projectRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         // Delete schema
         schemaService.getSchemasByProject(id).stream().map(Schema::getId).forEach(schemaService::delete);
         projectRepository.deleteById(id);
@@ -56,6 +59,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Schema> getSchemasByProject(UUID projectId) {
-        return schemaRepository.getSchemasByProject(projectId);
+        return Optional.ofNullable(schemaRepository.getSchemasByProject(projectId))
+                .orElseThrow(() -> new NotFoundException(projectId));
     }
 }

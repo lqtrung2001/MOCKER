@@ -34,18 +34,19 @@ public class SchemaServiceImpl implements SchemaService {
 
     @Override
     public List<Schema> getSchemasByProject(UUID projectId) {
-        return schemaRepository.getSchemasByProject(projectId);
+        return Optional.ofNullable(schemaRepository.getSchemasByProject(projectId))
+                .orElseThrow(() -> new NotFoundException(projectId));
     }
 
     @Override
     public Schema upsert(Schema schema) {
-        return schemaRepository.save(schema);
+        return Optional.of(schemaRepository.save(schema))
+                .orElseThrow(() -> new NotFoundException(schema.getId()));
     }
 
     @Override
     public Schema getSchema(UUID id) {
-        return Optional
-                .ofNullable(schemaRepository.getSchema(id))
+        return Optional.ofNullable(schemaRepository.getSchema(id))
                 .orElseThrow(() -> new NotFoundException(id));
     }
 
@@ -56,12 +57,14 @@ public class SchemaServiceImpl implements SchemaService {
 
     @Override
     public List<Table> getTablesBySchema(UUID schemaId) {
-        return tableRepository.findAllBySchemaFetchFields(schemaId);
+        return Optional.ofNullable(tableRepository.findAllBySchemaFetchFields(schemaId))
+                .orElseThrow(() -> new NotFoundException(schemaId));
     }
 
     @Override
     public List<TableRelation> getTableRelationsBySchema(UUID schemaId) {
-        return schemaRepository.getTableRelationsBySchema(schemaId);
+        return Optional.ofNullable(schemaRepository.getTableRelationsBySchema(schemaId))
+                .orElseThrow(() -> new NotFoundException(schemaId));
     }
 
     @Override

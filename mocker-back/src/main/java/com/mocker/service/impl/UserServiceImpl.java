@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User authentication(String email, String password) {
         return Optional.ofNullable(userRepository.findByEmailAndPassword(email, password))
-                .orElseThrow(() -> new NotFoundException("User with email: " + email + " does not exist"));
+                .orElseThrow(() -> new NotFoundException(email));
     }
 
     @Override
@@ -56,9 +56,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UUID update(User user) {
-        if (user.getId() == null) {
-            throw new NotFoundException("validation.data_not_found");
-        }
         String currentPassword = getUser(user.getId()).getPassword();
         user.setPassword(currentPassword);
         return userRepository.save(user).getId();
@@ -85,7 +82,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UUID saveUser(User user) {
-        return userRepository.save(user).getId();
+        return Optional.ofNullable(userRepository.save(user).getId())
+                .orElseThrow(() -> new NotFoundException(user.getId()));
     }
 
     @Override

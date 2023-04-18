@@ -1,6 +1,7 @@
 package com.mocker.service.impl;
 
 import com.mocker.domain.exception.BadRequestException;
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.User;
 import com.mocker.domain.model.entity.enumeration.Gender;
 import com.mocker.repository.UserRepository;
@@ -55,7 +56,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public User verifyAndSave(String verificationCode, User user) {
         if (!verificationMap.containsKey(user.getUsername()) || !verificationMap.get(user.getUsername()).equals(verificationCode)) {
-            throw new BadRequestException("");
+            throw new BadRequestException();
         }
         verificationMap.remove(user.getUsername());
         if (Strings.isNotBlank(user.getPassword())) {
@@ -76,6 +77,9 @@ public class AuthServiceImpl implements AuthService {
                     .build());
         } else {
             User userForgotPassword = userRepository.findByUsername(user.getUsername());
+            if (userForgotPassword == null) {
+                throw new NotFoundException(user.getUsername());
+            }
             userForgotPassword.setPassword(passwordEncoder.encode(verificationCode));
             return userRepository.save(userForgotPassword);
         }
