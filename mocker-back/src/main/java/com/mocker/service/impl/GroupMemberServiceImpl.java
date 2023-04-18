@@ -32,7 +32,7 @@ public class GroupMemberServiceImpl implements GroupMemberService {
     @Override
     public GroupMember delete(GroupMember groupMember) {
         if (groupMemberRepository.findById(groupMember.getId()).isEmpty()) {
-            throw new NotFoundException("GroupMember with id " + groupMember.getId() + " does not exist.");
+            throw new NotFoundException("GroupMember with id " + groupMember.getId() + " validation.data_not_found");
         }
         groupMemberRepository.deleteById(groupMember.getId());
         return groupMember;
@@ -41,9 +41,9 @@ public class GroupMemberServiceImpl implements GroupMemberService {
     @Override
     public GroupMember upsert(GroupMember groupMember) {
         UUID groupId = groupMember.getGroup().getId();
-        Group group = groupRepository.findById(groupId).orElseThrow(() -> new NotFoundException(groupId));
+        Group group = groupRepository.findById(groupId).orElseThrow(() -> new NotFoundException("Group with id: " + groupId + " validation.data_not_found"));
         UUID userId = groupMember.getUser().getId();
-        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException(userId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User with id: " + userId + " validation.data_not_found"));
         groupMemberRepository.save(GroupMember.builder()
                 .id(groupMember.getId())
                 .group(group)

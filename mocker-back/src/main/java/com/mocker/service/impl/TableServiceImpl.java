@@ -33,12 +33,14 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public Table getTable(UUID id) {
-        return tableRepository.findOneFetchFields(id);
+        return Optional.ofNullable(tableRepository.findOneFetchFields(id))
+                .orElseThrow(() -> new NotFoundException(id));
     }
 
     @Override
     public List<Table> getTablesBySchema(UUID schemaId) {
-        return tableRepository.findAllBySchemaFetchFields(schemaId);
+        return Optional.ofNullable(tableRepository.findAllBySchemaFetchFields(schemaId))
+                .orElseThrow(() -> new NotFoundException(schemaId));
     }
 
     @Override

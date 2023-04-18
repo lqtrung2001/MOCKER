@@ -1,5 +1,6 @@
 package com.mocker.service.impl;
 
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Field;
 import com.mocker.repository.FieldRepository;
 import com.mocker.service.FieldService;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -22,6 +24,7 @@ public class FieldServiceImpl implements FieldService {
 
     @Override
     public List<Field> getFieldsByTable(UUID tableId) {
-        return fieldRepository.getFieldsByTable(tableId);
+        return Optional.ofNullable(fieldRepository.getFieldsByTable(tableId))
+                .orElseThrow(() -> new NotFoundException(tableId));
     }
 }

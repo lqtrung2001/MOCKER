@@ -1,5 +1,6 @@
 package com.mocker.service.impl;
 
+import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Category;
 import com.mocker.repository.CategoryRepository;
 import com.mocker.service.CategoryService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -30,12 +32,13 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category getCategoryHasGenerateTypes(UUID id) {
-        return categoryRepository.getCategoryHasGenerateTypes(id);
+        return Optional.ofNullable(categoryRepository.getCategoryHasGenerateTypes(id))
+                .orElseThrow(() -> new NotFoundException(id));
     }
 
     @Override
     public Integer getGenerateTypesCount(UUID id) {
-        return categoryRepository.getGenerateTypesCount(id);
+        return Optional.ofNullable(categoryRepository.getGenerateTypesCount(id)).orElseThrow(() -> new NotFoundException(id));
     }
 
     @Override

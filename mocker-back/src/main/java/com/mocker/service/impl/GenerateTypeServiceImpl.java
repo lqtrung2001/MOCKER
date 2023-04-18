@@ -32,7 +32,7 @@ public class GenerateTypeServiceImpl implements GenerateTypeService {
     @Override
     public List<GenerateType> getGenerateTypesBySQLType(UUID sqlTypeId) {
         return sqlTypeRepository.findById(sqlTypeId)
-                .orElseThrow()
+                .orElseThrow(() -> new NotFoundException(sqlTypeId))
                 .getGenerateTypes();
     }
 

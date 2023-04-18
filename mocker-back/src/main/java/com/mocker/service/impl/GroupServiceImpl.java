@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -37,7 +38,8 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public List<Group> getGroupsWithAccess(UUID userId) {
-        return groupRepository.findAllWithAccess(userId);
+        return Optional.ofNullable(groupRepository.findAllWithAccess(userId))
+                .orElseThrow(() -> new NotFoundException(userId));
     }
 
     @Override
@@ -73,6 +75,7 @@ public class GroupServiceImpl implements GroupService {
                     .role(Role.GROUP_ADMIN).build();
             groupMemberRepository.save(build);
         }
-        return group;
+        return Optional.of(group)
+                .orElseThrow(() -> new NotFoundException(group.getId()));
     }
 }
