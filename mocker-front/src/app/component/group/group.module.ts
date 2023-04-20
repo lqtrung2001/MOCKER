@@ -5,6 +5,8 @@ import { GroupComponent } from '@app/component/group/component/group/group.compo
 import { LayoutModule } from '@shared/layout/layout.module';
 import { RouterOutlet } from '@angular/router';
 import { GroupRoutingModule } from '@app/component/group/group-routing.module';
+import { DatePipe, NgForOf, NgIf } from '@angular/common';
+import { SharedModule } from '@shared/shared.module';
 
 /**
  * @author Do Quoc Viet
@@ -20,7 +22,11 @@ import { GroupRoutingModule } from '@app/component/group/group-routing.module';
   imports: [
     GroupRoutingModule,
     LayoutModule,
-    RouterOutlet
+    RouterOutlet,
+    NgForOf,
+    SharedModule,
+    NgIf,
+    DatePipe
   ],
   providers: []
 })

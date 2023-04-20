@@ -42,6 +42,7 @@ import { DialogModal } from '@shared/modal/modal-provider/dialog/dialog.modal';
 import { ChooseTypeModal } from '@shared/modal/choose-type/choose-type.modal';
 import { ToastrModal } from '@shared/modal/toastr-provider/toastr/toastr.modal';
 import { TooltipComponent } from '@shared/component/tooltip/tooltip.component';
+import { ImageComponent } from '@shared/component/image/image.component';
 
 /**
  * @author Do Quoc Viet
@@ -72,7 +73,8 @@ import { TooltipComponent } from '@shared/component/tooltip/tooltip.component';
     DialogModal,
     ChooseTypeModal,
     ToastrModal,
-    TooltipComponent
+    TooltipComponent,
+    ImageComponent
   ],
   imports: [
     KeyValuePipe,
@@ -110,7 +112,8 @@ import { TooltipComponent } from '@shared/component/tooltip/tooltip.component';
     TableComponent,
     DialogModal,
     ChooseTypeModal,
-    ToastrModal
+    ToastrModal,
+    ImageComponent
   ],
   providers: []
 })

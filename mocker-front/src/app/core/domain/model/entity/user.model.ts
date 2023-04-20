@@ -11,6 +11,7 @@ export class UserModel extends BaseModel {
   public username: string;
   public password: string;
   public name: string;
+  public image: string;
   public bio: string;
   public phone: string;
   public gender: GenderEnum;

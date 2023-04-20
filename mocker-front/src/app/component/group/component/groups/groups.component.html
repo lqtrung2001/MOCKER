@@ -1,11 +1,39 @@
-<div class='' id='main'>
-  <p>Manage Group</p>
-  <div class='tw-flex'>
-    <div class='tw-drop-shadow-2xl tw-w-100 tw-h-150 tw-rounded-md tw-bg-white tw-p-5'>
-      <img class='tw-rounded-full tw-mx-auto tw-mt-5 tw-w-24 tw-h-24'
-           src='https://nypost.com/wp-content/uploads/sites/2/2022/12/avatar-4.jpg' alt=''/>
-      <p class='tw-font-medium tw-mt-5 tw-text-center'>AVATAR</p>
-      <p></p>
+<div class='tw-p-5 tw-h-screen' id='main'>
+  <div class='tw-flex tw-justify-between tw-items-center'>
+    <div class='tw-flex tw-items-center tw-ml-10'>
+      <i class='fa-regular fa-user-group'></i>
+      <p class='tw-font-bold tw-ml-3'>MANAGE GROUP</p>
+    </div>
+    <div class='tw-flex tw-items-center'>
+      <moc-button routerLink='new' class='tw-w-44 tw-mr-3' label='Add group' icon='fa-solid fa-user-plus'
+                  selfClass='tw-text-left btn-primary'></moc-button>
+      <moc-button class='tw-w-44' label='All Group' icon='fa-solid fa-filter'
+                  selfClass='tw-text-left btn-light'></moc-button>
+    </div>
+  </div>
+  <div class='tw-flex tw-text-sm tw-flex-wrap'>
+    <div *ngFor='let group of groups'
+         [routerLink]='group.id'
+         class='tw-cursor-pointer tw-min-h-86 tw-m-3 hover:tw-drop-shadow-2xl tw-border tw-w-72 tw-rounded-md tw-bg-white tw-pt-5 tw-px-5 tw-pb-2'>
+      <moc-image mocClass='tw-mx-auto tw-w-24 tw-h-24' mocFontSize='xl' [mocWidth]='24' [mocHeight]='24' [mocSrc]='group.image' [mocId]='group.id'
+                 [mocDisplayName]='group.name'></moc-image>
+      <p class='tw-font-medium tw-mt-5 tw-text-center'>{{ group.name }}</p>
+      <p class='tw-mt-2 tw-text-center tw-text-gray tw-font-medium'>{{ getRole(group) }}</p>
+      <p class='tw-h-16 tw-mt-3 tw-text-center tw-text-gray'>{{ group.description | truncate: 70 }}</p>
+      <hr class='tw-mt-3'/>
+      <div class='tw-relative tw-h-16'>
+        <div *ngFor='let groupMember of group.groupMembers; let index=index'
+             class='tw-absolute tw-z-{{ 5 - index }}0 tw-rounded-full tw-bg-white tw-mt-2 tw-w-10 tw-h-10 tw-text-center tw-pt-0.5'
+             [style.left]='index * 10 + "%"'>
+          <moc-image [mocWidth]='9' [mocHeight]='9' mocClass='tw-w-9 tw-h-9' [mocSrc]='groupMember.user.image' [mocId]='groupMember.user.id' [mocDisplayName]='groupMember.user.name'></moc-image>
+        </div>
+        <div *ngIf='groupMembers.length > 5'
+             class='tw-absolute tw-z-10 tw-rounded-full tw-bg-white tw-mt-2 tw-w-10 tw-h-10 tw-text-center tw-pt-1'
+             [style.right]='0'>
+          <div
+            class='tw-rounded-full tw-w-9 tw-h-9 tw-bg-blue-light tw-text-blue tw-font-bold tw-flex tw-justify-center tw-items-center'>{{ '+' + (groupMembers.length - 5) }}</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

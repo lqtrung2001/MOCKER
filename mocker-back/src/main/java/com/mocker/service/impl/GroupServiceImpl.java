@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author Luong Quoc Trung
@@ -37,7 +38,13 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public List<Group> getGroupsWithAccess(UUID userId) {
-        return groupRepository.findAllWithAccess(userId);
+        List<Group> groups = groupRepository.findAllWithAccess(userId);
+        return groups.stream()
+                .map(group -> group.toBuilder()
+                        .groupMembers(groupMemberRepository
+                                .findAllByGroup(group))
+                        .build())
+                .collect(Collectors.toList());
     }
 
     @Override

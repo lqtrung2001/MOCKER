@@ -13,7 +13,8 @@ const routes: Routes = [
   {
     path: '', component: GroupLayoutComponent, canActivate: [AuthGuard], children: [
       { path: '', component: GroupsComponent },
-      { path: ':id', component: GroupComponent }
+      { path: ':id', component: GroupComponent },
+      { path: 'new', component: GroupComponent }
     ]
   }
 ];
