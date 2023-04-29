@@ -15,4 +15,5 @@ public interface GroupRepositoryCustom {
 
     Group findOneWithEagerProjectsAndGroupMembers(UUID id);
 
+    String getRoleUserInGroup(UUID group, UUID user);
 }

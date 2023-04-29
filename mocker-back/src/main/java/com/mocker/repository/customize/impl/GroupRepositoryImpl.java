@@ -3,6 +3,7 @@ package com.mocker.repository.customize.impl;
 import com.mocker.domain.model.entity.Group;
 import com.mocker.domain.model.entity.GroupMember;
 import com.mocker.repository.customize.GroupRepositoryCustom;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
 
 import javax.persistence.EntityManager;
@@ -45,5 +46,13 @@ public class GroupRepositoryImpl implements GroupRepositoryCustom {
                 .leftJoin(group.projects, project).fetchJoin()
                 .leftJoin(group.groupMembers, groupMember).fetchJoin()
                 .fetchFirst();
+    }
+
+    @Override
+    public String getRoleUserInGroup(UUID group, UUID user) {
+        return new JPAQuery<GroupMember>(entityManager)
+                .from(groupMember)
+                .select(Expressions.stringPath("groupMember.role").as(String.valueOf(String.class)))
+                .where(groupMember.group.id.eq(group).and(groupMember.user.id.eq(user))).fetchOne();
     }
 }

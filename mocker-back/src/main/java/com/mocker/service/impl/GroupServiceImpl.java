@@ -2,6 +2,7 @@ package com.mocker.service.impl;
 
 import com.mocker.configuration.security.ApplicationContextHolder;
 import com.mocker.domain.exception.NotFoundException;
+import com.mocker.domain.exception.PermissionException;
 import com.mocker.domain.model.entity.Group;
 import com.mocker.domain.model.entity.GroupMember;
 import com.mocker.domain.model.entity.Project;
@@ -52,6 +53,10 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group delete(UUID id) {
+        UUID authId = applicationContextHolder.getCurrentUser().getId();
+        if (!groupRepository.getRoleUserInGroup(id, authId).equals("GROUP_ADMIN")) {
+            throw new PermissionException("User " + authId + "is not allowed to delete");
+        }
         Group group = groupRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         List<GroupMember> groupMembers = groupMemberRepository.findAllByGroup(group);
         List<Project> projects = projectRepository.findAllByGroup(group);
@@ -63,10 +68,11 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group upsert(Group group) {
+        UUID authId = applicationContextHolder.getCurrentUser().getId();
         // After saving group, update the group member for saved group and auth user
         boolean isNew = group.getId() == null;
-        groupRepository.save(group);
         if (isNew) {
+            groupRepository.save(group);
             GroupMember build = GroupMember.builder()
                     .id(GroupMemberPK.builder()
                             .groupId(group.getId())
@@ -74,8 +80,15 @@ public class GroupServiceImpl implements GroupService {
                             .build())
                     .role(Role.GROUP_ADMIN).build();
             groupMemberRepository.save(build);
+        } else {
+            if (!groupRepository.getRoleUserInGroup(group.getId(), authId).equals("GROUP_ADMIN")
+                    || !groupRepository.getRoleUserInGroup(group.getId(), authId).equals("GROUP_ASSOCIATE")) {
+                throw new PermissionException("User " + authId + "is not allowed to do action");
+            }
+            groupRepository.save(group);
         }
         return Optional.of(group)
                 .orElseThrow(() -> new NotFoundException(group.getId()));
     }
+
 }
