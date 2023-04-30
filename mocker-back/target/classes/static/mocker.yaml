@@ -1,0 +1,1576 @@
+openapi: "3.0.3"
+info:
+  title: mocker API
+  description: Website MOCKER generates source for system testing.
+  version: 3.0.1
+paths:
+  /auth/send-verification-code:
+    post:
+      operationId: sendVerificationCode
+      tags:
+        - Auth
+      description: Send verification code when register user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+              format: email
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: boolean
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /auth/verify/{verificationCode}:
+    parameters:
+      - in: path
+        name: verificationCode
+        required: true
+        description: verification code
+        schema:
+          type: string
+    post:
+      operationId: verifyAndSave
+      tags:
+        - Auth
+      description: verify code and save user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /auth/is-existed-username/{username}:
+    parameters:
+      - in: path
+        name: username
+        required: true
+        description: The username of user
+        schema:
+          type: string
+          format: email
+    get:
+      operationId: isExistedUsername
+      tags:
+        - Auth
+      description: Check is exists username
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: boolean
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /auth/change-password/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The user id
+        schema:
+          type: string
+          format: uuid
+    put:
+      operationId: changePassword
+      tags:
+        - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePassword'
+      description: Change password of a user
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /user/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The user id
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: getUser
+      tags:
+        - User
+      description: Get a user
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+    delete:
+      operationId: deleteUser
+      tags:
+        - User
+      description: Delete a user
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /user:
+    get:
+      operationId: getUsers
+      description: Get users
+      tags:
+        - User
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: upsertUser
+      tags:
+        - User
+      description: Update or insert user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /user/find-by-username:
+    get:
+      operationId: getUserByUsername
+      parameters:
+        - in: query
+          name: username
+          required: true
+          description: The username
+          schema:
+            type: string
+            format: email
+      tags:
+        - User
+      description: Get user by username
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /sql-type:
+    get:
+      operationId: getSQLTypes
+      tags:
+        - SQLType
+      description: Get SQLTypes
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SQLType'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /category:
+    get:
+      operationId: getCategories
+      tags:
+        - Category
+      description: Get categories
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /generate/schema/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The schema id
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: generateWithSchema
+      tags:
+        - Generate
+      description: Generate with schema Id
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  type: array
+                  additionalProperties:
+                    type: object
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /generate/table/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The table id
+        schema:
+          type: string
+          format: uuid
+    post:
+      operationId: generate
+      tags:
+        - Generate
+      description: Generate random row in table
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: integer
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties:
+                    type: string
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /generate:
+    parameters:
+      - in: query
+        name: row
+        required: true
+        description: Number row need query
+        schema:
+          type: number
+    post:
+      operationId: generateWithTable
+      tags:
+        - Generate
+      description: Generate random row in table
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Table'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties:
+                    type: string
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /project:
+    get:
+      operationId: getProjects
+      tags:
+        - Project
+      description: Get projects
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: upsertProject
+      tags:
+        - Project
+      description: Update or insert a project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /project/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The project ID
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: getProject
+      tags:
+        - Project
+      description: Get a project
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+    delete:
+      operationId: deleteProject
+      tags:
+        - Project
+      description: Delete a project
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /project/{id}/schemas:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The project ID
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: getSchemasByProject
+      tags:
+        - Project
+      description: Get schemas by project
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Schema'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /schema:
+    get:
+      operationId: getSchemas
+      tags:
+        - Schema
+      description: Get schemas
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Schema'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: upsertSchema
+      tags:
+        - Schema
+      description: Update or insert a Schema
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schema'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schema'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /schema/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The schema Id
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: getSchema
+      tags:
+        - Schema
+      description: Get a schema
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schema'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+    delete:
+      operationId: deleteSchema
+      tags:
+        - Schema
+      description: Delete a schema
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schema'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /schema/{id}/tables:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The schema Id
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: getTablesBySchema
+      tags:
+        - Schema
+      description: Get tables by schema
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Table'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /schema/{id}/tables/table-relations:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The schema Id
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: getTableRelationsBySchema
+      tags:
+        - Schema
+      description: Get table relations by schema
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TableRelation'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /group:
+    get:
+      operationId: getGroups
+      tags:
+        - Group
+      description: Get groups
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: upsertGroup
+      tags:
+        - Group
+      description: Update or insert a Group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /group/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The group Id
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: getGroup
+      tags:
+        - Group
+      description: Get a group
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+    delete:
+      operationId: deleteGroup
+      tags:
+        - Group
+      description: Delete a group
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /table:
+    post:
+      operationId: upsertTable
+      tags:
+        - Table
+      description: Update or insert a Table
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Table'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /table/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The table ID
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: getTable
+      tags:
+        - Table
+      description: Get a table
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+    delete:
+      operationId: deleteTable
+      tags:
+        - Table
+      description: Delete a table
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /table-relation:
+    post:
+      operationId: upsertTableRelation
+      tags:
+        - TableRelation
+      description: Update or insert a table relation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TableRelation'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableRelation'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /table-relation/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The table relation ID
+        schema:
+          type: string
+          format: uuid
+    delete:
+      operationId: deleteTableRelation
+      tags:
+        - TableRelation
+      description: Delete a table relation
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableRelation'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /group-member:
+    post:
+      operationId: upsertGroupMember
+      tags:
+        - GroupMember
+      description: Update or insert a GroupMember
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMember'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMember'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+    delete:
+      operationId: deleteGroupMember
+      tags:
+        - GroupMember
+      description: Delete a group member
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMember'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMember'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+components:
+  schemas:
+    Base:
+      type: object
+      description: BASE structure
+      properties:
+        createdDate:
+          type: string
+          format: date-time
+          description: Audit created date
+        createdBy:
+          readOnly: true
+          type: string
+          format: uuid
+          description: Audit created by
+        createdByGroup:
+          readOnly: true
+          type: string
+          format: uuid
+          description: Audit created by group
+        modifiedDate:
+          type: string
+          format: date-time
+          description: Audit modified date
+        modifiedBy:
+          readOnly: true
+          type: string
+          format: uuid
+          description: Audit modified by
+        modifiedByGroup:
+          readOnly: true
+          type: string
+          format: uuid
+          description: Audit modified by group
+        version:
+          readOnly: true
+          type: integer
+          description: Audit version
+    Category:
+      type: object
+      description: CATEGORY table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: Category id
+        name:
+          type: string
+          maxLength: 255
+          description: Name of category
+        description:
+          type: string
+          maxLength: 1000
+          description: Description of category
+        generateTypes:
+          type: array
+          description: List generate types of category
+          items:
+            $ref: '#/components/schemas/GenerateType'
+      allOf:
+        - $ref: '#/components/schemas/Base'
+    Field:
+      type: object
+      description: FIELD table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: Field id
+        name:
+          type: string
+          maxLength: 255
+          description: Name of field
+        sqlType:
+          $ref: '#/components/schemas/SQLType'
+        generateType:
+          $ref: '#/components/schemas/GenerateType'
+        option:
+          $ref: '#/components/schemas/Option'
+        table:
+          $ref: '#/components/schemas/Table'
+      allOf:
+        - $ref: '#/components/schemas/Base'
+    GenerateType:
+      type: object
+      description: GENERATE-TYPE table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: Generate type id
+        code:
+          type: string
+          maxLength: 255
+          description: Code of generate type
+        description:
+          type: string
+          maxLength: 1000
+          description: Description of generate type
+        category:
+          $ref: '#/components/schemas/Category'
+        sources:
+          type: array
+          description: List sources of generate type
+          items:
+            $ref: '#/components/schemas/Source'
+        sqlTypes:
+          type: array
+          description: List sql types of generate type
+          items:
+            $ref: '#/components/schemas/SQLType'
+      allOf:
+        - $ref: '#/components/schemas/Base'
+    Group:
+      type: object
+      description: GROUP table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: Group id
+        name:
+          type: string
+          maxLength: 255
+          description: Name of group
+        description:
+          type: string
+          maxLength: 1000
+          description: Description of group
+        users:
+          type: array
+          description: List users of group
+          items:
+            $ref: '#/components/schemas/User'
+        projects:
+          type: array
+          description: List projects of group
+          items:
+            $ref: '#/components/schemas/Project'
+        groupMembers:
+          type: array
+          description: List groupMembers of group
+          items:
+            $ref: '#/components/schemas/GroupMember'
+      allOf:
+        - $ref: '#/components/schemas/Base'
+    GroupMember:
+      type: object
+      description: GROUP-MEMBER table
+      properties:
+        id:
+          $ref: '#/components/schemas/GroupMemberPK'
+        role:
+          $ref: '#/components/schemas/Role'
+        user:
+          $ref: '#/components/schemas/User'
+        group:
+          $ref: '#/components/schemas/Group'
+      allOf:
+        - $ref: '#/components/schemas/Base'
+    GroupMemberPK:
+      type: object
+      description: GROUP-MEMBER primary key table
+      properties:
+        groupId:
+          readOnly: true
+          type: string
+          format: uuid
+          description: Group id of group access
+        userId:
+          readOnly: true
+          type: string
+          format: uuid
+          description: User id of group access
+    Option:
+      type: object
+      description: OPTION table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: Option id
+        blank:
+          type: integer
+          default: 0
+          minimum: 0
+          maximum: 100
+          description: Blank of option
+        field:
+          $ref: '#/components/schemas/Field'
+      allOf:
+        - $ref: '#/components/schemas/Base'
+    Project:
+      type: object
+      description: PROJECT table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: Project id
+        name:
+          type: string
+          maxLength: 255
+          description: Name of project
+        summary:
+          type: string
+          maxLength: 1000
+          description: Summary of project
+        description:
+          type: string
+          maxLength: 4096
+          description: Description of project
+        group:
+          $ref: '#/components/schemas/Group'
+        schemas:
+          type: array
+          description: List schemas of project
+          items:
+            $ref: '#/components/schemas/Schema'
+      allOf:
+        - $ref: '#/components/schemas/Base'
+    Schema:
+      type: object
+      description: SCHEMA table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: Schema id
+        name:
+          type: string
+          maxLength: 255
+          description: Name of schema
+        description:
+          type: string
+          maxLength: 1000
+          description: Description of schema
+        project:
+          $ref: '#/components/schemas/Project'
+        tables:
+          type: array
+          description: List tables of schema
+          items:
+            $ref: '#/components/schemas/Table'
+      allOf:
+        - $ref: '#/components/schemas/Base'
+    Source:
+      type: object
+      description: SOURCE table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: Source id
+        value:
+          type: string
+          maxLength: 4096
+          description: Value of source
+        generateType:
+          $ref: '#/components/schemas/GenerateType'
+      allOf:
+        - $ref: '#/components/schemas/Base'
+    SQLType:
+      type: object
+      description: SQL-TYPE table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: SQL type id
+        code:
+          type: string
+          maxLength: 255
+          description: Name of sql type
+        description:
+          type: string
+          maxLength: 1000
+          description: Description of sql type
+        generateTypes:
+          type: array
+          description: List generate types of sql type
+          items:
+            $ref: '#/components/schemas/GenerateType'
+      allOf:
+        - $ref: '#/components/schemas/Base'
+    Table:
+      type: object
+      description: TABLE table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: Table id
+        name:
+          type: string
+          maxLength: 255
+          description: Name of table
+        description:
+          type: string
+          maxLength: 1000
+          description: Description of table
+        schema:
+          $ref: '#/components/schemas/Schema'
+        fields:
+          type: array
+          description: List fields of table
+          items:
+            $ref: '#/components/schemas/Field'
+      allOf:
+        - $ref: '#/components/schemas/Base'
+    User:
+      type: object
+      description: USER table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: User id
+        username:
+          type: string
+          format: email
+          maxLength: 255
+          description: Username of user
+        password:
+          type: string
+          maxLength: 255
+          description: Password of user
+        name:
+          type: string
+          maxLength: 255
+          description: Name of user
+        bio:
+          type: string
+          maxLength: 255
+          description: Bio of user
+        phone:
+          type: string
+          maxLength: 12
+          description: Phone of user
+        gender:
+          $ref: '#/components/schemas/Gender'
+        address:
+          type: string
+          maxLength: 255
+          description: Address of user
+        dob:
+          type: string
+          format: date-time
+          description: dob of user
+        isAccountNonExpired:
+          type: boolean
+          description: Account non-expired
+        isAccountNonLocked:
+          type: boolean
+          description: Account non-locked
+        isCredentialsNonExpired:
+          type: boolean
+          description: Account credentials non-expired
+        isEnabled:
+          type: boolean
+          description: Account enabled
+        grantedAuthorities:
+          type: string
+          description: List of allowed authorities
+        groupMembers:
+          type: array
+          description: List groupMembers of user
+          items:
+            $ref: '#/components/schemas/GroupMember'
+      allOf:
+        - $ref: '#/components/schemas/Base'
+    ChangePassword:
+      type: object
+      description: The request of change password api
+      properties:
+        oldPassword:
+          type: string
+          description: The old password
+        newPassword:
+          type: string
+          description: The new password
+    Gender:
+      type: string
+      enum:
+        - MALE
+        - FEMALE
+        - OTHER
+      description: |
+        Gender:
+        * MALE - male
+        * FEMALE - female
+        * OTHER - other
+    Role:
+      type: object
+      enum:
+        - GROUP_ADMIN
+        - GROUP_ASSOCIATE
+        - USER
+        - ADMIN
+      description: |
+        Mocker role:
+        * GROUP_ADMIN - group admin.
+        * GROUP_ASSOCIATE - group associate.
+        * USER - user.
+        * ADMIN - admin.
+    RelationType:
+      type: object
+      enum:
+        - ONE_TO_ONE
+        - ONE_TO_MANY
+        - MANY_TO_ONE
+        - MANY_TO_MANY
+      description: |
+        Mocker relation type:
+        * ONE_TO_ONE - one-to-one relation.
+        * ONE_TO_MANY - one-to-many relation.
+        * MANY_TO_ONE - many-to-one relation.
+        * MANY_TO_MANY - many-to-many relation.
+    TableRelation:
+      type: object
+      description: TABLE-RELATION table
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: Table relation id
+        source:
+          $ref: '#/components/schemas/Field'
+        target:
+          $ref: '#/components/schemas/Field'
+        description:
+          type: string
+          maxLength: 255
+          description: Description of relation
+        relationType:
+          $ref: '#/components/schemas/RelationType'
+      allOf:
+        - $ref: '#/components/schemas/Base'
+    Error:
+      description: Schema for error response body
+      type: object
+      properties:
+        timestamp:
+          type: string
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
+        code:
+          enum:
+            - UNEXPECTED_EXCEPTION
+            - AUTHENTICATION_EXCEPTION
+            - PERMISSION_EXCEPTION
+            - BAD_REQUEST
+            - NOT_FOUND
+            - CONFLICT
+            - INVALID_STATUS
+            - INVALID_PROPERTIES
+            - ACTION_NOT_ALLOWED
+          description: |
+            Ged error code:
+            * UNEXPECTED_EXCEPTION - unexpected error.
+            * AUTHENTICATION_EXCEPTION - user is not authenticated.
+            * PERMISSION_EXCEPTION - user does not have permission to perform the action.
+            * BAD_REQUEST - the request is wrong.
+            * NOT_FOUND - resource not found.
+            * CONFLICT - business error.
+            * INVALID_STATUS - resource status is not valid.
+            * INVALID_PROPERTIES - the properties is not valid.
+            * ACTION_NOT_ALLOWED - the action not allowed.
+        additionalMessage:
+          type: string
+  responses:
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    AuthenticationError:
+      description: Authentication Error
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized, access to this resource is not allowed
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request, invalid query syntax
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Internal Server Error
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Error'

@@ -8,8 +8,8 @@
 
 export const environment = {
   production: false,
-  BASE_URL: 'http://localhost:8080',
-  API_URL: 'http://localhost:8080/api/v1'
+  BASE_URL: 'https://mockerbe.onrender.com',
+  API_URL: 'https://mockerbe.onrender.com/api/v1'
 };
 
 /*

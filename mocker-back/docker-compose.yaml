@@ -2,8 +2,8 @@ services:
   mocker-db:
     image: postgres:latest
     environment:
-      - POSTGRES_DB=mocker_db
+      - POSTGRES_DB=mocker
       - POSTGRES_USER=mocker_user
-      - POSTGRES_PASSWORD=mocker_password
+      - POSTGRES_PASSWORD=NsNNzUn33yw6xG6nmjkNzFV6vN3Xd033
     ports:
       - 5432:5432
