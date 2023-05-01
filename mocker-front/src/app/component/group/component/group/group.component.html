@@ -1,0 +1,28 @@
+<div class='tw-flex tw-text-sm tw-h-[calc(100vh_-_57px)]' id='main'>
+  <div class='tw-w-96 tw-h-full tw-border tw-border-t-0 tw-p-5'>
+    <p class='tw-text-3xl tw-font-medium'>{{ 'component.group.group' | translate }}</p>
+    <div>
+      <moc-input [control]='formGroup.controls.name' label='component.schema.name'></moc-input>
+      <moc-input [control]='formGroup.controls.description' [textArea]='true' label='component.schema.description'
+                 selfClass='tw-h-32 tw-overflow-auto'></moc-input>
+      <div class='tw-mt-3 tw-flex tw-justify-between tw-items-center'>
+        <moc-button (click)='submit()' class='tw-w-49/100 tw-inline' icon='fa-solid fa-floppy-disk'
+                    label='component.schema.save'
+                    selfClass='btn-primary tw-text-left'></moc-button>
+        <moc-button (click)='delete()' class='tw-w-49/100 tw-inline' icon='fa-solid fa-trash'
+                    label='component.schema.delete'
+                    selfClass='btn-red tw-text-left'></moc-button>
+      </div>
+    </div>
+  </div>
+  <div class='tw-p-5 tw-w-[calc(100%_-_384px)]'>
+    <moc-tab [tabs]='tabs'>
+      <ng-template #projects>
+        <moc-group-projects [projects]='group.projects'></moc-group-projects>
+      </ng-template>
+      <ng-template #members>
+        <moc-group-member [group]='group'></moc-group-member>
+      </ng-template>
+    </moc-tab>
+  </div>
+</div>

@@ -2,6 +2,9 @@ import { AbstractComponent } from '@core/common/abstract.component';
 import { Component, Injector, OnInit } from '@angular/core';
 import { SchemaModel } from '@core/domain/model/entity/schema.model';
 import { SchemaService } from '@core/service/schema.service';
+import { CreateAction, Grid, GridValue } from '@shared/component/grid/grid.component';
+import { StringUtil } from '@core/util/string.util';
+import { TruncatePipe } from '@shared/pipe/truncate.pipe';
 
 /**
  * @author Do Quoc viet
@@ -13,8 +16,7 @@ import { SchemaService } from '@core/service/schema.service';
   styleUrls: ['schemas.component.scss']
 })
 export class SchemasComponent extends AbstractComponent implements OnInit {
-  schemas: SchemaModel[] = [];
-  selects: string[] = [];
+  grid: Grid;
 
   constructor(
     injector: Injector,
@@ -25,46 +27,60 @@ export class SchemasComponent extends AbstractComponent implements OnInit {
 
   ngOnInit(): void {
     this.schemaService.getEntities().subscribe((schemas: SchemaModel[]): void => {
-      this.schemas = schemas;
+      this.grid = {
+        columns: [
+          {
+            label: this.translateService.instant('component.schemas.name'),
+            key: 'name',
+            isSearched: true
+          },
+          {
+            label: this.translateService.instant('component.schemas.description'),
+            key: 'description'
+          },
+          {
+            label: this.translateService.instant('component.schemas.shared_by'),
+            key: 'sharedBy',
+            isSearched: true
+          },
+          {
+            label: this.translateService.instant('component.schemas.group'),
+            key: 'group',
+            isSearched: true
+          },
+          {
+            label: this.translateService.instant('component.schemas.last_modified'),
+            key: 'lastModified'
+          }
+        ],
+        values: schemas.map((schema: SchemaModel): GridValue => ({
+          name: {
+            value: schema.name,
+            click: () => this.router.navigate([`/schema/${schema.id}`]),
+            html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue tw-uppercase'></a>`
+          },
+          description: this.truncatePipe.transform(schema.description, 50),
+          sharedBy: {
+            value: schema.project.name,
+            click: () => this.router.navigate([`/project/${schema.project.id}`]),
+            html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue'></a>`
+          },
+          group: {
+            value: schema.project.group.name,
+            click: () => this.router.navigate([`/group/${schema.project.group.id}`]),
+            html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue'></a>`
+          },
+          lastModified: this.datePipe.transform(schema.modifiedDate) || StringUtil.EMPTY
+        }))
+      };
     });
   }
 
-  isCheck(id: string): boolean {
-    return !!this.selects.find((value: string) => value === id);
+  get createAction(): CreateAction {
+    return {
+      click: () => this.router.navigate([`/schema/new`]),
+      content: 'component.schemas.create'
+    };
   }
 
-  select(id: string): void {
-    if (this.isCheck(id)) {
-      this.selects = this.selects.filter((value: string) => value !== id);
-    } else {
-      this.selects.push(id);
-    }
-  }
-
-  get isSelectAll(): boolean {
-    return this.selects.length === this.schemas.length;
-  }
-
-  selectAll(): void {
-    if (this.isSelectAll) {
-      this.selects = [];
-    } else {
-      this.selects = this.schemas.map((schema: SchemaModel) => schema.id);
-    }
-  }
-
-  delete(id: string): void {
-    // delete project
-  }
-
-  get canDeleteSelected(): boolean {
-    return !!this.selects.length;
-  }
-
-  deleteSelected(): void {
-    if (!this.canDeleteSelected) {
-      return;
-    }
-    // delete projects
-  }
 }

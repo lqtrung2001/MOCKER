@@ -39,7 +39,7 @@ public class GroupController implements GroupApi {
     @Override
     public ResponseEntity<List<GroupDto>> getGroups() {
         UUID authId = applicationContextHolder.getCurrentUser().getId();
-        return ResponseEntity.ok(apiGroupMapper.mapToGroupsDto(groupService.getGroupsWithAccess(authId)));
+        return ResponseEntity.ok(apiGroupMapperDecorator.mapToGroupsDtoFetchGroupMembers(groupService.getGroupsWithAccess(authId)));
     }
 
     @Override

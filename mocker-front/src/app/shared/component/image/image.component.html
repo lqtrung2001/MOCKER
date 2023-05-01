@@ -1,0 +1,9 @@
+<div [class]='mocClass' id='main'>
+  <img *ngIf='mocSrc' class='tw-rounded-full tw-border-2' [src]='mocSrc' alt='' [style.width]='(mocWidth * 4) + "px"'
+       [style.height]='(mocHeight * 4) + "px"'/>
+  <p *ngIf='!mocSrc'
+     [style.width]='(mocWidth * 4) + "px"'
+     [style.height]='(mocHeight * 4) + "px"'
+     class='tw-uppercase {{ ImageProcessorUtil.getImageColor(mocId) }} tw-font-medium tw-rounded-full tw-text-{{ mocFontSize }} tw-flex tw-justify-center tw-items-center'>
+    {{ mocDisplayName.charAt(0) }}</p>
+</div>

@@ -2,6 +2,8 @@ import { AbstractComponent } from '@core/common/abstract.component';
 import { Component, Injector, OnInit } from '@angular/core';
 import { ProjectModel } from '@core/domain/model/entity/project.model';
 import { ProjectService } from '@app/core/service/project.service';
+import { CreateAction, Grid, GridValue } from '@shared/component/grid/grid.component';
+import { StringUtil } from '@core/util/string.util';
 
 /**
  * @author Do Quoc Viet
@@ -14,8 +16,7 @@ import { ProjectService } from '@app/core/service/project.service';
   styleUrls: ['projects.component.scss']
 })
 export class ProjectsComponent extends AbstractComponent implements OnInit {
-  projects: ProjectModel[] = [];
-  selects: string[] = [];
+  grid: Grid;
 
   constructor(
     injector: Injector,
@@ -26,47 +27,50 @@ export class ProjectsComponent extends AbstractComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectService.getEntities().subscribe((projects: ProjectModel[]): void => {
-      this.projects = projects;
+      this.grid = {
+        columns: [
+          {
+            label: this.translateService.instant('component.projects.name'),
+            key: 'name',
+            isSearched: true
+          },
+          {
+            label: this.translateService.instant('component.projects.description'),
+            key: 'description'
+          },
+          {
+            label: this.translateService.instant('component.projects.shared_by'),
+            key: 'sharedBy',
+            isSearched: true
+          },
+          {
+            label: this.translateService.instant('component.projects.last_modified'),
+            key: 'lastModified'
+          }
+        ],
+        values: projects.map((project: ProjectModel): GridValue => ({
+          name: {
+            value: project.name,
+            click: () => this.router.navigate([`/project/${project.id}`]),
+            html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue tw-uppercase'></a>`
+          },
+          description: this.truncatePipe.transform(project.description, 50),
+          sharedBy: {
+            value: project.group.name,
+            click: () => this.router.navigate([`/group/${project.group.id}`]),
+            html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue tw-uppercase'></a>`
+          },
+          lastModified: this.datePipe.transform(project.modifiedDate) || StringUtil.EMPTY
+        }))
+      };
     });
   }
 
-  isCheck(id: string): boolean {
-    return !!this.selects.find((value: string) => value === id);
-  }
-
-  select(id: string): void {
-    if (this.isCheck(id)) {
-      this.selects = this.selects.filter((value: string) => value !== id);
-    } else {
-      this.selects.push(id);
-    }
-  }
-
-  get isSelectAll(): boolean {
-    return this.selects.length === this.projects.length;
-  }
-
-  selectAll(): void {
-    if (this.isSelectAll) {
-      this.selects = [];
-    } else {
-      this.selects = this.projects.map((project: ProjectModel) => project.id);
-    }
-  }
-
-  delete(id: string): void {
-    // delete project
-  }
-
-  get canDeleteSelected(): boolean {
-    return !!this.selects.length;
-  }
-
-  deleteSelected(): void {
-    if (!this.canDeleteSelected) {
-      return;
-    }
-    // delete projects
+  get createAction(): CreateAction {
+    return {
+      click: () => this.router.navigate([`/project/new`]),
+      content: 'component.projects.create'
+    };
   }
 
 }

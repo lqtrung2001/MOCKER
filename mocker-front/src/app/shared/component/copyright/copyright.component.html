@@ -1,7 +1,10 @@
-<div id='main' [class]='class + " tw-text-center tw-mb-3 tw-text-sm"'>
+<div class='{{ mocClass }} tw-text-center tw-mb-3 tw-text-sm' id='main'>
   <i class='fa-regular fa-copyright'></i>
-  <span class='tw-font-medium'> 2023 Mocker, LLC.
-    | <a href='#' class='hover:tw-underline hover:tw-text-blue tw-text-blue'>Terms of Use</a>
-    | <a href='#' class='hover:tw-underline hover:tw-text-blue tw-text-blue'>EULA</a>
-    | <a href='#' class='hover:tw-underline hover:tw-text-blue tw-text-blue'>Privacy</a></span>
+  <span class='tw-font-medium'>{{ 'component.copyright.company' | translate }}
+    | <a href='#'
+         class='hover:tw-underline hover:tw-text-blue tw-text-blue'>{{ 'component.copyright.term' | translate }}</a>
+    | <a href='#'
+         class='hover:tw-underline hover:tw-text-blue tw-text-blue'>{{ 'component.copyright.eula' | translate }}</a>
+    | <a href='#'
+         class='hover:tw-underline hover:tw-text-blue tw-text-blue'>{{ 'component.copyright.privacy' | translate }}</a></span>
 </div>

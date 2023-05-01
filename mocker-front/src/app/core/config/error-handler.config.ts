@@ -23,20 +23,21 @@ export class ErrorHandlerConfig implements ErrorHandler {
   }
 
   handleError(error: any): void {
-    const exception: any = (error instanceof AbstractException) ? error : error.rejection;
-    if (exception instanceof AbstractException) {
-      this.modalProvider.showError({
-        detail: exception.message
-      }).subscribe((): void => {
-        if (exception instanceof AuthenticationException) {
-          this.router.navigate(['auth/sign-in']).then();
-        }
-      });
-    } else {
-      this.modalProvider.showError({
-        detail: error.message
-      });
-    }
+    console.error(error);
+    // const exception: any = (error instanceof AbstractException) ? error : error.rejection;
+    // if (exception instanceof AbstractException) {
+    //   this.modalProvider.showError({
+    //     detail: exception.message
+    //   }).subscribe((): void => {
+    //     if (exception instanceof AuthenticationException) {
+    //       this.router.navigate(['auth/sign-in']).then();
+    //     }
+    //   });
+    // } else {
+    //   this.modalProvider.showError({
+    //     detail: error.message
+    //   });
+    // }
   }
 
 }
