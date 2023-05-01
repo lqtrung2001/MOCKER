@@ -46,5 +46,4 @@ public class GroupController implements GroupApi {
     public ResponseEntity<GroupDto> upsertGroup(GroupDto groupDto) {
         return ResponseEntity.ok(apiGroupMapper.map(groupService.upsert(apiGroupMapper.map(groupDto))));
     }
-
 }

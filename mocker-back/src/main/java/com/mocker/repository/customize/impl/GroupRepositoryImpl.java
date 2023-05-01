@@ -8,6 +8,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -45,5 +46,13 @@ public class GroupRepositoryImpl implements GroupRepositoryCustom {
                 .leftJoin(group.projects, project).fetchJoin()
                 .leftJoin(group.groupMembers, groupMember).fetchJoin()
                 .fetchFirst();
+    }
+
+    @Override
+    public String getRoleUserInGroup(UUID group, UUID user) {
+        return Objects.requireNonNull(new JPAQuery<GroupMember>(entityManager)
+                        .from(groupMember)
+                        .where(groupMember.group.id.eq(group).and(groupMember.user.id.eq(user))).fetchOne())
+                .getRole().toString();
     }
 }
