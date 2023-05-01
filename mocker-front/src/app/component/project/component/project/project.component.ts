@@ -35,7 +35,7 @@ export class ProjectComponent extends AbstractComponent {
     this.formGroup = this.formBuilder.group({
       name: this.formBuilder.control(undefined, [Validators.required])
     });
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    const id: string | null = this.activatedRoute.snapshot.paramMap.get('id');
     this.isNew = !id;
     if (id) {
       this.projectService.getEntity(id).subscribe((project: ProjectModel): void => {

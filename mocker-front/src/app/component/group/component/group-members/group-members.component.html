@@ -1,0 +1,13 @@
+<div class='' id='main'>
+  <div *ngFor='let groupMember of group.groupMembers'
+       class='hover:tw-drop-shadow-xl tw-cursor-pointer tw-bg-white tw-flex tw-w-72 tw-h-24 tw-border tw-rounded tw-m-5'>
+    <moc-image [mocWidth]='12' [mocHeight]='12' mocClass='tw-flex tw-justify-center tw-items-center tw-h-full tw-w-20'
+               [mocSrc]='groupMember.user.image' [mocId]='groupMember.user.id'
+               [mocDisplayName]='groupMember.user.name'></moc-image>
+    <div class='tw-text-sm tw-flex tw-flex-col tw-justify-center'>
+      <p class='tw-font-medium'>{{ groupMember.user.name }}</p>
+      <p class='tw-text-gray'>{{ groupMember.role }}</p>
+      <p class='tw-text-gray'>Date join: {{ groupMember.createdDate | date }}</p>
+    </div>
+  </div>
+</div>

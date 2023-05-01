@@ -48,21 +48,21 @@ export class NavigationComponent extends AbstractComponent {
       id: '1',
       icon: 'fa-solid fa-repeat',
       label: 'Switch Account',
-      click: () => {
+      click: (): void => {
         console.log('Switch Account');
       }
     }, {
       id: '2',
       icon: 'fa-regular fa-id-card',
       label: 'Profile',
-      click: () => {
+      click: (): void => {
         this.router.navigate([`people/${this.applicationConfig.user?.id}`]).then();
       }
     }, {
       id: '3',
       icon: 'fa-solid fa-right-from-bracket',
       label: 'Sign out',
-      click: () => {
+      click: (): void => {
         this.router.navigate([`auth/sign-in`]).then();
       }
     }];

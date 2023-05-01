@@ -1,5 +1,4 @@
 import { Component, Injector, Input, TemplateRef } from '@angular/core';
-import { AbstractComponent } from '@core/common/abstract.component';
 import { AbstractSharedComponent } from '@shared/component/common/abstract-shared.component';
 
 /**

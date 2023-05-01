@@ -9,7 +9,10 @@
   "message": {
     "schema_save_success": "Schema saved successfully",
     "schema_delete_confirm": "Are you sure you want to delete this schema?",
-    "schema_delete_success": "Schema with name {{name}} is deleted successfully"
+    "schema_delete_success": "Schema with name {{name}} is deleted successfully",
+    "group_save_success": "Group saved successfully",
+    "group_delete_confirm": "Are you sure you want to delete this group?",
+    "group_delete_success": "Group with name {{name}} is deleted successfully"
   },
   "enum": {
     "one_to_one": "ONE TO ONE",
@@ -78,7 +81,8 @@
     "projects": {
       "my_projects": "My Projects",
       "information": "A project is a group of schemas, datasets, and scenarios that can be shared with others or remain private.",
-      "create": "CREATE A PROJECT",
+      "create": "CREATE A NEW PROJECT",
+      "description": "Description",
       "name": "Name",
       "shared_by": "Shared By",
       "last_modified": "Last Modified"
@@ -132,7 +136,8 @@
     "schemas": {
       "my_schemas": "My Schemas",
       "information": "A database schema is (generally) broadly divided into two categories: physical database schema that defines how the data-like files are actually stored; and logical database schema, which describes all the logical constraints -- including integrity, tables and views -- applied on the stored data.",
-      "create": "CREATE A SCHEMA",
+      "create": "CREATE A NEW SCHEMA",
+      "description": "Description",
       "name": "Name",
       "shared_by": "Shared By",
       "group": "Group",
@@ -147,13 +152,44 @@
       "project_information": "Project Information:"
     },
     "diagram": {
-      "create_table": "CREATE TABLE",
+      "create_table": "CREATE A NEW TABLE",
       "download": "DOWNLOAD",
       "preview": "PREVIEW",
       "generated": "Data are generated successfully, please click preview button on the top of table for viewing its data.",
       "format": "Format",
       "filename": "File Name",
       "invalid_mapping": "Can not mapping these fields because they are not same generate type. Please double-check again."
+    },
+    "groups": {
+      "my_groups": "My Groups",
+      "information": "A Group is basically an assemblage of people. It can be understood as a collection of individuals (two or more), who come together and interact with each other, so as to achieve the objectives of the organization.",
+      "create": "CREATE A NEW GROUP",
+      "name": "Name",
+      "description": "Description",
+      "shared_by": "Shared By",
+      "last_modified": "Last Modified"
+    },
+    "group": {
+      "group": "Group"
+    },
+    "people": {
+      "people": "People",
+      "name": "Name",
+      "bio": "Bio",
+      "email": "Email",
+      "phone": "Phone",
+      "create": "CREATE A NEW USER"
+    },
+    "copyright": {
+      "company": "2023 Mocker, LLC.",
+      "term": "Terms of Use",
+      "eula": "EULA",
+      "privacy": "Privacy"
+    },
+    "grid": {
+      "no": "No",
+      "values_empty": "The values are empty, you can create a new one by using the create button.",
+      "values_no_match": "The values are not match with the any credentials, please try again."
     }
   },
   "audit": {
