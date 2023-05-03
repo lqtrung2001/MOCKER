@@ -41,7 +41,7 @@ export class ProjectComponent extends AbstractComponent {
       this.projectService.getEntity(id).subscribe((project: ProjectModel): void => {
         this.project = project;
         this.formGroup.patchValue(project);
-        this.projectService.getSchemasByProject(id).subscribe((schemas: SchemaModel[]): void => {
+        this.projectService.getSchemasByProjectId(id).subscribe((schemas: SchemaModel[]): void => {
           this.project.schemas = schemas;
         });
       });

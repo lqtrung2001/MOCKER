@@ -3,14 +3,14 @@
     <p class='tw-font-medium tw-text-lg tw-pl-2.5 tw-mt-4 tw-mb-2'>{{ "modal.relation_config.title" | translate }}</p>
     <moc-input [control]='formGroup.controls.source'
                [readonly]='true'
-               [placeholder]='"modal.relation_config.source_placeholder" | translate'
+               [mocPlaceholder]='"modal.relation_config.source_placeholder" | translate'
                label='modal.relation_config.source'></moc-input>
     <moc-input [control]='formGroup.controls.target'
                [readonly]='true'
-               [placeholder]='"modal.relation_config.target_placeholder" | translate'
+               [mocPlaceholder]='"modal.relation_config.target_placeholder" | translate'
                label='modal.relation_config.target'></moc-input>
     <moc-input [control]='formGroup.controls.description'
-               [placeholder]='"modal.relation_config.description_placeholder" | translate'
+               [mocPlaceholder]='"modal.relation_config.description_placeholder" | translate'
                label='modal.relation_config.description'></moc-input>
     <p class='tw-font-medium tw-pl-2.5 tw-mt-4 tw-mb-2'>{{ "modal.relation_config.relation_type" | translate }}</p>
     <moc-dropdown [options]='relationTypeOptions'>

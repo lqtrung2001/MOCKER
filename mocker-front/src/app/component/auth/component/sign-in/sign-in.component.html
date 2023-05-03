@@ -4,11 +4,11 @@
     <img alt='logo' class='tw-w-44 tw-mx-auto' src='assets/png/logo.png'/>
     <p class='tw-font-bold tw-mt-5 text-primary-solid'>{{ 'component.sign_in.title' | translate }}</p>
     <moc-input [control]='formGroup.controls.username'
-               [placeholder]='"component.sign_in.username_placeholder" | translate'
+               [mocPlaceholder]='"component.sign_in.username_placeholder" | translate'
                selfClass='tw-mt-2'
                type='email'></moc-input>
     <moc-input [control]='formGroup.controls.password'
-               [placeholder]='"component.sign_in.password_placeholder" | translate'
+               [mocPlaceholder]='"component.sign_in.password_placeholder" | translate'
                selfClass='tw-mt-2'
                type='password'></moc-input>
     <p *ngIf='invalidAuth' class='tw-mt-4 tw-text-red'>{{ 'component.sign_in.invalid_auth' | translate }}</p>

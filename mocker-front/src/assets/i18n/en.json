@@ -82,10 +82,10 @@
       "my_projects": "My Projects",
       "information": "A project is a group of schemas, datasets, and scenarios that can be shared with others or remain private.",
       "create": "CREATE A NEW PROJECT",
-      "description": "Description",
-      "name": "Name",
-      "shared_by": "Shared By",
-      "last_modified": "Last Modified"
+      "description": "description",
+      "name": "name",
+      "shared_by": "shared by",
+      "last_modified": "last modified"
     },
     "project": {
       "my_project": "My Project",
@@ -137,11 +137,11 @@
       "my_schemas": "My Schemas",
       "information": "A database schema is (generally) broadly divided into two categories: physical database schema that defines how the data-like files are actually stored; and logical database schema, which describes all the logical constraints -- including integrity, tables and views -- applied on the stored data.",
       "create": "CREATE A NEW SCHEMA",
-      "description": "Description",
-      "name": "Name",
-      "shared_by": "Shared By",
-      "group": "Group",
-      "last_modified": "Last Modified"
+      "description": "description",
+      "name": "name",
+      "shared_by": "shared by",
+      "group": "group",
+      "last_modified": "last modified"
     },
     "schema": {
       "schema": "Schema",
@@ -164,20 +164,20 @@
       "my_groups": "My Groups",
       "information": "A Group is basically an assemblage of people. It can be understood as a collection of individuals (two or more), who come together and interact with each other, so as to achieve the objectives of the organization.",
       "create": "CREATE A NEW GROUP",
-      "name": "Name",
-      "description": "Description",
-      "shared_by": "Shared By",
-      "last_modified": "Last Modified"
+      "name": "name",
+      "description": "description",
+      "shared_by": "shared by",
+      "last_modified": "last modified"
     },
     "group": {
       "group": "Group"
     },
     "people": {
       "people": "People",
-      "name": "Name",
-      "bio": "Bio",
-      "email": "Email",
-      "phone": "Phone",
+      "name": "name",
+      "bio": "bio",
+      "email": "email",
+      "phone": "phone",
       "create": "CREATE A NEW USER"
     },
     "copyright": {
@@ -189,7 +189,30 @@
     "grid": {
       "no": "No",
       "values_empty": "The values are empty, you can create a new one by using the create button.",
-      "values_no_match": "The values are not match with the any credentials, please try again."
+      "values_no_match": "The values are not match with the any credentials, please try again.",
+      "search": "Search by {{searches}} ..."
+    },
+    "group_members": {
+      "name": "name",
+      "role": "role",
+      "bio": "bio",
+      "email": "email",
+      "phone": "phone",
+      "group_admin": "Administrator",
+      "group_associate": "Associate",
+      "user": "User",
+      "add_user": "Add a user",
+      "delete": "Delete",
+      "remove_user_confirmation": "Are you sure you want to remove this user from this group?"
+    },
+    "group_projects": {
+      "description": "description",
+      "name": "name",
+      "created_date": "created date",
+      "last_modified": "last modified",
+      "delete": "delete",
+      "create_project": "create a new project",
+      "delete_project_confirmation": "Are you sure you want to delete this project forever?"
     }
   },
   "audit": {
@@ -262,6 +285,11 @@
       "cancel": "CANCEL",
       "ok": "OK",
       "delete_confirmation": "Are you sure you want to delete this relation?"
+    },
+    "add_user": {
+      "title": "Add a user to Group",
+      "search_placeholder": "Search by username, full name, or email",
+      "add_user": "Add user"
     }
   }
 }

@@ -7,7 +7,7 @@
            [maxlength]='maxLength'
            [min]='min'
            [minlength]='minLength'
-           [placeholder]='placeholder || ""'
+           [placeholder]='mocPlaceholder || ""'
            [readonly]='readonly'
            [style]='styles'
            [type]='type'
@@ -16,7 +16,7 @@
               [formControl]='control'
               [maxlength]='maxLength'
               [minlength]='minLength'
-              [placeholder]='placeholder || ""'
+              [placeholder]='mocPlaceholder || ""'
               [readonly]='readonly'
               [style]='styles'
               class='{{ selfClass }} {{ (isValidated && control.invalid) ? "invalid" : "" }} tw-border tw-p-2.5 tw-rounded tw-w-full'></textarea>

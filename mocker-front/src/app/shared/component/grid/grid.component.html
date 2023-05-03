@@ -2,17 +2,18 @@
   <div class='tw-flex tw-justify-between'>
     <moc-button (click)='createAction.click()' selfClass='btn-primary tw-uppercase'
                 [label]='createAction.content'></moc-button>
-    <moc-input class='tw-w-96' placeholder='Search...' [control]='formGroup.controls.search'></moc-input>
+    <moc-input class='tw-w-96' [mocPlaceholder]='searchPlaceholder' [control]='formGroup.controls.search'></moc-input>
   </div>
   <table class='tw-w-full tw-mt-5 tw-text-left'>
-    <tr class='tw-bg-gray'>
-      <th class='tw-p-4 tw-uppercase first-letter:tw-underline'>
+    <tr class='tw-bg-gray' (mouseleave)='columnActive=""'>
+      <th class='tw-p-4 tw-uppercase first-letter:tw-underline' (mouseenter)='columnActive="no"'>
         {{ 'component.grid.no' | translate }}
       </th>
       <th *ngFor='let column of mocGrid?.columns'
           [colSpan]='column.colSpan || 1'
           [innerHTML]='column.label'
           class='tw-p-4 tw-uppercase first-letter:tw-underline'
+          (mouseenter)='columnActive=column.key'
       ></th>
     </tr>
     <tr>
@@ -22,14 +23,14 @@
     </tr>
     <ng-container *ngFor='let value of values, let index=index'>
       <tr class='hover:tw-bg-gray'>
-        <td class='tw-p-4'>
+        <td class='tw-p-4 {{ columnActive==="no" ? "tw-bg-gray" : undefined }}'>
           {{ index + 1 + '.' }}
         </td>
         <td (click)='getAction(value[column.key])()'
             *ngFor='let column of mocGrid.columns'
             [colSpan]='column.colSpan || 1'
             [innerHTML]='getInnerHTML(value[column.key])'
-            class='tw-p-4'
+            class='tw-p-4  {{ columnActive===column.key ? "tw-bg-gray" : undefined }}'
         ></td>
       </tr>
       <tr>
@@ -39,7 +40,7 @@
       </tr>
     </ng-container>
     <ng-container *ngIf='!values?.length'>
-      <tr >
+      <tr>
         <td [colSpan]='colSpan' class='tw-text-center tw-py-4'>
           {{ (formGroup.controls.search.value && mocGrid.values.length ? 'component.grid.values_no_match' : 'component.grid.values_empty') | translate }}
         </td>

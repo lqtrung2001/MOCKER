@@ -176,12 +176,12 @@ export class AbstractService<Type> implements HttpInterceptor {
    * @method Authentication
    */
   authentication(): void {
-    const storage = localStorage.getItem(LocalStorageConstant.AUTH);
-    let authenticationException = new AuthenticationException(this.translateService.instant('error.authentication.title'), this.translateService.instant('error.authentication.message'));
+    const storage: string | null = localStorage.getItem(LocalStorageConstant.AUTH);
+    const authenticationException: AuthenticationException = new AuthenticationException(this.translateService.instant('error.authentication.title'), this.translateService.instant('error.authentication.message'));
     if (!storage) {
       throw authenticationException;
     }
-    const { username, password } = JSON.parse(storage!) as UserModel;
+    const { username, password }: { username: string, password: string } = JSON.parse(storage!) as UserModel;
     if (!username || !password) {
       throw authenticationException;
     }
@@ -192,10 +192,10 @@ export class AbstractService<Type> implements HttpInterceptor {
       .subscribe((httpResponse: HttpResponse<any>) => {
         if (httpResponse.ok) {
           if (!this.appConfigService.user) {
-            const storage = localStorage.getItem(LocalStorageConstant.AUTH)!;
+            const storage: string = localStorage.getItem(LocalStorageConstant.AUTH)!;
             this.appConfigService.user = JSON.parse(storage) as UserModel;
           }
-          const token = localStorage.getItem(LocalStorageConstant.TOKEN);
+          const token: string | null = localStorage.getItem(LocalStorageConstant.TOKEN);
           if (!token || token !== httpResponse.headers.get(HttpHeaderConstant.AUTHORIZATION)) {
             localStorage.setItem(LocalStorageConstant.TOKEN, httpResponse.headers.get(HttpHeaderConstant.AUTHORIZATION)!);
           }
@@ -226,11 +226,11 @@ export class AbstractService<Type> implements HttpInterceptor {
     return this.request<Type[]>(HttpMethodEnum.POST, `${this.API_URL}/${this.ENTITY_URL}`, entities);
   }
 
-  deleteEntity(id: string): Observable<Type> {
+  deleteEntity(id: string | any): Observable<Type> {
     return this.delete(`${this.API_URL}/${this.ENTITY_URL}/${id}`);
   }
 
-  deleteEntities(ids: string[]): Observable<Type[]> {
+  deleteEntities(ids: string[] | any): Observable<Type[]> {
     return this.request<Type[]>(HttpMethodEnum.DELETE, `${this.API_URL}/${this.ENTITY_URL}`, ids);
   }
 

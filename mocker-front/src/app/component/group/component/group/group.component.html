@@ -18,10 +18,12 @@
   <div class='tw-p-5 tw-w-[calc(100%_-_384px)]'>
     <moc-tab [tabs]='tabs'>
       <ng-template #projects>
-        <moc-group-projects [projects]='group.projects'></moc-group-projects>
+        <moc-group-projects [group]='group'
+                            [projects]='group ? group.projects : []'></moc-group-projects>
       </ng-template>
       <ng-template #members>
-        <moc-group-member [group]='group'></moc-group-member>
+        <moc-group-members [group]='group'
+                           [groupMembers]='group ? group.groupMembers : []'></moc-group-members>
       </ng-template>
     </moc-tab>
   </div>

@@ -17,7 +17,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": ["file-saver"],
+            "allowedCommonJsDependencies": [
+              "file-saver"
+            ],
             "outputPath": "dist/mocker-front",
             "index": "src/index.html",
             "main": "src/main.ts",

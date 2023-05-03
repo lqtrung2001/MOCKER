@@ -3,10 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
-export const environment = {
+export const environment: {
+  production: boolean,
+  BASE_URL: string,
+  API_URL: string
+} = {
   production: false,
   BASE_URL: 'http://localhost:8080',
   API_URL: 'http://localhost:8080/api/v1'

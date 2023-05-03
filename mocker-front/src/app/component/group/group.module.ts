@@ -10,6 +10,8 @@ import { SharedModule } from '@shared/shared.module';
 import { GroupMembersComponent } from '@app/component/group/component/group-members/group-members.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { GroupProjectsComponent } from '@app/component/group/component/group-projects/group-projects.component';
+import { AddUserModal } from '@app/component/group/modal/add-user/add-user.modal';
+import { ChangeRoleModal } from '@app/component/group/modal/change-role/change-role.modal';
 
 /**
  * @author Do Quoc Viet
@@ -21,7 +23,9 @@ import { GroupProjectsComponent } from '@app/component/group/component/group-pro
     GroupsComponent,
     GroupComponent,
     GroupMembersComponent,
-    GroupProjectsComponent
+    GroupProjectsComponent,
+    AddUserModal,
+    ChangeRoleModal
   ],
   exports: [],
   imports: [

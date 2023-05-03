@@ -3,7 +3,6 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { UserModel } from '@core/domain/model/entity/user.model';
 import { UserService } from '@core/service/user.service';
 import { CreateAction, Grid, GridValue } from '@shared/component/grid/grid.component';
-import { TruncatePipe } from '@shared/pipe/truncate.pipe';
 
 /**
  * @author Do Quoc Viet
@@ -39,7 +38,8 @@ export class PeopleComponent extends AbstractComponent implements OnInit {
           },
           {
             label: this.translateService.instant('component.people.email'),
-            key: 'email'
+            key: 'email',
+            isSearched: true
           },
           {
             label: this.translateService.instant('component.people.phone'),
@@ -50,10 +50,14 @@ export class PeopleComponent extends AbstractComponent implements OnInit {
           name: {
             value: user.name,
             click: () => this.router.navigate([`/people/${user.id}`]),
-            html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer hover:tw-text-blue tw-uppercase'>${user.name}</a>`
+            html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue tw-uppercase'></a>`
           },
-          bio: new TruncatePipe().transform(user.bio, 50),
-          email: user.username,
+          bio: this.truncatePipe.transform(user.bio, 50),
+          email: {
+            value: user.username,
+            click: () => this.router.navigate([`/people/${user.id}`]),
+            html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue'></a>`
+          },
           phone: user.phone
         }))
       };

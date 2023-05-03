@@ -6,6 +6,7 @@ import com.mocker.domain.exception.PermissionException;
 import com.mocker.domain.model.entity.Group;
 import com.mocker.domain.model.entity.GroupMember;
 import com.mocker.domain.model.entity.User;
+import com.mocker.domain.model.entity.composite_key.GroupMemberPK;
 import com.mocker.domain.model.entity.enumeration.Role;
 import com.mocker.repository.GroupMemberRepository;
 import com.mocker.repository.GroupRepository;
@@ -39,10 +40,10 @@ public class GroupMemberServiceImpl implements GroupMemberService {
         if (groupMemberRepository.findById(groupMember.getId()).isEmpty()) {
             throw new NotFoundException(groupMember.getId().getGroupId());
         }
-        if ((!groupRepository.getRoleUserInGroup(groupMember.getGroup().getId(), authId).equals("GROUP_ADMIN")
-                || !groupRepository.getRoleUserInGroup(groupMember.getGroup().getId(), authId).equals("GROUP_ASSOCIATE"))
-                || (groupRepository.getRoleUserInGroup(groupMember.getGroup().getId(), groupMember.getUser().getId()).equals("GROUP_ADMIN")
-                && groupRepository.getRoleUserInGroup(groupMember.getGroup().getId(), authId).equals("GROUP_ADMIN"))) {
+        if ((!groupRepository.getRoleUserInGroup(groupMember.getGroup().getId(), authId).equals(Role.GROUP_ADMIN)
+                || !groupRepository.getRoleUserInGroup(groupMember.getGroup().getId(), authId).equals(Role.GROUP_ASSOCIATE))
+                || (groupRepository.getRoleUserInGroup(groupMember.getGroup().getId(), groupMember.getUser().getId()).equals(Role.GROUP_ADMIN)
+                && groupRepository.getRoleUserInGroup(groupMember.getGroup().getId(), authId).equals(Role.GROUP_ADMIN))) {
             throw new PermissionException(authId);
         }
         groupMemberRepository.deleteById(groupMember.getId());
@@ -57,29 +58,29 @@ public class GroupMemberServiceImpl implements GroupMemberService {
         Group group = groupRepository.findById(groupId).orElseThrow(() -> new NotFoundException(groupId));
         UUID userId = groupMember.getUser().getId();
         User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException(userId));
-        if (!groupRepository.getRoleUserInGroup(groupId, authId).equals("GROUP_ADMIN")
-                || !groupRepository.getRoleUserInGroup(group.getId(), authId).equals("GROUP_ASSOCIATE")) {
+        if (!groupRepository.getRoleUserInGroup(groupId, authId).equals(Role.GROUP_ADMIN)
+                && !groupRepository.getRoleUserInGroup(group.getId(), authId).equals(Role.GROUP_ASSOCIATE)) {
             throw new PermissionException(authId);
         }
         if (isNew) {
             groupMemberRepository.save(GroupMember.builder()
-                    .id(groupMember.getId())
+                    .id(GroupMemberPK.builder().userId(userId).groupId(groupId).build())
                     .group(group)
                     .user(user)
                     .role(Role.USER)
                     .build());
         } else {
-            String oldRole = groupRepository.getRoleUserInGroup(groupId, userId);
-            String newRole = groupMember.getRole().toString();
-            //only role Group_admin can change role
-            if (!Objects.equals(oldRole, newRole) && !groupRepository.getRoleUserInGroup(groupId, authId).equals("GROUP_ADMIN")) {
+            Role oldRole = groupRepository.getRoleUserInGroup(groupId, userId);
+            Role newRole = groupMember.getRole();
+            // Only role GROUP_ADMIN can change role
+            if (!Objects.equals(oldRole, newRole) && !groupRepository.getRoleUserInGroup(groupId, authId).equals(Role.GROUP_ADMIN)) {
                 throw new PermissionException(authId);
             }
             groupMemberRepository.save(GroupMember.builder()
                     .id(groupMember.getId())
                     .group(group)
                     .user(user)
-                    .role(Role.valueOf(newRole))
+                    .role(newRole)
                     .build());
         }
         return groupMember;

@@ -26,6 +26,7 @@ public class ApiExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDto> handleDefaultException(Exception exception) {
+        exception.printStackTrace();
         ErrorDto errorDto = new ErrorDto();
         errorDto.setTimestamp(now().toString());
         errorDto.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
@@ -45,6 +46,7 @@ public class ApiExceptionHandler {
      */
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<ErrorDto> handleAuthenticationException(AuthenticationException authenticationException) {
+        authenticationException.printStackTrace();
         ErrorDto errorDto = new ErrorDto();
         errorDto.setTimestamp(now().toString());
         errorDto.setStatus(HttpStatus.FORBIDDEN.value());
@@ -64,6 +66,7 @@ public class ApiExceptionHandler {
      */
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorDto> handleNotFoundException(NotFoundException notFoundException) {
+        notFoundException.printStackTrace();
         ErrorDto errorDto = new ErrorDto();
         errorDto.setTimestamp(now().toString());
         errorDto.setStatus(HttpStatus.NOT_FOUND.value());
@@ -83,6 +86,7 @@ public class ApiExceptionHandler {
      */
     @ExceptionHandler(value = {BadRequestException.class})
     public ResponseEntity<ErrorDto> handleBadRequestException(BadRequestException badRequestException) {
+        badRequestException.printStackTrace();
         ErrorDto errorDto = new ErrorDto();
         errorDto.setTimestamp(now().toString());
         errorDto.setStatus(HttpStatus.BAD_REQUEST.value());
@@ -102,6 +106,7 @@ public class ApiExceptionHandler {
      */
     @ExceptionHandler(value = {UnauthorizedException.class})
     public ResponseEntity<ErrorDto> handleUnauthorizedException(UnauthorizedException unauthorizedException) {
+        unauthorizedException.printStackTrace();
         ErrorDto errorDto = new ErrorDto();
         errorDto.setTimestamp(now().toString());
         errorDto.setStatus(HttpStatus.UNAUTHORIZED.value());

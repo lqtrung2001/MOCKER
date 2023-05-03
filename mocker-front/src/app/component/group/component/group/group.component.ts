@@ -86,12 +86,17 @@ export class GroupComponent extends AbstractComponent implements OnInit {
   }
 
   get tabs(): Tab[] {
+    if (!this.group) {
+      return [];
+    }
     return [{
       title: 'PROJECT',
-      content: this.projects
+      content: this.projects,
+      icon: 'fa-regular fa-list'
     }, {
       title: 'MEMBER',
-      content: this.members
+      content: this.members,
+      icon: 'fa-regular fa-user'
     }];
   }
 

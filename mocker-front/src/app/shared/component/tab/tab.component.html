@@ -8,5 +8,5 @@
     </button>
   </div>
   <hr/>
-  <ng-container [ngTemplateOutlet]='tabs[current].content'></ng-container>
+  <ng-container [ngTemplateOutlet]='tabs[current] ? tabs[current].content : null'></ng-container>
 </div>

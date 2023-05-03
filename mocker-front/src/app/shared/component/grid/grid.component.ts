@@ -45,6 +45,7 @@ export class GridComponent extends SharedComponent implements OnChanges {
   @Input() createAction: CreateAction;
   formGroup: FormGroup<Controls>;
   values: GridValue[];
+  columnActive: string;
 
   constructor(injector: Injector) {
     super(injector);
@@ -98,6 +99,14 @@ export class GridComponent extends SharedComponent implements OnChanges {
         .reduce((previous: number, current: number): number => previous + current, 1);
     }
     return 0;
+  }
+
+  get searchPlaceholder(): string {
+    const searches: string | undefined = this.mocGrid.columns
+      ?.filter((gridColumn: GridColumn): boolean => !!gridColumn.isSearched)
+      .map((gridColumn: GridColumn) => gridColumn.label)
+      .join(', ');
+    return this.truncatePipe.transform(this.translateService.instant('component.grid.search', { searches }), 50);
   }
 
 }
