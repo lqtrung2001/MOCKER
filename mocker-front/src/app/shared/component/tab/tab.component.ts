@@ -1,35 +1,21 @@
-import { Component, Injector, Input, TemplateRef } from '@angular/core';
-import { AbstractSharedComponent } from '@shared/component/common/abstract-shared.component';
+import { SharedComponent } from '@shared/component/common/shared.component';
+import { Component, Injector, Input } from '@angular/core';
 
 /**
  * @author Do Quoc Viet
- * @date 05/02/2023
  */
-
-export interface Tab {
-  icon?: string;
-  title: string,
-  content: TemplateRef<any>
-}
 
 @Component({
   selector: 'moc-tab',
   templateUrl: 'tab.component.html',
   styleUrls: ['tab.component.scss']
 })
-export class TabComponent extends AbstractSharedComponent {
-  @Input() tabs: Tab[] = [];
-  current: number;
+export class TabComponent extends SharedComponent {
+  @Input() mocActive: boolean = false;
+  @Input() mocIcon: string;
+  @Input() mocTitle: string;
 
-  constructor(
-    injector: Injector
-  ) {
+  constructor(injector: Injector) {
     super(injector);
-    this.current = 0;
   }
-
-  change(index: number): void {
-    this.current = index;
-  }
-
 }

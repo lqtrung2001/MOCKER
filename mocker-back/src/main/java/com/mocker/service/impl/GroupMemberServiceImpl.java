@@ -1,6 +1,7 @@
 package com.mocker.service.impl;
 
 import com.mocker.configuration.security.ApplicationContextHolder;
+import com.mocker.domain.exception.BadRequestException;
 import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.exception.PermissionException;
 import com.mocker.domain.model.entity.Group;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -52,38 +54,49 @@ public class GroupMemberServiceImpl implements GroupMemberService {
 
     @Override
     public GroupMember upsert(GroupMember groupMember) {
+        Group group = groupRepository.findById(groupMember.getGroup().getId()).orElseThrow(NotFoundException::new);
         UUID authId = applicationContextHolder.getCurrentUser().getId();
-        boolean isNew = groupMember.getId() == null;
-        UUID groupId = groupMember.getGroup().getId();
-        Group group = groupRepository.findById(groupId).orElseThrow(() -> new NotFoundException(groupId));
-        UUID userId = groupMember.getUser().getId();
-        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException(userId));
-        if (!groupRepository.getRoleUserInGroup(groupId, authId).equals(Role.GROUP_ADMIN)
-                && !groupRepository.getRoleUserInGroup(group.getId(), authId).equals(Role.GROUP_ASSOCIATE)) {
+        Role authRoleInGroup = groupRepository.getRoleUserInGroup(group.getId(), authId);
+        // User is not allowed to change role unless having GROUP_ADMIN or GROUP_ASSOCIATE role.
+        if (!authRoleInGroup.equals(Role.GROUP_ADMIN) && !authRoleInGroup.equals(Role.GROUP_ASSOCIATE)) {
             throw new PermissionException(authId);
         }
-        if (isNew) {
-            groupMemberRepository.save(GroupMember.builder()
-                    .id(GroupMemberPK.builder().userId(userId).groupId(groupId).build())
+        UUID userId = groupMember.getUser().getId();
+        if (authId == userId) {
+            throw new BadRequestException("validation.change_role.can_not_change_role_of_self");
+        }
+        User user = userRepository.findById(userId).orElseThrow(NotFoundException::new);
+        if (groupMember.getId() == null) {
+            // Add user to group
+            return groupMemberRepository.save(GroupMember.builder()
+                    .id(GroupMemberPK.builder()
+                            .userId(userId)
+                            .groupId(groupMember.getGroup().getId())
+                            .build())
                     .group(group)
                     .user(user)
                     .role(Role.USER)
                     .build());
-        } else {
-            Role oldRole = groupRepository.getRoleUserInGroup(groupId, userId);
-            Role newRole = groupMember.getRole();
-            // Only role GROUP_ADMIN can change role
-            if (!Objects.equals(oldRole, newRole) && !groupRepository.getRoleUserInGroup(groupId, authId).equals(Role.GROUP_ADMIN)) {
-                throw new PermissionException(authId);
-            }
-            groupMemberRepository.save(GroupMember.builder()
-                    .id(groupMember.getId())
-                    .group(group)
-                    .user(user)
-                    .role(newRole)
-                    .build());
         }
-        return groupMember;
+        Role oldRole = groupRepository.getRoleUserInGroup(groupMember.getGroup().getId(), userId);
+        Role newRole = Optional.of(groupMember.getRole()).get();
+        if (Objects.equals(oldRole, newRole)) {
+            throw new BadRequestException("validation.can_not_change_the_same_role", oldRole.getValue());
+        }
+        if (authRoleInGroup.equals(Role.GROUP_ASSOCIATE) && (newRole.equals(Role.GROUP_ADMIN) || (oldRole.equals(Role.GROUP_ASSOCIATE) && newRole.equals(Role.USER)))) {
+            throw new BadRequestException("validation.change_role.not_permitted");
+        }
+        if (newRole.equals(Role.GROUP_ADMIN)) {
+            // Change the admin role to the user role
+            GroupMember authGroupMember = groupMemberRepository.findById(GroupMemberPK.builder()
+                            .groupId(groupMember.getId().getGroupId())
+                            .userId(authId)
+                            .build())
+                    .orElseThrow(NotFoundException::new);
+            authGroupMember.setRole(Role.USER);
+            groupMemberRepository.save(authGroupMember);
+        }
+        return groupMemberRepository.save(groupMember);
     }
 
 }

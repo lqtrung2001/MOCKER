@@ -16,15 +16,13 @@
     </div>
   </div>
   <div class='tw-p-5 tw-w-[calc(100%_-_384px)]'>
-    <moc-tab [tabs]='tabs'>
-      <ng-template #projects>
-        <moc-group-projects [group]='group'
-                            [projects]='group ? group.projects : []'></moc-group-projects>
-      </ng-template>
-      <ng-template #members>
-        <moc-group-members [group]='group'
-                           [groupMembers]='group ? group.groupMembers : []'></moc-group-members>
-      </ng-template>
-    </moc-tab>
+    <moc-tabs>
+      <moc-tab mocTitle='PROJECT' mocIcon='fa-regular fa-list'>
+        <moc-group-projects [group]='group'></moc-group-projects>
+      </moc-tab>
+      <moc-tab mocTitle='MEMBER' mocIcon='fa-regular fa-user'>
+        <moc-group-members [group]='group'></moc-group-members>
+      </moc-tab>
+    </moc-tabs>
   </div>
 </div>

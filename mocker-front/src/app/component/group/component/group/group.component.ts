@@ -1,9 +1,8 @@
-import { Component, Injector, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { AbstractComponent } from '@core/common/abstract.component';
 import { GroupModel } from '@core/domain/model/entity/group.model';
 import { GroupService } from '@core/service/group.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Tab } from '@shared/component/tab/tab.component';
 
 /**
  * @author Do Quoc Viet
@@ -20,8 +19,6 @@ type Controls = {
   styleUrls: ['group.component.scss']
 })
 export class GroupComponent extends AbstractComponent implements OnInit {
-  @ViewChild('projects') projects: TemplateRef<any>;
-  @ViewChild('members') members: TemplateRef<any>;
   group: GroupModel;
   formGroup: FormGroup<Controls>;
 
@@ -83,21 +80,6 @@ export class GroupComponent extends AbstractComponent implements OnInit {
         });
       }
     });
-  }
-
-  get tabs(): Tab[] {
-    if (!this.group) {
-      return [];
-    }
-    return [{
-      title: 'PROJECT',
-      content: this.projects,
-      icon: 'fa-regular fa-list'
-    }, {
-      title: 'MEMBER',
-      content: this.members,
-      icon: 'fa-regular fa-user'
-    }];
   }
 
 }

@@ -1,0 +1,10 @@
+<div class='' id='main'>
+  <button (click)='selectTab(tabComponent)'
+          *ngFor='let tabComponent of tabComponents; let index=index'
+          class='tw-py-3 tw-px-5 tw-font-medium tw-rounded-t-md {{ tabComponent.mocActive ? "tw-bg-blue tw-text-white" : "tab-hover" }}'>
+    <i *ngIf='tabComponent.mocIcon' [class]='tabComponent.mocIcon + " tw-mr-3"'></i>
+    {{ tabComponent.mocTitle }}
+  </button>
+  <hr/>
+  <ng-content></ng-content>
+</div>

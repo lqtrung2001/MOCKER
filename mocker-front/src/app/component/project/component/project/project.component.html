@@ -2,7 +2,7 @@
   <p
     class='tw-text-3xl tw-font-medium tw-mt-5'>{{ ('component.project.' + (isNew ? 'new_project' : 'my_project')) | translate }}</p>
   <ng-container *ngIf='isNew' [ngTemplateOutlet]='settings'></ng-container>
-  <moc-tab *ngIf='!isNew' [tabs]='tabs' class='tw-mt-5'>
+  <moc-tab1 *ngIf='!isNew' [tabs]='tabs' class='tw-mt-5'>
     <ng-template #resources>
       <div id='resources'>
         <div class='tw-mt-5'>
@@ -33,7 +33,7 @@
         </ng-container>
       </div>
     </ng-template>
-  </moc-tab>
+  </moc-tab1>
   <ng-template #settings>
     <div id='settings'>
       <p class='tw-mt-5 tw-font-medium'>{{ 'component.project.project_name' | translate }}</p>

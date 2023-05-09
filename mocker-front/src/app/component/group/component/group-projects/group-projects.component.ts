@@ -1,5 +1,5 @@
 import { AbstractComponent } from '@core/common/abstract.component';
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ProjectModel } from '@core/domain/model/entity/project.model';
 import { CreateAction, Grid, GridValue } from '@shared/component/grid/grid.component';
 import { StringUtil } from '@core/util/string.util';
@@ -15,9 +15,8 @@ import { GroupModel } from '@core/domain/model/entity/group.model';
   templateUrl: 'group-projects.component.html',
   styleUrls: ['group-projects.component.scss']
 })
-export class GroupProjectsComponent extends AbstractComponent implements OnInit {
+export class GroupProjectsComponent extends AbstractComponent implements OnChanges {
   @Input() group: GroupModel;
-  @Input() projects: ProjectModel[] = [];
   grid: Grid;
 
   constructor(
@@ -27,7 +26,11 @@ export class GroupProjectsComponent extends AbstractComponent implements OnInit 
     super(injector);
   }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.refresh();
+  }
+
+  refresh(): void {
     this.grid = {
       columns: [
         {
@@ -52,7 +55,7 @@ export class GroupProjectsComponent extends AbstractComponent implements OnInit 
           key: 'delete'
         }
       ],
-      values: this.projects.map((project: ProjectModel): GridValue => ({
+      values: !this.group ? [] : this.group.projects.map((project: ProjectModel): GridValue => ({
         name: {
           value: project.name,
           click: () => this.router.navigate([`/project/${project.id}`]),
@@ -70,7 +73,7 @@ export class GroupProjectsComponent extends AbstractComponent implements OnInit 
               if (result) {
                 this.projectService.deleteEntity(project.id).subscribe((): void => {
                   this.projectService.getProjectsByGroupId(this.group.id).subscribe((projects: ProjectModel[]): void => {
-                    this.projects = projects;
+                    this.group.projects = projects;
                   });
                 });
               }

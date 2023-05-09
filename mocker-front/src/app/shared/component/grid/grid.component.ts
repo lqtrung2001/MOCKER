@@ -1,6 +1,7 @@
 import { SharedComponent } from '@shared/component/common/shared.component';
 import { Component, Injector, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { StringUtil } from '@core/util/string.util';
 
 /**
  * @author Do Quoc Viet
@@ -16,7 +17,7 @@ export type GridColumn = {
 export type GridValue = {
   [key: string]: {
     value: string,
-    click?: () => void,
+    click?: (arg?: any) => void,
     html?: string
   } | string
 };
@@ -102,6 +103,9 @@ export class GridComponent extends SharedComponent implements OnChanges {
   }
 
   get searchPlaceholder(): string {
+    if (!this.mocGrid) {
+      return StringUtil.EMPTY;
+    }
     const searches: string | undefined = this.mocGrid.columns
       ?.filter((gridColumn: GridColumn): boolean => !!gridColumn.isSearched)
       .map((gridColumn: GridColumn) => gridColumn.label)

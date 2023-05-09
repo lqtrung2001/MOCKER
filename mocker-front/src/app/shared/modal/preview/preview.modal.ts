@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Injector, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractModal } from '@core/common/abstract.modal';
-import { Tab } from '@shared/component/tab/tab.component';
+import { Tab } from '@shared/component/tab1/tab1.component';
 import { FormatEnum } from '@core/domain/enum/format.enum';
 
 /**

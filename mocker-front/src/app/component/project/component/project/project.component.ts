@@ -2,7 +2,7 @@ import { Component, Injector, TemplateRef, ViewChild } from '@angular/core';
 import { ProjectService } from '@app/core/service/project.service';
 import { AbstractComponent } from '@core/common/abstract.component';
 import { ProjectModel } from '@core/domain/model/entity/project.model';
-import { Tab } from '@shared/component/tab/tab.component';
+import { Tab } from '@shared/component/tab1/tab1.component';
 import { SchemaModel } from '@core/domain/model/entity/schema.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 

@@ -1,0 +1,11 @@
+#main {
+  .tab-hover:hover {
+    @apply tw-relative tw-text-blue;
+
+    &::after {
+      @apply tw-absolute tw-bottom-0 tw-h-1 tw-rounded-t-md tw-bg-blue tw-w-9/10;
+      content: '';
+      left: 5%;
+    }
+  }
+}

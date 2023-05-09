@@ -1,7 +1,7 @@
 <div [modal]='this' id='main' popup>
   <div class='tw-w-300 tw-h-200 tw-text-sm tw-p-5'>
     <p class='tw-font-medium tw-text-lg'>{{ 'modal.preview.title' | translate }}</p>
-    <moc-tab [tabs]='tabs' selfClass='tw-text-center'>
+    <moc-tab1 [tabs]='tabs' selfClass='tw-text-center'>
       <ng-template #table>
         <div class='tw-overflow-auto tw-h-150 tw-mt-5'>
           <table *ngIf='options.data.length' class='tw-w-full'>
@@ -29,7 +29,7 @@
           <pre *ngSwitchCase='"CSV"' class='tw-h-150 tw-mt-5 tw-overflow-scroll'>{{ options.data | csv }}</pre>
         </ng-container>
       </ng-template>
-    </moc-tab>
+    </moc-tab1>
     <div class='tw-flex tw-justify-between tw-mt-5'>
       <p>{{ 'modal.preview.show_first_100_rows' | translate }}</p>
       <div class='tw-flex tw-pr-5'>

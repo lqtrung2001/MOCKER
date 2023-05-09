@@ -25,7 +25,7 @@ import { ButtonComponent } from '@shared/component/button/button.component';
 import { DropdownComponent } from '@shared/component/dropdown/dropdown.component';
 import { DescriptionComponent } from '@shared/component/description/description.component';
 import { TruncatePipe } from '@shared/pipe/truncate.pipe';
-import { TabComponent } from '@shared/component/tab/tab.component';
+import { Tab1Component } from '@shared/component/tab1/tab1.component';
 import { DateDistancePipe } from '@shared/pipe/date-distance.pipe';
 import { TableDetailComponent } from '@shared/component/table-detail/table-detail.component';
 import { CopyrightComponent } from '@shared/component/copyright/copyright.component';
@@ -44,6 +44,8 @@ import { ToastrModal } from '@shared/modal/toastr-provider/toastr/toastr.modal';
 import { TooltipComponent } from '@shared/component/tooltip/tooltip.component';
 import { ImageComponent } from '@shared/component/image/image.component';
 import { GridComponent } from '@shared/component/grid/grid.component';
+import { TabsComponent } from '@shared/component/tabs/tabs.component';
+import { TabComponent } from '@shared/component/tab/tab.component';
 
 /**
  * @author Do Quoc Viet
@@ -58,7 +60,7 @@ import { GridComponent } from '@shared/component/grid/grid.component';
     LoadingComponent,
     DropdownComponent,
     TruncatePipe,
-    TabComponent,
+    Tab1Component,
     DateDistancePipe,
     TableDetailComponent,
     CopyrightComponent,
@@ -76,7 +78,9 @@ import { GridComponent } from '@shared/component/grid/grid.component';
     ToastrModal,
     TooltipComponent,
     ImageComponent,
-    GridComponent
+    GridComponent,
+    TabsComponent,
+    TabComponent
   ],
   imports: [
     KeyValuePipe,
@@ -104,7 +108,7 @@ import { GridComponent } from '@shared/component/grid/grid.component';
     DropdownComponent,
     DescriptionComponent,
     TruncatePipe,
-    TabComponent,
+    Tab1Component,
     DateDistancePipe,
     TableDetailComponent,
     CopyrightComponent,
@@ -116,7 +120,9 @@ import { GridComponent } from '@shared/component/grid/grid.component';
     ChooseTypeModal,
     ToastrModal,
     ImageComponent,
-    GridComponent
+    GridComponent,
+    TabsComponent,
+    TabComponent
   ],
   providers: []
 })

@@ -290,6 +290,15 @@
       "title": "Add a user to Group",
       "search_placeholder": "Search by username, full name, or email",
       "add_user": "Add user"
+    },
+    "change_role": {
+      "instruction": "Please select a role to change:",
+      "group_admin": "Administrator",
+      "group_associate": "Associate",
+      "user": "User",
+      "not_permitted": "You are not allowed to change this user's role",
+      "can_not_change_role_of_self": "Can't change role of self.",
+      "change_new_admin_confirmation": "Are you sure you want to change this user's role to Group Admin, your role will be user after that?"
     }
   }
 }

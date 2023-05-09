@@ -1,5 +1,5 @@
 import { AbstractComponent } from '@core/common/abstract.component';
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GroupMemberModel } from '@core/domain/model/entity/group-member.model';
 import { CreateAction, Grid, GridValue } from '@shared/component/grid/grid.component';
 import { StringUtil } from '@core/util/string.util';
@@ -7,6 +7,8 @@ import { GroupMemberService } from '@core/service/group-member.service';
 import { AddUserModal, AddUserModalOptions } from '@app/component/group/modal/add-user/add-user.modal';
 import { UserModel } from '@core/domain/model/entity/user.model';
 import { GroupModel } from '@core/domain/model/entity/group.model';
+import { ChangeRoleModal, ChangeRoleModalOptions } from '@app/component/group/modal/change-role/change-role.modal';
+import { RoleEnum } from '@core/domain/enum/role.enum';
 
 /**
  * @author Do Quoc Viet
@@ -17,9 +19,8 @@ import { GroupModel } from '@core/domain/model/entity/group.model';
   templateUrl: 'group-members.component.html',
   styleUrls: ['group-members.component.scss']
 })
-export class GroupMembersComponent extends AbstractComponent implements OnInit {
+export class GroupMembersComponent extends AbstractComponent implements OnChanges {
   @Input() group: GroupModel;
-  @Input() groupMembers: GroupMemberModel[] = [];
   grid: Grid;
 
   constructor(
@@ -29,7 +30,7 @@ export class GroupMembersComponent extends AbstractComponent implements OnInit {
     super(injector);
   }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.refresh();
   }
 
@@ -64,7 +65,7 @@ export class GroupMembersComponent extends AbstractComponent implements OnInit {
           key: 'delete'
         }
       ],
-      values: this.groupMembers.map((groupMember: GroupMemberModel): GridValue => ({
+      values: !this.group ? [] : this.group.groupMembers.map((groupMember: GroupMemberModel): GridValue => ({
         name: {
           value: groupMember.user.name,
           click: () => this.router.navigate([`/people/${groupMember.user.id}`]),
@@ -72,6 +73,28 @@ export class GroupMembersComponent extends AbstractComponent implements OnInit {
         },
         role: {
           value: this.translateService.instant(`component.group_members.${groupMember.role.toLowerCase()}`),
+          click: (): void => {
+            const changeRoleModalOptions: ChangeRoleModalOptions = {
+              current: groupMember,
+              groupMembers: this.group.groupMembers
+            };
+            this.modalService.open(ChangeRoleModal, changeRoleModalOptions)
+              .subscribe((role: RoleEnum): void => {
+                if (!role) {
+                  return;
+                }
+                groupMember.role = role;
+                this.groupMemberService.upsertEntity(groupMember)
+                  .subscribe((groupMember: GroupMemberModel): void => {
+                    this.group.groupMembers.forEach((item: GroupMemberModel): void => {
+                      if (item.user.id === groupMember.user.id) {
+                        item.role = groupMember.role;
+                      }
+                    });
+                    this.refresh();
+                  });
+              });
+          },
           html: `<p class='tw-font-medium tw-text-blue hover:tw-underline tw-cursor-pointer'></p>`
         },
         bio: this.truncatePipe.transform(groupMember.user.bio, 50),
@@ -90,7 +113,7 @@ export class GroupMembersComponent extends AbstractComponent implements OnInit {
               if (result) {
                 this.groupMemberService.deleteEntity(groupMember.id).subscribe((): void => {
                   this.groupMemberService.getGroupMembersByGroupId(this.group.id).subscribe((groupMembers: GroupMemberModel[]): void => {
-                    this.groupMembers = groupMembers;
+                    this.group.groupMembers = groupMembers;
                   });
                 });
               }
@@ -106,7 +129,7 @@ export class GroupMembersComponent extends AbstractComponent implements OnInit {
     return {
       click: (): void => {
         const options: AddUserModalOptions = {
-          addedUserIds: this.groupMembers.map((groupMember: GroupMemberModel): string => groupMember.user.id)
+          addedUserIds: this.group.groupMembers.map((groupMember: GroupMemberModel): string => groupMember.user.id)
         };
         this.modalService.open(AddUserModal, options).subscribe((user: UserModel): void => {
           if (user) {
@@ -114,7 +137,7 @@ export class GroupMembersComponent extends AbstractComponent implements OnInit {
             groupMember.user = user;
             groupMember.group = this.group;
             this.groupMemberService.upsertEntity(groupMember).subscribe((response: GroupMemberModel): void => {
-              this.groupMembers.push(response);
+              this.group.groupMembers.push(response);
               this.refresh();
             });
           }
