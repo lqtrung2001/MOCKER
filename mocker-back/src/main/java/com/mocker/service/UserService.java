@@ -30,4 +30,6 @@ public interface UserService {
     Boolean isExistedUsername(String username);
 
     User upsert(User user);
+
+    List<User> getUsersByCriteria(String criteria);
 }

@@ -19,8 +19,7 @@ export class UserService extends AbstractService<UserModel> {
   }
 
   findByCriteria(value: string): Observable<UserModel[]> {
-    // return this.request<UserModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${this.ENTITY_URL}/fint-by-criteria?criteria=${value}`);
-    return this.getEntities();
+    return this.request<UserModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${this.ENTITY_URL}/search-by-criteria?criteria=${value}`);
   }
 
 }

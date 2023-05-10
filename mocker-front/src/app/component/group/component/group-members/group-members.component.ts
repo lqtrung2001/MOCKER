@@ -112,9 +112,10 @@ export class GroupMembersComponent extends AbstractComponent implements OnChange
             }).subscribe((result: boolean): void => {
               if (result) {
                 this.groupMemberService.deleteEntity(groupMember.id).subscribe((): void => {
-                  this.groupMemberService.getGroupMembersByGroupId(this.group.id).subscribe((groupMembers: GroupMemberModel[]): void => {
-                    this.group.groupMembers = groupMembers;
-                  });
+                  this.groupMemberService.getGroupMembersByGroupId(this.group.id)
+                    .subscribe((groupMembers: GroupMemberModel[]): void => {
+                      this.group.groupMembers = groupMembers;
+                    });
                 });
               }
             });
