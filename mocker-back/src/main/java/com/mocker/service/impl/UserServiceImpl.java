@@ -35,6 +35,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getUsersByCriteria(String criteria) {
+        return userRepository.findAllByCriteria(criteria);
+    }
+
+    @Override
     public User upsert(User user) {
         return userRepository.save(user);
     }

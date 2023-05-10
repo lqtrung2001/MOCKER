@@ -45,6 +45,11 @@ public class UserController implements UserApi {
                 .collect(Collectors.toList()));
     }
 
+    @Override
+    public ResponseEntity<List<UserDto>> getUsersByCriteria(String criteria) {
+        return ResponseEntity.ok(apiUserMapper.map(userService.getUsersByCriteria(criteria)));
+    }
+
     @SneakyThrows
     @Override
     public ResponseEntity<UserDto> deleteUser(UUID id) {
