@@ -1,0 +1,19 @@
+#main {
+  .pagination {
+    > span {
+      @apply tw-w-9 tw-text-center tw-leading-10 tw-h-10 tw-bg-white tw-rounded tw-m-1;
+    }
+
+    .disable {
+      @apply tw-text-gray tw-cursor-default tw-drop-shadow-none;
+    }
+
+    .enable {
+      @apply hover:tw-text-white hover:tw-bg-blue tw-cursor-pointer tw-drop-shadow;
+    }
+
+    .active {
+      @apply tw-bg-blue tw-text-white;
+    }
+  }
+}

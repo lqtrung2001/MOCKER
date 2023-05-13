@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
 import { DatePipe, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ProjectRoutingModule } from '@app/component/project/project-routing.module';
+import { ProjectSchemasComponent } from '@app/component/project/component/project-schemas/project-schemas.component';
 
 /**
  * @author Do Quoc Viet
@@ -16,7 +17,8 @@ import { ProjectRoutingModule } from '@app/component/project/project-routing.mod
   declarations: [
     ProjectsComponent,
     ProjectComponent,
-    ProjectLayoutComponent
+    ProjectLayoutComponent,
+    ProjectSchemasComponent
   ],
   exports: [],
   imports: [

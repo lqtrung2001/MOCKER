@@ -1,45 +1,31 @@
-<div class='tw-w-300 tw-mx-auto tw-text-sm' id='main'>
-  <p
-    class='tw-text-3xl tw-font-medium tw-mt-5'>{{ ('component.project.' + (isNew ? 'new_project' : 'my_project')) | translate }}</p>
-  <ng-container *ngIf='isNew' [ngTemplateOutlet]='settings'></ng-container>
-  <moc-tab1 *ngIf='!isNew' [tabs]='tabs' class='tw-mt-5'>
-    <ng-template #resources>
-      <div id='resources'>
-        <div class='tw-mt-5'>
-          <button
-            class='hover:tw-text-blue tw-font-medium tw-py-2 tw-border tw-rounded-l-md tw-px-5'>{{ 'component.project.new_schema' | translate }}</button>
-          <button
-            class='hover:tw-text-blue tw-font-medium tw-py-2 tw-border tw-px-5'>{{ 'NEW DATASET' | translate }}</button>
-          <button
-            class='hover:tw-text-blue tw-font-medium tw-py-2 tw-border tw-px-5'>{{ 'NEW API' | translate }}</button>
-          <button
-            class='hover:tw-text-blue tw-font-medium tw-py-2 tw-border tw-rounded-r-md tw-px-5'>{{ 'NEW SCENARIO' | translate }}</button>
-        </div>
-        <hr class='tw-mt-5'/>
-        <ng-container *ngFor='let schema of project?.schemas'>
-          <div class='tw-flex tw-px-3 tw-py-2 tw-items-center'>
-            <div class='tw-w-1/2 tw-flex tw-items-center'>
-              <i class='fa-regular fa-diagram-project'></i>
-              <div class='tw-ml-3'>
-                <a class='tw-font-medium hover:tw-underline hover:tw-text-blue tw-uppercase'
-                   routerLink='schema/{{ schema.id }}'>{{ schema.name }}</a>
-                <p>{{ 'component.project.schema' }}</p>
-              </div>
-            </div>
-            <div
-              class='tw-w-1/2'>{{ ('component.project.last_modified' | translate) + (schema.modifiedDate | dateDistance) }}</div>
-          </div>
-          <hr/>
-        </ng-container>
+<div class='tw-flex tw-text-sm tw-h-[calc(100vh_-_57px)]' id='main'>
+  <div class='tw-w-96 tw-h-full tw-border tw-border-t-0 tw-p-5'>
+    <p class='tw-text-3xl tw-font-medium'>{{ 'component.project.project' | translate }}</p>
+    <div>
+      <moc-input [control]='formGroup.controls.name' label='component.project.name'></moc-input>
+      <moc-input [control]='formGroup.controls.description' [textArea]='true' label='component.project.description'
+                 selfClass='tw-h-32 tw-overflow-auto'></moc-input>
+      <div class='tw-mt-3 tw-flex tw-justify-between tw-items-center'>
+        <moc-button (click)='submit()' class='tw-w-49/100 tw-inline' icon='fa-solid fa-floppy-disk'
+                    label='component.project.save'
+                    selfClass='btn-primary tw-text-left'></moc-button>
+        <moc-button (click)='delete()' class='tw-w-49/100 tw-inline' icon='fa-solid fa-trash'
+                    label='component.project.delete'
+                    selfClass='btn-red tw-text-left'></moc-button>
       </div>
-    </ng-template>
-  </moc-tab1>
-  <ng-template #settings>
-    <div id='settings'>
-      <p class='tw-mt-5 tw-font-medium'>{{ 'component.project.project_name' | translate }}</p>
-      <moc-input [control]='formGroup.controls.name' [mocPlaceholder]='"component.project.project_name_placeholder" | translate'
-                 class='tw-mt-3'></moc-input>
-      <p class='tw-mt-5 tw-font-medium'>{{ 'component.project.share_with' | translate }}</p>
     </div>
-  </ng-template>
+    <div>
+      <p class='tw-font-medium tw-mt-5'>{{ 'component.project.group_information' | translate }}</p>
+      <a class='tw-uppercase tw-font-medium tw-mt-3 tw-inline-block tw-underline hover:tw-text-blue tw-cursor-pointer'
+         routerLink='/project/{{ project ? project.group.id : undefined }}'>{{ project ? project.group.name : undefined }}</a>
+      <p class='tw-mt-3'>{{ project ? project.group.description : undefined }}</p>
+    </div>
+  </div>
+  <div class='tw-p-5 tw-w-[calc(100%_-_384px)]'>
+    <moc-tabs>
+      <moc-tab mocTitle='SCHEMA' mocIcon='fa-regular fa-diagram-project'>
+        <moc-project-schemas [project]='project'></moc-project-schemas>
+      </moc-tab>
+    </moc-tabs>
+  </div>
 </div>

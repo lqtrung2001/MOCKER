@@ -4,7 +4,6 @@ import { GroupModel } from '@core/domain/model/entity/group.model';
 import { GroupService } from '@core/service/group.service';
 import { CreateAction, Grid, GridValue } from '@shared/component/grid/grid.component';
 import { StringUtil } from '@core/util/string.util';
-import { GroupMemberModel } from '@core/domain/model/entity/group-member.model';
 
 /**
  * @author Do Quoc Viet
@@ -56,10 +55,7 @@ export class GroupsComponent extends AbstractComponent implements OnInit {
           },
           description: this.truncatePipe.transform(group.description, 50),
           sharedBy: {
-            value: this.truncatePipe.transform(group.groupMembers
-              .map((groupMember: GroupMemberModel): string => this.truncatePipe
-                .transform(groupMember.user.name.substring(0, groupMember.user.name.indexOf(StringUtil.SPACE)), 10))
-              .join(', '), 30),
+            value: group.groupMembers.length + ' contributors',
             html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue'></a>`,
             click: () => this.router.navigate([`/group/${group.id}`])
           },

@@ -22,11 +22,12 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/api/v1")
 public class ProjectController implements ProjectApi {
     private final ApiProjectMapper apiProjectMapper;
+    private final ApiProjectMapperDecorator apiProjectMapperDecorator;
     private final ProjectService projectService;
 
     @Override
     public ResponseEntity<ProjectDto> getProject(UUID id) {
-        return ResponseEntity.ok(apiProjectMapper.map(projectService.getProject(id)));
+        return ResponseEntity.ok(apiProjectMapperDecorator.mapFetchSchemas(projectService.getProject(id)));
     }
 
     @Override

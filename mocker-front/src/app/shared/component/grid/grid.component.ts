@@ -45,16 +45,19 @@ export class GridComponent extends SharedComponent implements OnChanges {
   @Input() mocGrid: Grid;
   @Input() createAction: CreateAction;
   formGroup: FormGroup<Controls>;
-  values: GridValue[];
   columnActive: string;
+  pageValues: GridValue[];
+  currentPageNumber: number;
 
-  constructor(injector: Injector) {
+  constructor(
+    injector: Injector
+  ) {
     super(injector);
     this.formGroup = this.formBuilder.group({
       search: this.formBuilder.control(undefined, [])
     });
     this.formGroup.controls.search.valueChanges.subscribe((value: string): void => {
-      this.values = this.mocGrid.values.filter((gridValue: GridValue): boolean => {
+      this.pageValues = this.mocGrid.values.filter((gridValue: GridValue): boolean => {
         let match: boolean = false;
         this.mocGrid.columns
           ?.filter((gridColumn: GridColumn): boolean => !!gridColumn.isSearched)
@@ -64,6 +67,7 @@ export class GridComponent extends SharedComponent implements OnChanges {
             const valueForCheck: string = gridValue[key] instanceof Object ? gridValue[key].value : gridValue[key];
             if (valueForCheck.toLowerCase().includes(value.toLowerCase())) {
               match = true;
+              return;
             }
           });
         return match;
@@ -73,7 +77,7 @@ export class GridComponent extends SharedComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['mocGrid']) {
-      this.values = changes['mocGrid'].currentValue?.values;
+      this.pageNumberChange(1);
     }
   }
 
@@ -111,6 +115,39 @@ export class GridComponent extends SharedComponent implements OnChanges {
       .map((gridColumn: GridColumn) => gridColumn.label)
       .join(', ');
     return this.truncatePipe.transform(this.translateService.instant('component.grid.search', { searches }), 50);
+  }
+
+  get totalPageNumber(): Array<number> {
+    if (!this.mocGrid?.values?.length) {
+      return [];
+    }
+    return Array(Math.ceil(this.mocGrid.values.length / this.applicationConfig.numberItemsOfPage))
+      .fill(0)
+      .map((value: any, index: number): number => index + 1);
+  }
+
+  pageNumberChange(pageNumber?: number | 'previous' | 'next'): void {
+    if (!this.mocGrid?.values?.length) {
+      return;
+    }
+    if (pageNumber === 'previous') {
+      if (this.currentPageNumber === 1) {
+        return;
+      }
+      this.currentPageNumber--;
+    }
+    if (pageNumber === 'next') {
+      if (this.currentPageNumber === this.totalPageNumber.length) {
+        return;
+      }
+      this.currentPageNumber++;
+    }
+    if (Number.isInteger(pageNumber)) {
+      // @ts-ignore
+      this.currentPageNumber = pageNumber;
+    }
+    const start: number = (this.currentPageNumber - 1) * this.applicationConfig.numberItemsOfPage;
+    this.pageValues = this.mocGrid.values.slice(start, start + this.applicationConfig.numberItemsOfPage);
   }
 
 }
