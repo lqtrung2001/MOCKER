@@ -15,7 +15,9 @@ import com.mocker.controller.sqlType.ApiSQLTypeMapper;
 import com.mocker.controller.table.ApiTableMapper;
 import com.mocker.controller.tableRelation.ApiTableRelationMapper;
 import com.mocker.controller.user.ApiUserMapper;
+import com.mocker.domain.model.entity.Project;
 import org.mapstruct.Mapper;
+import com.mocker.domain.dto.ProjectDto;
 
 /**
  * @author Do Quoc Viet
@@ -39,4 +41,7 @@ import org.mapstruct.Mapper;
         ApiTableRelationMapper.class,
         ApiUserMapper.class})
 public interface ApiProjectMapperDecorator {
+
+    ProjectDto mapFetchSchemas(Project project);
+
 }

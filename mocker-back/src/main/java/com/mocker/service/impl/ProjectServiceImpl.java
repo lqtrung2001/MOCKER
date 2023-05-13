@@ -33,7 +33,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project getProject(UUID id) {
-        return projectRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
+        Project project = projectRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
+        project.setSchemas(schemaRepository.getSchemasByProject(project.getId()));
+        return project;
     }
 
     @Override

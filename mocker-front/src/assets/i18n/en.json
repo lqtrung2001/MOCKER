@@ -12,7 +12,10 @@
     "schema_delete_success": "Schema with name {{name}} is deleted successfully",
     "group_save_success": "Group saved successfully",
     "group_delete_confirm": "Are you sure you want to delete this group?",
-    "group_delete_success": "Group with name {{name}} is deleted successfully"
+    "group_delete_success": "Group with name {{name}} is deleted successfully",
+    "project_save_success": "Project saved successfully",
+    "project_delete_confirm": "Are you sure you want to delete this project?",
+    "project_delete_success": "Project with name {{name}} is deleted successfully"
   },
   "enum": {
     "one_to_one": "ONE TO ONE",
@@ -80,7 +83,7 @@
     },
     "projects": {
       "my_projects": "My Projects",
-      "information": "A project is a group of schemas, datasets, and scenarios that can be shared with others or remain private.",
+      "information": "A project is defined as a sequence of tasks that must be completed to attain a certain outcome. According to the Project Management Institute (PMI), the term Project refers to ” to any temporary endeavor with a definite beginning and end”. Depending on its complexity, it can be managed by a single person or hundreds.",
       "create": "CREATE A NEW PROJECT",
       "description": "description",
       "name": "name",
@@ -88,16 +91,22 @@
       "last_modified": "last modified"
     },
     "project": {
-      "my_project": "My Project",
-      "new_project": "New Project",
-      "new_schema": "NEW SCHEMA",
-      "schema": "Schema",
-      "last_modified": "Last Modified ",
-      "project_name": "Project Name",
-      "project_name_placeholder": "Project Name",
-      "share_with": "Share With"
+      "project": "Project",
+      "name": "Name:",
+      "description": "Description:",
+      "save": "SAVE",
+      "delete": "DELETE",
+      "group_information": "Group information"
+    },
+    "project_schemas": {
+      "name": "Name",
+      "description": "Description",
+      "created_date": "Created date",
+      "last_modified": "Last modified",
+      "delete_schema_confirmation": "Are you sure you want to delete this schema?"
     },
     "general": {
+      "mocker": "Mocker",
       "introduction": "Need some mock data to test your app? Mocker lets you generate up to 1,000 rows of realistic test data in CSV, JSON, SQL, and Excel formats.",
       "row": "#Rows:",
       "format": "Format:",
@@ -170,7 +179,11 @@
       "last_modified": "last modified"
     },
     "group": {
-      "group": "Group"
+      "group": "Group",
+      "name": "Name:",
+      "description": "Description:",
+      "save": "SAVE",
+      "delete": "DELETE"
     },
     "people": {
       "people": "People",
