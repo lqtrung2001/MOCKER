@@ -1,16 +1,26 @@
 package com.mocker.service.impl;
 
 import com.mocker.configuration.security.ApplicationContextHolder;
+import com.mocker.constant.GoogleConstant;
 import com.mocker.domain.exception.BadRequestException;
 import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.exception.PermissionException;
 import com.mocker.domain.model.entity.User;
+import com.mocker.domain.model.entity.enumeration.Gender;
 import com.mocker.repository.UserRepository;
 import com.mocker.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.OAuth2AccessToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -28,6 +38,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ApplicationContextHolder applicationContextHolder;
     private final PasswordEncoder passwordEncoder;
+    private final OAuth2AuthorizedClientService authorizedClientService;
 
     @Override
     public Boolean isExistedUsername(String username) {
@@ -37,6 +48,46 @@ public class UserServiceImpl implements UserService {
     @Override
     public User upsert(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public User saveUserGoogle() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof OAuth2AuthenticationToken oauthToken) {
+            OAuth2User oAuth2User = oauthToken.getPrincipal();
+            String email = oAuth2User.getAttribute(GoogleConstant.EMAIL);
+            String username = oAuth2User.getAttribute(GoogleConstant.NAME);
+            OAuth2AuthorizedClient authorizedClient = getAuthorizedClient(oauthToken.getAuthorizedClientRegistrationId());
+            if (authorizedClient == null) {
+                throw new BadRequestException();
+            }
+            OAuth2AccessToken accessToken = authorizedClient.getAccessToken();
+            String tokenId = accessToken.getTokenValue().substring(10, 20);
+            System.out.println(tokenId);
+            if (!isExistedUsername(email)) {
+                return userRepository.save(User.builder()
+                                .username(email)
+                                .password(passwordEncoder.encode(tokenId))
+                                .name(username)
+                                .bio("N/A")
+                                .address("N/A")
+                                .dob(OffsetDateTime.now())
+                                .gender(Gender.MALE)
+                                .phone("N/A")
+                                .grantedAuthorities("ROLE_USER")
+                                .isAccountNonExpired(true)
+                                .isCredentialsNonExpired(true)
+                                .isAccountNonLocked(true)
+                                .isEnabled(true)
+                                .build())
+                        .toBuilder().password(tokenId).build();
+            } else {
+                User userByUsername = getUserByUsername(email);
+                userByUsername.setPassword(passwordEncoder.encode(tokenId));
+                return userRepository.save(userByUsername).toBuilder().password(tokenId).build();
+            }
+        }
+        throw new BadRequestException();
     }
 
     @Override
@@ -95,5 +146,13 @@ public class UserServiceImpl implements UserService {
         }
         user.setPassword(passwordEncoder.encode(newPassword));
         return userRepository.save(user);
+    }
+
+    private OAuth2AuthorizedClient getAuthorizedClient(String clientRegistrationId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof OAuth2AuthenticationToken oauthToken) {
+            return authorizedClientService.loadAuthorizedClient(clientRegistrationId, oauthToken.getName());
+        }
+        return null;
     }
 }

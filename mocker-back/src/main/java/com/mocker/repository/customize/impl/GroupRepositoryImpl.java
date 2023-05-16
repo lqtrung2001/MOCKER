@@ -2,6 +2,7 @@ package com.mocker.repository.customize.impl;
 
 import com.mocker.domain.model.entity.Group;
 import com.mocker.domain.model.entity.GroupMember;
+import com.mocker.domain.model.entity.enumeration.Role;
 import com.mocker.repository.customize.GroupRepositoryCustom;
 import com.querydsl.jpa.impl.JPAQuery;
 
@@ -49,10 +50,10 @@ public class GroupRepositoryImpl implements GroupRepositoryCustom {
     }
 
     @Override
-    public String getRoleUserInGroup(UUID group, UUID user) {
+    public Role getRoleUserInGroup(UUID group, UUID user) {
         return Objects.requireNonNull(new JPAQuery<GroupMember>(entityManager)
                         .from(groupMember)
                         .where(groupMember.group.id.eq(group).and(groupMember.user.id.eq(user))).fetchOne())
-                .getRole().toString();
+                .getRole();
     }
 }

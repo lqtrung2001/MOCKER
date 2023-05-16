@@ -1,6 +1,7 @@
 package com.mocker.repository.customize;
 
 import com.mocker.domain.model.entity.Group;
+import com.mocker.domain.model.entity.enumeration.Role;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,5 +16,5 @@ public interface GroupRepositoryCustom {
 
     Group findOneWithEagerProjectsAndGroupMembers(UUID id);
 
-    String getRoleUserInGroup(UUID group, UUID user);
+    Role getRoleUserInGroup(UUID group, UUID user);
 }
