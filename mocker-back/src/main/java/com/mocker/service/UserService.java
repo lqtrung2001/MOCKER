@@ -32,4 +32,6 @@ public interface UserService {
     User upsert(User user);
 
     List<User> getUsersByCriteria(String criteria);
+
+    User saveUserGoogle();
 }

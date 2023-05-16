@@ -10,5 +10,4 @@ public interface AuthService {
     Boolean sendVerificationCode(String username);
 
     User verifyAndSave(String verificationCode, User user);
-
 }

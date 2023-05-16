@@ -44,4 +44,9 @@ public class AuthController implements AuthApi {
     public ResponseEntity<UserDto> changePassword(UUID id, ChangePasswordDto changePasswordDto) {
         return ResponseEntity.ok(apiAuthMapper.map(userService.changePassword(id, changePasswordDto.getOldPassword(), changePasswordDto.getNewPassword())));
     }
+
+    @Override
+    public ResponseEntity<UserDto> loginWithGoogle() {
+        return ResponseEntity.ok(apiAuthMapper.map(userService.saveUserGoogle()));
+    }
 }

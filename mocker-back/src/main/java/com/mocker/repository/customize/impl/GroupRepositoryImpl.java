@@ -42,11 +42,11 @@ public class GroupRepositoryImpl implements GroupRepositoryCustom {
     }
 
     @Override
-    public Role getRoleUserInGroup(UUID group, UUID user) {
+    public String getRoleUserInGroup(UUID group, UUID user) {
         return Objects.requireNonNull(new JPAQuery<GroupMember>(entityManager)
                         .from(groupMember)
                         .where(groupMember.group.id.eq(group).and(groupMember.user.id.eq(user))).fetchOne())
-                .getRole();
+                .getRole().toString();
     }
 
 }
