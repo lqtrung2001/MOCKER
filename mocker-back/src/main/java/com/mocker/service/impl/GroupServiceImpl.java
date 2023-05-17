@@ -59,7 +59,7 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public Group delete(UUID id) {
         UUID authId = applicationContextHolder.getCurrentUser().getId();
-        if (!groupRepository.getRoleUserInGroup(id, authId).equals("GROUP_ADMIN")) {
+        if (!groupRepository.getRoleUserInGroup(id, authId).equals(Role.GROUP_ADMIN)) {
             throw new PermissionException("User " + authId + "is not allowed to delete");
         }
         Group group = groupRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
@@ -75,8 +75,7 @@ public class GroupServiceImpl implements GroupService {
     public Group upsert(Group group) {
         UUID authId = applicationContextHolder.getCurrentUser().getId();
         // After saving group, update the group member for saved group and auth user
-        boolean isNew = group.getId() == null;
-        if (isNew) {
+        if (group.getId() == null) {
             groupRepository.save(group);
             GroupMember build = GroupMember.builder()
                     .id(GroupMemberPK.builder()
@@ -86,8 +85,8 @@ public class GroupServiceImpl implements GroupService {
                     .role(Role.GROUP_ADMIN).build();
             groupMemberRepository.save(build);
         } else {
-            if (!groupRepository.getRoleUserInGroup(group.getId(), authId).equals("GROUP_ADMIN")
-                    || !groupRepository.getRoleUserInGroup(group.getId(), authId).equals("GROUP_ASSOCIATE")) {
+            Role roleUserInGroup = groupRepository.getRoleUserInGroup(group.getId(), authId);
+            if (!roleUserInGroup.equals(Role.GROUP_ADMIN) && !roleUserInGroup.equals(Role.GROUP_ASSOCIATE)) {
                 throw new PermissionException("User " + authId + "is not allowed to do action");
             }
             groupRepository.save(group);

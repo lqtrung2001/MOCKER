@@ -37,9 +37,6 @@ public class Project extends Base {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "SUMMARY", nullable = false, length = 1000)
-    private String summary;
-
     @Column(name = "DESCRIPTION", length = 4096)
     private String description;
 

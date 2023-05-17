@@ -3,6 +3,13 @@ import { AbstractComponent } from '@core/common/abstract.component';
 import { SchemaModel } from '@core/domain/model/entity/schema.model';
 import { SchemaService } from '@core/service/schema.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProjectService } from '@core/service/project.service';
+import { ProjectModel } from '@core/domain/model/entity/project.model';
+import {
+  CreateEntityModal,
+  CreateEntityModalCloseOptions,
+  CreateEntityModalOptions
+} from '@shared/modal/create-entity/create-entity.modal';
 
 /**
  * @author Do Quoc Viet
@@ -24,7 +31,8 @@ export class SchemaComponent extends AbstractComponent implements OnInit {
 
   constructor(
     injector: Injector,
-    private schemaService: SchemaService
+    private schemaService: SchemaService,
+    private projectService: ProjectService
   ) {
     super(injector);
     this.formGroup = this.formBuilder.group({
@@ -34,11 +42,39 @@ export class SchemaComponent extends AbstractComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    const id: string | null = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
       this.schemaService.getEntity(id).subscribe((schema: SchemaModel): void => {
         this.schema = schema;
         this.formGroup.patchValue(schema);
+      });
+    } else {
+      this.activatedRoute.queryParams.subscribe((params: any): void => {
+        if (!params.projectId) {
+          return;
+        }
+        this.projectService.getEntity(params.projectId).subscribe((project: ProjectModel): void => {
+          if (!project.id) {
+            return;
+          }
+          setTimeout((): void => {
+            const options: CreateEntityModalOptions = {
+              type: 'schema',
+              description: this.translateService.instant('component.schemas.information')
+            };
+            this.modalService.open(CreateEntityModal, options).subscribe((closeOptions: CreateEntityModalCloseOptions): void => {
+              if (!closeOptions) {
+                return;
+              }
+              this.schema = new SchemaModel();
+              this.schema.project = project;
+              this.schema.name = closeOptions.name;
+              this.schema.description = closeOptions.description;
+              this.formGroup.patchValue(this.schema);
+              this.submit();
+            });
+          });
+        });
       });
     }
   }

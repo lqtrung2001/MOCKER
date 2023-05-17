@@ -4,6 +4,7 @@ import { ProjectModel } from '@core/domain/model/entity/project.model';
 import { ProjectService } from '@app/core/service/project.service';
 import { CreateAction, Grid, GridValue } from '@shared/component/grid/grid.component';
 import { StringUtil } from '@core/util/string.util';
+import { ChooseParentModal, ChooseParentModalOptions } from '@shared/modal/choose-parent/choose-parent.modal';
 
 /**
  * @author Do Quoc Viet
@@ -68,7 +69,22 @@ export class ProjectsComponent extends AbstractComponent implements OnInit {
 
   get createAction(): CreateAction {
     return {
-      click: () => this.router.navigate([`/project/new`]),
+      click: (): void => {
+        const options: ChooseParentModalOptions = {
+          type: 'group'
+        };
+        this.modalService.open(ChooseParentModal, options)
+          .subscribe((groupId: string): void => {
+            if (groupId) {
+              this.router.navigate(['/project/new'], {
+                queryParams: {
+                  groupId
+                }
+              }).then((): void => {
+              });
+            }
+          });
+      },
       content: 'component.projects.create'
     };
   }

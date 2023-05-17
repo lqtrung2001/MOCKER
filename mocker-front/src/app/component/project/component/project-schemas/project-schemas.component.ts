@@ -89,7 +89,11 @@ export class ProjectSchemasComponent extends AbstractComponent implements OnChan
 
   get createAction(): CreateAction {
     return {
-      click: () => this.router.navigate([`/schema/new`]),
+      click: () => this.router.navigate(['/schema/new'], {
+        queryParams: {
+          projectId: this.project.id
+        }
+      }),
       content: 'component.schemas.create'
     };
   }

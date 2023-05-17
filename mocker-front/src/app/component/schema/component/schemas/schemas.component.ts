@@ -5,6 +5,7 @@ import { SchemaService } from '@core/service/schema.service';
 import { CreateAction, Grid, GridValue } from '@shared/component/grid/grid.component';
 import { StringUtil } from '@core/util/string.util';
 import { TruncatePipe } from '@shared/pipe/truncate.pipe';
+import { ChooseParentModal, ChooseParentModalOptions } from '@shared/modal/choose-parent/choose-parent.modal';
 
 /**
  * @author Do Quoc viet
@@ -78,7 +79,19 @@ export class SchemasComponent extends AbstractComponent implements OnInit {
 
   get createAction(): CreateAction {
     return {
-      click: () => this.router.navigate([`/schema/new`]),
+      click: (): void => {
+        const options: ChooseParentModalOptions = {
+          type: 'project'
+        };
+        setTimeout(() => this.modalService.open(ChooseParentModal, options)
+          .subscribe((projectId: string): void => {
+            if (projectId) {
+              this.router.navigate(['/schema/new'], { queryParams: { projectId } })
+                .then((): void => {
+                });
+            }
+          }));
+      },
       content: 'component.schemas.create'
     };
   }

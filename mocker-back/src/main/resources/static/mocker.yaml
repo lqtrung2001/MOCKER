@@ -1297,10 +1297,6 @@ components:
           type: string
           maxLength: 255
           description: Name of project
-        summary:
-          type: string
-          maxLength: 1000
-          description: Summary of project
         description:
           type: string
           maxLength: 4096

@@ -4,7 +4,7 @@
     <img alt='email' class='tw-w-32 tw-mt-4 tw-mx-auto' src='assets/png/auth/email.svg'/>
     <p class='tw-mt-4 tw-text-gray'>{{ 'modal.verification.instruction' | translate }}</p>
     <p class='tw-mt-2 tw-font-medium'>{{ options ? options.username : undefined }}</p>
-    <moc-input [control]='verificationCode'
+    <moc-input [mocControl]='verificationCode'
                [mocPlaceholder]='"modal.verification.verification_code_placeholder" | translate'
                [selfClass]='isInvalidVerificationCode ? "invalid" : ""'></moc-input>
     <p *ngIf='isInvalidVerificationCode'

@@ -1,22 +1,24 @@
-<div class='tw-flex tw-text-sm tw-h-[calc(100vh_-_57px)]' id='main'>
-  <div class='tw-w-96 tw-h-full tw-border tw-border-t-0 tw-p-5'>
+<div *ngIf='group' class='tw-flex tw-text-sm tw-h-[calc(100vh_-_57px)]' id='main'>
+  <div class='tw-w-96 tw-h-full tw-border tw-border-t-0 tw-p-5 tw-relative'>
     <p class='tw-text-3xl tw-font-medium'>{{ 'component.group.group' | translate }}</p>
     <div>
-      <moc-input [control]='formGroup.controls.name' label='component.group.name'></moc-input>
-      <moc-input [control]='formGroup.controls.description' [textArea]='true' label='component.group.description'
+      <moc-input [mocControl]='formGroup.controls.name' mocLabel='component.group.name'></moc-input>
+      <moc-input [mocControl]='formGroup.controls.description' [mocTextArea]='true'
+                 mocLabel='component.group.description'
                  selfClass='tw-h-32 tw-overflow-auto'></moc-input>
       <div class='tw-mt-3 tw-flex tw-justify-between tw-items-center'>
-        <moc-button (click)='submit()' class='tw-w-49/100 tw-inline' icon='fa-solid fa-floppy-disk'
+        <moc-button (click)='submit()' mocClass='tw-w-49/100 tw-inline' icon='fa-solid fa-floppy-disk'
                     label='component.group.save'
                     selfClass='btn-primary tw-text-left'></moc-button>
-        <moc-button (click)='delete()' class='tw-w-49/100 tw-inline' icon='fa-solid fa-trash'
+        <moc-button (click)='delete()' mocClass='tw-w-49/100 tw-inline' icon='fa-solid fa-trash'
                     label='component.group.delete'
                     selfClass='btn-red tw-text-left'></moc-button>
       </div>
     </div>
+    <moc-copyright mocClass='tw-absolute tw-bottom-5 tw-mt-10'></moc-copyright>
   </div>
   <div class='tw-p-5 tw-w-[calc(100%_-_384px)]'>
-    <moc-tabs>
+    <moc-tabs *ngIf='group?.id'>
       <moc-tab mocTitle='PROJECT' mocIcon='fa-regular fa-list'>
         <moc-group-projects [group]='group'></moc-group-projects>
       </moc-tab>

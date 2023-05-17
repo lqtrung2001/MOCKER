@@ -1,0 +1,12 @@
+<div class='' popup [dialog]='true' id='main'>
+  <div class='tw-text-sm tw-w-150 tw-p-5'>
+    <p class='tw-font-medium'>{{ title }}</p>
+    <moc-description class='tw-mt-3' [description]='options.description'></moc-description>
+    <moc-input mocClass='tw-mt-3' [mocControl]='formGroup.controls.name' mocLabel='modal.create_entity.name'></moc-input>
+    <moc-input [mocTextArea]='true' [mocControl]='formGroup.controls.description' mocLabel='modal.create_entity.description'></moc-input>
+    <div class='tw-mt-3 tw-flex tw-justify-end'>
+      <moc-button (click)='submit()' selfClass='btn-primary' label='modal.create_entity.save'></moc-button>
+      <moc-button (click)='cancel()' mocClass='tw-ml-2' selfClass='btn-light' label='modal.create_entity.cancel'></moc-button>
+    </div>
+  </div>
+</div>

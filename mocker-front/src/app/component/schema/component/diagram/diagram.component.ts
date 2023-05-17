@@ -77,7 +77,7 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.schema) {
+    if (this.schema?.id) {
       this.schemaService.getTablesBySchema(this.schema.id)
         .subscribe((tables: TableModel[]): void => {
           this.schema.tables = tables;

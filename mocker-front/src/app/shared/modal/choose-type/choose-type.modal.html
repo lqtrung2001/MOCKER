@@ -2,18 +2,18 @@
   <div class='tw-relative tw-w-232 tw-h-200 tw-p-5 tw-text-sm'>
     <div class='tw-flex tw-justify-between tw-items-center'>
       <p class='tw-font-medium'>{{ 'modal.choose_type.title' | translate }}</p>
-      <moc-input [control]='formControl' [mocPlaceholder]='"modal.choose_type.find_placeholder" | translate'
-                 class='tw-w-60'
+      <moc-input [mocControl]='formControl' [mocPlaceholder]='"modal.choose_type.find_placeholder" | translate'
+                 mocClass='tw-w-60'
                  selfClass='tw-p-2'></moc-input>
     </div>
     <div *ngIf='options?.isGenerateType' class='tw-flex tw-mt-3 tw-overflow-x-scroll'>
       <moc-button (click)='changeCategory()'
-                  class='tw-mx-0.5 tw-mb-2'
+                  mocClass='tw-mx-0.5 tw-mb-2'
                   label='All&nbsp;({{ numberOfGenerateTypes }})'
                   selfClass='tw-py-2 {{ currentCategory ? "btn-light" : "btn-primary" }}'></moc-button>
       <moc-button (click)='changeCategory(category)'
                   *ngFor='let category of categories'
-                  class='tw-mx-0.5 tw-mb-2'
+                  mocClass='tw-mx-0.5 tw-mb-2'
                   label='{{ category.name | truncate: 20 }}&nbsp;({{ category.generateTypes.length }})'
                   selfClass='tw-py-2 {{ currentCategory?.id === category.id ? "btn-primary" : "btn-light" }}'></moc-button>
     </div>

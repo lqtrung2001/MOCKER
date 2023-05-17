@@ -3,7 +3,7 @@
     <i class='tw-text-5xl fa-regular fa-floppy-disk'></i>
     <p class='tw-mt-3 tw-font-medium'>{{ 'modal.add_user.title' | translate }}</p>
     <div class='tw-relative'>
-      <moc-input class='tw-mt-3' [control]='searchFormControl'
+      <moc-input mocClass='tw-mt-3' [mocControl]='searchFormControl'
                  [mocPlaceholder]='"modal.add_user.search_placeholder" | translate'></moc-input>
       <div *ngIf='users.length'
            class='tw-text-left tw-z-10 tw-absolute tw-rounded tw-top-10 tw-border tw-p-3 tw-bg-white tw-w-96'>
@@ -15,6 +15,6 @@
         </p>
       </div>
     </div>
-    <moc-button class='tw-mt-3' selfClass='btn-primary' label='modal.add_user.add_user'></moc-button>
+    <moc-button mocClass='tw-mt-3' selfClass='btn-primary' label='modal.add_user.add_user'></moc-button>
   </div>
 </div>

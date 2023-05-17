@@ -3,6 +3,13 @@ import { ProjectService } from '@app/core/service/project.service';
 import { AbstractComponent } from '@core/common/abstract.component';
 import { ProjectModel } from '@core/domain/model/entity/project.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { GroupService } from '@core/service/group.service';
+import { GroupModel } from '@core/domain/model/entity/group.model';
+import {
+  CreateEntityModal,
+  CreateEntityModalCloseOptions,
+  CreateEntityModalOptions
+} from '@shared/modal/create-entity/create-entity.modal';
 
 /**
  * @author Do Quoc Viet
@@ -24,7 +31,8 @@ export class ProjectComponent extends AbstractComponent implements OnInit {
 
   constructor(
     injector: Injector,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private groupService: GroupService
   ) {
     super(injector);
     this.formGroup = this.formBuilder.group({
@@ -39,6 +47,34 @@ export class ProjectComponent extends AbstractComponent implements OnInit {
       this.projectService.getEntity(id).subscribe((project: ProjectModel): void => {
         this.project = project;
         this.formGroup.patchValue(project);
+      });
+    } else {
+      this.activatedRoute.queryParams.subscribe((params: any): void => {
+        if (!params.groupId) {
+          return;
+        }
+        this.groupService.getEntity(params.groupId).subscribe((group: GroupModel): void => {
+          if (!group.id) {
+            return;
+          }
+          setTimeout((): void => {
+            const options: CreateEntityModalOptions = {
+              type: 'project',
+              description: this.translateService.instant('component.projects.information')
+            };
+            this.modalService.open(CreateEntityModal, options).subscribe((closeOptions: CreateEntityModalCloseOptions): void => {
+              if (!closeOptions) {
+                return;
+              }
+              this.project = new ProjectModel();
+              this.project.group = group;
+              this.project.name = closeOptions.name;
+              this.project.description = closeOptions.description;
+              this.formGroup.patchValue(this.project);
+              this.submit();
+            });
+          });
+        });
       });
     }
   }
@@ -57,9 +93,9 @@ export class ProjectComponent extends AbstractComponent implements OnInit {
         this.project = project;
         this.formGroup.patchValue(project);
       });
-    });
-    this.toastrProvider.showSuccess({
-      body: 'message.project_save_success'
+      this.toastrProvider.showSuccess({
+        body: 'message.project_save_success'
+      });
     });
   }
 

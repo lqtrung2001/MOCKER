@@ -15,7 +15,7 @@ import {
   UpperCasePipe
 } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterLinkWithHref } from '@angular/router';
+import { RouterLink, RouterLinkWithHref } from '@angular/router';
 import { InputComponent } from '@shared/component/input/input.component';
 import {
   ErrorMessageProcessorComponent
@@ -46,6 +46,8 @@ import { ImageComponent } from '@shared/component/image/image.component';
 import { GridComponent } from '@shared/component/grid/grid.component';
 import { TabsComponent } from '@shared/component/tabs/tabs.component';
 import { TabComponent } from '@shared/component/tab/tab.component';
+import { ChooseParentModal } from '@shared/modal/choose-parent/choose-parent.modal';
+import { CreateEntityModal } from '@shared/modal/create-entity/create-entity.modal';
 
 /**
  * @author Do Quoc Viet
@@ -80,7 +82,9 @@ import { TabComponent } from '@shared/component/tab/tab.component';
     ImageComponent,
     GridComponent,
     TabsComponent,
-    TabComponent
+    TabComponent,
+    ChooseParentModal,
+    CreateEntityModal
   ],
   imports: [
     KeyValuePipe,
@@ -98,7 +102,8 @@ import { TabComponent } from '@shared/component/tab/tab.component';
     NgStyle,
     NgClass,
     FormsModule,
-    DatePipe
+    DatePipe,
+    RouterLink
   ],
   exports: [
     InputComponent,

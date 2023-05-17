@@ -1,4 +1,4 @@
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, Input } from '@angular/core';
 import { SharedComponent } from '@shared/component/common/shared.component';
 
 /**
@@ -11,6 +11,8 @@ import { SharedComponent } from '@shared/component/common/shared.component';
   styleUrls: ['copyright.component.scss']
 })
 export class CopyrightComponent extends SharedComponent {
+  @Input() mocHiddenPrivacy: boolean = false;
+
   constructor(
     injector: Injector
   ) {

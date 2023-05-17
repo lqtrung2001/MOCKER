@@ -312,6 +312,18 @@
       "not_permitted": "You are not allowed to change this user's role",
       "can_not_change_role_of_self": "Can't change role of self.",
       "change_new_admin_confirmation": "Are you sure you want to change this user's role to Group Admin, your role will be user after that?"
+    },
+    "choose_parent": {
+      "title": "Please choose a {{ entity }}",
+      "search_placeholder": "Search for {{ entity }}...",
+      "more": "More ..."
+    },
+    "create_entity": {
+      "title": "Please complete the form for creating a new {{ entity }}",
+      "name": "Name:",
+      "description": "Description:",
+      "save": "Save",
+      "cancel": "Cancel"
     }
   }
 }
