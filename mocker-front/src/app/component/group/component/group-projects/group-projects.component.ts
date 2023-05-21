@@ -79,7 +79,7 @@ export class GroupProjectsComponent extends AbstractComponent implements OnChang
               }
             });
           },
-          html: '<i class="tw-cursor-pointer tw-text-red tw-self-center fa-regular fa-circle-xmark"></i>'
+          html: '<i class="tw-cursor-pointer tw-text-red tw-self-center fa-solid fa-circle-xmark"></i>'
         }
       }))
     };

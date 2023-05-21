@@ -23,7 +23,7 @@
             [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
             [control]='field.controls.generateType'
             [label]='field.controls.generateType.value?.code || ("component.table_detail.generate_type_placeholder" | translate)'
-            icon='fa-solid fa-arrow-up-arrow-down'
+            icon='fa-solid fa-repeat'
             selfClass='tw-text-left tw-px-5 btn-light {{ !field.controls.generateType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
           </moc-button>
         </td>
@@ -33,7 +33,7 @@
             [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
             [control]='field.controls.sqlType'
             [label]='field.controls.sqlType.value?.code || ("component.table_detail.sql_type_placeholder" | translate)'
-            icon='fa-solid fa-arrow-up-arrow-down'
+            icon='fa-solid fa-repeat'
             selfClass='tw-text-left tw-px-5 btn-light {{ !field.controls.sqlType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
           </moc-button>
         </td>

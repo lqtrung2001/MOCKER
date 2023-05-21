@@ -30,15 +30,15 @@ export class NavigationComponent extends AbstractComponent {
     this.navigations = [{
       routerLink: '/schema',
       title: 'schema',
-      icon: 'fa-regular fa-diagram-project'
+      icon: 'fa-solid fa-diagram-project'
     }, {
       routerLink: '/project',
       title: 'project',
-      icon: 'fa-regular fa-list'
+      icon: 'fa-solid fa-list'
     }, {
       routerLink: '/group',
       title: 'group',
-      icon: 'fa-light fa-user-group'
+      icon: 'fa-solid fa-sitemap'
     }, {
       routerLink: '/people',
       title: 'people',
@@ -53,7 +53,7 @@ export class NavigationComponent extends AbstractComponent {
       }
     }, {
       id: '2',
-      icon: 'fa-regular fa-id-card',
+      icon: 'fa-solid fa-id-card',
       label: 'Profile',
       click: (): void => {
         this.router.navigate([`people/${this.applicationConfig.user?.id}`]).then();

@@ -8,7 +8,7 @@
     <moc-input [mocControl]='formGroup.controls.rows' mocClass='tw-w-24' selfClass='tw-px-5'></moc-input>
     <span class='tw-mt-3 tw-mx-5'>{{ 'component.general.format' | translate }}</span>
     <moc-dropdown [options]='formats'>
-      <moc-button [label]='formGroup.controls.format.value' mocClass='tw-w-32' icon='fa-solid fa-arrow-up-arrow-down'
+      <moc-button [label]='formGroup.controls.format.value' mocClass='tw-w-32' icon='fa-solid fa-repeat'
                   selfClass='tw-text-left btn-light'></moc-button>
     </moc-dropdown>
     <span *ngIf='isShowTableNameField' class='tw-mt-3 tw-mx-5'>{{ 'component.general.table_name' | translate }}</span>
@@ -23,7 +23,7 @@
                 selfClass='tw-px-5 btn-light'></moc-button>
     <moc-button mocClass='tw-w-52 tw-ml-3' label='component.general.save_this_table'
                 selfClass='tw-px-5 btn-light'></moc-button>
-    <moc-button mocClass='tw-w-52 tw-ml-3' icon='fa-solid fa-arrow-up-arrow-down' label='component.general.more'
+    <moc-button mocClass='tw-w-52 tw-ml-3' icon='fa-solid fa-repeat' label='component.general.more'
                 selfClass='tw-px-5 btn-light'></moc-button>
   </div>
 </div>

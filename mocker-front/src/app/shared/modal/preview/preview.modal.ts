@@ -43,11 +43,11 @@ export class PreviewModal extends AbstractModal implements OnInit {
   get tabs(): Tab[] {
     return [{
       title: 'TABLE',
-      icon: 'fa-regular fa-table',
+      icon: 'fa-solid fa-table',
       content: this.table
     }, {
       title: `RAW [${this.options.format}]`,
-      icon: 'fa-regular fa-line-columns',
+      icon: 'fa-solid fa-line-columns',
       content: this.raw
     }];
   }
