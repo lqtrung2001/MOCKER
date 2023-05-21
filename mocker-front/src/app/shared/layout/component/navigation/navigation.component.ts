@@ -39,11 +39,13 @@ export class NavigationComponent extends AbstractComponent {
       routerLink: '/group',
       title: 'group',
       icon: 'fa-solid fa-sitemap'
-    }, {
-      routerLink: '/people',
-      title: 'people',
-      icon: 'fa-regular fa-user'
-    }];
+    }
+    // , {
+    //   routerLink: '/people',
+    //   title: 'people',
+    //   icon: 'fa-regular fa-user'
+    // }
+    ];
     this.options = [{
       id: '1',
       icon: 'fa-solid fa-sort',

@@ -18,7 +18,7 @@
     <div>
       <p class='tw-font-medium tw-mt-5'>{{ 'component.project.group_information' | translate }}</p>
       <a class='tw-uppercase tw-font-medium tw-mt-3 tw-inline-block tw-underline hover:tw-text-blue tw-cursor-pointer'
-         routerLink='/project/{{ project ? project.group.id : undefined }}'>{{ project ? project.group.name : undefined }}</a>
+         routerLink='/group/{{ project ? project.group.id : undefined }}'>{{ project ? project.group.name : undefined }}</a>
       <p class='tw-mt-3'>{{ project ? project.group.description : undefined }}</p>
     </div>
     <moc-copyright mocClass='tw-absolute tw-bottom-5 tw-mt-10'></moc-copyright>
