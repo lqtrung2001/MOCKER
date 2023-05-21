@@ -1,7 +1,9 @@
 package com.mocker.service;
 
 import com.mocker.domain.model.entity.GroupMember;
+import com.mocker.domain.model.entity.composite_key.GroupMemberPK;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -10,8 +12,9 @@ import java.util.UUID;
 
 public interface GroupMemberService {
 
-    GroupMember delete(GroupMember groupMember);
+    GroupMemberPK delete(GroupMemberPK groupMemberPK);
 
     GroupMember upsert(GroupMember groupMember);
 
+    List<GroupMember> getGroupMembersByGroup(UUID groupId);
 }

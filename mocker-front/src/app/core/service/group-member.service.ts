@@ -16,7 +16,7 @@ export class GroupMemberService extends AbstractService<GroupMemberModel> {
   override ENTITY_URL: string = 'group-member';
 
   override deleteEntity(groupMemberPkModel: GroupMemberPkModel): Observable<GroupMemberModel> {
-    return this.request<GroupMemberModel>(HttpMethodEnum.POST, `${this.API_URL}/${this.ENTITY_URL}/delete-member`, groupMemberPkModel);
+    return this.request<GroupMemberModel>(HttpMethodEnum.POST, `${this.API_URL}/${this.ENTITY_URL}/delete-group-member`, groupMemberPkModel);
   }
 
   getGroupMembersByGroupId(groupId: string): Observable<GroupMemberModel[]> {

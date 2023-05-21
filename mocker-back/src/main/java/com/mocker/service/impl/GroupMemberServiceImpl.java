@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -37,19 +38,16 @@ public class GroupMemberServiceImpl implements GroupMemberService {
     private final UserRepository userRepository;
 
     @Override
-    public GroupMember delete(GroupMember groupMember) {
+    public GroupMemberPK delete(GroupMemberPK groupMemberPK) {
         UUID authId = applicationContextHolder.getCurrentUser().getId();
-        if (groupMemberRepository.findById(groupMember.getId()).isEmpty()) {
-            throw new NotFoundException(groupMember.getId().getGroupId());
+        if (groupMemberRepository.findById(groupMemberPK).isEmpty()) {
+            throw new NotFoundException(groupMemberPK.getGroupId());
         }
-        if ((!groupRepository.getRoleUserInGroup(groupMember.getGroup().getId(), authId).equals(Role.GROUP_ADMIN)
-                || !groupRepository.getRoleUserInGroup(groupMember.getGroup().getId(), authId).equals(Role.GROUP_ASSOCIATE))
-                || (groupRepository.getRoleUserInGroup(groupMember.getGroup().getId(), groupMember.getUser().getId()).equals(Role.GROUP_ADMIN)
-                && groupRepository.getRoleUserInGroup(groupMember.getGroup().getId(), authId).equals(Role.GROUP_ADMIN))) {
+        if (!groupRepository.getRoleUserInGroup(groupMemberPK.getGroupId(), authId).equals(Role.GROUP_ADMIN)) {
             throw new PermissionException(authId);
         }
-        groupMemberRepository.deleteById(groupMember.getId());
-        return groupMember;
+        groupMemberRepository.deleteById(groupMemberPK);
+        return groupMemberPK;
     }
 
     @Override
@@ -97,6 +95,20 @@ public class GroupMemberServiceImpl implements GroupMemberService {
             groupMemberRepository.save(authGroupMember);
         }
         return groupMemberRepository.save(groupMember);
+    }
+
+    @Override
+    public List<GroupMember> getGroupMembersByGroup(UUID groupId) {
+        Group group = groupRepository.findById(groupId).orElseThrow(() -> new NotFoundException(groupId));
+        List<GroupMember> groupMembers = groupMemberRepository.findAllByGroup(group);
+        boolean contains = groupMembers.stream().map(GroupMember::getUser)
+                .map(User::getId)
+                .toList()
+                .contains(applicationContextHolder.getCurrentUser().getId());
+        if (!contains) {
+            throw new PermissionException("You cannot be allowed to access this group");
+        }
+        return groupMembers;
     }
 
 }
