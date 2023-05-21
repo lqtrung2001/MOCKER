@@ -5,6 +5,7 @@ import com.mocker.domain.exception.BadRequestException;
 import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.exception.PermissionException;
 import com.mocker.domain.model.entity.User;
+import com.mocker.domain.model.entity.enumeration.Role;
 import com.mocker.repository.UserRepository;
 import com.mocker.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -68,13 +69,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(UUID id) {
-        return userRepository.findById(id)
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(id));
+        if (applicationContextHolder.getCurrentUser().getId() != user.getId()) {
+            user.setPassword(null);
+        }
+
+        return user;
     }
 
     @Override
     public List<User> getUsers() {
-        return userRepository.findAll();
+        List<User> users = userRepository.findAll();
+        if (!applicationContextHolder.getCurrentUser().getGrantedAuthorities().equals(Role.ADMIN.getValue())) {
+            for (User user : users) {
+                user.setPassword(null);
+            }
+        }
+        return users;
     }
 
     @Override

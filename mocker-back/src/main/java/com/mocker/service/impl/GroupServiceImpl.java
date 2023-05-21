@@ -51,7 +51,12 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public Group getGroup(UUID id) {
         Group group = groupRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
-        group.setGroupMembers(groupMemberRepository.findAllByGroup(group));
+        group.setGroupMembers(groupMemberRepository.findAllByGroup(group)
+                .stream()
+                .map(groupMember -> groupMember.toBuilder()
+                        .user(groupMember.getUser().toBuilder().password(null).build())
+                        .build())
+                .collect(Collectors.toList()));
         group.setProjects(projectRepository.findAllByGroup(group));
         return group;
     }
