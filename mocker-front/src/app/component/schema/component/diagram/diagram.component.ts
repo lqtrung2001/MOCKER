@@ -120,22 +120,22 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
   }
 
   modifyBoundingClientRectWhenTableMove(event: CdkDragMove): void {
-    // When table move to left [Width]
-    if (this.diagram.nativeElement.getBoundingClientRect().x >= event.pointerPosition.x - 250) {
-      this.renderer.setStyle(this.diagram.nativeElement, 'width', `${this.diagram.nativeElement.getBoundingClientRect().width + 1}px`);
-    }
-    // When table move to top [Height]
-    if (this.diagram.nativeElement.getBoundingClientRect().y >= event.pointerPosition.y - 200) {
-      this.renderer.setStyle(this.diagram.nativeElement, 'height', `${this.diagram.nativeElement.getBoundingClientRect().height + 1}px`);
-    }
-    // When table move to right [WIDTH]
-    if ((this.diagram.nativeElement.getBoundingClientRect().x + this.diagram.nativeElement.getBoundingClientRect().width) <= event.pointerPosition.x + 250) {
-      this.renderer.setStyle(this.diagram.nativeElement, 'width', `${this.diagram.nativeElement.getBoundingClientRect().width + 1}px`);
-    }
-    // When table move to bottom [HEIGHT]
-    if (this.diagram.nativeElement.getBoundingClientRect().y + this.diagram.nativeElement.getBoundingClientRect().height <= event.pointerPosition.y + 200) {
-      this.renderer.setStyle(this.diagram.nativeElement, 'height', `${this.diagram.nativeElement.getBoundingClientRect().height + 1}px`);
-    }
+    // // When table move to left [Width]
+    // if (this.diagram.nativeElement.getBoundingClientRect().x >= event.pointerPosition.x - 250) {
+    //   this.renderer.setStyle(this.diagram.nativeElement, 'width', `${this.diagram.nativeElement.getBoundingClientRect().width + 1}px`);
+    // }
+    // // When table move to top [Height]
+    // if (this.diagram.nativeElement.getBoundingClientRect().y >= event.pointerPosition.y - 200) {
+    //   this.renderer.setStyle(this.diagram.nativeElement, 'height', `${this.diagram.nativeElement.getBoundingClientRect().height + 1}px`);
+    // }
+    // // When table move to right [WIDTH]
+    // if ((this.diagram.nativeElement.getBoundingClientRect().x + this.diagram.nativeElement.getBoundingClientRect().width) <= event.pointerPosition.x + 250) {
+    //   this.renderer.setStyle(this.diagram.nativeElement, 'width', `${this.diagram.nativeElement.getBoundingClientRect().width + 1}px`);
+    // }
+    // // When table move to bottom [HEIGHT]
+    // if (this.diagram.nativeElement.getBoundingClientRect().y + this.diagram.nativeElement.getBoundingClientRect().height <= event.pointerPosition.y + 200) {
+    //   this.renderer.setStyle(this.diagram.nativeElement, 'height', `${this.diagram.nativeElement.getBoundingClientRect().height + 1}px`);
+    // }
   }
 
   dragEnded(table: TableModel, event: CdkDragEnd): void {

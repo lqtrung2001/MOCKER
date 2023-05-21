@@ -20,24 +20,24 @@
     </div>
   </div>
   <div (scroll)='onScroll()' class='diagram tw-border tw-mt-3 tw-h-full tw-w-full tw-overflow-auto'>
-    <div #diagram class='tw-relative'>
+    <div #diagram class='tw-relative tw-flex'>
       <moc-table
-        (cdkDragMoved)='dragMoved(table, $event)'
         (cdkDragEnded)='dragEnded(table, $event)'
+        (cdkDragMoved)='dragMoved(table, $event)'
+        (deleted)='tableDeleted(table, $event)'
         (refresh)='reDrawRelationLine($event)'
         (relationMapping)='relationMapping($event)'
-        (deleted)='tableDeleted(table, $event)'
         *ngFor='let table of schema?.tables'
         [current]='current'
         [dataDetail]='data ? data[table.name].values : []'
         [foreignKeys]='foreignKeys'
         [format]='formGroup.controls.format.value'
+        [position]='tableIdIsBeingMoved === table.id ? position : undefined'
         [relations]='relations'
         [table]='table'
-        [position]='tableIdIsBeingMoved === table.id ? position : undefined'
         cdkDrag
-        mocClass='tw-absolute tw-top-0'
-        cdkDragBoundary='.diagram'>
+        cdkDragBoundary='.diagram'
+        mocClass='tw-absolute tw-top-0'>
         <i cdkDragHandle class='tw-ml-3 tw-cursor-pointer fa-solid fa-arrows-up-down-left-right'></i>
       </moc-table>
     </div>
