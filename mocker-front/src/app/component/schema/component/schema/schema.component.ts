@@ -10,6 +10,7 @@ import {
   CreateEntityModalCloseOptions,
   CreateEntityModalOptions
 } from '@shared/modal/create-entity/create-entity.modal';
+import { Location } from '@angular/common';
 
 /**
  * @author Do Quoc Viet
@@ -92,6 +93,9 @@ export class SchemaComponent extends AbstractComponent implements OnInit {
       this.schemaService.getEntity(schema.id).subscribe((schema: SchemaModel): void => {
         this.schema = schema;
         this.formGroup.patchValue(schema);
+        if (this.router.url.includes('new')) {
+          this.location.replaceState(`/schema/${schema.id}`);
+        }
       });
       this.toastrProvider.showSuccess({
         body: 'message.schema_save_success'

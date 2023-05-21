@@ -87,7 +87,11 @@ export class GroupProjectsComponent extends AbstractComponent implements OnChang
 
   get createAction(): CreateAction {
     return {
-      click: () => this.router.navigate([`/project/new?groupId=${this.group.id}`]),
+      click: () => this.router.navigate(['/project/new'], {
+        queryParams: {
+          groupId: this.group.id
+        }
+      }),
       content: 'component.group_projects.create_project'
     };
   }

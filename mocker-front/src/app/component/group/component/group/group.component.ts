@@ -78,6 +78,9 @@ export class GroupComponent extends AbstractComponent implements OnInit {
       this.groupService.getEntity(group.id).subscribe((group: GroupModel): void => {
         this.group = group;
         this.formGroup.patchValue(group);
+        if (this.router.url.includes('new')) {
+          this.location.replaceState(`/group/${group.id}`);
+        }
       });
     });
     this.toastrProvider.showSuccess({

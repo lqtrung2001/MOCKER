@@ -84,11 +84,15 @@ export class GroupMembersComponent extends AbstractComponent implements OnChange
                   return;
                 }
                 groupMember.role = role;
+                const isChangeGroupAdmin: boolean = RoleEnum.GROUP_ADMIN === role;
                 this.groupMemberService.upsertEntity(groupMember)
                   .subscribe((groupMember: GroupMemberModel): void => {
                     this.group.groupMembers.forEach((item: GroupMemberModel): void => {
                       if (item.user.id === groupMember.user.id) {
                         item.role = groupMember.role;
+                      }
+                      if (isChangeGroupAdmin && item.user.id === this.applicationConfig.user?.id) {
+                        item.role = RoleEnum.USER;
                       }
                     });
                     this.refresh();

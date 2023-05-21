@@ -92,6 +92,9 @@ export class ProjectComponent extends AbstractComponent implements OnInit {
       this.projectService.getEntity(project.id).subscribe((project: ProjectModel): void => {
         this.project = project;
         this.formGroup.patchValue(project);
+        if (this.router.url.includes('new')) {
+          this.location.replaceState(`/project/${project.id}`);
+        }
       });
       this.toastrProvider.showSuccess({
         body: 'message.project_save_success'
