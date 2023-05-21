@@ -21,15 +21,15 @@
         <hr/>
       </td>
     </tr>
-    <ng-container *ngFor='let value of pageValues, let index=index'>
+    <ng-container *ngFor='let pageValue of pageValues'>
       <tr class='hover:tw-bg-gray'>
         <td class='tw-p-4 {{ columnActive==="no" ? "tw-bg-gray" : undefined }}'>
-          {{ index + 1 + '.' }}
+          {{ pageValue.position + 1 + '.' }}
         </td>
-        <td (click)='getAction(value[column.key])()'
+        <td (click)='getAction(pageValue.gridValue[column.key])()'
             *ngFor='let column of mocGrid.columns'
             [colSpan]='column.colSpan || 1'
-            [innerHTML]='getInnerHTML(value[column.key])'
+            [innerHTML]='getInnerHTML(pageValue.gridValue[column.key])'
             class='tw-p-4  {{ columnActive===column.key ? "tw-bg-gray" : undefined }}'
         ></td>
       </tr>

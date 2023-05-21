@@ -32,6 +32,11 @@ export type CreateAction = {
   content: string;
 }
 
+type PageValue = {
+  gridValue: GridValue;
+  position: number;
+}
+
 type Controls = {
   search: FormControl
 }
@@ -46,7 +51,7 @@ export class GridComponent extends SharedComponent implements OnChanges {
   @Input() createAction: CreateAction;
   formGroup: FormGroup<Controls>;
   columnActive: string;
-  pageValues: GridValue[];
+  pageValues: PageValue[];
   currentPageNumber: number;
 
   constructor(
@@ -57,21 +62,26 @@ export class GridComponent extends SharedComponent implements OnChanges {
       search: this.formBuilder.control(undefined, [])
     });
     this.formGroup.controls.search.valueChanges.subscribe((value: string): void => {
-      this.pageValues = this.mocGrid.values.filter((gridValue: GridValue): boolean => {
-        let match: boolean = false;
-        this.mocGrid.columns
-          ?.filter((gridColumn: GridColumn): boolean => !!gridColumn.isSearched)
-          .map((gridColumn: GridColumn): string => gridColumn.key)
-          .forEach((key: string): void => {
-            // @ts-ignore
-            const valueForCheck: string = gridValue[key] instanceof Object ? gridValue[key].value : gridValue[key];
-            if (valueForCheck.toLowerCase().includes(value.toLowerCase())) {
-              match = true;
-              return;
-            }
-          });
-        return match;
-      });
+      this.pageValues = this.mocGrid.values
+        .map((gridValue: GridValue, index: number): PageValue => ({
+          gridValue: gridValue,
+          position: index
+        }))
+        .filter((pageValue: PageValue): boolean => {
+          let match: boolean = false;
+          this.mocGrid.columns
+            ?.filter((gridColumn: GridColumn): boolean => !!gridColumn.isSearched)
+            .map((gridColumn: GridColumn): string => gridColumn.key)
+            .forEach((key: string): void => {
+              // @ts-ignore
+              const valueForCheck: string = pageValue.gridValue[key] instanceof Object ? pageValue.gridValue[key].value : pageValue.gridValue[key];
+              if (valueForCheck.toLowerCase().includes(value.toLowerCase())) {
+                match = true;
+                return;
+              }
+            });
+          return match;
+        });
     });
   }
 
@@ -148,7 +158,12 @@ export class GridComponent extends SharedComponent implements OnChanges {
       this.currentPageNumber = pageNumber;
     }
     const start: number = (this.currentPageNumber - 1) * this.applicationConfig.numberItemsOfPage;
-    this.pageValues = this.mocGrid.values.slice(start, start + this.applicationConfig.numberItemsOfPage);
+    this.pageValues = this.mocGrid.values
+      .map((gridValue: GridValue, index: number): PageValue => ({
+        gridValue: gridValue,
+        position: index
+      }))
+      .slice(start, start + this.applicationConfig.numberItemsOfPage);
   }
 
 }
