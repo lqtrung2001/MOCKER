@@ -1,5 +1,5 @@
 <div [class]='mocClass' id='main' xmlns='http://www.w3.org/1999/html'>
-  <div [class]='selfClass'>
+  <div [class]='mocStyle'>
     <table class='tw-w-full'>
       <thead class='tw-sticky tw-top-0 tw-bg-white tw-z-20'>
       <tr>
@@ -15,7 +15,7 @@
           <moc-input [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
                      [mocControl]='field.controls.name'
                      [mocPlaceholder]='"component.table_detail.field_name_placeholder" | translate'
-                     selfClass='tw-px-5'></moc-input>
+                     mocStyle='tw-px-5'></moc-input>
         </td>
         <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
           <moc-button
@@ -24,7 +24,7 @@
             [control]='field.controls.generateType'
             [label]='field.controls.generateType.value?.code || ("component.table_detail.generate_type_placeholder" | translate)'
             icon='fa-solid fa-sort'
-            selfClass='tw-text-left tw-px-5 btn-light {{ !field.controls.generateType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
+            mocStyle='tw-text-left tw-px-5 btn-secondary {{ !field.controls.generateType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
           </moc-button>
         </td>
         <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
@@ -34,7 +34,7 @@
             [control]='field.controls.sqlType'
             [label]='field.controls.sqlType.value?.code || ("component.table_detail.sql_type_placeholder" | translate)'
             icon='fa-solid fa-sort'
-            selfClass='tw-text-left tw-px-5 btn-light {{ !field.controls.sqlType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
+            mocStyle='tw-text-left tw-px-5 btn-secondary {{ !field.controls.sqlType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
           </moc-button>
         </td>
         <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
@@ -45,12 +45,12 @@
                        [min]='0'
                        mocClass='tw-w-20'
                        mocPlaceholder='0%'
-                       selfClass='tw-text-center'
+                       mocStyle='tw-text-center'
                        type='number'></moc-input>
             <moc-button [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
                         mocClass='tw-w-12'
                         icon='fa-solid fa-diagram-predecessor'
-                        selfClass='btn-light tw-h-10'></moc-button>
+                        mocStyle='btn-secondary tw-h-10'></moc-button>
             <i (click)='removeField(i, field.controls.id ? field.controls.id.value : undefined)'
                class='tw-text-lg {{ isReadonly(field.controls.id ? field.controls.id.value : undefined) ? "" : "tw-cursor-pointer" }} fa-regular fa-circle-xmark tw-self-center'></i>
           </div>
@@ -70,5 +70,5 @@
   </div>
   <moc-button (click)='insertField()' mocClass='tw-w-[calc(208px)] tw-mt-3 tw-inline-block'
               label='component.table_detail.add_another_field'
-              selfClass='btn-primary'></moc-button>
+              mocStyle='btn-primary'></moc-button>
 </div>

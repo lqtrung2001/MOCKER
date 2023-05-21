@@ -1,7 +1,7 @@
 <div [class]='mocClass' id='main'>
   <button
     (click)='buttonClick()'
-    class='{{ selfClass }} {{ isValidated && control && control.invalid ? "invalid" : "" }} tw-py-2.5 tw-px-5 tw-rounded tw-font-medium tw-w-full {{ readonly ? "tw-cursor-default" : "tw-cursor-pointer hover:tw-drop-shadow-md" }} tw-relative'>
+    class='{{ mocStyle }} {{ isValidated && control && control.invalid ? "invalid" : "" }} tw-py-2.5 tw-px-5 tw-rounded tw-font-medium tw-w-full {{ readonly ? "tw-cursor-default" : "tw-cursor-pointer hover:tw-drop-shadow-md" }} tw-relative'>
     {{ label | translate }}
     <i *ngIf='icon' class='{{ !label ? "" : "tw-absolute tw-right-5 tw-top-1/2 -tw-translate-y-1/2" }} {{ icon }}'></i>
   </button>

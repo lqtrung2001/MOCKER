@@ -8,12 +8,12 @@
          class='tw-text-red tw-text-center tw-mt-2'>{{ 'component.sign_up.exist_username' | translate }}</p>
       <moc-button mocClass='tw-mt-3 tw-text-right'
                   label='component.person.save'
-                  selfClass='tw-w-28 {{ formGroup.controls.username.value === user.username ? "btn-light" : "btn-primary" }}'></moc-button>
+                  mocStyle='tw-w-28 {{ formGroup.controls.username.value === user.username ? "btn-secondary" : "btn-primary" }}'></moc-button>
     </div>
     <div class='tw-p-5 tw-w-49/100 tw-border tw-rounded'>
       <p class='tw-font-medium'>{{ 'component.person.my_password' | translate }}</p>
       <moc-button (click)='changePassword()' mocClass='mt-3' label='component.person.change_password'
-                  selfClass='tw-w-52 btn-primary'></moc-button>
+                  mocStyle='tw-w-52 btn-primary'></moc-button>
     </div>
   </div>
   <div class='tw-mt-5 tw-flex tw-justify-between'>
@@ -23,13 +23,13 @@
       <p
         class='tw-mt-3'>{{ 'You have used 0 of the maximum requests allowed by the free tier in the last 24 hours.' }}</p>
       <moc-button mocClass='tw-mt-8 text-right' label='component.person.generate_new_api_key'
-                  selfClass='tw-w-52 btn-primary'></moc-button>
+                  mocStyle='tw-w-52 btn-primary'></moc-button>
     </div>
     <div class='tw-p-5 tw-w-49/100 tw-border tw-rounded'>
       <p class='tw-font-medium'>{{ 'component.person.my_plan' | translate }}</p>
       <p class='tw-mt-5'><b>Free</b> - 1,000 rows/download - Free</p>
       <moc-button mocClass='tw-mt-20 tw-text-right' label='component.person.change_plan'
-                  selfClass='tw-w-36 btn-primary'></moc-button>
+                  mocStyle='tw-w-36 btn-primary'></moc-button>
     </div>
   </div>
   <div class='tw-mt-5 tw-flex tw-justify-between'>
@@ -38,7 +38,7 @@
       <p
         class='tw-mt-3'>{{ 'If you delete your account, all of your data will be lost forever. Proceed with caution!' }}</p>
       <moc-button mocClass='tw-mt-8 tw-text-right' label='component.person.delete_my_account'
-                  selfClass='tw-w-52 tw-text-white tw-bg-red tw-uppercase'></moc-button>
+                  mocStyle='tw-w-52 tw-text-white tw-bg-red tw-uppercase'></moc-button>
     </div>
     <div class='tw-p-5 tw-w-49/100 tw-border tw-rounded'>
       <p class='tw-font-medium'>{{ 'component.person.my_payments' | translate }}</p>

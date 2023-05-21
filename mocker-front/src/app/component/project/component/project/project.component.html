@@ -5,14 +5,14 @@
       <moc-input [mocControl]='formGroup.controls.name' mocLabel='component.project.name'></moc-input>
       <moc-input [mocControl]='formGroup.controls.description' [mocTextArea]='true'
                  mocLabel='component.project.description'
-                 selfClass='tw-h-32 tw-overflow-auto'></moc-input>
+                 mocStyle='tw-h-32 tw-overflow-auto'></moc-input>
       <div class='tw-mt-3 tw-flex tw-justify-between tw-items-center'>
-        <moc-button (click)='submit()' mocClass='tw-w-49/100 tw-inline' icon='fa-solid fa-floppy-disk'
+        <moc-button (click)='submit()' icon='fa-solid fa-floppy-disk'
                     label='component.project.save'
-                    selfClass='btn-primary tw-text-left'></moc-button>
-        <moc-button (click)='delete()' mocClass='tw-w-49/100 tw-inline' icon='fa-solid fa-trash'
+                    mocStyle='btn-primary tw-text-left !tw-w-40'></moc-button>
+        <moc-button (click)='delete()' icon='fa-solid fa-trash'
                     label='component.project.delete'
-                    selfClass='btn-red tw-text-left'></moc-button>
+                    mocStyle='btn-primary-red tw-text-left !tw-w-40'></moc-button>
       </div>
     </div>
     <div>

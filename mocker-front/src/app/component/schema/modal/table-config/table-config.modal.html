@@ -4,7 +4,7 @@
     <moc-table-detail [fields]='formGroup.controls.table.controls.fields'
                       [relations]='options.relations'
                       mocClass='tw-mt-10'
-                      selfClass='tw-h-150 tw-overflow-y-auto'></moc-table-detail>
+                      mocStyle='tw-h-150 tw-overflow-y-auto'></moc-table-detail>
     <div class='tw-mt-5 tw-flex'>
       <div class='tw-flex'>
         <span class='tw-mt-3'>{{ 'modal.table_config.table_name' | translate }}</span>
@@ -18,12 +18,12 @@
       </div>
       <moc-button (click)='submit()' mocClass='tw-ml-5 tw-w-40' icon='fa-solid fa-floppy-disk'
                   label='modal.table_config.save'
-                  selfClass='btn-primary tw-text-left'></moc-button>
+                  mocStyle='btn-primary tw-text-left'></moc-button>
       <moc-button (click)='delete()' mocClass='tw-ml-5 tw-w-56' icon='fa-solid fa-trash' label='modal.table_config.delete'
-                  selfClass='btn-red tw-text-left'></moc-button>
+                  mocStyle='btn-primary-red tw-text-left'></moc-button>
       <moc-button (click)='close()' mocClass='tw-ml-5 tw-w-40'
                   icon='fa-solid fa-right-from-bracket'
-                  label='modal.table_config.close' selfClass='btn-light tw-text-left'></moc-button>
+                  label='modal.table_config.close' mocStyle='btn-secondary tw-text-left'></moc-button>
     </div>
   </div>
 </div>

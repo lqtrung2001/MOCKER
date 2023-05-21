@@ -5,14 +5,14 @@
     <p class='tw-font-bold tw-mt-5 text-primary-solid'>{{ 'component.sign_in.title' | translate }}</p>
     <moc-input [mocControl]='formGroup.controls.username'
                [mocPlaceholder]='"component.sign_in.username_placeholder" | translate'
-               selfClass='tw-mt-2'
+               mocStyle='tw-mt-2'
                type='email'></moc-input>
     <moc-input [mocControl]='formGroup.controls.password'
                [mocPlaceholder]='"component.sign_in.password_placeholder" | translate'
-               selfClass='tw-mt-2'
+               mocStyle='tw-mt-2'
                type='password'></moc-input>
     <p *ngIf='invalidAuth' class='tw-mt-4 tw-text-red'>{{ 'component.sign_in.invalid_auth' | translate }}</p>
-    <moc-button (click)='submit()' mocClass='tw-mt-3' selfClass='btn-primary' label='component.sign_in.continue'></moc-button>
+    <moc-button (click)='submit()' mocClass='tw-mt-3' mocStyle='btn-primary' label='component.sign_in.continue'></moc-button>
     <p class='tw-mt-4 tw-text-gray'>{{ 'component.sign_in.or' | translate }}</p>
     <button (click)='signInWithMethod(signInMethod)'
             *ngFor='let signInMethod of signInMethods'

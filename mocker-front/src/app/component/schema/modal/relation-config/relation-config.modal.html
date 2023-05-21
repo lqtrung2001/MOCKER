@@ -18,23 +18,23 @@
                   [label]='label'
                   mocClass='tw-mt-3'
                   icon='fa-solid fa-sort'
-                  selfClass='tw-text-left btn-light'></moc-button>
+                  mocStyle='tw-text-left btn-secondary'></moc-button>
     </moc-dropdown>
     <div class='tw-flex tw-mt-3 tw-float-right tw-clear-both'>
       <moc-button *ngIf='options.id'
                   (click)='delete()'
                   label='modal.relation_config.delete'
-                  selfClass='btn-red'>
+                  mocStyle='btn-primary-red'>
       </moc-button>
       <moc-button (click)='modalInstance.close(false)'
                   mocClass='tw-ml-1'
                   label='modal.relation_config.cancel'
-                  selfClass='btn-light'>
+                  mocStyle='btn-secondary'>
       </moc-button>
       <moc-button (click)='close()'
                   mocClass='tw-ml-1'
                   label='modal.relation_config.ok'
-                  selfClass='tw-w-12 btn-primary'>
+                  mocStyle='tw-w-12 btn-primary'>
       </moc-button>
     </div>
   </div>

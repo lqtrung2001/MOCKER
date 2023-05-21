@@ -11,7 +11,7 @@
            [readonly]='readonly'
            [style]='styles'
            [type]='type'
-           class='{{ selfClass }} {{ (isValidated && mocControl.invalid) ? "invalid" : "" }} tw-border tw-p-2.5 tw-rounded tw-w-full'/>
+           class='{{ mocStyle }} {{ (isValidated && mocControl.invalid) ? "invalid" : "" }} tw-border tw-p-2.5 tw-rounded tw-w-full'/>
     <textarea #inputElement *ngIf='mocTextArea'
               [formControl]='mocControl'
               [maxlength]='maxLength'
@@ -19,7 +19,7 @@
               [placeholder]='mocPlaceholder || ""'
               [readonly]='readonly'
               [style]='styles'
-              class='{{ selfClass }} {{ (isValidated && mocControl.invalid) ? "invalid" : "" }} tw-border tw-p-2.5 tw-rounded tw-w-full'></textarea>
+              class='{{ mocStyle }} {{ (isValidated && mocControl.invalid) ? "invalid" : "" }} tw-border tw-p-2.5 tw-rounded tw-w-full'></textarea>
     <div (click)='showPasswordChange()'
          *ngIf='isShowEye'
          class='tw-absolute tw-right-3 tw-top-4 tw-cursor-pointer tw-text-lg'>

@@ -6,7 +6,7 @@
     <p class='tw-mt-2 tw-font-medium'>{{ options ? options.username : undefined }}</p>
     <moc-input [mocControl]='verificationCode'
                [mocPlaceholder]='"modal.verification.verification_code_placeholder" | translate'
-               [selfClass]='isInvalidVerificationCode ? "invalid" : ""'></moc-input>
+               [mocStyle]='isInvalidVerificationCode ? "invalid" : ""'></moc-input>
     <p *ngIf='isInvalidVerificationCode'
        class='tw-text-red tw-text-center tw-mt-2'>{{ 'modal.verification.invalid_verification_code' | translate }}</p>
     <hr class='tw-mt-4'/>

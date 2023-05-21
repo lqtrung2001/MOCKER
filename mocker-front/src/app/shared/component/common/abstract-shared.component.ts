@@ -10,7 +10,7 @@ import { AbstractComponent } from '@core/common/abstract.component';
 })
 export abstract class AbstractSharedComponent extends AbstractComponent implements AfterViewInit {
   @Input() mocClass: string;
-  @Input() selfClass: string;
+  @Input() mocStyle: string;
 
   protected constructor(
     injector: Injector
@@ -21,7 +21,7 @@ export abstract class AbstractSharedComponent extends AbstractComponent implemen
   ngAfterViewInit(): void {
     // For important
     this.mocClass?.replace(/ /g, ' !');
-    this.selfClass?.replace(/ /g, ' !');
+    this.mocStyle?.replace(/ /g, ' !');
   }
 
 }

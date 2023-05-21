@@ -5,22 +5,22 @@
     <p class='tw-font-bold tw-mt-5 text-primary-solid'>{{ 'component.sign_up.title' | translate }}</p>
     <moc-input [mocControl]='formGroup.controls.username'
                [mocPlaceholder]='"component.sign_up.email_address_placeholder" | translate'
-               selfClass='{{ isExistedUsername ? "invalid" : "" }} tw-mt-2'
+               mocStyle='{{ isExistedUsername ? "invalid" : "" }} tw-mt-2'
                type='email'></moc-input>
     <p *ngIf='isExistedUsername'
        class='tw-text-red tw-text-center tw-mt-2'>{{ 'component.sign_up.exist_username' | translate }}</p>
     <moc-input [mocControl]='formGroup.controls.password'
                [mocPlaceholder]='"component.sign_up.password_placeholder" | translate'
-               selfClass='tw-mt-2'
+               mocStyle='tw-mt-2'
                type='password'></moc-input>
     <moc-input [mocControl]='formGroup.controls.confirmPassword'
                [mocPlaceholder]='"component.sign_up.confirm_password_placeholder" | translate'
-               selfClass='{{ isPasswordNotMatch ? "invalid" : "" }} tw-mt-2'
+               mocStyle='{{ isPasswordNotMatch ? "invalid" : "" }} tw-mt-2'
                type='password'></moc-input>
     <p *ngIf='isPasswordNotMatch'
        class='tw-text-red tw-text-center tw-mt-2'>{{ 'component.sign_up.password_not_match' | translate }}</p>
     <p class='tw-mt-4 tw-text-gray tw-text-xs'>{{ 'component.sign_up.accept_terms_and_conditions' | translate }}</p>
-    <moc-button (click)='submit()' mocClass='tw-mt-3' selfClass='btn-primary'
+    <moc-button (click)='submit()' mocClass='tw-mt-3' mocStyle='btn-primary'
                 label='component.sign_up.sign_up'></moc-button>
     <p class='tw-mt-4 tw-text-gray'>{{ 'component.sign_up.or' | translate }}</p>
     <button *ngFor='let signInMethod of signInMethods'

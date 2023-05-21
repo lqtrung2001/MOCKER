@@ -5,8 +5,8 @@
     <moc-input mocClass='tw-mt-3' [mocControl]='formGroup.controls.name' mocLabel='modal.create_entity.name'></moc-input>
     <moc-input [mocTextArea]='true' [mocControl]='formGroup.controls.description' mocLabel='modal.create_entity.description'></moc-input>
     <div class='tw-mt-3 tw-flex tw-justify-end'>
-      <moc-button (click)='submit()' selfClass='btn-primary' label='modal.create_entity.save'></moc-button>
-      <moc-button (click)='cancel()' mocClass='tw-ml-2' selfClass='btn-light' label='modal.create_entity.cancel'></moc-button>
+      <moc-button (click)='submit()' mocStyle='btn-primary' label='modal.create_entity.save'></moc-button>
+      <moc-button (click)='cancel()' mocClass='tw-ml-2' mocStyle='btn-secondary' label='modal.create_entity.cancel'></moc-button>
     </div>
   </div>
 </div>
