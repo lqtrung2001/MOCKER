@@ -110,7 +110,7 @@ export class GridComponent extends SharedComponent implements OnChanges {
   }
 
   get totalPageNumber(): Array<number> {
-    if (!this.mocGrid?.values?.length) {
+    if (!this.pages.length) {
       return [1];
     }
     return Array(Math.ceil(this.pages.length / this.applicationConfig.numberItemsOfPage))
