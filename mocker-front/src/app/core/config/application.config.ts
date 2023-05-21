@@ -26,7 +26,7 @@ export class ApplicationConfig {
       format: FormatEnum.SQL
     },
     {
-      icon: 'fa-sharp fa-solid fa-paperclip-vertical',
+      icon: 'fa-solid fa-table',
       format: FormatEnum.JSON
     },
     {

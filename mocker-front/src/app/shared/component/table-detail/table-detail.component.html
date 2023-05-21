@@ -23,7 +23,7 @@
             [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
             [control]='field.controls.generateType'
             [label]='field.controls.generateType.value?.code || ("component.table_detail.generate_type_placeholder" | translate)'
-            icon='fa-solid fa-repeat'
+            icon='fa-solid fa-sort'
             selfClass='tw-text-left tw-px-5 btn-light {{ !field.controls.generateType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
           </moc-button>
         </td>
@@ -33,7 +33,7 @@
             [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
             [control]='field.controls.sqlType'
             [label]='field.controls.sqlType.value?.code || ("component.table_detail.sql_type_placeholder" | translate)'
-            icon='fa-solid fa-repeat'
+            icon='fa-solid fa-sort'
             selfClass='tw-text-left tw-px-5 btn-light {{ !field.controls.sqlType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
           </moc-button>
         </td>
@@ -49,7 +49,7 @@
                        type='number'></moc-input>
             <moc-button [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
                         mocClass='tw-w-12'
-                        icon='fa-solid fa-sigma'
+                        icon='fa-solid fa-diagram-predecessor'
                         selfClass='btn-light tw-h-10'></moc-button>
             <i (click)='removeField(i, field.controls.id ? field.controls.id.value : undefined)'
                class='tw-text-lg {{ isReadonly(field.controls.id ? field.controls.id.value : undefined) ? "" : "tw-cursor-pointer" }} fa-regular fa-circle-xmark tw-self-center'></i>

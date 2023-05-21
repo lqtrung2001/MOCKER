@@ -46,7 +46,7 @@ export class NavigationComponent extends AbstractComponent {
     }];
     this.options = [{
       id: '1',
-      icon: 'fa-solid fa-repeat',
+      icon: 'fa-solid fa-sort',
       label: 'Switch Account',
       click: (): void => {
         console.log('Switch Account');
