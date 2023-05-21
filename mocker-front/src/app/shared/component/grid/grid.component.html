@@ -30,7 +30,7 @@
             *ngFor='let column of mocGrid.columns'
             [colSpan]='column.colSpan || 1'
             [innerHTML]='getInnerHTML(pageValue.gridValue[column.key])'
-            class='tw-p-4  {{ columnActive===column.key ? "tw-bg-gray" : undefined }}'
+            class='tw-p-4  {{ columnActive === column.key ? "tw-bg-gray" : undefined }}'
         ></td>
       </tr>
       <tr>
@@ -48,16 +48,16 @@
     </ng-container>
   </table>
   <div class='tw-flex tw-justify-end tw-mt-5 pagination'>
-    <span (click)='pageNumberChange(1)'
+    <span (click)='selectPage(1)'
       [class]='(totalPageNumber.length === 1 || currentPageNumber === 1) ? "disable" : "enable"'>{{ '<<' }}</span>
-    <span (click)='pageNumberChange("previous")'
+    <span (click)='selectPage("previous")'
       [class]='(totalPageNumber.length === 1 || currentPageNumber === 1) ? "disable" : "enable"'>{{ '<' }}</span>
     <span *ngFor='let item of totalPageNumber'
-          (click)='pageNumberChange(item)'
+          (click)='selectPage(item)'
       class='{{ currentPageNumber === item ? "active" : undefined }} enable'>{{ item }}</span>
-    <span (click)='pageNumberChange("next")'
+    <span (click)='selectPage("next")'
       [class]='(totalPageNumber.length === 1 || currentPageNumber === totalPageNumber.length) ? "disable" : "enable"'>{{ '>' }}</span>
-    <span (click)='pageNumberChange(totalPageNumber.length)'
+    <span (click)='selectPage(totalPageNumber.length)'
       [class]='(totalPageNumber.length === 1 || currentPageNumber === totalPageNumber.length) ? "disable" : "enable"'>{{ '>>' }}</span>
   </div>
 </div>

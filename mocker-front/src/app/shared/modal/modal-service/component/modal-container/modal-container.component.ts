@@ -10,7 +10,7 @@ import {
 import { Modal } from '@shared/modal/modal-service/model/modal.model';
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Do Quoc Viet
  */
 
 @Component({

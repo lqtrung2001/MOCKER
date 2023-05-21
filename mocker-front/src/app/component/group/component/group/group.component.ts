@@ -83,9 +83,6 @@ export class GroupComponent extends AbstractComponent implements OnInit {
         }
       });
     });
-    this.toastrProvider.showSuccess({
-      body: 'message.group_save_success'
-    });
   }
 
   delete(): void {

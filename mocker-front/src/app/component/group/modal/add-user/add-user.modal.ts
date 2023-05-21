@@ -30,6 +30,9 @@ export class AddUserModal extends AbstractModal {
     super(injector);
     this.searchFormControl = this.formBuilder.control(undefined, []);
     this.searchFormControl.valueChanges.subscribe((value: string): void => {
+      if (!value) {
+        return;
+      }
       this.users = [];
       clearTimeout(this.timeout);
       this.timeout = setTimeout((): void => {

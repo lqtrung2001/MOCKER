@@ -27,26 +27,21 @@ export class GroupsComponent extends AbstractComponent implements OnInit {
   ngOnInit(): void {
     this.groupService.getEntities().subscribe((groups: GroupModel[]): void => {
       this.grid = {
-        columns: [
-          {
-            label: this.translateService.instant('component.groups.name'),
-            key: 'name',
-            isSearched: true
-          },
-          {
-            label: this.translateService.instant('component.groups.description'),
-            key: 'description'
-          },
-          {
-            label: this.translateService.instant('component.groups.shared_by'),
-            key: 'sharedBy',
-            isSearched: true
-          },
-          {
-            label: this.translateService.instant('component.groups.last_modified'),
-            key: 'lastModified'
-          }
-        ],
+        columns: [{
+          label: this.translateService.instant('component.groups.name'),
+          key: 'name',
+          isSearched: true
+        }, {
+          label: this.translateService.instant('component.groups.description'),
+          key: 'description',
+          isSearched: true
+        }, {
+          label: this.translateService.instant('component.groups.shared_by'),
+          key: 'sharedBy'
+        }, {
+          label: this.translateService.instant('component.groups.last_modified'),
+          key: 'lastModified'
+        }],
         values: groups.map((group: GroupModel): GridValue => ({
           name: {
             value: group.name,

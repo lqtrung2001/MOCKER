@@ -32,7 +32,6 @@ export class ModalService {
   }
 
   public open<T extends Modal>(component: Type<T>, inputs?: any): Observable<any> {
-    document.body.style.overflow = 'hidden';
     this.setupModalContainerDiv();
     const modalContainerRef: ComponentRef<ModalContainerComponent> = this.applicationRef.bootstrap(this.modalContainerFactory, this.modalContainer);
     const modalComponentRef: ComponentRef<T> = modalContainerRef.instance.createModal(component);
