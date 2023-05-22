@@ -137,7 +137,7 @@ export class GroupMembersComponent extends AbstractComponent implements OnChange
   invalidDeleteMember(groupMember: GroupMemberModel): boolean {
     if (groupMember.user.id === this.applicationConfig.user?.id) {
       this.modalProvider.showError({
-        body: 'You can not delete yourself from this group!'
+        detail: 'You can not delete <b>yourself</b> from this group! Please try again.'
       });
       return true;
     }
@@ -146,7 +146,7 @@ export class GroupMembersComponent extends AbstractComponent implements OnChange
       || (currentRole === RoleEnum.GROUP_ASSOCIATE && groupMember.role === RoleEnum.GROUP_ASSOCIATE)
       || (currentRole === RoleEnum.GROUP_ASSOCIATE && groupMember.role === RoleEnum.GROUP_ADMIN)) {
       this.modalProvider.showError({
-        body: 'You can be allowed to perform this action!'
+        detail: 'You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.'
       });
       return true;
     }
@@ -154,14 +154,13 @@ export class GroupMembersComponent extends AbstractComponent implements OnChange
   }
 
   get createAction(): CreateAction {
-    const currentRole: RoleEnum = this.group.groupMembers.find((groupMember: GroupMemberModel): boolean => groupMember.user.id === this.applicationConfig.user?.id)!.role;
-    if (currentRole !== RoleEnum.GROUP_ADMIN && currentRole !== RoleEnum.GROUP_ASSOCIATE) {
+    const groupMember: GroupMemberModel | undefined = this.group.groupMembers
+      .find((groupMember: GroupMemberModel): boolean => groupMember.user.id === this.applicationConfig.user?.id);
+    if (!groupMember || (groupMember.role !== RoleEnum.GROUP_ADMIN && groupMember.role !== RoleEnum.GROUP_ASSOCIATE)) {
       return {
-        click: (): void => {
-          this.modalProvider.showError({
-            body: 'You can not be allowed to perform this action!'
-          });
-        },
+        click: () => this.modalProvider.showError({
+          detail: 'You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.'
+        }),
         content: 'component.group_members.add_user'
       };
     }

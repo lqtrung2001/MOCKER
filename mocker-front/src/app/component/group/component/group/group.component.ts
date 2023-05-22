@@ -82,7 +82,7 @@ export class GroupComponent extends AbstractComponent implements OnInit {
         .role;
       if (currentRole !== RoleEnum.GROUP_ADMIN && currentRole !== RoleEnum.GROUP_ASSOCIATE) {
         this.modalProvider.showError({
-          body: 'You can not be allowed to perform this action!'
+          detail: 'You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.'
         });
         return;
       }
@@ -94,6 +94,9 @@ export class GroupComponent extends AbstractComponent implements OnInit {
         if (this.router.url.includes('new')) {
           this.location.replaceState(`/group/${group.id}`);
         }
+        this.toastrProvider.showSuccess({
+          detail: `The group <b>${group.name}</b> has been created successfully!`
+        });
       });
     });
   }
@@ -104,7 +107,7 @@ export class GroupComponent extends AbstractComponent implements OnInit {
       .role;
     if (currentRole !== RoleEnum.GROUP_ADMIN) {
       this.modalProvider.showError({
-        body: 'You can not be allowed to perform this action!'
+        detail: 'You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.'
       });
       return;
     }
@@ -114,9 +117,8 @@ export class GroupComponent extends AbstractComponent implements OnInit {
       if (result) {
         this.groupService.deleteEntity(this.group.id).subscribe((group: GroupModel): void => {
           if (group) {
-            const detail: string = this.translateService.instant('message.group_delete_success', { name: this.group.name });
-            this.toastrProvider.showSuccess({
-              detail
+            this.toastrProvider.showInformation({
+              detail: `The group <b>${group.name}</b> has been deleted successfully!`
             });
             this.router.navigate(['/group']).then();
           }

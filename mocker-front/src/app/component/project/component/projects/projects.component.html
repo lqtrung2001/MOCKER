@@ -1,6 +1,6 @@
 <div class='tw-w-300 tw-mx-auto tw-text-sm' id='main'>
   <p class='tw-text-3xl tw-font-medium tw-mt-5'>{{ 'component.projects.my_projects' | translate }}</p>
-  <moc-description [description]='"component.projects.information" | translate' class='tw-mt-5'></moc-description>
+  <moc-description mocClass='tw-mt-5'>{{ 'component.projects.information' | translate }}</moc-description>
   <moc-grid mocClass='tw-mt-10' [createAction]='createAction' [mocGrid]='grid'></moc-grid>
 </div>
 <moc-copyright mocClass='tw-mt-10'></moc-copyright>

@@ -38,7 +38,7 @@ export class ApplicationConfig {
       format: FormatEnum.CSV
     }
   ];
-  public numberItemsOfPage: number = 5;
+  public numberItemsOfPage: number = 8;
 
   constructor(
     private formBuilder: FormBuilder

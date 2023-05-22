@@ -1,6 +1,6 @@
 <div class='tw-w-300 tw-mx-auto tw-text-sm' id='main'>
   <p class='tw-text-3xl tw-font-medium tw-mt-5'>{{ 'component.general.mocker' | translate }}</p>
-  <moc-description [description]='"component.general.introduction" | translate' class='tw-mt-5'></moc-description>
+  <moc-description mocClass='tw-mt-5'>{{ 'component.general.introduction' | translate }}</moc-description>
   <moc-table-detail [fields]='formGroup.controls.table.controls.fields' mocClass='tw-mt-10'></moc-table-detail>
   <hr class='tw-mt-5'/>
   <div [formGroup]='formGroup' class='tw-flex tw-mt-5'>

@@ -69,7 +69,7 @@ export class GroupProjectsComponent extends AbstractComponent implements OnChang
         delete: {
           value: StringUtil.EMPTY,
           click: (): void => {
-            if (this.invalidDeleteProject(project)) {
+            if (this.invalidDeleteProject()) {
               return;
             }
             this.modalProvider.showConfirmation({
@@ -90,11 +90,11 @@ export class GroupProjectsComponent extends AbstractComponent implements OnChang
     };
   }
 
-  invalidDeleteProject(project: ProjectModel): boolean {
+  invalidDeleteProject(): boolean {
     const currentRole: RoleEnum = this.group.groupMembers.find((groupMember: GroupMemberModel): boolean => groupMember.user.id === this.applicationConfig.user?.id)!.role;
     if (currentRole !== RoleEnum.GROUP_ADMIN && currentRole !== RoleEnum.GROUP_ASSOCIATE) {
       this.modalProvider.showError({
-        body: 'You can be allowed to perform this action!'
+        detail: 'You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.'
       });
       return true;
     }
@@ -102,11 +102,12 @@ export class GroupProjectsComponent extends AbstractComponent implements OnChang
   }
 
   get createAction(): CreateAction {
-    const currentRole: RoleEnum = this.group.groupMembers.find((groupMember: GroupMemberModel): boolean => groupMember.user.id === this.applicationConfig.user?.id)!.role;
-    if (currentRole !== RoleEnum.GROUP_ADMIN && currentRole !== RoleEnum.GROUP_ASSOCIATE) {
+    const groupMember: GroupMemberModel | undefined = this.group.groupMembers
+      .find((groupMember: GroupMemberModel): boolean => groupMember.user.id === this.applicationConfig.user?.id);
+    if (!groupMember || (groupMember.role !== RoleEnum.GROUP_ADMIN && groupMember.role !== RoleEnum.GROUP_ASSOCIATE)) {
       return {
         click: () => this.modalProvider.showError({
-          body: 'You can not be allowed to perform this action!'
+          detail: 'You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.'
         }),
         content: 'component.group_projects.create_project'
       };

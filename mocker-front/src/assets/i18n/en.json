@@ -10,7 +10,7 @@
     "schema_save_success": "Schema saved successfully",
     "schema_delete_confirm": "Are you sure you want to delete this schema?",
     "schema_delete_success": "Schema with name {{name}} is deleted successfully",
-    "group_save_success": "Group saved successfully",
+    "group_save_success": "Group with name: {{ name }} saved successfully",
     "group_delete_confirm": "Are you sure you want to delete this group?",
     "group_delete_success": "Group with name {{name}} is deleted successfully",
     "project_save_success": "Project saved successfully",
@@ -206,6 +206,7 @@
       "search": "Search by {{searches}} ..."
     },
     "group_members": {
+      "description": "A member of the group has three roles (GROUP_ADMIN, GROUP_ASSOCIATE and USER), each of which has a specific feature. With the GROUP ADMIN/GROUP_ASSOCIATE role, you can create or update group members and eventually delete them. But group associations can not remove the GROUP ADMIN role, they only can remove member that has user role in group. Additionally, you can not remove yourself from group. If you are GROUP ADMIN, when you want to propose someone become GROUP_ADMIN, you will has role USER after.",
       "name": "name",
       "role": "role",
       "bio": "bio",
