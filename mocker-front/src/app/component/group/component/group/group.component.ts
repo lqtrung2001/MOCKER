@@ -8,6 +8,8 @@ import {
   CreateEntityModalCloseOptions,
   CreateEntityModalOptions
 } from '@shared/modal/create-entity/create-entity.modal';
+import { RoleEnum } from '@core/domain/enum/role.enum';
+import { GroupMemberModel } from '@core/domain/model/entity/group-member.model';
 
 /**
  * @author Do Quoc Viet
@@ -74,6 +76,17 @@ export class GroupComponent extends AbstractComponent implements OnInit {
       ...this.group,
       ...this.formGroup.getRawValue()
     };
+    if (this.group.id) {
+      const currentRole: RoleEnum = this.group.groupMembers
+        .find((groupMember: GroupMemberModel): boolean => groupMember.user.id === this.applicationConfig.user?.id)!
+        .role;
+      if (currentRole !== RoleEnum.GROUP_ADMIN && currentRole !== RoleEnum.GROUP_ASSOCIATE) {
+        this.modalProvider.showError({
+          body: 'You can not be allowed to perform this action!'
+        });
+        return;
+      }
+    }
     this.groupService.upsertEntity(this.group).subscribe((group: GroupModel): void => {
       this.groupService.getEntity(group.id).subscribe((group: GroupModel): void => {
         this.group = group;
@@ -86,6 +99,15 @@ export class GroupComponent extends AbstractComponent implements OnInit {
   }
 
   delete(): void {
+    const currentRole: RoleEnum = this.group.groupMembers
+      .find((groupMember: GroupMemberModel): boolean => groupMember.user.id === this.applicationConfig.user?.id)!
+      .role;
+    if (currentRole !== RoleEnum.GROUP_ADMIN) {
+      this.modalProvider.showError({
+        body: 'You can not be allowed to perform this action!'
+      });
+      return;
+    }
     this.modalProvider.showConfirmation({
       body: 'message.group_delete_confirm'
     }).subscribe((result: boolean): void => {

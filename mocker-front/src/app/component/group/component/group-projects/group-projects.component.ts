@@ -5,6 +5,8 @@ import { CreateAction, Grid, GridValue } from '@shared/component/grid/grid.compo
 import { StringUtil } from '@core/util/string.util';
 import { ProjectService } from '@app/core/service/project.service';
 import { GroupModel } from '@core/domain/model/entity/group.model';
+import { GroupMemberModel } from '@core/domain/model/entity/group-member.model';
+import { RoleEnum } from '@core/domain/enum/role.enum';
 
 /**
  * @author Do Quoc Viet
@@ -67,6 +69,9 @@ export class GroupProjectsComponent extends AbstractComponent implements OnChang
         delete: {
           value: StringUtil.EMPTY,
           click: (): void => {
+            if (this.invalidDeleteProject(project)) {
+              return;
+            }
             this.modalProvider.showConfirmation({
               body: 'component.group_projects.delete_project_confirmation'
             }).subscribe((result: boolean): void => {
@@ -85,7 +90,27 @@ export class GroupProjectsComponent extends AbstractComponent implements OnChang
     };
   }
 
+  invalidDeleteProject(project: ProjectModel): boolean {
+    const currentRole: RoleEnum = this.group.groupMembers.find((groupMember: GroupMemberModel): boolean => groupMember.user.id === this.applicationConfig.user?.id)!.role;
+    if (currentRole !== RoleEnum.GROUP_ADMIN && currentRole !== RoleEnum.GROUP_ASSOCIATE) {
+      this.modalProvider.showError({
+        body: 'You can be allowed to perform this action!'
+      });
+      return true;
+    }
+    return false;
+  }
+
   get createAction(): CreateAction {
+    const currentRole: RoleEnum = this.group.groupMembers.find((groupMember: GroupMemberModel): boolean => groupMember.user.id === this.applicationConfig.user?.id)!.role;
+    if (currentRole !== RoleEnum.GROUP_ADMIN && currentRole !== RoleEnum.GROUP_ASSOCIATE) {
+      return {
+        click: () => this.modalProvider.showError({
+          body: 'You can not be allowed to perform this action!'
+        }),
+        content: 'component.group_projects.create_project'
+      };
+    }
     return {
       click: () => this.router.navigate(['/project/new'], {
         queryParams: {

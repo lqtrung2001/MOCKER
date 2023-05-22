@@ -10,6 +10,8 @@ import {
   CreateEntityModalCloseOptions,
   CreateEntityModalOptions
 } from '@shared/modal/create-entity/create-entity.modal';
+import { RoleEnum } from '@core/domain/enum/role.enum';
+import { GroupMemberModel } from '@core/domain/model/entity/group-member.model';
 
 /**
  * @author Do Quoc Viet
@@ -57,6 +59,12 @@ export class ProjectComponent extends AbstractComponent implements OnInit {
           if (!group.id) {
             return;
           }
+          if (this.noPermissionForUpsertProject(group)) {
+            this.modalProvider.showError({
+              body: 'You can not be allowed to access this group'
+            });
+            return;
+          }
           setTimeout((): void => {
             const options: CreateEntityModalOptions = {
               type: 'project',
@@ -100,6 +108,13 @@ export class ProjectComponent extends AbstractComponent implements OnInit {
         body: 'message.project_save_success'
       });
     });
+  }
+
+  noPermissionForUpsertProject(group: GroupModel): boolean {
+    const currentRole: RoleEnum = group.groupMembers
+      .find((groupMember: GroupMemberModel): boolean => groupMember.user.id === this.applicationConfig.user?.id)!
+      .role;
+    return currentRole !== RoleEnum.GROUP_ADMIN && currentRole !== RoleEnum.GROUP_ASSOCIATE;
   }
 
   delete(): void {

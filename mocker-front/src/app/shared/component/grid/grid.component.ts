@@ -144,7 +144,7 @@ export class GridComponent extends SharedComponent implements OnChanges {
   }
 
   get pages(): PageValue[] {
-    return this.mocGrid.values
+    return !this.mocGrid ? [] : this.mocGrid.values
       .map((gridValue: GridValue, index: number): PageValue => ({
         gridValue: gridValue,
         position: index

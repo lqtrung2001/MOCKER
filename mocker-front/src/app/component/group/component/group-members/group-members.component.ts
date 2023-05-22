@@ -111,6 +111,9 @@ export class GroupMembersComponent extends AbstractComponent implements OnChange
         delete: {
           value: StringUtil.EMPTY,
           click: (): void => {
+            if (this.invalidDeleteMember(groupMember)) {
+              return;
+            }
             this.modalProvider.showConfirmation({
               body: 'component.group_members.remove_user_confirmation'
             }).subscribe((result: boolean): void => {
@@ -119,6 +122,7 @@ export class GroupMembersComponent extends AbstractComponent implements OnChange
                   this.groupMemberService.getGroupMembersByGroupId(this.group.id)
                     .subscribe((groupMembers: GroupMemberModel[]): void => {
                       this.group.groupMembers = groupMembers;
+                      this.refresh();
                     });
                 });
               }
@@ -130,7 +134,37 @@ export class GroupMembersComponent extends AbstractComponent implements OnChange
     };
   }
 
+  invalidDeleteMember(groupMember: GroupMemberModel): boolean {
+    if (groupMember.user.id === this.applicationConfig.user?.id) {
+      this.modalProvider.showError({
+        body: 'You can not delete yourself from this group!'
+      });
+      return true;
+    }
+    const currentRole: RoleEnum = this.group.groupMembers.find((groupMember: GroupMemberModel): boolean => groupMember.user.id === this.applicationConfig.user?.id)!.role;
+    if (currentRole === RoleEnum.USER
+      || (currentRole === RoleEnum.GROUP_ASSOCIATE && groupMember.role === RoleEnum.GROUP_ASSOCIATE)
+      || (currentRole === RoleEnum.GROUP_ASSOCIATE && groupMember.role === RoleEnum.GROUP_ADMIN)) {
+      this.modalProvider.showError({
+        body: 'You can be allowed to perform this action!'
+      });
+      return true;
+    }
+    return false;
+  }
+
   get createAction(): CreateAction {
+    const currentRole: RoleEnum = this.group.groupMembers.find((groupMember: GroupMemberModel): boolean => groupMember.user.id === this.applicationConfig.user?.id)!.role;
+    if (currentRole !== RoleEnum.GROUP_ADMIN && currentRole !== RoleEnum.GROUP_ASSOCIATE) {
+      return {
+        click: (): void => {
+          this.modalProvider.showError({
+            body: 'You can not be allowed to perform this action!'
+          });
+        },
+        content: 'component.group_members.add_user'
+      };
+    }
     return {
       click: (): void => {
         const options: AddUserModalOptions = {

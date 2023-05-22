@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -68,7 +67,7 @@ public class GroupServiceImpl implements GroupService {
     public Group delete(UUID id) {
         UUID authId = applicationContextHolder.getCurrentUser().getId();
         if (!groupRepository.getRoleUserInGroup(id, authId).equals(Role.GROUP_ADMIN)) {
-            throw new PermissionException("User " + authId + "is not allowed to delete");
+            throw new PermissionException("User " + authId + " is not allowed to delete");
         }
         Group group = groupRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         List<GroupMember> groupMembers = groupMemberRepository.findAllByGroup(group);
@@ -81,9 +80,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group upsert(Group group) {
-        UUID authId = Optional
-                .ofNullable(applicationContextHolder.getCurrentUser().getId())
-                .orElseThrow(() -> new PermissionException("Please login and try again!"));
+        UUID authId = applicationContextHolder.getCurrentUser().getId();
         // After saving group, update the group member for saved group and auth user
         if (group.getId() == null) {
             groupRepository.save(group);

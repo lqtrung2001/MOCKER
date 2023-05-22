@@ -37,7 +37,8 @@ export class AddUserModal extends AbstractModal {
       clearTimeout(this.timeout);
       this.timeout = setTimeout((): void => {
         this.userService.findByCriteria(value).subscribe((users: UserModel[]): void => {
-          this.users = users.filter((user: UserModel): boolean => !this.options.addedUserIds.find((userId: string): boolean => user.id === userId));
+          this.users = users.filter((user: UserModel): boolean => !this.options.addedUserIds.find((userId: string): boolean => user.id === userId))
+            .slice(0, 1);
         });
       }, 1000);
     });
