@@ -27,11 +27,10 @@ export class ErrorHandlerConfig implements ErrorHandler {
     if (exception instanceof AbstractException) {
       this.modalProvider.showError({
         detail: exception.message
-      }).subscribe((): void => {
-        if (exception instanceof AuthenticationException) {
-          this.router.navigate(['auth/sign-in']).then();
-        }
       });
+      if (exception instanceof AuthenticationException) {
+        this.router.navigate(['auth/sign-in']).then();
+      }
     } else {
       console.error(error);
     }
