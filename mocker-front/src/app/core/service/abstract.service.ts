@@ -9,7 +9,7 @@ import {
   HttpResponse,
   HttpStatusCode
 } from '@angular/common/http';
-import { catchError, finalize, Observable } from 'rxjs';
+import { catchError, finalize, Observable, of } from 'rxjs';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 import { ApplicationConfig } from '@core/config/application.config';
 import { environment } from '@environment/environment';
@@ -22,10 +22,10 @@ import { HttpHeaderConstant } from '@core/constant/http-header.constant';
 import { ErrorModel } from '@core/domain/model/error.model';
 import { UserModel } from '@core/domain/model/entity/user.model';
 import { UnauthorizedException } from '@core/domain/exception/unauthorized.exception';
-import { BadRequestException } from '@core/domain/exception/bad-request.exception';
-import { NotFoundException } from '@core/domain/exception/not-found.exception';
 import { AuthenticationException } from '@core/domain/exception/authentication.exception';
 import { Exception } from '@core/domain/exception/exception';
+import { AbstractException } from '@core/domain/exception/abstract.exception';
+import { Router } from '@angular/router';
 
 /**
  * @author Do Quoc Viet
@@ -42,12 +42,14 @@ export class AbstractService<Type> implements HttpInterceptor {
   protected httpClient: HttpClient;
   protected appConfigService: ApplicationConfig;
   protected translateService: TranslateService;
+  protected router: Router;
 
   constructor(private readonly injector: Injector) {
     this.modalProvider = injector.get(ModalProvider);
     this.httpClient = injector.get(HttpClient);
     this.appConfigService = injector.get(ApplicationConfig);
     this.translateService = injector.get(TranslateService);
+    this.router = injector.get(Router);
   }
 
   /**
@@ -131,18 +133,26 @@ export class AbstractService<Type> implements HttpInterceptor {
       error.additionalMessage = httpErrorResponse.message;
       error.path = httpErrorResponse.url || StringUtil.EMPTY;
     }
+    let exception: AbstractException;
     switch (httpErrorResponse.status) {
       case HttpStatusCode.Forbidden:
-        throw new AuthenticationException(this.translateService.instant('error.authentication.title'), this.translateService.instant('error.authentication.message'));
+        exception = new AuthenticationException(this.translateService.instant('error.authentication.title'), this.translateService.instant('error.authentication.message'));
+        break;
       case HttpStatusCode.BadRequest:
-        throw new BadRequestException(error.message, error.additionalMessage);
       case HttpStatusCode.NotFound:
-        throw new NotFoundException(error.message, error.additionalMessage);
       case HttpStatusCode.Unauthorized:
-        throw new UnauthorizedException(error.message, error.additionalMessage);
+        exception = new UnauthorizedException(error.message, error.additionalMessage);
+        break;
       default:
-        throw new Exception(error.message, error.additionalMessage, error.path);
+        exception = new Exception(error.message, error.additionalMessage, error.path);
     }
+    this.modalProvider.showError({
+      detail: exception.message
+    });
+    if (exception instanceof AuthenticationException) {
+      this.router.navigate(['auth/sign-in']).then();
+    }
+    throw exception;
   };
 
   /**

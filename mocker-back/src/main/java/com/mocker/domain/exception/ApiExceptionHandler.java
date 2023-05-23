@@ -5,9 +5,11 @@ import com.mocker.utility.MessageContextHelper;
 import com.sun.jdi.InternalException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.persistence.OptimisticLockException;
 import java.sql.Timestamp;
 import java.time.Instant;
 
@@ -117,6 +119,25 @@ public class ApiExceptionHandler {
         errorDto.setCode(ErrorDto.CodeEnum.PERMISSION_EXCEPTION);
         errorDto.setAdditionalMessage(unauthorizedException.getMessage());
         return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);
+    }
+
+    /**
+     * The OptimisticLockException handler
+     *
+     * @param objectOptimisticLockingFailureException The objectOptimisticLockingFailureException to be handled
+     * @return The ErrorDto instance
+     */
+    @ExceptionHandler(ObjectOptimisticLockingFailureException.class)
+    public ResponseEntity<ErrorDto> handleOptimisticLockException(ObjectOptimisticLockingFailureException objectOptimisticLockingFailureException) {
+        objectOptimisticLockingFailureException.printStackTrace();
+        ErrorDto errorDto = new ErrorDto();
+        errorDto.setTimestamp(now().toString());
+        errorDto.setStatus(HttpStatus.LOCKED.value());
+        errorDto.setError(HttpStatus.LOCKED.name());
+        errorDto.setMessage(getMessage(Exception.class));
+        errorDto.setCode(ErrorDto.CodeEnum.CONFLICT);
+        errorDto.setAdditionalMessage("This entity/resource was updated by another transaction, please reload page by using F5 on your computer and try again.");
+        return new ResponseEntity<>(errorDto, HttpStatus.LOCKED);
     }
 
     private String getMessage(Class<? extends Exception> clazz) {

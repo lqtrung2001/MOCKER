@@ -11,7 +11,7 @@ export abstract class AbstractException implements Error {
 
   protected constructor(message: string, private additionalMessage?: string, stackTrace?: string) {
     this.message = `<b>${message.toUpperCase()}</b>
-                    <p>${additionalMessage || StringUtil.EMPTY}</p>
-                    ${stackTrace ? '<p><b>Stack trace: </b></br>${stackTrace || StringUtil.EMPTY}</p>' : StringUtil.EMPTY}`;
+                    <p class='tw-mt-2'>${additionalMessage || StringUtil.EMPTY}</p>
+                    ${stackTrace ? `<p><b>Stack trace: </b></br>${stackTrace || StringUtil.EMPTY}</p>` : StringUtil.EMPTY}`;
   }
 }

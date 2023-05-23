@@ -57,7 +57,7 @@ public class GroupMemberServiceImpl implements GroupMemberService {
         Role authRoleInGroup = groupRepository.getRoleUserInGroup(group.getId(), authId);
         // User is not allowed to change role unless having GROUP_ADMIN or GROUP_ASSOCIATE role.
         if (!authRoleInGroup.equals(Role.GROUP_ADMIN) && !authRoleInGroup.equals(Role.GROUP_ASSOCIATE)) {
-            throw new PermissionException(authId);
+            throw new PermissionException("You can not perform this action! You must be an administrator or an associate of this group.");
         }
         UUID userId = groupMember.getUser().getId();
         if (authId == userId) {

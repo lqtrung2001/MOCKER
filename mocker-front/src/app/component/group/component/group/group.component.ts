@@ -57,9 +57,11 @@ export class GroupComponent extends AbstractComponent implements OnInit {
           if (!closeOptions) {
             return;
           }
-          this.group = new GroupModel();
-          this.group.name = closeOptions.name;
-          this.group.description = closeOptions.description;
+          this.group = {
+            ...new GroupModel(),
+            name: closeOptions.name,
+            description: closeOptions.description
+          };
           this.formGroup.patchValue(this.group);
           this.submit();
         });

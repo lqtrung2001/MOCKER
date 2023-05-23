@@ -94,7 +94,7 @@ public class GroupServiceImpl implements GroupService {
         } else {
             Role roleUserInGroup = groupRepository.getRoleUserInGroup(group.getId(), authId);
             if (!roleUserInGroup.equals(Role.GROUP_ADMIN) && !roleUserInGroup.equals(Role.GROUP_ASSOCIATE)) {
-                throw new PermissionException("You are not allowed to do action!");
+                throw new PermissionException("You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.");
             }
             groupRepository.save(group);
         }
