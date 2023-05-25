@@ -18,4 +18,6 @@ public interface GroupService {
     Group delete(UUID id);
 
     Group upsert(Group group);
+
+    Group getGroupByProjectId(UUID projectId);
 }

@@ -101,4 +101,9 @@ public class GroupServiceImpl implements GroupService {
         return group;
     }
 
+    @Override
+    public Group getGroupByProjectId(UUID projectId) {
+        return null;
+    }
+
 }

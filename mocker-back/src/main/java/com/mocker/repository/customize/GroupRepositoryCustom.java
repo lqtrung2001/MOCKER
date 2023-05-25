@@ -17,4 +17,10 @@ public interface GroupRepositoryCustom {
     Group findOneWithEagerProjectsAndGroupMembers(UUID id);
 
     Role getRoleUserInGroup(UUID group, UUID user);
+
+    Group getGroupByProjectId(UUID projectId);
+
+    Group getGroupBySchemaId(UUID schemaId);
+
+    Group getGroupByTableId(UUID tableId);
 }
