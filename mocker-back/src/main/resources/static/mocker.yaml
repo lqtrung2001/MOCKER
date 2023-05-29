@@ -449,7 +449,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Table'
+              $ref: "#/components/schemas/Table"
       responses:
         200:
           description: The query is successful
@@ -1313,6 +1313,10 @@ components:
           minimum: 0
           maximum: 100
           description: Blank of option
+        unique:
+          type: boolean
+          default: false
+          description: Unique option
         field:
           $ref: '#/components/schemas/Field'
       allOf:

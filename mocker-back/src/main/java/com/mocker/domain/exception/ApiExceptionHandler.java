@@ -87,7 +87,7 @@ public class ApiExceptionHandler {
      * @param badRequestException The bad request exception to be handled
      * @return The ErrorDto instance
      */
-    @ExceptionHandler(value = {BadRequestException.class})
+    @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ErrorDto> handleBadRequestException(BadRequestException badRequestException) {
         badRequestException.printStackTrace();
         ErrorDto errorDto = new ErrorDto();
@@ -156,7 +156,8 @@ public class ApiExceptionHandler {
         }
         if (clazz.getSimpleName().equals("UnauthorizedException") || clazz.isInstance(UnauthorizedException.class)) {
             message.append("unauthorized");
-        } else {
+        }
+        if ("exception.".contentEquals(message)){
             message.append("business_application_error");
         }
         return MessageContextHelper.getMessage(message.toString());

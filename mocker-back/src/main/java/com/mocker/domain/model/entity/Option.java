@@ -37,6 +37,9 @@ public class Option extends Base {
     @Column(name = "CONFIGURATION")
     private String configuration;
 
+    @Column(name = "IS_UNIQUE")
+    private boolean isUnique;
+
     @OneToOne
     @JoinColumn(nullable = false, name = "FIELD_ID", referencedColumnName = "ID")
     private Field field;

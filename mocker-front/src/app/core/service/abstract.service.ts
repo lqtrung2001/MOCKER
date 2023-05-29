@@ -26,6 +26,8 @@ import { AuthenticationException } from '@core/domain/exception/authentication.e
 import { Exception } from '@core/domain/exception/exception';
 import { AbstractException } from '@core/domain/exception/abstract.exception';
 import { Router } from '@angular/router';
+import {BadRequestException} from "@core/domain/exception/bad-request.exception";
+import {NotFoundException} from "@core/domain/exception/not-found.exception";
 
 /**
  * @author Do Quoc Viet
@@ -139,13 +141,18 @@ export class AbstractService<Type> implements HttpInterceptor {
         exception = new AuthenticationException(this.translateService.instant('error.authentication.title'), this.translateService.instant('error.authentication.message'));
         break;
       case HttpStatusCode.BadRequest:
+        exception = new BadRequestException(error.message, error.additionalMessage);
+        break;
       case HttpStatusCode.NotFound:
+        exception = new NotFoundException(error.message, error.additionalMessage);
+        break;
       case HttpStatusCode.Unauthorized:
         exception = new UnauthorizedException(error.message, error.additionalMessage);
         break;
       default:
         exception = new Exception(error.message, error.additionalMessage, error.path);
     }
+    console.log(exception);
     this.modalProvider.showError({
       detail: exception.message
     });
