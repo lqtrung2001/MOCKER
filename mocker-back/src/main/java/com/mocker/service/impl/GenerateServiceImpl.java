@@ -5,6 +5,7 @@ import com.mocker.domain.exception.BadRequestException;
 import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Field;
 import com.mocker.domain.model.entity.GenerateType;
+import com.mocker.domain.model.entity.Source;
 import com.mocker.domain.model.entity.Table;
 import com.mocker.domain.model.entity.TableRelation;
 import com.mocker.domain.model.entity.enumeration.RelationType;
@@ -294,44 +295,57 @@ public class GenerateServiceImpl implements GenerateService {
         if (row <= 0) {
             throw new BadRequestException("Row must be greater than zero");
         }
-        boolean unique = true;
+        if (CollectionUtils.isEmpty(table.getFields())) {
+            throw new BadRequestException("The table's fields are empty");
+        }
+        Set<String> uniqueFields = new HashSet<>();
+        table.getFields().forEach(field -> {
+            if (field.getOption().isUnique() && field.getOption().getBlank() > 0){
+                throw new BadRequestException("The unique option and the blank option are conflict");
+            }
+            if (uniqueFields.contains(field.getName())) {
+                throw new BadRequestException("The table's fields are duplicate");
+            }
+            if (field.getName().contains(" ")) {
+                throw new BadRequestException("The table's fields have spacing");
+            }
+            uniqueFields.add(field.getName());
+        });
+
         List<Map<String, String>> result = new ArrayList<>();
         Random random = new Random();
         List<Field> fields = table.getFields().stream().peek(field -> {
             GenerateType generateType = field.getGenerateType();
-            generateType.setSources(sourceRepository.findAllByGenerateType(generateType));
+            List<Source> sources = sourceRepository.findAllByGenerateType(generateType);
+            long limit = sources.stream().map(Source::getValue).distinct().count();
+            if (field.getOption().isUnique() && limit < row) {
+                throw new BadRequestException("The number of records isn't enough at the moment, please try again!");
+            }
+            generateType.setSources(sources);
             field.setGenerateType(generateType);
         }).toList();
-        if (fields.isEmpty()) {
-            throw new NotFoundException(table.getName());
-        }
-        Set<String> uniqueFields = new HashSet<>();
-        fields.forEach(field -> {
-            if (!uniqueFields.add(field.getName())) {
-                throw new BadRequestException("Fields is duplicate");
-            }
-            if (field.getName().contains(" ")) {
-                throw new BadRequestException("Field have spacing");
-            }
-        });
 
-        Map<String, List<Integer>> mapDuplicate = new HashMap<>();
+        Map<String, List<String>> mapDuplicate = new HashMap<>();
         fields.forEach(field -> mapDuplicate.put(field.getName(), new ArrayList<>()));
         while (result.size() < row) {
             Map<String, String> map = new HashMap<>();
-            fields.forEach(field -> {
-                int index = random.nextInt(0, field.getGenerateType().getSources().size());
-                if (random.nextInt(0, 100) > field.getOption().getBlank()) {
-                    if (unique && mapDuplicate.get(field.getName()).contains(index)) {
-                        return;
-                    }
-                    map.put(field.getName(), field.getGenerateType().getSources().get(index).getValue());
-                } else {
+            for (Field field : fields) {
+                if (!field.getOption().isUnique() && random.nextInt(0, 100) < field.getOption().getBlank()) {
                     map.put(field.getName(), null);
+                } else {
+                    int index;
+                    String value;
+                    do {
+                        index = random.nextInt(0, field.getGenerateType().getSources().size());
+                        value = field.getGenerateType().getSources().get(index).getValue();
+                    }
+                    while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
+                    map.put(field.getName(), value);
+                    mapDuplicate.get(field.getName()).add(value);
                 }
-                mapDuplicate.get(field.getName()).add(index);
-            });
+            }
             result.add(map);
+
         }
         return result;
     }
