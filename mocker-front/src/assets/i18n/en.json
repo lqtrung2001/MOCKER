@@ -317,6 +317,7 @@
     "choose_parent": {
       "title": "Please choose a {{ entity }}",
       "search_placeholder": "Search for {{ entity }}...",
+      "no_projects": "No {{ entity }}s available at this time. Please click on the button below for creating a new {{ entity }}.",
       "more": "More ..."
     },
     "create_entity": {

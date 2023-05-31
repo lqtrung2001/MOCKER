@@ -18,4 +18,6 @@ public interface ProjectRepository extends JpaRepository<Project, UUID>, Project
 
     List<Project> findAllByGroup(Group group);
 
+    Project findOneByNameAndGroupId(String name, UUID groupId);
+
 }

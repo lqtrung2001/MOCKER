@@ -5,6 +5,8 @@ import { GroupModel } from '@core/domain/model/entity/group.model';
 import { ProjectService } from '@core/service/project.service';
 import { GroupService } from '@core/service/group.service';
 import { FormControl } from '@angular/forms';
+import { RoleEnum } from '@core/domain/enum/role.enum';
+import { StringUtil } from '@core/util/string.util';
 
 /**
  * @author Do Quoc Viet
@@ -41,16 +43,18 @@ export class ChooseParentModal extends AbstractModal implements OnInit {
 
   ngOnInit(): void {
     if (this.options.type === 'project') {
-      this.projectService.getEntities().subscribe((projects: ProjectModel[]): void => {
-        this.parents = projects;
-        this.values = projects;
-      });
+      this.projectService.getProjects([RoleEnum.GROUP_ADMIN, RoleEnum.GROUP_ASSOCIATE])
+        .subscribe((projects: ProjectModel[]): void => {
+          this.parents = projects;
+          this.values = projects;
+        });
     }
     if (this.options.type === 'group') {
-      this.groupService.getEntities().subscribe((groups: GroupModel[]): void => {
-        this.parents = groups;
-        this.values = groups;
-      });
+      this.groupService.getGroups([RoleEnum.GROUP_ADMIN, RoleEnum.GROUP_ASSOCIATE])
+        .subscribe((groups: GroupModel[]): void => {
+          this.parents = groups;
+          this.values = groups;
+        });
     }
   }
 
@@ -60,8 +64,20 @@ export class ChooseParentModal extends AbstractModal implements OnInit {
 
   viewMore(): void {
     this.close();
-    this.router.navigate(['/project']).then((): void => {
-    });
+    let path: string = StringUtil.EMPTY;
+    switch (this.options.type) {
+      case 'project':
+        path = 'project';
+        break;
+      case 'group':
+        path = 'group';
+        break;
+    }
+    this.router.navigate([`/${path}`], {
+      queryParams: {
+        roles: RoleEnum.GROUP_ADMIN
+      }
+    }).then();
   }
 
   get title(): string {

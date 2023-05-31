@@ -5,6 +5,8 @@ import { ProjectService } from '@app/core/service/project.service';
 import { CreateAction, Grid, GridValue } from '@shared/component/grid/grid.component';
 import { StringUtil } from '@core/util/string.util';
 import { ChooseParentModal, ChooseParentModalOptions } from '@shared/modal/choose-parent/choose-parent.modal';
+import { RoleEnum } from '@core/domain/enum/role.enum';
+import { RoleUtil } from '@core/util/role.util';
 
 /**
  * @author Do Quoc Viet
@@ -27,44 +29,49 @@ export class ProjectsComponent extends AbstractComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.projectService.getEntities().subscribe((projects: ProjectModel[]): void => {
-      this.grid = {
-        columns: [
-          {
-            label: this.translateService.instant('component.projects.name'),
-            key: 'name',
-            isSearched: true
-          },
-          {
-            label: this.translateService.instant('component.projects.description'),
-            key: 'description'
-          },
-          {
-            label: this.translateService.instant('component.projects.shared_by'),
-            key: 'sharedBy',
-            isSearched: true
-          },
-          {
-            label: this.translateService.instant('component.projects.last_modified'),
-            key: 'lastModified'
-          }
-        ],
-        values: projects.map((project: ProjectModel): GridValue => ({
-          name: {
-            value: project.name,
-            click: () => this.router.navigate([`/project/${project.id}`]),
-            html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue tw-uppercase'></a>`
-          },
-          description: this.truncatePipe.transform(project.description, 50),
-          sharedBy: {
-            value: project.group.name,
-            click: () => this.router.navigate([`/group/${project.group.id}`]),
-            html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue tw-uppercase'></a>`
-          },
-          lastModified: this.datePipe.transform(project.modifiedDate) || StringUtil.EMPTY
-        }))
-      };
-    });
+    const roles: RoleEnum[] | undefined = this.activatedRoute.snapshot.queryParamMap.get('roles')
+      ?.toString()
+      .split(',')
+      .map(role => RoleUtil.valueOf(role));
+    this.projectService.getProjects(roles || [])
+      .subscribe((projects: ProjectModel[]): void => {
+        this.grid = {
+          columns: [
+            {
+              label: this.translateService.instant('component.projects.name'),
+              key: 'name',
+              isSearched: true
+            },
+            {
+              label: this.translateService.instant('component.projects.description'),
+              key: 'description'
+            },
+            {
+              label: this.translateService.instant('component.projects.shared_by'),
+              key: 'sharedBy',
+              isSearched: true
+            },
+            {
+              label: this.translateService.instant('component.projects.last_modified'),
+              key: 'lastModified'
+            }
+          ],
+          values: projects.map((project: ProjectModel): GridValue => ({
+            name: {
+              value: project.name,
+              click: () => this.router.navigate([`/project/${project.id}`]),
+              html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue'></a>`
+            },
+            description: this.truncatePipe.transform(project.description, 50),
+            sharedBy: {
+              value: project.group.name,
+              click: () => this.router.navigate([`/group/${project.group.id}`]),
+              html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue'></a>`
+            },
+            lastModified: this.datePipe.transform(project.modifiedDate) || StringUtil.EMPTY
+          }))
+        };
+      });
   }
 
   get createAction(): CreateAction {

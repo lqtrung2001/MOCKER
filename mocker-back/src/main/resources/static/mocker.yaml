@@ -477,6 +477,14 @@ paths:
       tags:
         - Project
       description: Get projects
+      parameters:
+        - in: query
+          name: roles
+          description: The roles in project
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Role'
       responses:
         200:
           description: The query is successful
@@ -788,6 +796,14 @@ paths:
       tags:
         - Group
       description: Get groups
+      parameters:
+        - in: query
+          name: roles
+          description: The roles in group
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Role'
       responses:
         200:
           description: The query is successful

@@ -104,6 +104,12 @@ export class GroupComponent extends AbstractComponent implements OnInit {
   }
 
   delete(): void {
+    if (!this.group.id || this.group.id === 'new') {
+      this.modalProvider.showError({
+        body: 'The group is not available for deleting at this moment, please try again!'
+      });
+      return;
+    }
     const currentRole: RoleEnum = this.group.groupMembers
       .find((groupMember: GroupMemberModel): boolean => groupMember.user.id === this.applicationConfig.user?.id)!
       .role;

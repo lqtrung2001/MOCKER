@@ -1,6 +1,7 @@
 package com.mocker.service;
 
 import com.mocker.domain.model.entity.Group;
+import com.mocker.domain.model.entity.enumeration.Role;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,7 +12,7 @@ import java.util.UUID;
 
 public interface GroupService {
 
-    List<Group> getGroupsWithAccess(UUID userId);
+    List<Group> getGroupsWithAccess(List<Role> roles);
 
     Group getGroup(UUID id);
 
@@ -19,5 +20,4 @@ public interface GroupService {
 
     Group upsert(Group group);
 
-    Group getGroupByProjectId(UUID projectId);
 }

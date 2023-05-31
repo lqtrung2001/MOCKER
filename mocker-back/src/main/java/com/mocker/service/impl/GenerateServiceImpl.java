@@ -3,6 +3,7 @@ package com.mocker.service.impl;
 import com.mocker.constant.GenerateConstant;
 import com.mocker.domain.exception.BadRequestException;
 import com.mocker.domain.exception.NotFoundException;
+import com.mocker.domain.model.entity.*;
 import com.mocker.domain.model.entity.Field;
 import com.mocker.domain.model.entity.GenerateType;
 import com.mocker.domain.model.entity.Source;
@@ -13,19 +14,12 @@ import com.mocker.repository.FieldRepository;
 import com.mocker.repository.SourceRepository;
 import com.mocker.repository.TableRepository;
 import com.mocker.service.GenerateService;
+import com.mocker.service.PermissionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -41,13 +35,12 @@ public class GenerateServiceImpl implements GenerateService {
     private final TableRepository tableRepository;
     private final SourceRepository sourceRepository;
     private final FieldRepository fieldRepository;
+    private final PermissionService permissionService;
 
     @Override
     public List<Map<String, String>> generateWithTableId(UUID tableId, Integer row) {
-        Table table = tableRepository.findOneFetchFields(tableId);
-        if (table == null) {
-            throw new NotFoundException(tableId);
-        }
+        permissionService.checkPermission(tableId, Table.class);
+        Table table = Optional.ofNullable(tableRepository.findOneFetchFields(tableId)).orElseThrow(() -> new NotFoundException(tableId));
         return generate(table, row);
     }
 
@@ -59,6 +52,7 @@ public class GenerateServiceImpl implements GenerateService {
     @SuppressWarnings("unchecked")
     @Override
     public Map<String, Map<String, Object>> generateWithSchema(UUID id) {
+        permissionService.checkPermission(id, Schema.class);
         int numberGenerate = 5;
         if (numberGenerate <= 0) {
             throw new BadRequestException("Row must be greater than zero");
@@ -125,13 +119,13 @@ public class GenerateServiceImpl implements GenerateService {
             for (int i = 0; i < fields.size(); i++) {
                 if (fields.get(i).getTableRelationTargets().size() > 0) {
                     List<UUID> fieldFirstIds = fields.get(i).getTableRelationTargets().stream().map(TableRelation::getSource)
-                            .map(Field::getId).collect(Collectors.toList());
+                            .map(Field::getId).toList();
                     for (UUID fieldId1 : fieldFirstIds) {
                         Set<String> fieldHaveCommon = new HashSet<>();
                         for (int j = i + 1; j < fields.size(); j++) {
                             if (fields.get(j).getTableRelationTargets().size() > 0) {
                                 List<UUID> fieldNextIds = fields.get(j).getTableRelationTargets().stream().map(TableRelation::getSource)
-                                        .map(Field::getId).collect(Collectors.toList());
+                                        .map(Field::getId).toList();
                                 for (UUID fieldId2 : fieldNextIds) {
                                     if (fieldId1.equals(fieldId2)) {
                                         fieldHaveCommon.add(fields.get(i).getName());
@@ -188,13 +182,13 @@ public class GenerateServiceImpl implements GenerateService {
                                 // if doesn't exist circle relationship import ONE_TO_MANY normal'
                                 List<String> listFieldName = field.getTableRelationSources().stream().map(TableRelation::getTarget)
                                         .map(Field::getName)
-                                        .collect(Collectors.toList());
+                                        .toList();
                                 listFieldName.forEach(fieldName -> {
                                     if (CollectionUtils.isEmpty(mapRelationValue.get(fieldName))) {
                                         List<String> listTableName = field.getTableRelationSources().stream().map(TableRelation::getTarget)
                                                 .map(Field::getTable)
                                                 .map(Table::getName)
-                                                .collect(Collectors.toList());
+                                                .toList();
                                         listTableName.forEach(tableName -> mapRelationValue.put(fieldName, ((List<Object>) result.get(tableName).get(GenerateConstant.VALUES))
                                                 .stream()
                                                 .map(obj -> ((HashMap<String, Object>) obj).get(fieldName))
@@ -217,12 +211,12 @@ public class GenerateServiceImpl implements GenerateService {
                                         ? field.getTableRelationTargets().stream()
                                         .map(TableRelation::getSource)
                                         .map(Field::getTable).map(Table::getName)
-                                        .collect(Collectors.toList())
+                                        .toList()
                                         .get(0)
                                         : field.getTableRelationSources().stream()
                                         .map(TableRelation::getTarget)
                                         .map(Field::getTable).map(Table::getName)
-                                        .collect(Collectors.toList())
+                                        .toList()
                                         .get(0);
                                 if (result.get(tableName) == null) {
                                     int index = random.nextInt(field.getGenerateType().getSources().size());
@@ -231,16 +225,16 @@ public class GenerateServiceImpl implements GenerateService {
                                     String fieldName = CollectionUtils.isEmpty(field.getTableRelationSources())
                                             ? field.getTableRelationTargets().stream().map(TableRelation::getSource)
                                             .map(Field::getName)
-                                            .collect(Collectors.toList())
+                                            .toList()
                                             .get(0)
                                             : field.getTableRelationSources().stream().map(TableRelation::getTarget)
                                             .map(Field::getName)
-                                            .collect(Collectors.toList())
+                                            .toList()
                                             .get(0);
                                     List<Object> sourceValues = ((List<Object>) result.get(tableName).get(GenerateConstant.VALUES))
                                             .stream()
                                             .map(obj -> ((HashMap<String, Object>) obj).get(fieldName))
-                                            .collect(Collectors.toList());
+                                            .toList();
                                     map.put(field.getName(), sourceValues.get(random.nextInt(sourceValues.size())));
                                 }
                             } else {
@@ -249,13 +243,13 @@ public class GenerateServiceImpl implements GenerateService {
                                         && field.getTableRelationSources().stream().map(TableRelation::getRelationType).allMatch(RelationType.MANY_TO_ONE::equals))) {
                                     String fieldName = field.getTableRelationTargets().stream().map(TableRelation::getSource)
                                             .map(Field::getName)
-                                            .collect(Collectors.toList())
+                                            .toList()
                                             .get(0);
                                     if (CollectionUtils.isEmpty(mapRelationValue.get(fieldName))) {
                                         String tableName = field.getTableRelationTargets().stream().map(TableRelation::getSource)
                                                 .map(Field::getTable)
                                                 .map(Table::getName)
-                                                .collect(Collectors.toList())
+                                                .toList()
                                                 .get(0);
                                         mapRelationValue.put(fieldName, ((List<Object>) result.get(tableName).get(GenerateConstant.VALUES))
                                                 .stream()

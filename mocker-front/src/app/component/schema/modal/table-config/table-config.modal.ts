@@ -90,7 +90,11 @@ export class TableConfigModal extends AbstractModal implements OnInit {
       });
       return;
     }
-    const { name, description, fields } = this.formGroup.controls.table.getRawValue() as TableModel;
+    const { name, description, fields }: {
+      name: string,
+      description: string,
+      fields: FieldModel[]
+    } = this.formGroup.controls.table.getRawValue() as TableModel;
     const table: TableModel = {
       ...this.table,
       name,

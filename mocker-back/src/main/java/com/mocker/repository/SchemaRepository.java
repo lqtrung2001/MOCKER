@@ -13,4 +13,5 @@ import java.util.UUID;
 
 @Repository
 public interface SchemaRepository extends JpaRepository<Schema, UUID>, SchemaRepositoryCustom {
+    Schema findOneByNameAndProjectId(String name, UUID projectId);
 }

@@ -58,7 +58,7 @@ export class SchemasComponent extends AbstractComponent implements OnInit {
           name: {
             value: schema.name,
             click: () => this.router.navigate([`/schema/${schema.id}`]),
-            html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue tw-uppercase'></a>`
+            html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue'></a>`
           },
           description: this.truncatePipe.transform(schema.description, 50),
           sharedBy: {

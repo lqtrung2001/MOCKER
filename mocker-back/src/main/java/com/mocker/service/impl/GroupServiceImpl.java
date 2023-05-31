@@ -2,17 +2,16 @@ package com.mocker.service.impl;
 
 import com.mocker.configuration.security.ApplicationContextHolder;
 import com.mocker.domain.exception.NotFoundException;
-import com.mocker.domain.exception.PermissionException;
 import com.mocker.domain.model.entity.Group;
 import com.mocker.domain.model.entity.GroupMember;
 import com.mocker.domain.model.entity.Project;
-import com.mocker.domain.model.entity.User;
 import com.mocker.domain.model.entity.composite_key.GroupMemberPK;
 import com.mocker.domain.model.entity.enumeration.Role;
 import com.mocker.repository.GroupMemberRepository;
 import com.mocker.repository.GroupRepository;
 import com.mocker.repository.ProjectRepository;
 import com.mocker.service.GroupService;
+import com.mocker.service.PermissionService;
 import com.mocker.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,10 +36,12 @@ public class GroupServiceImpl implements GroupService {
     private final ApplicationContextHolder applicationContextHolder;
     private final ProjectRepository projectRepository;
     private final ProjectService projectService;
+    private final PermissionService permissionService;
 
     @Override
-    public List<Group> getGroupsWithAccess(UUID userId) {
-        List<Group> groups = groupRepository.findAllWithAccess(userId);
+    public List<Group> getGroupsWithAccess(List<Role> roles) {
+        UUID authId = applicationContextHolder.getCurrentUser().getId();
+        List<Group> groups = groupRepository.findAllWithAccess(authId, roles);
         return groups.stream()
                 .map(group -> group.toBuilder()
                         .groupMembers(groupMemberRepository
@@ -51,13 +52,9 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group getGroup(UUID id) {
+        permissionService.checkPermission(id, Group.class);
         Group group = groupRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         List<GroupMember> groupMembers = groupMemberRepository.findAllByGroup(group);
-        User user = applicationContextHolder.getCurrentUser();
-        boolean contains = groupMembers.stream().map(GroupMember::getUser).map(User::getId).toList().contains(user.getId());
-        if (!contains) {
-            throw new PermissionException("You can be allowed to access this group");
-        }
         group.setGroupMembers(groupMembers);
         group.setProjects(projectRepository.findAllByGroup(group));
         return group;
@@ -65,10 +62,11 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group delete(UUID id) {
-        UUID authId = applicationContextHolder.getCurrentUser().getId();
-        if (!groupRepository.getRoleUserInGroup(id, authId).equals(Role.GROUP_ADMIN)) {
-            throw new PermissionException("User " + authId + " is not allowed to delete");
-        }
+        permissionService.checkPermission(
+                id,
+                Group.class,
+                List.of(Role.GROUP_ADMIN),
+                "You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b>.");
         Group group = groupRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         List<GroupMember> groupMembers = groupMemberRepository.findAllByGroup(group);
         List<Project> projects = projectRepository.findAllByGroup(group);
@@ -92,18 +90,14 @@ public class GroupServiceImpl implements GroupService {
                     .role(Role.GROUP_ADMIN).build();
             groupMemberRepository.save(build);
         } else {
-            Role roleUserInGroup = groupRepository.getRoleUserInGroup(group.getId(), authId);
-            if (!roleUserInGroup.equals(Role.GROUP_ADMIN) && !roleUserInGroup.equals(Role.GROUP_ASSOCIATE)) {
-                throw new PermissionException("You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.");
-            }
+            permissionService.checkPermission(
+                    group.getId(),
+                    Group.class,
+                    List.of(Role.GROUP_ADMIN, Role.GROUP_ASSOCIATE),
+                    "You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.");
             groupRepository.save(group);
         }
         return group;
-    }
-
-    @Override
-    public Group getGroupByProjectId(UUID projectId) {
-        return null;
     }
 
 }

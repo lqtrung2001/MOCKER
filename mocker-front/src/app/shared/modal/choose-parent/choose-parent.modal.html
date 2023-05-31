@@ -9,6 +9,7 @@
            class='tw-font-medium tw-py-2 hover:tw-text-blue tw-cursor-pointer hover:tw-underline tw-uppercase'>
           {{ (index + 1) + '. ' + parent.name }}
         </p>
+        <p>{{ 'modal.choose_parent.no_projects' | translate: {entity: options.type} }}</p>
         <p (click)='viewMore()'
            class='tw-text-center tw-py-2 tw-text-blue tw-cursor-pointer hover:tw-underline tw-uppercase'>
           {{ 'modal.choose_parent.more' | translate }}

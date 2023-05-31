@@ -13,6 +13,7 @@ import com.mocker.repository.GroupMemberRepository;
 import com.mocker.repository.GroupRepository;
 import com.mocker.repository.UserRepository;
 import com.mocker.service.GroupMemberService;
+import com.mocker.service.PermissionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,15 +37,24 @@ public class GroupMemberServiceImpl implements GroupMemberService {
     private final GroupMemberRepository groupMemberRepository;
     private final GroupRepository groupRepository;
     private final UserRepository userRepository;
+    private final PermissionService permissionService;
 
     @Override
     public GroupMemberPK delete(GroupMemberPK groupMemberPK) {
+        permissionService.checkPermission(groupMemberPK.getGroupId(), Group.class);
         UUID authId = applicationContextHolder.getCurrentUser().getId();
-        if (groupMemberRepository.findById(groupMemberPK).isEmpty()) {
-            throw new NotFoundException(groupMemberPK.getGroupId());
+        GroupMember groupMember = groupMemberRepository.findById(groupMemberPK).orElseThrow(() -> new NotFoundException(groupMemberPK.getGroupId()));
+        Role roleAuthInGroup = groupRepository.getRoleUserInGroup(groupMemberPK.getGroupId(), authId);
+        if ((!roleAuthInGroup.equals(Role.GROUP_ADMIN) && !roleAuthInGroup.equals(Role.GROUP_ASSOCIATE))
+                || (roleAuthInGroup.equals(Role.GROUP_ASSOCIATE) && groupMember.getRole().equals(Role.GROUP_ADMIN))) {
+            throw new PermissionException("You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.");
         }
-        if (!groupRepository.getRoleUserInGroup(groupMemberPK.getGroupId(), authId).equals(Role.GROUP_ADMIN)) {
-            throw new PermissionException(authId);
+        if (authId.equals(groupMemberPK.getUserId())) {
+            if (roleAuthInGroup.equals(Role.GROUP_ADMIN)) {
+                throw new PermissionException("You can not leave this group while you are <b>group admin</b>. Please propose someone to <b>group admin</b>");
+            }
+            groupMemberRepository.deleteById(groupMemberPK);
+            return groupMemberPK;
         }
         groupMemberRepository.deleteById(groupMemberPK);
         return groupMemberPK;
@@ -52,13 +62,11 @@ public class GroupMemberServiceImpl implements GroupMemberService {
 
     @Override
     public GroupMember upsert(GroupMember groupMember) {
+        permissionService.checkPermission(groupMember.getGroup().getId(), Group.class, List.of(Role.GROUP_ADMIN, Role.GROUP_ASSOCIATE));
         Group group = groupRepository.findById(groupMember.getGroup().getId()).orElseThrow(NotFoundException::new);
         UUID authId = applicationContextHolder.getCurrentUser().getId();
         Role authRoleInGroup = groupRepository.getRoleUserInGroup(group.getId(), authId);
         // User is not allowed to change role unless having GROUP_ADMIN or GROUP_ASSOCIATE role.
-        if (!authRoleInGroup.equals(Role.GROUP_ADMIN) && !authRoleInGroup.equals(Role.GROUP_ASSOCIATE)) {
-            throw new PermissionException("You can not perform this action! You must be an administrator or an associate of this group.");
-        }
         UUID userId = groupMember.getUser().getId();
         if (authId == userId) {
             throw new BadRequestException("validation.change_role.can_not_change_role_of_self");
@@ -99,16 +107,8 @@ public class GroupMemberServiceImpl implements GroupMemberService {
 
     @Override
     public List<GroupMember> getGroupMembersByGroup(UUID groupId) {
-        Group group = groupRepository.findById(groupId).orElseThrow(() -> new NotFoundException(groupId));
-        List<GroupMember> groupMembers = groupMemberRepository.findAllByGroup(group);
-        boolean contains = groupMembers.stream().map(GroupMember::getUser)
-                .map(User::getId)
-                .toList()
-                .contains(applicationContextHolder.getCurrentUser().getId());
-        if (!contains) {
-            throw new PermissionException("You cannot be allowed to access this group");
-        }
-        return groupMembers;
+        permissionService.checkPermission(groupId, Group.class);
+        return groupMemberRepository.findAllByGroupId(groupId);
     }
 
 }

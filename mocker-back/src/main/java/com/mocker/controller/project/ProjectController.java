@@ -1,8 +1,14 @@
 package com.mocker.controller.project;
 
 import com.mocker.api.ProjectApi;
+import com.mocker.controller.mapper.ApiAbstractMapper;
+import com.mocker.controller.schema.ApiSchemaMapper;
 import com.mocker.domain.dto.ProjectDto;
+import com.mocker.domain.dto.RoleDto;
+import com.mocker.domain.dto.SchemaDto;
+import com.mocker.domain.model.entity.enumeration.Role;
 import com.mocker.service.ProjectService;
+import com.mocker.service.SchemaService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +29,10 @@ import java.util.stream.Collectors;
 public class ProjectController implements ProjectApi {
     private final ApiProjectMapper apiProjectMapper;
     private final ApiProjectMapperDecorator apiProjectMapperDecorator;
+    private final ApiAbstractMapper apiAbstractMapper;
+    private final ApiSchemaMapper apiSchemaMapper;
     private final ProjectService projectService;
+    private final SchemaService schemaService;
 
     @Override
     public ResponseEntity<ProjectDto> getProject(UUID id) {
@@ -31,8 +40,9 @@ public class ProjectController implements ProjectApi {
     }
 
     @Override
-    public ResponseEntity<List<ProjectDto>> getProjects() {
-        return ResponseEntity.ok(projectService.getProjects()
+    public ResponseEntity<List<ProjectDto>> getProjects(List<RoleDto> rolesDto) {
+        List<Role> roles = apiAbstractMapper.mapRolesDtoToRoles(rolesDto);
+        return ResponseEntity.ok(projectService.getProjects(roles)
                 .stream()
                 .map(apiProjectMapper::map)
                 .collect(Collectors.toList()));
@@ -47,5 +57,10 @@ public class ProjectController implements ProjectApi {
     @Override
     public ResponseEntity<ProjectDto> deleteProject(UUID id) {
         return ResponseEntity.ok(apiProjectMapper.map(projectService.delete(id)));
+    }
+
+    @Override
+    public ResponseEntity<List<SchemaDto>> getSchemasByProject(UUID id) {
+        return ResponseEntity.ok(apiSchemaMapper.map(schemaService.getSchemasByProject(id)));
     }
 }

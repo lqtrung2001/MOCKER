@@ -2,11 +2,11 @@ package com.mocker.repository.customize.impl;
 
 import com.mocker.domain.model.entity.Group;
 import com.mocker.domain.model.entity.GroupMember;
-import com.mocker.domain.model.entity.QSchema;
-import com.mocker.domain.model.entity.QTable;
 import com.mocker.domain.model.entity.enumeration.Role;
 import com.mocker.repository.customize.GroupRepositoryCustom;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,11 +18,12 @@ import java.util.stream.Collectors;
 import static com.mocker.domain.model.entity.QGroup.group;
 import static com.mocker.domain.model.entity.QGroupMember.groupMember;
 import static com.mocker.domain.model.entity.QProject.project;
-import static com.mocker.domain.model.entity.QSchema.*;
-import static com.mocker.domain.model.entity.QTable.*;
+import static com.mocker.domain.model.entity.QSchema.schema;
+import static com.mocker.domain.model.entity.QTable.table;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
 @SuppressWarnings("unused")
@@ -32,11 +33,14 @@ public class GroupRepositoryImpl implements GroupRepositoryCustom {
     private EntityManager entityManager;
 
     @Override
-    public List<Group> findAllWithAccess(UUID userId) {
+    public List<Group> findAllWithAccess(UUID userId, List<Role> roles) {
+        BooleanExpression criteria = groupMember.user.id.eq(userId);
+        if (!CollectionUtils.isEmpty(roles)) {
+            criteria = criteria.and(groupMember.role.in(roles));
+        }
         return new JPAQuery<GroupMember>(entityManager)
                 .from(groupMember)
-                .where(groupMember.user.id.eq(userId))
-                .innerJoin(groupMember.group, group).fetchJoin()
+                .where(criteria)
                 .fetch()
                 .stream()
                 .map(GroupMember::getGroup)

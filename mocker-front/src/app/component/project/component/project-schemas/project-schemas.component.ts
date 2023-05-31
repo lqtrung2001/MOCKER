@@ -78,10 +78,7 @@ export class ProjectSchemasComponent extends AbstractComponent implements OnChan
             }).subscribe((result: boolean): void => {
               if (result) {
                 this.schemaService.deleteEntity(schema.id).subscribe((): void => {
-                  const position: number = this.project.schemas
-                    .indexOf(this.project.schemas
-                      .find((item: SchemaModel): boolean => item.id === schema.id)!);
-                  this.project.schemas.splice(position, 1);
+                  this.schemaService.get
                   this.refresh();
                 });
               }

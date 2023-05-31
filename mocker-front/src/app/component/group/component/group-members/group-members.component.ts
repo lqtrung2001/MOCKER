@@ -114,11 +114,18 @@ export class GroupMembersComponent extends AbstractComponent implements OnChange
             if (this.invalidDeleteMember(groupMember)) {
               return;
             }
+            const isRemoveSelf: boolean = groupMember.user.id === this.applicationConfig.user?.id;
             this.modalProvider.showConfirmation({
-              body: 'component.group_members.remove_user_confirmation'
+              body: isRemoveSelf
+                ? 'Are you want to leave this group?'
+                : 'component.group_members.remove_user_confirmation'
             }).subscribe((result: boolean): void => {
               if (result) {
                 this.groupMemberService.deleteEntity(groupMember.id).subscribe((): void => {
+                  if (isRemoveSelf) {
+                    this.router.navigate(['/group']).then();
+                    return;
+                  }
                   this.groupMemberService.getGroupMembersByGroupId(this.group.id)
                     .subscribe((groupMembers: GroupMemberModel[]): void => {
                       this.group.groupMembers = groupMembers;
@@ -136,10 +143,13 @@ export class GroupMembersComponent extends AbstractComponent implements OnChange
 
   invalidDeleteMember(groupMember: GroupMemberModel): boolean {
     if (groupMember.user.id === this.applicationConfig.user?.id) {
-      this.modalProvider.showError({
-        detail: 'You can not delete <b>yourself</b> from this group! Please try again.'
-      });
-      return true;
+      if (groupMember.role === RoleEnum.GROUP_ADMIN) {
+        this.modalProvider.showError({
+          detail: 'You can not leave this group while you are <b>group admin</b>. Please propose someone to <b>group admin</b>.'
+        });
+        return true;
+      }
+      return false;
     }
     const currentRole: RoleEnum = this.group.groupMembers.find((groupMember: GroupMemberModel): boolean => groupMember.user.id === this.applicationConfig.user?.id)!.role;
     if (currentRole === RoleEnum.USER

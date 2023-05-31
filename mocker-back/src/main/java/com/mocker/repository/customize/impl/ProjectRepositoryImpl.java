@@ -22,7 +22,7 @@ public class ProjectRepositoryImpl implements ProjectRepositoryCustom {
     EntityManager entityManager;
 
     @Override
-    public List<Project> findAll(Set<UUID> groupIds) {
+    public List<Project> findAllByGroupIds(Set<UUID> groupIds) {
         return new JPAQuery<Project>(entityManager)
                 .from(QProject.project)
                 .where(QProject.project.group.id.in(groupIds))

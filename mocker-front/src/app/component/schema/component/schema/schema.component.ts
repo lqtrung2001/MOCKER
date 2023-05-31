@@ -10,7 +10,6 @@ import {
   CreateEntityModalCloseOptions,
   CreateEntityModalOptions
 } from '@shared/modal/create-entity/create-entity.modal';
-import { Location } from '@angular/common';
 
 /**
  * @author Do Quoc Viet
@@ -104,6 +103,12 @@ export class SchemaComponent extends AbstractComponent implements OnInit {
   }
 
   delete(): void {
+    if (!this.schema.id || this.schema.id === 'new') {
+      this.modalProvider.showError({
+        body: 'The schema is not available for deleting at this moment, please try again!'
+      });
+      return;
+    }
     this.modalProvider.showConfirmation({
       body: 'message.schema_delete_confirm'
     }).subscribe((result: boolean): void => {

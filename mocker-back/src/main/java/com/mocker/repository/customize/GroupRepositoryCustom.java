@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public interface GroupRepositoryCustom {
 
-    List<Group> findAllWithAccess(UUID userId);
+    List<Group> findAllWithAccess(UUID userId, List<Role> roles);
 
     Group findOneWithEagerProjectsAndGroupMembers(UUID id);
 

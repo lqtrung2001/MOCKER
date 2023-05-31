@@ -118,6 +118,12 @@ export class ProjectComponent extends AbstractComponent implements OnInit {
   }
 
   delete(): void {
+    if (!this.project.id || this.project.id === 'new') {
+      this.modalProvider.showError({
+        body: 'The project is not available for deleting at this moment, please try again!'
+      });
+      return;
+    }
     this.modalProvider.showConfirmation({
       body: 'message.project_delete_confirm'
     }).subscribe((result: boolean): void => {

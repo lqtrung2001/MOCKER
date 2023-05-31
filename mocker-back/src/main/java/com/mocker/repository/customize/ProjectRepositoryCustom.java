@@ -12,6 +12,6 @@ import java.util.UUID;
 
 public interface ProjectRepositoryCustom {
 
-    List<Project> findAll(Set<UUID> groupIds);
+    List<Project> findAllByGroupIds(Set<UUID> groupIds);
 
 }

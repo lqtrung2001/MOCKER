@@ -2,7 +2,10 @@ package com.mocker.controller.group;
 
 import com.mocker.api.GroupApi;
 import com.mocker.configuration.security.ApplicationContextHolder;
+import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.domain.dto.GroupDto;
+import com.mocker.domain.dto.RoleDto;
+import com.mocker.domain.model.entity.enumeration.Role;
 import com.mocker.service.GroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,7 @@ import java.util.UUID;
 public class GroupController implements GroupApi {
     private final ApiGroupMapper apiGroupMapper;
     private final ApiGroupMapperDecorator apiGroupMapperDecorator;
+    private final ApiAbstractMapper apiAbstractMapper;
     private final GroupService groupService;
     private final ApplicationContextHolder applicationContextHolder;
 
@@ -37,9 +41,11 @@ public class GroupController implements GroupApi {
     }
 
     @Override
-    public ResponseEntity<List<GroupDto>> getGroups() {
-        UUID authId = applicationContextHolder.getCurrentUser().getId();
-        return ResponseEntity.ok(apiGroupMapperDecorator.mapToGroupsDtoFetchGroupMembers(groupService.getGroupsWithAccess(authId)));
+    public ResponseEntity<List<GroupDto>> getGroups(List<RoleDto> rolesDto) {
+        List<Role> roles = apiAbstractMapper.mapRolesDtoToRoles(rolesDto);
+        return ResponseEntity.ok(apiGroupMapperDecorator
+                .mapToGroupsDtoFetchGroupMembers(groupService
+                        .getGroupsWithAccess(roles)));
     }
 
     @Override

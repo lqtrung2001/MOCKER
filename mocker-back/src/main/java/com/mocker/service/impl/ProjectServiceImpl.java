@@ -1,28 +1,29 @@
 package com.mocker.service.impl;
 
 import com.mocker.configuration.security.ApplicationContextHolder;
+import com.mocker.domain.exception.BadRequestException;
 import com.mocker.domain.exception.NotFoundException;
-import com.mocker.domain.exception.PermissionException;
 import com.mocker.domain.model.entity.Group;
 import com.mocker.domain.model.entity.GroupMember;
 import com.mocker.domain.model.entity.Project;
 import com.mocker.domain.model.entity.Schema;
-import com.mocker.domain.model.entity.User;
 import com.mocker.domain.model.entity.enumeration.Role;
 import com.mocker.repository.GroupMemberRepository;
-import com.mocker.repository.GroupRepository;
 import com.mocker.repository.ProjectRepository;
 import com.mocker.repository.SchemaRepository;
 import com.mocker.repository.UserRepository;
+import com.mocker.service.PermissionService;
 import com.mocker.service.ProjectService;
 import com.mocker.service.SchemaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author Luong Quoc Trung
@@ -38,49 +39,57 @@ public class ProjectServiceImpl implements ProjectService {
     private final SchemaRepository schemaRepository;
     private final ApplicationContextHolder applicationContextHolder;
     private final SchemaService schemaService;
-    private final GroupRepository groupRepository;
     private final GroupMemberRepository groupMemberRepository;
+    private final PermissionService permissionService;
 
     @Override
     public Project getProject(UUID id) {
-        checkCurrentUserInProject(id, null);
+        permissionService.checkPermission(id, Project.class);
         Project project = projectRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         project.setSchemas(schemaRepository.getSchemasByProject(project.getId()));
         return project;
     }
 
     @Override
-    public List<Project> getProjects() {
+    public List<Project> getProjects(List<Role> roles) {
         UUID authId = applicationContextHolder.getCurrentUser().getId();
         Set<UUID> groupIds = userRepository.findAllGroupIds(authId);
-        groupIds.forEach(groupId -> {
-            Group group = groupRepository.findById(groupId).orElseThrow(() -> new NotFoundException(groupId));
-            List<GroupMember> groupMembers = groupMemberRepository.findAllByGroup(group);
-            boolean contains = groupMembers.stream().map(GroupMember::getUser)
-                    .map(User::getId)
-                    .toList()
-                    .contains(applicationContextHolder.getCurrentUser().getId());
-            if (!contains) {
-                groupIds.remove(groupId);
-            }
-        });
-        return projectRepository.findAll(groupIds);
+        groupIds = groupIds.stream().filter(groupId -> {
+            List<GroupMember> groupMembers = groupMemberRepository.findAllByGroupId(groupId);
+            return groupMembers.stream()
+                    .anyMatch(groupMember -> authId.equals(groupMember.getUser().getId())
+                            && (CollectionUtils.isEmpty(roles) || roles.contains(groupMember.getRole())));
+        }).collect(Collectors.toSet());
+        return projectRepository.findAllByGroupIds(groupIds);
     }
 
     @Override
     public Project upsert(Project project) {
-        checkCurrentUserInProject(project.getId(), project.getGroup().getId());
-        checkRoleInProject(project.getId(), project.getGroup().getId());
-        return Optional.of(projectRepository.save(project))
-                .orElseThrow(() -> new NotFoundException(project.getId()));
+        permissionService.checkPermission(
+                project.getGroup().getId(),
+                Group.class,
+                List.of(Role.GROUP_ADMIN, Role.GROUP_ASSOCIATE),
+                "You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.");
+        Project existingProjectName = projectRepository.findOneByNameAndGroupId(project.getName(), project.getGroup().getId());
+        if (Objects.nonNull(existingProjectName)) {
+            if (Objects.isNull(project.getId())) {
+                // Create a new project
+                throw new BadRequestException("The project with name " + project.getName() + " is already existed, please create with the different project name");
+            } else if (!Objects.equals(existingProjectName.getId(), project.getId())) {
+                throw new BadRequestException("The project with name " + project.getName() + "is already existed, please update it with the different project name");
+            }
+        }
+        return projectRepository.save(project);
     }
 
     @Override
     public Project delete(UUID id) {
-        checkCurrentUserInProject(id, null);
-        checkRoleInProject(id, null);
+        permissionService.checkPermission(
+                id,
+                Project.class,
+                List.of(Role.GROUP_ADMIN, Role.GROUP_ASSOCIATE),
+                "You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.");
         Project project = projectRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
-        // Delete schema
         schemaService.getSchemasByProject(id).stream().map(Schema::getId).forEach(schemaService::delete);
         projectRepository.deleteById(id);
         return project;
@@ -88,38 +97,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Schema> getSchemasByProject(UUID projectId) {
-        checkCurrentUserInProject(projectId, null);
-        return Optional.ofNullable(schemaRepository.getSchemasByProject(projectId))
-                .orElseThrow(() -> new NotFoundException(projectId));
+        permissionService.checkPermission(projectId, Project.class);
+        return schemaRepository.getSchemasByProject(projectId);
     }
 
-    private void checkCurrentUserInProject(UUID projectId, UUID groupId) {
-        UUID auth = applicationContextHolder.getCurrentUser().getId();
-        if (projectId != null) {
-            Group group = groupRepository.getGroupByProjectId(projectId);
-            List<GroupMember> groupMembers = groupMemberRepository.findAllByGroup(group);
-            boolean contains = groupMembers.stream().map(GroupMember::getUser)
-                    .map(User::getId)
-                    .toList()
-                    .contains(auth);
-            if (!contains) {
-                throw new PermissionException("You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.");
-            }
-        } else {
-            Role roleUserInGroup = groupRepository.getRoleUserInGroup(groupId, auth);
-            if (roleUserInGroup.equals(Role.USER)) {
-                throw new PermissionException("You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.");
-            }
-        }
-    }
-
-    private void checkRoleInProject(UUID projectId, UUID groupId) {
-        UUID auth = applicationContextHolder.getCurrentUser().getId();
-        Role roleUserInGroup = (projectId != null)
-                ? groupRepository.getRoleUserInGroup(groupRepository.getGroupByProjectId(projectId).getId(), auth)
-                : groupRepository.getRoleUserInGroup(groupId, auth);
-        if (roleUserInGroup.equals(Role.USER)) {
-            throw new PermissionException("You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.");
-        }
-    }
 }
