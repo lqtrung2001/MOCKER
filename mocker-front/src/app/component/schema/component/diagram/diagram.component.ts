@@ -300,13 +300,14 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
     this.relationLines = this.relationLines.filter((relationLine: RelationLine): boolean => !tableRelations
       .map((tableRelation: TableRelationModel): string => tableRelation.id)
       .includes(relationLine.tableRelation.id));
-    setTimeout((): void => {
-      // Synchronize functions
+    try {
       tableRelations.forEach((tableRelation: TableRelationModel): void => {
         this.relationLines.push(DrawUtil.newRelationLine(tableRelation));
         this.relationLines[this.relationLines.length - 1].leaderLine.position();
       });
-    });
+    } catch (e) {
+      // TODO: Handle
+    }
   }
 
   createTable(): void {
@@ -318,7 +319,7 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
     };
     this.modalService.open(TableConfigModal, options)
       .subscribe((closeOptions: TableConfigModalCloseOptions): void => {
-        if (closeOptions.table && !closeOptions.deleted) {
+        if (closeOptions && closeOptions.table && !closeOptions.deleted) {
           this.schema.tables.push(closeOptions.table);
         }
       });
@@ -357,6 +358,12 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
   }
 
   initializeData(callback?: () => void): void {
+    if (!this.schema.tables.length) {
+      this.modalProvider.showError({
+        detail: 'No tables found for this schema, please try again.'
+      });
+      return;
+    }
     this.generateService.generateBySchema(this.schema.id)
       .subscribe((data: DataModel): void => {
         this.data = data;

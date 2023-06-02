@@ -25,9 +25,9 @@ type Controls = {
   table: FormGroup<{
     name: FormControl,
     description: FormControl,
+    row: FormControl,
     fields: FormArray<FormGroup<FieldControls>>
   }>;
-  rows: FormControl;
 }
 
 @Component({
@@ -50,9 +50,9 @@ export class TableConfigModal extends AbstractModal implements OnInit {
       table: this.formBuilder.group({
         name: this.formBuilder.control(undefined, [Validators.required]),
         description: this.formBuilder.control('Description', [Validators.required]),
-        fields: this.formBuilder.array<FormGroup<FieldControls>>([])
-      }),
-      rows: this.formBuilder.control(99, [Validators.required])
+        fields: this.formBuilder.array<FormGroup<FieldControls>>([]),
+        row: this.formBuilder.control(99, [Validators.required])
+      })
     });
   }
 
@@ -90,16 +90,18 @@ export class TableConfigModal extends AbstractModal implements OnInit {
       });
       return;
     }
-    const { name, description, fields }: {
+    const { name, description, row, fields }: {
       name: string,
       description: string,
-      fields: FieldModel[]
+      row: number,
+      fields: FieldModel[],
     } = this.formGroup.controls.table.getRawValue() as TableModel;
     const table: TableModel = {
       ...this.table,
       name,
       description,
-      fields
+      fields,
+      row
     };
     table.fields = table.fields.map((field: FieldModel): FieldModel => {
       const found: FieldModel | undefined = this.table.fields.find((item: FieldModel): boolean => item.id === field.id);

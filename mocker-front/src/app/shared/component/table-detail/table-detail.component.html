@@ -9,58 +9,61 @@
         <th class='tw-pb-3 first-letter:tw-underline'>{{ 'component.table_detail.options' | translate }}</th>
       </tr>
       </thead>
-      <tbody *ngFor='let field of formArray.controls; let i = index;' [formGroup]='$any(formArray)'>
-      <tr [formGroupName]='i' class='tw-relative' #fieldElement>
-        <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
-          <moc-input [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
-                     [mocControl]='field.controls.name'
-                     [mocPlaceholder]='"component.table_detail.field_name_placeholder" | translate'
-                     mocStyle='tw-px-5'></moc-input>
-        </td>
-        <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
-          <moc-button
-            (click)='chooseType(field.controls.generateType, true, field.controls.id ? field.controls.id.value : undefined)'
-            [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
-            [control]='field.controls.generateType'
-            [label]='field.controls.generateType.value?.code || ("component.table_detail.generate_type_placeholder" | translate)'
-            icon='fa-solid fa-sort'
-            mocStyle='tw-text-left tw-px-5 btn-secondary {{ !field.controls.generateType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
-          </moc-button>
-        </td>
-        <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
-          <moc-button
-            (click)='chooseType(field.controls.sqlType, false, field.controls.id ? field.controls.id.value : undefined)'
-            [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
-            [control]='field.controls.sqlType'
-            [label]='field.controls.sqlType.value?.code || ("component.table_detail.sql_type_placeholder" | translate)'
-            icon='fa-solid fa-sort'
-            mocStyle='tw-text-left tw-px-5 btn-secondary {{ !field.controls.sqlType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
-          </moc-button>
-        </td>
-        <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
-          <div class='tw-flex tw-justify-between'>
-            <p class='tw-self-center'>{{ 'component.table_detail.blank' | translate }}</p>
-            <moc-input [mocControl]='field.controls.option.controls.blank' [max]='100'
-                       [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
-                       [min]='0'
-                       mocClass='tw-w-20'
-                       mocPlaceholder='0%'
-                       mocStyle='tw-text-center'
-                       type='number'></moc-input>
-            <moc-button [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
-                        mocClass='tw-w-12'
-                        icon='fa-solid fa-diagram-predecessor'
-                        mocStyle='btn-secondary tw-h-10'></moc-button>
-            <i (click)='removeField(i, field.controls.id ? field.controls.id.value : undefined)'
-               class='tw-text-lg {{ isReadonly(field.controls.id ? field.controls.id.value : undefined) ? "" : "tw-cursor-pointer" }} fa-regular fa-circle-xmark tw-self-center'></i>
-          </div>
-        </td>
-        <moc-tooltip *ngIf='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
-                     [dock]='fieldElement'>
-          <p class='tw-text-red'>{{ 'component.table_detail.field_is_mapped' | translate }}</p>
-        </moc-tooltip>
-      </tr>
-      </tbody>
+      <ng-container [formGroup]='$any(formArray)'>
+        <tbody *ngFor='let field of formArray.controls; let i = index;'>
+        <tr [formGroupName]='i' class='tw-relative' #fieldElement>
+          <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
+            <moc-input [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
+                       [mocControl]='field.controls.name'
+                       [mocPlaceholder]='"component.table_detail.field_name_placeholder" | translate'
+                       mocStyle='tw-px-5'></moc-input>
+          </td>
+          <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
+            <moc-button
+              (click)='chooseType(field.controls.generateType, true, field.controls.id ? field.controls.id.value : undefined)'
+              [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
+              [control]='field.controls.generateType'
+              [label]='field.controls.generateType.value?.code || ("component.table_detail.generate_type_placeholder" | translate)'
+              icon='fa-solid fa-sort'
+              mocStyle='tw-text-left tw-px-5 btn-secondary {{ !field.controls.generateType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
+            </moc-button>
+          </td>
+          <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
+            <moc-button
+              (click)='chooseType(field.controls.sqlType, false, field.controls.id ? field.controls.id.value : undefined)'
+              [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
+              [control]='field.controls.sqlType'
+              [label]='field.controls.sqlType.value?.code || ("component.table_detail.sql_type_placeholder" | translate)'
+              icon='fa-solid fa-sort'
+              mocStyle='tw-text-left tw-px-5 btn-secondary {{ !field.controls.sqlType.value ? "tw-text-gray !tw-font-normal" : "" }}'>
+            </moc-button>
+          </td>
+          <td class='tw-w-1/4 tw-px-3 tw-py-1.5 tw-align-top'>
+            <div class='tw-flex tw-justify-between'>
+              <p class='tw-self-center'>{{ 'component.table_detail.blank' | translate }}</p>
+              <moc-input [mocControl]='field.controls.option.controls.blank' [max]='100'
+                         [readonly]='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
+                         [min]='0'
+                         mocClass='tw-w-20'
+                         mocPlaceholder='0%'
+                         mocStyle='tw-text-center'
+                         type='number'></moc-input>
+              <div class='tw-flex tw-items-center'>
+                <p class='tw-self-center'>{{ 'component.table_detail.unique' | translate }}</p>
+                <input type='checkbox' [formControl]='field.controls.option.controls.unique'
+                       class='tw-cursor-pointer tw-ml-2 tw-w-3.5 tw-h-3.5 tw-border'/>
+              </div>
+              <i (click)='removeField(i, field.controls.id ? field.controls.id.value : undefined)'
+                 class='tw-text-lg {{ isReadonly(field.controls.id ? field.controls.id.value : undefined) ? "" : "tw-cursor-pointer" }} fa-solid tw-text-red fa-circle-xmark tw-self-center'></i>
+            </div>
+          </td>
+          <moc-tooltip *ngIf='isReadonly(field.controls.id ? field.controls.id.value : undefined)'
+                       [dock]='fieldElement'>
+            <p class='tw-text-red'>{{ 'component.table_detail.field_is_mapped' | translate }}</p>
+          </moc-tooltip>
+        </tr>
+        </tbody>
+      </ng-container>
       <tfoot>
       <tr>
         <td class='tw-py-3 tw-text-center' colspan='4'>{{ 'component.table_detail.instruction' | translate }}</td>

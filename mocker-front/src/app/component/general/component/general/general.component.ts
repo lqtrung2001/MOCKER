@@ -18,8 +18,8 @@ type Controls = {
   table: FormGroup<{
     name: FormControl;
     fields: FormArray<FormGroup>;
+    row: FormControl;
   }>;
-  rows: FormControl;
   format: FormControl;
 }
 
@@ -40,9 +40,9 @@ export class GeneralComponent extends AbstractComponent {
     this.formGroup = this.formBuilder.group({
       table: this.formBuilder.group({
         name: this.formBuilder.control('MOCKER', [Validators.required]),
-        fields: this.formBuilder.array<FormGroup<Controls>>([])
+        fields: this.formBuilder.array<FormGroup<Controls>>([]),
+        row: this.formBuilder.control(1, [Validators.required])
       }),
-      rows: this.formBuilder.control(1, [Validators.required]),
       format: this.formBuilder.control(FormatEnum.SQL, [Validators.required])
     });
     this.formGroup.valueChanges.subscribe(() => {
@@ -52,13 +52,14 @@ export class GeneralComponent extends AbstractComponent {
     if (tableConfigStorage) {
       this.formGroup.patchValue(tableConfigStorage);
       const { table } = tableConfigStorage;
-      table.fields.forEach((field: FieldModel) => {
+      table.fields.forEach((field: FieldModel): void => {
         this.formGroup.controls.table.controls.fields.push(this.formBuilder.group({
           name: this.formBuilder.control(field.name, [Validators.required]),
           generateType: this.formBuilder.control(field.generateType, [Validators.required]),
           sqlType: this.formBuilder.control(field.sqlType, []),
           option: this.formBuilder.group({
-            blank: this.formBuilder.control(field.option?.blank || 0, [])
+            blank: this.formBuilder.control(field.option?.blank || 0, []),
+            unique: this.formBuilder.control(field.option?.unique || false, [])
           }, [])
         }));
       });
@@ -79,7 +80,7 @@ export class GeneralComponent extends AbstractComponent {
     localStorage.setItem(LocalStorageConstant.TABLE_CONFIG, JSON.stringify(this.formGroup.getRawValue()));
     const table: TableModel = this.formGroup.controls.table.getRawValue() as TableModel;
     if (!this.data.length) {
-      this.generateService.generateWithTable(table, this.formGroup.controls.rows.value)
+      this.generateService.generateWithTable(table)
         .subscribe((data: any[]): void => {
           this.data = data;
           this.startDownload();
@@ -103,7 +104,7 @@ export class GeneralComponent extends AbstractComponent {
     const table: TableModel = this.formGroup.controls.table.getRawValue() as TableModel;
     const format = this.formGroup.controls.format.value;
     if (!this.data.length) {
-      this.generateService.generateWithTable(table, this.formGroup.controls.rows.value)
+      this.generateService.generateWithTable(table)
         .subscribe((data: any[]): void => {
           this.data = data;
           const options: PreviewModalOptions = {

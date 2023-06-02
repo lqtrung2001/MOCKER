@@ -5,7 +5,7 @@
   <hr class='tw-mt-5'/>
   <div [formGroup]='formGroup' class='tw-flex tw-mt-5'>
     <span class='tw-mt-3 tw-mr-5'>{{ 'component.general.row' | translate }}</span>
-    <moc-input [mocControl]='formGroup.controls.rows' mocClass='tw-w-24' mocStyle='tw-px-5'></moc-input>
+    <moc-input [mocControl]='formGroup.controls.table.controls.row' mocClass='tw-w-24' mocStyle='tw-px-5'></moc-input>
     <span class='tw-mt-3 tw-mx-5'>{{ 'component.general.format' | translate }}</span>
     <moc-dropdown [options]='formats'>
       <moc-button [label]='formGroup.controls.format.value' mocClass='tw-w-32' icon='fa-solid fa-sort'

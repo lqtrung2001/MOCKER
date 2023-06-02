@@ -20,7 +20,8 @@ export type FieldControls = {
   sqlType: FormControl;
   option: FormGroup<{
     id: FormControl;
-    blank: FormControl
+    blank: FormControl,
+    unique: FormControl
   }>;
 }
 
@@ -48,7 +49,8 @@ export class TableDetailComponent extends AbstractSharedComponent {
       sqlType: this.formBuilder.control(undefined, []),
       option: this.formBuilder.group({
         id: this.formBuilder.control(undefined, []),
-        blank: this.formBuilder.control(0, [])
+        blank: this.formBuilder.control(0, []),
+        unique: this.formBuilder.control(false, [])
       }, [])
     });
     this.formArray.push(field);

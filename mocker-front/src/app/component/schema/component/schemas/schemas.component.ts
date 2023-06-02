@@ -4,7 +4,6 @@ import { SchemaModel } from '@core/domain/model/entity/schema.model';
 import { SchemaService } from '@core/service/schema.service';
 import { CreateAction, Grid, GridValue } from '@shared/component/grid/grid.component';
 import { StringUtil } from '@core/util/string.util';
-import { TruncatePipe } from '@shared/pipe/truncate.pipe';
 import { ChooseParentModal, ChooseParentModalOptions } from '@shared/modal/choose-parent/choose-parent.modal';
 
 /**

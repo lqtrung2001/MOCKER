@@ -127,7 +127,8 @@
       "field_is_mapped": "This field is mapped to another field in this schema, please delete relationships between fields and try again.",
       "generate_type_placeholder": "Generate type",
       "sql_type_placeholder": "SQL type",
-      "blank": "Blank:"
+      "blank": "Blank:",
+      "unique": "Unique:"
     },
     "person": {
       "my_account": "My Account",
@@ -318,6 +319,7 @@
       "title": "Please choose a {{ entity }}",
       "search_placeholder": "Search for {{ entity }}...",
       "no_projects": "No {{ entity }}s available at this time. Please click on the button below for creating a new {{ entity }}.",
+      "create_new": "Create a new",
       "more": "More ..."
     },
     "create_entity": {

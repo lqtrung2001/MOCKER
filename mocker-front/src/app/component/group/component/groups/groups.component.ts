@@ -4,6 +4,8 @@ import { GroupModel } from '@core/domain/model/entity/group.model';
 import { GroupService } from '@core/service/group.service';
 import { CreateAction, Grid, GridValue } from '@shared/component/grid/grid.component';
 import { StringUtil } from '@core/util/string.util';
+import { RoleEnum } from '@core/domain/enum/role.enum';
+import { RoleUtil } from '@core/util/role.util';
 
 /**
  * @author Do Quoc Viet
@@ -25,7 +27,11 @@ export class GroupsComponent extends AbstractComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.groupService.getEntities().subscribe((groups: GroupModel[]): void => {
+    const roles: RoleEnum[] | undefined = this.activatedRoute.snapshot.queryParamMap.get('roles')
+      ?.toString()
+      .split(',')
+      .map(role => RoleUtil.valueOf(role));
+    this.groupService.getGroups(roles || []).subscribe((groups: GroupModel[]): void => {
       this.grid = {
         columns: [{
           label: this.translateService.instant('component.groups.name'),
@@ -46,7 +52,7 @@ export class GroupsComponent extends AbstractComponent implements OnInit {
           name: {
             value: group.name,
             click: () => this.router.navigate([`/group/${group.id}`]),
-            html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue tw-uppercase'></a>`
+            html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue'></a>`
           },
           description: this.truncatePipe.transform(group.description, 50),
           sharedBy: {

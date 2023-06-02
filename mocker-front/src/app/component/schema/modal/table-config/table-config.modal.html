@@ -9,11 +9,12 @@
       <div class='tw-flex'>
         <span class='tw-mt-3'>{{ 'modal.table_config.table_name' | translate }}</span>
         <moc-input [mocControl]='formGroup.controls.table.controls.name' mocClass='tw-ml-5'
+                   mocStyle='tw-uppercase'
                    [mocPlaceholder]='"modal.table_config.table_name_placeholder" | translate'></moc-input>
       </div>
       <div class='tw-flex tw-ml-5'>
         <span class='tw-mt-3'>{{ 'modal.table_config.rows' | translate }}</span>
-        <moc-input [mocControl]='formGroup.controls.rows' mocClass=' tw-ml-5 tw-w-36'
+        <moc-input [mocControl]='formGroup.controls.table.controls.row' mocClass=' tw-ml-5 tw-w-36'
                    mocPlaceholder='modal.table_config.rows_placeholder'></moc-input>
       </div>
       <moc-button (click)='submit()' mocClass='tw-ml-5 tw-w-40' icon='fa-solid fa-floppy-disk'

@@ -9,7 +9,7 @@ import { ErrorHandler, Injectable } from '@angular/core';
 })
 export class ErrorHandlerConfig implements ErrorHandler {
   handleError(error: any): void {
-    console.log(error);
+    console.error(error);
   }
 
 }
