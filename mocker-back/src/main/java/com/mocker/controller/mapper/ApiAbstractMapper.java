@@ -1,8 +1,8 @@
 package com.mocker.controller.mapper;
 
+import com.mocker.domain.dto.RoleDto;
 import com.mocker.domain.model.entity.enumeration.Role;
 import org.mapstruct.Mapper;
-import com.mocker.domain.dto.RoleDto;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ApiAbstractMapper {
+    RoleDto map(Role role);
 
     List<Role> mapRolesDtoToRoles(List<RoleDto> rolesDto);
 }

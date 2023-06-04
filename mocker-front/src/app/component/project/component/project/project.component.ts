@@ -12,6 +12,8 @@ import {
 } from '@shared/modal/create-entity/create-entity.modal';
 import { RoleEnum } from '@core/domain/enum/role.enum';
 import { GroupMemberModel } from '@core/domain/model/entity/group-member.model';
+import { PermissionUtil } from '@core/util/permission.util';
+import { PermissionService } from '@core/service/permission.service';
 
 /**
  * @author Do Quoc Viet
@@ -34,7 +36,8 @@ export class ProjectComponent extends AbstractComponent implements OnInit {
   constructor(
     injector: Injector,
     private projectService: ProjectService,
-    private groupService: GroupService
+    private groupService: GroupService,
+    private permissionService: PermissionService
   ) {
     super(injector);
     this.formGroup = this.formBuilder.group({
@@ -49,6 +52,12 @@ export class ProjectComponent extends AbstractComponent implements OnInit {
       this.projectService.getEntity(id).subscribe((project: ProjectModel): void => {
         this.project = project;
         this.formGroup.patchValue(project);
+        this.permissionService.getPermission('project', id)
+          .subscribe((role: RoleEnum): void => {
+            this.modalProvider.showWarning({
+              detail: PermissionUtil.getLabelFollowingRole(role)
+            });
+          });
       });
     } else {
       this.activatedRoute.queryParams.subscribe((params: any): void => {

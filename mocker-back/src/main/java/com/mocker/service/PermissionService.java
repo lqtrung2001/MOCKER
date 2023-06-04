@@ -32,4 +32,6 @@ public interface PermissionService {
      * @param msg      The default message
      */
     void checkPermission(UUID targetId, Class<? extends Base> clazz, List<Role> roles, String msg);
+
+    Role getPermission(String entity, UUID id);
 }

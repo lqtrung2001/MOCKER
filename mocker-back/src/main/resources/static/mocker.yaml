@@ -1238,6 +1238,43 @@ paths:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/ServerError'
+  /permission/{entity}/{id}:
+    parameters:
+      - in: path
+        name: entity
+        required: true
+        description: The entity need to be checked
+        schema:
+          type: string
+      - in: path
+        name: id
+        required: true
+        description: The entity's id need to be checked
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: getPermission
+      tags:
+        - Permission
+      description: Get the permission for the given entity
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
 components:
   schemas:
     Base:

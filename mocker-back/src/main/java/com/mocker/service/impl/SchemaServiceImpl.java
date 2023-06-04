@@ -91,8 +91,8 @@ public class SchemaServiceImpl implements SchemaService {
         permissionService.checkPermission(
                 id,
                 Schema.class,
-                List.of(Role.GROUP_ADMIN, Role.GROUP_ASSOCIATE),
-                "You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.");
+                List.of(Role.GROUP_ADMIN),
+                "You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b>.");
         Schema schema = schemaRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(id));
         tableService.getTablesBySchema(id)

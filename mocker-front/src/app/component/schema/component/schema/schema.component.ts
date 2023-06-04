@@ -10,6 +10,9 @@ import {
   CreateEntityModalCloseOptions,
   CreateEntityModalOptions
 } from '@shared/modal/create-entity/create-entity.modal';
+import { RoleEnum } from '@core/domain/enum/role.enum';
+import { PermissionUtil } from '@core/util/permission.util';
+import { PermissionService } from '@core/service/permission.service';
 
 /**
  * @author Do Quoc Viet
@@ -32,7 +35,8 @@ export class SchemaComponent extends AbstractComponent implements OnInit {
   constructor(
     injector: Injector,
     private schemaService: SchemaService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private permissionService: PermissionService
   ) {
     super(injector);
     this.formGroup = this.formBuilder.group({
@@ -47,6 +51,12 @@ export class SchemaComponent extends AbstractComponent implements OnInit {
       this.schemaService.getEntity(id).subscribe((schema: SchemaModel): void => {
         this.schema = schema;
         this.formGroup.patchValue(schema);
+        this.permissionService.getPermission('schema', id)
+          .subscribe((role: RoleEnum): void => {
+            this.modalProvider.showWarning({
+              detail: PermissionUtil.getLabelFollowingRole(role)
+            });
+          });
       });
     } else {
       this.activatedRoute.queryParams.subscribe((params: any): void => {
