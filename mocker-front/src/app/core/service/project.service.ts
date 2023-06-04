@@ -17,16 +17,12 @@ import { SchemaModel } from '@core/domain/model/entity/schema.model';
 export class ProjectService extends AbstractService<ProjectModel> {
   override ENTITY_URL: string = 'project';
 
-  getProjectsByGroupId(groupId: string): Observable<ProjectModel[]> {
-    return this.request<ProjectModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${this.ENTITY_URL}?groupId=${groupId}`);
-  }
-
   getProjects(roles: RoleEnum[]): Observable<ProjectModel[]> {
     return this.request<ProjectModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${this.ENTITY_URL}?${roles ? `roles=${roles.join(',')}` : StringUtil.EMPTY}`);
   }
 
-  getSchemasByProjectId(projectId: string): Observable<SchemaModel[]> {
-    return this.request<SchemaModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${this.ENTITY_URL}/${projectId}/schemas`);
+  getSchemasByProjectId(projectId: string, roles: RoleEnum[] = []): Observable<SchemaModel[]> {
+    return this.request<SchemaModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${this.ENTITY_URL}/${projectId}/schemas?${roles ? `roles=${roles.join(',')}` : StringUtil.EMPTY}`);
   }
 
 }

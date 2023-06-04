@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public interface GroupService {
 
-    List<Group> getGroupsWithAccess(List<Role> roles);
+    List<Group> getGroups(List<Role> roles);
 
     Group getGroup(UUID id);
 

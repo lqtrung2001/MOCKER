@@ -204,7 +204,10 @@
       "no": "No",
       "values_empty": "The values are empty, you can create a new one by using the create button.",
       "values_no_match": "The values are not match with the any credentials, please try again.",
-      "search": "Search by {{searches}} ..."
+      "search": "Search by {{searches}} ...",
+      "group_admin": "Administrator",
+      "group_associate": "Associate",
+      "user": "User"
     },
     "group_members": {
       "description": "A member of the group has three roles (GROUP_ADMIN, GROUP_ASSOCIATE and USER), each of which has a specific feature. With the GROUP ADMIN/GROUP_ASSOCIATE role, you can create or update group members and eventually delete them. But group associations can not remove the GROUP ADMIN role, they only can remove member that has user role in group. Additionally, you can not remove yourself from group. If you are GROUP ADMIN, when you want to propose someone become GROUP_ADMIN, you will has role USER after.",

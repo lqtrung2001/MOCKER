@@ -3,9 +3,13 @@ package com.mocker.service.impl;
 import com.mocker.configuration.security.ApplicationContextHolder;
 import com.mocker.domain.exception.BadRequestException;
 import com.mocker.domain.exception.NotFoundException;
-import com.mocker.domain.model.entity.*;
+import com.mocker.domain.model.entity.Project;
+import com.mocker.domain.model.entity.Schema;
+import com.mocker.domain.model.entity.Table;
+import com.mocker.domain.model.entity.TableRelation;
 import com.mocker.domain.model.entity.enumeration.Role;
-import com.mocker.repository.*;
+import com.mocker.repository.SchemaRepository;
+import com.mocker.repository.TableRepository;
 import com.mocker.service.PermissionService;
 import com.mocker.service.SchemaService;
 import com.mocker.service.TableService;
@@ -15,7 +19,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -31,16 +34,13 @@ public class SchemaServiceImpl implements SchemaService {
     private final TableService tableService;
     private final TableRepository tableRepository;
     private final ApplicationContextHolder applicationContextHolder;
-    private final GroupRepository groupRepository;
-    private final GroupMemberRepository groupMemberRepository;
-    private final UserRepository userRepository;
-    private final ProjectRepository projectRepository;
     private final PermissionService permissionService;
 
     @Override
-    public List<Schema> getSchemasByProject(UUID projectId) {
+    public List<Schema> getSchemasByProjectId(UUID projectId, List<Role> roles) {
         permissionService.checkPermission(projectId, Project.class);
-        return schemaRepository.getSchemasByProject(projectId);
+        UUID authId = applicationContextHolder.getCurrentUser().getId();
+        return schemaRepository.getSchemasByProjectId(authId, projectId, roles);
     }
 
     @Override
@@ -69,23 +69,9 @@ public class SchemaServiceImpl implements SchemaService {
     }
 
     @Override
-    public List<Schema> getSchemas() {
+    public List<Schema> getSchemas(List<Role> roles) {
         UUID auth = applicationContextHolder.getCurrentUser().getId();
-        List<Schema> schemas = schemaRepository.getSchemas(auth);
-        Set<UUID> groupIds = userRepository.findAllGroupIds(auth);
-        groupIds.forEach(groupId -> {
-            Group group = groupRepository.findById(groupId).orElseThrow(() -> new NotFoundException(groupId));
-            List<GroupMember> groupMembers = groupMemberRepository.findAllByGroup(group);
-            boolean contains = groupMembers.stream().map(GroupMember::getUser)
-                    .map(User::getId)
-                    .toList()
-                    .contains(applicationContextHolder.getCurrentUser().getId());
-            if (!contains) {
-                List<Project> projects = projectRepository.findAllByGroup(groupRepository.findById(groupId).orElseThrow(() -> new NotFoundException(groupId)));
-                projects.forEach(project -> schemas.removeAll(schemaRepository.getSchemasByProject(project.getId())));
-            }
-        });
-        return schemas;
+        return schemaRepository.getSchemas(auth, roles);
     }
 
     @Override

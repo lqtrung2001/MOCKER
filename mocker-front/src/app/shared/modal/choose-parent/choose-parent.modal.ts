@@ -75,7 +75,7 @@ export class ChooseParentModal extends AbstractModal implements OnInit {
     }
     this.router.navigate([`/${path}`], {
       queryParams: {
-        roles: RoleEnum.GROUP_ADMIN
+        roles: `${RoleEnum.GROUP_ADMIN},${RoleEnum.GROUP_ASSOCIATE}`
       }
     }).then();
   }

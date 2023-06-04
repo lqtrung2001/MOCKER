@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { TableModel } from '@core/domain/model/entity/table.model';
 import { HttpMethodEnum } from '@core/domain/enum/http-method.enum';
 import { TableRelationModel } from '@core/domain/model/entity/table-relation.model';
-import { GroupMemberModel } from '@core/domain/model/entity/group-member.model';
+import { RoleEnum } from '@core/domain/enum/role.enum';
+import { StringUtil } from '@core/util/string.util';
 
 /**
  * @author Do Quoc Viet
@@ -19,6 +20,10 @@ export class SchemaService extends AbstractService<SchemaModel> {
 
   getSchemasByProjectId(projectId: string): Observable<SchemaModel[]> {
     return this.request<SchemaModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${this.ENTITY_URL}?projectId=${projectId}`);
+  }
+
+  getSchemas(roles: RoleEnum[]): Observable<SchemaModel[]> {
+    return this.request<SchemaModel[]>(HttpMethodEnum.GET, `${this.API_URL}/${this.ENTITY_URL}?${roles ? `roles=${roles.join(',')}` : StringUtil.EMPTY}`);
   }
 
   getTablesBySchema(schemaId: string): Observable<TableModel[]> {

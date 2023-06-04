@@ -106,9 +106,9 @@ public class GroupMemberServiceImpl implements GroupMemberService {
     }
 
     @Override
-    public List<GroupMember> getGroupMembersByGroup(UUID groupId) {
+    public List<GroupMember> getGroupMembersByGroupId(UUID groupId, List<Role> roles) {
         permissionService.checkPermission(groupId, Group.class);
-        return groupMemberRepository.findAllByGroupId(groupId);
+        return groupMemberRepository.getGroupMembersByGroupId(groupId, roles);
     }
 
 }

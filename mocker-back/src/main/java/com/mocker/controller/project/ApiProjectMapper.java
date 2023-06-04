@@ -7,6 +7,8 @@ import com.mocker.domain.model.entity.Project;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 /**
  * @author Luong Quoc Trung
  * @author Do Quoc Viet
@@ -21,5 +23,7 @@ public interface ApiProjectMapper {
 
     @Mapping(target = "schemas", ignore = true)
     ProjectDto map(Project project);
+
+    List<ProjectDto> map(List<Project> projects);
 
 }

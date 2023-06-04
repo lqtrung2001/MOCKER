@@ -4,9 +4,12 @@ import com.mocker.domain.model.entity.Group;
 import com.mocker.domain.model.entity.Project;
 import com.mocker.domain.model.entity.Schema;
 import com.mocker.domain.model.entity.TableRelation;
+import com.mocker.domain.model.entity.enumeration.Role;
 import com.mocker.repository.customize.SchemaRepositoryCustom;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.hibernate.Hibernate;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -31,22 +34,36 @@ public class SchemaRepositoryImpl implements SchemaRepositoryCustom {
     EntityManager entityManager;
 
     @Override
-    public List<Schema> getSchemasByProject(UUID projectId) {
-        return new JPAQuery<Schema>(entityManager)
-                .from(schema)
-                .where(schema.project.id.eq(projectId))
-                .fetch();
-    }
-
-    @Override
-    public List<Schema> getSchemas(UUID userId) {
+    public List<Schema> getSchemasByProjectId(UUID authId, UUID projectId, List<Role> roles) {
+        BooleanExpression criteria = schema.project.id.eq(projectId)
+                .and(groupMember.user.id.eq(authId));
+        if (!CollectionUtils.isEmpty(roles)) {
+            criteria = criteria.and(groupMember.role.in(roles));
+        }
         return new JPAQuery<Schema>(entityManager)
                 .from(schema)
                 .where(schema.project.in(new JPAQuery<Project>(entityManager)
                         .from(project)
                         .where(project.group.in(new JPAQuery<Group>(entityManager)
                                 .from(groupMember)
-                                .where(groupMember.user.id.eq(userId))
+                                .where(criteria)
+                                .select(groupMember.group)))))
+                .fetch();
+    }
+
+    @Override
+    public List<Schema> getSchemas(UUID userId, List<Role> roles) {
+        BooleanExpression criteria = groupMember.user.id.eq(userId);
+        if (!CollectionUtils.isEmpty(roles)) {
+            criteria = criteria.and(groupMember.role.in(roles));
+        }
+        return new JPAQuery<Schema>(entityManager)
+                .from(schema)
+                .where(schema.project.in(new JPAQuery<Project>(entityManager)
+                        .from(project)
+                        .where(project.group.in(new JPAQuery<Group>(entityManager)
+                                .from(groupMember)
+                                .where(criteria)
                                 .select(groupMember.group)))))
                 .fetch();
     }

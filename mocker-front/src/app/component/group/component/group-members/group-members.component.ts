@@ -9,6 +9,7 @@ import { UserModel } from '@core/domain/model/entity/user.model';
 import { GroupModel } from '@core/domain/model/entity/group.model';
 import { ChangeRoleModal, ChangeRoleModalOptions } from '@app/component/group/modal/change-role/change-role.modal';
 import { RoleEnum } from '@core/domain/enum/role.enum';
+import { GroupService } from '@core/service/group.service';
 
 /**
  * @author Do Quoc Viet
@@ -22,10 +23,12 @@ import { RoleEnum } from '@core/domain/enum/role.enum';
 export class GroupMembersComponent extends AbstractComponent implements OnChanges {
   @Input() group: GroupModel;
   grid: Grid;
+  currentRole: RoleEnum | undefined;
 
   constructor(
     injector: Injector,
-    private groupMemberService: GroupMemberService
+    private groupMemberService: GroupMemberService,
+    private groupService: GroupService
   ) {
     super(injector);
   }
@@ -126,7 +129,7 @@ export class GroupMembersComponent extends AbstractComponent implements OnChange
                     this.router.navigate(['/group']).then();
                     return;
                   }
-                  this.groupMemberService.getGroupMembersByGroupId(this.group.id)
+                  this.groupService.getGroupMembersByGroupId(this.group.id, this.currentRole ? [this.currentRole] : [])
                     .subscribe((groupMembers: GroupMemberModel[]): void => {
                       this.group.groupMembers = groupMembers;
                       this.refresh();
@@ -193,6 +196,17 @@ export class GroupMembersComponent extends AbstractComponent implements OnChange
       },
       content: 'component.group_members.add_user'
     };
+  }
+
+  roleChange(role?: RoleEnum): void {
+    if (role !== this.currentRole) {
+      this.groupService.getGroupMembersByGroupId(this.group.id, role ? [role] : [])
+        .subscribe((groupMembers: GroupMemberModel[]): void => {
+          this.group.groupMembers = groupMembers;
+          this.currentRole = role;
+          this.refresh();
+        });
+    }
   }
 
 }

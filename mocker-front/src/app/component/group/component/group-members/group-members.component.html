@@ -1,4 +1,4 @@
 <div class='' id='main'>
   <moc-description mocClass='tw-mt-5'>{{ 'component.group_members.description' | translate }}</moc-description>
-  <moc-grid mocClass='tw-mt-5' [createAction]='createAction' [mocGrid]='grid'></moc-grid>
+  <moc-grid mocClass='tw-mt-5' [currentRole]='currentRole' (roleChangeEmitter)='roleChange($event)' [createAction]='createAction' [mocGrid]='grid'></moc-grid>
 </div>

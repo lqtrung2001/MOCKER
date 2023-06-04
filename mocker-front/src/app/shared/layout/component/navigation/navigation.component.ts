@@ -18,8 +18,6 @@ export interface Navigation {
   styleUrls: ['navigation.component.scss']
 })
 export class NavigationComponent extends AbstractComponent {
-
-  avatarUrl: string = 'https://yt3.ggpht.com/Cji7zw_9NO5VpKrfN3oP90Wiby3UhNG2t4q8j3wJiAMFSQicFKu-jXJ13H_mJfBKPD1lzaGGXZA=s88-c-k-c0x00ffffff-no-rj-mo';
   navigations: Navigation[] = [];
   options: Option[] = [];
 
@@ -48,20 +46,13 @@ export class NavigationComponent extends AbstractComponent {
     ];
     this.options = [{
       id: '1',
-      icon: 'fa-solid fa-sort',
-      label: 'Switch Account',
-      click: (): void => {
-        console.log('Switch Account');
-      }
-    }, {
-      id: '2',
       icon: 'fa-solid fa-id-card',
       label: 'Profile',
       click: (): void => {
         this.router.navigate([`people/${this.applicationConfig.user?.id}`]).then();
       }
     }, {
-      id: '3',
+      id: '1',
       icon: 'fa-solid fa-right-from-bracket',
       label: 'Sign out',
       click: (): void => {

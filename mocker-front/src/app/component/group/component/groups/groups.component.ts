@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
 import { AbstractComponent } from '@core/common/abstract.component';
 import { GroupModel } from '@core/domain/model/entity/group.model';
 import { GroupService } from '@core/service/group.service';
@@ -18,6 +18,7 @@ import { RoleUtil } from '@core/util/role.util';
 })
 export class GroupsComponent extends AbstractComponent implements OnInit {
   grid: Grid;
+  currentRole: RoleEnum | undefined;
 
   constructor(
     injector: Injector,
@@ -30,8 +31,18 @@ export class GroupsComponent extends AbstractComponent implements OnInit {
     const roles: RoleEnum[] | undefined = this.activatedRoute.snapshot.queryParamMap.get('roles')
       ?.toString()
       .split(',')
-      .map(role => RoleUtil.valueOf(role));
-    this.groupService.getGroups(roles || []).subscribe((groups: GroupModel[]): void => {
+      .filter((role: string): boolean => !!role)
+      .map((role: string): RoleEnum => RoleUtil.valueOf(role));
+    if (roles?.length === 1) {
+      this.currentRole = roles.at(0)!;
+    } else {
+      this.currentRole = undefined;
+    }
+    this.initialEntities(roles);
+  }
+
+  initialEntities(roles: RoleEnum[] = []): void {
+    this.groupService.getGroups(roles).subscribe((groups: GroupModel[]): void => {
       this.grid = {
         columns: [{
           label: this.translateService.instant('component.groups.name'),
@@ -73,4 +84,10 @@ export class GroupsComponent extends AbstractComponent implements OnInit {
     };
   }
 
+  roleChange(role: RoleEnum | undefined): void {
+    if (role !== this.currentRole) {
+      this.initialEntities(role ? [role] : undefined);
+      this.currentRole = role;
+    }
+  }
 }

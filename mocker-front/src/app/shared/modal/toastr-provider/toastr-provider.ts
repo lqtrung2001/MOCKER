@@ -70,7 +70,7 @@ export class ToastrProvider {
 
   init(): number {
     const index: number = Math.random();
-    this.toastrPositions.forEach((toastrPosition: ToastrPosition, i) => {
+    this.toastrPositions.forEach((toastrPosition: ToastrPosition, i: number): void => {
       i++;
       toastrPosition.bottom = i;
       toastrPosition.zIndex = 100 - i;

@@ -60,7 +60,8 @@ public class ProjectController implements ProjectApi {
     }
 
     @Override
-    public ResponseEntity<List<SchemaDto>> getSchemasByProject(UUID id) {
-        return ResponseEntity.ok(apiSchemaMapper.map(schemaService.getSchemasByProject(id)));
+    public ResponseEntity<List<SchemaDto>> getSchemasByProject(UUID id, List<RoleDto> rolesDto) {
+        List<Role> roles = apiAbstractMapper.mapRolesDtoToRoles(rolesDto);
+        return ResponseEntity.ok(apiSchemaMapper.map(schemaService.getSchemasByProjectId(id, roles)));
     }
 }

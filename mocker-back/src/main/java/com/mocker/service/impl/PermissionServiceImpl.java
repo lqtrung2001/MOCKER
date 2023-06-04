@@ -76,7 +76,7 @@ public class PermissionServiceImpl implements PermissionService {
         }
         UUID authId = applicationContextHolder.getCurrentUser().getId();
         Role role = groupMemberRepository
-                .findAllByGroupId(groupId)
+                .getGroupMembersByGroupId(groupId, List.of(Role.GROUP_ADMIN, Role.GROUP_ASSOCIATE, Role.USER))
                 .stream()
                 .filter(item -> authId.equals(item.getUser().getId()))
                 .map(GroupMember::getRole)

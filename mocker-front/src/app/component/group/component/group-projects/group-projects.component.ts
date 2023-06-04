@@ -7,6 +7,7 @@ import { ProjectService } from '@app/core/service/project.service';
 import { GroupModel } from '@core/domain/model/entity/group.model';
 import { GroupMemberModel } from '@core/domain/model/entity/group-member.model';
 import { RoleEnum } from '@core/domain/enum/role.enum';
+import { GroupService } from '@app/core/service/group.service';
 
 /**
  * @author Do Quoc Viet
@@ -20,10 +21,12 @@ import { RoleEnum } from '@core/domain/enum/role.enum';
 export class GroupProjectsComponent extends AbstractComponent implements OnChanges {
   @Input() group: GroupModel;
   grid: Grid;
+  currentRole: RoleEnum | undefined;
 
   constructor(
     injector: Injector,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private groupService: GroupService
   ) {
     super(injector);
   }
@@ -77,9 +80,11 @@ export class GroupProjectsComponent extends AbstractComponent implements OnChang
             }).subscribe((result: boolean): void => {
               if (result) {
                 this.projectService.deleteEntity(project.id).subscribe((): void => {
-                  this.projectService.getProjectsByGroupId(this.group.id).subscribe((projects: ProjectModel[]): void => {
-                    this.group.projects = projects;
-                  });
+                  this.groupService.getProjectsByGroupId(this.group.id, this.currentRole ? [this.currentRole] : [])
+                    .subscribe((projects: ProjectModel[]): void => {
+                      this.group.projects = projects;
+                      this.refresh();
+                    });
                 });
               }
             });
@@ -120,6 +125,17 @@ export class GroupProjectsComponent extends AbstractComponent implements OnChang
       }),
       content: 'component.group_projects.create_project'
     };
+  }
+
+  roleChange(role?: RoleEnum): void {
+    if (role !== this.currentRole) {
+      this.groupService.getProjectsByGroupId(this.group.id, role ? [role] : [])
+        .subscribe((projects: ProjectModel[]): void => {
+          this.group.projects = projects;
+          this.currentRole = role;
+          this.refresh();
+        });
+    }
   }
 
 }

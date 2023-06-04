@@ -20,6 +20,7 @@ import { RoleUtil } from '@core/util/role.util';
 })
 export class ProjectsComponent extends AbstractComponent implements OnInit {
   grid: Grid;
+  currentRole: RoleEnum | undefined;
 
   constructor(
     injector: Injector,
@@ -32,7 +33,17 @@ export class ProjectsComponent extends AbstractComponent implements OnInit {
     const roles: RoleEnum[] | undefined = this.activatedRoute.snapshot.queryParamMap.get('roles')
       ?.toString()
       .split(',')
-      .map(role => RoleUtil.valueOf(role));
+      .filter((role: string): boolean => !!role)
+      .map((role: string): RoleEnum => RoleUtil.valueOf(role));
+    if (roles?.length === 1) {
+      this.currentRole = roles.at(0)!;
+    } else {
+      this.currentRole = undefined;
+    }
+    this.initialEntities(roles);
+  }
+
+  initialEntities(roles: RoleEnum[] = []): void {
     this.projectService.getProjects(roles || [])
       .subscribe((projects: ProjectModel[]): void => {
         this.grid = {
@@ -96,4 +107,10 @@ export class ProjectsComponent extends AbstractComponent implements OnInit {
     };
   }
 
+  roleChange(role: RoleEnum | undefined): void {
+    if (role !== this.currentRole) {
+      this.initialEntities(role ? [role] : undefined);
+      this.currentRole = role;
+    }
+  }
 }

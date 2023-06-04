@@ -1,7 +1,10 @@
 import { SharedComponent } from '@shared/component/common/shared.component';
-import { Component, Injector, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { StringUtil } from '@core/util/string.util';
+import { Option } from '@shared/component/dropdown/dropdown.component';
+import { RoleEnum } from '@core/domain/enum/role.enum';
+import { RoleUtil } from '@core/util/role.util';
 
 /**
  * @author Do Quoc Viet
@@ -49,6 +52,9 @@ type Controls = {
 export class GridComponent extends SharedComponent implements OnChanges {
   @Input() mocGrid: Grid;
   @Input() createAction: CreateAction;
+  @Input() entity: string;
+  @Input() currentRole: RoleEnum | undefined;
+  @Output() roleChangeEmitter: EventEmitter<RoleEnum | undefined> = new EventEmitter<RoleEnum | undefined>();
   formGroup: FormGroup<Controls>;
   columnActive: string;
   pageValues: PageValue[];
@@ -120,6 +126,7 @@ export class GridComponent extends SharedComponent implements OnChanges {
 
   selectPage(pageNumber?: number | 'previous' | 'next'): void {
     if (!this.mocGrid?.values?.length) {
+      this.pageValues = [];
       this.currentPageNumber = 1;
       return;
     }
@@ -168,6 +175,18 @@ export class GridComponent extends SharedComponent implements OnChanges {
           });
         return match;
       });
+  }
+
+  get roleOptions(): Option[] {
+    const roles: string[] = [StringUtil.EMPTY, RoleEnum.GROUP_ADMIN, RoleEnum.GROUP_ASSOCIATE, RoleEnum.USER];
+    return roles.map((role: string): Option => ({
+      id: role,
+      label: role ? this.translateService.instant(`component.grid.${role.toLowerCase()}`) : '-',
+      click: (): void => {
+        this.roleChangeEmitter.emit(role ? RoleUtil.valueOf(role) : undefined);
+      }
+    }));
+
   }
 
 }

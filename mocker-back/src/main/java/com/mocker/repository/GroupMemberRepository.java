@@ -3,6 +3,8 @@ package com.mocker.repository;
 import com.mocker.domain.model.entity.Group;
 import com.mocker.domain.model.entity.GroupMember;
 import com.mocker.domain.model.entity.composite_key.GroupMemberPK;
+import com.mocker.domain.model.entity.enumeration.Role;
+import com.mocker.repository.customize.GroupMemberRepositoryCustom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,10 +16,8 @@ import java.util.UUID;
  */
 
 @Repository
-public interface GroupMemberRepository extends JpaRepository<GroupMember, GroupMemberPK> {
+public interface GroupMemberRepository extends JpaRepository<GroupMember, GroupMemberPK>, GroupMemberRepositoryCustom {
 
     List<GroupMember> findAllByGroup(Group group);
-
-    List<GroupMember> findAllByGroupId(UUID groupId);
 
 }

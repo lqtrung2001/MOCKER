@@ -4,7 +4,6 @@ import com.mocker.configuration.security.ApplicationContextHolder;
 import com.mocker.domain.exception.BadRequestException;
 import com.mocker.domain.exception.NotFoundException;
 import com.mocker.domain.model.entity.Group;
-import com.mocker.domain.model.entity.GroupMember;
 import com.mocker.domain.model.entity.Project;
 import com.mocker.domain.model.entity.Schema;
 import com.mocker.domain.model.entity.enumeration.Role;
@@ -17,13 +16,10 @@ import com.mocker.service.ProjectService;
 import com.mocker.service.SchemaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author Luong Quoc Trung
@@ -45,22 +41,13 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Project getProject(UUID id) {
         permissionService.checkPermission(id, Project.class);
-        Project project = projectRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
-        project.setSchemas(schemaRepository.getSchemasByProject(project.getId()));
-        return project;
+        return projectRepository.getProject(id);
     }
 
     @Override
     public List<Project> getProjects(List<Role> roles) {
         UUID authId = applicationContextHolder.getCurrentUser().getId();
-        Set<UUID> groupIds = userRepository.findAllGroupIds(authId);
-        groupIds = groupIds.stream().filter(groupId -> {
-            List<GroupMember> groupMembers = groupMemberRepository.findAllByGroupId(groupId);
-            return groupMembers.stream()
-                    .anyMatch(groupMember -> authId.equals(groupMember.getUser().getId())
-                            && (CollectionUtils.isEmpty(roles) || roles.contains(groupMember.getRole())));
-        }).collect(Collectors.toSet());
-        return projectRepository.findAllByGroupIds(groupIds);
+        return projectRepository.getProjects(authId, roles);
     }
 
     @Override
@@ -90,15 +77,19 @@ public class ProjectServiceImpl implements ProjectService {
                 List.of(Role.GROUP_ADMIN, Role.GROUP_ASSOCIATE),
                 "You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.");
         Project project = projectRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
-        schemaService.getSchemasByProject(id).stream().map(Schema::getId).forEach(schemaService::delete);
+        schemaService.getSchemasByProjectId(id, List.of(Role.GROUP_ADMIN, Role.GROUP_ASSOCIATE, Role.USER))
+                .stream()
+                .map(Schema::getId)
+                .forEach(schemaService::delete);
         projectRepository.deleteById(id);
         return project;
     }
 
     @Override
-    public List<Schema> getSchemasByProject(UUID projectId) {
-        permissionService.checkPermission(projectId, Project.class);
-        return schemaRepository.getSchemasByProject(projectId);
+    public List<Project> getProjectsByGroupId(UUID groupId, List<Role> roles) {
+        permissionService.checkPermission(groupId, Group.class);
+        UUID authId = applicationContextHolder.getCurrentUser().getId();
+        return projectRepository.getProjectsByGroupId(authId, groupId, roles);
     }
 
 }

@@ -1,15 +1,12 @@
-import {AbstractComponent} from '@core/common/abstract.component';
-import {Component, Injector, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {ProjectModel} from '@core/domain/model/entity/project.model';
-import {CreateAction, Grid, GridValue} from '@shared/component/grid/grid.component';
-import {SchemaModel} from '@core/domain/model/entity/schema.model';
-import {StringUtil} from '@core/util/string.util';
-import {SchemaService} from '@core/service/schema.service';
-import {GroupMemberModel} from "@core/domain/model/entity/group-member.model";
-import {RoleEnum} from "@core/domain/enum/role.enum";
-import {GroupService} from "@core/service/group.service";
-import {group} from "@angular/animations";
-import {GroupModel} from "@core/domain/model/entity/group.model";
+import { AbstractComponent } from '@core/common/abstract.component';
+import { Component, Injector, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ProjectModel } from '@core/domain/model/entity/project.model';
+import { CreateAction, Grid, GridValue } from '@shared/component/grid/grid.component';
+import { SchemaModel } from '@core/domain/model/entity/schema.model';
+import { StringUtil } from '@core/util/string.util';
+import { SchemaService } from '@core/service/schema.service';
+import { RoleEnum } from '@core/domain/enum/role.enum';
+import { ProjectService } from '@app/core/service/project.service';
 
 /**
  * @author Do Quoc Viet
@@ -23,11 +20,12 @@ import {GroupModel} from "@core/domain/model/entity/group.model";
 export class ProjectSchemasComponent extends AbstractComponent implements OnChanges {
   @Input() project: ProjectModel;
   grid: Grid;
+  currentRole: RoleEnum | undefined;
 
   constructor(
     injector: Injector,
     private schemaService: SchemaService,
-    private groupService: GroupService
+    private projectService: ProjectService
   ) {
     super(injector);
   }
@@ -78,8 +76,11 @@ export class ProjectSchemasComponent extends AbstractComponent implements OnChan
             }).subscribe((result: boolean): void => {
               if (result) {
                 this.schemaService.deleteEntity(schema.id).subscribe((): void => {
-                  this.schemaService.get
-                  this.refresh();
+                  this.projectService.getSchemasByProjectId(this.project.id, this.currentRole ? [this.currentRole] : [])
+                    .subscribe((schemas: SchemaModel[]): void => {
+                      this.project.schemas = schemas;
+                      this.refresh();
+                    });
                 });
               }
             });
@@ -91,20 +92,6 @@ export class ProjectSchemasComponent extends AbstractComponent implements OnChan
   }
 
   get createAction(): CreateAction {
-    // this.groupService.getEntity(this.project.group.id)
-    //   .subscribe((group: GroupModel): void => {
-    //     const groupMember: GroupMemberModel | undefined = group.groupMembers
-    //       .find((groupMember: GroupMemberModel): boolean => groupMember.user.id === this.applicationConfig.user?.id);
-    //
-    //   })
-    // if (!groupMember || (groupMember.role !== RoleEnum.GROUP_ADMIN && groupMember.role !== RoleEnum.GROUP_ASSOCIATE)) {
-    //   return {
-    //     click: () => this.modalProvider.showError({
-    //       detail: 'You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.'
-    //     }),
-    //     content: 'component.schemas.create'
-    //   };
-    // }
     return {
       click: () => this.router.navigate(['/schema/new'], {
         queryParams: {
@@ -113,6 +100,17 @@ export class ProjectSchemasComponent extends AbstractComponent implements OnChan
       }),
       content: 'component.schemas.create'
     };
+  }
+
+  roleChange(role?: RoleEnum): void {
+    if (role !== this.currentRole) {
+      this.projectService.getSchemasByProjectId(this.project.id, role ? [role] : [])
+        .subscribe((schemas: SchemaModel[]): void => {
+          this.project.schemas = schemas;
+          this.currentRole = role;
+          this.refresh();
+        });
+    }
   }
 
 }

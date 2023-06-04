@@ -13,7 +13,6 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static com.mocker.domain.model.entity.QGroup.group;
 import static com.mocker.domain.model.entity.QGroupMember.groupMember;
@@ -33,18 +32,16 @@ public class GroupRepositoryImpl implements GroupRepositoryCustom {
     private EntityManager entityManager;
 
     @Override
-    public List<Group> findAllWithAccess(UUID userId, List<Role> roles) {
+    public List<Group> getGroups(UUID userId, List<Role> roles) {
         BooleanExpression criteria = groupMember.user.id.eq(userId);
         if (!CollectionUtils.isEmpty(roles)) {
             criteria = criteria.and(groupMember.role.in(roles));
         }
-        return new JPAQuery<GroupMember>(entityManager)
-                .from(groupMember)
+        return new JPAQuery<Group>(entityManager)
+                .from(group)
                 .where(criteria)
-                .fetch()
-                .stream()
-                .map(GroupMember::getGroup)
-                .collect(Collectors.toList());
+                .join(group.groupMembers, groupMember).fetchJoin()
+                .fetch();
     }
 
     @Override
