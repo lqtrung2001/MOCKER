@@ -404,12 +404,6 @@ paths:
       tags:
         - Generate
       description: Generate random row in table
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: integer
       responses:
         200:
           description: The query is successful
@@ -432,13 +426,6 @@ paths:
         500:
           $ref: '#/components/responses/ServerError'
   /generate:
-    parameters:
-      - in: query
-        name: row
-        required: true
-        description: Number row need query
-        schema:
-          type: number
     post:
       operationId: generateWithTable
       tags:
@@ -1443,6 +1430,12 @@ components:
           type: string
           maxLength: 255
           description: Name of table
+        row:
+          type: integer
+          default: 0
+          minimum: 0
+          maximum: 1000
+          description: row number generated
         description:
           type: string
           maxLength: 1000
