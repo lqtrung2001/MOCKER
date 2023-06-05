@@ -78,13 +78,16 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.schema?.id) {
+      this.relationLines.forEach((relationLine: RelationLine): void => {
+        relationLine.leaderLine.remove();
+      });
       this.schemaService.getTablesBySchema(this.schema.id)
         .subscribe((tables: TableModel[]): void => {
           this.schema.tables = tables;
           this.schemaService.getTableRelationsBySchema(this.schema.id)
             .subscribe((tableRelations: TableRelationModel[]): void => {
               tableRelations.forEach((tableRelation: TableRelationModel): void => {
-                const relationLine = DrawUtil.newRelationLine(tableRelation);
+                const relationLine: RelationLine = DrawUtil.newRelationLine(tableRelation);
                 if (relationLine) {
                   this.relationLines.push(relationLine);
                 }
