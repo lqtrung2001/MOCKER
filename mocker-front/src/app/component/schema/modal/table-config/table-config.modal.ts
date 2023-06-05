@@ -72,7 +72,8 @@ export class TableConfigModal extends AbstractModal implements OnInit {
         sqlType: this.formBuilder.control(field.sqlType, []),
         option: this.formBuilder.group({
           id: this.formBuilder.control(field.option?.id, []),
-          blank: this.formBuilder.control(field.option?.blank || 0, [])
+          blank: this.formBuilder.control(field.option?.blank || 0, []),
+          unique: this.formBuilder.control(field.option?.unique, [])
         }, [])
       }));
     });
@@ -81,7 +82,6 @@ export class TableConfigModal extends AbstractModal implements OnInit {
   submit(): void {
     this.formGroup.markAllAsTouched();
     this.formGroup.controls.table.controls.fields.markAllAsTouched();
-    console.log(this.formGroup);
     if (this.formGroup.invalid || this.formGroup.controls.table.controls.fields.invalid) {
       return;
     }
