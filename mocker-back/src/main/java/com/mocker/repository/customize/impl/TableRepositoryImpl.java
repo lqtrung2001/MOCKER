@@ -51,4 +51,11 @@ public class TableRepositoryImpl implements TableRepositoryCustom {
                 .fetchOne();
     }
 
+    @Override
+    public Table getTableByFieldId(UUID fieldId) {
+        return new JPAQuery<Table>(entityManager)
+                .from(table)
+                .innerJoin(table.fields, field)
+                .where(field.id.eq(fieldId)).fetchOne();
+    }
 }
