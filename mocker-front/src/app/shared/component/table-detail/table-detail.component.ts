@@ -1,4 +1,4 @@
-import { Component, Injector, Input } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   ChooseTypeModal,
@@ -30,7 +30,7 @@ export type FieldControls = {
   templateUrl: 'table-detail.component.html',
   styleUrls: ['table-detail.component.scss']
 })
-export class TableDetailComponent extends AbstractSharedComponent {
+export class TableDetailComponent extends AbstractSharedComponent implements OnInit {
   @Input('fields') formArray: FormArray<FormGroup<FieldControls>>;
   @Input() relations: string[] = [];
 
@@ -38,6 +38,15 @@ export class TableDetailComponent extends AbstractSharedComponent {
     injector: Injector
   ) {
     super(injector);
+  }
+
+  ngOnInit(): void {
+    // The default fields
+    if (!this.formArray.length) {
+      this.insertField();
+      this.insertField();
+      this.insertField();
+    }
   }
 
   insertField(): void {

@@ -81,6 +81,7 @@ export class TableConfigModal extends AbstractModal implements OnInit {
   submit(): void {
     this.formGroup.markAllAsTouched();
     this.formGroup.controls.table.controls.fields.markAllAsTouched();
+    console.log(this.formGroup);
     if (this.formGroup.invalid || this.formGroup.controls.table.controls.fields.invalid) {
       return;
     }

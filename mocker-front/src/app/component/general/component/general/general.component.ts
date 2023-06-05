@@ -9,6 +9,11 @@ import { PreviewModal, PreviewModalOptions } from '@shared/modal/preview/preview
 import { Option } from '@shared/component/dropdown/dropdown.component';
 import { DownloadUtil } from '@core/util/download.util';
 import { FormatEnum } from '@core/domain/enum/format.enum';
+import { ChooseParentModal, ChooseParentModalOptions } from '@shared/modal/choose-parent/choose-parent.modal';
+import { SchemaModel } from '@core/domain/model/entity/schema.model';
+import { TableService } from '@core/service/table.service';
+import { SchemaService } from '@core/service/schema.service';
+import { StringUtil } from '@core/util/string.util';
 
 /**
  * @author Do Quoc Viet
@@ -34,7 +39,9 @@ export class GeneralComponent extends AbstractComponent {
 
   constructor(
     injector: Injector,
-    private generateService: GenerateService
+    private generateService: GenerateService,
+    private tableService: TableService,
+    private schemaService: SchemaService
   ) {
     super(injector);
     this.formGroup = this.formBuilder.group({
@@ -100,6 +107,12 @@ export class GeneralComponent extends AbstractComponent {
     if (this.formGroup.invalid) {
       return;
     }
+    if (!this.formGroup.controls.table.controls.fields.length) {
+      this.modalProvider.showWarning({
+        body: 'warning.fields_empty_when_generating'
+      });
+      return;
+    }
     localStorage.setItem(LocalStorageConstant.TABLE_CONFIG, JSON.stringify(this.formGroup.getRawValue()));
     const table: TableModel = this.formGroup.controls.table.getRawValue() as TableModel;
     const format = this.formGroup.controls.format.value;
@@ -141,4 +154,41 @@ export class GeneralComponent extends AbstractComponent {
   get isShowTableNameField(): boolean {
     return this.formGroup.controls.format.value !== FormatEnum.CSV;
   }
+
+  saveToSchema(): void {
+    this.formGroup.markAllAsTouched();
+    if (this.formGroup.invalid) {
+      return;
+    }
+    if (!this.formGroup.controls.table.controls.fields.length) {
+      this.modalProvider.showWarning({
+        body: 'warning.fields_empty_when_generating'
+      });
+      return;
+    }
+    localStorage.setItem(LocalStorageConstant.TABLE_CONFIG, JSON.stringify(this.formGroup.getRawValue()));
+    const options: ChooseParentModalOptions = {
+      type: 'schema'
+    };
+    this.modalService.open(ChooseParentModal, options)
+      .subscribe((schemaId: string): void => {
+        if (schemaId) {
+          this.schemaService.getEntity(schemaId)
+            .subscribe((schema: SchemaModel): void => {
+              const table: TableModel = this.formGroup.controls.table.getRawValue() as TableModel;
+              table.schema = schema;
+              table.description = StringUtil.EMPTY;
+              this.tableService.upsertEntity(table).subscribe((res: TableModel): void => {
+                if (res.id) {
+                  this.toastrProvider.showSuccess({
+                    detail: `The table was successfully saved to the schema (id: ${schemaId}).`
+                  });
+                  this.router.navigate([`/schema/${schemaId}`]).then();
+                }
+              });
+            });
+        }
+      });
+  }
+
 }

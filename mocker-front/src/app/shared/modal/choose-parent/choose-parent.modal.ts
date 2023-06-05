@@ -6,14 +6,15 @@ import { ProjectService } from '@core/service/project.service';
 import { GroupService } from '@core/service/group.service';
 import { FormControl } from '@angular/forms';
 import { RoleEnum } from '@core/domain/enum/role.enum';
-import { StringUtil } from '@core/util/string.util';
+import { SchemaService } from '@core/service/schema.service';
+import { SchemaModel } from '@core/domain/model/entity/schema.model';
 
 /**
  * @author Do Quoc Viet
  */
 
 export interface ChooseParentModalOptions {
-  type: 'project' | 'group';
+  type: 'project' | 'group' | 'schema';
 }
 
 @Component({
@@ -30,7 +31,8 @@ export class ChooseParentModal extends AbstractModal implements OnInit {
   constructor(
     injector: Injector,
     private projectService: ProjectService,
-    private groupService: GroupService
+    private groupService: GroupService,
+    private schemaService: SchemaService
   ) {
     super(injector);
     this.searchFormControl = this.formBuilder.control(undefined, []);
@@ -56,6 +58,13 @@ export class ChooseParentModal extends AbstractModal implements OnInit {
           this.values = groups;
         });
     }
+    if (this.options.type === 'schema') {
+      this.schemaService.getSchemas([RoleEnum.GROUP_ADMIN, RoleEnum.GROUP_ASSOCIATE])
+        .subscribe((schemas: SchemaModel[]): void => {
+          this.parents = schemas;
+          this.values = schemas;
+        });
+    }
   }
 
   selectParent(id: string): void {
@@ -64,16 +73,7 @@ export class ChooseParentModal extends AbstractModal implements OnInit {
 
   viewMore(): void {
     this.close();
-    let path: string = StringUtil.EMPTY;
-    switch (this.options.type) {
-      case 'project':
-        path = 'project';
-        break;
-      case 'group':
-        path = 'group';
-        break;
-    }
-    this.router.navigate([`/${path}`], {
+    this.router.navigate([`/${this.options.type}`], {
       queryParams: {
         roles: `${RoleEnum.GROUP_ADMIN},${RoleEnum.GROUP_ASSOCIATE}`
       }

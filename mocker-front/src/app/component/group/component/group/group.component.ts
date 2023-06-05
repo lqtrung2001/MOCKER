@@ -51,7 +51,7 @@ export class GroupComponent extends AbstractComponent implements OnInit {
         this.formGroup.patchValue(group);
         this.permissionService.getPermission('group', id)
           .subscribe((role: RoleEnum): void => {
-            this.modalProvider.showWarning({
+            this.modalProvider.showInformation({
               detail: PermissionUtil.getLabelFollowingRole(role)
             });
           });
