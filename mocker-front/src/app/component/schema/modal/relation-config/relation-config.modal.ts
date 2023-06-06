@@ -89,15 +89,14 @@ export class RelationConfigModal extends AbstractModal implements OnInit {
     const relationTypes: string[] = [
       RelationTypeEnum.ONE_TO_ONE,
       RelationTypeEnum.ONE_TO_MANY,
-      RelationTypeEnum.MANY_TO_ONE,
-      RelationTypeEnum.MANY_TO_MANY
+      RelationTypeEnum.MANY_TO_ONE
     ];
     return relationTypes
       .map((item: string): RelationTypeEnum => RelationTypeUtil.fromValue(item))
       .map((item: RelationTypeEnum): Option => ({
         id: item,
         label: RelationTypeUtil.getLabel(item),
-        click: () => {
+        click: (): void => {
           this.formGroup.controls.relationType.setValue(item);
         }
       }));
