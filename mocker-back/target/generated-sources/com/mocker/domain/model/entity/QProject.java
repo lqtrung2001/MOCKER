@@ -52,8 +52,6 @@ public class QProject extends EntityPathBase<Project> {
 
     public final ListPath<Schema, QSchema> schemas = this.<Schema, QSchema>createList("schemas", Schema.class, QSchema.class, PathInits.DIRECT2);
 
-    public final StringPath summary = createString("summary");
-
     //inherited
     public final NumberPath<Integer> version = _super.version;
 

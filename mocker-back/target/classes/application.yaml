@@ -16,12 +16,19 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: mocker.service@gmail.com
-    password: 0393014871
+    password: pelptyjzhjcoovnupelptyjzhjcoovnu
     properties:
       mail:
         smtp:
           auth: true
           starttls:
             enable: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 405114314484-rdp9bj491f6bd6kj3u9fqimstqfn9mmg.apps.googleusercontent.com
+            clientSecret: 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
   thymeleaf:
     check-template-location: false

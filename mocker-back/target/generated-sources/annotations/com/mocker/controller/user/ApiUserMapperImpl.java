@@ -38,7 +38,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-30T14:53:17+0700",
+    date = "2023-06-06T21:19:19+0700",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 18.0.2.1 (Oracle Corporation)"
 )
 @Component
@@ -125,6 +125,20 @@ public class ApiUserMapperImpl implements ApiUserMapper {
         userDto.setVersion( user.getVersion() );
 
         return userDto;
+    }
+
+    @Override
+    public List<UserDto> map(List<User> users) {
+        if ( users == null ) {
+            return null;
+        }
+
+        List<UserDto> list = new ArrayList<UserDto>( users.size() );
+        for ( User user : users ) {
+            list.add( map( user ) );
+        }
+
+        return list;
     }
 
     protected Gender genderDtoToGender(GenderDto genderDto) {
@@ -366,6 +380,9 @@ public class ApiUserMapperImpl implements ApiUserMapper {
         option.version( optionDto.getVersion() );
         option.id( optionDto.getId() );
         option.blank( optionDto.getBlank() );
+        if ( optionDto.getUnique() != null ) {
+            option.unique( optionDto.getUnique() );
+        }
         option.field( fieldDtoToField( optionDto.getField() ) );
 
         return option.build();
@@ -441,6 +458,7 @@ public class ApiUserMapperImpl implements ApiUserMapper {
         table.id( tableDto.getId() );
         table.name( tableDto.getName() );
         table.description( tableDto.getDescription() );
+        table.row( tableDto.getRow() );
         table.schema( schemaDtoToSchema( tableDto.getSchema() ) );
         table.fields( fieldDtoListToFieldList( tableDto.getFields() ) );
 
@@ -528,7 +546,6 @@ public class ApiUserMapperImpl implements ApiUserMapper {
         project.version( projectDto.getVersion() );
         project.id( projectDto.getId() );
         project.name( projectDto.getName() );
-        project.summary( projectDto.getSummary() );
         project.description( projectDto.getDescription() );
         project.group( groupDtoToGroup( projectDto.getGroup() ) );
         project.schemas( schemaDtoListToSchemaList( projectDto.getSchemas() ) );

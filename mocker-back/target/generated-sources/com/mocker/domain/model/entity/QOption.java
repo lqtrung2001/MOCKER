@@ -50,6 +50,8 @@ public class QOption extends EntityPathBase<Option> {
     //inherited
     public final DateTimePath<java.time.OffsetDateTime> modifiedDate = _super.modifiedDate;
 
+    public final BooleanPath unique = createBoolean("unique");
+
     //inherited
     public final NumberPath<Integer> version = _super.version;
 

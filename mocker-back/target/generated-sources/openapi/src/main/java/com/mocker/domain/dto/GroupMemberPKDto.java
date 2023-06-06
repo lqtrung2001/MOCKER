@@ -14,7 +14,7 @@ import javax.validation.constraints.*;
  * GROUP-MEMBER primary key table
  */
 @ApiModel(description = "GROUP-MEMBER primary key table")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-30T14:53:10.406404500+07:00[Asia/Saigon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-06T21:19:09.773925100+07:00[Asia/Saigon]")
 public class GroupMemberPKDto   {
   @JsonProperty("groupId")
   private UUID groupId;

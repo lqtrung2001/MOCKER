@@ -5,7 +5,6 @@
  */
 package com.mocker.api;
 
-import java.math.BigDecimal;
 import com.mocker.domain.dto.ErrorDto;
 import com.mocker.domain.dto.TableDto;
 import java.util.UUID;
@@ -24,7 +23,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-30T14:53:10.406404500+07:00[Asia/Saigon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-06T21:19:09.773925100+07:00[Asia/Saigon]")
 @Validated
 @Api(value = "generate", description = "the generate API")
 public interface GenerateApi {
@@ -38,7 +37,6 @@ public interface GenerateApi {
      * Generate random row in table
      *
      * @param id The table id (required)
-     * @param body  (required)
      * @return The query is successful (status code 200)
      *         or Bad request, invalid query syntax (status code 400)
      *         or Authentication Error (status code 401)
@@ -56,10 +54,9 @@ public interface GenerateApi {
         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDto.class) })
     @PostMapping(
         value = "/generate/table/{id}",
-        produces = { "application/json", "application/problem+json" },
-        consumes = { "application/json" }
+        produces = { "application/json", "application/problem+json" }
     )
-    default ResponseEntity<List<Map<String, String>>> generate(@ApiParam(value = "The table id",required=true) @PathVariable("id") UUID id,@ApiParam(value = "" ,required=true )  @Valid @RequestBody Integer body) {
+    default ResponseEntity<List<Map<String, String>>> generate(@ApiParam(value = "The table id",required=true) @PathVariable("id") UUID id) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
@@ -108,7 +105,6 @@ public interface GenerateApi {
      * POST /generate
      * Generate random row in table
      *
-     * @param row Number row need query (required)
      * @param tableDto  (required)
      * @return The query is successful (status code 200)
      *         or Bad request, invalid query syntax (status code 400)
@@ -130,7 +126,7 @@ public interface GenerateApi {
         produces = { "application/json", "application/problem+json" },
         consumes = { "application/json" }
     )
-    default ResponseEntity<List<Map<String, String>>> generateWithTable(@NotNull @ApiParam(value = "Number row need query", required = true) @Valid @RequestParam(value = "row", required = true) BigDecimal row,@ApiParam(value = "" ,required=true )  @Valid @RequestBody TableDto tableDto) {
+    default ResponseEntity<List<Map<String, String>>> generateWithTable(@ApiParam(value = "" ,required=true )  @Valid @RequestBody TableDto tableDto) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {

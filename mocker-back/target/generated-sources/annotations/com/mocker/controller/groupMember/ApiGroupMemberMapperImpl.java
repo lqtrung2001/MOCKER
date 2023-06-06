@@ -1,6 +1,7 @@
 package com.mocker.controller.groupMember;
 
 import com.mocker.controller.group.ApiGroupMapper;
+import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.controller.user.ApiUserMapper;
 import com.mocker.domain.dto.GroupMemberDto;
 import com.mocker.domain.dto.GroupMemberPKDto;
@@ -8,6 +9,8 @@ import com.mocker.domain.dto.RoleDto;
 import com.mocker.domain.model.entity.GroupMember;
 import com.mocker.domain.model.entity.composite_key.GroupMemberPK;
 import com.mocker.domain.model.entity.enumeration.Role;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import javax.annotation.processing.Generated;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +18,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-30T14:53:17+0700",
+    date = "2023-06-06T21:19:18+0700",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 18.0.2.1 (Oracle Corporation)"
 )
 @Component
 public class ApiGroupMemberMapperImpl implements ApiGroupMemberMapper {
 
+    @Autowired
+    private ApiAbstractMapper apiAbstractMapper;
     @Autowired
     private ApiUserMapper apiUserMapper;
     @Autowired
@@ -49,7 +54,7 @@ public class ApiGroupMemberMapperImpl implements ApiGroupMemberMapper {
             groupMember.modifiedByGroup( groupMemberDto.getModifiedByGroup().toString() );
         }
         groupMember.version( groupMemberDto.getVersion() );
-        groupMember.id( groupMemberPKDtoToGroupMemberPK( groupMemberDto.getId() ) );
+        groupMember.id( map( groupMemberDto.getId() ) );
         groupMember.role( roleDtoToRole( groupMemberDto.getRole() ) );
         groupMember.user( apiUserMapper.map( groupMemberDto.getUser() ) );
         groupMember.group( apiGroupMapper.map( groupMemberDto.getGroup() ) );
@@ -65,8 +70,8 @@ public class ApiGroupMemberMapperImpl implements ApiGroupMemberMapper {
 
         GroupMemberDto groupMemberDto = new GroupMemberDto();
 
-        groupMemberDto.setId( groupMemberPKToGroupMemberPKDto( groupMember.getId() ) );
-        groupMemberDto.setRole( roleToRoleDto( groupMember.getRole() ) );
+        groupMemberDto.setId( map( groupMember.getId() ) );
+        groupMemberDto.setRole( apiAbstractMapper.map( groupMember.getRole() ) );
         groupMemberDto.setUser( apiUserMapper.map( groupMember.getUser() ) );
         groupMemberDto.setGroup( apiGroupMapper.map( groupMember.getGroup() ) );
         groupMemberDto.setCreatedDate( groupMember.getCreatedDate() );
@@ -88,7 +93,22 @@ public class ApiGroupMemberMapperImpl implements ApiGroupMemberMapper {
         return groupMemberDto;
     }
 
-    protected GroupMemberPK groupMemberPKDtoToGroupMemberPK(GroupMemberPKDto groupMemberPKDto) {
+    @Override
+    public GroupMemberPKDto map(GroupMemberPK groupMemberPK) {
+        if ( groupMemberPK == null ) {
+            return null;
+        }
+
+        GroupMemberPKDto groupMemberPKDto = new GroupMemberPKDto();
+
+        groupMemberPKDto.setGroupId( groupMemberPK.getGroupId() );
+        groupMemberPKDto.setUserId( groupMemberPK.getUserId() );
+
+        return groupMemberPKDto;
+    }
+
+    @Override
+    public GroupMemberPK map(GroupMemberPKDto groupMemberPKDto) {
         if ( groupMemberPKDto == null ) {
             return null;
         }
@@ -99,6 +119,20 @@ public class ApiGroupMemberMapperImpl implements ApiGroupMemberMapper {
         groupMemberPK.userId( groupMemberPKDto.getUserId() );
 
         return groupMemberPK.build();
+    }
+
+    @Override
+    public List<GroupMemberDto> map(List<GroupMember> groupMembers) {
+        if ( groupMembers == null ) {
+            return null;
+        }
+
+        List<GroupMemberDto> list = new ArrayList<GroupMemberDto>( groupMembers.size() );
+        for ( GroupMember groupMember : groupMembers ) {
+            list.add( map( groupMember ) );
+        }
+
+        return list;
     }
 
     protected Role roleDtoToRole(RoleDto roleDto) {
@@ -121,40 +155,5 @@ public class ApiGroupMemberMapperImpl implements ApiGroupMemberMapper {
         }
 
         return role;
-    }
-
-    protected GroupMemberPKDto groupMemberPKToGroupMemberPKDto(GroupMemberPK groupMemberPK) {
-        if ( groupMemberPK == null ) {
-            return null;
-        }
-
-        GroupMemberPKDto groupMemberPKDto = new GroupMemberPKDto();
-
-        groupMemberPKDto.setGroupId( groupMemberPK.getGroupId() );
-        groupMemberPKDto.setUserId( groupMemberPK.getUserId() );
-
-        return groupMemberPKDto;
-    }
-
-    protected RoleDto roleToRoleDto(Role role) {
-        if ( role == null ) {
-            return null;
-        }
-
-        RoleDto roleDto;
-
-        switch ( role ) {
-            case GROUP_ADMIN: roleDto = RoleDto.GROUP_ADMIN;
-            break;
-            case GROUP_ASSOCIATE: roleDto = RoleDto.GROUP_ASSOCIATE;
-            break;
-            case USER: roleDto = RoleDto.USER;
-            break;
-            case ADMIN: roleDto = RoleDto.ADMIN;
-            break;
-            default: throw new IllegalArgumentException( "Unexpected enum constant: " + role );
-        }
-
-        return roleDto;
     }
 }

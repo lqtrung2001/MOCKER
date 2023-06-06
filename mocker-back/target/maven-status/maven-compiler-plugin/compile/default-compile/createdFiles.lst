@@ -35,6 +35,7 @@ com\mocker\service\impl\AuthServiceImpl.class
 com\mocker\controller\auth\AuthController.class
 com\mocker\domain\dto\UserDto.class
 com\mocker\domain\model\entity\QBase.class
+com\mocker\domain\annotation\aspect\PermissionAspect.class
 com\mocker\controller\groupMember\ApiGroupMemberMapperImpl$1.class
 com\mocker\service\AuthService.class
 com\mocker\domain\model\entity\Project$ProjectBuilder.class
@@ -58,6 +59,7 @@ com\mocker\domain\dto\OptionDto.class
 com\mocker\api\ApiUtil.class
 com\mocker\service\impl\SchemaServiceImpl.class
 com\mocker\api\SchemaApi.class
+com\mocker\constant\GoogleConstant.class
 com\mocker\domain\model\entity\Category$CategoryBuilder.class
 com\mocker\domain\model\entity\GenerateType$GenerateTypeBuilder.class
 com\mocker\controller\option\ApiOptionMapper.class
@@ -97,12 +99,15 @@ com\mocker\domain\dto\ErrorDto$CodeEnum.class
 com\mocker\domain\dto\GroupDto.class
 com\mocker\api\ProjectApi.class
 com\mocker\domain\model\entity\QProject.class
+com\mocker\repository\customize\GroupMemberRepositoryCustom.class
 com\mocker\controller\sqlType\ApiSQLTypeMapperDecorator.class
 com\mocker\controller\tableRelation\ApiTableRelationMapperImpl$1.class
 com\mocker\repository\customize\impl\SQLTypeRepositoryImpl.class
 com\mocker\domain\model\entity\User$UserBuilderImpl.class
 com\mocker\repository\customize\TableRelationCustom.class
+com\mocker\service\impl\PermissionServiceImpl.class
 com\mocker\configuration\security\auth\ApplicationUserService.class
+com\mocker\controller\mapper\ApiAbstractMapperImpl$1.class
 com\mocker\repository\customize\SourceRepositoryCustom.class
 com\mocker\controller\generateType\ApiGenerateTypeMapperImpl.class
 com\mocker\domain\exception\AuthenticationException.class
@@ -198,6 +203,7 @@ com\mocker\repository\customize\impl\ProjectRepositoryImpl.class
 com\mocker\controller\group\ApiGroupMapperImpl$1.class
 com\mocker\repository\customize\CategoryRepositoryCustom.class
 com\mocker\controller\table\ApiTableMapperImpl.class
+com\mocker\service\PermissionService.class
 com\mocker\domain\model\entity\QGroupMember.class
 com\mocker\domain\model\entity\QGroup.class
 com\mocker\api\TableRelationApi.class
@@ -220,8 +226,10 @@ com\mocker\controller\generate\ApiGenerateMapperDecorator.class
 com\mocker\repository\FieldRepository.class
 com\mocker\repository\customize\UserRepositoryCustom.class
 com\mocker\controller\generateType\ApiGenerateTypeMapper.class
+com\mocker\repository\customize\impl\GroupMemberRepositoryImpl.class
 com\mocker\domain\dto\RoleDto.class
 com\mocker\domain\dto\ErrorDto.class
+com\mocker\controller\permission\PermissionController.class
 com\mocker\controller\user\UserController.class
 com\mocker\controller\groupMember\ApiGroupMemberMapper.class
 com\mocker\domain\model\entity\Category$CategoryBuilderImpl.class
@@ -236,6 +244,8 @@ com\mocker\domain\model\entity\Group.class
 com\mocker\repository\GenerateTypeRepository.class
 com\mocker\controller\generateType\GenerateTypeController.class
 com\mocker\repository\customize\impl\TableRelationRepositoryImpl.class
+com\mocker\api\PermissionApi.class
+com\mocker\domain\annotation\declare\permission\Permission.class
 com\mocker\service\TableRelationService.class
 com\mocker\repository\customize\OptionRepositoryCustom.class
 com\mocker\configuration\security\audit\AuditorAwareImpl.class

@@ -17,13 +17,16 @@ import javax.validation.constraints.*;
  * OPTION table
  */
 @ApiModel(description = "OPTION table")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-30T14:53:10.406404500+07:00[Asia/Saigon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-06T21:19:09.773925100+07:00[Asia/Saigon]")
 public class OptionDto   {
   @JsonProperty("id")
   private UUID id;
 
   @JsonProperty("blank")
   private Integer blank = 0;
+
+  @JsonProperty("unique")
+  private Boolean unique = false;
 
   @JsonProperty("field")
   private FieldDto field;
@@ -92,6 +95,26 @@ public class OptionDto   {
 
   public void setBlank(Integer blank) {
     this.blank = blank;
+  }
+
+  public OptionDto unique(Boolean unique) {
+    this.unique = unique;
+    return this;
+  }
+
+  /**
+   * Unique option
+   * @return unique
+  */
+  @ApiModelProperty(value = "Unique option")
+
+
+  public Boolean getUnique() {
+    return unique;
+  }
+
+  public void setUnique(Boolean unique) {
+    this.unique = unique;
   }
 
   public OptionDto field(FieldDto field) {
@@ -273,6 +296,7 @@ public class OptionDto   {
     OptionDto option = (OptionDto) o;
     return Objects.equals(this.id, option.id) &&
         Objects.equals(this.blank, option.blank) &&
+        Objects.equals(this.unique, option.unique) &&
         Objects.equals(this.field, option.field) &&
         Objects.equals(this.createdDate, option.createdDate) &&
         Objects.equals(this.createdBy, option.createdBy) &&
@@ -285,7 +309,7 @@ public class OptionDto   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, blank, field, createdDate, createdBy, createdByGroup, modifiedDate, modifiedBy, modifiedByGroup, version);
+    return Objects.hash(id, blank, unique, field, createdDate, createdBy, createdByGroup, modifiedDate, modifiedBy, modifiedByGroup, version);
   }
 
   @Override
@@ -295,6 +319,7 @@ public class OptionDto   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    blank: ").append(toIndentedString(blank)).append("\n");
+    sb.append("    unique: ").append(toIndentedString(unique)).append("\n");
     sb.append("    field: ").append(toIndentedString(field)).append("\n");
     sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
     sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");

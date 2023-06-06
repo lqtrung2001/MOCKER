@@ -20,13 +20,16 @@ import javax.validation.constraints.*;
  * TABLE table
  */
 @ApiModel(description = "TABLE table")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-30T14:53:10.406404500+07:00[Asia/Saigon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-06T21:19:09.773925100+07:00[Asia/Saigon]")
 public class TableDto   {
   @JsonProperty("id")
   private UUID id;
 
   @JsonProperty("name")
   private String name;
+
+  @JsonProperty("row")
+  private Integer row = 0;
 
   @JsonProperty("description")
   private String description;
@@ -100,6 +103,28 @@ public class TableDto   {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public TableDto row(Integer row) {
+    this.row = row;
+    return this;
+  }
+
+  /**
+   * row number generated
+   * minimum: 0
+   * maximum: 1000
+   * @return row
+  */
+  @ApiModelProperty(value = "row number generated")
+
+@Min(0) @Max(1000) 
+  public Integer getRow() {
+    return row;
+  }
+
+  public void setRow(Integer row) {
+    this.row = row;
   }
 
   public TableDto description(String description) {
@@ -330,6 +355,7 @@ public class TableDto   {
     TableDto table = (TableDto) o;
     return Objects.equals(this.id, table.id) &&
         Objects.equals(this.name, table.name) &&
+        Objects.equals(this.row, table.row) &&
         Objects.equals(this.description, table.description) &&
         Objects.equals(this.schema, table.schema) &&
         Objects.equals(this.fields, table.fields) &&
@@ -344,7 +370,7 @@ public class TableDto   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, description, schema, fields, createdDate, createdBy, createdByGroup, modifiedDate, modifiedBy, modifiedByGroup, version);
+    return Objects.hash(id, name, row, description, schema, fields, createdDate, createdBy, createdByGroup, modifiedDate, modifiedBy, modifiedByGroup, version);
   }
 
   @Override
@@ -354,6 +380,7 @@ public class TableDto   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    row: ").append(toIndentedString(row)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    schema: ").append(toIndentedString(schema)).append("\n");
     sb.append("    fields: ").append(toIndentedString(fields)).append("\n");

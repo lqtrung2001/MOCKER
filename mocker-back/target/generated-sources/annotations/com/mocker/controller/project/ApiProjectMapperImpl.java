@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-30T14:53:17+0700",
+    date = "2023-06-06T21:19:19+0700",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 18.0.2.1 (Oracle Corporation)"
 )
 @Component
@@ -62,7 +62,6 @@ public class ApiProjectMapperImpl implements ApiProjectMapper {
         project.version( projectDto.getVersion() );
         project.id( projectDto.getId() );
         project.name( projectDto.getName() );
-        project.summary( projectDto.getSummary() );
         project.description( projectDto.getDescription() );
         project.group( apiGroupMapper.map( projectDto.getGroup() ) );
         project.schemas( schemaDtoListToSchemaList( projectDto.getSchemas() ) );
@@ -80,7 +79,6 @@ public class ApiProjectMapperImpl implements ApiProjectMapper {
 
         projectDto.setId( project.getId() );
         projectDto.setName( project.getName() );
-        projectDto.setSummary( project.getSummary() );
         projectDto.setDescription( project.getDescription() );
         projectDto.setGroup( apiGroupMapper.map( project.getGroup() ) );
         projectDto.setCreatedDate( project.getCreatedDate() );
@@ -100,6 +98,20 @@ public class ApiProjectMapperImpl implements ApiProjectMapper {
         projectDto.setVersion( project.getVersion() );
 
         return projectDto;
+    }
+
+    @Override
+    public List<ProjectDto> map(List<Project> projects) {
+        if ( projects == null ) {
+            return null;
+        }
+
+        List<ProjectDto> list = new ArrayList<ProjectDto>( projects.size() );
+        for ( Project project : projects ) {
+            list.add( map( project ) );
+        }
+
+        return list;
     }
 
     protected List<GenerateType> generateTypeDtoListToGenerateTypeList(List<GenerateTypeDto> list) {
@@ -286,6 +298,9 @@ public class ApiProjectMapperImpl implements ApiProjectMapper {
         option.version( optionDto.getVersion() );
         option.id( optionDto.getId() );
         option.blank( optionDto.getBlank() );
+        if ( optionDto.getUnique() != null ) {
+            option.unique( optionDto.getUnique() );
+        }
         option.field( fieldDtoToField( optionDto.getField() ) );
 
         return option.build();
@@ -361,6 +376,7 @@ public class ApiProjectMapperImpl implements ApiProjectMapper {
         table.id( tableDto.getId() );
         table.name( tableDto.getName() );
         table.description( tableDto.getDescription() );
+        table.row( tableDto.getRow() );
         table.schema( schemaDtoToSchema( tableDto.getSchema() ) );
         table.fields( fieldDtoListToFieldList( tableDto.getFields() ) );
 

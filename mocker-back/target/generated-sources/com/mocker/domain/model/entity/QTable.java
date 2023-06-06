@@ -50,6 +50,8 @@ public class QTable extends EntityPathBase<Table> {
 
     public final StringPath name = createString("name");
 
+    public final NumberPath<Integer> row = createNumber("row", Integer.class);
+
     public final QSchema schema;
 
     //inherited

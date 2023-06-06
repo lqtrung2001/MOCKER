@@ -44,7 +44,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-30T14:53:17+0700",
+    date = "2023-06-06T21:19:19+0700",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 18.0.2.1 (Oracle Corporation)"
 )
 @Component
@@ -337,6 +337,9 @@ public class ApiTableRelationMapperImpl implements ApiTableRelationMapper {
         option.version( optionDto.getVersion() );
         option.id( optionDto.getId() );
         option.blank( optionDto.getBlank() );
+        if ( optionDto.getUnique() != null ) {
+            option.unique( optionDto.getUnique() );
+        }
         option.field( fieldDtoToField( optionDto.getField() ) );
 
         return option.build();
@@ -562,7 +565,6 @@ public class ApiTableRelationMapperImpl implements ApiTableRelationMapper {
         project.version( projectDto.getVersion() );
         project.id( projectDto.getId() );
         project.name( projectDto.getName() );
-        project.summary( projectDto.getSummary() );
         project.description( projectDto.getDescription() );
         project.group( groupDtoToGroup( projectDto.getGroup() ) );
         project.schemas( schemaDtoListToSchemaList( projectDto.getSchemas() ) );
@@ -652,6 +654,7 @@ public class ApiTableRelationMapperImpl implements ApiTableRelationMapper {
         table.id( tableDto.getId() );
         table.name( tableDto.getName() );
         table.description( tableDto.getDescription() );
+        table.row( tableDto.getRow() );
         table.schema( schemaDtoToSchema( tableDto.getSchema() ) );
         table.fields( fieldDtoListToFieldList( tableDto.getFields() ) );
 

@@ -7,6 +7,7 @@ src/main/java/com/mocker/api/CategoryApi.java
 src/main/java/com/mocker/api/GenerateApi.java
 src/main/java/com/mocker/api/GroupApi.java
 src/main/java/com/mocker/api/GroupMemberApi.java
+src/main/java/com/mocker/api/PermissionApi.java
 src/main/java/com/mocker/api/ProjectApi.java
 src/main/java/com/mocker/api/SchemaApi.java
 src/main/java/com/mocker/api/SqlTypeApi.java

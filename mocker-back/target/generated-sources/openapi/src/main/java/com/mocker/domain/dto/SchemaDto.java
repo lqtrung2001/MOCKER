@@ -20,7 +20,7 @@ import javax.validation.constraints.*;
  * SCHEMA table
  */
 @ApiModel(description = "SCHEMA table")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-30T14:53:10.406404500+07:00[Asia/Saigon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-06T21:19:09.773925100+07:00[Asia/Saigon]")
 public class SchemaDto   {
   @JsonProperty("id")
   private UUID id;

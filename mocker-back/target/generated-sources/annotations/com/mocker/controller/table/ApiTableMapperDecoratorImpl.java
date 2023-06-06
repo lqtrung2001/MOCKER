@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-30T14:53:16+0700",
+    date = "2023-06-06T21:19:18+0700",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 18.0.2.1 (Oracle Corporation)"
 )
 @Component
@@ -50,6 +50,7 @@ public class ApiTableMapperDecoratorImpl implements ApiTableMapperDecorator {
 
         tableDto.setId( table.getId() );
         tableDto.setName( table.getName() );
+        tableDto.setRow( table.getRow() );
         tableDto.setDescription( table.getDescription() );
         tableDto.setSchema( apiSchemaMapper.map( table.getSchema() ) );
         tableDto.setFields( fieldListToFieldDtoList( table.getFields() ) );

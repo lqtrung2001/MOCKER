@@ -20,16 +20,13 @@ import javax.validation.constraints.*;
  * PROJECT table
  */
 @ApiModel(description = "PROJECT table")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-30T14:53:10.406404500+07:00[Asia/Saigon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-06T21:19:09.773925100+07:00[Asia/Saigon]")
 public class ProjectDto   {
   @JsonProperty("id")
   private UUID id;
 
   @JsonProperty("name")
   private String name;
-
-  @JsonProperty("summary")
-  private String summary;
 
   @JsonProperty("description")
   private String description;
@@ -103,26 +100,6 @@ public class ProjectDto   {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public ProjectDto summary(String summary) {
-    this.summary = summary;
-    return this;
-  }
-
-  /**
-   * Summary of project
-   * @return summary
-  */
-  @ApiModelProperty(value = "Summary of project")
-
-@Size(max=1000) 
-  public String getSummary() {
-    return summary;
-  }
-
-  public void setSummary(String summary) {
-    this.summary = summary;
   }
 
   public ProjectDto description(String description) {
@@ -353,7 +330,6 @@ public class ProjectDto   {
     ProjectDto project = (ProjectDto) o;
     return Objects.equals(this.id, project.id) &&
         Objects.equals(this.name, project.name) &&
-        Objects.equals(this.summary, project.summary) &&
         Objects.equals(this.description, project.description) &&
         Objects.equals(this.group, project.group) &&
         Objects.equals(this.schemas, project.schemas) &&
@@ -368,7 +344,7 @@ public class ProjectDto   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, summary, description, group, schemas, createdDate, createdBy, createdByGroup, modifiedDate, modifiedBy, modifiedByGroup, version);
+    return Objects.hash(id, name, description, group, schemas, createdDate, createdBy, createdByGroup, modifiedDate, modifiedBy, modifiedByGroup, version);
   }
 
   @Override
@@ -378,7 +354,6 @@ public class ProjectDto   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    summary: ").append(toIndentedString(summary)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    group: ").append(toIndentedString(group)).append("\n");
     sb.append("    schemas: ").append(toIndentedString(schemas)).append("\n");

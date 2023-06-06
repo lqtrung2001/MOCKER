@@ -14,7 +14,7 @@ import javax.validation.constraints.*;
  * Schema for error response body
  */
 @ApiModel(description = "Schema for error response body")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-30T14:53:10.406404500+07:00[Asia/Saigon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-06-06T21:19:09.773925100+07:00[Asia/Saigon]")
 public class ErrorDto   {
   @JsonProperty("timestamp")
   private String timestamp;
