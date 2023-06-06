@@ -84,6 +84,8 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
       this.schemaService.getTablesBySchema(this.schema.id)
         .subscribe((tables: TableModel[]): void => {
           this.schema.tables = tables;
+          // Remove the relation lines
+          this.relationLines = [];
           this.schemaService.getTableRelationsBySchema(this.schema.id)
             .subscribe((tableRelations: TableRelationModel[]): void => {
               tableRelations.forEach((tableRelation: TableRelationModel): void => {

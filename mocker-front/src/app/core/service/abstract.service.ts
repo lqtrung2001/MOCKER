@@ -9,7 +9,7 @@ import {
   HttpResponse,
   HttpStatusCode
 } from '@angular/common/http';
-import { catchError, finalize, Observable, of } from 'rxjs';
+import { catchError, finalize, Observable } from 'rxjs';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 import { ApplicationConfig } from '@core/config/application.config';
 import { environment } from '@environment/environment';
@@ -26,8 +26,9 @@ import { AuthenticationException } from '@core/domain/exception/authentication.e
 import { Exception } from '@core/domain/exception/exception';
 import { AbstractException } from '@core/domain/exception/abstract.exception';
 import { Router } from '@angular/router';
-import {BadRequestException} from "@core/domain/exception/bad-request.exception";
-import {NotFoundException} from "@core/domain/exception/not-found.exception";
+import { BadRequestException } from '@core/domain/exception/bad-request.exception';
+import { NotFoundException } from '@core/domain/exception/not-found.exception';
+import { ToastrProvider } from '@shared/modal/toastr-provider/toastr-provider';
 
 /**
  * @author Do Quoc Viet
@@ -45,6 +46,7 @@ export class AbstractService<Type> implements HttpInterceptor {
   protected appConfigService: ApplicationConfig;
   protected translateService: TranslateService;
   protected router: Router;
+  protected toastrProvider: ToastrProvider;
 
   constructor(private readonly injector: Injector) {
     this.modalProvider = injector.get(ModalProvider);
@@ -52,6 +54,7 @@ export class AbstractService<Type> implements HttpInterceptor {
     this.appConfigService = injector.get(ApplicationConfig);
     this.translateService = injector.get(TranslateService);
     this.router = injector.get(Router);
+    this.toastrProvider = injector.get(ToastrProvider);
   }
 
   /**
@@ -194,13 +197,18 @@ export class AbstractService<Type> implements HttpInterceptor {
    */
   authentication(): void {
     const storage: string | null = localStorage.getItem(LocalStorageConstant.AUTH);
-    const authenticationException: AuthenticationException = new AuthenticationException(this.translateService.instant('error.authentication.title'), this.translateService.instant('error.authentication.message'));
     if (!storage) {
-      throw authenticationException;
+      this.toastrProvider.showWarning({
+        detail: 'The current user is not authenticated to access this page, please login and try again!'
+      });
+      this.router.navigate(['auth/sign-in']).then();
     }
     const { username, password }: { username: string, password: string } = JSON.parse(storage!) as UserModel;
     if (!username || !password) {
-      throw authenticationException;
+      this.toastrProvider.showWarning({
+        detail: 'The current user is not authenticated to access this page, please login and try again!'
+      });
+      this.router.navigate(['auth/sign-in']).then();
     }
     this.httpClient.post(`${this.BASE_URL}/login`, {
       username,

@@ -24,7 +24,6 @@ export interface TableConfigModalCloseOptions {
 type Controls = {
   table: FormGroup<{
     name: FormControl,
-    description: FormControl,
     row: FormControl,
     fields: FormArray<FormGroup<FieldControls>>
   }>;
@@ -49,7 +48,6 @@ export class TableConfigModal extends AbstractModal implements OnInit {
     this.formGroup = this.formBuilder.group({
       table: this.formBuilder.group({
         name: this.formBuilder.control(undefined, [Validators.required]),
-        description: this.formBuilder.control('Description', [Validators.required]),
         fields: this.formBuilder.array<FormGroup<FieldControls>>([]),
         row: this.formBuilder.control(99, [Validators.required])
       })

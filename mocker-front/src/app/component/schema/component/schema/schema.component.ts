@@ -94,22 +94,21 @@ export class SchemaComponent extends AbstractComponent implements OnInit {
     if (this.formGroup.invalid) {
       return;
     }
-    this.schema = {
+    const body: SchemaModel = {
       ...this.schema,
       ...this.formGroup.getRawValue()
     };
-    this.schemaService.upsertEntity(this.schema).subscribe((schema: SchemaModel): void => {
-      this.schemaService.getEntity(schema.id).subscribe((schema: SchemaModel): void => {
+    this.schemaService.upsertEntity(body)
+      .subscribe((schema: SchemaModel): void => {
         this.schema = schema;
         this.formGroup.patchValue(schema);
         if (this.router.url.includes('new')) {
           this.location.replaceState(`/schema/${schema.id}`);
         }
+        this.toastrProvider.showSuccess({
+          body: 'message.schema_save_success'
+        });
       });
-      this.toastrProvider.showSuccess({
-        body: 'message.schema_save_success'
-      });
-    });
   }
 
   delete(): void {

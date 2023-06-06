@@ -47,7 +47,7 @@ public class Table extends Base {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "DESCRIPTION", nullable = false, length = 4096)
+    @Column(name = "DESCRIPTION", length = 4096)
     private String description;
 
     @Column(name = "ROW")
