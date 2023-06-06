@@ -6,6 +6,8 @@ import com.mocker.domain.model.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 /**
  * @author Luong Quoc Trung
  * @author Do Quoc Viet
@@ -17,4 +19,6 @@ public interface ApiUserMapper {
 
     @Mapping(target = "groupMembers", ignore = true)
     UserDto map(User user);
+
+    List<UserDto> map(List<User> users);
 }

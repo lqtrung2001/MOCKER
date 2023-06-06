@@ -2,21 +2,24 @@ package com.mocker.repository.customize.impl;
 
 import com.mocker.domain.model.entity.Group;
 import com.mocker.domain.model.entity.GroupMember;
+import com.mocker.domain.model.entity.enumeration.Role;
 import com.mocker.repository.customize.GroupRepositoryCustom;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static com.mocker.domain.model.entity.QGroup.group;
 import static com.mocker.domain.model.entity.QGroupMember.groupMember;
-import static com.mocker.domain.model.entity.QProject.project;
 
 /**
- * @author Luong Quoc Trung, Do Quoc Viet
+ * @author Luong Quoc Trung
+ * @author Do Quoc Viet
  */
 
 @SuppressWarnings("unused")
@@ -26,24 +29,24 @@ public class GroupRepositoryImpl implements GroupRepositoryCustom {
     private EntityManager entityManager;
 
     @Override
-    public List<Group> findAllWithAccess(UUID userId) {
-        return new JPAQuery<GroupMember>(entityManager)
-                .from(groupMember)
-                .where(groupMember.user.id.eq(userId))
-                .innerJoin(groupMember.group, group).fetchJoin()
-                .fetch()
-                .stream()
-                .map(GroupMember::getGroup)
-                .collect(Collectors.toList());
+    public List<Group> getGroups(UUID userId, List<Role> roles) {
+        BooleanExpression criteria = groupMember.user.id.eq(userId);
+        if (!CollectionUtils.isEmpty(roles)) {
+            criteria = criteria.and(groupMember.role.in(roles));
+        }
+        return new JPAQuery<Group>(entityManager)
+                .from(group)
+                .where(criteria)
+                .join(group.groupMembers, groupMember).fetchJoin()
+                .fetch();
     }
 
     @Override
-    public Group findOneWithEagerProjectsAndGroupMembers(UUID id) {
-        return new JPAQuery<Group>(entityManager)
-                .from(group)
-                .where(group.id.eq(id))
-                .leftJoin(group.projects, project).fetchJoin()
-                .leftJoin(group.groupMembers, groupMember).fetchJoin()
-                .fetchFirst();
+    public Role getRoleUserInGroup(UUID group, UUID user) {
+        return Objects.requireNonNull(new JPAQuery<GroupMember>(entityManager)
+                        .from(groupMember)
+                        .where(groupMember.group.id.eq(group).and(groupMember.user.id.eq(user))).fetchOne())
+                .getRole();
     }
+
 }

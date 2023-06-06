@@ -4,6 +4,29 @@ info:
   description: Website MOCKER generates source for system testing.
   version: 3.0.1
 paths:
+  /auth/google:
+    get:
+      operationId: loginWithGoogle
+      tags:
+        - Auth
+      description: Login with Google
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
   /auth/send-verification-code:
     post:
       operationId: sendVerificationCode
@@ -243,6 +266,38 @@ paths:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/ServerError'
+  /user/search-by-criteria:
+    get:
+      operationId: getUsersByCriteria
+      description: Get users by criteria
+      parameters:
+        - in: query
+          name: criteria
+          required: true
+          description: The criteria
+          schema:
+            type: string
+      tags:
+        - User
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
   /user/find-by-username:
     get:
       operationId: getUserByUsername
@@ -372,12 +427,6 @@ paths:
       tags:
         - Generate
       description: Generate random row in table
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: integer
       responses:
         200:
           description: The query is successful
@@ -400,13 +449,6 @@ paths:
         500:
           $ref: '#/components/responses/ServerError'
   /generate:
-    parameters:
-      - in: query
-        name: row
-        required: true
-        description: Number row need query
-        schema:
-          type: number
     post:
       operationId: generateWithTable
       tags:
@@ -417,7 +459,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Table'
+              $ref: "#/components/schemas/Table"
       responses:
         200:
           description: The query is successful
@@ -445,6 +487,14 @@ paths:
       tags:
         - Project
       description: Get projects
+      parameters:
+        - in: query
+          name: roles
+          description: The roles in project
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Role'
       responses:
         200:
           description: The query is successful
@@ -554,6 +604,13 @@ paths:
         schema:
           type: string
           format: uuid
+      - in: query
+        name: roles
+        description: The roles in group
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
     get:
       operationId: getSchemasByProject
       tags:
@@ -584,6 +641,14 @@ paths:
       tags:
         - Schema
       description: Get schemas
+      parameters:
+        - in: query
+          name: roles
+          description: The roles in group
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Role'
       responses:
         200:
           description: The query is successful
@@ -756,6 +821,14 @@ paths:
       tags:
         - Group
       description: Get groups
+      parameters:
+        - in: query
+          name: roles
+          description: The roles in group
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Role'
       responses:
         200:
           description: The query is successful
@@ -846,6 +919,86 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Group'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /group/{id}/projects:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The group Id
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: roles
+        description: The roles in group
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+    get:
+      operationId: getProjectsByGroupId
+      tags:
+        - Group
+      description: Get projects
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /group/{id}/group-members:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The group Id
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: roles
+        description: The roles in group
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+    get:
+      operationId: getGroupMembersByGroupId
+      tags:
+        - Group
+      description: Get group members
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupMember'
         400:
           $ref: '#/components/responses/BadRequest'
         401:
@@ -999,6 +1152,45 @@ paths:
         500:
           $ref: '#/components/responses/ServerError'
   /group-member:
+    get:
+      operationId: getGroupMembers
+      tags:
+        - GroupMember
+      description: get GroupMembers
+      parameters:
+        - in: query
+          name: groupId
+          required: true
+          description: The group ID
+          schema:
+            type: string
+            format: uuid
+        - in: query
+          name: roles
+          description: The roles in group
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Role'
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupMember'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
     post:
       operationId: upsertGroupMember
       tags:
@@ -1027,7 +1219,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/ServerError'
-    delete:
+  /group-member/delete-group-member:
+    post:
       operationId: deleteGroupMember
       tags:
         - GroupMember
@@ -1037,14 +1230,51 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GroupMember'
+              $ref: '#/components/schemas/GroupMemberPK'
       responses:
         200:
           description: The query is successful
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GroupMember'
+                $ref: '#/components/schemas/GroupMemberPK'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationError'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /permission/{entity}/{id}:
+    parameters:
+      - in: path
+        name: entity
+        required: true
+        description: The entity need to be checked
+        schema:
+          type: string
+      - in: path
+        name: id
+        required: true
+        description: The entity's id need to be checked
+        schema:
+          type: string
+          format: uuid
+    get:
+      operationId: getPermission
+      tags:
+        - Permission
+      description: Get the permission for the given entity
+      responses:
+        200:
+          description: The query is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
         400:
           $ref: '#/components/responses/BadRequest'
         401:
@@ -1248,6 +1478,10 @@ components:
           minimum: 0
           maximum: 100
           description: Blank of option
+        unique:
+          type: boolean
+          default: false
+          description: Unique option
         field:
           $ref: '#/components/schemas/Field'
       allOf:
@@ -1265,10 +1499,6 @@ components:
           type: string
           maxLength: 255
           description: Name of project
-        summary:
-          type: string
-          maxLength: 1000
-          description: Summary of project
         description:
           type: string
           maxLength: 4096
@@ -1362,6 +1592,12 @@ components:
           type: string
           maxLength: 255
           description: Name of table
+        row:
+          type: integer
+          default: 0
+          minimum: 0
+          maximum: 1000
+          description: row number generated
         description:
           type: string
           maxLength: 1000

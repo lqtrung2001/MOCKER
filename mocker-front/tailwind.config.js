@@ -14,8 +14,11 @@ module.exports = {
         'blue-solid': '#172B4D',
         'gray': '#F0F2F5',
         'green': '#00CA4E',
+        'green-light': '#7ffcb1',
         'red': '#FF605C',
-        'yellow': '#FFBD44'
+        'red-light': '#fda6a4',
+        'yellow': '#FFBD44',
+        'yellow-light': '#ffdb9c'
       },
       height: {
         '150': '600px',
@@ -29,7 +32,9 @@ module.exports = {
         '150': '600px'
       },
       minHeight: {
-        '26': '104px'
+        '26': '104px',
+        '80': '320px',
+        '86': '344px'
       },
       minWidth: {
         '300': '1200px'

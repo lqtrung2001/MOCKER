@@ -77,14 +77,17 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.schema) {
+    if (this.schema?.id) {
+      this.relationLines.forEach((relationLine: RelationLine): void => {
+        relationLine.leaderLine.remove();
+      });
       this.schemaService.getTablesBySchema(this.schema.id)
         .subscribe((tables: TableModel[]): void => {
           this.schema.tables = tables;
           this.schemaService.getTableRelationsBySchema(this.schema.id)
             .subscribe((tableRelations: TableRelationModel[]): void => {
               tableRelations.forEach((tableRelation: TableRelationModel): void => {
-                const relationLine = DrawUtil.newRelationLine(tableRelation);
+                const relationLine: RelationLine = DrawUtil.newRelationLine(tableRelation);
                 if (relationLine) {
                   this.relationLines.push(relationLine);
                 }
@@ -120,22 +123,22 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
   }
 
   modifyBoundingClientRectWhenTableMove(event: CdkDragMove): void {
-    // When table move to left [Width]
-    if (this.diagram.nativeElement.getBoundingClientRect().x >= event.pointerPosition.x - 250) {
-      this.renderer.setStyle(this.diagram.nativeElement, 'width', `${this.diagram.nativeElement.getBoundingClientRect().width + 1}px`);
-    }
-    // When table move to top [Height]
-    if (this.diagram.nativeElement.getBoundingClientRect().y >= event.pointerPosition.y - 200) {
-      this.renderer.setStyle(this.diagram.nativeElement, 'height', `${this.diagram.nativeElement.getBoundingClientRect().height + 1}px`);
-    }
-    // When table move to right [WIDTH]
-    if ((this.diagram.nativeElement.getBoundingClientRect().x + this.diagram.nativeElement.getBoundingClientRect().width) <= event.pointerPosition.x + 250) {
-      this.renderer.setStyle(this.diagram.nativeElement, 'width', `${this.diagram.nativeElement.getBoundingClientRect().width + 1}px`);
-    }
-    // When table move to bottom [HEIGHT]
-    if (this.diagram.nativeElement.getBoundingClientRect().y + this.diagram.nativeElement.getBoundingClientRect().height <= event.pointerPosition.y + 200) {
-      this.renderer.setStyle(this.diagram.nativeElement, 'height', `${this.diagram.nativeElement.getBoundingClientRect().height + 1}px`);
-    }
+    // // When table move to left [Width]
+    // if (this.diagram.nativeElement.getBoundingClientRect().x >= event.pointerPosition.x - 250) {
+    //   this.renderer.setStyle(this.diagram.nativeElement, 'width', `${this.diagram.nativeElement.getBoundingClientRect().width + 1}px`);
+    // }
+    // // When table move to top [Height]
+    // if (this.diagram.nativeElement.getBoundingClientRect().y >= event.pointerPosition.y - 200) {
+    //   this.renderer.setStyle(this.diagram.nativeElement, 'height', `${this.diagram.nativeElement.getBoundingClientRect().height + 1}px`);
+    // }
+    // // When table move to right [WIDTH]
+    // if ((this.diagram.nativeElement.getBoundingClientRect().x + this.diagram.nativeElement.getBoundingClientRect().width) <= event.pointerPosition.x + 250) {
+    //   this.renderer.setStyle(this.diagram.nativeElement, 'width', `${this.diagram.nativeElement.getBoundingClientRect().width + 1}px`);
+    // }
+    // // When table move to bottom [HEIGHT]
+    // if (this.diagram.nativeElement.getBoundingClientRect().y + this.diagram.nativeElement.getBoundingClientRect().height <= event.pointerPosition.y + 200) {
+    //   this.renderer.setStyle(this.diagram.nativeElement, 'height', `${this.diagram.nativeElement.getBoundingClientRect().height + 1}px`);
+    // }
   }
 
   dragEnded(table: TableModel, event: CdkDragEnd): void {
@@ -300,13 +303,14 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
     this.relationLines = this.relationLines.filter((relationLine: RelationLine): boolean => !tableRelations
       .map((tableRelation: TableRelationModel): string => tableRelation.id)
       .includes(relationLine.tableRelation.id));
-    setTimeout((): void => {
-      // Synchronize functions
+    try {
       tableRelations.forEach((tableRelation: TableRelationModel): void => {
         this.relationLines.push(DrawUtil.newRelationLine(tableRelation));
         this.relationLines[this.relationLines.length - 1].leaderLine.position();
       });
-    });
+    } catch (e) {
+      // TODO: Handle
+    }
   }
 
   createTable(): void {
@@ -318,7 +322,7 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
     };
     this.modalService.open(TableConfigModal, options)
       .subscribe((closeOptions: TableConfigModalCloseOptions): void => {
-        if (closeOptions.table && !closeOptions.deleted) {
+        if (closeOptions && closeOptions.table && !closeOptions.deleted) {
           this.schema.tables.push(closeOptions.table);
         }
       });
@@ -357,6 +361,12 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
   }
 
   initializeData(callback?: () => void): void {
+    if (!this.schema.tables.length) {
+      this.modalProvider.showError({
+        detail: 'No tables found for this schema, please try again.'
+      });
+      return;
+    }
     this.generateService.generateBySchema(this.schema.id)
       .subscribe((data: DataModel): void => {
         this.data = data;

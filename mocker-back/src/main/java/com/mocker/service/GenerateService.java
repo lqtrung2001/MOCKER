@@ -11,9 +11,9 @@ import java.util.UUID;
  */
 
 public interface GenerateService {
-    List<Map<String, String>> generateWithTableId(UUID tableId, Integer row);
+    List<Map<String, String>> generateWithTableId(UUID tableId);
 
-    List<Map<String, String>> generateWithTable(Table table, Integer row);
+    List<Map<String, String>> generateWithTable(Table table);
 
     Map<String, Map<String, Object>> generateWithSchema(UUID id);
 }

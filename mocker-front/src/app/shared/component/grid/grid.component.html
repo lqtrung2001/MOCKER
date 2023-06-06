@@ -1,0 +1,70 @@
+<div [class]='mocClass' id='main'>
+  <div class='tw-flex tw-justify-between'>
+    <div class='tw-flex'>
+      <moc-button (click)='createAction.click()' mocStyle='btn-primary tw-uppercase'
+                  [label]='createAction.content'></moc-button>
+      <moc-dropdown class='tw-ml-5' [options]='roleOptions'>
+        <moc-button [label]='!currentRole ? "Filter by role" : translateService.instant("component.grid." + currentRole.toLowerCase())' mocClass='tw-w-52' icon='fa-solid fa-sort'
+                    mocStyle='tw-text-left btn-secondary'></moc-button>
+      </moc-dropdown>
+    </div>
+    <moc-input mocClass='tw-w-96' [mocPlaceholder]='searchPlaceholder'
+               [mocControl]='formGroup.controls.search'></moc-input>
+  </div>
+  <table class='tw-w-full tw-mt-5 tw-text-left'>
+    <tr class='tw-bg-gray' (mouseleave)='columnActive=""'>
+      <th class='tw-p-4 tw-uppercase first-letter:tw-underline' (mouseenter)='columnActive="no"'>
+        {{ 'component.grid.no' | translate }}
+      </th>
+      <th *ngFor='let column of mocGrid?.columns'
+          [colSpan]='column.colSpan || 1'
+          [innerHTML]='column.label'
+          class='tw-p-4 tw-uppercase first-letter:tw-underline'
+          (mouseenter)='columnActive=column.key'
+      ></th>
+    </tr>
+    <tr>
+      <td [colSpan]='colSpan'>
+        <hr/>
+      </td>
+    </tr>
+    <ng-container *ngFor='let pageValue of pageValues'>
+      <tr class='hover:tw-bg-gray'>
+        <td class='tw-p-4 {{ columnActive==="no" ? "tw-bg-gray" : undefined }}'>
+          {{ pageValue.position + 1 + '.' }}
+        </td>
+        <td (click)='getAction(pageValue.gridValue[column.key])()'
+            *ngFor='let column of mocGrid.columns'
+            [colSpan]='column.colSpan || 1'
+            [innerHTML]='getInnerHTML(pageValue.gridValue[column.key])'
+            class='tw-p-4  {{ columnActive === column.key ? "tw-bg-gray" : undefined }}'
+        ></td>
+      </tr>
+      <tr>
+        <td [colSpan]='colSpan'>
+          <hr/>
+        </td>
+      </tr>
+    </ng-container>
+    <ng-container *ngIf='!pageValues?.length'>
+      <tr>
+        <td [colSpan]='colSpan' class='tw-text-center tw-py-4'>
+          {{ (formGroup.controls.search.value && mocGrid.values.length ? 'component.grid.values_no_match' : 'component.grid.values_empty') | translate }}
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+  <div class='tw-flex tw-justify-end tw-mt-5 pagination'>
+    <span (click)='selectPage(1)'
+          [class]='(totalPageNumber.length === 1 || currentPageNumber === 1) ? "disable" : "enable"'>{{ '<<' }}</span>
+    <span (click)='selectPage("previous")'
+          [class]='(totalPageNumber.length === 1 || currentPageNumber === 1) ? "disable" : "enable"'>{{ '<' }}</span>
+    <span *ngFor='let item of totalPageNumber'
+          (click)='selectPage(item)'
+          class='{{ currentPageNumber === item ? "active" : undefined }} enable'>{{ item }}</span>
+    <span (click)='selectPage("next")'
+          [class]='(totalPageNumber.length === 1 || currentPageNumber === totalPageNumber.length) ? "disable" : "enable"'>{{ '>' }}</span>
+    <span (click)='selectPage(totalPageNumber.length)'
+          [class]='(totalPageNumber.length === 1 || currentPageNumber === totalPageNumber.length) ? "disable" : "enable"'>{{ '>>' }}</span>
+  </div>
+</div>

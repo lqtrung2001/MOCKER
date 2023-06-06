@@ -6,6 +6,8 @@ import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal
 import { ModalService } from '@shared/modal/modal-service/modal-service.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrProvider } from '@shared/modal/toastr-provider/toastr-provider';
+import { DatePipe, Location } from '@angular/common';
+import { TruncatePipe } from '@shared/pipe/truncate.pipe';
 
 /**
  * @author Do Quoc Viet
@@ -20,6 +22,11 @@ export abstract class AbstractComponent {
   protected formBuilder: FormBuilder;
   protected translateService: TranslateService;
   protected toastrProvider: ToastrProvider;
+  protected location: Location;
+
+  // Pipe
+  protected datePipe: DatePipe;
+  protected truncatePipe: TruncatePipe;
 
   protected constructor(injector: Injector) {
     this.applicationConfig = injector.get(ApplicationConfig);
@@ -30,6 +37,9 @@ export abstract class AbstractComponent {
     this.formBuilder = injector.get(FormBuilder);
     this.translateService = injector.get(TranslateService);
     this.toastrProvider = injector.get(ToastrProvider);
+    this.location = injector.get(Location);
+    this.datePipe = new DatePipe('en');
+    this.truncatePipe = new TruncatePipe();
   }
 
 }

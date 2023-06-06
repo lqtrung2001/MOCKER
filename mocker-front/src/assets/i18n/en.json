@@ -9,7 +9,13 @@
   "message": {
     "schema_save_success": "Schema saved successfully",
     "schema_delete_confirm": "Are you sure you want to delete this schema?",
-    "schema_delete_success": "Schema with name {{name}} is deleted successfully"
+    "schema_delete_success": "Schema with name {{name}} is deleted successfully",
+    "group_save_success": "Group with name: {{ name }} saved successfully",
+    "group_delete_confirm": "Are you sure you want to delete this group?",
+    "group_delete_success": "Group with name {{name}} is deleted successfully",
+    "project_save_success": "Project saved successfully",
+    "project_delete_confirm": "Are you sure you want to delete this project?",
+    "project_delete_success": "Project with name {{name}} is deleted successfully"
   },
   "enum": {
     "one_to_one": "ONE TO ONE",
@@ -77,23 +83,30 @@
     },
     "projects": {
       "my_projects": "My Projects",
-      "information": "A project is a group of schemas, datasets, and scenarios that can be shared with others or remain private.",
-      "create": "CREATE A PROJECT",
-      "name": "Name",
-      "shared_by": "Shared By",
-      "last_modified": "Last Modified"
+      "information": "A project is defined as a sequence of tasks that must be completed to attain a certain outcome. According to the Project Management Institute (PMI), the term Project refers to ” to any temporary endeavor with a definite beginning and end”. Depending on its complexity, it can be managed by a single person or hundreds.",
+      "create": "CREATE A NEW PROJECT",
+      "description": "description",
+      "name": "name",
+      "shared_by": "shared by",
+      "last_modified": "last modified"
     },
     "project": {
-      "my_project": "My Project",
-      "new_project": "New Project",
-      "new_schema": "NEW SCHEMA",
-      "schema": "Schema",
-      "last_modified": "Last Modified ",
-      "project_name": "Project Name",
-      "project_name_placeholder": "Project Name",
-      "share_with": "Share With"
+      "project": "Project",
+      "name": "Name:",
+      "description": "Description:",
+      "save": "SAVE",
+      "delete": "DELETE",
+      "group_information": "Group information"
+    },
+    "project_schemas": {
+      "name": "Name",
+      "description": "Description",
+      "created_date": "Created date",
+      "last_modified": "Last modified",
+      "delete_schema_confirmation": "Are you sure you want to delete this schema?"
     },
     "general": {
+      "mocker": "Mocker",
       "introduction": "Need some mock data to test your app? Mocker lets you generate up to 1,000 rows of realistic test data in CSV, JSON, SQL, and Excel formats.",
       "row": "#Rows:",
       "format": "Format:",
@@ -114,7 +127,8 @@
       "field_is_mapped": "This field is mapped to another field in this schema, please delete relationships between fields and try again.",
       "generate_type_placeholder": "Generate type",
       "sql_type_placeholder": "SQL type",
-      "blank": "Blank:"
+      "blank": "Blank:",
+      "unique": "Unique:"
     },
     "person": {
       "my_account": "My Account",
@@ -132,11 +146,12 @@
     "schemas": {
       "my_schemas": "My Schemas",
       "information": "A database schema is (generally) broadly divided into two categories: physical database schema that defines how the data-like files are actually stored; and logical database schema, which describes all the logical constraints -- including integrity, tables and views -- applied on the stored data.",
-      "create": "CREATE A SCHEMA",
-      "name": "Name",
-      "shared_by": "Shared By",
-      "group": "Group",
-      "last_modified": "Last Modified"
+      "create": "CREATE A NEW SCHEMA",
+      "description": "description",
+      "name": "name",
+      "shared_by": "shared by",
+      "group": "group",
+      "last_modified": "last modified"
     },
     "schema": {
       "schema": "Schema",
@@ -147,13 +162,75 @@
       "project_information": "Project Information:"
     },
     "diagram": {
-      "create_table": "CREATE TABLE",
+      "create_table": "CREATE A NEW TABLE",
       "download": "DOWNLOAD",
       "preview": "PREVIEW",
       "generated": "Data are generated successfully, please click preview button on the top of table for viewing its data.",
       "format": "Format",
       "filename": "File Name",
       "invalid_mapping": "Can not mapping these fields because they are not same generate type. Please double-check again."
+    },
+    "groups": {
+      "my_groups": "My Groups",
+      "information": "A Group is basically an assemblage of people. It can be understood as a collection of individuals (two or more), who come together and interact with each other, so as to achieve the objectives of the organization.",
+      "create": "CREATE A NEW GROUP",
+      "name": "name",
+      "description": "description",
+      "shared_by": "shared by",
+      "last_modified": "last modified"
+    },
+    "group": {
+      "group": "Group",
+      "name": "Name:",
+      "description": "Description:",
+      "save": "SAVE",
+      "delete": "DELETE"
+    },
+    "people": {
+      "people": "People",
+      "name": "name",
+      "bio": "bio",
+      "email": "email",
+      "phone": "phone",
+      "create": "CREATE A NEW USER"
+    },
+    "copyright": {
+      "company": "2023 Mocker, LLC.",
+      "term": "Terms of Use",
+      "eula": "EULA",
+      "privacy": "Privacy"
+    },
+    "grid": {
+      "no": "No",
+      "values_empty": "The values are empty, you can create a new one by using the create button.",
+      "values_no_match": "The values are not match with the any credentials, please try again.",
+      "search": "Search by {{searches}} ...",
+      "group_admin": "Administrator",
+      "group_associate": "Associate",
+      "user": "User"
+    },
+    "group_members": {
+      "description": "A member of the group has three roles (GROUP_ADMIN, GROUP_ASSOCIATE and USER), each of which has a specific feature. With the GROUP ADMIN/GROUP_ASSOCIATE role, you can create or update group members and eventually delete them. But group associations can not remove the GROUP ADMIN role, they only can remove member that has user role in group. Additionally, you can not remove yourself from group. If you are GROUP ADMIN, when you want to propose someone become GROUP_ADMIN, you will has role USER after.",
+      "name": "name",
+      "role": "role",
+      "bio": "bio",
+      "email": "email",
+      "phone": "phone",
+      "group_admin": "Administrator",
+      "group_associate": "Associate",
+      "user": "User",
+      "add_user": "Add a user",
+      "delete": "Delete",
+      "remove_user_confirmation": "Are you sure you want to remove this user from this group?"
+    },
+    "group_projects": {
+      "description": "description",
+      "name": "name",
+      "created_date": "created date",
+      "last_modified": "last modified",
+      "delete": "delete",
+      "create_project": "create a new project",
+      "delete_project_confirmation": "Are you sure you want to delete this project forever?"
     }
   },
   "audit": {
@@ -226,6 +303,34 @@
       "cancel": "CANCEL",
       "ok": "OK",
       "delete_confirmation": "Are you sure you want to delete this relation?"
+    },
+    "add_user": {
+      "title": "Add a user to Group",
+      "search_placeholder": "Search by username, full name, or email",
+      "add_user": "Add user"
+    },
+    "change_role": {
+      "instruction": "Please select a role to change:",
+      "group_admin": "Administrator",
+      "group_associate": "Associate",
+      "user": "User",
+      "not_permitted": "You are not allowed to change this user's role",
+      "can_not_change_role_of_self": "Can't change role of self.",
+      "change_new_admin_confirmation": "Are you sure you want to change this user's role to Group Admin, your role will be user after that?"
+    },
+    "choose_parent": {
+      "title": "Please choose a {{ entity }}",
+      "search_placeholder": "Search for {{ entity }}...",
+      "no_projects": "No {{ entity }}s available at this time. Please click on the button below for creating a new {{ entity }}.",
+      "create_new": "Create a new",
+      "more": "More ..."
+    },
+    "create_entity": {
+      "title": "Please complete the form for creating a new {{ entity }}",
+      "name": "Name:",
+      "description": "Description:",
+      "save": "Save",
+      "cancel": "Cancel"
     }
   }
 }

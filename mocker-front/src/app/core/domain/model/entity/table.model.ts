@@ -10,6 +10,7 @@ export class TableModel extends BaseModel {
   public id: string;
   public name: string;
   public description: string;
+  public row: number;
   public schema: SchemaModel;
   public fields: FieldModel[] = [];
 }

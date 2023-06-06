@@ -84,5 +84,4 @@ public class AuthServiceImpl implements AuthService {
             return userRepository.save(userForgotPassword);
         }
     }
-
 }

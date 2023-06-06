@@ -1,0 +1,21 @@
+<div class='' id='main' popup [modal]='this'>
+  <div class='tw-w-96 tw-min-h-80 tw-p-5'>
+    <p class='tw-font-medium tw-uppercase'>{{ title }}</p>
+    <div class='tw-text-sm tw-mt-5'>
+      <moc-input [mocControl]='searchFormControl' [mocPlaceholder]='placeholder'></moc-input>
+      <div class='tw-mt-3'>
+        <p (click)='selectParent(parent.id)'
+           *ngFor='let parent of values.slice(0, 5), let index=index'
+           class='tw-font-medium tw-py-2 hover:tw-text-blue tw-cursor-pointer hover:tw-underline tw-uppercase'>
+          {{ (index + 1) + '. ' + parent.name + ': ' + (parent.description | truncate: 30) }}
+        </p>
+        <p *ngIf='!values?.length'>{{ 'modal.choose_parent.no_projects' | translate: {entity: options.type} }}</p>
+        <moc-button *ngIf='!values?.length' mocClass='tw-mt-5 tw-mx-auto tw-w-1/2' mocStyle='btn-primary' label='modal.choose_parent.create_new'></moc-button>
+        <p *ngIf='values?.length' (click)='viewMore()'
+           class='tw-text-center tw-py-2 tw-text-blue tw-cursor-pointer hover:tw-underline tw-uppercase'>
+          {{ 'modal.choose_parent.more' | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

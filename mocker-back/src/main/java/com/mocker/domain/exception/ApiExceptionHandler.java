@@ -2,11 +2,14 @@ package com.mocker.domain.exception;
 
 import com.mocker.domain.dto.ErrorDto;
 import com.mocker.utility.MessageContextHelper;
+import com.sun.jdi.InternalException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.persistence.OptimisticLockException;
 import java.sql.Timestamp;
 import java.time.Instant;
 
@@ -26,6 +29,7 @@ public class ApiExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDto> handleDefaultException(Exception exception) {
+        exception.printStackTrace();
         ErrorDto errorDto = new ErrorDto();
         errorDto.setTimestamp(now().toString());
         errorDto.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
@@ -45,6 +49,7 @@ public class ApiExceptionHandler {
      */
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<ErrorDto> handleAuthenticationException(AuthenticationException authenticationException) {
+        authenticationException.printStackTrace();
         ErrorDto errorDto = new ErrorDto();
         errorDto.setTimestamp(now().toString());
         errorDto.setStatus(HttpStatus.FORBIDDEN.value());
@@ -64,6 +69,7 @@ public class ApiExceptionHandler {
      */
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorDto> handleNotFoundException(NotFoundException notFoundException) {
+        notFoundException.printStackTrace();
         ErrorDto errorDto = new ErrorDto();
         errorDto.setTimestamp(now().toString());
         errorDto.setStatus(HttpStatus.NOT_FOUND.value());
@@ -81,8 +87,9 @@ public class ApiExceptionHandler {
      * @param badRequestException The bad request exception to be handled
      * @return The ErrorDto instance
      */
-    @ExceptionHandler(value = {BadRequestException.class})
+    @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ErrorDto> handleBadRequestException(BadRequestException badRequestException) {
+        badRequestException.printStackTrace();
         ErrorDto errorDto = new ErrorDto();
         errorDto.setTimestamp(now().toString());
         errorDto.setStatus(HttpStatus.BAD_REQUEST.value());
@@ -102,6 +109,7 @@ public class ApiExceptionHandler {
      */
     @ExceptionHandler(value = {UnauthorizedException.class})
     public ResponseEntity<ErrorDto> handleUnauthorizedException(UnauthorizedException unauthorizedException) {
+        unauthorizedException.printStackTrace();
         ErrorDto errorDto = new ErrorDto();
         errorDto.setTimestamp(now().toString());
         errorDto.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -113,15 +121,44 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);
     }
 
+    /**
+     * The OptimisticLockException handler
+     *
+     * @param objectOptimisticLockingFailureException The objectOptimisticLockingFailureException to be handled
+     * @return The ErrorDto instance
+     */
+    @ExceptionHandler(ObjectOptimisticLockingFailureException.class)
+    public ResponseEntity<ErrorDto> handleOptimisticLockException(ObjectOptimisticLockingFailureException objectOptimisticLockingFailureException) {
+        objectOptimisticLockingFailureException.printStackTrace();
+        ErrorDto errorDto = new ErrorDto();
+        errorDto.setTimestamp(now().toString());
+        errorDto.setStatus(HttpStatus.LOCKED.value());
+        errorDto.setError(HttpStatus.LOCKED.name());
+        errorDto.setMessage(getMessage(Exception.class));
+        errorDto.setCode(ErrorDto.CodeEnum.CONFLICT);
+        errorDto.setAdditionalMessage("This entity/resource was updated by another transaction, please reload page by using F5 on your computer and try again.");
+        return new ResponseEntity<>(errorDto, HttpStatus.LOCKED);
+    }
+
     private String getMessage(Class<? extends Exception> clazz) {
         StringBuilder message = new StringBuilder("exception.");
-        switch (clazz.getSimpleName()) {
-            case "BadRequestException" -> message.append("bad_request");
-            case "AuthenticationException" -> message.append("authentication");
-            case "InternalException" -> message.append("internal");
-            case "NotFoundException" -> message.append("not_found");
-            case "UnauthorizedException" -> message.append("unauthorized");
-            default -> message.append("business_application_error");
+        if (clazz.getSimpleName().equals("BadRequestException") || clazz.isInstance(BadRequestException.class)) {
+            message.append("bad_request");
+        }
+        if (clazz.getSimpleName().equals("AuthenticationException") || clazz.isInstance(AuthenticationException.class)) {
+            message.append("authentication");
+        }
+        if (clazz.getSimpleName().equals("InternalException") || clazz.isInstance(InternalException.class)) {
+            message.append("internal");
+        }
+        if (clazz.getSimpleName().equals("NotFoundException") || clazz.isInstance(NotFoundException.class)) {
+            message.append("not_found");
+        }
+        if (clazz.getSimpleName().equals("UnauthorizedException") || clazz.isInstance(UnauthorizedException.class)) {
+            message.append("unauthorized");
+        }
+        if ("exception.".contentEquals(message)){
+            message.append("business_application_error");
         }
         return MessageContextHelper.getMessage(message.toString());
     }

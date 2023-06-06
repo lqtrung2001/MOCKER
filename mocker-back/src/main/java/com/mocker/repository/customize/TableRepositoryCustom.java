@@ -18,4 +18,7 @@ public interface TableRepositoryCustom {
 
     Table findOneFetchFields(UUID id);
 
+    Table getTableByFieldId(UUID schemaId);
+
+
 }

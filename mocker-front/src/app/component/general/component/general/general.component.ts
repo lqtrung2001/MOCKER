@@ -9,6 +9,11 @@ import { PreviewModal, PreviewModalOptions } from '@shared/modal/preview/preview
 import { Option } from '@shared/component/dropdown/dropdown.component';
 import { DownloadUtil } from '@core/util/download.util';
 import { FormatEnum } from '@core/domain/enum/format.enum';
+import { ChooseParentModal, ChooseParentModalOptions } from '@shared/modal/choose-parent/choose-parent.modal';
+import { SchemaModel } from '@core/domain/model/entity/schema.model';
+import { TableService } from '@core/service/table.service';
+import { SchemaService } from '@core/service/schema.service';
+import { StringUtil } from '@core/util/string.util';
 
 /**
  * @author Do Quoc Viet
@@ -18,8 +23,8 @@ type Controls = {
   table: FormGroup<{
     name: FormControl;
     fields: FormArray<FormGroup>;
+    row: FormControl;
   }>;
-  rows: FormControl;
   format: FormControl;
 }
 
@@ -34,15 +39,17 @@ export class GeneralComponent extends AbstractComponent {
 
   constructor(
     injector: Injector,
-    private generateService: GenerateService
+    private generateService: GenerateService,
+    private tableService: TableService,
+    private schemaService: SchemaService
   ) {
     super(injector);
     this.formGroup = this.formBuilder.group({
       table: this.formBuilder.group({
         name: this.formBuilder.control('MOCKER', [Validators.required]),
-        fields: this.formBuilder.array<FormGroup<Controls>>([])
+        fields: this.formBuilder.array<FormGroup<Controls>>([]),
+        row: this.formBuilder.control(1, [Validators.required])
       }),
-      rows: this.formBuilder.control(1, [Validators.required]),
       format: this.formBuilder.control(FormatEnum.SQL, [Validators.required])
     });
     this.formGroup.valueChanges.subscribe(() => {
@@ -52,13 +59,14 @@ export class GeneralComponent extends AbstractComponent {
     if (tableConfigStorage) {
       this.formGroup.patchValue(tableConfigStorage);
       const { table } = tableConfigStorage;
-      table.fields.forEach((field: FieldModel) => {
+      table.fields.forEach((field: FieldModel): void => {
         this.formGroup.controls.table.controls.fields.push(this.formBuilder.group({
           name: this.formBuilder.control(field.name, [Validators.required]),
           generateType: this.formBuilder.control(field.generateType, [Validators.required]),
           sqlType: this.formBuilder.control(field.sqlType, []),
           option: this.formBuilder.group({
-            blank: this.formBuilder.control(field.option?.blank || 0, [])
+            blank: this.formBuilder.control(field.option?.blank || 0, []),
+            unique: this.formBuilder.control(field.option?.unique || false, [])
           }, [])
         }));
       });
@@ -79,7 +87,7 @@ export class GeneralComponent extends AbstractComponent {
     localStorage.setItem(LocalStorageConstant.TABLE_CONFIG, JSON.stringify(this.formGroup.getRawValue()));
     const table: TableModel = this.formGroup.controls.table.getRawValue() as TableModel;
     if (!this.data.length) {
-      this.generateService.generateWithTable(table, this.formGroup.controls.rows.value)
+      this.generateService.generateWithTable(table)
         .subscribe((data: any[]): void => {
           this.data = data;
           this.startDownload();
@@ -99,11 +107,17 @@ export class GeneralComponent extends AbstractComponent {
     if (this.formGroup.invalid) {
       return;
     }
+    if (!this.formGroup.controls.table.controls.fields.length) {
+      this.modalProvider.showWarning({
+        body: 'warning.fields_empty_when_generating'
+      });
+      return;
+    }
     localStorage.setItem(LocalStorageConstant.TABLE_CONFIG, JSON.stringify(this.formGroup.getRawValue()));
     const table: TableModel = this.formGroup.controls.table.getRawValue() as TableModel;
     const format = this.formGroup.controls.format.value;
     if (!this.data.length) {
-      this.generateService.generateWithTable(table, this.formGroup.controls.rows.value)
+      this.generateService.generateWithTable(table)
         .subscribe((data: any[]): void => {
           this.data = data;
           const options: PreviewModalOptions = {
@@ -140,4 +154,41 @@ export class GeneralComponent extends AbstractComponent {
   get isShowTableNameField(): boolean {
     return this.formGroup.controls.format.value !== FormatEnum.CSV;
   }
+
+  saveToSchema(): void {
+    this.formGroup.markAllAsTouched();
+    if (this.formGroup.invalid) {
+      return;
+    }
+    if (!this.formGroup.controls.table.controls.fields.length) {
+      this.modalProvider.showWarning({
+        body: 'warning.fields_empty_when_generating'
+      });
+      return;
+    }
+    localStorage.setItem(LocalStorageConstant.TABLE_CONFIG, JSON.stringify(this.formGroup.getRawValue()));
+    const options: ChooseParentModalOptions = {
+      type: 'schema'
+    };
+    this.modalService.open(ChooseParentModal, options)
+      .subscribe((schemaId: string): void => {
+        if (schemaId) {
+          this.schemaService.getEntity(schemaId)
+            .subscribe((schema: SchemaModel): void => {
+              const table: TableModel = this.formGroup.controls.table.getRawValue() as TableModel;
+              table.schema = schema;
+              table.description = StringUtil.EMPTY;
+              this.tableService.upsertEntity(table).subscribe((res: TableModel): void => {
+                if (res.id) {
+                  this.toastrProvider.showSuccess({
+                    detail: `The table was successfully saved to the schema (id: ${schemaId}).`
+                  });
+                  this.router.navigate([`/schema/${schemaId}`]).then();
+                }
+              });
+            });
+        }
+      });
+  }
+
 }

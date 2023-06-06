@@ -2,8 +2,8 @@ package com.mocker.service;
 
 import com.mocker.domain.model.entity.Project;
 import com.mocker.domain.model.entity.Schema;
+import com.mocker.domain.model.entity.enumeration.Role;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,11 +15,11 @@ public interface ProjectService {
 
     Project getProject(UUID id);
 
-    List<Project> getProjects();
+    List<Project> getProjects(List<Role> roles);
 
     Project upsert(Project project);
 
     Project delete(UUID id);
 
-    List<Schema> getSchemasByProject(UUID projectId);
+    List<Project> getProjectsByGroupId(UUID groupId, List<Role> roles);
 }

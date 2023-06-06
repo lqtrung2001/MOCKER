@@ -22,22 +22,23 @@ export class ApplicationConfig {
     format: FormatEnum
   }[] = [
     {
-      icon: 'fa-regular fa-database',
+      icon: 'fa-solid fa-database',
       format: FormatEnum.SQL
     },
     {
-      icon: 'fa-sharp fa-regular fa-paperclip-vertical',
+      icon: 'fa-solid fa-table',
       format: FormatEnum.JSON
     },
     {
-      icon: 'fa-regular fa-file-excel',
+      icon: 'fa-solid fa-file-excel',
       format: FormatEnum.XML
     },
     {
-      icon: 'fa-regular fa-file-csv',
+      icon: 'fa-solid fa-file-csv',
       format: FormatEnum.CSV
     }
   ];
+  public numberItemsOfPage: number = 8;
 
   constructor(
     private formBuilder: FormBuilder

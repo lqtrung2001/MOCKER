@@ -1,43 +1,43 @@
-<div class='{{ class }}' id='main'>
+<div class='{{ mocClass }}' id='main'>
   <div class='tw-flex tw-items-start'>
-    <div class='tw-flex tw-items-center tw-w-140 tw-justify-between'>
-      <moc-button (click)='createTable()' class='tw-w-44' icon='fa-solid fa-folder-plus'
-                  label='component.diagram.create_table' selfClass='btn-primary tw-text-left'></moc-button>
-      <moc-button (click)='download()' class='tw-w-44' icon='fa-solid fa-download'
-                  label='component.diagram.download' selfClass='btn-primary tw-text-left'></moc-button>
-      <moc-button (click)='preview()' class='tw-w-44' icon='fa-solid fa-display-code'
-                  label='component.diagram.preview' selfClass='btn-light tw-text-left'></moc-button>
+    <div class='tw-flex tw-items-center tw-w-150 tw-justify-between'>
+      <moc-button (click)='createTable()' mocClass='tw-w-52' icon='fa-solid fa-folder-plus'
+                  label='component.diagram.create_table' mocStyle='btn-primary tw-text-left'></moc-button>
+      <moc-button (click)='download()' mocClass='tw-w-44' icon='fa-solid fa-download'
+                  label='component.diagram.download' mocStyle='btn-primary tw-text-left'></moc-button>
+      <moc-button (click)='preview()' mocClass='tw-w-44' icon='fa-solid fa-display'
+                  label='component.diagram.preview' mocStyle='btn-secondary tw-text-left'></moc-button>
     </div>
     <div class='tw-flex tw-ml-5'>
       <span class='tw-mt-3 tw-mx-5'>{{ 'component.diagram.format' | translate }}</span>
       <moc-dropdown [options]='formats'>
-        <moc-button [label]='formGroup.controls.format.value' class='tw-w-32' icon='fa-solid fa-arrow-up-arrow-down'
-                    selfClass='tw-text-left btn-light'></moc-button>
+        <moc-button [label]='formGroup.controls.format.value' mocClass='tw-w-32' icon='fa-solid fa-sort'
+                    mocStyle='tw-text-left btn-secondary'></moc-button>
       </moc-dropdown>
       <span class='tw-mt-3 tw-mx-5'>{{ 'component.diagram.filename' | translate }}</span>
-      <moc-input [control]='formGroup.controls.filename' class='tw-w-32'
-                 selfClass='tw-px-5'></moc-input>
+      <moc-input [mocControl]='formGroup.controls.filename' mocClass='tw-w-32'
+                 mocStyle='tw-px-5'></moc-input>
     </div>
   </div>
   <div (scroll)='onScroll()' class='diagram tw-border tw-mt-3 tw-h-full tw-w-full tw-overflow-auto'>
-    <div #diagram class='tw-relative'>
+    <div #diagram class='tw-relative tw-flex'>
       <moc-table
-        (cdkDragMoved)='dragMoved(table, $event)'
         (cdkDragEnded)='dragEnded(table, $event)'
+        (cdkDragMoved)='dragMoved(table, $event)'
+        (deleted)='tableDeleted(table, $event)'
         (refresh)='reDrawRelationLine($event)'
         (relationMapping)='relationMapping($event)'
-        (deleted)='tableDeleted(table, $event)'
         *ngFor='let table of schema?.tables'
         [current]='current'
         [dataDetail]='data ? data[table.name].values : []'
         [foreignKeys]='foreignKeys'
         [format]='formGroup.controls.format.value'
+        [position]='tableIdIsBeingMoved === table.id ? position : undefined'
         [relations]='relations'
         [table]='table'
-        [position]='tableIdIsBeingMoved === table.id ? position : undefined'
         cdkDrag
-        class='tw-absolute tw-top-0'
-        cdkDragBoundary='.diagram'>
+        cdkDragBoundary='.diagram'
+        mocClass='tw-absolute tw-top-0'>
         <i cdkDragHandle class='tw-ml-3 tw-cursor-pointer fa-solid fa-arrows-up-down-left-right'></i>
       </moc-table>
     </div>

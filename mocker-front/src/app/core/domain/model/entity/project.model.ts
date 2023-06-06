@@ -9,7 +9,6 @@ import { SchemaModel } from '@core/domain/model/entity/schema.model';
 export class ProjectModel extends BaseModel {
   public id: string;
   public name: string;
-  public summary: string;
   public description: string;
   public group: GroupModel;
   public schemas: SchemaModel[] = [];

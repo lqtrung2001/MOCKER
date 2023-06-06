@@ -2,6 +2,11 @@ import { AbstractComponent } from '@core/common/abstract.component';
 import { Component, Injector, OnInit } from '@angular/core';
 import { SchemaModel } from '@core/domain/model/entity/schema.model';
 import { SchemaService } from '@core/service/schema.service';
+import { CreateAction, Grid, GridValue } from '@shared/component/grid/grid.component';
+import { StringUtil } from '@core/util/string.util';
+import { ChooseParentModal, ChooseParentModalOptions } from '@shared/modal/choose-parent/choose-parent.modal';
+import { RoleEnum } from '@core/domain/enum/role.enum';
+import { RoleUtil } from '@core/util/role.util';
 
 /**
  * @author Do Quoc viet
@@ -13,8 +18,8 @@ import { SchemaService } from '@core/service/schema.service';
   styleUrls: ['schemas.component.scss']
 })
 export class SchemasComponent extends AbstractComponent implements OnInit {
-  schemas: SchemaModel[] = [];
-  selects: string[] = [];
+  grid: Grid;
+  currentRole: RoleEnum | undefined;
 
   constructor(
     injector: Injector,
@@ -24,47 +29,94 @@ export class SchemasComponent extends AbstractComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.schemaService.getEntities().subscribe((schemas: SchemaModel[]): void => {
-      this.schemas = schemas;
-    });
-  }
-
-  isCheck(id: string): boolean {
-    return !!this.selects.find((value: string) => value === id);
-  }
-
-  select(id: string): void {
-    if (this.isCheck(id)) {
-      this.selects = this.selects.filter((value: string) => value !== id);
+    const roles: RoleEnum[] | undefined = this.activatedRoute.snapshot.queryParamMap.get('roles')
+      ?.toString()
+      .split(',')
+      .filter((role: string): boolean => !!role)
+      .map((role: string): RoleEnum => RoleUtil.valueOf(role));
+    if (roles?.length === 1) {
+      this.currentRole = roles.at(0)!;
     } else {
-      this.selects.push(id);
+      this.currentRole = undefined;
     }
+    this.initialEntities(roles);
   }
 
-  get isSelectAll(): boolean {
-    return this.selects.length === this.schemas.length;
+  get createAction(): CreateAction {
+    return {
+      click: (): void => {
+        const options: ChooseParentModalOptions = {
+          type: 'project'
+        };
+        setTimeout(() => this.modalService.open(ChooseParentModal, options)
+          .subscribe((projectId: string): void => {
+            if (projectId) {
+              this.router.navigate(['/schema/new'], { queryParams: { projectId } })
+                .then((): void => {
+                });
+            }
+          }));
+      },
+      content: 'component.schemas.create'
+    };
   }
 
-  selectAll(): void {
-    if (this.isSelectAll) {
-      this.selects = [];
-    } else {
-      this.selects = this.schemas.map((schema: SchemaModel) => schema.id);
+  private initialEntities(roles: RoleEnum[] = []): void {
+    this.schemaService.getSchemas(roles)
+      .subscribe((schemas: SchemaModel[]): void => {
+        this.grid = {
+          columns: [
+            {
+              label: this.translateService.instant('component.schemas.name'),
+              key: 'name',
+              isSearched: true
+            },
+            {
+              label: this.translateService.instant('component.schemas.description'),
+              key: 'description'
+            },
+            {
+              label: this.translateService.instant('component.schemas.shared_by'),
+              key: 'sharedBy',
+              isSearched: true
+            },
+            {
+              label: this.translateService.instant('component.schemas.group'),
+              key: 'group',
+              isSearched: true
+            },
+            {
+              label: this.translateService.instant('component.schemas.last_modified'),
+              key: 'lastModified'
+            }
+          ],
+          values: schemas.map((schema: SchemaModel): GridValue => ({
+            name: {
+              value: schema.name,
+              click: () => this.router.navigate([`/schema/${schema.id}`]),
+              html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue'></a>`
+            },
+            description: this.truncatePipe.transform(schema.description, 50),
+            sharedBy: {
+              value: schema.project.name,
+              click: () => this.router.navigate([`/project/${schema.project.id}`]),
+              html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue'></a>`
+            },
+            group: {
+              value: schema.project.group.name,
+              click: () => this.router.navigate([`/group/${schema.project.group.id}`]),
+              html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue'></a>`
+            },
+            lastModified: this.datePipe.transform(schema.modifiedDate) || StringUtil.EMPTY
+          }))
+        };
+      });
+  }
+
+  roleChange(role: RoleEnum | undefined): void {
+    if (role !== this.currentRole) {
+      this.initialEntities(role ? [role] : undefined);
+      this.currentRole = role;
     }
-  }
-
-  delete(id: string): void {
-    // delete project
-  }
-
-  get canDeleteSelected(): boolean {
-    return !!this.selects.length;
-  }
-
-  deleteSelected(): void {
-    if (!this.canDeleteSelected) {
-      return;
-    }
-    // delete projects
   }
 }

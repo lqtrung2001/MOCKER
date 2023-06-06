@@ -1,11 +1,20 @@
 package com.mocker.domain.model.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.*;
 import java.util.UUID;
 
 /**
@@ -36,6 +45,9 @@ public class Option extends Base {
 
     @Column(name = "CONFIGURATION")
     private String configuration;
+
+    @Column(name = "IS_UNIQUE")
+    private boolean unique;
 
     @OneToOne
     @JoinColumn(nullable = false, name = "FIELD_ID", referencedColumnName = "ID")

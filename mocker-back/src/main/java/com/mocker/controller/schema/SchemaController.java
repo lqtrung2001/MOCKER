@@ -1,14 +1,15 @@
 package com.mocker.controller.schema;
 
 import com.mocker.api.SchemaApi;
+import com.mocker.controller.mapper.ApiAbstractMapper;
 import com.mocker.controller.table.ApiTableMapperDecorator;
 import com.mocker.controller.tableRelation.ApiTableRelationMapper;
+import com.mocker.domain.dto.RoleDto;
 import com.mocker.domain.dto.SchemaDto;
 import com.mocker.domain.dto.TableDto;
 import com.mocker.domain.dto.TableRelationDto;
-import com.mocker.repository.TableRelationRepository;
+import com.mocker.domain.model.entity.enumeration.Role;
 import com.mocker.service.SchemaService;
-import com.mocker.service.TableRelationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,14 +28,15 @@ import java.util.UUID;
 @RequestMapping(path = "/api/v1")
 public class SchemaController implements SchemaApi {
     private final ApiSchemaMapper apiSchemaMapper;
+    private final ApiAbstractMapper apiAbstractMapper;
     private final ApiTableMapperDecorator apiTableMapperDecorator;
     private final ApiTableRelationMapper apiTableRelationMapper;
     private final SchemaService schemaService;
-    private final TableRelationService tableRelationService;
 
     @Override
-    public ResponseEntity<List<SchemaDto>> getSchemas() {
-        return ResponseEntity.ok(apiSchemaMapper.map(schemaService.getSchemas()));
+    public ResponseEntity<List<SchemaDto>> getSchemas(List<RoleDto> rolesDto) {
+        List<Role> roles = apiAbstractMapper.mapRolesDtoToRoles(rolesDto);
+        return ResponseEntity.ok(apiSchemaMapper.map(schemaService.getSchemas(roles)));
     }
 
     @Override

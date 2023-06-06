@@ -30,6 +30,7 @@ import javax.crypto.SecretKey;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@SuppressWarnings("deprecation")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -48,11 +49,13 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .anonymous()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/**").permitAll()
-                .antMatchers("/api/**").permitAll()
-//                .antMatchers("/api/**").hasAnyRole(ApplicationUserRole.USER.name(), ApplicationUserRole.ADMIN.name())
+                .antMatchers("/api/**").hasAnyRole(ApplicationUserRole.USER.name(), ApplicationUserRole.ADMIN.name())
+                .antMatchers("/auth/send-verification-code").permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                .and()
+                .oauth2Login();
+
 
         http.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfiguration, secretKey));
         http.addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfiguration), JwtUsernameAndPasswordAuthenticationFilter.class);

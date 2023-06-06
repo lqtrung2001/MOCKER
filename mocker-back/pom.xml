@@ -24,6 +24,7 @@
         <jetbrains.annotations.version>23.1.0</jetbrains.annotations.version>
         <com.google.guava>31.1-android</com.google.guava>
         <io.jsonwebtoken.version>0.11.5</io.jsonwebtoken.version>
+        <security.oauth.version>2.5.2.RELEASE</security.oauth.version>
     </properties>
     <dependencies>
         <dependency>
@@ -45,6 +46,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-client</artifactId>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -133,6 +138,17 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2 -->
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>${security.oauth.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
         </dependency>
     </dependencies>
 

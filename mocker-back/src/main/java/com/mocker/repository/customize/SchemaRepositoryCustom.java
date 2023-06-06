@@ -2,6 +2,7 @@ package com.mocker.repository.customize;
 
 import com.mocker.domain.model.entity.Schema;
 import com.mocker.domain.model.entity.TableRelation;
+import com.mocker.domain.model.entity.enumeration.Role;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,9 +14,9 @@ import java.util.UUID;
 
 public interface SchemaRepositoryCustom {
 
-    List<Schema> getSchemasByProject(UUID projectId);
+    List<Schema> getSchemasByProjectId(UUID authId, UUID projectId, List<Role> roles);
 
-    List<Schema> getSchemas(UUID userId);
+    List<Schema> getSchemas(UUID userId, List<Role> roles);
 
     Schema getSchema(UUID id);
 

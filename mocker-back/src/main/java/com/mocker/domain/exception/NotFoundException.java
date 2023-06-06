@@ -9,6 +9,10 @@ import java.util.UUID;
 
 public class NotFoundException extends AbstractException {
 
+    public NotFoundException() {
+        super("exception.not_found");
+    }
+
     public NotFoundException(UUID entityId) {
         super("exception.not_found.default_message", entityId.toString());
     }

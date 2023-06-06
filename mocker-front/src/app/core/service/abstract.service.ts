@@ -9,7 +9,7 @@ import {
   HttpResponse,
   HttpStatusCode
 } from '@angular/common/http';
-import { catchError, finalize, Observable } from 'rxjs';
+import { catchError, finalize, Observable, of } from 'rxjs';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 import { ApplicationConfig } from '@core/config/application.config';
 import { environment } from '@environment/environment';
@@ -22,10 +22,12 @@ import { HttpHeaderConstant } from '@core/constant/http-header.constant';
 import { ErrorModel } from '@core/domain/model/error.model';
 import { UserModel } from '@core/domain/model/entity/user.model';
 import { UnauthorizedException } from '@core/domain/exception/unauthorized.exception';
-import { BadRequestException } from '@core/domain/exception/bad-request.exception';
-import { NotFoundException } from '@core/domain/exception/not-found.exception';
 import { AuthenticationException } from '@core/domain/exception/authentication.exception';
 import { Exception } from '@core/domain/exception/exception';
+import { AbstractException } from '@core/domain/exception/abstract.exception';
+import { Router } from '@angular/router';
+import {BadRequestException} from "@core/domain/exception/bad-request.exception";
+import {NotFoundException} from "@core/domain/exception/not-found.exception";
 
 /**
  * @author Do Quoc Viet
@@ -42,12 +44,14 @@ export class AbstractService<Type> implements HttpInterceptor {
   protected httpClient: HttpClient;
   protected appConfigService: ApplicationConfig;
   protected translateService: TranslateService;
+  protected router: Router;
 
   constructor(private readonly injector: Injector) {
     this.modalProvider = injector.get(ModalProvider);
     this.httpClient = injector.get(HttpClient);
     this.appConfigService = injector.get(ApplicationConfig);
     this.translateService = injector.get(TranslateService);
+    this.router = injector.get(Router);
   }
 
   /**
@@ -131,18 +135,31 @@ export class AbstractService<Type> implements HttpInterceptor {
       error.additionalMessage = httpErrorResponse.message;
       error.path = httpErrorResponse.url || StringUtil.EMPTY;
     }
+    let exception: AbstractException;
     switch (httpErrorResponse.status) {
       case HttpStatusCode.Forbidden:
-        throw new AuthenticationException(this.translateService.instant('error.authentication.title'), this.translateService.instant('error.authentication.message'));
+        exception = new AuthenticationException(this.translateService.instant('error.authentication.title'), this.translateService.instant('error.authentication.message'));
+        break;
       case HttpStatusCode.BadRequest:
-        throw new BadRequestException(error.message, error.additionalMessage);
+        exception = new BadRequestException(error.message, error.additionalMessage);
+        break;
       case HttpStatusCode.NotFound:
-        throw new NotFoundException(error.message, error.additionalMessage);
+        exception = new NotFoundException(error.message, error.additionalMessage);
+        break;
       case HttpStatusCode.Unauthorized:
-        throw new UnauthorizedException(error.message, error.additionalMessage);
+        exception = new UnauthorizedException(error.message, error.additionalMessage);
+        break;
       default:
-        throw new Exception(error.message, error.additionalMessage, error.path);
+        exception = new Exception(error.message, error.additionalMessage, error.path);
     }
+    console.log(exception);
+    this.modalProvider.showError({
+      detail: exception.message
+    });
+    if (exception instanceof AuthenticationException) {
+      this.router.navigate(['auth/sign-in']).then();
+    }
+    throw exception;
   };
 
   /**
@@ -176,12 +193,12 @@ export class AbstractService<Type> implements HttpInterceptor {
    * @method Authentication
    */
   authentication(): void {
-    const storage = localStorage.getItem(LocalStorageConstant.AUTH);
-    let authenticationException = new AuthenticationException(this.translateService.instant('error.authentication.title'), this.translateService.instant('error.authentication.message'));
+    const storage: string | null = localStorage.getItem(LocalStorageConstant.AUTH);
+    const authenticationException: AuthenticationException = new AuthenticationException(this.translateService.instant('error.authentication.title'), this.translateService.instant('error.authentication.message'));
     if (!storage) {
       throw authenticationException;
     }
-    const { username, password } = JSON.parse(storage!) as UserModel;
+    const { username, password }: { username: string, password: string } = JSON.parse(storage!) as UserModel;
     if (!username || !password) {
       throw authenticationException;
     }
@@ -192,10 +209,10 @@ export class AbstractService<Type> implements HttpInterceptor {
       .subscribe((httpResponse: HttpResponse<any>) => {
         if (httpResponse.ok) {
           if (!this.appConfigService.user) {
-            const storage = localStorage.getItem(LocalStorageConstant.AUTH)!;
+            const storage: string = localStorage.getItem(LocalStorageConstant.AUTH)!;
             this.appConfigService.user = JSON.parse(storage) as UserModel;
           }
-          const token = localStorage.getItem(LocalStorageConstant.TOKEN);
+          const token: string | null = localStorage.getItem(LocalStorageConstant.TOKEN);
           if (!token || token !== httpResponse.headers.get(HttpHeaderConstant.AUTHORIZATION)) {
             localStorage.setItem(LocalStorageConstant.TOKEN, httpResponse.headers.get(HttpHeaderConstant.AUTHORIZATION)!);
           }
@@ -226,11 +243,11 @@ export class AbstractService<Type> implements HttpInterceptor {
     return this.request<Type[]>(HttpMethodEnum.POST, `${this.API_URL}/${this.ENTITY_URL}`, entities);
   }
 
-  deleteEntity(id: string): Observable<Type> {
+  deleteEntity(id: string | any): Observable<Type> {
     return this.delete(`${this.API_URL}/${this.ENTITY_URL}/${id}`);
   }
 
-  deleteEntities(ids: string[]): Observable<Type[]> {
+  deleteEntities(ids: string[] | any): Observable<Type[]> {
     return this.request<Type[]>(HttpMethodEnum.DELETE, `${this.API_URL}/${this.ENTITY_URL}`, ids);
   }
 

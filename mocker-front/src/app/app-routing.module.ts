@@ -19,6 +19,12 @@ const routes: Routes = [
     path: 'project',
     loadChildren: () => import('./component/project/project.module').then(module => module.ProjectModule)
   }, {
+    path: 'group',
+    loadChildren: () => import('./component/group/group.module').then(module => module.GroupModule)
+  }, {
+  //   path: 'people',
+  //   loadChildren: () => import('./component/people/people.module').then(module => module.PeopleModule)
+  // }, {
     path: 'not-found',
     loadChildren: () => import('./component/not-found/not-found.module').then(module => module.NotFoundModule)
   }, {

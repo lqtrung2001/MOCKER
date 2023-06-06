@@ -51,41 +51,57 @@ export class DrawUtil {
     sourceHTMLElement.addEventListener('mouseover', () => {
       if (!this.removedLeaderLines.includes(leaderLine._id)) {
         this.moveToLastElement(leaderLine._id);
-        leaderLine.setOptions({
+        try {
+          leaderLine.setOptions({
           color: 'rgb(30,41,248)'
         });
         leaderLine.size = 1.75;
         targetHTMLElement.style.backgroundColor = '#c7d6ff';
+        } catch (e) {
+          // TODO: Handler error when leader line missing options properties
+        }
       }
     });
     sourceHTMLElement.addEventListener('mouseout', () => {
       if (!this.removedLeaderLines.includes(leaderLine._id)) {
         this.moveToLastElement(leaderLine._id);
-        leaderLine.setOptions({
+        try {
+          leaderLine.setOptions({
           color: '#333'
         });
         leaderLine.size = 1.5;
         targetHTMLElement.style.backgroundColor = '#fff';
+        } catch (e) {
+          // TODO: Handler error when leader line missing options properties
+        }
       }
     });
     targetHTMLElement.addEventListener('mouseover', () => {
       if (!this.removedLeaderLines.includes(leaderLine._id)) {
         this.moveToLastElement(leaderLine._id);
-        leaderLine.setOptions({
+        try {
+          leaderLine.setOptions({
           color: 'rgb(30,41,248)'
         });
         leaderLine.size = 1.75;
         sourceHTMLElement.style.backgroundColor = '#c7d6ff';
+        } catch (e) {
+          // TODO: Handler error when leader line missing options properties
+        }
       }
     });
     targetHTMLElement.addEventListener('mouseout', () => {
       if (!this.removedLeaderLines.includes(leaderLine._id)) {
         this.moveToLastElement(leaderLine._id);
-        leaderLine.setOptions({
+        try {
+          leaderLine.setOptions({
           color: '#333'
         });
         leaderLine.size = 1.5;
         sourceHTMLElement.style.backgroundColor = '#fff';
+        } catch (e) {
+          // TODO: Handler error when leader line missing options properties
+        }
       }
     });
     const socket: string = this.getSocketPosition(tableRelation.source.id, tableRelation.target.id);

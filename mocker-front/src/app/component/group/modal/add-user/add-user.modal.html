@@ -1,0 +1,20 @@
+<div class='' popup id='main' [modal]='this'>
+  <div class='tw-text-sm tw-w-112 tw-p-8 tw-text-center'>
+    <i class='tw-text-5xl fa-solid fa-floppy-disk'></i>
+    <p class='tw-mt-3 tw-font-medium'>{{ 'modal.add_user.title' | translate }}</p>
+    <div class='tw-relative'>
+      <moc-input mocClass='tw-mt-3' [mocControl]='searchFormControl'
+                 [mocPlaceholder]='"modal.add_user.search_placeholder" | translate'></moc-input>
+      <div *ngIf='users.length'
+           class='tw-text-left tw-z-10 tw-absolute tw-rounded tw-top-10 tw-border tw-p-3 tw-bg-white tw-w-96'>
+        <p *ngFor='let user of users'
+           (click)='close(user)'
+           class='tw-text-blue tw-font-medium hover:tw-underline tw-p-2 tw-cursor-pointer'>
+          {{ user.name + ': ' }}
+          <span class='tw-text-black'>{{ user.username | truncate: 30 }}</span>
+        </p>
+      </div>
+    </div>
+    <moc-button mocClass='tw-mt-3' mocStyle='btn-primary' label='modal.add_user.add_user'></moc-button>
+  </div>
+</div>

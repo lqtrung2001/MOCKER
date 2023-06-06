@@ -8,6 +8,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -45,6 +46,15 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
                 .map(GroupMember::getGroup)
                 .map(Group::getId)
                 .collect(Collectors.toSet());
+    }
+
+    @Override
+    public List<User> findAllByCriteria(String criteria) {
+        return new JPAQuery<User>(entityManager)
+                .from(user)
+                .where(user.username.contains(criteria)
+                        .or(user.name.contains(criteria)))
+                .fetch();
     }
 
 

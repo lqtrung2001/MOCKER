@@ -3,27 +3,28 @@
     <p class='tw-font-bold tw-text-medium'>{{ 'modal.table_config.title' | translate }}</p>
     <moc-table-detail [fields]='formGroup.controls.table.controls.fields'
                       [relations]='options.relations'
-                      class='tw-mt-10'
-                      selfClass='tw-h-150 tw-overflow-y-auto'></moc-table-detail>
+                      mocClass='tw-mt-10'
+                      mocStyle='tw-h-150 tw-overflow-y-auto'></moc-table-detail>
     <div class='tw-mt-5 tw-flex'>
       <div class='tw-flex'>
         <span class='tw-mt-3'>{{ 'modal.table_config.table_name' | translate }}</span>
-        <moc-input [control]='formGroup.controls.table.controls.name' class='tw-ml-5'
-                   [placeholder]='"modal.table_config.table_name_placeholder" | translate'></moc-input>
+        <moc-input [mocControl]='formGroup.controls.table.controls.name' mocClass='tw-ml-5'
+                   mocStyle='tw-uppercase'
+                   [mocPlaceholder]='"modal.table_config.table_name_placeholder" | translate'></moc-input>
       </div>
       <div class='tw-flex tw-ml-5'>
         <span class='tw-mt-3'>{{ 'modal.table_config.rows' | translate }}</span>
-        <moc-input [control]='formGroup.controls.rows' class=' tw-ml-5 tw-w-36'
-                   placeholder='modal.table_config.rows_placeholder'></moc-input>
+        <moc-input [mocControl]='formGroup.controls.table.controls.row' mocClass=' tw-ml-5 tw-w-36'
+                   [mocPlaceholder]='"modal.table_config.rows_placeholder" | translate'></moc-input>
       </div>
-      <moc-button (click)='submit()' class='tw-ml-5 tw-w-40' icon='fa-solid fa-floppy-disk'
+      <moc-button (click)='submit()' mocClass='tw-ml-5 tw-w-40' icon='fa-solid fa-floppy-disk'
                   label='modal.table_config.save'
-                  selfClass='btn-primary tw-text-left'></moc-button>
-      <moc-button (click)='delete()' class='tw-ml-5 tw-w-56' icon='fa-solid fa-trash' label='modal.table_config.delete'
-                  selfClass='btn-red tw-text-left'></moc-button>
-      <moc-button (click)='close()' class='tw-ml-5 tw-w-40'
+                  mocStyle='btn-primary tw-text-left'></moc-button>
+      <moc-button (click)='delete()' mocClass='tw-ml-5 tw-w-56' icon='fa-solid fa-trash' label='modal.table_config.delete'
+                  mocStyle='btn-primary-red tw-text-left'></moc-button>
+      <moc-button (click)='close()' mocClass='tw-ml-5 tw-w-40'
                   icon='fa-solid fa-right-from-bracket'
-                  label='modal.table_config.close' selfClass='btn-light tw-text-left'></moc-button>
+                  label='modal.table_config.close' mocStyle='btn-secondary tw-text-left'></moc-button>
     </div>
   </div>
 </div>

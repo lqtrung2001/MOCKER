@@ -15,12 +15,12 @@ export class InputComponent extends AbstractSharedComponent implements OnInit {
   @ViewChild('inputElement') htmlInputElement: HTMLInputElement;
   @Input() readonly: boolean;
   @Input() type: 'number' | 'email' | 'password' | 'text';
-  @Input() placeholder: string;
+  @Input() mocPlaceholder: string;
   @Input() styles: string;
-  @Input() control: FormControl;
-  @Input() textArea: boolean;
+  @Input() mocControl: FormControl;
+  @Input() mocTextArea: boolean;
   @Input() formControlName: string;
-  @Input() label: string;
+  @Input() mocLabel: string;
   @Input() min: number;
   @Input() max: number;
   @Input() minLength: number;
@@ -36,7 +36,7 @@ export class InputComponent extends AbstractSharedComponent implements OnInit {
   }
 
   get isValidated(): boolean {
-    return this.control?.touched || this.control?.dirty;
+    return this.mocControl?.touched || this.mocControl?.dirty;
   }
 
   ngOnInit(): void {

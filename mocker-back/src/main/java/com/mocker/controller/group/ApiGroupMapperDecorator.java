@@ -17,7 +17,12 @@ import com.mocker.controller.tableRelation.ApiTableRelationMapper;
 import com.mocker.controller.user.ApiUserMapper;
 import com.mocker.domain.dto.GroupDto;
 import com.mocker.domain.model.entity.Group;
+import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+
+import java.util.List;
 
 /**
  * @author Do Quoc Viet
@@ -43,5 +48,12 @@ import org.mapstruct.Mapper;
 public interface ApiGroupMapperDecorator {
 
     GroupDto mapFetchProjectsAndGroupMembers(Group group);
+
+    @IterableMapping(qualifiedByName = "mapFetchGroupMembers")
+    List<GroupDto> mapToGroupsDtoFetchGroupMembers(List<Group> groups);
+
+    @Named("mapFetchGroupMembers")
+    @Mapping(target = "projects", ignore = true)
+    GroupDto mapFetchGroupMembers(Group group);
 
 }

@@ -1,32 +1,32 @@
-<div class='tw-text-sm {{ class }}' id='main'>
-  <p *ngIf='label' class='tw-font-medium tw-pl-2.5 tw-mt-4 tw-mb-2'>{{ label | translate }}</p>
+<div class='tw-text-sm {{ mocClass }}' id='main'>
+  <p *ngIf='mocLabel' class='tw-font-medium tw-pl-2.5 tw-mt-4 tw-mb-2'>{{ mocLabel | translate }}</p>
   <div class='tw-relative'>
-    <input #inputElement *ngIf='!textArea'
-           [formControl]='control'
+    <input #inputElement *ngIf='!mocTextArea'
+           [formControl]='mocControl'
            [max]='max'
            [maxlength]='maxLength'
            [min]='min'
            [minlength]='minLength'
-           [placeholder]='placeholder || ""'
+           [placeholder]='mocPlaceholder || ""'
            [readonly]='readonly'
            [style]='styles'
            [type]='type'
-           class='{{ selfClass }} {{ (isValidated && control.invalid) ? "invalid" : "" }} tw-border tw-p-2.5 tw-rounded tw-w-full'/>
-    <textarea #inputElement *ngIf='textArea'
-              [formControl]='control'
+           class='{{ mocStyle }} {{ (isValidated && mocControl.invalid) ? "invalid" : "" }} tw-border tw-p-2.5 tw-rounded tw-w-full'/>
+    <textarea #inputElement *ngIf='mocTextArea'
+              [formControl]='mocControl'
               [maxlength]='maxLength'
               [minlength]='minLength'
-              [placeholder]='placeholder || ""'
+              [placeholder]='mocPlaceholder || ""'
               [readonly]='readonly'
               [style]='styles'
-              class='{{ selfClass }} {{ (isValidated && control.invalid) ? "invalid" : "" }} tw-border tw-p-2.5 tw-rounded tw-w-full'></textarea>
+              class='{{ mocStyle }} {{ (isValidated && mocControl.invalid) ? "invalid" : "" }} tw-border tw-p-2.5 tw-rounded tw-w-full'></textarea>
     <div (click)='showPasswordChange()'
          *ngIf='isShowEye'
          class='tw-absolute tw-right-3 tw-top-4 tw-cursor-pointer tw-text-lg'>
-      <i class='fa-regular fa-eye{{ isShowPassword ? "-slash" : "" }} tw-text-gray'></i>
+      <i class='fa-solid fa-eye{{ isShowPassword ? "-slash" : "" }} tw-text-gray'></i>
     </div>
   </div>
-  <div *ngIf='isValidated && control.invalid && control.errors'>
-    <moc-error-message-processor [error]='control.errors'></moc-error-message-processor>
+  <div *ngIf='isValidated && mocControl.invalid && mocControl.errors'>
+    <moc-error-message-processor [error]='mocControl.errors'></moc-error-message-processor>
   </div>
 </div>

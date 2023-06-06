@@ -4,9 +4,9 @@
     <img alt='email' class='tw-w-32 tw-mt-4 tw-mx-auto' src='assets/png/auth/email.svg'/>
     <p class='tw-mt-4 tw-text-gray'>{{ 'modal.verification.instruction' | translate }}</p>
     <p class='tw-mt-2 tw-font-medium'>{{ options ? options.username : undefined }}</p>
-    <moc-input [control]='verificationCode'
-               [placeholder]='"modal.verification.verification_code_placeholder" | translate'
-               [selfClass]='isInvalidVerificationCode ? "invalid" : ""'></moc-input>
+    <moc-input [mocControl]='verificationCode'
+               [mocPlaceholder]='"modal.verification.verification_code_placeholder" | translate'
+               [mocStyle]='isInvalidVerificationCode ? "invalid" : ""'></moc-input>
     <p *ngIf='isInvalidVerificationCode'
        class='tw-text-red tw-text-center tw-mt-2'>{{ 'modal.verification.invalid_verification_code' | translate }}</p>
     <hr class='tw-mt-4'/>

@@ -1,0 +1,8 @@
+<div class='' popup id='main' [modal]='this'>
+  <div class='tw-p-5 tw-w-96 tw-bg-white tw-text-sm'>
+    <p class='tw-font-medium'>{{ 'modal.change_role.instruction' | translate }}</p>
+    <p *ngFor='let role of roles; let index=index'
+       (click)='changeRole(role)'
+       class='tw-font-medium {{ options.current.role === role ? "tw-text-gray" : "tw-cursor-pointer tw-text-blue hover:tw-underline" }} tw-pt-4'>{{ '[' + (index + 1) + ']. ' + (('modal.change_role.' + role.toLowerCase()) | translate) }}</p>
+  </div>
+</div>

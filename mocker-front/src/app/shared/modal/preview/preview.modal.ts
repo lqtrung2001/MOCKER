@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Injector, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractModal } from '@core/common/abstract.modal';
-import { Tab } from '@shared/component/tab/tab.component';
+import { Tab } from '@shared/component/tab1/tab1.component';
 import { FormatEnum } from '@core/domain/enum/format.enum';
 
 /**
@@ -43,11 +43,11 @@ export class PreviewModal extends AbstractModal implements OnInit {
   get tabs(): Tab[] {
     return [{
       title: 'TABLE',
-      icon: 'fa-regular fa-table',
+      icon: 'fa-solid fa-table',
       content: this.table
     }, {
       title: `RAW [${this.options.format}]`,
-      icon: 'fa-regular fa-line-columns',
+      icon: 'fa-solid fa-line-columns',
       content: this.raw
     }];
   }

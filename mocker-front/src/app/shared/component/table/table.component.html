@@ -1,10 +1,10 @@
-<div class='{{ class }} tw-text-sm tw-rounded-md tw-z-10 tw-drop-shadow-xl' id='main'>
-  <div class='{{ selfClass }} tw-border tw-rounded tw-w-72'>
+<div class='{{ mocClass }} tw-text-sm tw-rounded-md tw-overflow-hidden tw-z-10 tw-drop-shadow-xl' id='main'>
+  <div class='{{ mocStyle }} tw-border tw-rounded tw-w-72'>
     <p class='tw-bg-blue tw-h-8 tw-text-center tw-leading-8 tw-font-medium tw-text-white tw-uppercase'>
-      <i class='fa-regular fa-table tw-mr-3'></i>
+      <i class='fa-solid fa-table tw-mr-3'></i>
       {{ table.name }}
       <i (click)='openDetail()' class='tw-ml-3 fa-solid fa-pen-to-square tw-cursor-pointer'></i>
-      <i *ngIf='dataDetail.length' (click)='preview()' class='fa-regular fa-eye tw-ml-3 tw-cursor-pointer'></i>
+      <i *ngIf='dataDetail.length' (click)='preview()' class='fa-solid fa-eye tw-ml-3 tw-cursor-pointer'></i>
       <ng-content></ng-content>
     </p>
     <div class='tw-bg-white'>
@@ -13,7 +13,7 @@
            [id]='field.id'
            class='field tw-px-5 tw-py-1.5 tw-flex tw-justify-between tw-cursor-pointer hover:tw-font-medium {{ current && current.id === field.id ? "tw-bg-blue-light" : undefined }} hover:tw-bg-blue-light tw-items-center'>
         <p class='tw-w-1/12'>
-          <i *ngIf='foreignKeys.includes(field.id)' class='fa-regular fa-key'></i>
+          <i *ngIf='foreignKeys.includes(field.id)' class='fa-solid fa-key'></i>
           <!--          <i class='fa-solid fa-key text-yellow'></i>-->
         </p>
         <p class='tw-w-1/2'>{{ field.name }}</p>

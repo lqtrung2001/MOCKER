@@ -1,40 +1,40 @@
 <div [dialog]='true' [modal]='this' class='' id='main' popup>
   <div class='tw-p-5 tw-w-96 tw-text-sm'>
     <p class='tw-font-medium tw-text-lg tw-pl-2.5 tw-mt-4 tw-mb-2'>{{ "modal.relation_config.title" | translate }}</p>
-    <moc-input [control]='formGroup.controls.source'
+    <moc-input [mocControl]='formGroup.controls.source'
                [readonly]='true'
-               [placeholder]='"modal.relation_config.source_placeholder" | translate'
-               label='modal.relation_config.source'></moc-input>
-    <moc-input [control]='formGroup.controls.target'
+               [mocPlaceholder]='"modal.relation_config.source_placeholder" | translate'
+               mocLabel='modal.relation_config.source'></moc-input>
+    <moc-input [mocControl]='formGroup.controls.target'
                [readonly]='true'
-               [placeholder]='"modal.relation_config.target_placeholder" | translate'
-               label='modal.relation_config.target'></moc-input>
-    <moc-input [control]='formGroup.controls.description'
-               [placeholder]='"modal.relation_config.description_placeholder" | translate'
-               label='modal.relation_config.description'></moc-input>
+               [mocPlaceholder]='"modal.relation_config.target_placeholder" | translate'
+               mocLabel='modal.relation_config.target'></moc-input>
+    <moc-input [mocControl]='formGroup.controls.description'
+               [mocPlaceholder]='"modal.relation_config.description_placeholder" | translate'
+               mocLabel='modal.relation_config.description'></moc-input>
     <p class='tw-font-medium tw-pl-2.5 tw-mt-4 tw-mb-2'>{{ "modal.relation_config.relation_type" | translate }}</p>
     <moc-dropdown [options]='relationTypeOptions'>
       <moc-button [control]='formGroup.controls.relationType'
                   [label]='label'
-                  class='tw-mt-3'
-                  icon='fa-solid fa-arrow-up-arrow-down'
-                  selfClass='tw-text-left btn-light'></moc-button>
+                  mocClass='tw-mt-3'
+                  icon='fa-solid fa-sort'
+                  mocStyle='tw-text-left btn-secondary'></moc-button>
     </moc-dropdown>
     <div class='tw-flex tw-mt-3 tw-float-right tw-clear-both'>
       <moc-button *ngIf='options.id'
                   (click)='delete()'
                   label='modal.relation_config.delete'
-                  selfClass='btn-red'>
+                  mocStyle='btn-primary-red'>
       </moc-button>
       <moc-button (click)='modalInstance.close(false)'
-                  class='tw-ml-1'
+                  mocClass='tw-ml-1'
                   label='modal.relation_config.cancel'
-                  selfClass='btn-light'>
+                  mocStyle='btn-secondary'>
       </moc-button>
       <moc-button (click)='close()'
-                  class='tw-ml-1'
+                  mocClass='tw-ml-1'
                   label='modal.relation_config.ok'
-                  selfClass='tw-w-12 btn-primary'>
+                  mocStyle='btn-primary'>
       </moc-button>
     </div>
   </div>

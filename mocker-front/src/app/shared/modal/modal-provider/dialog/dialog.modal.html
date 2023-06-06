@@ -11,13 +11,13 @@
         <moc-button (click)='close(false)'
                     *ngIf='isShowBtnCancel'
                     label='modal.dialog.cancel'
-                    selfClass='btn-light'>
+                    mocStyle='btn-secondary'>
         </moc-button>
         <moc-button (click)='close(true)'
                     *ngIf='isShowBtnOK'
-                    class='tw-ml-1'
+                    mocClass='tw-ml-1'
                     label='modal.dialog.ok'
-                    selfClass='tw-w-12 btn-primary tw-bg-{{ color }}'>
+                    mocStyle='btn-primary tw-bg-{{ color }}'>
         </moc-button>
       </div>
     </div>

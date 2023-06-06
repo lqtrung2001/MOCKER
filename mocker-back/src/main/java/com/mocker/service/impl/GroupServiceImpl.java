@@ -11,13 +11,13 @@ import com.mocker.repository.GroupMemberRepository;
 import com.mocker.repository.GroupRepository;
 import com.mocker.repository.ProjectRepository;
 import com.mocker.service.GroupService;
+import com.mocker.service.PermissionService;
 import com.mocker.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -35,23 +35,31 @@ public class GroupServiceImpl implements GroupService {
     private final ApplicationContextHolder applicationContextHolder;
     private final ProjectRepository projectRepository;
     private final ProjectService projectService;
+    private final PermissionService permissionService;
 
     @Override
-    public List<Group> getGroupsWithAccess(UUID userId) {
-        return Optional.ofNullable(groupRepository.findAllWithAccess(userId))
-                .orElseThrow(() -> new NotFoundException(userId));
+    public List<Group> getGroups(List<Role> roles) {
+        UUID authId = applicationContextHolder.getCurrentUser().getId();
+        return groupRepository.getGroups(authId, roles);
     }
 
     @Override
     public Group getGroup(UUID id) {
+        permissionService.checkPermission(id, Group.class);
         Group group = groupRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
-        group.setGroupMembers(groupMemberRepository.findAllByGroup(group));
+        List<GroupMember> groupMembers = groupMemberRepository.findAllByGroup(group);
+        group.setGroupMembers(groupMembers);
         group.setProjects(projectRepository.findAllByGroup(group));
         return group;
     }
 
     @Override
     public Group delete(UUID id) {
+        permissionService.checkPermission(
+                id,
+                Group.class,
+                List.of(Role.GROUP_ADMIN),
+                "You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b>.");
         Group group = groupRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         List<GroupMember> groupMembers = groupMemberRepository.findAllByGroup(group);
         List<Project> projects = projectRepository.findAllByGroup(group);
@@ -63,19 +71,26 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group upsert(Group group) {
+        UUID authId = applicationContextHolder.getCurrentUser().getId();
         // After saving group, update the group member for saved group and auth user
-        boolean isNew = group.getId() == null;
-        groupRepository.save(group);
-        if (isNew) {
+        if (group.getId() == null) {
+            groupRepository.save(group);
             GroupMember build = GroupMember.builder()
                     .id(GroupMemberPK.builder()
                             .groupId(group.getId())
-                            .userId(applicationContextHolder.getCurrentUser().getId())
+                            .userId(authId)
                             .build())
                     .role(Role.GROUP_ADMIN).build();
             groupMemberRepository.save(build);
+        } else {
+            permissionService.checkPermission(
+                    group.getId(),
+                    Group.class,
+                    List.of(Role.GROUP_ADMIN, Role.GROUP_ASSOCIATE),
+                    "You can not be allowed to perform this action!<br/>Please try again later when you have a new role with <b>group admin</b> or <b>group associate</b>.");
+            groupRepository.save(group);
         }
-        return Optional.of(group)
-                .orElseThrow(() -> new NotFoundException(group.getId()));
+        return group;
     }
+
 }

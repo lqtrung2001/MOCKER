@@ -10,6 +10,8 @@ export abstract class AbstractException implements Error {
   stack: string;
 
   protected constructor(message: string, private additionalMessage?: string, stackTrace?: string) {
-    this.message = `<b>${message}</b><p>${additionalMessage || StringUtil.EMPTY}</p>${stackTrace || StringUtil.EMPTY}`;
+    this.message = `<b>${message.toUpperCase()}</b>
+                    <p class='tw-mt-2'>${additionalMessage || StringUtil.EMPTY}</p>
+                    ${stackTrace ? `<p><b>Stack trace: </b></br>${stackTrace || StringUtil.EMPTY}</p>` : StringUtil.EMPTY}`;
   }
 }

@@ -1,0 +1,30 @@
+<div *ngIf='group' class='tw-flex tw-text-sm tw-h-[calc(100vh_-_57px)]' id='main'>
+  <div class='tw-w-96 tw-h-full tw-border tw-border-t-0 tw-p-5 tw-relative'>
+    <p class='tw-text-3xl tw-font-medium'>{{ 'component.group.group' | translate }}</p>
+    <div>
+      <moc-input [mocControl]='formGroup.controls.name' mocLabel='component.group.name'></moc-input>
+      <moc-input [mocControl]='formGroup.controls.description' [mocTextArea]='true'
+                 mocLabel='component.group.description'
+                 mocStyle='tw-min-h-86 tw-overflow-auto'></moc-input>
+      <div class='tw-mt-3 tw-flex tw-justify-between tw-items-center'>
+        <moc-button (click)='submit()' icon='fa-solid fa-floppy-disk'
+                    label='component.group.save'
+                    mocStyle='btn-primary tw-text-left !tw-w-40'></moc-button>
+        <moc-button (click)='delete()' icon='fa-solid fa-trash'
+                    label='component.group.delete'
+                    mocStyle='btn-primary-red tw-text-left !tw-w-40'></moc-button>
+      </div>
+    </div>
+    <moc-copyright mocClass='tw-absolute tw-bottom-5 tw-mt-10'></moc-copyright>
+  </div>
+  <div class='tw-p-5 tw-w-[calc(100%_-_384px)]'>
+    <moc-tabs *ngIf='group?.id'>
+      <moc-tab mocTitle='PROJECT' mocIcon='fa-solid fa-list'>
+        <moc-group-projects [group]='group'></moc-group-projects>
+      </moc-tab>
+      <moc-tab mocTitle='MEMBER' mocIcon='fa-regular fa-user'>
+        <moc-group-members [group]='group'></moc-group-members>
+      </moc-tab>
+    </moc-tabs>
+  </div>
+</div>
