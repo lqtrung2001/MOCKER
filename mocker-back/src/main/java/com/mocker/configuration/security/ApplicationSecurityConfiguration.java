@@ -51,6 +51,8 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .authorizeRequests()
                 .antMatchers("/api/**").hasAnyRole(ApplicationUserRole.USER.name(), ApplicationUserRole.ADMIN.name())
                 .antMatchers("/auth/send-verification-code").permitAll()
+                .antMatchers("/auth/verify/**").permitAll()
+                .antMatchers("/auth/is-existed-username/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
