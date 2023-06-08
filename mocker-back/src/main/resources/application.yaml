@@ -16,7 +16,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: mocker.service@gmail.com
-    password: pelptyjzhjcoovnupelptyjzhjcoovnu
+    password: dsgzfgwatuwujntb
     properties:
       mail:
         smtp:
