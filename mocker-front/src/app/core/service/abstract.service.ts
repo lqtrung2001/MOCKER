@@ -9,7 +9,7 @@ import {
   HttpResponse,
   HttpStatusCode
 } from '@angular/common/http';
-import { catchError, finalize, Observable } from 'rxjs';
+import { catchError, finalize, Observable, of } from 'rxjs';
 import { ModalProvider } from '@shared/modal/modal-provider/modal-provider.modal';
 import { ApplicationConfig } from '@core/config/application.config';
 import { environment } from '@environment/environment';
@@ -155,14 +155,15 @@ export class AbstractService<Type> implements HttpInterceptor {
       default:
         exception = new Exception(error.message, error.additionalMessage, error.path);
     }
-    console.log(exception);
+    console.log(`${new Date().toDateString()}: A exception occurred while processing: `);
+    console.error(exception);
     this.modalProvider.showError({
       detail: exception.message
     });
     if (exception instanceof AuthenticationException) {
       this.router.navigate(['auth/sign-in']).then();
     }
-    throw exception;
+    return of();
   };
 
   /**

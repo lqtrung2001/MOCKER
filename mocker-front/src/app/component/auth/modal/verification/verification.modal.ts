@@ -3,11 +3,11 @@ import { Component, Injector } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from '@core/service/auth.service';
 import { UserModel } from '@core/domain/model/entity/user.model';
-import { catchError, of } from 'rxjs';
 import {
   ChangePasswordModal,
   ChangePasswordModalOptions
 } from '@app/component/auth/modal/change-password/change-password.modal';
+import { catchError, of } from 'rxjs';
 
 /**
  * @author Do Quoc Viet
@@ -47,7 +47,7 @@ export class VerificationModal extends AbstractModal {
         }).pipe(catchError(() => {
           this.isInvalidVerificationCode = true;
           return of(new UserModel());
-        })).subscribe((user: UserModel) => {
+        })).subscribe((user: UserModel): void => {
           if (user) {
             if (this.options.password) {
               // Sign up
@@ -57,13 +57,15 @@ export class VerificationModal extends AbstractModal {
               // Forget password
               const changePasswordModalOptions: ChangePasswordModalOptions = {
                 id: user.id!,
-                oldPassword: verificationCode
+                oldPassword: verificationCode,
+                isDialog: true
               };
-              this.modalService.open(ChangePasswordModal, changePasswordModalOptions).subscribe((success: boolean) => {
-                if (success) {
-                  this.close(true);
-                }
-              });
+              this.modalService.open(ChangePasswordModal, changePasswordModalOptions)
+                .subscribe((success: boolean): void => {
+                  if (success) {
+                    this.close(true);
+                  }
+                });
             }
           }
         });

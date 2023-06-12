@@ -7,6 +7,7 @@ import com.mocker.domain.model.entity.enumeration.Gender;
 import com.mocker.repository.UserRepository;
 import com.mocker.service.AuthService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -18,6 +19,7 @@ import javax.transaction.Transactional;
 import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 /**
@@ -55,8 +57,8 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public User verifyAndSave(String verificationCode, User user) {
-        if (!verificationMap.containsKey(user.getUsername()) || !verificationMap.get(user.getUsername()).equals(verificationCode)) {
-            throw new BadRequestException();
+        if (!verificationMap.containsKey(user.getUsername()) || !StringUtils.equals(verificationMap.get(user.getUsername()), verificationCode)) {
+            throw new BadRequestException("Invalid verification code: " + verificationCode + ", please check your confirmation code and try again.");
         }
         verificationMap.remove(user.getUsername());
         if (Strings.isNotBlank(user.getPassword())) {
@@ -64,11 +66,11 @@ public class AuthServiceImpl implements AuthService {
                     .username(user.getUsername())
                     .password(passwordEncoder.encode(user.getPassword()))
                     .name("User-" + verificationCode)
-                    .bio("N/A")
-                    .address("N/A")
+                    .bio(StringUtils.EMPTY)
+                    .address(StringUtils.EMPTY)
                     .dob(OffsetDateTime.now())
                     .gender(Gender.MALE)
-                    .phone("N/A")
+                    .phone(StringUtils.EMPTY)
                     .grantedAuthorities("ROLE_USER")
                     .isAccountNonExpired(true)
                     .isCredentialsNonExpired(true)
@@ -76,10 +78,8 @@ public class AuthServiceImpl implements AuthService {
                     .isEnabled(true)
                     .build());
         } else {
-            User userForgotPassword = userRepository.findByUsername(user.getUsername());
-            if (userForgotPassword == null) {
-                throw new NotFoundException(user.getUsername());
-            }
+            User userForgotPassword = Optional.ofNullable(userRepository.findByUsername(user.getUsername()))
+                    .orElseThrow(() -> new NotFoundException(user.getUsername()));
             userForgotPassword.setPassword(passwordEncoder.encode(verificationCode));
             return userRepository.save(userForgotPassword);
         }

@@ -3,10 +3,10 @@
     <table class='tw-w-full'>
       <thead class='tw-sticky tw-top-0 tw-bg-white tw-z-20'>
       <tr>
-        <th class='tw-pb-3 first-letter:tw-underline'>{{ 'component.table_detail.field_name' | translate }}</th>
-        <th class='tw-pb-3 first-letter:tw-underline'>{{ 'component.table_detail.generate_type' | translate }}</th>
-        <th class='tw-pb-3 first-letter:tw-underline'>{{ 'component.table_detail.sql_type' | translate }}</th>
-        <th class='tw-pb-3 first-letter:tw-underline'>{{ 'component.table_detail.options' | translate }}</th>
+        <th class='tw-pb-3 first-letter:tw-underline'>{{ ('component.table_detail.field_name' | translate) + ' *' }}</th>
+        <th class='tw-pb-3 first-letter:tw-underline'>{{ ('component.table_detail.generate_type' | translate) + ' *' }}</th>
+        <th class='tw-pb-3 first-letter:tw-underline'>{{ ('component.table_detail.sql_type' | translate) }}</th>
+        <th class='tw-pb-3 first-letter:tw-underline'>{{ ('component.table_detail.options' | translate) }}</th>
       </tr>
       </thead>
       <ng-container [formGroup]='$any(formArray)'>

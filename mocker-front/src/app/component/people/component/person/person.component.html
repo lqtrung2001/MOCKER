@@ -2,49 +2,25 @@
   <p class='tw-text-3xl tw-font-medium tw-mt-5'>{{ 'component.person.my_account' | translate }}</p>
   <div class='tw-mt-5 tw-flex tw-justify-between'>
     <div class='tw-p-5 tw-w-49/100 tw-border tw-rounded'>
-      <p class='tw-font-medium'>{{ 'component.person.my_email' | translate }}</p>
-      <moc-input [mocControl]='formGroup.controls.username' mocClass='tw-mt-5' type='email'></moc-input>
-      <p *ngIf='isExistedUsername'
-         class='tw-text-red tw-text-center tw-mt-2'>{{ 'component.sign_up.exist_username' | translate }}</p>
-      <moc-button mocClass='tw-mt-3 tw-text-right'
-                  label='component.person.save'
-                  mocStyle='tw-w-28 {{ formGroup.controls.username.value === user.username ? "btn-secondary" : "btn-primary" }}'></moc-button>
+      <moc-input [mocRequired]='true' [readonly]='true' mocLabel='component.person.my_email'
+                 [mocControl]='formGroup.controls.username' mocClass='tw-mt-5' type='email'></moc-input>
     </div>
     <div class='tw-p-5 tw-w-49/100 tw-border tw-rounded'>
       <p class='tw-font-medium'>{{ 'component.person.my_password' | translate }}</p>
-      <moc-button (click)='changePassword()' mocClass='mt-3' label='component.person.change_password'
+      <moc-button (click)='changePassword()' mocClass='tw-mt-3' label='component.person.change_password'
                   mocStyle='tw-w-52 btn-primary'></moc-button>
     </div>
   </div>
-  <div class='tw-mt-5 tw-flex tw-justify-between'>
-    <div class='tw-p-5 tw-w-49/100 tw-border tw-rounded'>
-      <p class='tw-font-medium'>{{ 'component.person.my_api_key' | translate }}</p>
-      <moc-input [mocControl]='formGroup.controls.apiKey' mocClass='tw-mt-5'></moc-input>
-      <p
-        class='tw-mt-3'>{{ 'You have used 0 of the maximum requests allowed by the free tier in the last 24 hours.' }}</p>
-      <moc-button mocClass='tw-mt-8 text-right' label='component.person.generate_new_api_key'
-                  mocStyle='tw-w-52 btn-primary'></moc-button>
-    </div>
-    <div class='tw-p-5 tw-w-49/100 tw-border tw-rounded'>
-      <p class='tw-font-medium'>{{ 'component.person.my_plan' | translate }}</p>
-      <p class='tw-mt-5'><b>Free</b> - 1,000 rows/download - Free</p>
-      <moc-button mocClass='tw-mt-20 tw-text-right' label='component.person.change_plan'
-                  mocStyle='tw-w-36 btn-primary'></moc-button>
-    </div>
+  <div class='tw-mt-5 tw-p-5 tw-border tw-rounded'>
+    <p class='tw-font-medium'>{{ 'component.person.my_information' | translate }}</p>
+    <moc-input [mocRequired]='true' [mocControl]='formGroup.controls.name' mocLabel='component.person.name'
+               mocClass='tw-mt-5'></moc-input>
+    <moc-input [mocControl]='formGroup.controls.bio' mocLabel='component.person.bio'
+               mocClass='tw-mt-5'></moc-input>
+    <moc-input [mocControl]='formGroup.controls.phone' mocLabel='component.person.phone'
+               mocClass='tw-mt-5'></moc-input>
+    <moc-button (click)='submit()' mocClass='tw-mt-3 tw-text-right'
+                label='component.person.save'
+                mocStyle='tw-w-28 btn-primary'></moc-button>
   </div>
-  <div class='tw-mt-5 tw-flex tw-justify-between'>
-    <div class='tw-p-5 tw-w-49/100 tw-border tw-rounded'>
-      <p class='tw-font-medium'>{{ 'component.person.delete_my_account' | translate }}</p>
-      <p
-        class='tw-mt-3'>{{ 'If you delete your account, all of your data will be lost forever. Proceed with caution!' }}</p>
-      <moc-button mocClass='tw-mt-8 tw-text-right' label='component.person.delete_my_account'
-                  mocStyle='tw-w-52 tw-text-white tw-bg-red tw-uppercase'></moc-button>
-    </div>
-    <div class='tw-p-5 tw-w-49/100 tw-border tw-rounded'>
-      <p class='tw-font-medium'>{{ 'component.person.my_payments' | translate }}</p>
-      <p class='tw-mt-3'>{{ 'Here are all the payments that you have made for MOCKER:' }}</p>
-      <moc-description mocClass='tw-mt-3'>{{ 'You have not made any payments.' | translate }}</moc-description>
-    </div>
-  </div>
-  <moc-copyright mocClass='tw-mt-10'></moc-copyright>
 </div>

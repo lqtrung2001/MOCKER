@@ -53,7 +53,7 @@ export class SchemaComponent extends AbstractComponent implements OnInit {
         this.formGroup.patchValue(schema);
         this.permissionService.getPermission('schema', id)
           .subscribe((role: RoleEnum): void => {
-            this.modalProvider.showInformation({
+            this.toastrProvider.showInformation({
               detail: PermissionUtil.getLabelFollowingRole(role)
             });
           });
