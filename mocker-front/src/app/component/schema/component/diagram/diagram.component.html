@@ -14,8 +14,8 @@
         <moc-button [label]='formGroup.controls.format.value' mocClass='tw-w-32' icon='fa-solid fa-sort'
                     mocStyle='tw-text-left btn-secondary'></moc-button>
       </moc-dropdown>
-      <span class='tw-mt-3 tw-mx-5'>{{ 'component.diagram.filename' | translate }}</span>
-      <moc-input [mocControl]='formGroup.controls.filename' mocClass='tw-w-32'
+      <span class='tw-mt-3 tw-mx-5 {{ formGroup.controls.filename.invalid ? "tw-text-red" : "" }}'>{{ ('component.diagram.filename' | translate) + ': *' }}</span>
+      <moc-input [mocControl]='formGroup.controls.filename' mocClass='tw-w-40'
                  mocStyle='tw-px-5'></moc-input>
     </div>
   </div>

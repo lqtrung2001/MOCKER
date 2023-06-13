@@ -2,9 +2,9 @@
   <div class='tw-w-96 tw-h-full tw-border tw-border-t-0 tw-p-5 tw-relative'>
     <p class='tw-text-3xl tw-font-medium'>{{ 'component.schema.schema' | translate }}</p>
     <div>
-      <moc-input [mocControl]='formGroup.controls.name' mocLabel='component.schema.name'></moc-input>
-      <moc-input [mocControl]='formGroup.controls.description' [mocTextArea]='true' mocLabel='component.schema.description'
-                 mocStyle='tw-h-32 tw-overflow-auto'></moc-input>
+      <moc-input [mocRequired]='true' [mocControl]='formGroup.controls.name' mocLabel='component.schema.name'></moc-input>
+      <moc-input [mocRequired]='true' [mocControl]='formGroup.controls.description' [mocTextArea]='true' mocLabel='component.schema.description'
+                 mocStyle='tw-min-h-32 tw-overflow-auto'></moc-input>
       <div class='tw-mt-3 tw-flex tw-justify-between tw-items-center'>
         <moc-button (click)='submit()' icon='fa-solid fa-floppy-disk'
                     label='component.schema.save'

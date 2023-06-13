@@ -54,7 +54,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User upsert(User user) {
-        return userRepository.save(user);
+        UUID authId = applicationContextHolder.getCurrentUser().getId();
+        if (!user.getId().equals(authId)) {
+            throw new PermissionException("You can not change another user's information, please try again later");
+        }
+        User existing = userRepository.findById(user.getId()).orElseThrow(() -> new NotFoundException("User " + user.getId() + " does not exist"));
+        existing.setName(user.getName());
+        existing.setBio(user.getBio());
+        existing.setPhone(user.getPhone());
+        User save = userRepository.save(existing);
+        return save.toBuilder().password(null).username(null).build();
     }
 
     @Override

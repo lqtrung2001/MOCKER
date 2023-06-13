@@ -51,10 +51,13 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .authorizeRequests()
                 .antMatchers("/api/**").hasAnyRole(ApplicationUserRole.USER.name(), ApplicationUserRole.ADMIN.name())
                 .antMatchers("/auth/send-verification-code").permitAll()
+                .antMatchers("/auth/verify/**").permitAll()
+                .antMatchers("/auth/is-existed-username/**").permitAll()
+                .antMatchers("/auth/change-password/**").permitAll()
                 .anyRequest()
-                .authenticated()
-                .and()
-                .oauth2Login();
+                .authenticated();
+//                .and()
+//                .oauth2Login();
 
 
         http.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfiguration, secretKey));

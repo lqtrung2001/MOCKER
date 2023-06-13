@@ -12,7 +12,6 @@ import { NgModule } from '@angular/core';
 const routes: Routes = [
   {
     path: '', component: PeopleLayoutComponent, canActivate: [AuthGuard], children: [
-      { path: '', component: PeopleComponent },
       { path: ':id', component: PersonComponent }
     ]
   }

@@ -1,5 +1,5 @@
 import { AbstractComponent } from '@core/common/abstract.component';
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { UserModel } from '@core/domain/model/entity/user.model';
 import { UserService } from '@core/service/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -7,9 +7,7 @@ import {
   ChangePasswordModal,
   ChangePasswordModalOptions
 } from '@app/component/auth/modal/change-password/change-password.modal';
-import { VerificationModal, VerificationModalOptions } from '@app/component/auth/modal/verification/verification.modal';
-import { LocalStorageConstant } from '@core/constant/local-storage.constant';
-import { AuthService } from '@core/service/auth.service';
+import { StringUtil } from '@core/util/string.util';
 
 /**
  * @author Do Quoc Viet
@@ -17,7 +15,9 @@ import { AuthService } from '@core/service/auth.service';
 
 type Controls = {
   username: FormControl,
-  apiKey: FormControl
+  name: FormControl,
+  bio: FormControl,
+  phone: FormControl
 }
 
 @Component({
@@ -25,55 +25,68 @@ type Controls = {
   templateUrl: 'person.component.html',
   styleUrls: ['person.component.scss']
 })
-export class PersonComponent extends AbstractComponent {
+export class PersonComponent extends AbstractComponent implements OnInit {
   user: UserModel;
   formGroup: FormGroup<Controls>;
-  isExistedUsername: boolean = false;
 
   constructor(
     injector: Injector,
-    private userService: UserService,
-    private authService: AuthService
+    private userService: UserService
   ) {
     super(injector);
     this.formGroup = this.formBuilder.group({
       username: this.formBuilder.control(undefined, [Validators.required, Validators.email]),
-      apiKey: this.formBuilder.control(undefined, [])
+      name: this.formBuilder.control(StringUtil.EMPTY, [Validators.required]),
+      bio: this.formBuilder.control(StringUtil.EMPTY, []),
+      phone: this.formBuilder.control(StringUtil.EMPTY, [Validators.maxLength(12)])
     });
+  }
+
+  ngOnInit(): void {
     const id: string = this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.userService.getEntity(id).subscribe((user: UserModel) => {
+    if (this.applicationConfig.user?.id && id !== this.applicationConfig.user?.id) {
+      setTimeout((): void => {
+        this.modalProvider.showError({
+          detail: 'You can not access this resource! Please try again later.'
+        });
+      });
+      this.router.navigate(['/']).then();
+      return;
+    }
+    this.userService.getEntity(id).subscribe((user: UserModel): void => {
       this.user = user;
       this.formGroup.patchValue(user);
     });
   }
 
-  changeUsername(): void {
-    const control: FormControl = this.formGroup.controls.username;
-    if (control.valid && control.value !== this.user.username) {
-      this.authService.isExistedUsername(control.value).subscribe((existed: boolean) => {
-        if (existed) {
-          this.isExistedUsername = true;
-          return;
-        }
-        this.authService.sendVerificationCode(control.value).subscribe((success: boolean) => {
-          if (success) {
-            // const validateOTPModalOptions: VerificationModalOptions = {
-            //   username,
-            //   password
-            // };
-            // this.modalService.open(VerificationModal, validateOTPModalOptions).onResult().subscribe((user: UserModel) => {
-            //   if (user) {
-            //     // For set token
-            //     localStorage.setItem(LocalStorageConstant.AUTH, JSON.stringify(user));
-            //     this.authService.signIn(username, password).subscribe(() => {
-            //       this.router.navigate(['/']).then();
-            //     });
-            //   }
-            // });
-          }
+  submit(): void {
+    const { name, bio, phone }: {
+      name: FormControl,
+      bio: FormControl,
+      phone: FormControl
+    } = this.formGroup.controls;
+    if (name.invalid || bio.invalid || phone.invalid) {
+      return;
+    }
+    const user: UserModel = {
+      ...this.user,
+      name: name.value,
+      bio: bio.value,
+      phone: phone.value
+    };
+    this.userService.upsertEntity(user)
+      .subscribe((response: UserModel): void => {
+        response.username = this.user.username;
+        this.user = response;
+        this.applicationConfig.user!.name = user.name;
+        this.formGroup.patchValue({
+          ...this.user,
+          username: this.formGroup.controls.username.getRawValue()
+        });
+        this.toastrProvider.showSuccess({
+          detail: 'The users information has been successfully updated.'
         });
       });
-    }
   }
 
   changePassword(): void {

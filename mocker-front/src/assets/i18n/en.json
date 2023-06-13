@@ -136,12 +136,10 @@
       "save": "SAVE",
       "my_password": "My Password",
       "change_password": "CHANGE MY PASSWORD",
-      "my_api_key": "My API key",
-      "my_plan": "My Plan",
-      "change_plan": "CHANGE PLAN",
-      "generate_new_api_key": "GENERATE NEW API KEY",
-      "delete_my_account": "Delete My Account",
-      "my_payments": "My Payments"
+      "my_information": "My Information",
+      "name": "Name",
+      "bio": "Bio",
+      "phone": "Phone"
     },
     "schemas": {
       "my_schemas": "My Schemas",

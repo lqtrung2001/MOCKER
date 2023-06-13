@@ -1,5 +1,7 @@
 <div class='tw-text-sm {{ mocClass }}' id='main'>
-  <p *ngIf='mocLabel' class='tw-font-medium tw-pl-2.5 tw-mt-4 tw-mb-2'>{{ mocLabel | translate }}</p>
+  <p *ngIf='mocLabel' class='tw-font-medium tw-pl-2.5 tw-mt-4 tw-mb-2 {{ (isValidated && mocControl.invalid) ? "tw-text-red" : "" }}'>
+    {{ (mocLabel | translate) + ((mocLabel | translate).endsWith(':') ? "" : ":") + (mocRequired ? " *" : "") }}
+  </p>
   <div class='tw-relative'>
     <input #inputElement *ngIf='!mocTextArea'
            [formControl]='mocControl'
@@ -11,6 +13,7 @@
            [readonly]='readonly'
            [style]='styles'
            [type]='type'
+           [autocomplete]='mocAutoComplete ? "none" : true'
            class='{{ mocStyle }} {{ (isValidated && mocControl.invalid) ? "invalid" : "" }} tw-border tw-p-2.5 tw-rounded tw-w-full'/>
     <textarea #inputElement *ngIf='mocTextArea'
               [formControl]='mocControl'

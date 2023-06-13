@@ -59,29 +59,35 @@ export class SignUpComponent extends AbstractComponent {
       return;
     }
     const { username, password } = this.formGroup.getRawValue();
-    this.authService.isExistedUsername(username).subscribe((isExisted: boolean) => {
-      if (isExisted) {
-        this.isExistedUsername = true;
-        return;
-      }
-      this.authService.sendVerificationCode(username).subscribe((success: boolean) => {
-        if (success) {
-          const validateOTPModalOptions: VerificationModalOptions = {
-            username,
-            password
-          };
-          this.modalService.open(VerificationModal, validateOTPModalOptions).subscribe((user: UserModel) => {
-            if (user) {
-              // For set token
-              localStorage.setItem(LocalStorageConstant.AUTH, JSON.stringify(user));
-              this.authService.signIn(username, password).subscribe(() => {
-                this.router.navigate(['/']).then();
-              });
-            }
-          });
+    new Promise((resolve): void => {
+      this.authService.isExistedUsername(username).subscribe((isExisted: boolean): void => {
+        if (isExisted) {
+          this.isExistedUsername = true;
+          return;
         }
+        resolve(username);
       });
+    }).then((): void => {
+      this.authService.sendVerificationCode(username)
+        .subscribe((success: boolean): void => {
+          if (success) {
+            const validateOTPModalOptions: VerificationModalOptions = {
+              username,
+              password
+            };
+            this.modalService.open(VerificationModal, validateOTPModalOptions).subscribe((user: UserModel): void => {
+              if (user) {
+                // For set token
+                localStorage.setItem(LocalStorageConstant.AUTH, JSON.stringify(user));
+                this.authService.signIn(username, password).subscribe(() => {
+                  this.router.navigate(['/']).then();
+                });
+              }
+            });
+          }
+        });
     });
+
   }
 
 }

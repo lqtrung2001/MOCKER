@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Injector, Input, OnInit } from '@angular/core';
 import { AbstractModal } from '@core/common/abstract.modal';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@core/service/auth.service';
@@ -14,6 +14,7 @@ export interface ChangePasswordModalOptions {
   id: string;
   oldPassword?: string;
   newPassword?: string;
+  isDialog?: boolean;
 }
 
 type Controls = {
@@ -45,7 +46,7 @@ export class ChangePasswordModal extends AbstractModal implements OnInit, AfterV
       newPassword: this.formBuilder.control(undefined, [Validators.required, Validators.minLength(5)]),
       confirmPassword: this.formBuilder.control(undefined, [Validators.required, Validators.minLength(5)])
     });
-    this.formGroup.controls.confirmPassword.valueChanges.subscribe((value: string) => {
+    this.formGroup.controls.confirmPassword.valueChanges.subscribe((value: string): void => {
       const password: string = this.formGroup.controls.newPassword.value;
       this.isPasswordNotMatch = this.formGroup.controls.newPassword.valid
         && this.formGroup.controls.confirmPassword.valid
@@ -62,6 +63,7 @@ export class ChangePasswordModal extends AbstractModal implements OnInit, AfterV
   ngOnInit(): void {
     // isShowOldPassword is false when forget password and want to change password
     this.isShowOldPassword = !this.options.oldPassword;
+    console.log(this.options);
     this.formGroup.controls.oldPassword.patchValue(this.options.oldPassword);
   }
 
@@ -71,25 +73,26 @@ export class ChangePasswordModal extends AbstractModal implements OnInit, AfterV
       return;
     }
     const { oldPassword, newPassword } = this.formGroup.getRawValue();
-    this.authService.changePassword(this.options.id, oldPassword, newPassword).subscribe((user: UserModel) => {
-      if (user) {
-        user.password = newPassword;
-        this.appConfigService.user = user;
-        localStorage.setItem(LocalStorageConstant.AUTH, JSON.stringify(user));
-        if (!this.isShowOldPassword) {
-          // For set token
-          this.authService.signIn(user.username!, user.password!).subscribe(() => {
-            this.toastrProvider.showSuccess({
-              body: 'Change password successfully'
+    this.authService.changePassword(this.options.id, oldPassword, newPassword)
+      .subscribe((user: UserModel): void => {
+        if (user) {
+          user.password = newPassword;
+          this.appConfigService.user = user;
+          localStorage.setItem(LocalStorageConstant.AUTH, JSON.stringify(user));
+          if (!this.isShowOldPassword) {
+            // For set token
+            this.authService.signIn(user.username!, user.password!).subscribe((): void => {
+              this.toastrProvider.showSuccess({
+                body: 'Change password successfully'
+              });
+              this.close(true);
             });
-            this.close(true);
+          }
+          this.toastrProvider.showSuccess({
+            body: 'Change password successfully'
           });
+          this.close(true);
         }
-        this.toastrProvider.showSuccess({
-          body: 'Change password successfully'
-        });
-        this.close(true);
-      }
-    });
+      });
   }
 }

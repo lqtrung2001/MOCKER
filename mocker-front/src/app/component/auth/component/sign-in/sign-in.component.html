@@ -3,13 +3,17 @@
        class='tw-w-100 tw-bg-white tw-rounded tw-drop-shadow-2xl tw-text-sm tw-text-center tw-p-10'>
     <img alt='logo' class='tw-w-44 tw-mx-auto' src='assets/png/logo.png'/>
     <p class='tw-font-bold tw-mt-5 text-primary-solid'>{{ 'component.sign_in.title' | translate }}</p>
-    <moc-input [mocControl]='formGroup.controls.username'
+    <moc-input [mocRequired]='true'
+               mocLabel='Your email'
+               [mocControl]='formGroup.controls.username'
                [mocPlaceholder]='"component.sign_in.username_placeholder" | translate'
-               mocStyle='tw-mt-2'
+               mocClass='tw-text-left tw-mt-2'
                type='email'></moc-input>
-    <moc-input [mocControl]='formGroup.controls.password'
+    <moc-input [mocRequired]='true'
+               mocLabel='Your password'
+               [mocControl]='formGroup.controls.password'
                [mocPlaceholder]='"component.sign_in.password_placeholder" | translate'
-               mocStyle='tw-mt-2'
+               mocClass='tw-text-left tw-mt-2'
                type='password'></moc-input>
     <p *ngIf='invalidAuth' class='tw-mt-4 tw-text-red'>{{ 'component.sign_in.invalid_auth' | translate }}</p>
     <moc-button (click)='submit()' mocClass='tw-mt-3' mocStyle='btn-primary' label='component.sign_in.continue'></moc-button>

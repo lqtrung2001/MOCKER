@@ -69,11 +69,7 @@ export class GroupMembersComponent extends AbstractComponent implements OnChange
         }
       ],
       values: !this.group ? [] : this.group.groupMembers.map((groupMember: GroupMemberModel): GridValue => ({
-        name: {
-          value: groupMember.user.name,
-          click: () => this.router.navigate([`/people/${groupMember.user.id}`]),
-          html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue tw-uppercase'></a>`
-        },
+        name: groupMember.user.name,
         role: {
           value: this.translateService.instant(`component.group_members.${groupMember.role.toLowerCase()}`),
           click: (): void => {
@@ -93,9 +89,11 @@ export class GroupMembersComponent extends AbstractComponent implements OnChange
                     this.group.groupMembers.forEach((item: GroupMemberModel): void => {
                       if (item.user.id === groupMember.user.id) {
                         item.role = groupMember.role;
+                        item.version = groupMember.version;
                       }
                       if (isChangeGroupAdmin && item.user.id === this.applicationConfig.user?.id) {
                         item.role = RoleEnum.USER;
+                        item.version--;
                       }
                     });
                     this.refresh();
@@ -105,11 +103,7 @@ export class GroupMembersComponent extends AbstractComponent implements OnChange
           html: `<p class='tw-font-medium tw-text-blue hover:tw-underline tw-cursor-pointer'></p>`
         },
         bio: this.truncatePipe.transform(groupMember.user.bio, 50),
-        email: {
-          value: groupMember.user.username,
-          click: () => this.router.navigate([`/people/${groupMember.user.id}`]),
-          html: `<a class='tw-font-medium hover:tw-underline tw-cursor-pointer tw-text-blue'></a>`
-        },
+        email: groupMember.user.username,
         phone: groupMember.user.phone,
         delete: {
           value: StringUtil.EMPTY,

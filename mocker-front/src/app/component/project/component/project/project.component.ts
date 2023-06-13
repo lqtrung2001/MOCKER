@@ -54,7 +54,7 @@ export class ProjectComponent extends AbstractComponent implements OnInit {
         this.formGroup.patchValue(project);
         this.permissionService.getPermission('project', id)
           .subscribe((role: RoleEnum): void => {
-            this.modalProvider.showInformation({
+            this.toastrProvider.showInformation({
               detail: PermissionUtil.getLabelFollowingRole(role)
             });
           });

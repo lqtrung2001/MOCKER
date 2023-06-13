@@ -121,7 +121,7 @@ export class GeneralComponent extends AbstractComponent {
         .subscribe((data: any[]): void => {
           this.data = data;
           const options: PreviewModalOptions = {
-            data,
+            data: data.slice(0, 100),
             tableName: this.formGroup.controls.table.controls.name.value,
             format,
             download: this.download.bind(this)
