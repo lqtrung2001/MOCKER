@@ -49,7 +49,7 @@ export class TableConfigModal extends AbstractModal implements OnInit {
       table: this.formBuilder.group({
         name: this.formBuilder.control(undefined, [Validators.required]),
         fields: this.formBuilder.array<FormGroup<FieldControls>>([]),
-        row: this.formBuilder.control(99, [Validators.required])
+        row: this.formBuilder.control(99, [Validators.required, Validators.max(1000)])
       })
     });
   }
@@ -130,6 +130,9 @@ export class TableConfigModal extends AbstractModal implements OnInit {
   }
 
   delete(): void {
+    if (!this.table?.id) {
+      return;
+    }
     this.modalProvider.showConfirmation({
       body: 'modal.table_config.delete_confirmation'
     }).subscribe((result: boolean): void => {

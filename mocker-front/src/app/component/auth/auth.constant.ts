@@ -1,18 +1,18 @@
-/**
- * @author Do Quoc Viet
- */
-
 export interface SignInMethod {
   name: string;
   icon: string;
 }
 
+/**
+ * @author Do Quoc Viet
+ */
+
 export class AuthConstant {
-  static signInMethods: SignInMethod[] = [{
-    name: 'Google',
-    icon: 'google'
-  }
-  // , {
+  static signInMethods: SignInMethod[] = [
+  //   {
+  //   name: 'Google',
+  //   icon: 'google'
+  // }, {
   //   name: 'Microsoft',
   //   icon: 'microsoft'
   // }, {
@@ -23,5 +23,4 @@ export class AuthConstant {
   //   icon: 'facebook'
   // }
   ];
-
 }

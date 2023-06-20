@@ -14,6 +14,7 @@
                [mocControl]='formGroup.controls.password'
                [mocPlaceholder]='"component.sign_in.password_placeholder" | translate'
                mocClass='tw-text-left tw-mt-2'
+               mocStyle='tw-mt-2'
                type='password'></moc-input>
     <p *ngIf='invalidAuth' class='tw-mt-4 tw-text-red'>{{ 'component.sign_in.invalid_auth' | translate }}</p>
     <moc-button (click)='submit()' mocClass='tw-mt-3' mocStyle='btn-primary' label='component.sign_in.continue'></moc-button>

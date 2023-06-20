@@ -91,7 +91,8 @@ export class PersonComponent extends AbstractComponent implements OnInit {
 
   changePassword(): void {
     const options: ChangePasswordModalOptions = {
-      id: this.user.id
+      id: this.user.id,
+      isDialog: true
     };
     this.modalService.open(ChangePasswordModal, options);
   }
