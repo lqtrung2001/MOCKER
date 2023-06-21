@@ -39,7 +39,8 @@
     "maxlength": "The maximum number of characters allowed in this field is {{ length }}.",
     "minlength": "The minimum number of characters allowed in this field is {{ length }}.",
     "unique_field_name": "These fields name in the table is conflicting with one another.",
-    "un_space": "The field name must has not space."
+    "un_space": "The field name must has not space.",
+    "max": "Value must not be greater than max."
   },
   "component": {
     "sign_in": {
