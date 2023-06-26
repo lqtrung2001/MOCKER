@@ -20,7 +20,7 @@
       <moc-button (click)='submit()' mocClass='tw-ml-5 tw-w-40' icon='fa-solid fa-floppy-disk'
                   label='modal.table_config.save'
                   mocStyle='btn-primary tw-text-left'></moc-button>
-      <moc-button [readonly]='!table?.id' (click)='delete()' mocClass='tw-ml-5 tw-w-56' icon='fa-solid fa-trash'
+      <moc-button [readonly]='table ? !table.id : true' (click)='delete()' mocClass='tw-ml-5 tw-w-56' icon='fa-solid fa-trash'
                   label='modal.table_config.delete'
                   mocStyle='btn-primary-red tw-text-left'></moc-button>
       <moc-button (click)='close()' mocClass='tw-ml-5 tw-w-40'

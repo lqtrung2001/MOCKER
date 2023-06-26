@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://dpg-ch6u2krhp8u9bo4c50kg-a.oregon-postgres.render.com:5432/mocker
-    username: mocker_user
-    password: NsNNzUn33yw6xG6nmjkNzFV6vN3Xd033
+    url: jdbc:postgresql://mocker-db-do-user-14218649-0.b.db.ondigitalocean.com:25060/defaultdb
+    username: doadmin
+    password: AVNS_93oRkRmBKYjfgOXE2Qa
   jpa:
     properties:
       hibernate:
