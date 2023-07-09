@@ -8,7 +8,7 @@ import { AbstractSharedComponent } from '@shared/component/common/abstract-share
 })
 export class ChangeLogComponent extends AbstractSharedComponent {
   changeLogs: {
-    time: Date,
+    title: string,
     message: string
   }[] = [];
 
@@ -18,65 +18,29 @@ export class ChangeLogComponent extends AbstractSharedComponent {
     super(injector);
     this.changeLogs.push(
       {
-        time: new Date('2/3/2023'),
-        message: 'Added the ability to generate v5 UUIDs via a new uuid_v5(namespace, name) function in formulas'
+        title: 'Step 1: ',
+        message: 'Access to a Group, this will be where you and your friends jointly manage, create Projects and share data with each other.'
       },
       {
-        time: new Date('1/22/2023'),
-        message: 'Added the ability to force the quote character on custom file formats.'
+        title: 'Step 2: ',
+        message: 'Access to a Project, each Project corresponds to each project that your group works together.'
       },
       {
-        time: new Date('1/4/2023'),
-        message: 'Added Address Line 2 type.'
+        title: 'Step 3: ',
+        message: 'We continue to access the Schema where the Project\'s tables are stored.'
       },
       {
-        time: new Date('12/22/2022'),
-        message: 'Added a ULID data type.'
+        title: 'Step 4: ',
+        message: 'Then create the tables you want as instructed above.'
       },
       {
-        time: new Date('11/20/2022'),
-        message: 'Added airport data.'
+        title: 'Step 5: ',
+        message: 'Once there are tables, we will create a relationship between the tables by clicking on 2 fields of 2 different tables. Note that fields must use data types to be linked.'
       },
       {
-        time: new Date('11/14/2021'),
-        message: 'You can now generate datasets using JSON and import them into other schemas using the Dataset Column type.'
+        title: 'Step 6: ',
+        message: 'After the above steps you have the complete data, you can press the Preview button and then click the eye icon to open each panel to preview the data or press the Download button to download the data.'
       },
-      {
-        time: new Date('10/14/2021'),
-        message: 'Added support for InfluxDB'
-      },
-      {
-        time: new Date('6/19/2021'),
-        message: 'Added the ability to import fields from a JSON schema or example JSON object.'
-      },
-      {
-        time: new Date('5/22/2021'),
-        message: 'You can now create a dataset directly from a schema. You no longer need to download and reupload generated data to create a datase2!'
-      },
-      {
-        time: new Date('5/19/2021'),
-        message: 'You can now stream data to an MQTT endpoint! Click More > Stream to MQTT Endpoint... to get started.'
-      },
-      {
-        time: new Date('5/3/2021'),
-        message: 'Added types related to construction work.'
-      },
-      {
-        time: new Date('5/3/2021'),
-        message: 'Added Etherium and Tezos types.'
-      },
-      {
-        time: new Date('4/10/2021'),
-        message: 'Added a download button to the preview dialog.'
-      },
-      {
-        time: new Date('4/4/2021'),
-        message: 'You can now use regular expressions to generate data in formulas. For example /d+/.gen'
-      },
-      {
-        time: new Date('4/2/2021'),
-        message: 'Restored the ability to backup your schemas to files.'
-      }
     );
   }
 }

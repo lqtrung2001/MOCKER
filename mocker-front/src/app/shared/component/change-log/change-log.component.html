@@ -1,9 +1,13 @@
 <div [class]='mocClass' id='main'>
-  <p class='tw-mt-8 tw-text-justify tw-text-blue tw-text-2xl'>What's new in Mocker?</p>
+  <p class='tw-mt-8 tw-text-justify tw-text-blue tw-text-2xl'>If you want to save and download more complex data ?</p>
   <table class='tw-mt-3'>
     <tr *ngFor='let changeLog of changeLogs'>
-      <td class='tw-p-2 tw-w-28'>{{ changeLog.time | date: 'dd/MM/YYYY' }}</td>
+      <td class='tw-p-2 tw-w-28'>{{ changeLog.title }}</td>
       <td class='tw-p-2' colspan='2'>{{ changeLog.message }}</td>
     </tr>
   </table>
+  <p class='tw-mt-8 tw-text-justify tw-text-blue tw-text-2xl'>If you have any questions, please contact our fanpage:
+    <a href='https://www.facebook.com/Mocker-Console-108216655669836'>Mocker Console</a>
+  </p>
+
 </div>
