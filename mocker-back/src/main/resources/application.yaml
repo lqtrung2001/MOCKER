@@ -40,3 +40,6 @@ server:
     key-store: /root/MOCKER/mocker-back/keystore.p12
     key-store-password: mocker-console
     key-alias: mocker
+    trust-store-type: PKCS12
+    trust-store: /root/MOCKER/mocker-back/keystore.p12
+    trust-store-password: mocker-console
