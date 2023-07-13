@@ -30,6 +30,8 @@
 
 * Github: https://github.com/NachiLuong/MOCKER
 * Mockaroo: https://www.mockaroo.com/
+* Other libraries: [mapstruct](https://mapstruct.org/), [project-lombok](https://projectlombok.org/), [tailwindcss](https://tailwindcss.com/),
+  [fontawesome](https://fontawesome.com/)...
 
 ### What is Mocker?
 
@@ -49,13 +51,13 @@ and simple relationships. In the future we will try to develop to serve more of 
 * Running the docker-compose.yaml file to create a container, the process will pull postgresSQL with latest version and
   then initialing your container.
 
-**3. Back - end**
+**3. Back - end:**
 
 * Maven clean and maven install (_mvn clean install_) to create api in mocker-back.
 * Run backend (run in file MockerBackApplication.java file) to initialize tables.
 * Connect database and run scripts file that are configured in DATABASE folder.
 
-**4. Front - end**
+**4. Front - end:**
 
 * Run _**npm install**_ in terminal to install packages.
 * Run **_ng serve_** in terminal to run front-end.
