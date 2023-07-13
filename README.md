@@ -2,7 +2,7 @@
 
 #### The Mocker - Console, mock everything you need by quickly and easily
 
-### ESSAY ON SOFTWARE ENGINEERING
+### GRADUATION THESIS
 
 **Name:** Building a website **MOCKER** generates data for system testing.
 
