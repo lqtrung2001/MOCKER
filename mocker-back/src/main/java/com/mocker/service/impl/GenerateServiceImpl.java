@@ -3,12 +3,7 @@ package com.mocker.service.impl;
 import com.mocker.constant.GenerateConstant;
 import com.mocker.domain.exception.BadRequestException;
 import com.mocker.domain.exception.NotFoundException;
-import com.mocker.domain.model.entity.Field;
-import com.mocker.domain.model.entity.GenerateType;
-import com.mocker.domain.model.entity.Schema;
-import com.mocker.domain.model.entity.Source;
-import com.mocker.domain.model.entity.Table;
-import com.mocker.domain.model.entity.TableRelation;
+import com.mocker.domain.model.entity.*;
 import com.mocker.domain.model.entity.enumeration.RelationType;
 import com.mocker.repository.FieldRepository;
 import com.mocker.repository.SourceRepository;
@@ -16,19 +11,11 @@ import com.mocker.repository.TableRepository;
 import com.mocker.service.GenerateService;
 import com.mocker.service.PermissionService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -49,7 +36,8 @@ public class GenerateServiceImpl implements GenerateService {
     @Override
     public List<Map<String, String>> generateWithTableId(UUID tableId) {
         permissionService.checkPermission(tableId, Table.class);
-        Table table = Optional.ofNullable(tableRepository.findOneFetchFields(tableId)).orElseThrow(() -> new NotFoundException(tableId));
+        Table table = Optional.ofNullable(tableRepository.findOneFetchFields(tableId))
+                .orElseThrow(() -> new NotFoundException(tableId));
         return generate(table);
     }
 
@@ -161,7 +149,7 @@ public class GenerateServiceImpl implements GenerateService {
                             .map(field -> field.getTable().getRow()).toList().get(0);
                     listRowSources.forEach(source -> {
                         if (source > rowTarget) {
-                            throw new BadRequestException("Number row of source much less than number row of target");
+                            throw new BadRequestException("Number row of source much less than number row of target.");
                         }
                     });
                     for (UUID fieldId1 : fieldFirstIds) {
@@ -189,6 +177,7 @@ public class GenerateServiceImpl implements GenerateService {
             fields.forEach(field -> mapDuplicate.put(field.getName(), new ArrayList<>()));
             while (row++ < numberRowsOfTable) {
                 Map<String, Object> map = new HashMap<>();
+                int finalRow = row - 1;
                 fields.forEach(field -> {
                     // [MOC-49]: normal insert
                     // TODO: Do Quoc Viet check number of field's relations
@@ -205,11 +194,17 @@ public class GenerateServiceImpl implements GenerateService {
                         } else {
                             int index;
                             String value;
-                            do {
-                                index = random.nextInt(field.getGenerateType().getSources().size());
-                                value = field.getGenerateType().getSources().get(index).getValue();
+                            if (GenerateConstant.NATURAL_ID.equals(field.getGenerateType().getCode())) {
+                                value = String.valueOf(finalRow);
+                            } else if (GenerateConstant.TECHNICAL_ID.equals(field.getGenerateType().getCode())) {
+                                value = UUID.randomUUID().toString();
+                            } else {
+                                do {
+                                    index = random.nextInt(field.getGenerateType().getSources().size());
+                                    value = field.getGenerateType().getSources().get(index).getValue();
+                                }
+                                while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
                             }
-                            while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
                             map.put(field.getName(), value);
                             mapDuplicate.get(field.getName()).add(value);
                         }
@@ -223,23 +218,29 @@ public class GenerateServiceImpl implements GenerateService {
                                     && (field.getTableRelationTargets().stream().map(TableRelation::getRelationType).anyMatch(RelationType.ONE_TO_MANY::equals))
                                     && ((Integer) mapIndexAndValues.get(GenerateConstant.INDEX) == 0)) {
                                 if (CollectionUtils.isEmpty(mapCircleRelationValue.get(field.getGenerateType().getCode()))) {
-                                    List<Object> obj = new ArrayList<>();
+                                    List<Object> objects = new ArrayList<>();
                                     for (int i = 0; i < numberRowsOfTable; i++) {
                                         if (!field.getOption().isUnique() && random.nextInt(100) < field.getOption().getBlank()) {
-                                            obj.add(null);
+                                            objects.add(null);
                                         } else {
                                             int index;
                                             String value;
-                                            do {
-                                                index = random.nextInt(field.getGenerateType().getSources().size());
-                                                value = field.getGenerateType().getSources().get(index).getValue();
+                                            if (GenerateConstant.NATURAL_ID.equals(field.getGenerateType().getCode())) {
+                                                value = String.valueOf(finalRow);
+                                            } else if (GenerateConstant.TECHNICAL_ID.equals(field.getGenerateType().getCode())) {
+                                                value = UUID.randomUUID().toString();
+                                            } else {
+                                                do {
+                                                    index = random.nextInt(field.getGenerateType().getSources().size());
+                                                    value = field.getGenerateType().getSources().get(index).getValue();
+                                                }
+                                                while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
                                             }
-                                            while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
-                                            obj.add(value);
+                                            objects.add(value);
                                             mapDuplicate.get(field.getName()).add(value);
                                         }
                                     }
-                                    mapCircleRelationValue.put(field.getGenerateType().getCode(), obj);
+                                    mapCircleRelationValue.put(field.getGenerateType().getCode(), objects);
                                 }
                                 if (sourceValuesCircle.isEmpty()) {
                                     sourceValuesCircle.addAll(mapCircleRelationValue.get(field.getGenerateType().getCode()));
@@ -279,25 +280,21 @@ public class GenerateServiceImpl implements GenerateService {
                                     if (!field.getOption().isUnique() && random.nextInt(100) < field.getOption().getBlank()) {
                                         value = null;
                                     } else {
-                                        Object vl;
                                         do {
-                                            vl = sourceValues.get(random.nextInt(sourceValues.size()));
+                                            value = sourceValues.get(random.nextInt(sourceValues.size()));
                                         }
-                                        while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(vl));
-                                        value = vl;
-                                        mapDuplicate.get(field.getName()).add(vl);
+                                        while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
+                                        mapDuplicate.get(field.getName()).add(value);
                                     }
                                 } else {
                                     if (!field.getOption().isUnique() && random.nextInt(100) < field.getOption().getBlank()) {
                                         value = null;
                                     } else {
-                                        Object vl;
                                         do {
-                                            vl = sourceValuesNoCommon.get(random.nextInt(sourceValuesNoCommon.size()));
+                                            value = sourceValuesNoCommon.get(random.nextInt(sourceValuesNoCommon.size()));
                                         }
-                                        while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(vl));
-                                        value = vl;
-                                        mapDuplicate.get(field.getName()).add(vl);
+                                        while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
+                                        mapDuplicate.get(field.getName()).add(value);
                                     }
                                 }
                                 map.put(field.getName(), value);
@@ -326,11 +323,17 @@ public class GenerateServiceImpl implements GenerateService {
                                     } else {
                                         int index;
                                         String value;
-                                        do {
-                                            index = random.nextInt(field.getGenerateType().getSources().size());
-                                            value = field.getGenerateType().getSources().get(index).getValue();
+                                        if (GenerateConstant.NATURAL_ID.equals(field.getGenerateType().getCode())) {
+                                            value = String.valueOf(finalRow);
+                                        } else if (GenerateConstant.TECHNICAL_ID.equals(field.getGenerateType().getCode())) {
+                                            value = UUID.randomUUID().toString();
+                                        } else {
+                                            do {
+                                                index = random.nextInt(field.getGenerateType().getSources().size());
+                                                value = field.getGenerateType().getSources().get(index).getValue();
+                                            }
+                                            while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
                                         }
-                                        while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
                                         map.put(field.getName(), value);
                                         mapDuplicate.get(field.getName()).add(value);
                                     }
@@ -352,13 +355,11 @@ public class GenerateServiceImpl implements GenerateService {
                                     if (!field.getOption().isUnique() && random.nextInt(100) < field.getOption().getBlank()) {
                                         value = null;
                                     } else {
-                                        Object vl;
                                         do {
-                                            vl = sourceValues.get(random.nextInt(sourceValues.size()));
+                                            value = sourceValues.get(random.nextInt(sourceValues.size()));
                                         }
-                                        while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(vl));
-                                        value = vl;
-                                        mapDuplicate.get(field.getName()).add(vl);
+                                        while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
+                                        mapDuplicate.get(field.getName()).add(value);
                                     }
                                     map.put(field.getName(), value);
                                 }
@@ -386,13 +387,11 @@ public class GenerateServiceImpl implements GenerateService {
                                     if (!field.getOption().isUnique() && random.nextInt(100) < field.getOption().getBlank()) {
                                         value = null;
                                     } else {
-                                        Object vl;
                                         do {
-                                            vl = sourceValues.get(random.nextInt(sourceValues.size()));
+                                            value = sourceValues.get(random.nextInt(sourceValues.size()));
                                         }
-                                        while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(vl));
-                                        value = vl;
-                                        mapDuplicate.get(field.getName()).add(vl);
+                                        while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
+                                        mapDuplicate.get(field.getName()).add(value);
                                     }
                                     map.put(field.getName(), value);
                                 }
@@ -445,21 +444,21 @@ public class GenerateServiceImpl implements GenerateService {
 
     public List<Map<String, String>> generate(Table table) {
         if (table.getRow() <= 0) {
-            throw new BadRequestException("Row must be greater than zero");
+            throw new BadRequestException("Row must be greater than zero.");
         }
         if (CollectionUtils.isEmpty(table.getFields())) {
-            throw new BadRequestException("The table's fields are empty");
+            throw new BadRequestException("The table's fields are empty.");
         }
         Set<String> uniqueFields = new HashSet<>();
         table.getFields().forEach(field -> {
             if (field.getOption().isUnique() && field.getOption().getBlank() > 0) {
-                throw new BadRequestException("The unique option and the blank option are conflict");
+                throw new BadRequestException("The unique option and the blank option are conflict.");
             }
             if (uniqueFields.contains(field.getName())) {
-                throw new BadRequestException("The table's fields are duplicate");
+                throw new BadRequestException("The table's fields are duplicate.");
             }
-            if (field.getName().contains(" ")) {
-                throw new BadRequestException("The table's fields have spacing");
+            if (field.getName().contains(StringUtils.SPACE)) {
+                throw new BadRequestException("The table's fields have spacing.");
             }
             uniqueFields.add(field.getName());
         });
@@ -482,16 +481,23 @@ public class GenerateServiceImpl implements GenerateService {
         while (result.size() < table.getRow()) {
             Map<String, String> map = new HashMap<>();
             for (Field field : fields) {
-                if (!field.getOption().isUnique() && random.nextInt(100) < field.getOption().getBlank()) {
+                if (!field.getOption().isUnique()
+                        && random.nextInt(100) < field.getOption().getBlank()) {
                     map.put(field.getName(), null);
                 } else {
                     int index;
                     String value;
-                    do {
-                        index = random.nextInt(field.getGenerateType().getSources().size());
-                        value = field.getGenerateType().getSources().get(index).getValue();
+                    if (GenerateConstant.NATURAL_ID.equals(field.getGenerateType().getCode())) {
+                        value = String.valueOf(result.size());
+                    } else if (GenerateConstant.TECHNICAL_ID.equals(field.getGenerateType().getCode())) {
+                        value = UUID.randomUUID().toString();
+                    } else {
+                        do {
+                            index = random.nextInt(field.getGenerateType().getSources().size());
+                            value = field.getGenerateType().getSources().get(index).getValue();
+                        }
+                        while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
                     }
-                    while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
                     map.put(field.getName(), value);
                     mapDuplicate.get(field.getName()).add(value);
                 }

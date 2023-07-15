@@ -99,6 +99,9 @@ export class GeneralComponent extends AbstractComponent {
 
   startDownload(): void {
     const tableName: string = this.formGroup.controls.table.controls.name.value;
+    this.toastrProvider.showWarning({
+      detail: 'Please remove all conflict relations when inserting data before inserting! Sorry but we can\'t do that 😉.'
+    });
     DownloadUtil.download(this.data, this.formGroup.controls.format.value, tableName, tableName);
   }
 
@@ -119,6 +122,9 @@ export class GeneralComponent extends AbstractComponent {
     if (!this.data.length) {
       this.generateService.generateWithTable(table)
         .subscribe((data: any[]): void => {
+          this.toastrProvider.showWarning({
+            detail: 'Please remove all conflict relations when inserting data before inserting! Sorry but we can\'t do that 😉.'
+          });
           this.data = data;
           const options: PreviewModalOptions = {
             data: data.slice(0, 100),
@@ -135,6 +141,9 @@ export class GeneralComponent extends AbstractComponent {
         format,
         download: this.download.bind(this)
       };
+      this.toastrProvider.showWarning({
+        detail: 'Please remove all conflict relations when inserting data before inserting! Sorry but we can\'t do that 😉.'
+      });
       this.modalService.open(PreviewModal, options);
     }
   }

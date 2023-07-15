@@ -336,6 +336,9 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
       return;
     }
     const callback: () => void = (): void => {
+      this.toastrProvider.showWarning({
+        detail: 'Please remove all conflict relations when inserting data before inserting! Sorry but we can\'t do that 😉.'
+      });
       DownloadUtil.download(this.data!, this.formGroup.controls.format.value, this.formGroup.controls.filename.value);
     };
     if (this.data) {

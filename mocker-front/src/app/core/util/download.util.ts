@@ -1,7 +1,7 @@
 import * as FileSaver from 'file-saver';
-import { StringUtil } from '@core/util/string.util';
-import { DataModel } from '@core/domain/model/data.model';
-import { FormatEnum } from '@core/domain/enum/format.enum';
+import {StringUtil} from '@core/util/string.util';
+import {DataModel} from '@core/domain/model/data.model';
+import {FormatEnum} from '@core/domain/enum/format.enum';
 
 /**
  * @author Do Quoc Viet
@@ -26,7 +26,7 @@ export class DownloadUtil {
           metadata = this.dataToCSV(data);
       }
       FileSaver.saveAs(new File(metadata, `${fileName}.${format.toLowerCase()}`,
-        { type: 'text/plain;charset=utf-8' }));
+        {type: 'text/plain;charset=utf-8'}));
     } else {
       const metadata: any[] = [];
       if (format === FormatEnum.JSON) {
@@ -59,7 +59,7 @@ export class DownloadUtil {
         });
       }
       FileSaver.saveAs(new File(metadata, `${fileName}.${format.toLowerCase()}`,
-        { type: 'text/plain;charset=utf-8' }));
+        {type: 'text/plain;charset=utf-8'}));
     }
   }
 
@@ -76,11 +76,11 @@ export class DownloadUtil {
     if (!arr?.length) {
       return [];
     }
-    const keys: string = Object.keys(arr[0]).map((key: string) => `"${key}"`).join(', ');
-    return arr.map((element: any) => {
-      const values: string = Object.keys(arr[0]).map((key: string) => `"${element[key]}"`).join(', ').replace(/"/g, '\"');
+    const keys: string = Object.keys(arr[0]).map((key: string): string => `${key}`).join(', ');
+    return arr.map((element: any): string => {
+      const values: string = Object.keys(arr[0]).map((key: string): string => `'${element[key].replace(/'/g, '\\\'')}'`).join(', ');
       // @formatter:off
-      return `INSERT INTO "${tableName}" (${keys})\n\tVALUES (${values});\n`;
+      return `INSERT INTO '${tableName.toUpperCase()}' (${keys})\n\tVALUES (${values});\n`;
       // @formatter:on
     });
   }
@@ -89,8 +89,8 @@ export class DownloadUtil {
     if (!arr?.length) {
       return [];
     }
-    const keys: string = Object.keys(arr[0]).map((key: string) => `"${key}"`).join(',') + '\n';
-    const result: string[] = arr.map((element: any) => Object.keys(arr[0]).map((key: string) => `"${element[key]}"`).join(',') + '\n');
+    const keys: string = Object.keys(arr[0]).map((key: string): string => `"${key}"`).join(',') + '\n';
+    const result: string[] = arr.map((element: any): string => Object.keys(arr[0]).map((key: string): string => `"${element[key]}"`).join(',') + '\n');
     result.unshift(keys);
     return result;
   }
@@ -107,14 +107,14 @@ export class DownloadUtil {
 
   private static variableToXml(variable: any, arrayItemPropertyName: any = null): string {
     if (Array.isArray(variable)) {
-      return `<${arrayItemPropertyName}>${variable.reduce((xml, propertyValue) => {
+      return `<${arrayItemPropertyName}>${variable.reduce((xml, propertyValue): string => {
         return `${xml}\n\t<row>\n\t\t${(this.variableToXml(propertyValue))}</row>`;
       }, StringUtil.EMPTY)}</${arrayItemPropertyName}>`;
     }
     if (variable instanceof Object) {
-      return Object.entries(variable).reduce((xml, [propertyName, propertyValue]) => {
-        const value = this.variableToXml(propertyValue, propertyName);
-        const tag = propertyValue instanceof Array ? value : `<${propertyName}>${value}</${propertyName}>\n\t\t`;
+      return Object.entries(variable).reduce((xml: string, [propertyName, propertyValue]): string => {
+        const value: string = this.variableToXml(propertyValue, propertyName);
+        const tag: string = propertyValue instanceof Array ? value : `<${propertyName}>${value}</${propertyName}>\n\t\t`;
         return `${xml}${tag}`;
       }, StringUtil.EMPTY);
     }

@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:8080/mocker_db
+    url: jdbc:postgresql://localhost:5432/mocker_db
     username: mocker_user
     password: mocker_password
   jpa:
@@ -23,20 +23,7 @@ spring:
           auth: true
           starttls:
             enable: true
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            clientId: 405114314484-rdp9bj491f6bd6kj3u9fqimstqfn9mmg.apps.googleusercontent.com
-            clientSecret: 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
   thymeleaf:
     check-template-location: false
 server:
   port: 8080
-  ssl:
-    enabled: true
-    key-store-type: PKCS12
-    key-store: C:\Workspace\repository\MOCKER\mocker-back\keystore.p12
-    key-store-password: mocker-console
-    key-alias: mocker

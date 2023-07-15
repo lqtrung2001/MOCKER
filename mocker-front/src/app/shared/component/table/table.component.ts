@@ -65,13 +65,19 @@ export class TableComponent extends AbstractSharedComponent {
 
   preview(): void {
     const options: PreviewModalOptions = {
-      data: this.dataDetail,
-      download: () => {
+      data: this.dataDetail.slice(0, 100),
+      download: (): void => {
+        this.toastrProvider.showWarning({
+          detail: 'Please remove all conflict relations when inserting data before inserting! Sorry but we can\'t do that 😉.'
+        });
         DownloadUtil.download(this.dataDetail, this.format, this.table.name, this.table.name);
       },
       tableName: this.table.name,
       format: this.format
     };
+    this.toastrProvider.showWarning({
+      detail: 'Please remove all conflict relations when inserting data before inserting! Sorry but we can\'t do that 😉.'
+    });
     this.modalService.open(PreviewModal, options);
   }
 
