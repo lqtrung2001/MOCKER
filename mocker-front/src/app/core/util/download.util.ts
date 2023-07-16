@@ -41,13 +41,24 @@ export class DownloadUtil {
           return previous;
         });
         metadata.push(...this.dataToJSON(obj, StringUtil.EMPTY));
+      }
+      if (format === FormatEnum.SQL) {
+        if (Array.isArray(data)) {
+          Object.keys(data).forEach((key: string): void => {
+            metadata.push(`/* TABLE: [${key}] */\n`);
+            metadata.push(...this.dataToSQL(data[key].values, key));
+          })
+        } else {
+          Object.keys(data)
+            .sort((table1: string, table2: string): number => data[table1].index - data[table2].index)
+            .forEach((key: string): void => {
+              metadata.push(`/* TABLE: [${key}] */\n`);
+              metadata.push(...this.dataToSQL(data[key].values, key));
+            })
+        }
       } else {
         Object.keys(data).forEach((key: string): void => {
           switch (format) {
-            case 'SQL':
-              metadata.push(`/* TABLE: [${key}] */\n`);
-              metadata.push(...this.dataToSQL(data[key].values, key));
-              break;
             case 'XML':
               metadata.push(`<-- TABLE: [${key}] -->\n`);
               metadata.push(...this.dataToXML(data[key].values, key));
