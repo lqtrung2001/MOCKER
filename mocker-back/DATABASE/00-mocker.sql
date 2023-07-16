@@ -1,3 +1,18 @@
+-- DELETE FROM table_relation WHERE true;
+-- DELETE FROM field WHERE true;
+-- DELETE FROM sql_type_generate_type WHERE true;
+-- DELETE FROM source WHERE true;
+-- DELETE FROM generate_type WHERE true;
+-- DELETE FROM category WHERE true;
+-- DELETE FROM sql_type WHERE true;
+-- DELETE FROM option WHERE true;
+-- DELETE FROM "table" WHERE true;
+-- DELETE FROM schema WHERE true;
+-- DELETE FROM project WHERE true;
+-- DELETE FROM group_member WHERE true;
+-- DELETE FROM "user" WHERE true;
+-- DELETE FROM "group" WHERE true;
+
 INSERT INTO "group" (id, created_by, created_by_group, created_date, modified_by, modified_by_group, modified_date,
                      name, description, version)
 VALUES ('b6bf5612-12fb-4e77-aaa6-34d8223e2290', '5ecaf074-a91f-4758-ae0d-0724443a1a7a',

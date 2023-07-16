@@ -48,7 +48,7 @@ export class TableConfigModal extends AbstractModal implements OnInit {
     this.formGroup = this.formBuilder.group({
       table: this.formBuilder.group({
         name: this.formBuilder.control(undefined, [Validators.required]),
-        fields: this.formBuilder.array<FormGroup<FieldControls>>([]),
+        fields: this.formBuilder.array<FormGroup<FieldControls>>([], []),
         row: this.formBuilder.control(99, [Validators.required, Validators.max(1000)])
       })
     });
@@ -63,17 +63,29 @@ export class TableConfigModal extends AbstractModal implements OnInit {
     this.formGroup.controls.table.patchValue(this.table);
     this.formGroup.controls.table.controls.fields = this.formBuilder.array<FormGroup>([]);
     this.table?.fields.forEach((field: FieldModel): void => {
-      this.formGroup.controls.table.controls.fields.push(this.formBuilder.group({
-        id: this.formBuilder.control(field.id, []),
-        name: this.formBuilder.control(field.name, [Validators.required]),
-        generateType: this.formBuilder.control(field.generateType, [Validators.required]),
-        sqlType: this.formBuilder.control(field.sqlType, []),
+      const fieldGroup: FormGroup = this.formBuilder.group({
+        id: this.formBuilder.control(undefined, []),
+        name: this.formBuilder.control(undefined, [Validators.required]),
+        generateType: this.formBuilder.control(undefined, [Validators.required]),
+        sqlType: this.formBuilder.control(undefined, []),
         option: this.formBuilder.group({
-          id: this.formBuilder.control(field.option?.id, []),
-          blank: this.formBuilder.control(field.option?.blank || 0, []),
-          unique: this.formBuilder.control(field.option?.unique, [])
+          id: this.formBuilder.control(undefined, []),
+          blank: this.formBuilder.control(0, []),
+          unique: this.formBuilder.control(undefined, [])
         }, [])
-      }));
+      });
+      fieldGroup.patchValue({
+        id: field.id,
+        name: field.name,
+        generateType: field.generateType,
+        sqlType: field.sqlType,
+        option: {
+          id: field.option?.id,
+          blank: field.option?.blank || 0,
+          unique: field.option?.unique
+        }
+      });
+      this.formGroup.controls.table.controls.fields.push(fieldGroup);
     });
   }
 

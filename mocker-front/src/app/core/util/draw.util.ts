@@ -1,5 +1,5 @@
-import { RelationTypeEnum } from '@core/domain/enum/relation-type.enum';
-import { TableRelationModel } from '@core/domain/model/entity/table-relation.model';
+import {RelationTypeEnum} from '@core/domain/enum/relation-type.enum';
+import {TableRelationModel} from '@core/domain/model/entity/table-relation.model';
 
 /**
  * @author Do Quoc Viet
@@ -33,7 +33,7 @@ export class DrawUtil {
       targetHTMLElement,
       {
         endPlugOutline: false,
-        animOptions: { duration: 3000, timing: 'linear' },
+        animOptions: {duration: 3000, timing: 'linear'},
         // startLabel: '1',
         middleLabel: LeaderLine.captionLabel(`${tableRelation.description}`, {color: 'red'}),
         // endLabel: 'n',
@@ -53,12 +53,12 @@ export class DrawUtil {
         this.moveToLastElement(leaderLine._id);
         try {
           leaderLine.setOptions({
-          color: 'rgb(30,41,248)'
-        });
-        leaderLine.size = 1.75;
-        targetHTMLElement.style.backgroundColor = '#c7d6ff';
+            color: 'rgb(30,41,248)'
+          });
+          leaderLine.size = 1.75;
+          targetHTMLElement.style.backgroundColor = '#c7d6ff';
         } catch (e) {
-          // TODO: Handler error when leader line missing options properties
+          console.error(e)
         }
       }
     });
@@ -67,12 +67,12 @@ export class DrawUtil {
         this.moveToLastElement(leaderLine._id);
         try {
           leaderLine.setOptions({
-          color: '#333'
-        });
-        leaderLine.size = 1.5;
-        targetHTMLElement.style.backgroundColor = '#fff';
+            color: '#333'
+          });
+          leaderLine.size = 1.5;
+          targetHTMLElement.style.backgroundColor = '#fff';
         } catch (e) {
-          // TODO: Handler error when leader line missing options properties
+          console.error(e)
         }
       }
     });
@@ -81,12 +81,12 @@ export class DrawUtil {
         this.moveToLastElement(leaderLine._id);
         try {
           leaderLine.setOptions({
-          color: 'rgb(30,41,248)'
-        });
-        leaderLine.size = 1.75;
-        sourceHTMLElement.style.backgroundColor = '#c7d6ff';
+            color: 'rgb(30,41,248)'
+          });
+          leaderLine.size = 1.75;
+          sourceHTMLElement.style.backgroundColor = '#c7d6ff';
         } catch (e) {
-          // TODO: Handler error when leader line missing options properties
+          console.error(e)
         }
       }
     });
@@ -95,17 +95,17 @@ export class DrawUtil {
         this.moveToLastElement(leaderLine._id);
         try {
           leaderLine.setOptions({
-          color: '#333'
-        });
-        leaderLine.size = 1.5;
-        sourceHTMLElement.style.backgroundColor = '#fff';
+            color: '#333'
+          });
+          leaderLine.size = 1.5;
+          sourceHTMLElement.style.backgroundColor = '#fff';
         } catch (e) {
-          // TODO: Handler error when leader line missing options properties
+          console.error(e)
         }
       }
     });
     const socket: string = this.getSocketPosition(tableRelation.source.id, tableRelation.target.id);
-    leaderLine.setOptions({ startSocket: socket, endSocket: socket });
+    leaderLine.setOptions({startSocket: socket, endSocket: socket});
     return {
       tableRelation,
       leaderLine
@@ -121,12 +121,12 @@ export class DrawUtil {
         end = 'disc';
         break;
       case RelationTypeEnum.ONE_TO_MANY:
-        start = 'disc';
-        end = 'arrow1';
-        break;
-      case RelationTypeEnum.MANY_TO_ONE:
         start = 'arrow1';
         end = 'disc';
+        break;
+      case RelationTypeEnum.MANY_TO_ONE:
+        start = 'disc';
+        end = 'arrow1';
         break;
       default:
         start = 'arrow1';

@@ -9,34 +9,34 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { FieldModel } from '@core/domain/model/entity/field.model';
-import { TableRelationModel } from '@core/domain/model/entity/table-relation.model';
-import { AbstractSharedComponent } from '@shared/component/common/abstract-shared.component';
+import {FieldModel} from '@core/domain/model/entity/field.model';
+import {TableRelationModel} from '@core/domain/model/entity/table-relation.model';
+import {AbstractSharedComponent} from '@shared/component/common/abstract-shared.component';
 import {
   RelationConfigModal,
   RelationConfigModalClosedOptions,
   RelationConfigModalOptions
 } from '@app/component/schema/modal/relation-config/relation-config.modal';
-import { TableRelationService } from '@core/service/table-relation.service';
-import { SchemaService } from '@app/core/service/schema.service';
-import { SchemaModel } from '@core/domain/model/entity/schema.model';
-import { TableModel } from '@core/domain/model/entity/table.model';
-import { DrawUtil, RelationLine } from '@core/util/draw.util';
-import { RelationTypeEnum } from '@core/domain/enum/relation-type.enum';
-import { StringUtil } from '@core/util/string.util';
+import {TableRelationService} from '@core/service/table-relation.service';
+import {SchemaService} from '@app/core/service/schema.service';
+import {SchemaModel} from '@core/domain/model/entity/schema.model';
+import {TableModel} from '@core/domain/model/entity/table.model';
+import {DrawUtil, RelationLine} from '@core/util/draw.util';
+import {RelationTypeEnum} from '@core/domain/enum/relation-type.enum';
+import {StringUtil} from '@core/util/string.util';
 import {
   TableConfigModal,
   TableConfigModalCloseOptions,
   TableConfigModalOptions
 } from '@app/component/schema/modal/table-config/table-config.modal';
-import { DataModel } from '@core/domain/model/data.model';
-import { GenerateService } from '@core/service/generate.service';
-import { DownloadUtil } from '@core/util/download.util';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Option } from '@shared/component/dropdown/dropdown.component';
-import { FormatEnum } from '@core/domain/enum/format.enum';
-import { CdkDragEnd, CdkDragMove } from '@angular/cdk/drag-drop';
-import { Position } from '@shared/component/table/table.component';
+import {DataModel} from '@core/domain/model/data.model';
+import {GenerateService} from '@core/service/generate.service';
+import {DownloadUtil} from '@core/util/download.util';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Option} from '@shared/component/dropdown/dropdown.component';
+import {FormatEnum} from '@core/domain/enum/format.enum';
+import {CdkDragEnd, CdkDragMove} from '@angular/cdk/drag-drop';
+import {Position} from '@shared/component/table/table.component';
 
 /**
  * @author Do Quoc Viet
@@ -118,7 +118,7 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
       if (containRelation) {
         const socket: string = DrawUtil.getSocketPosition(relationLine.tableRelation.source.id, relationLine.tableRelation.target.id);
         relationLine.leaderLine.size = 1.75;
-        relationLine.leaderLine.setOptions({ startSocket: socket, endSocket: socket, color: 'rgb(30,41,248)' });
+        relationLine.leaderLine.setOptions({startSocket: socket, endSocket: socket, color: 'rgb(30,41,248)'});
         relationLine.leaderLine.position();
       }
     });
@@ -150,7 +150,7 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
         .some((id: string): boolean => id === relationLine.tableRelation.source.id || id === relationLine.tableRelation.target.id);
       if (containRelation) {
         relationLine.leaderLine.size = 1.5;
-        relationLine.leaderLine.setOptions({ color: '#333' });
+        relationLine.leaderLine.setOptions({color: '#333'});
       }
     });
     this.tableIdIsBeingMoved = undefined;
@@ -164,7 +164,7 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
   onScroll(): void {
     this.relationLines.forEach((relationLine: RelationLine): void => {
       const socket: string = DrawUtil.getSocketPosition(relationLine.tableRelation.source.id, relationLine.tableRelation.target.id);
-      relationLine.leaderLine.setOptions({ startSocket: socket, endSocket: socket });
+      relationLine.leaderLine.setOptions({startSocket: socket, endSocket: socket});
       relationLine.leaderLine.position();
     });
   }
@@ -289,6 +289,9 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
   }
 
   reDrawRelationLine(table: TableModel): void {
+    if (!table) {
+      return;
+    }
     // refresh data when the tables are updated
     this.data = undefined;
     const tableRelations: TableRelationModel[] = [];
@@ -302,17 +305,16 @@ export class DiagramComponent extends AbstractSharedComponent implements OnChang
         tableRelations.push(relationLine.tableRelation);
       }
     });
-    this.relationLines = this.relationLines.filter((relationLine: RelationLine): boolean => !tableRelations
-      .map((tableRelation: TableRelationModel): string => tableRelation.id)
-      .includes(relationLine.tableRelation.id));
-    try {
+    this.relationLines = this.relationLines
+      .filter((relationLine: RelationLine): boolean => !tableRelations
+        .map((tableRelation: TableRelationModel): string => tableRelation.id)
+        .includes(relationLine.tableRelation.id));
+    setTimeout((): void => {
       tableRelations.forEach((tableRelation: TableRelationModel): void => {
         this.relationLines.push(DrawUtil.newRelationLine(tableRelation));
         this.relationLines[this.relationLines.length - 1].leaderLine.position();
       });
-    } catch (e) {
-      // TODO: Handle
-    }
+    })
   }
 
   createTable(): void {

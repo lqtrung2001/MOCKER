@@ -78,9 +78,9 @@ export class DownloadUtil {
     }
     const keys: string = Object.keys(arr[0]).map((key: string): string => `${key}`).join(', ');
     return arr.map((element: any): string => {
-      const values: string = Object.keys(arr[0]).map((key: string): string => `'${element[key].replace(/'/g, '\\\'')}'`).join(', ');
+      const values: string = Object.keys(arr[0]).map((key: string): string => `"${element[key].replace(/"/g, '\\\"')}"`).join(', ');
       // @formatter:off
-      return `INSERT INTO '${tableName.toUpperCase()}' (${keys})\n\tVALUES (${values});\n`;
+      return `INSERT INTO "${tableName.toUpperCase()}" (${keys})\n\tVALUES (${values});\n`;
       // @formatter:on
     });
   }

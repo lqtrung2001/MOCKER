@@ -54,6 +54,7 @@ export class TableComponent extends AbstractSharedComponent {
         if (closeOptions) {
           this.table = closeOptions.table;
           if (closeOptions.change && !closeOptions.deleted) {
+            console.log('a')
             this.refresh.emit(this.table);
           }
           if (closeOptions.deleted) {
