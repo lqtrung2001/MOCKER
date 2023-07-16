@@ -49,49 +49,54 @@ public class GenerateServiceImpl implements GenerateService {
     @SuppressWarnings("unchecked")
     @Override
     public Map<String, Map<String, Object>> generateWithSchema(UUID id) {
-        permissionService.checkPermission(id, Schema.class);
+        permissionService.checkPermission (id, Schema.class);
         List<Table> tables = tableRepository.findAllBySchema(id);
         List<Table> sortedTables = new ArrayList<>(tables);
-        tables.forEach(table -> {
-            List<Field> fields = fieldRepository.getFieldsByTable(table.getId());
-            fields.forEach(field -> {
-                //check relation source
-                // TODO: Do Quoc Viet: check duplicates code
-                field.getTableRelationSources().forEach(tableRelation -> {
-                    int sourceIndex = sortedTables.stream().map(Table::getId).toList().indexOf(tableRelation.getSource().getTable().getId());
-                    int targetIndex = sortedTables.stream().map(Table::getId).toList().indexOf(tableRelation.getTarget().getTable().getId());
-                    switch (tableRelation.getRelationType()) {
-                        case ONE_TO_MANY -> {
-                            if (sourceIndex < targetIndex) {
-                                Collections.swap(sortedTables, sourceIndex, targetIndex);
+        for (int i = 0; i < sortedTables.size(); i++) {
+            tables.forEach(table -> {
+                List<Field> fields = fieldRepository.getFieldsByTable(table.getId());
+                fields.forEach(field -> {
+                    //check relation source
+                    field.getTableRelationSources().forEach(tableRelation -> {
+                        int sourceIndex = sortedTables.stream().map(Table::getId).toList().indexOf(tableRelation.getSource().getTable().getId());
+                        int targetIndex = sortedTables.stream().map(Table::getId).toList().indexOf(tableRelation.getTarget().getTable().getId());
+                        switch (tableRelation.getRelationType()) {
+                            case ONE_TO_MANY -> {
+                                if (sourceIndex > targetIndex) {
+                                    if (sourceIndex == sortedTables.size() - 1 && targetIndex == 0) {
+                                        sortedTables.add(targetIndex, sortedTables.remove(sourceIndex));
+                                    }else {
+                                        sortedTables.add(sourceIndex, sortedTables.remove(targetIndex));
+                                    }
+                                }
+                            }
+                            case MANY_TO_ONE -> {
+                                if (sourceIndex < targetIndex) {
+                                    sortedTables.add(sourceIndex, sortedTables.remove(targetIndex));
+                                }
                             }
                         }
-                        case MANY_TO_ONE -> {
-                            if (sourceIndex > targetIndex) {
-                                Collections.swap(sortedTables, sourceIndex, targetIndex);
-                            }
-                        }
-                    }
-                });
-                // check relation target
-                field.getTableRelationTargets().forEach(tableRelation -> {
-                    int sourceIndex = sortedTables.stream().map(Table::getId).toList().indexOf(tableRelation.getSource().getTable().getId());
-                    int targetIndex = sortedTables.stream().map(Table::getId).toList().indexOf(tableRelation.getTarget().getTable().getId());
-                    switch (tableRelation.getRelationType()) {
-                        case ONE_TO_MANY -> {
-                            if (sourceIndex < targetIndex) {
-                                Collections.swap(sortedTables, sourceIndex, targetIndex);
-                            }
-                        }
-                        case MANY_TO_ONE -> {
-                            if (sourceIndex > targetIndex) {
-                                Collections.swap(sortedTables, sourceIndex, targetIndex);
-                            }
-                        }
-                    }
+                    });
+                    // check relation target
+//                field.getTableRelationTargets().forEach(tableRelation -> {
+//                    int sourceIndex = sortedTables.stream().map(Table::getId).toList().indexOf(tableRelation.getSource().getTable().getId());
+//                    int targetIndex = sortedTables.stream().map(Table::getId).toList().indexOf(tableRelation.getTarget().getTable().getId());
+//                    switch (tableRelation.getRelationType()) {
+//                        case ONE_TO_MANY -> {
+//                            if (sourceIndex > targetIndex) {
+//                                sortedTables.add(targetIndex, sortedTables.remove(sourceIndex));
+//                            }
+//                        }
+//                        case MANY_TO_ONE -> {
+//                            if (sourceIndex < targetIndex) {
+//                                sortedTables.add(targetIndex, sortedTables.remove(sourceIndex));
+//                            }
+//                        }
+//                    }
+//                });
                 });
             });
-        });
+        }
         Map<String, Map<String, Object>> result = new HashMap<>();
         AtomicInteger counter = new AtomicInteger();
         Map<String, List<Object>> mapCircleRelationValue = new HashMap<>();
@@ -182,20 +187,14 @@ public class GenerateServiceImpl implements GenerateService {
                     // [MOC-49]: normal insert
                     // TODO: Do Quoc Viet check number of field's relations
                     // relationship: not ONE_TO_ONE and not ONE_TO_MANY
-                    if ((CollectionUtils.isEmpty(field.getTableRelationSources()) && CollectionUtils.isEmpty(field.getTableRelationTargets()))
-                            || ((!CollectionUtils.isEmpty(field.getTableRelationSources())
-                            && field.getTableRelationSources().stream().map(TableRelation::getRelationType).noneMatch(RelationType::isRelationOneTo))
-                            && (!CollectionUtils.isEmpty(field.getTableRelationTargets()))
-                            && (field.getTableRelationTargets().stream().map(TableRelation::getRelationType).noneMatch(RelationType.ONE_TO_ONE::equals))
-                            || (!CollectionUtils.isEmpty(field.getTableRelationTargets()) && CollectionUtils.isEmpty(field.getTableRelationSources())
-                            && (field.getTableRelationTargets().stream().map(TableRelation::getRelationType).anyMatch(RelationType.ONE_TO_MANY::equals))))) {
+                    if (CollectionUtils.isEmpty(field.getTableRelationTargets())) {
                         if (!field.getOption().isUnique() && random.nextInt(100) < field.getOption().getBlank()) {
                             map.put(field.getName(), null);
                         } else {
                             int index;
                             String value;
                             if (GenerateConstant.NATURAL_ID.equals(field.getGenerateType().getCode())) {
-                                value = String.valueOf(finalRow);
+                                value = String.valueOf(finalRow + 1);
                             } else if (GenerateConstant.TECHNICAL_ID.equals(field.getGenerateType().getCode())) {
                                 value = UUID.randomUUID().toString();
                             } else {
@@ -226,7 +225,7 @@ public class GenerateServiceImpl implements GenerateService {
                                             int index;
                                             String value;
                                             if (GenerateConstant.NATURAL_ID.equals(field.getGenerateType().getCode())) {
-                                                value = String.valueOf(finalRow);
+                                                value = String.valueOf(finalRow +1 ) ;
                                             } else if (GenerateConstant.TECHNICAL_ID.equals(field.getGenerateType().getCode())) {
                                                 value = UUID.randomUUID().toString();
                                             } else {
@@ -324,7 +323,7 @@ public class GenerateServiceImpl implements GenerateService {
                                         int index;
                                         String value;
                                         if (GenerateConstant.NATURAL_ID.equals(field.getGenerateType().getCode())) {
-                                            value = String.valueOf(finalRow);
+                                            value = String.valueOf(finalRow +1);
                                         } else if (GenerateConstant.TECHNICAL_ID.equals(field.getGenerateType().getCode())) {
                                             value = UUID.randomUUID().toString();
                                         } else {
@@ -377,23 +376,58 @@ public class GenerateServiceImpl implements GenerateService {
                                                 .map(Table::getName)
                                                 .toList()
                                                 .get(0);
-                                        mapRelationValue.put(fieldName, ((List<Object>) result.get(tableName).get(GenerateConstant.VALUES))
-                                                .stream()
-                                                .map(obj -> ((HashMap<String, Object>) obj).get(fieldName))
-                                                .collect(Collectors.toList()));
-                                    }
-                                    List<Object> sourceValues = mapRelationValue.get(fieldName);
-                                    Object value;
-                                    if (!field.getOption().isUnique() && random.nextInt(100) < field.getOption().getBlank()) {
-                                        value = null;
-                                    } else {
-                                        do {
-                                            value = sourceValues.get(random.nextInt(sourceValues.size()));
+                                        if (result.get(tableName) == null) {
+
+                                            int index;
+                                            String value;
+                                            if (GenerateConstant.NATURAL_ID.equals(field.getGenerateType().getCode())) {
+                                                value = String.valueOf(finalRow +1);
+                                            } else if (GenerateConstant.TECHNICAL_ID.equals(field.getGenerateType().getCode())) {
+                                                value = UUID.randomUUID().toString();
+                                            } else {
+                                                do {
+                                                    index = random.nextInt(field.getGenerateType().getSources().size());
+                                                    value = field.getGenerateType().getSources().get(index).getValue();
+                                                }
+                                                while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
+                                            }
+                                            map.put(field.getName(), value);
+//                                            mapDuplicate.get(field.getName()).add(value);
+//                                            List<Object> temp = new ArrayList<>();
+//                                            mapRelationValue.put(fieldName, temp);
+                                        }else {
+                                            mapRelationValue.put(fieldName, ((List<Object>) result.get(tableName).get(GenerateConstant.VALUES))
+                                                    .stream()
+                                                    .map(obj -> ((HashMap<String, Object>) obj).get(fieldName))
+                                                    .collect(Collectors.toList()));
+                                            List<Object> sourceValues = mapRelationValue.get(fieldName);
+                                            Object value;
+                                            if (!field.getOption().isUnique() && random.nextInt(100) < field.getOption().getBlank()) {
+                                                value = null;
+                                            } else {
+                                                do {
+                                                    value = sourceValues.get(random.nextInt(sourceValues.size()));
+                                                }
+                                                while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
+                                                mapDuplicate.get(field.getName()).add(value);
+                                            }
+                                            map.put(field.getName(), value);
                                         }
-                                        while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
-                                        mapDuplicate.get(field.getName()).add(value);
+                                    } else {
+                                        List<Object> sourceValues = mapRelationValue.get(fieldName);
+                                        Object value;
+                                        if (!field.getOption().isUnique() && random.nextInt(100) < field.getOption().getBlank()) {
+                                            value = null;
+                                        } else {
+                                            do {
+                                                value = sourceValues.get(random.nextInt(sourceValues.size()));
+                                            }
+                                            while (field.getOption().isUnique() && mapDuplicate.get(field.getName()).contains(value));
+                                            mapDuplicate.get(field.getName()).add(value);
+                                        }
+                                        map.put(field.getName(), value);
                                     }
-                                    map.put(field.getName(), value);
+
                                 }
                             }
                         }
@@ -488,7 +522,7 @@ public class GenerateServiceImpl implements GenerateService {
                     int index;
                     String value;
                     if (GenerateConstant.NATURAL_ID.equals(field.getGenerateType().getCode())) {
-                        value = String.valueOf(result.size());
+                        value = String.valueOf(result.size() + 1);
                     } else if (GenerateConstant.TECHNICAL_ID.equals(field.getGenerateType().getCode())) {
                         value = UUID.randomUUID().toString();
                     } else {
